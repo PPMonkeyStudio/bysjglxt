@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_report_opening" table="BYSJGLXT_REPORT_OPENING">
+        <id name="report_opening_id" type="java.lang.String">
+            <column name="REPORT_OPENING_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="report_opening_student" type="java.lang.String">
+            <column name="REPORT_OPENING_STUDENT" />
+        </property>
+        <property name="report_opening_documentary_survey" type="java.lang.String">
+            <column name="REPORT_OPENING_DOCUMENTARY_SURVEY" />
+        </property>
+        <property name="report_opening_main" type="java.lang.String">
+            <column name="REPORT_OPENING_MAIN" />
+        </property>
+        <property name="report_opening_detail" type="java.lang.String">
+            <column name="REPORT_OPENING_DETAIL" />
+        </property>
+        <property name="report_opening_reference" type="java.lang.String">
+            <column name="REPORT_OPENING_REFERENCE" />
+        </property>
+        <property name="report_opening_plan" type="java.lang.String">
+            <column name="REPORT_OPENING_PLAN" />
+        </property>
+        <property name="report_opening_gmt_create" type="java.lang.String">
+            <column name="REPORT_OPENING_GMT_CREATE" />
+        </property>
+        <property name="report_opening_gmt_modified" type="java.lang.String">
+            <column name="REPORT_OPENING_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

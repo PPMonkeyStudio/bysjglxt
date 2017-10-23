@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_topic_select" table="BYSJGLXT_TOPIC_SELECT">
+        <id name="topic_select_id" type="java.lang.String">
+            <column name="TOPIC_SELECT_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="topic_select_student" type="java.lang.String">
+            <column name="TOPIC_SELECT_STUDENT" />
+        </property>
+        <property name="topic_select_teacher_tutor" type="java.lang.String">
+            <column name="TOPIC_SELECT_TEACHER_TUTOR" />
+        </property>
+        <property name="topic_select_teacher_review" type="java.lang.String">
+            <column name="TOPIC_SELECT_TEACHER_REVIEW" />
+        </property>
+        <property name="topic_select_topic" type="java.lang.String">
+            <column name="TOPIC_SELECT_TOPIC" />
+        </property>
+        <property name="topic_select_gmt_create" type="java.lang.String">
+            <column name="TOPIC_SELECT_GMT_CREATE" />
+        </property>
+        <property name="topic_select_gmt_modified" type="java.lang.String">
+            <column name="TOPIC_SELECT_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

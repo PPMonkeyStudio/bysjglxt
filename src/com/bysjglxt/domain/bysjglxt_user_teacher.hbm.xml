@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_user_teacher" table="BYSJGLXT_USER_TEACHER">
+        <id name="user_teacher_id" type="java.lang.String">
+            <column name="USER_TEACHER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="user_teacher_num" type="java.lang.String">
+            <column name="USER_TEACHER_NUM" />
+        </property>
+        <property name="user_teacher_password" type="java.lang.String">
+            <column name="USER_TEACHER_PASSWORD" />
+        </property>
+        <property name="user_teacher_basic" type="java.lang.String">
+            <column name="USER_TEACHER_BASIC" />
+        </property>
+        <property name="user_teacher_section" type="java.lang.String">
+            <column name="USER_TEACHER_SECTION" />
+        </property>
+        <property name="user_teacher_max_guidance" type="int">
+            <column name="USER_TEACHER_MAX_GUIDANCE" />
+        </property>
+        <property name="user_teacher_gmt_create" type="java.lang.String">
+            <column name="USER_TEACHER_GMT_CREATE" />
+        </property>
+        <property name="user_teacher_gmt_modified" type="java.lang.String">
+            <column name="USER_TEACHER_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

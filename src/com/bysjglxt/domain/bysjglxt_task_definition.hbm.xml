@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_task_definition" table="BYSJGLXT_TASK_DEFINITION">
+        <id name="task_definition_id" type="java.lang.String">
+            <column name="TASK_DEFINITION_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="task_definition_name" type="java.lang.String">
+            <column name="TASK_DEFINITION_NAME" />
+        </property>
+        <property name="task_definition_process_definition" type="java.lang.String">
+            <column name="TASK_DEFINITION_PROCESS_DEFINITION" />
+        </property>
+        <property name="task_definition_type" type="int">
+            <column name="TASK_DEFINITION_TYPE" />
+        </property>
+        <property name="task_definition_role" type="int">
+            <column name="TASK_DEFINITION_ROLE" />
+        </property>
+        <property name="task_definition_return" type="java.lang.String">
+            <column name="TASK_DEFINITION_RETURN" />
+        </property>
+        <property name="task_definition_father" type="java.lang.String">
+            <column name="TASK_DEFINITION_FATHER" />
+        </property>
+        <property name="task_definition_gmt_create" type="java.lang.String">
+            <column name="TASK_DEFINITION_GMT_CREATE" />
+        </property>
+        <property name="task_definition_gmt_modified" type="java.lang.String">
+            <column name="TASK_DEFINITION_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

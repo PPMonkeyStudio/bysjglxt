@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_taskbook" table="BYSJGLXT_TASKBOOK">
+        <id name="taskbook_id" type="java.lang.String">
+            <column name="TASKBOOK_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="bysjglxt_taskbook_student" type="java.lang.String">
+            <column name="BYSJGLXT_TASKBOOK_STUDENT" />
+        </property>
+        <property name="taskbook_acontent_required" type="java.lang.String">
+            <column name="TASKBOOK_ACONTENT_REQUIRED" />
+        </property>
+        <property name="taskbook_plan" type="java.lang.String">
+            <column name="TASKBOOK_PLAN" />
+        </property>
+        <property name="taskbook_opinion" type="java.lang.String">
+            <column name="TASKBOOK_OPINION" />
+        </property>
+        <property name="taskbook_gmt_create" type="java.lang.String">
+            <column name="TASKBOOK_GMT_CREATE" />
+        </property>
+        <property name="taskbook_gmt_modified" type="java.lang.String">
+            <column name="TASKBOOK_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

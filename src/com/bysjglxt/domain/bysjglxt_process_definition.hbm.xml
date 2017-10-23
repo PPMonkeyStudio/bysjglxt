@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_process_definition" table="BYSJGLXT_PROCESS_DEFINITION">
+        <id name="process_definition_id" type="java.lang.String">
+            <column name="PROCESS_DEFINITION_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="process_definition_name" type="java.lang.String">
+            <column name="PROCESS_DEFINITION_NAME" />
+        </property>
+        <property name="process_definition_instance_role" type="int">
+            <column name="PROCESS_DEFINITION_INSTANCE_ROLE" />
+        </property>
+        <property name="process_definition_gmt_create" type="java.lang.String">
+            <column name="PROCESS_DEFINITION_GMT_CREATE" />
+        </property>
+        <property name="process_definition_gmt_modified" type="java.lang.String">
+            <column name="PROCESS_DEFINITION_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

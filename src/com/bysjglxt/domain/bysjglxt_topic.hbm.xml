@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_topic" table="BYSJGLXT_TOPIC">
+        <id name="topic_id" type="java.lang.String">
+            <column name="TOPIC_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="topic_num" type="java.lang.String">
+            <column name="TOPIC_NUM" />
+        </property>
+        <property name="topic_name_chinese" type="java.lang.String">
+            <column name="TOPIC_NAME_CHINESE" />
+        </property>
+        <property name="topic_name_english" type="java.lang.String">
+            <column name="TOPIC_NAME_ENGLISH" />
+        </property>
+        <property name="topic_requirement" type="java.lang.String">
+            <column name="TOPIC_REQUIREMENT" />
+        </property>
+        <property name="topic_source" type="java.lang.String">
+            <column name="TOPIC_SOURCE" />
+        </property>
+        <property name="topic_type" type="java.lang.String">
+            <column name="TOPIC_TYPE" />
+        </property>
+        <property name="topic_student_max" type="int">
+            <column name="TOPIC_STUDENT_MAX" />
+        </property>
+        <property name="topic_remark" type="java.lang.String">
+            <column name="TOPIC_REMARK" />
+        </property>
+        <property name="topic_teacher" type="java.lang.String">
+            <column name="TOPIC_TEACHER" />
+        </property>
+        <property name="topic_student" type="java.lang.String">
+            <column name="TOPIC_STUDENT" />
+        </property>
+        <property name="topic_gmt_create" type="java.lang.String">
+            <column name="TOPIC_GMT_CREATE" />
+        </property>
+        <property name="topic_gmt_modified" type="java.lang.String">
+            <column name="TOPIC_GMT_MODIFIED" />
+        </property>
+        <property name="topic_examine_state" type="int">
+            <column name="TOPIC_EXAMINE_STATE" />
+        </property>
+    </class>
+</hibernate-mapping>
