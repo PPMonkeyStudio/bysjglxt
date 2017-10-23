@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_student_basic" table="BYSJGLXT_STUDENT_BASIC">
+        <id name="student_basic_id" type="java.lang.String">
+            <column name="STUDENT_BASIC_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="student_basic_num" type="java.lang.String">
+            <column name="STUDENT_BASIC_NUM" />
+        </property>
+        <property name="student_basic_name" type="java.lang.String">
+            <column name="STUDENT_BASIC_NAME" />
+        </property>
+        <property name="student_basic_sex" type="java.lang.String">
+            <column name="STUDENT_BASIC_SEX" />
+        </property>
+        <property name="student_basic_native_place" type="java.lang.String">
+            <column name="STUDENT_BASIC_NATIVE_PLACE" />
+        </property>
+        <property name="student_basic_class" type="java.lang.String">
+            <column name="STUDENT_BASIC_CLASS" />
+        </property>
+        <property name="student_basic_phone" type="java.lang.String">
+            <column name="STUDENT_BASIC_PHONE" />
+        </property>
+        <property name="student_basic_year" type="java.lang.String">
+            <column name="STUDENT_BASIC_YEAR" />
+        </property>
+        <property name="student_basic_major" type="java.lang.String">
+            <column name="STUDENT_BASIC_MAJOR" />
+        </property>
+        <property name="student_basic_college" type="java.lang.String">
+            <column name="STUDENT_BASIC_COLLEGE" />
+        </property>
+        <property name="student_basic_gmt_create" type="java.lang.String">
+            <column name="STUDENT_BASIC_GMT_CREATE" />
+        </property>
+        <property name="student_basic_gmt_modified" type="java.lang.String">
+            <column name="STUDENT_BASIC_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

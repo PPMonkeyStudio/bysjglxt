@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_teacher_basic" table="BYSJGLXT_TEACHER_BASIC">
+        <id name="teacher_basic_id" type="java.lang.String">
+            <column name="TEACHER_BASIC_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="certificate_type" type="java.lang.String">
+            <column name="CERTIFICATE_TYPE" />
+        </property>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="certificate_no" type="java.lang.String">
+            <column name="CERTIFICATE_NO" />
+        </property>
+        <property name="nation" type="java.lang.String">
+            <column name="NATION" />
+        </property>
+        <property name="nationality" type="java.lang.String">
+            <column name="NATIONALITY" />
+        </property>
+        <property name="g_a_t" type="java.lang.String">
+            <column name="G_A_T" />
+        </property>
+        <property name="hua_qiao" type="java.lang.String">
+            <column name="HUA_QIAO" />
+        </property>
+        <property name="political_status" type="java.lang.String">
+            <column name="POLITICAL_STATUS" />
+        </property>
+        <property name="sex" type="java.lang.String">
+            <column name="SEX" />
+        </property>
+        <property name="birthday" type="java.lang.String">
+            <column name="BIRTHDAY" />
+        </property>
+        <property name="highest_education" type="java.lang.String">
+            <column name="HIGHEST_EDUCATION" />
+        </property>
+        <property name="highest_degree" type="java.lang.String">
+            <column name="HIGHEST_DEGREE" />
+        </property>
+        <property name="learn_edge_structure" type="java.lang.String">
+            <column name="LEARN_EDGE_STRUCTURE" />
+        </property>
+        <property name="professional_title" type="java.lang.String">
+            <column name="PROFESSIONAL_TITLE" />
+        </property>
+        <property name="professional_grade" type="java.lang.String">
+            <column name="PROFESSIONAL_GRADE" />
+        </property>
+        <property name="subject_category" type="java.lang.String">
+            <column name="SUBJECT_CATEGORY" />
+        </property>
+        <property name="work_date" type="java.lang.String">
+            <column name="WORK_DATE" />
+        </property>
+        <property name="induction_date" type="java.lang.String">
+            <column name="INDUCTION_DATE" />
+        </property>
+        <property name="teacher_certificate_no" type="java.lang.String">
+            <column name="TEACHER_CERTIFICATE_NO" />
+        </property>
+        <property name="teaching_type" type="java.lang.String">
+            <column name="TEACHING_TYPE" />
+        </property>
+        <property name="teaching_status" type="java.lang.String">
+            <column name="TEACHING_STATUS" />
+        </property>
+        <property name="teaching_profession_name" type="java.lang.String">
+            <column name="TEACHING_PROFESSION_NAME" />
+        </property>
+        <property name="teaching_profession_no" type="java.lang.String">
+            <column name="TEACHING_PROFESSION_NO" />
+        </property>
+        <property name="profession_teaching_date" type="java.lang.String">
+            <column name="PROFESSION_TEACHING_DATE" />
+        </property>
+        <property name="experimental_technical_personnel" type="java.lang.String">
+            <column name="EXPERIMENTAL_TECHNICAL_PERSONNEL" />
+        </property>
+        <property name="double_teacher_type" type="java.lang.String">
+            <column name="DOUBLE_TEACHER_TYPE" />
+        </property>
+        <property name="engineering_background" type="java.lang.String">
+            <column name="ENGINEERING_BACKGROUND" />
+        </property>
+        <property name="industry_background" type="java.lang.String">
+            <column name="INDUSTRY_BACKGROUND" />
+        </property>
+        <property name="administrative_rank" type="java.lang.String">
+            <column name="ADMINISTRATIVE_RANK" />
+        </property>
+        <property name="graduate_tutor_type" type="java.lang.String">
+            <column name="GRADUATE_TUTOR_TYPE" />
+        </property>
+        <property name="number_of_doctor" type="java.lang.String">
+            <column name="NUMBER_OF_DOCTOR" />
+        </property>
+        <property name="number_of_master" type="java.lang.String">
+            <column name="NUMBER_OF_MASTER" />
+        </property>
+        <property name="employee_type" type="java.lang.String">
+            <column name="EMPLOYEE_TYPE" />
+        </property>
+        <property name="employment_type" type="java.lang.String">
+            <column name="EMPLOYMENT_TYPE" />
+        </property>
+        <property name="job_statue" type="java.lang.String">
+            <column name="JOB_STATUE" />
+        </property>
+        <property name="transaction_type" type="java.lang.String">
+            <column name="TRANSACTION_TYPE" />
+        </property>
+    </class>
+</hibernate-mapping>

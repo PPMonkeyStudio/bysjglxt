@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_record_progress" table="BYSJGLXT_RECORD_PROGRESS">
+        <id name="record_progress_id" type="java.lang.String">
+            <column name="RECORD_PROGRESS_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="record_progress_student" type="java.lang.String">
+            <column name="RECORD_PROGRESS_STUDENT" />
+        </property>
+        <property name="record_progress_gmt_start" type="java.lang.String">
+            <column name="RECORD_PROGRESS_GMT_START" />
+        </property>
+        <property name="record_progress_gmt_stop" type="java.lang.String">
+            <column name="RECORD_PROGRESS_GMT_STOP" />
+        </property>
+        <property name="record_progress_record" type="java.lang.String">
+            <column name="RECORD_PROGRESS_RECORD" />
+        </property>
+        <property name="record_progress_opinion" type="java.lang.String">
+            <column name="RECORD_PROGRESS_OPINION" />
+        </property>
+        <property name="record_progress_stage" type="int">
+            <column name="RECORD_PROGRESS_STAGE" />
+        </property>
+        <property name="record_progress_gmt_create" type="java.lang.String">
+            <column name="RECORD_PROGRESS_GMT_CREATE" />
+        </property>
+        <property name="record_progress_gmt_modified" type="java.lang.String">
+            <column name="RECORD_PROGRESS_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

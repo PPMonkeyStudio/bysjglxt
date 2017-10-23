@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.bysjglxt_summary" table="BYSJGLXT_SUMMARY">
+        <id name="summary_id" type="java.lang.String">
+            <column name="SUMMARY_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="summary_student" type="java.lang.String">
+            <column name="SUMMARY_STUDENT" />
+        </property>
+        <property name="summary_gmt_start" type="java.lang.String">
+            <column name="SUMMARY_GMT_START" />
+        </property>
+        <property name="summary_gmt_stop" type="java.lang.String">
+            <column name="SUMMARY_GMT_STOP" />
+        </property>
+        <property name="summary_summary" type="java.lang.String">
+            <column name="SUMMARY_SUMMARY" />
+        </property>
+        <property name="summary_opinion" type="java.lang.String">
+            <column name="SUMMARY_OPINION" />
+        </property>
+        <property name="summary_gmt_create" type="java.lang.String">
+            <column name="SUMMARY_GMT_CREATE" />
+        </property>
+        <property name="summary_gmt_modified" type="java.lang.String">
+            <column name="SUMMARY_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>
