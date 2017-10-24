@@ -1,4 +1,4 @@
-package com.bysjglxt.domain;
+package com.bysjglxt.domain.DO;
 
 public class bysjglxt_evaluate_review {
 	private String evaluate_review_id;
@@ -24,6 +24,7 @@ public class bysjglxt_evaluate_review {
 	private int evaluate_review_is_teacher_opinion;
 	private String evaluate_review_gmt_create;
 	private String evaluate_review_gmt_modified;
+
 	public String getEvaluate_review_id() {
 		return evaluate_review_id;
 	}

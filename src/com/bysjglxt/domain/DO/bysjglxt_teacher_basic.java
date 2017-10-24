@@ -1,4 +1,4 @@
-package com.bysjglxt.domain;
+package com.bysjglxt.domain.DO;
 
 public class bysjglxt_teacher_basic {
 	private String teacher_basic_id;

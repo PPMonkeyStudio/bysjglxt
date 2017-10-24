@@ -1,4 +1,4 @@
-package com.bysjglxt.domain;
+package com.bysjglxt.domain.DO;
 
 public class bysjglxt_task_instance {
 	private String task_instance_id;
