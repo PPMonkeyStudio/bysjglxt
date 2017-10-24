@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="studentInformationManagementAction" class="com.bysjglxt.action.StudentInformationManagementAction"
+		scope="prototype">
+		<property name="studentInformationManagementService" ref="studentInformationManagementService"></property>
+	</bean>
+
+	<bean id="studentInformationManagementService"
+		class="com.bysjglxt.service.impl.StudentInformationManagementServiceImpl">
+		<property name="studentInformationManagementDao" ref="studentInformationManagementDao"></property>
+	</bean>
+
+	<bean id="studentInformationManagementDao"
+		class="com.bysjglxt.dao.impl.StudentInformationManagementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+</beans>

@@ -5,7 +5,8 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.devMode" value="true" />
-	<include file="test/struts_test.xml">/index.jsp</include>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<include file="test/struts_test.xml"></include>
+	<include file="struts2/*.xml"></include>
 </struts>
