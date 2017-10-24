@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="teacherInformationManagementAction" class="com.bysjglxt.action.TeacherInformationManagementAction"
+		scope="prototype">
+		<property name="teacherInformationManagementService" ref="teacherInformationManagementService"></property>
+	</bean>
+
+	<bean id="teacherInformationManagementService"
+		class="com.bysjglxt.service.impl.TeacherInformationManagementServiceImpl">
+		<property name="teacherInformationManagementDao" ref="teacherInformationManagementDao"></property>
+	</bean>
+
+	<bean id="teacherInformationManagementDao"
+		class="com.bysjglxt.dao.impl.TeacherInformationManagementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+</beans>
