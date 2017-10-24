@@ -3,7 +3,7 @@ package com.bysjglxt.service;
 import java.io.File;
 import java.util.List;
 
-import com.bysjglxt.domain.bysjglxt_student_basic;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 
 public interface StudentInformationManagementService {
 
