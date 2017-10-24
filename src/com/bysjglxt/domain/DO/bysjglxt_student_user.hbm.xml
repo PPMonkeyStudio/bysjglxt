@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-24 11:19:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.bysjglxt_user_student" table="BYSJGLXT_USER_STUDENT">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_student_user" table="BYSJGLXT_STUDENT_USER">
         <id name="user_student_id" type="java.lang.String">
             <column name="USER_STUDENT_ID" />
             <generator class="assigned" />

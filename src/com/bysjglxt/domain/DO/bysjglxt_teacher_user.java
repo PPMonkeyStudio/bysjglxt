@@ -1,5 +1,7 @@
-package com.bysjglxt.domain;
-public class bysjglxt_user_teacher {
+package com.bysjglxt.domain.DO;
+
+public class bysjglxt_teacher_user {
+
 	private String user_teacher_id;
 	private String user_teacher_num;
 	private String user_teacher_password;
