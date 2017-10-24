@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-23 20:49:20 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-24 11:27:29 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.bysjglxt_task_instance" table="BYSJGLXT_TASK_INSTANCE">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_task_instance" table="BYSJGLXT_TASK_INSTANCE">
         <id name="task_instance_id" type="java.lang.String">
             <column name="TASK_INSTANCE_ID" />
             <generator class="assigned" />

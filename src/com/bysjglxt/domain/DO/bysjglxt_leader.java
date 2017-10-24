@@ -1,4 +1,4 @@
-package com.bysjglxt.domain;
+package com.bysjglxt.domain.DO;
 
 public class bysjglxt_leader {
 	private String leader_teacher_id;
@@ -15,6 +15,5 @@ public class bysjglxt_leader {
 	public String toString() {
 		return "bysjglxt_leader [leader_teacher_id=" + leader_teacher_id + "]";
 	}
-	
-	
+
 }

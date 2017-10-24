@@ -1,5 +1,4 @@
-package com.bysjglxt.domain;
-
+package com.bysjglxt.domain.DO;
 
 public class test {
 	private String id;
@@ -30,5 +29,4 @@ public class test {
 		this.createTime = createTime;
 	}
 
-	
 }
