@@ -3,5 +3,12 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	
+	<package name="StudentInformationManagement" namespace="/student"
+		extends="struts-default">
+		<action name="StudentInformationManagement_*"
+			class="com.bysjglxt.action.StudentInformationManagementAction"
+			method="{1}">
+			<result name="page">/WEB-INF/view/StudentInformationManagement.jsp</result>
+		</action>
+	</package>
 </struts>

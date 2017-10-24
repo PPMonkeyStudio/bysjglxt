@@ -6,8 +6,24 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class StudentInformationManagementAction extends ActionSupport {
 
-	// service层注入
 	private StudentInformationManagementService studentInformationManagementService;
+
+	/*
+	 * 
+	 */
+
+	public String page() {
+
+		return "page";
+	}
+
+	/*
+	 * 
+	 */
+
+	public StudentInformationManagementService getStudentInformationManagementService() {
+		return studentInformationManagementService;
+	}
 
 	public void setStudentInformationManagementService(
 			StudentInformationManagementService studentInformationManagementService) {

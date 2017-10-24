@@ -19,7 +19,7 @@
 <script type="text/javascript" src="<%=basePath%>js/bootstrap-select.js"></script>
 <!--------------------------------------------------------------------------------->
 <link rel="stylesheet"
-	href="<%=basePath%><%=basePath%>css/navbar/chartist-custom.css">
+	href="<%=basePath%>css/navbar/chartist-custom.css">
 <link rel="stylesheet" href="<%=basePath%>css/navbar/main.css">
 <link rel="stylesheet"
 	href="<%=basePath%>css/navbar/font-awesome.min.css">
@@ -76,7 +76,9 @@
 							<i class="icon-submenu lnr lnr-chevron-left"></i></a>
 						<div id="subPages" class="collapse ">
 							<ul class="nav">
-								<li><a href="#" class="">学生信息管理</a></li>
+								<li><a
+									href="<%=basePath%>student/StudentInformationManagement_page"
+									class="">学生信息管理</a></li>
 								<li><a href="#" class="">教师信息管理</a></li></li>
 				</ul>
 			</div>
@@ -88,10 +90,10 @@
 			</nav>
 		</div>
 	</div>
-
 	</div>
+
 	<!-- END WRAPPER -->
-	
+
 </body>
 
 </html>
