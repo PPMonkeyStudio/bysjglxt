@@ -20,7 +20,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	}
 
 	@Override
-	public List<bysjglxt_student_basic> convertStudentExcelToList(File studentExcel) {
+	public List<bysjglxt_student_basic> convertStudentExcelToList(File studentExcel,String EXCEL_StudentFileName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -50,6 +50,18 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		}
 
 		return list_StudentInformationDTO_All;
+	}
+
+	@Override
+	public boolean save_NewStudent(bysjglxt_student_basic student_basic) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean remove_StudentList(List<String> useStudentNumList) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
