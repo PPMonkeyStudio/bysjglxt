@@ -1,5 +1,6 @@
 package com.bysjglxt.action;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 import com.bysjglxt.service.StudentInformationManagementService;
@@ -26,7 +28,10 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	private HttpServletRequest http_request;
 
+	private File EXCEL_Student;
+
 	/**
+	 * 跳转列表页
 	 * 
 	 * @return
 	 */
@@ -64,6 +69,27 @@ public class StudentInformationManagementAction extends ActionSupport
 		}
 	}
 
+	public void PreviewStudentEXCEL() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+
+		List<bysjglxt_student_basic> list_PreviewStudentEXCEL = studentInformationManagementService
+				.convertStudentExcelToList(EXCEL_Student);
+
+		try {
+
+			http_response.setContentType("text/html;charset=utf-8");
+
+			http_response.getWriter().write(gson.toJson(list_PreviewStudentEXCEL));
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
 	/*
 	 * 
 	 */
@@ -79,6 +105,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 		this.http_response = http_response;
 
+	}
+
+	public File getEXCEL_Student() {
+		return EXCEL_Student;
+	}
+
+	public void setEXCEL_Student(File eXCEL_Student) {
+		EXCEL_Student = eXCEL_Student;
 	}
 
 	public HttpServletResponse getHttp_response() {
