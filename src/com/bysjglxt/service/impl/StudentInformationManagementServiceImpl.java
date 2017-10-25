@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bysjglxt.dao.StudentInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.service.StudentInformationManagementService;
 
 public class StudentInformationManagementServiceImpl implements StudentInformationManagementService {
@@ -25,6 +26,11 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	public boolean saveStudentList(List<bysjglxt_student_basic> studentBasicList) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<StudentInformationDTO> list_StudentInformationDTO_All() {
+		return studentInformationManagementDao.list_StudentInformationDTO_All();
 	}
 
 }
