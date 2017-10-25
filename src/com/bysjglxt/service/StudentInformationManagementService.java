@@ -15,7 +15,7 @@ public interface StudentInformationManagementService {
 	 * 
 	 * @return List<bysjglxt_student_basic>
 	 */
-	public List<bysjglxt_student_basic> convertStudentExcelToList(File studentExcel);
+	public List<bysjglxt_student_basic> convertStudentExcelToList(File EXCEL_Student, String EXCEL_StudentFileName);
 
 	/**
 	 * 将学生基础信息List生成bysjglxt_student_basic以及基于此生成的bysjglxt_user_student，存储到数据库中

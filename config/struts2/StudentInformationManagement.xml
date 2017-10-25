@@ -8,7 +8,8 @@
 		<action name="StudentInformationManagement_*"
 			class="com.bysjglxt.action.StudentInformationManagementAction"
 			method="{1}">
-			<result name="listPage">/WEB-INF/view/StudentInformationManagement.jsp</result>
+			<result name="listPage">/WEB-INF/view/StudentInformationManagement/StudentInformationManagement.jsp
+			</result>
 		</action>
 	</package>
 </struts>

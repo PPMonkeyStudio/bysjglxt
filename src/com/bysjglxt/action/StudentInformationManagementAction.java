@@ -30,6 +30,8 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	private File EXCEL_Student;
 
+	private String EXCEL_StudentFileName;
+
 	/**
 	 * 跳转列表页
 	 * 
@@ -75,7 +77,7 @@ public class StudentInformationManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 
 		List<bysjglxt_student_basic> list_PreviewStudentEXCEL = studentInformationManagementService
-				.convertStudentExcelToList(EXCEL_Student);
+				.convertStudentExcelToList(EXCEL_Student, EXCEL_StudentFileName);
 
 		try {
 
@@ -133,6 +135,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	public StudentInformationManagementService getStudentInformationManagementService() {
 		return studentInformationManagementService;
+	}
+
+	public String getEXCEL_StudentFileName() {
+		return EXCEL_StudentFileName;
+	}
+
+	public void setEXCEL_StudentFileName(String eXCEL_StudentFileName) {
+		EXCEL_StudentFileName = eXCEL_StudentFileName;
 	}
 
 	public void setStudentInformationManagementService(
