@@ -11,7 +11,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!---------------------------------------------------------------------------------------------------->
-
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/List_Student_All.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Student_Information_Display.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -52,7 +55,7 @@
 							</button></span>
 					</div>
 				</div>
-				<table class="table table-hover table-bordered"
+				<table id="table_student" class="table table-hover table-bordered"
 					style="text-align: center; margin: 20px 0;">
 					<tr>
 						<th>学号</th>
@@ -66,21 +69,10 @@
 								type="checkbox"><span>全选</span>
 						</label></th>
 					</tr>
-
-					<tr>
-						<td>15478019</td>
-						<td>张三</td>
-						<td>男</td>
-						<td>软件工程</td>
-						<td>2015</td>
-						<td>✔</td>
-						<td style="padding: 0;"><button style="margin: 3px 0 0 0;"
-								class="btn btn-default  btn-ms">详细信息</button></td>
-						<td><label class="fancy-checkbox"> <input
-								type="checkbox"><span></span>
-						</label></td>
-					</tr>
 				</table>
+				<div id="i_pulse" style="text-align: center;">
+					<i class="fa fa-spinner fa-pulse fa-3x"></i>
+				</div>
 				<div style="height: 34px">
 
 					<button class="btn btn-danger"
@@ -114,7 +106,35 @@
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
 	</div>
-
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<div class="modal fade" id="modal_Student_Information"
+		data-keyboard="true" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- 模态弹出窗内容 -->
+				<!--弹出框头部，一般使用“modal-header”表示，主要包括标题和关闭按钮-->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">详细信息</h4>
+				</div>
+				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
+				<div class="modal-body">
+					<table id="table_student_detail"
+						class="table table-hover table-bordered"
+						style="text-align: center; margin: 20px 0;">
+						<!--  -->
+						<tbody></tbody>
+					</table>
+				</div>
+				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
+				<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
