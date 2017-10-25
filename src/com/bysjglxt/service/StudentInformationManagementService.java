@@ -14,8 +14,9 @@ public interface StudentInformationManagementService {
 	 * @param StudentExcel
 	 * 
 	 * @return List<bysjglxt_student_basic>
+	 * @throws Exception 
 	 */
-	public List<bysjglxt_student_basic> convertStudentExcelToList(File EXCEL_Student, String EXCEL_StudentFileName);
+	public List<bysjglxt_student_basic> convertStudentExcelToList(File EXCEL_Student, String EXCEL_StudentFileName) throws Exception;
 
 	/**
 	 * 将学生基础信息List生成bysjglxt_student_basic以及基于此生成的bysjglxt_user_student，存储到数据库中
@@ -48,7 +49,7 @@ public interface StudentInformationManagementService {
 	 * 
 	 * @param useStudentNumList
 	 *            由要删除的学生学号组成的列表
-	 * @return 是否存储成功,1是 0否
+	 * @return 是否删除成功,1是 0否
 	 */
 	public boolean remove_StudentList(List<String> useStudentNumList);
 

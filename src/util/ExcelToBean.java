@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -194,7 +195,7 @@ public class ExcelToBean {
 			try {
 				field = superClass.getDeclaredField(fieldName);
 			} catch (NoSuchFieldException e) {
-				// Field 不在当前类定义, 继续向上转型
+				System.out.println("异常");
 			}
 		}
 		if (field == null)
@@ -203,7 +204,6 @@ public class ExcelToBean {
 		if (!Modifier.isPublic(field.getModifiers())) {
 			field.setAccessible(true);
 		}
-
 		try {
 			field.set(object, value);
 		} catch (IllegalAccessException e) {

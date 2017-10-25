@@ -9,7 +9,7 @@ public class bysjglxt_student_basic {
 	private String student_basic_grade;
 	private String student_basic_idtype;
 	private String student_basic_idcaard;
-	private int student_basic_age;
+	private String student_basic_age;
 	private String student_basic_sex;
 	private String student_basic_nation;
 	private String student_basic_politicalvisage;
@@ -108,11 +108,11 @@ public class bysjglxt_student_basic {
 		this.student_basic_idcaard = student_basic_idcaard;
 	}
 
-	public int getStudent_basic_age() {
+	public String getStudent_basic_age() {
 		return student_basic_age;
 	}
 
-	public void setStudent_basic_age(int student_basic_age) {
+	public void setStudent_basic_age(String student_basic_age) {
 		this.student_basic_age = student_basic_age;
 	}
 
