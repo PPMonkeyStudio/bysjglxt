@@ -26,6 +26,9 @@
 <link rel="stylesheet" href="<%=basePath%>css/navbar/style.css">
 <link rel="stylesheet" href="<%=basePath%>css/table.css">
 <!--------------------------------------------------------------------------------->
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
+<script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
+<!--------------------------------------------------------------------------------->
 
 <title>Insert title here</title>
 </head>

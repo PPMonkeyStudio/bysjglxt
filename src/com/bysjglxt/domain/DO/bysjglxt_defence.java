@@ -1,6 +1,6 @@
 package com.bysjglxt.domain.DO;
 
-public class bysjglxt_defence_ {
+public class bysjglxt_defence {
 
 	private String defence_id;
 	private String defence_student;
