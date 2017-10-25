@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 
 public interface TeacherInformationManagementService {
 
@@ -24,4 +25,12 @@ public interface TeacherInformationManagementService {
 	 * @return 是否存储成功,1是 0否
 	 */
 	public boolean saveTeacherList(List<bysjglxt_teacher_basic> teacherBasicList);
+
+	/**
+	 * 获取数据库中所有的bysjglxt_teacher_basic记录以及bysjglxt_user_teacher记录，
+	 * 并封装成TeacherInformationDTO的List返回
+	 * 
+	 * @return
+	 */
+	public List<TeacherInformationDTO> list_TeacherInformationDTO_All();
 }
