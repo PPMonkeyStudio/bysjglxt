@@ -32,6 +32,8 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	private String EXCEL_StudentFileName;
 
+	private String EXCEL_StudentContentType;
+
 	/**
 	 * 跳转列表页
 	 * 
@@ -131,6 +133,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	public void setHttp_request(HttpServletRequest http_request) {
 		this.http_request = http_request;
+	}
+
+	public String getEXCEL_StudentContentType() {
+		return EXCEL_StudentContentType;
+	}
+
+	public void setEXCEL_StudentContentType(String eXCEL_StudentContentType) {
+		EXCEL_StudentContentType = eXCEL_StudentContentType;
 	}
 
 	public StudentInformationManagementService getStudentInformationManagementService() {
