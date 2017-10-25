@@ -76,10 +76,14 @@
 							<i class="icon-submenu lnr lnr-chevron-left"></i></a>
 						<div id="subPages" class="collapse ">
 							<ul class="nav">
-								<li><a
-									href="<%=basePath%>student/StudentInformationManagement_page"
-									class="">学生信息管理</a></li>
-								<li><a href="#" class="">教师信息管理</a></li></li>
+								<li><a href="#" class="">添加学生信息</a></li></li>
+					<li><a
+						href="<%=basePath%>student/StudentInformationManagement_listPage"
+						class="">学生信息列表</a></li>
+					<li><a href="#" class="">添加教师信息</a></li>
+					</li>
+					<li><a href="#" class="">教师信息列表</a></li>
+					</li>
 				</ul>
 			</div>
 			</li>

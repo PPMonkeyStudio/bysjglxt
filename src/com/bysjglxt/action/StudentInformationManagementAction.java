@@ -12,9 +12,9 @@ public class StudentInformationManagementAction extends ActionSupport {
 	 * 
 	 */
 
-	public String page() {
+	public String listPage() {
 
-		return "page";
+		return "listPage";
 	}
 
 	/*
