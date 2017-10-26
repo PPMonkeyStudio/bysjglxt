@@ -59,7 +59,8 @@ public interface StudentInformationManagementService {
 	 * 根据页数以及搜索关键词，查询学生信息，并连同页面信息一起封装进StudentInformationManagementVO
 	 * 
 	 * @param studentInformationManagementVO
-	 *            存有需要查询的当前页pageIndex 以及搜索信息search（搜索信息需要判断是否为null），
+	 *            存有需要查询的当前页pageIndex
+	 *            以及搜索信息search模糊查询学生姓名，并匹配变色（搜索信息需要判断是否为null），
 	 * @return 封装好的StudentInformationManagementVO（类中所有页面信息均要封装）
 	 */
 	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
