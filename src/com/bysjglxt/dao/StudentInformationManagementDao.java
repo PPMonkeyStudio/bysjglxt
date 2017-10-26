@@ -11,4 +11,15 @@ public interface StudentInformationManagementDao {
 
 	bysjglxt_student_basic get_StudentBasicInformation_ByUserBasic(String id);
 
+	boolean saveStudentBasic(bysjglxt_student_basic bysjglxt_student_basic);
+
+	boolean saveStudent(bysjglxt_student_user bysjglxt_student_user);
+
+	bysjglxt_student_user getStudentByNum(String student_num);
+
+	boolean deleteStudentBasicInfoById(String user_student_basic);
+
+	boolean deleteStudentInfoById(String user_student_id);
+
+
 }

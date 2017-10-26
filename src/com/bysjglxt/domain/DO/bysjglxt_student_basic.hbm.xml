@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-24 11:27:29 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-25 23:18:20 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_student_basic" table="BYSJGLXT_STUDENT_BASIC">
         <id name="student_basic_id" type="java.lang.String">
@@ -14,20 +14,44 @@
         <property name="student_basic_name" type="java.lang.String">
             <column name="STUDENT_BASIC_NAME" />
         </property>
+        <property name="student_basicd_year" type="java.lang.String">
+            <column name="STUDENT_BASICD_YEAR" />
+        </property>
+        <property name="student_basic_grade" type="java.lang.String">
+            <column name="STUDENT_BASIC_GRADE" />
+        </property>
+        <property name="student_basic_idtype" type="java.lang.String">
+            <column name="STUDENT_BASIC_IDTYPE" />
+        </property>
+        <property name="student_basic_idcaard" type="java.lang.String">
+            <column name="STUDENT_BASIC_IDCAARD" />
+        </property>
+        <property name="student_basic_age" type="java.lang.String">
+            <column name="STUDENT_BASIC_AGE" />
+        </property>
         <property name="student_basic_sex" type="java.lang.String">
             <column name="STUDENT_BASIC_SEX" />
+        </property>
+        <property name="student_basic_nation" type="java.lang.String">
+            <column name="STUDENT_BASIC_NATION" />
+        </property>
+        <property name="student_basic_politicalvisage" type="java.lang.String">
+            <column name="STUDENT_BASIC_POLITICALVISAGE" />
         </property>
         <property name="student_basic_native_place" type="java.lang.String">
             <column name="STUDENT_BASIC_NATIVE_PLACE" />
         </property>
-        <property name="student_basic_class" type="java.lang.String">
-            <column name="STUDENT_BASIC_CLASS" />
+        <property name="student_basic_studenttype" type="java.lang.String">
+            <column name="STUDENT_BASIC_STUDENTTYPE" />
         </property>
-        <property name="student_basic_phone" type="java.lang.String">
-            <column name="STUDENT_BASIC_PHONE" />
+        <property name="student_basic_enrollmenttype" type="java.lang.String">
+            <column name="STUDENT_BASIC_ENROLLMENTTYPE" />
         </property>
-        <property name="student_basic_year" type="java.lang.String">
-            <column name="STUDENT_BASIC_YEAR" />
+        <property name="student_basic_teachingmethods" type="java.lang.String">
+            <column name="STUDENT_BASIC_TEACHINGMETHODS" />
+        </property>
+        <property name="student_basic_professionalcode" type="java.lang.String">
+            <column name="STUDENT_BASIC_PROFESSIONALCODE" />
         </property>
         <property name="student_basic_major" type="java.lang.String">
             <column name="STUDENT_BASIC_MAJOR" />
@@ -35,11 +59,32 @@
         <property name="student_basic_college" type="java.lang.String">
             <column name="STUDENT_BASIC_COLLEGE" />
         </property>
-        <property name="student_basic_gmt_create" type="java.lang.String">
-            <column name="STUDENT_BASIC_GMT_CREATE" />
+        <property name="student_basic_phone" type="java.lang.String">
+            <column name="STUDENT_BASIC_PHONE" />
         </property>
-        <property name="student_basic_gmt_modified" type="java.lang.String">
-            <column name="STUDENT_BASIC_GMT_MODIFIED" />
+        <property name="student_basic_independentmajorname" type="java.lang.String">
+            <column name="STUDENT_BASIC_INDEPENDENTMAJORNAME" />
+        </property>
+        <property name="student_basic_is_normalmajor" type="java.lang.String">
+            <column name="STUDENT_BASIC_IS_NORMALMAJOR" />
+        </property>
+        <property name="student_basic_is_disability" type="java.lang.String">
+            <column name="STUDENT_BASIC_IS_DISABILITY" />
+        </property>
+        <property name="student_basic_householdregistrationtype" type="java.lang.String">
+            <column name="STUDENT_BASIC_HOUSEHOLDREGISTRATIONTYPE" />
+        </property>
+        <property name="student_basic_transactiontypes" type="java.lang.String">
+            <column name="STUDENT_BASIC_TRANSACTIONTYPES" />
+        </property>
+        <property name="student_basic_entranceeducation" type="java.lang.String">
+            <column name="STUDENT_BASIC_ENTRANCEEDUCATION" />
+        </property>
+        <property name="student_basic_enrollmentmode" type="java.lang.String">
+            <column name="STUDENT_BASIC_ENROLLMENTMODE" />
+        </property>
+        <property name="student_basic_reasonsfordroppingoutofschool" type="java.lang.String">
+            <column name="STUDENT_BASIC_REASONSFORDROPPINGOUTOFSCHOOL" />
         </property>
     </class>
 </hibernate-mapping>

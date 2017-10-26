@@ -73,7 +73,7 @@ public class StudentInformationManagementAction extends ActionSupport
 		}
 	}
 
-	public void PreviewStudentEXCEL() {
+	public void PreviewStudentEXCEL() throws Exception {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();

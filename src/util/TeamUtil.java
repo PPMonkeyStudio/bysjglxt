@@ -90,7 +90,7 @@ public class TeamUtil {
 		}
 	}
 
-	public String getUuid() {
+	public static String getUuid() {
 		UUID uuid = UUID.randomUUID();
 		String s = uuid.toString();
 		return s;

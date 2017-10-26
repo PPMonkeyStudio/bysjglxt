@@ -39,15 +39,54 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	public bysjglxt_student_basic get_StudentBasicInformation_ByUserBasic(String id) {
 		Session session = getSession();
 		bysjglxt_student_basic StudentBasicInformation = null;
-
 		String hql = "from bysjglxt_student_basic where student_basic_id='" + id + "'";
 		Query query = session.createQuery(hql);
-
 		StudentBasicInformation = (bysjglxt_student_basic) query.uniqueResult();
-
-		System.out.println("StudentBasicInformation:" + StudentBasicInformation);
-
 		return StudentBasicInformation;
+	}
+
+	@Override
+	public boolean saveStudentBasic(bysjglxt_student_basic bysjglxt_student_basic) {
+		boolean flag = false;
+		Session session = getSession();
+		flag = (boolean) session.save(bysjglxt_student_basic);
+		return flag;
+	}
+
+	@Override
+	public boolean saveStudent(bysjglxt_student_user bysjglxt_student_user) {
+		boolean flag = false;
+		Session session = getSession();
+		flag = (boolean) session.save(bysjglxt_student_user);
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_student_user getStudentByNum(String student_num) {
+		Session session = getSession();
+		bysjglxt_student_user StudentInformation = null;
+		String hql = "from bysjglxt_student_user where user_student_num='" + student_num + "'";
+		Query query = session.createQuery(hql);
+		StudentInformation = (bysjglxt_student_user) query.uniqueResult();
+		return StudentInformation;
+	}
+
+	@Override
+	public boolean deleteStudentBasicInfoById(String user_student_basic) {
+		Session session = getSession();
+		String hql = "delete from bysjglxt_student_basic where student_basic_id='" + user_student_basic + "'";
+		Query query = session.createQuery(hql);
+		query.executeUpdate();
+		return true;
+	}
+
+	@Override
+	public boolean deleteStudentInfoById(String user_student_id) {
+		Session session = getSession();
+		String hql = "delete from bysjglxt_student_user where user_student_id='" + user_student_id + "'";
+		Query query = session.createQuery(hql);
+		query.executeUpdate();
+		return true;
 	}
 
 }
