@@ -13,6 +13,7 @@ import com.bysjglxt.dao.StudentInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 import com.bysjglxt.service.StudentInformationManagementService;
 
 import util.ExcelToBean;
@@ -119,6 +120,13 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			flag = studentInformationManagementDao.deleteStudentInfoById(bysjglxt_student_user.getUser_student_id());
 		}
 		return flag;
+	}
+
+	@Override
+	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
+			StudentInformationManagementVO studentInformationManagementVO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

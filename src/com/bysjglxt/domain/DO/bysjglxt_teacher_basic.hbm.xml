@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-25 23:18:20 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-26 19:52:36 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_teacher_basic" table="BYSJGLXT_TEACHER_BASIC">
         <id name="teacher_basic_id" type="java.lang.String">
@@ -115,6 +115,24 @@
         </property>
         <property name="transaction_type" type="java.lang.String">
             <column name="TRANSACTION_TYPE" />
+        </property>
+        <property name="university_transfer" type="java.lang.String">
+            <column name="UNIVERSITY_TRANSFER" />
+        </property>
+        <property name="school_graduation" type="java.lang.String">
+            <column name="SCHOOL_GRADUATION" />
+        </property>
+        <property name="school_adjustment" type="java.lang.String">
+            <column name="SCHOOL_ADJUSTMENT" />
+        </property>
+        <property name="off_campus_teacher_type" type="java.lang.String">
+            <column name="OFF_CAMPUS_TEACHER_TYPE" />
+        </property>
+        <property name="teacher_basic_gmt_create" type="java.lang.String">
+            <column name="TEACHER_BASIC_GMT_CREATE" />
+        </property>
+        <property name="teacher_basic_gmt_modified" type="java.lang.String">
+            <column name="TEACHER_BASIC_GMT_MODIFIED" />
         </property>
     </class>
 </hibernate-mapping>
