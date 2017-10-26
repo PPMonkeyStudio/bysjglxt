@@ -19,8 +19,6 @@ public class bysjglxt_student_basic {
 	private String student_basic_teachingmethods;
 	private String student_basic_professionalcode;
 	private String student_basic_major;
-	private String student_basic_college;
-	private String student_basic_phone;
 	private String student_basic_independentmajorname;
 	private String student_basic_is_normalmajor;
 	private String student_basic_is_disability;
@@ -29,6 +27,8 @@ public class bysjglxt_student_basic {
 	private String student_basic_entranceeducation;
 	private String student_basic_enrollmentmode;
 	private String student_basic_reasonsfordroppingoutofschool;
+	private String student_basic_college;
+	private String student_basic_phone;
 
 	@Override
 	public String toString() {

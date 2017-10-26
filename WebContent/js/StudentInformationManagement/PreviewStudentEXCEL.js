@@ -10,7 +10,6 @@ function Preview_Student_EXCEL(file) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-
 				EXCEL_Student_List = JSON.parse(xhr.responseText);
 
 				var table_excel_student = document
@@ -25,15 +24,57 @@ function Preview_Student_EXCEL(file) {
 					table_excel_student.firstElementChild.appendChild(new_tr)
 
 					new_tr.innerHTML = '<td>'
-							+ EXCEL_Student_List[num].bysjglxtStudentBasic.student_basic_num
+							+ EXCEL_Student_List[num].student_basic_num
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].bysjglxtStudentBasic.student_basic_name
+							+ EXCEL_Student_List[num].student_basic_name
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].bysjglxtStudentBasic.student_basic_sex
+							+ EXCEL_Student_List[num].student_basicd_year
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].bysjglxtStudentBasic.student_basic_major
+							+ EXCEL_Student_List[num].student_basic_grade
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].bysjglxtStudentBasic.student_basic_year
+							+ EXCEL_Student_List[num].student_basic_idtype
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_idcaard
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_age
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_sex
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_nation
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_politicalvisage
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_native_place
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_studenttype
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_enrollmenttype
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_teachingmethods
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_professionalcode
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_major
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_independentmajorname
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_is_normalmajor
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_is_disability
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_householdregistrationtype
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_transactiontypes
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_entranceeducation
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_enrollmentmode
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_reasonsfordroppingoutofschool
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_phone
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_college
 							+ '</td>';
 				}
 				// 让加载图标消失
