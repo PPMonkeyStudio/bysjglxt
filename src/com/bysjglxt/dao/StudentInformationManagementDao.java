@@ -25,6 +25,10 @@ public interface StudentInformationManagementDao {
 	List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch(
 			StudentInformationManagementVO studentInformationManagementVO);
 
+	int get_StudentInfor_TotalRecords_BySearch(String search);
+
+	bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id);
+
 	
 
 }
