@@ -28,11 +28,19 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	private HttpServletRequest http_request;
 
+	/*
+	 * 学生excel
+	 */
 	private File EXCEL_Student;
 
 	private String EXCEL_StudentFileName;
 
 	private String EXCEL_StudentContentType;
+
+	/*
+	 * 从js中返回来的学生信息list
+	 */
+	private List<bysjglxt_student_basic> Save_Student_EXCEL_List;
 
 	/**
 	 * 跳转列表页
@@ -44,6 +52,11 @@ public class StudentInformationManagementAction extends ActionSupport
 		return "listPage";
 	}
 
+	/**
+	 * 跳转手动添加学生页
+	 * 
+	 * @return
+	 */
 	public String CreateStudentPage() {
 		return "CreateStudentPage";
 	}
@@ -98,6 +111,20 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	}
 
+	public void SaveStudentEXCEL() throws Exception {
+		http_response.setContentType("text/html;charset=utf-8");
+
+		List<bysjglxt_student_basic> list_PreviewStudentEXCEL = studentInformationManagementService
+				.convertStudentExcelToList(EXCEL_Student, EXCEL_StudentFileName);
+
+		if (studentInformationManagementService.saveStudentList(list_PreviewStudentEXCEL)) {
+			http_response.getWriter().write("success");
+		} else {
+			http_response.getWriter().write("fail");
+		}
+
+	}
+
 	/*
 	 * 
 	 */
@@ -113,6 +140,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 		this.http_response = http_response;
 
+	}
+
+	public List<bysjglxt_student_basic> getSave_Student_EXCEL_List() {
+		return Save_Student_EXCEL_List;
+	}
+
+	public void setSave_Student_EXCEL_List(List<bysjglxt_student_basic> save_Student_EXCEL_List) {
+		Save_Student_EXCEL_List = save_Student_EXCEL_List;
 	}
 
 	public File getEXCEL_Student() {

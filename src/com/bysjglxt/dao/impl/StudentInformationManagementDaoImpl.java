@@ -47,17 +47,27 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 
 	@Override
 	public boolean saveStudentBasic(bysjglxt_student_basic bysjglxt_student_basic) {
-		boolean flag = false;
-		Session session = getSession();
-		flag = (boolean) session.save(bysjglxt_student_basic);
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.save(bysjglxt_student_basic);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
 		return flag;
 	}
 
 	@Override
 	public boolean saveStudent(bysjglxt_student_user bysjglxt_student_user) {
-		boolean flag = false;
-		Session session = getSession();
-		flag = (boolean) session.save(bysjglxt_student_user);
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.save(bysjglxt_student_user);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
 		return flag;
 	}
 
