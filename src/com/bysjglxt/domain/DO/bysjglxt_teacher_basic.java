@@ -38,6 +38,60 @@ public class bysjglxt_teacher_basic {
 	private String employment_type;
 	private String job_statue;
 	private String transaction_type;
+	private String university_transfer;
+	private String school_graduation;
+	private String school_adjustment;
+	private String off_campus_teacher_type;
+	private String teacher_basic_gmt_create;
+	private String teacher_basic_gmt_modified;
+
+	public String getUniversity_transfer() {
+		return university_transfer;
+	}
+
+	public void setUniversity_transfer(String university_transfer) {
+		this.university_transfer = university_transfer;
+	}
+
+	public String getSchool_graduation() {
+		return school_graduation;
+	}
+
+	public void setSchool_graduation(String school_graduation) {
+		this.school_graduation = school_graduation;
+	}
+
+	public String getSchool_adjustment() {
+		return school_adjustment;
+	}
+
+	public void setSchool_adjustment(String school_adjustment) {
+		this.school_adjustment = school_adjustment;
+	}
+
+	public String getOff_campus_teacher_type() {
+		return off_campus_teacher_type;
+	}
+
+	public void setOff_campus_teacher_type(String off_campus_teacher_type) {
+		this.off_campus_teacher_type = off_campus_teacher_type;
+	}
+
+	public String getTeacher_basic_gmt_create() {
+		return teacher_basic_gmt_create;
+	}
+
+	public void setTeacher_basic_gmt_create(String teacher_basic_gmt_create) {
+		this.teacher_basic_gmt_create = teacher_basic_gmt_create;
+	}
+
+	public String getTeacher_basic_gmt_modified() {
+		return teacher_basic_gmt_modified;
+	}
+
+	public void setTeacher_basic_gmt_modified(String teacher_basic_gmt_modified) {
+		this.teacher_basic_gmt_modified = teacher_basic_gmt_modified;
+	}
 
 	public String getTeacher_basic_id() {
 		return teacher_basic_id;

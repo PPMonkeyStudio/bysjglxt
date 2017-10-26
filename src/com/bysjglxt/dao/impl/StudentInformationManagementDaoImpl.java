@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import com.bysjglxt.dao.StudentInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
 public class StudentInformationManagementDaoImpl implements StudentInformationManagementDao {
 
@@ -99,4 +100,55 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		return true;
 	}
 
+	@Override
+	public List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch(
+			StudentInformationManagementVO studentInformationManagementVO) {
+		Session session = getSession();
+		String hql = "from bysjglxt_student_basic where 1=1";
+		if (studentInformationManagementVO.getSearch() != null
+				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + studentInformationManagementVO.getSearch() + "%";
+			hql = hql + " and student_basic_name like '" + search + "'";
+			System.out.println(hql);
+		}
+		hql = hql + " order by student_basic_num";
+		Query query = session.createQuery(hql);
+		query.setFirstResult(
+				(studentInformationManagementVO.getPageIndex() - 1) * studentInformationManagementVO.getPageSize());
+		query.setMaxResults(studentInformationManagementVO.getPageSize());
+		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = query.list();
+		session.clear();
+		if (studentInformationManagementVO.getSearch() != null
+				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
+			for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
+				bysjglxt_student_basic.setStudent_basic_name(bysjglxt_student_basic.getStudent_basic_name().replaceAll(
+						bysjglxt_student_basic.getStudent_basic_name(),
+						"<span style='color: #ff5063;'>" + bysjglxt_student_basic.getStudent_basic_name() + "</span>"));
+			}
+		}
+		return listStudentBasicInformationByPageAndSearch;
+	}
+
+	@Override
+	public int get_StudentInfor_TotalRecords_BySearch(String search) {
+		Session session = getSession();
+		String hql = "select count(*) from bysjglxt_student_basic where 1=1";
+		if (search != null && search.trim().length() > 0) {
+			search = "%" + search + "%";
+			hql = hql + " and student_basic_name like '" + search + "'";
+		}
+		Query query = session.createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id) {
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_student_user where user_student_basic='" + student_basic_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
+		return bysjglxt_student_user;
+	}
 }

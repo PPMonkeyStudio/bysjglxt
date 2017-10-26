@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
 public interface StudentInformationManagementDao {
 
@@ -21,5 +22,13 @@ public interface StudentInformationManagementDao {
 
 	boolean deleteStudentInfoById(String user_student_id);
 
+	List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch(
+			StudentInformationManagementVO studentInformationManagementVO);
+
+	int get_StudentInfor_TotalRecords_BySearch(String search);
+
+	bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id);
+
+	
 
 }
