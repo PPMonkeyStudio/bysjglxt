@@ -81,12 +81,10 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		System.out.println(listAllStudentUserInformation.size());
 
 		for (bysjglxt_student_user student_user : listAllStudentUserInformation) {
-			System.out.println("gg");
 			studentInformationDTO = new StudentInformationDTO();
 			studentInformationDTO.setBysjglxtStudentUser(student_user);
 			studentInformationDTO.setBysjglxtStudentBasic(studentInformationManagementDao
 					.get_StudentBasicInformation_ByUserBasic(student_user.getUser_student_basic()));
-			System.out.println(studentInformationDTO);
 			list_StudentInformationDTO_All.add(studentInformationDTO);
 		}
 
