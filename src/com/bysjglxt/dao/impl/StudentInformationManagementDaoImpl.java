@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import com.bysjglxt.dao.StudentInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
 public class StudentInformationManagementDaoImpl implements StudentInformationManagementDao {
 
@@ -97,6 +98,18 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		Query query = session.createQuery(hql);
 		query.executeUpdate();
 		return true;
+	}
+
+	@Override
+	public List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch(
+			StudentInformationManagementVO studentInformationManagementVO) {
+
+		Session session = getSession();
+		String hql = "from bysjglxt_student_basic where 1=1";
+		
+		
+
+		return null;
 	}
 
 }

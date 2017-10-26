@@ -125,7 +125,11 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	@Override
 	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
 			StudentInformationManagementVO studentInformationManagementVO) {
-		// TODO Auto-generated method stub
+		List<StudentInformationDTO> listStudentInformationDTO = new ArrayList<StudentInformationDTO>();
+		List<StudentInformationDTO> studentInformationDTO = new ArrayList<StudentInformationDTO>();
+		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = studentInformationManagementDao
+				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO);
+
 		return null;
 	}
 
