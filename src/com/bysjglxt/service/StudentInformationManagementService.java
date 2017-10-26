@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
 public interface StudentInformationManagementService {
 
@@ -14,9 +15,10 @@ public interface StudentInformationManagementService {
 	 * @param StudentExcel
 	 * 
 	 * @return List<bysjglxt_student_basic>
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	public List<bysjglxt_student_basic> convertStudentExcelToList(File EXCEL_Student, String EXCEL_StudentFileName) throws Exception;
+	public List<bysjglxt_student_basic> convertStudentExcelToList(File EXCEL_Student, String EXCEL_StudentFileName)
+			throws Exception;
 
 	/**
 	 * 将学生基础信息List生成bysjglxt_student_basic以及基于此生成的bysjglxt_user_student，存储到数据库中
@@ -52,5 +54,15 @@ public interface StudentInformationManagementService {
 	 * @return 是否删除成功,1是 0否
 	 */
 	public boolean remove_StudentList(List<String> useStudentNumList);
+
+	/**
+	 * 根据页数以及搜索关键词，查询学生信息，并连同页面信息一起封装进StudentInformationManagementVO
+	 * 
+	 * @param studentInformationManagementVO
+	 *            存有需要查询的当前页pageIndex 以及搜索信息search（搜索信息需要判断是否为null），
+	 * @return 封装好的StudentInformationManagementVO（类中所有页面信息均要封装）
+	 */
+	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
+			StudentInformationManagementVO studentInformationManagementVO);
 
 }

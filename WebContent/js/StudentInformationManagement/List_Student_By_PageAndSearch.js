@@ -1,8 +1,8 @@
-﻿window.onload = List_Student_All;
+﻿window.onload = List_Student_By_pageAndSearch;
 
 var student_json = null;
 
-function List_Student_All() {
+function List_Student_By_PageAndSearch() {
 
 	document.getElementById("i_pulse").style.display = "block";
 
@@ -48,8 +48,9 @@ function List_Student_All() {
 		}
 	}
 
-	xhr.open("POST",
-			"/bysjglxt/student/StudentInformationManagement_ListStudentAll");
+	xhr
+			.open("POST",
+					"/bysjglxt/student/StudentInformationManagement_ListStudentByPageAndSearch");
 	xhr.send(null);
 
 }
