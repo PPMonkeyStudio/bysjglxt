@@ -38,6 +38,14 @@ public class StudentInformationManagementVO {
 		return pageIndex;
 	}
 
+	@Override
+	public String toString() {
+		return "StudentInformationManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords
+				+ ", pageSize=" + pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage
+				+ ", HaveNextPage=" + HaveNextPage + ", list_StudentInformationDTO=" + list_StudentInformationDTO
+				+ ", search=" + search + "]";
+	}
+
 	public String getSearch() {
 		return search;
 	}

@@ -121,9 +121,9 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		if (studentInformationManagementVO.getSearch() != null
 				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
 			for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
-				bysjglxt_student_basic.setStudent_basic_name(bysjglxt_student_basic.getStudent_basic_name().replaceAll(
-						bysjglxt_student_basic.getStudent_basic_name(),
-						"<span style='color: #ff5063;'>" + bysjglxt_student_basic.getStudent_basic_name() + "</span>"));
+				bysjglxt_student_basic.setStudent_basic_name(bysjglxt_student_basic.getStudent_basic_name()
+						.replaceAll(studentInformationManagementVO.getSearch().trim(), "<span style='color: #ff5063;'>"
+								+ studentInformationManagementVO.getSearch().trim() + "</span>"));
 			}
 		}
 		return listStudentBasicInformationByPageAndSearch;

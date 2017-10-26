@@ -128,7 +128,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user bysjglxt_student_user = null;
 		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = studentInformationManagementDao
 				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO);
-		studentInformationManagementVO.setTotalPages(studentInformationManagementDao
+		studentInformationManagementVO.setTotalRecords(studentInformationManagementDao
 				.get_StudentInfor_TotalRecords_BySearch(studentInformationManagementVO.getSearch()));
 		System.out.println("总记录数：" + studentInformationManagementVO.getTotalRecords());
 		studentInformationManagementVO.setTotalPages(

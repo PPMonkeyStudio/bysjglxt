@@ -11,7 +11,6 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
-import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 import com.bysjglxt.service.StudentInformationManagementService;
 import com.google.gson.Gson;
@@ -75,10 +74,8 @@ public class StudentInformationManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 
 		// 获取所有学生信息列表
-		List<StudentInformationDTO> list_StudentInformationDTO_All = studentInformationManagementService
-				.list_StudentInformationDTO_All();
-
-		studentInformationManagementVO.setList_StudentInformationDTO(list_StudentInformationDTO_All);
+		studentInformationManagementVO = studentInformationManagementService
+				.VO_Student_By_PageAndSearch(studentInformationManagementVO);
 
 		http_response.setContentType("text/html;charset=utf-8");
 
