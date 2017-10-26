@@ -13,6 +13,12 @@ public class StudentInformationDTO {
 	 * 
 	 */
 
+	@Override
+	public String toString() {
+		return "StudentInformationDTO [bysjglxtStudentBasic=" + bysjglxtStudentBasic + ", bysjglxtStudentUser="
+				+ bysjglxtStudentUser + "]";
+	}
+
 	public bysjglxt_student_basic getBysjglxtStudentBasic() {
 		return bysjglxtStudentBasic;
 	}
