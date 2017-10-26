@@ -12,11 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/List_Student_All.js"></script>
+	src="<%=basePath%>js/StudentInformationManagement/List_Student_By_PageAndSearch.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Student_Information_Display.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/PreviewStudentEXCEL.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Input_Select.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -51,29 +53,44 @@
 					</div>
 
 					<div class="input-group" style="width: 300px; float: right;">
-						<input class="form-control" type="text"> <span
-							class="input-group-btn"><button class="btn btn-primary"
-								type="button">
+						<input id="input_search" class="form-control" type="text">
+						<span class="input-group-btn"><button
+								class="btn btn-primary"
+								onclick="List_Student_By_PageAndSearch(1)">
 								<i class="fa fa-search"></i> 检索
 							</button></span>
 					</div>
 				</div>
 				<table id="table_student" class="table table-hover table-bordered"
 					style="text-align: center; margin: 20px 0;">
-					<tr>
-						<th>学号</th>
-						<th>姓名</th>
-						<th>性别</th>
-						<th>专业</th>
-						<th>届别</th>
-						<th>操作权限</th>
-						<th>操作</th>
-						<th><label class="fancy-checkbox"> <input
-								type="checkbox"><span>全选</span>
-						</label></th>
-					</tr>
+					<tbody>
+						<tr>
+							<th>学号</th>
+							<th>姓名</th>
+							<th><select>
+									<option value="-1">性别</option>
+									<option value="1">男</option>
+									<option value="0">女</option>
+							</select></th>
+							<th><select data-live-search="true">
+									<option value="-1">专业名称</option>
+							</select></th>
+							<th><select data-live-search="true">
+									<option value="-1">年级</option>
+							</select></th>
+							<th><select>
+									<option value="-1">操作权限</option>
+									<option value="1">有操作权限</option>
+									<option value="0">无操作权限</option>
+							</select></th>
+							<th>操作</th>
+							<th><label class="fancy-checkbox"> <input id="checkbox_all_select"
+									type="checkbox" onclick="all_select()"><span>全选</span>
+							</label></th>
+						</tr>
+					</tbody>
 				</table>
-				<div id="i_pulse" style="text-align: center; display: none;">
+				<div id="i_pulse" style="text-align: center;">
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
 				</div>
 				<div style="height: 34px">
@@ -93,14 +110,20 @@
 					</button>
 				</div>
 				<div style="margin: 0 auto; width: 400px; text-align: center;">
-					<button class="btn btn-default">首页</button>
-					<button class="btn btn-default">上一页</button>
-					<button class="btn btn-default">下一页</button>
-					<button class="btn btn-default">尾页</button>
+					<button id="button_HomePage" class="btn btn-default"
+						onclick="flip(1)">首页</button>
+					<button id="button_PrePage" class="btn btn-default"
+						onclick="flip(2)">上一页</button>
+					<button id="button_NextPage" class="btn btn-default"
+						onclick="flip(3)">下一页</button>
+					<button id="button_EndPage" class="btn btn-default"
+						onclick="flip(4)">尾页</button>
 				</div>
 				<div
 					style="margin: 20px auto 20px; width: 200px; text-align: center;">
-					第 1 页<br>共 2 页<br>共 14 条记录
+					第<span id="span_pageIndex">1</span>页<br>共<span
+						id="span_totalPages">1</span>页<br>共<span
+						id="span_totalRecords">0</span>条记录
 				</div>
 			</div>
 			<!--  -->
@@ -161,7 +184,7 @@
 						onchange="Preview_Student_EXCEL(this)">
 					<!--  -->
 					<div
-						style=" width: 100%; max-height: 400px; min-height: 0px; overflow-x: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; border: 1px solid #ddd;">
+						style="width: 100%; max-height: 400px; min-height: 0px; overflow-x: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; border: 1px solid #ddd;">
 						<table id="table_excel_student"
 							class="table table-bordered table-hover"
 							style="text-align: center;">
@@ -190,4 +213,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 </body>
+<script>
+	$('select').selectpicker('refresh');
+</script>
 </html>

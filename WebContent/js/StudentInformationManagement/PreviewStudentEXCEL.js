@@ -3,6 +3,9 @@
 var EXCEL_Student_File = null
 
 function Preview_Student_EXCEL(file) {
+
+	remove_Preview_Student_EXCEL();
+
 	EXCEL_Student_File = file;
 	document.getElementById("i_pulse_2").style.display = "block";
 
@@ -23,8 +26,8 @@ function Preview_Student_EXCEL(file) {
 					if (EXCEL_Student_List[num].student_basic_name == undefined) {
 						EXCEL_Student_List[num].student_basic_name = "";
 					}
-					if (EXCEL_Student_List[num].student_basicd_year == undefined) {
-						EXCEL_Student_List[num].student_basicd_year = "";
+					if (EXCEL_Student_List[num].student_basic_year == undefined) {
+						EXCEL_Student_List[num].student_basic_year = "";
 					}
 					if (EXCEL_Student_List[num].student_basic_grade == undefined) {
 						EXCEL_Student_List[num].student_basic_grade = "";
@@ -130,7 +133,7 @@ function Preview_Student_EXCEL(file) {
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_name
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].student_basicd_year
+							+ EXCEL_Student_List[num].student_basic_year
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_grade
 							+ '</td><td>'
@@ -232,7 +235,7 @@ function Save_Student_EXCEL() {
 					document.getElementById("i_pulse_2").style.display = "none";
 					$("#modal_excel").modal("hide");
 					toastr.success("导入成功");
-					List_Student_All();
+					List_Student_By_PageAndSearch(1);
 				} else {
 					document.getElementById("i_pulse_2").style.display = "none";
 				}

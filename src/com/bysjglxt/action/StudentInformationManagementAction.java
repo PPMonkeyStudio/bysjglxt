@@ -42,6 +42,8 @@ public class StudentInformationManagementAction extends ActionSupport
 	 */
 	private List<bysjglxt_student_basic> Save_Student_EXCEL_List;
 
+	private StudentInformationManagementVO studentInformationManagementVO;
+
 	/**
 	 * 跳转列表页
 	 * 
@@ -63,14 +65,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	/**
 	 * 获取所有学生信息，通过ajax返回
+	 * 
+	 * @throws IOException
 	 */
-	public void ListStudentByPageAndSearch() {
+	public void ListStudentByPageAndSearch() throws IOException {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-
-		StudentInformationManagementVO studentInformationManagementVO = new StudentInformationManagementVO();
 
 		// 获取所有学生信息列表
 		List<StudentInformationDTO> list_StudentInformationDTO_All = studentInformationManagementService
@@ -78,16 +80,10 @@ public class StudentInformationManagementAction extends ActionSupport
 
 		studentInformationManagementVO.setList_StudentInformationDTO(list_StudentInformationDTO_All);
 
-		try {
+		http_response.setContentType("text/html;charset=utf-8");
 
-			http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(studentInformationManagementVO));
 
-			http_response.getWriter().write(gson.toJson(studentInformationManagementVO));
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
 	}
 
 	public void PreviewStudentEXCEL() throws Exception {
@@ -98,16 +94,9 @@ public class StudentInformationManagementAction extends ActionSupport
 		List<bysjglxt_student_basic> list_PreviewStudentEXCEL = studentInformationManagementService
 				.convertStudentExcelToList(EXCEL_Student, EXCEL_StudentFileName);
 
-		try {
+		http_response.setContentType("text/html;charset=utf-8");
 
-			http_response.setContentType("text/html;charset=utf-8");
-
-			http_response.getWriter().write(gson.toJson(list_PreviewStudentEXCEL));
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
+		http_response.getWriter().write(gson.toJson(list_PreviewStudentEXCEL));
 
 	}
 
@@ -172,6 +161,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	public void setHttp_request(HttpServletRequest http_request) {
 		this.http_request = http_request;
+	}
+
+	public StudentInformationManagementVO getStudentInformationManagementVO() {
+		return studentInformationManagementVO;
+	}
+
+	public void setStudentInformationManagementVO(StudentInformationManagementVO studentInformationManagementVO) {
+		this.studentInformationManagementVO = studentInformationManagementVO;
 	}
 
 	public String getEXCEL_StudentContentType() {
