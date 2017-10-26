@@ -114,7 +114,8 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		boolean flag = false;
 		for (String student_num : useStudentNumList) {
 			bysjglxt_student_user bysjglxt_student_user = studentInformationManagementDao.getStudentByNum(student_num);
-			flag = studentInformationManagementDao.deleteStudentBasicInfoById(bysjglxt_student_user.getUser_student_basic());
+			flag = studentInformationManagementDao
+					.deleteStudentBasicInfoById(bysjglxt_student_user.getUser_student_basic());
 			flag = studentInformationManagementDao.deleteStudentInfoById(bysjglxt_student_user.getUser_student_id());
 		}
 		return flag;

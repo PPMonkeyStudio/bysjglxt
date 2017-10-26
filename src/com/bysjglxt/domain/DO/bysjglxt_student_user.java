@@ -10,6 +10,15 @@ public class bysjglxt_student_user {
 	private String user_student_gmt_modified;
 	private int user_student_is_operate_premission;
 
+	@Override
+	public String toString() {
+		return "bysjglxt_user_student [user_student_id=" + user_student_id + ", user_student_num=" + user_student_num
+				+ ", user_student_password=" + user_student_password + ", user_student_basic=" + user_student_basic
+				+ ", user_student_gmt_create=" + user_student_gmt_create + ", user_student_gmt_modified="
+				+ user_student_gmt_modified + ", user_student_is_operate_premission="
+				+ user_student_is_operate_premission + "]";
+	}
+
 	public String getUser_student_id() {
 		return user_student_id;
 	}
@@ -64,15 +73,6 @@ public class bysjglxt_student_user {
 
 	public void setUser_student_is_operate_premission(int user_student_is_operate_premission) {
 		this.user_student_is_operate_premission = user_student_is_operate_premission;
-	}
-
-	@Override
-	public String toString() {
-		return "bysjglxt_user_student [user_student_id=" + user_student_id + ", user_student_num=" + user_student_num
-				+ ", user_student_password=" + user_student_password + ", user_student_basic=" + user_student_basic
-				+ ", user_student_gmt_create=" + user_student_gmt_create + ", user_student_gmt_modified="
-				+ user_student_gmt_modified + ", user_student_is_operate_premission="
-				+ user_student_is_operate_premission + "]";
 	}
 
 }

@@ -73,7 +73,7 @@
 						</label></th>
 					</tr>
 				</table>
-				<div id="i_pulse" style="text-align: center;">
+				<div id="i_pulse" style="text-align: center; display: none;">
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
 				</div>
 				<div style="height: 34px">
@@ -129,7 +129,7 @@
 				<div class="modal-body">
 					<table id="table_student_detail"
 						class="table table-hover table-bordered"
-						style="text-align: center; margin: 20px 0;">
+						style="text-align: center;">
 						<tbody></tbody>
 					</table>
 				</div>
@@ -142,6 +142,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!-------excel模态框------->
+
 	<div class="modal fade " id="modal_excel" data-keyboard="true"
 		tabindex="-1">
 		<div class="modal-dialog modal-lg">
@@ -156,42 +157,32 @@
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">
-					<input type="file" onchange="Preview_Student_EXCEL(this)">
-					<table id="table_excel_student" class="table table-bordered "
-						style="text-align: center; margin: 20px 0; overflow: scroll;">
-						<tr>
-							<th>学号</th>
-							<th>姓名</th>
-							<th>年制</th>
-							<th>年级</th>
-							<th>证件类型</th>
-							<th>身份证/护照号码</th>
-							<th>年龄</th>
-							<th>性别</th>
-							<th>民族</th>
-							<th>政治面貌</th>
-							<th>生源地</th>
-							<th>学生类型</th>
-							<th>招生类型</th>
-							<th>授课方式</th>
-							<th>专业代码</th>
-							<th>专业名称</th>
-							<th>自主专业名称</th>
-							<th>是否师范类</th>
-							<th>是否残疾</th>
-							<th>户口类型</th>
-							<th>异动类型</th>
-							<th>入学学历</th>
-							<th>招生方式</th>
-							<th>休退学原因</th>
-						</tr>
-					</table>
+					<input id="input_upload_student_excel" type="file"
+						onchange="Preview_Student_EXCEL(this)">
+					<!--  -->
+					<div
+						style=" width: 100%; max-height: 400px; min-height: 0px; overflow-x: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; border: 1px solid #ddd;">
+						<table id="table_excel_student"
+							class="table table-bordered table-hover"
+							style="text-align: center;">
+							<tbody></tbody>
+						</table>
+					</div>
+					<!--  -->
 					<div id="i_pulse_2" style="text-align: center; display: none;">
 						<i class="fa fa-spinner fa-pulse fa-3x"></i>
 					</div>
 				</div>
 				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
-				<div class="modal-footer"></div>
+				<div class="modal-footer">
+					<button class="btn btn-danger"
+						onclick="remove_Preview_Student_EXCEL()">
+						<i class="fa fa-trash-o"></i> 重置数据
+					</button>
+					<button class="btn btn-default" onclick="Save_Student_EXCEL()">
+						<i class="fa fa-upload"></i> 确认导入
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -4,6 +4,8 @@ var student_json = null;
 
 function List_Student_All() {
 
+	document.getElementById("i_pulse").style.display = "block";
+
 	var xhr = false;
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {

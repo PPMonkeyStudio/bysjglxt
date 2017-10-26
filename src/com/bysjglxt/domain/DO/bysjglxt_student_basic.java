@@ -19,8 +19,6 @@ public class bysjglxt_student_basic {
 	private String student_basic_teachingmethods;
 	private String student_basic_professionalcode;
 	private String student_basic_major;
-	private String student_basic_college;
-	private String student_basic_phone;
 	private String student_basic_independentmajorname;
 	private String student_basic_is_normalmajor;
 	private String student_basic_is_disability;
@@ -29,6 +27,8 @@ public class bysjglxt_student_basic {
 	private String student_basic_entranceeducation;
 	private String student_basic_enrollmentmode;
 	private String student_basic_reasonsfordroppingoutofschool;
+	private String student_basic_college;
+	private String student_basic_phone;
 
 	@Override
 	public String toString() {
@@ -42,14 +42,15 @@ public class bysjglxt_student_basic {
 				+ student_basic_studenttype + ", student_basic_enrollmenttype=" + student_basic_enrollmenttype
 				+ ", student_basic_teachingmethods=" + student_basic_teachingmethods
 				+ ", student_basic_professionalcode=" + student_basic_professionalcode + ", student_basic_major="
-				+ student_basic_major + ", student_basic_college=" + student_basic_college + ", student_basic_phone="
-				+ student_basic_phone + ", student_basic_independentmajorname=" + student_basic_independentmajorname
+				+ student_basic_major + ", student_basic_independentmajorname=" + student_basic_independentmajorname
 				+ ", student_basic_is_normalmajor=" + student_basic_is_normalmajor + ", student_basic_is_disability="
 				+ student_basic_is_disability + ", student_basic_householdregistrationtype="
 				+ student_basic_householdregistrationtype + ", student_basic_transactiontypes="
 				+ student_basic_transactiontypes + ", student_basic_entranceeducation="
 				+ student_basic_entranceeducation + ", student_basic_enrollmentmode=" + student_basic_enrollmentmode
-				+ ", student_basic_reasonsfordroppingoutofschool=" + student_basic_reasonsfordroppingoutofschool + "]";
+				+ ", student_basic_reasonsfordroppingoutofschool=" + student_basic_reasonsfordroppingoutofschool
+				+ ", student_basic_college=" + student_basic_college + ", student_basic_phone=" + student_basic_phone
+				+ "]";
 	}
 
 	public String getStudent_basic_id() {
