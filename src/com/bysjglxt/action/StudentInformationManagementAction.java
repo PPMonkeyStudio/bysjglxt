@@ -44,6 +44,10 @@ public class StudentInformationManagementAction extends ActionSupport
 		return "listPage";
 	}
 
+	public String CreateStudentPage() {
+		return "CreateStudentPage";
+	}
+
 	/**
 	 * 获取所有学生信息，通过ajax返回
 	 */
