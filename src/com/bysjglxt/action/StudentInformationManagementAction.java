@@ -64,7 +64,7 @@ public class StudentInformationManagementAction extends ActionSupport
 	/**
 	 * 获取所有学生信息，通过ajax返回
 	 */
-	public void ListStudentAll() {
+	public void ListStudentByPageAndSearch() {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
