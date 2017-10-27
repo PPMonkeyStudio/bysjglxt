@@ -53,7 +53,7 @@ public interface StudentInformationManagementService {
 	 *            由要删除的学生学号组成的列表
 	 * @return 是否删除成功,1是 0否
 	 */
-	public boolean remove_StudentList(List<String> useStudentNumList);
+	public boolean remove_StudentList(List<String> useStudentIDList);
 
 	/**
 	 * 根据页数以及搜索关键词，查询学生信息，并连同页面信息一起封装进StudentInformationManagementVO

@@ -49,8 +49,11 @@ function List_Student_By_PageAndSearch(pageIndex) {
 							+ '</td><td>✔</td><td style="padding: 0;"><button id="'
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_num
 							+ '" onclick="Student_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default btn-ms">详细信息</button></td>'
-							+ '<td>' + '<label class="fancy-checkbox">'
-							+ '<input type="checkbox" class="checkbox_select">'
+							+ '<td>'
+							+ '<label class="fancy-checkbox">'
+							+ '<input id="'
+							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
+							+ '" type="checkbox" class="checkbox_select">'
 							+ '<span></span></label></td>';
 				}
 
