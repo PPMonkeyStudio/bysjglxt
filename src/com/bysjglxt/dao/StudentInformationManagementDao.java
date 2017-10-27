@@ -29,7 +29,9 @@ public interface StudentInformationManagementDao {
 
 	bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id,int operationPermission);
 
-	List<String> listStudent_Major();
+	List<String> listStudent_Major() throws Exception;
+
+	List<String> listStudent_Grade() throws Exception;
 
 	
 

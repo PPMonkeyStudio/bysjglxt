@@ -164,8 +164,13 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	}
 
 	@Override
-	public List<String> list_Student_Major() {
+	public List<String> list_Student_Major() throws Exception {
 		return studentInformationManagementDao.listStudent_Major();
+	}
+
+	@Override
+	public List<String> list_Student_Grade() throws Exception {
+		return studentInformationManagementDao.listStudent_Grade();
 	}
 
 }

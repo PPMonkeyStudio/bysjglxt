@@ -76,15 +76,17 @@ public interface StudentInformationManagementService {
 	 * @说明 获取bysjglxt_student_basic表中所有学生信息中所有包括的专业student_basic_major
 	 * 
 	 * @return 返回List<String>专业名
+	 * @throws Exception 
 	 */
-	public List<String> list_Student_Major();
+	public List<String> list_Student_Major() throws Exception;
 
 	/**
 	 * @DOTO
 	 * @说明 获取bysjglxt_student_basic表中所有学生信息中所有包括的专业student_basic_grade
 	 * 
 	 * @return 返回List<String>年级
+	 * @throws Exception 
 	 */
-	public List<String> list_Student_Grade();
+	public List<String> list_Student_Grade() throws Exception;
 
 }
