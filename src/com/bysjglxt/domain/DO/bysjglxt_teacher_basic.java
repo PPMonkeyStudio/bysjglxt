@@ -1,17 +1,18 @@
 package com.bysjglxt.domain.DO;
 
 public class bysjglxt_teacher_basic {
+
 	private String teacher_basic_id;
-	private String certificate_type;
 	private String name;
-	private String certificate_no;
 	private String nation;
+	private String sex;
+	private String birthday;
 	private String nationality;
+	private String certificate_type;
+	private String certificate_no;
 	private String g_a_t;
 	private String hua_qiao;
 	private String political_status;
-	private String sex;
-	private String birthday;
 	private String highest_education;
 	private String highest_degree;
 	private String learn_edge_structure;
@@ -391,10 +392,10 @@ public class bysjglxt_teacher_basic {
 
 	@Override
 	public String toString() {
-		return "bysjglxt_teacher_basic [teacher_basic_id=" + teacher_basic_id + ", certificate_type=" + certificate_type
-				+ ", name=" + name + ", certificate_no=" + certificate_no + ", nation=" + nation + ", nationality="
-				+ nationality + ", g_a_t=" + g_a_t + ", hua_qiao=" + hua_qiao + ", political_status=" + political_status
-				+ ", sex=" + sex + ", birthday=" + birthday + ", highest_education=" + highest_education
+		return "bysjglxt_teacher_basic [teacher_basic_id=" + teacher_basic_id + ", name=" + name + ", nation=" + nation
+				+ ", sex=" + sex + ", birthday=" + birthday + ", nationality=" + nationality + ", certificate_type="
+				+ certificate_type + ", certificate_no=" + certificate_no + ", g_a_t=" + g_a_t + ", hua_qiao="
+				+ hua_qiao + ", political_status=" + political_status + ", highest_education=" + highest_education
 				+ ", highest_degree=" + highest_degree + ", learn_edge_structure=" + learn_edge_structure
 				+ ", professional_title=" + professional_title + ", professional_grade=" + professional_grade
 				+ ", subject_category=" + subject_category + ", work_date=" + work_date + ", induction_date="
@@ -407,7 +408,10 @@ public class bysjglxt_teacher_basic {
 				+ ", administrative_rank=" + administrative_rank + ", graduate_tutor_type=" + graduate_tutor_type
 				+ ", number_of_doctor=" + number_of_doctor + ", number_of_master=" + number_of_master
 				+ ", employee_type=" + employee_type + ", employment_type=" + employment_type + ", job_statue="
-				+ job_statue + ", transaction_type=" + transaction_type + "]";
+				+ job_statue + ", transaction_type=" + transaction_type + ", university_transfer=" + university_transfer
+				+ ", school_graduation=" + school_graduation + ", school_adjustment=" + school_adjustment
+				+ ", off_campus_teacher_type=" + off_campus_teacher_type + ", teacher_basic_gmt_create="
+				+ teacher_basic_gmt_create + ", teacher_basic_gmt_modified=" + teacher_basic_gmt_modified + "]";
 	}
 
 }

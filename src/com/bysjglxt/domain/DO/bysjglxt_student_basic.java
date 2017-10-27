@@ -1,5 +1,6 @@
 package com.bysjglxt.domain.DO;
 
+
 public class bysjglxt_student_basic {
 
 	private String student_basic_id;
@@ -268,4 +269,6 @@ public class bysjglxt_student_basic {
 				+ ", student_basic_reasonsfordroppingoutofschool=" + student_basic_reasonsfordroppingoutofschool + "]";
 	}
 
+
 }
+

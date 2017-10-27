@@ -27,7 +27,9 @@ public interface StudentInformationManagementDao {
 
 	int get_StudentInfor_TotalRecords_BySearch(String search);
 
-	bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id);
+	bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id,int operationPermission);
+
+	List<String> listStudent_Major();
 
 	
 

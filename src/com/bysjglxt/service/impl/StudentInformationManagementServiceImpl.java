@@ -125,15 +125,30 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			StudentInformationManagementVO studentInformationManagementVO) {
 		List<StudentInformationDTO> listStudentInformationDTO = new ArrayList<StudentInformationDTO>();
 		StudentInformationDTO studentInformationDTO = null;
+		bysjglxt_student_basic student_basic = null;
 		bysjglxt_student_user bysjglxt_student_user = null;
 		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = studentInformationManagementDao
 				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO);
-		studentInformationManagementVO.setTotalRecords(studentInformationManagementDao
-				.get_StudentInfor_TotalRecords_BySearch(studentInformationManagementVO.getSearch()));
-		System.out.println("总记录数：" + studentInformationManagementVO.getTotalRecords());
-		studentInformationManagementVO.setTotalPages(
-				((studentInformationManagementVO.getTotalRecords() - 1) / studentInformationManagementVO.getPageSize())
-						+ 1);
+		int i = 0;
+		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
+			studentInformationDTO = new StudentInformationDTO();
+			student_basic = new bysjglxt_student_basic();
+			bysjglxt_student_user = new bysjglxt_student_user();
+			bysjglxt_student_user = studentInformationManagementDao.getStudentInfoByBasicId(
+					bysjglxt_student_basic.getStudent_basic_id(),
+					studentInformationManagementVO.getUser_student_is_operate_premission());
+			if (bysjglxt_student_user.getUser_student_id() != null
+					&& bysjglxt_student_user.getUser_student_id().trim().length() > 0) {
+				studentInformationDTO.setBysjglxtStudentUser(bysjglxt_student_user);
+				i++;
+				student_basic = studentInformationManagementDao
+						.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_user.getUser_student_basic());
+				studentInformationDTO.setBysjglxtStudentBasic(bysjglxt_student_basic);
+			}
+		}
+		studentInformationManagementVO.setTotalRecords(i);
+		System.out.println("总记录数:\t" + i);
+		studentInformationManagementVO.setTotalPages(((i - 1) / studentInformationManagementVO.getPageSize()) + 1);
 		if (studentInformationManagementVO.getPageIndex() <= 1) {
 			studentInformationManagementVO.setHavePrePage(false);
 		} else {
@@ -144,18 +159,13 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		} else {
 			studentInformationManagementVO.setHaveNextPage(true);
 		}
-
-		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
-			studentInformationDTO = new StudentInformationDTO();
-			bysjglxt_student_user = new bysjglxt_student_user();
-			studentInformationDTO.setBysjglxtStudentBasic(bysjglxt_student_basic);
-			bysjglxt_student_user = studentInformationManagementDao
-					.getStudentInfoByBasicId(bysjglxt_student_basic.getStudent_basic_id());
-			studentInformationDTO.setBysjglxtStudentUser(bysjglxt_student_user);
-			listStudentInformationDTO.add(studentInformationDTO);
-		}
 		studentInformationManagementVO.setList_StudentInformationDTO(listStudentInformationDTO);
 		return studentInformationManagementVO;
+	}
+
+	@Override
+	public List<String> list_Student_Major() {
+		return studentInformationManagementDao.listStudent_Major();
 	}
 
 }

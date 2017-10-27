@@ -1,27 +1,33 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-26 20:45:46 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-27 12:56:31 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_teacher_basic" table="BYSJGLXT_TEACHER_BASIC">
         <id name="teacher_basic_id" type="java.lang.String">
             <column name="TEACHER_BASIC_ID" />
             <generator class="assigned" />
         </id>
-        <property name="certificate_type" type="java.lang.String">
-            <column name="CERTIFICATE_TYPE" />
-        </property>
         <property name="name" type="java.lang.String">
             <column name="NAME" />
-        </property>
-        <property name="certificate_no" type="java.lang.String">
-            <column name="CERTIFICATE_NO" />
         </property>
         <property name="nation" type="java.lang.String">
             <column name="NATION" />
         </property>
+        <property name="sex" type="java.lang.String">
+            <column name="SEX" />
+        </property>
+        <property name="birthday" type="java.lang.String">
+            <column name="BIRTHDAY" />
+        </property>
         <property name="nationality" type="java.lang.String">
             <column name="NATIONALITY" />
+        </property>
+        <property name="certificate_type" type="java.lang.String">
+            <column name="CERTIFICATE_TYPE" />
+        </property>
+        <property name="certificate_no" type="java.lang.String">
+            <column name="CERTIFICATE_NO" />
         </property>
         <property name="g_a_t" type="java.lang.String">
             <column name="G_A_T" />
@@ -31,12 +37,6 @@
         </property>
         <property name="political_status" type="java.lang.String">
             <column name="POLITICAL_STATUS" />
-        </property>
-        <property name="sex" type="java.lang.String">
-            <column name="SEX" />
-        </property>
-        <property name="birthday" type="java.lang.String">
-            <column name="BIRTHDAY" />
         </property>
         <property name="highest_education" type="java.lang.String">
             <column name="HIGHEST_EDUCATION" />
