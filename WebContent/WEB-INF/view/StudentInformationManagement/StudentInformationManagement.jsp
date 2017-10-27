@@ -19,6 +19,8 @@
 	src="<%=basePath%>js/StudentInformationManagement/PreviewStudentEXCEL.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Input_Select.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Delete_Student.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -53,9 +55,9 @@
 					</div>
 
 					<div class="input-group" style="width: 300px; float: right;">
-						<input id="input_search" class="form-control" type="text">
-						<span class="input-group-btn"><button
-								class="btn btn-primary"
+						<input id="input_search" class="form-control" type="text"
+							oninput="List_Student_By_PageAndSearch(1)"> <span
+							class="input-group-btn"><button class="btn btn-primary"
 								onclick="List_Student_By_PageAndSearch(1)">
 								<i class="fa fa-search"></i> 检索
 							</button></span>
@@ -84,8 +86,8 @@
 									<option value="0">无操作权限</option>
 							</select></th>
 							<th>操作</th>
-							<th><label class="fancy-checkbox"> <input id="checkbox_all_select"
-									type="checkbox" onclick="all_select()"><span>全选</span>
+							<th><label class="fancy-checkbox"> <input
+									id="checkbox_all_select" type="checkbox" onclick="all_select()"><span>全选</span>
 							</label></th>
 						</tr>
 					</tbody>
@@ -95,7 +97,7 @@
 				</div>
 				<div style="height: 34px">
 
-					<button class="btn btn-danger"
+					<button class="btn btn-danger" onclick="Delete_Student()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-trash-o"></i> 删除所选
 					</button>

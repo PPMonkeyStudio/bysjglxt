@@ -20,7 +20,9 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class StudentInformationManagementAction extends ActionSupport
 		implements ServletResponseAware, ServletRequestAware {
-
+	/*
+	 * 
+	 */
 	private StudentInformationManagementService studentInformationManagementService;
 
 	private HttpServletResponse http_response;
@@ -42,6 +44,11 @@ public class StudentInformationManagementAction extends ActionSupport
 	private List<bysjglxt_student_basic> Save_Student_EXCEL_List;
 
 	private StudentInformationManagementVO studentInformationManagementVO;
+
+	/*
+	 * 
+	 */
+	private List<String> ListDeleteStudentID;
 
 	/**
 	 * 跳转列表页
@@ -83,6 +90,12 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	}
 
+	/**
+	 * 
+	 * 预览Excel导入的学生信息
+	 * 
+	 * @throws Exception
+	 */
 	public void PreviewStudentEXCEL() throws Exception {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -97,6 +110,11 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	}
 
+	/**
+	 * 在确认后存储导入的Excel学生信息
+	 * 
+	 * @throws Exception
+	 */
 	public void SaveStudentEXCEL() throws Exception {
 		http_response.setContentType("text/html;charset=utf-8");
 
@@ -108,6 +126,14 @@ public class StudentInformationManagementAction extends ActionSupport
 		} else {
 			http_response.getWriter().write("fail");
 		}
+
+	}
+
+	public void DeleteStudent() throws IOException {
+		studentInformationManagementService.remove_StudentList(ListDeleteStudentID);
+
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
 
 	}
 
@@ -178,6 +204,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	public StudentInformationManagementService getStudentInformationManagementService() {
 		return studentInformationManagementService;
+	}
+
+	public List<String> getListDeleteStudentID() {
+		return ListDeleteStudentID;
+	}
+
+	public void setListDeleteStudentID(List<String> listDeleteStudentID) {
+		ListDeleteStudentID = listDeleteStudentID;
 	}
 
 	public String getEXCEL_StudentFileName() {

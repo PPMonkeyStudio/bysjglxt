@@ -73,10 +73,10 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public bysjglxt_student_user getStudentByNum(String student_num) {
+	public bysjglxt_student_user getStudentByNum(String user_student_id) {
 		Session session = getSession();
 		bysjglxt_student_user StudentInformation = null;
-		String hql = "from bysjglxt_student_user where user_student_num='" + student_num + "'";
+		String hql = "from bysjglxt_student_user where user_student_id='" + user_student_id + "'";
 		Query query = session.createQuery(hql);
 		StudentInformation = (bysjglxt_student_user) query.uniqueResult();
 		return StudentInformation;
@@ -88,6 +88,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		String hql = "delete from bysjglxt_student_basic where student_basic_id='" + user_student_basic + "'";
 		Query query = session.createQuery(hql);
 		query.executeUpdate();
+		System.out.println(hql);
 		return true;
 	}
 

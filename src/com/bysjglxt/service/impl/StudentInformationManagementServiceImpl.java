@@ -109,9 +109,9 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	}
 
 	@Override
-	public boolean remove_StudentList(List<String> useStudentNumList) {
+	public boolean remove_StudentList(List<String> useStudentIDList) {
 		boolean flag = false;
-		for (String student_num : useStudentNumList) {
+		for (String student_num : useStudentIDList) {
 			bysjglxt_student_user bysjglxt_student_user = studentInformationManagementDao.getStudentByNum(student_num);
 			flag = studentInformationManagementDao
 					.deleteStudentBasicInfoById(bysjglxt_student_user.getUser_student_basic());
