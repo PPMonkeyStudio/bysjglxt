@@ -165,8 +165,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 
 	@Override
 	public List<String> list_Student_Major() {
-		// TODO Auto-generated method stub
-		return null;
+		return studentInformationManagementDao.listStudent_Major();
 	}
 
 }

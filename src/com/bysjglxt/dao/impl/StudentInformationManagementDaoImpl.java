@@ -1,5 +1,6 @@
 package com.bysjglxt.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -142,6 +143,12 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		return listStudentBasicInformationByPageAndSearch;
 	}
 
+	
+	/**
+	 * 改方法暂时被弃用
+	 * @param search
+	 * @return
+	 */
 	@Override
 	public int get_StudentInfor_TotalRecords_BySearch(String search) {
 		Session session = getSession();
@@ -166,5 +173,15 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		Query query = session.createQuery(hql);
 		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
 		return bysjglxt_student_user;
+	}
+
+	@Override
+	public List<String> listStudent_Major() {
+		Session session = getSession();
+		List<String> listStudent_Major = new ArrayList<String>();
+		String hql = "select distinct(student_basic_major) from bysjglxt_student_basic";
+		Query query = session.createQuery(hql);
+		listStudent_Major = (List<String>) query.uniqueResult();
+		return listStudent_Major;
 	}
 }

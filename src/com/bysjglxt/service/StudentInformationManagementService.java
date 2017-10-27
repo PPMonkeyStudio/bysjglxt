@@ -57,7 +57,7 @@ public interface StudentInformationManagementService {
 
 	/**
 	 * @DOTO 筛选：性别（1男、0女）、专业（String）、年级（String）、操作权限（1有、0无）
-	 * 
+	 * @DATE 2017-10-27
 	 * 
 	 * @说明 根据页数以及搜索关键词，查询学生信息，并连同页面信息一起封装进StudentInformationManagementVO
 	 * 
@@ -72,6 +72,7 @@ public interface StudentInformationManagementService {
 
 	/**
 	 * @DOTO
+	 * @DATE 2017-10-27
 	 * @说明 获取bysjglxt_student_basic表中所有学生信息中所有包括的专业student_basic_major
 	 * 
 	 * @return 返回List<String>专业名
