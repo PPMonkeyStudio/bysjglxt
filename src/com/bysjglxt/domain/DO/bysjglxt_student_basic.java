@@ -26,9 +26,9 @@ public class bysjglxt_student_basic {
 	private String student_basic_transactiontypes;
 	private String student_basic_entranceeducation;
 	private String student_basic_enrollmentmode;
-	private String student_basic_reasonsfordroppingoutofschool;
 	private String student_basic_college;
 	private String student_basic_phone;
+	private String student_basic_reasonsfordroppingoutofschool;
 
 	@Override
 	public String toString() {
