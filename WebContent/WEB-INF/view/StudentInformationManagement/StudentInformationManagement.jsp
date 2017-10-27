@@ -77,8 +77,8 @@
 							<th><select id="select_sex"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
-									<option value="1">男</option>
-									<option value="0">女</option>
+									<option value="男">男</option>
+									<option value="女">女</option>
 							</select></th>
 							<th><select id="select_major" data-live-search="true"
 								onchange="List_Student_By_PageAndSearch(1)">
@@ -228,7 +228,9 @@
 	$('select').selectpicker('refresh');
 </script>
 <script>
-	Get_Student_Major(document.getElementById("select_major"));
-	Get_Student_Grade(document.getElementById("select_Grade"));
+	var select_major = document.getElementById("select_major");
+	var select_grade = document.getElementById("select_grade")
+	Get_Student_Major(select_major);
+	Get_Student_Grade(select_grade);
 </script>
 </html>

@@ -5,8 +5,15 @@ function Get_Student_Major(select) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				var json = JSON.parse(xhr.responseText);
-				alert(json);
+				var MajorList = JSON.parse(xhr.responseText);
+
+				for (var num = 0; num < MajorList.length; num++) {
+					var option = document.createElement("option");
+					option.appendChild(document.createTextNode(MajorList[num]));
+					select.appendChild(option);
+					option.value = MajorList[num];
+				}
+
 				$('#' + select.id).selectpicker('refresh');
 
 			} else {
