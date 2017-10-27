@@ -61,6 +61,7 @@ public interface StudentInformationManagementService {
 	 * @param studentInformationManagementVO
 	 *            存有需要查询的当前页pageIndex
 	 *            以及搜索信息search模糊查询学生姓名，并匹配变色并按照学号排序（搜索信息需要判断是否为null），
+	 * @DOTO 筛选：性别（1男、0女）、专业（String）、年级（String）、操作权限（1有、0无）
 	 * @return 封装好的StudentInformationManagementVO（类中所有页面信息均要封装）
 	 */
 	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
