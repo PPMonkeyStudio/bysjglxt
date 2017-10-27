@@ -69,18 +69,20 @@
 						<tr>
 							<th>学号</th>
 							<th>姓名</th>
-							<th><select>
+							<th><select onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="1">男</option>
 									<option value="0">女</option>
 							</select></th>
-							<th><select data-live-search="true">
+							<th><select data-live-search="true"
+								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">专业名称</option>
 							</select></th>
-							<th><select data-live-search="true">
+							<th><select data-live-search="true"
+								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">年级</option>
 							</select></th>
-							<th><select>
+							<th><select onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">操作权限</option>
 									<option value="1">有操作权限</option>
 									<option value="0">无操作权限</option>

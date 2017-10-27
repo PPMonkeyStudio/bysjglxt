@@ -3,16 +3,8 @@
 var student_json = null;
 
 function List_Student_By_PageAndSearch(pageIndex) {
-	document.getElementById("i_pulse").style.display = "block";
 
-	/*
-	 * 清空原表数据
-	 */
-	var new_tr_list = document.getElementsByClassName("new_tr");
-	var long = new_tr_list.length;
-	for (var num = 0; num < long; num++) {
-		new_tr_list[0].parentNode.removeChild(new_tr_list[0]);
-	}
+	document.getElementById("i_pulse").style.display = "block";
 
 	/*
 	 * 
@@ -24,6 +16,19 @@ function List_Student_By_PageAndSearch(pageIndex) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				student_json = JSON.parse(xhr.responseText);
+				/*
+				 * 清空原表数据
+				 */
+				var new_tr_list = document.getElementsByClassName("new_tr");
+				var long = new_tr_list.length;
+
+				for (var num = 0; num < long; num++) {
+
+					new_tr_list[0].parentNode.removeChild(new_tr_list[0]);
+				}
+				/*
+				 * 
+				 */
 				var table_student = document.getElementById("table_student");
 
 				for (var num = 0; num < student_json.list_StudentInformationDTO.length; num++) {
@@ -47,7 +52,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 							+ '</td><td>'
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_grade
 							+ '</td><td>✔</td><td style="padding: 0;"><button id="'
-							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_num
+							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
 							+ '" onclick="Student_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default btn-ms">详细信息</button></td>'
 							+ '<td>'
 							+ '<label class="fancy-checkbox">'
@@ -66,6 +71,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 
 				// 让加载图标消失
 				document.getElementById("i_pulse").style.display = "none";
+
+				// 让全选框取消选择
+				document.getElementById("checkbox_all_select").checked = false;
 
 			} else {
 				toastr.error(xhr.status);

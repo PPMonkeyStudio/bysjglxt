@@ -6,9 +6,9 @@ public class bysjglxt_student_user {
 	private String user_student_num;
 	private String user_student_password;
 	private String user_student_basic;
+	private int user_student_is_operate_premission;
 	private String user_student_gmt_create;
 	private String user_student_gmt_modified;
-	private int user_student_is_operate_premission;
 
 	@Override
 	public String toString() {

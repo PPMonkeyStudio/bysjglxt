@@ -92,7 +92,7 @@
 
 	for (var num = 0; num < student_json.list_StudentInformationDTO.length; num++) {
 
-		if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_num == this_button.id) {
+		if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id == this_button.id) {
 			/*
 			 * 
 			 */
