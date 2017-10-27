@@ -112,6 +112,18 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			hql = hql + " and student_basic_name like '" + search + "'";
 			System.out.println(hql);
 		}
+		if (studentInformationManagementVO.getSex() != null
+				&& studentInformationManagementVO.getSex().trim().length() > 0) {
+			hql = hql + " and student_basic_sex ='" + studentInformationManagementVO.getSex() + "'";
+		}
+		if (studentInformationManagementVO.getStudent_basic_major() != null
+				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0) {
+			hql = hql + " and student_basic_major='" + studentInformationManagementVO.getStudent_basic_major() + "'";
+		}
+		if (studentInformationManagementVO.getStudent_basic_grade() != null
+				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0) {
+			hql = hql + " and student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade() + "'";
+		}
 		hql = hql + " order by student_basic_num";
 		Query query = session.createQuery(hql);
 		query.setFirstResult(
@@ -144,10 +156,13 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id) {
+	public bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id, int permission) {
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		Session session = getSession();
 		String hql = "from bysjglxt_student_user where user_student_basic='" + student_basic_id + "'";
+		if (permission != 0) {
+			hql = hql + " and user_student_is_operate_premission='" + permission + "'";
+		}
 		Query query = session.createQuery(hql);
 		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
 		return bysjglxt_student_user;

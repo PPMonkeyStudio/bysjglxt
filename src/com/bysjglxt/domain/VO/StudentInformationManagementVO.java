@@ -31,7 +31,7 @@ public class StudentInformationManagementVO {
 	private String search;
 
 	// 性别筛选
-	private int sex;
+	private String sex;
 	// 专业筛选
 	private String student_basic_major;
 	// 年级筛选
@@ -54,11 +54,11 @@ public class StudentInformationManagementVO {
 		return pageIndex;
 	}
 
-	public int getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(int sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
