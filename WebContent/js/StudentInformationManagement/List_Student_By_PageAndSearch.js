@@ -23,7 +23,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 				var long = new_tr_list.length;
 
 				for (var num = 0; num < long; num++) {
-
 					new_tr_list[0].parentNode.removeChild(new_tr_list[0]);
 				}
 				/*
@@ -51,7 +50,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_major
 							+ '</td><td>'
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_grade
-							+ '</td><td>✔</td><td style="padding: 0;"><button id="'
+							+ '</td><td>'
+							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission
+							+ '</td><td style="padding: 0;"><button id="'
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
 							+ '" onclick="Student_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default btn-ms">详细信息</button></td>'
 							+ '<td>'
@@ -99,6 +100,40 @@ function List_Student_By_PageAndSearch(pageIndex) {
 	if (search == undefined || search == null || search == "") {
 	} else {
 		formData.append("studentInformationManagementVO.search", search);
+	}
+	/*
+	 * 
+	 */
+	// 性别
+	var select_sex = document.getElementById("select_sex");
+	if (select_sex.value == "1") {
+		formData.append("studentInformationManagementVO.sex", select_sex.value);
+	} else if (select_sex.value == "0") {
+		formData.append("studentInformationManagementVO.sex", select_sex.value);
+	}
+	// 权限
+	if (document.getElementById("select_premission").value == "1") {
+		formData
+				.append(
+						"studentInformationManagementVO.user_student_is_operate_premission",
+						document.getElementById("select_sex").value);
+	} else if (document.getElementById("select_premission").value == "0") {
+		formData
+				.append(
+						"studentInformationManagementVO.user_student_is_operate_premission",
+						document.getElementById("select_premission").value);
+	}
+	// 专业
+	if (document.getElementById("select_major").value == "-1") {
+	} else {
+		formData.append("studentInformationManagementVO.student_basic_major",
+				document.getElementById("select_major").value);
+	}
+	// 年级
+	if (document.getElementById("select_grade").value == "-1") {
+	} else {
+		formData.append("studentInformationManagementVO.student_basic_grade",
+				document.getElementById("select_grade").value);
 	}
 	/*
 	 * 

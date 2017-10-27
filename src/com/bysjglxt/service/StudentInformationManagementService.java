@@ -77,4 +77,12 @@ public interface StudentInformationManagementService {
 	 */
 	public List<String> list_Student_Major();
 
+	/**
+	 * @DOTO
+	 * @说明 获取bysjglxt_student_basic表中所有学生信息中所有包括的专业student_basic_grade
+	 * 
+	 * @return 返回List<String>年级
+	 */
+	public List<String> list_Student_Grade();
+
 }

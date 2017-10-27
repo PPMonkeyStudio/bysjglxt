@@ -21,6 +21,10 @@
 	src="<%=basePath%>js/StudentInformationManagement/Input_Select.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Delete_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Grade.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -44,7 +48,8 @@
 				<div style="height: 34px;">
 
 					<div style="width: 500px; float: left;">
-						<button class="btn btn-default">
+						<button class="btn btn-default"
+							onclick="window.location='<%=basePath%>student/StudentInformationManagement_CreateStudentPage'">
 							<i class="fa fa-plus-square"></i> 手动新增
 						</button>
 						<button class="btn btn-default" data-toggle="modal"
@@ -69,20 +74,22 @@
 						<tr>
 							<th>学号</th>
 							<th>姓名</th>
-							<th><select onchange="List_Student_By_PageAndSearch(1)">
+							<th><select id="select_sex"
+								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="1">男</option>
 									<option value="0">女</option>
 							</select></th>
-							<th><select data-live-search="true"
+							<th><select id="select_major" data-live-search="true"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">专业名称</option>
 							</select></th>
-							<th><select data-live-search="true"
+							<th><select id="select_grade" data-live-search="true"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">年级</option>
 							</select></th>
-							<th><select onchange="List_Student_By_PageAndSearch(1)">
+							<th><select id="select_premission"
+								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">操作权限</option>
 									<option value="1">有操作权限</option>
 									<option value="0">无操作权限</option>
@@ -207,7 +214,7 @@
 						<i class="fa fa-trash-o"></i> 重置数据
 					</button>
 					<button class="btn btn-default" onclick="Save_Student_EXCEL()">
-						<i class="fa fa-upload"></i> 确认导入
+						<i class="fa fa-check"></i> 确认导入
 					</button>
 				</div>
 			</div>
@@ -219,5 +226,9 @@
 </body>
 <script>
 	$('select').selectpicker('refresh');
+</script>
+<script>
+	Get_Student_Major(document.getElementById("select_major"));
+	Get_Student_Grade(document.getElementById("select_Grade"));
 </script>
 </html>
