@@ -46,12 +46,17 @@ public class StudentInformationManagementAction extends ActionSupport
 	private StudentInformationManagementVO studentInformationManagementVO;
 
 	/*
-	 * 
+	 * 删除所选学生列表
 	 */
 	private List<String> ListDeleteStudentID;
 
+	/*
+	 * 手动添加的学生
+	 */
+	private bysjglxt_student_basic NewStudent;
+
 	/**
-	 * 跳转列表页
+	 * @说明 跳转列表页
 	 * 
 	 * @return
 	 */
@@ -61,7 +66,7 @@ public class StudentInformationManagementAction extends ActionSupport
 	}
 
 	/**
-	 * 跳转手动添加学生页
+	 * @说明 跳转手动添加学生页
 	 * 
 	 * @return
 	 */
@@ -70,7 +75,7 @@ public class StudentInformationManagementAction extends ActionSupport
 	}
 
 	/**
-	 * 获取所有学生信息，通过ajax返回
+	 * @说明 获取所有学生信息，通过ajax返回
 	 * 
 	 * @throws IOException
 	 */
@@ -92,7 +97,7 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	/**
 	 * 
-	 * 预览Excel导入的学生信息
+	 * @说明 预览Excel导入的学生信息
 	 * 
 	 * @throws Exception
 	 */
@@ -111,7 +116,7 @@ public class StudentInformationManagementAction extends ActionSupport
 	}
 
 	/**
-	 * 在确认后存储导入的Excel学生信息
+	 * @说明 在确认后存储导入的Excel学生信息
 	 * 
 	 * @throws Exception
 	 */
@@ -129,12 +134,54 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	}
 
+	/**
+	 * @说明
+	 * @throws IOException
+	 */
 	public void DeleteStudent() throws IOException {
 		studentInformationManagementService.remove_StudentList(ListDeleteStudentID);
 
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 
+	}
+
+	/**
+	 * 
+	 * @说明 获取学生专业
+	 * @throws IOException
+	 */
+	public void GetStudentMajor() throws IOException {
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+
+		http_response.getWriter().write(gson.toJson(studentInformationManagementService.list_Student_Major()));
+	}
+
+	/**
+	 * 
+	 * @说明 获取学生年级
+	 * @throws IOException
+	 */
+	public void GetStudentGrade() throws IOException {
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+
+		http_response.getWriter().write(gson.toJson(studentInformationManagementService.list_Student_Grade()));
+	}
+
+	/**
+	 * @说明 手动添加的学生
+	 */
+	public void CreateStudent() {
+		System.out.println(NewStudent.toString());
+		// studentInformationManagementService.save_NewStudent(NewStudent);
 	}
 
 	/*
@@ -225,6 +272,14 @@ public class StudentInformationManagementAction extends ActionSupport
 	public void setStudentInformationManagementService(
 			StudentInformationManagementService studentInformationManagementService) {
 		this.studentInformationManagementService = studentInformationManagementService;
+	}
+
+	public bysjglxt_student_basic getNewStudent() {
+		return NewStudent;
+	}
+
+	public void setNewStudent(bysjglxt_student_basic newStudent) {
+		NewStudent = newStudent;
 	}
 
 }

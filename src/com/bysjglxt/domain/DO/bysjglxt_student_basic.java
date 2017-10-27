@@ -269,4 +269,6 @@ public class bysjglxt_student_basic {
 				+ ", student_basic_reasonsfordroppingoutofschool=" + student_basic_reasonsfordroppingoutofschool + "]";
 	}
 
+
 }
+
