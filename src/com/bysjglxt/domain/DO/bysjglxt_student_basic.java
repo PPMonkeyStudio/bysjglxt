@@ -19,6 +19,8 @@ public class bysjglxt_student_basic {
 	private String student_basic_teachingmethods;
 	private String student_basic_professionalcode;
 	private String student_basic_major;
+	private String student_basic_college;
+	private String student_basic_phone;
 	private String student_basic_independentmajorname;
 	private String student_basic_is_normalmajor;
 	private String student_basic_is_disability;
@@ -26,17 +28,7 @@ public class bysjglxt_student_basic {
 	private String student_basic_transactiontypes;
 	private String student_basic_entranceeducation;
 	private String student_basic_enrollmentmode;
-	private String student_basic_college;
-	private String student_basic_phone;
 	private String student_basic_reasonsfordroppingoutofschool;
-
-	public String getStudent_basic_year() {
-		return student_basic_year;
-	}
-
-	public void setStudent_basic_year(String student_basic_year) {
-		this.student_basic_year = student_basic_year;
-	}
 
 	public String getStudent_basic_id() {
 		return student_basic_id;
@@ -60,6 +52,14 @@ public class bysjglxt_student_basic {
 
 	public void setStudent_basic_name(String student_basic_name) {
 		this.student_basic_name = student_basic_name;
+	}
+
+	public String getStudent_basic_year() {
+		return student_basic_year;
+	}
+
+	public void setStudent_basic_year(String student_basic_year) {
+		this.student_basic_year = student_basic_year;
 	}
 
 	public String getStudent_basic_grade() {
