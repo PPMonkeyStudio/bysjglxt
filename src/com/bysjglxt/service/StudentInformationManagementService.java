@@ -56,11 +56,11 @@ public interface StudentInformationManagementService {
 	public boolean remove_StudentList(List<String> useStudentIDList);
 
 	/**
-	 * @DOTO 筛选：性别（1男、0女）、专业（String）、年级（String）、操作权限（1有、0无）
+	 * 
 	 * @DATE 2017-10-27
 	 * 
 	 * @说明 根据页数以及搜索关键词，查询学生信息，并连同页面信息一起封装进StudentInformationManagementVO
-	 * 
+	 *     筛选：性别（1男、0女）、专业（String）、年级（String）、操作权限（1有、0无）
 	 * @param studentInformationManagementVO
 	 *            存有需要查询的当前页pageIndex
 	 *            以及搜索信息search模糊查询学生姓名，并匹配变色并按照学号排序（搜索信息需要判断是否为null），
@@ -71,7 +71,7 @@ public interface StudentInformationManagementService {
 			StudentInformationManagementVO studentInformationManagementVO);
 
 	/**
-	 * @DOTO
+	 * 
 	 * @DATE 2017-10-27
 	 * @说明 获取bysjglxt_student_basic表中所有学生信息中所有包括的专业student_basic_major
 	 * 
@@ -81,7 +81,7 @@ public interface StudentInformationManagementService {
 	public List<String> list_Student_Major() throws Exception;
 
 	/**
-	 * @DOTO
+	 * 
 	 * @DATE 2017-10-27
 	 * @说明 获取bysjglxt_student_basic表中所有学生信息中所有包括的专业student_basic_grade
 	 * 
@@ -91,31 +91,34 @@ public interface StudentInformationManagementService {
 	public List<String> list_Student_Grade() throws Exception;
 
 	/**
-	 * @DOTO
+	 * @待测试
 	 * @DATE 2017-10-28
 	 * @说明 批量赋予操作权限
-	 * @param listString 学生user表id 组成的list
+	 * @param listString
+	 *            学生user表id 组成的list
 	 * @return 成功与否
 	 */
 	public boolean update_Give_Student_Operate_Permission(List<String> listString);
 
 	/**
-	 * @DOTO
+	 * @待测试
 	 * @DATE 2017-10-28
 	 * @说明 批量剥夺操作权限
-	 * @param listStringd  学生user表id 组成的list
+	 * @param listStringd
+	 *            学生user表id 组成的list
 	 * @return 成功与否
 	 */
 	public boolean update_Take_Student_Operate_Permission(List<String> listString);
 
 	/**
 	 * 
-	 * @DOTO
+	 * 
 	 * @DATE 2017-10-28
 	 * @说明 修改学生基础信息
-	 * @param bysjglxt_student_basic 学生基础信息对象
+	 * @param bysjglxt_student_basic
+	 *            学生基础信息对象
 	 * @return 成功与否
 	 */
 	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic);
-	
+
 }

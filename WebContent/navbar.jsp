@@ -85,7 +85,6 @@
 						class="">学生信息列表</a></li>
 					<li><a href="#">添加教师信息</a></li>
 					<li><a href="#">教师信息列表</a></li>
-					<li><a href="#">我的信息</a></li>
 				</ul>
 			</div>
 			</li>
