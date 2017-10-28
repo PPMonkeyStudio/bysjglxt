@@ -1,8 +1,12 @@
 package com.bysjglxt.service.impl;
 
+import java.util.List;
+
 import com.bysjglxt.dao.TopicManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.service.TopicManagementService;
+
+import util.TeamUtil;
 
 public class TopicManagementServiceImpl implements TopicManagementService {
 
@@ -15,20 +19,39 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 
 	@Override
 	public boolean CreateTopic(bysjglxt_topic newTopic) {
-		// TODO Auto-generated method stub
-		return false;
+		newTopic.setTopic_id(TeamUtil.getUuid());
+		newTopic.setTopic_gmt_create(TeamUtil.getStringSecond());
+		newTopic.setTopic_gmt_modified(TeamUtil.getStringSecond());
+		newTopic.setTopic_examine_state("未审核");
+		return topicManagementDao.CreateTopic(newTopic);
 	}
 
 	@Override
-	public boolean DeleteTopic(String topicID) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean DeleteTopic(List<String> topicID) {
+		boolean flag = false;
+		for (String string : topicID) {
+			flag = topicManagementDao.DeleteTopic(string);
+		}
+		return flag;
 	}
 
 	@Override
-	public boolean adoptTopic(String topicID) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean adoptTopic(List<String> topicID) {
+		boolean flag = false;
+		for (String string : topicID) {
+			flag = topicManagementDao.updateTopicState(string);
+		}
+		return flag;
 	}
+
+	@Override
+	public boolean closeTopic(List<String> topicID) {
+		boolean flag = false;
+		for (String string : topicID) {
+			flag = topicManagementDao.closeTopic(string);
+		}
+		return flag;
+	}
+	
 
 }
