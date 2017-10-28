@@ -101,7 +101,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user.setUser_student_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_student_user.setUser_student_gmt_modified(bysjglxt_student_user.getUser_student_gmt_create());
 		flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
-		return false;
+		return flag;
 	}
 
 	@Override
@@ -152,7 +152,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			studentInformationManagementVO.setHaveNextPage(true);
 		}
 		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
-			System.out.println("okokokoko\t" + bysjglxt_student_basic.getStudent_basic_id());
 			studentInformationDTO = new StudentInformationDTO();
 			student_basic = new bysjglxt_student_basic();
 			bysjglxt_student_user = new bysjglxt_student_user();
@@ -160,7 +159,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 					bysjglxt_student_basic.getStudent_basic_id(),
 					studentInformationManagementVO.getUser_student_is_operate_premission());
 			if (bysjglxt_student_user != null) {
-				System.out.println("kokoo\t" + bysjglxt_student_user);
 				studentInformationDTO.setBysjglxtStudentUser(bysjglxt_student_user);
 				student_basic = studentInformationManagementDao
 						.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_user.getUser_student_basic());
