@@ -114,9 +114,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 	// 权限
 	if (document.getElementById("select_premission").value == "1") {
 		formData
-				.append(
-						"studentInformationManagementVO.user_student_is_operate_premission",
-						document.getElementById("select_sex").value);
+		.append(
+				"studentInformationManagementVO.user_student_is_operate_premission",
+				document.getElementById("select_premission").value);
 	} else if (document.getElementById("select_premission").value == "0") {
 		formData
 				.append(

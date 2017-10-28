@@ -54,6 +54,10 @@ public class StudentInformationManagementAction extends ActionSupport
 	 * 手动添加的学生
 	 */
 	private bysjglxt_student_basic newStudent;
+	/*
+	 * 修改的学生基础信息
+	 */
+	private bysjglxt_student_basic updateStudent;
 
 	/**
 	 * @说明 跳转列表页
@@ -100,6 +104,7 @@ public class StudentInformationManagementAction extends ActionSupport
 	 * @throws Exception
 	 */
 	public void PreviewStudentEXCEL() throws Exception {
+		System.out.println();
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -183,6 +188,17 @@ public class StudentInformationManagementAction extends ActionSupport
 	 */
 	public void CreateStudent() throws IOException {
 		studentInformationManagementService.save_NewStudent(newStudent);
+		http_response.setContentType("text/html;charset=utf-8");
+
+		http_response.getWriter().write("success");
+	}
+
+	/**
+	 * @throws IOException
+	 * @说明 修改学生基础信息
+	 */
+	public void UpdateStudent() throws IOException {
+		studentInformationManagementService.update_StudentBasicInfomation(updateStudent);
 		http_response.setContentType("text/html;charset=utf-8");
 
 		http_response.getWriter().write("success");
@@ -284,6 +300,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	public void setNewStudent(bysjglxt_student_basic newStudent) {
 		this.newStudent = newStudent;
+	}
+
+	public bysjglxt_student_basic getUpdateStudent() {
+		return updateStudent;
+	}
+
+	public void setUpdateStudent(bysjglxt_student_basic updateStudent) {
+		this.updateStudent = updateStudent;
 	}
 
 }
