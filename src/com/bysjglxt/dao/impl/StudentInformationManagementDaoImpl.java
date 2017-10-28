@@ -59,6 +59,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		}
 		return flag;
 	}
+
 	@Override
 	public boolean saveStudent(bysjglxt_student_user bysjglxt_student_user) {
 		boolean flag = true;
@@ -221,6 +222,54 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		List<bysjglxt_student_basic> listStudentAllBasicInformationByAndSearch = query.list();
 		session.clear();
 		return listStudentAllBasicInformationByAndSearch;
+	}
+
+	@Override
+	public boolean update_Give_Student_Operate_Permission(String string) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_student_user set user_student_is_operate_premission=1 where user_student_id='"
+					+ string + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			flag = false;
+		}
+
+		return flag;
+	}
+
+	@Override
+	public boolean update_Take_Student_Operate_Permission(String string) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_student_user set user_student_is_operate_premission=0 where user_student_id='"
+					+ string + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			flag = false;
+		}
+
+		return flag;
+	}
+
+	@Override
+	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_student_basic);
+		} catch (Exception e) {
+			e.printStackTrace();
+			flag = false;
+		}
+		
+		return flag;
 	}
 
 }

@@ -36,4 +36,10 @@ public interface StudentInformationManagementDao {
 	List<bysjglxt_student_basic> listStudentAllBasicInformationByAndSearch(
 			StudentInformationManagementVO studentInformationManagementVO);
 
+	boolean update_Give_Student_Operate_Permission(String string);
+
+	boolean update_Take_Student_Operate_Permission(String string);
+
+	boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic);
+
 }
