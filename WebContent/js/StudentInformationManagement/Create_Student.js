@@ -66,7 +66,7 @@ function Create_Student() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-
+				window.location = "/bysjglxt/student/StudentInformationManagement_listPage";
 			} else {
 				toastr.error(xhr.status);
 			}
@@ -78,53 +78,114 @@ function Create_Student() {
 	xhr.open("POST",
 			"/bysjglxt/student/StudentInformationManagement_CreateStudent");
 
-	formData.append("NewStudent.student_basic_num", student_basic_num.value);
-	formData.append("NewStudent.student_basic_name", student_basic_name.value);
-	formData.append("NewStudent.student_basic_year", student_basic_year.value);
-	formData
-			.append("NewStudent.student_basic_grade", student_basic_grade.value);
-	formData.append("NewStudent.student_basic_idtype",
-			student_basic_idtype.value);
-	formData.append("NewStudent.student_basic_idcaard",
-			student_basic_idcaard.value);
-	formData.append("NewStudent.student_basic_age", student_basic_age.value);
-	formData.append("NewStudent.student_basic_sex", student_basic_sex.value);
-	formData.append("NewStudent.student_basic_nation",
-			student_basic_nation.value);
-	formData.append("NewStudent.student_basic_politicalvisage",
-			student_basic_politicalvisage.value);
-	formData.append("NewStudent.student_basic_native_place",
-			student_basic_native_place.value);
-	formData.append("NewStudent.student_basic_studenttype",
-			student_basic_studenttype.value);
-	formData.append("NewStudent.student_basic_enrollmenttype",
-			student_basic_enrollmenttype.value);
-	formData.append("NewStudent.student_basic_teachingmethods",
-			student_basic_teachingmethods.value);
-	formData.append("NewStudent.student_basic_professionalcode",
-			student_basic_professionalcode.value);
-	formData
-			.append("NewStudent.student_basic_major", student_basic_major.value);
-	formData.append("NewStudent.student_basic_independentmajorname",
-			student_basic_independentmajorname.value);
-	formData.append("NewStudent.student_basic_is_normalmajor",
-			student_basic_is_normalmajor.value);
-	formData.append("NewStudent.student_basic_is_disability",
-			student_basic_is_disability.value);
-	formData.append("NewStudent.student_basic_householdregistrationtype",
-			student_basic_householdregistrationtype.value);
-	formData.append("NewStudent.student_basic_transactiontypes",
-			student_basic_transactiontypes.value);
-	formData.append("NewStudent.student_basic_entranceeducation",
-			student_basic_entranceeducation.value);
-	formData.append("NewStudent.student_basic_enrollmentmode",
-			student_basic_enrollmentmode.value);
-	formData.append("NewStudent.student_basic_reasonsfordroppingoutofschool",
-			student_basic_reasonsfordroppingoutofschool.value);
-	formData.append("NewStudent.student_basic_college",
-			student_basic_college.value);
-	formData
-			.append("NewStudent.student_basic_phone", student_basic_phone.value);
+	if (!student_basic_num.value == "") {
+		formData
+				.append("newStudent.student_basic_num", student_basic_num.value);
+	}
+	if (!student_basic_name.value == "") {
+		formData.append("newStudent.student_basic_name",
+				student_basic_name.value);
+	}
+	if (!student_basic_year.value == "") {
+		formData.append("newStudent.student_basic_year",
+				student_basic_year.value);
+	}
+	if (!student_basic_grade.value == "") {
+		formData.append("newStudent.student_basic_grade",
+				student_basic_grade.value);
+	}
+	if (!student_basic_idtype.value == "") {
+		formData.append("newStudent.student_basic_idtype",
+				student_basic_idtype.value);
+	}
+	if (!student_basic_idcaard.value == "") {
+		formData.append("newStudent.student_basic_idcaard",
+				student_basic_idcaard.value);
+	}
+	if (!student_basic_age.value == "") {
+		formData
+				.append("newStudent.student_basic_age", student_basic_age.value);
+	}
+	if (!student_basic_sex.value == "") {
+		formData
+				.append("newStudent.student_basic_sex", student_basic_sex.value);
+	}
+	if (!student_basic_nation.value == "") {
+		formData.append("newStudent.student_basic_nation",
+				student_basic_nation.value);
+	}
+	if (!student_basic_politicalvisage.value == "") {
+		formData.append("newStudent.student_basic_politicalvisage",
+				student_basic_politicalvisage.value);
+	}
+	if (!student_basic_native_place.value == "") {
+		formData.append("newStudent.student_basic_native_place",
+				student_basic_native_place.value);
+	}
+	if (!student_basic_studenttype.value == "") {
+		formData.append("newStudent.student_basic_studenttype",
+				student_basic_studenttype.value);
+	}
+	if (!student_basic_enrollmenttype.value == "") {
+		formData.append("newStudent.student_basic_enrollmenttype",
+				student_basic_enrollmenttype.value);
+	}
+	if (!student_basic_teachingmethods.value == "") {
+		formData.append("newStudent.student_basic_teachingmethods",
+				student_basic_teachingmethods.value);
+	}
+	if (!student_basic_professionalcode.value == "") {
+		formData.append("newStudent.student_basic_professionalcode",
+				student_basic_professionalcode.value);
+	}
+	if (!student_basic_major.value == "") {
+		formData.append("newStudent.student_basic_major",
+				student_basic_major.value);
+	}
+	if (!student_basic_independentmajorname.value == "") {
+		formData.append("newStudent.student_basic_independentmajorname",
+				student_basic_independentmajorname.value);
+	}
+	if (!student_basic_is_normalmajor.value == "") {
+		formData.append("newStudent.student_basic_is_normalmajor",
+				student_basic_is_normalmajor.value);
+	}
+	if (!student_basic_is_disability.value == "") {
+		formData.append("newStudent.student_basic_is_disability",
+				student_basic_is_disability.value);
+	}
+	if (!student_basic_householdregistrationtype.value == "") {
+		formData.append("newStudent.student_basic_householdregistrationtype",
+				student_basic_householdregistrationtype.value);
+	}
+	if (!student_basic_transactiontypes.value == "") {
+		formData.append("newStudent.student_basic_transactiontypes",
+				student_basic_transactiontypes.value);
+	}
+	if (!student_basic_entranceeducation.value == "") {
+		formData.append("newStudent.student_basic_entranceeducation",
+				student_basic_entranceeducation.value);
+	}
+	if (!student_basic_enrollmentmode.value == "") {
+		formData.append("newStudent.student_basic_enrollmentmode",
+				student_basic_enrollmentmode.value);
+	}
+
+	if (!student_basic_reasonsfordroppingoutofschool.value == "") {
+		formData.append(
+				"newStudent.student_basic_reasonsfordroppingoutofschool",
+				student_basic_reasonsfordroppingoutofschool.value);
+	}
+
+	if (!student_basic_college.value == "") {
+		formData.append("newStudent.student_basic_college",
+				student_basic_college.value);
+	}
+
+	if (!student_basic_phone.value == "") {
+		formData.append("newStudent.student_basic_phone",
+				student_basic_phone.value);
+	}
 
 	xhr.send(formData);
 }
