@@ -38,7 +38,6 @@
 		<nav class="navbar navbar-default navbar-fixed-top">
 		<div
 			style="width: auto; float: left; line-height: 78px; margin: 0 0 0 30px; font-size: 30px;">毕业设计管理系统</div>
-
 		<div id="navbar-menu">
 			<ul class="nav navbar-nav navbar-right" style="margin: 0 50px 0 0">
 				<li class="dropdown"><a href="#"

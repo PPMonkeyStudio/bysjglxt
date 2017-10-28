@@ -1,5 +1,7 @@
 package com.bysjglxt.action;
 
+
+
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -94,9 +96,11 @@ public class TopicManagementAction extends ActionSupport implements ServletRespo
 		return topicManagementService;
 	}
 
+
 	public void setTopicManagementService(TopicManagementService topicManagementService) {
 		this.topicManagementService = topicManagementService;
 	}
+
 
 	public bysjglxt_topic getNewTopic() {
 		return newTopic;
@@ -105,5 +109,6 @@ public class TopicManagementAction extends ActionSupport implements ServletRespo
 	public void setNewTopic(bysjglxt_topic newTopic) {
 		this.newTopic = newTopic;
 	}
+
 
 }

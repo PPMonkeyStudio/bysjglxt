@@ -2,6 +2,7 @@ package com.bysjglxt.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -44,7 +45,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 
 	@Override
 	public boolean saveTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic) {
-		boolean flag = false;
+		boolean flag = true;
 		try {
 			Session session = getSession();
 			session.save(bysjglxt_teacher_basic);
@@ -57,7 +58,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 
 	@Override
 	public boolean saveTeacher(bysjglxt_teacher_user bysjglxt_teacher_user) {
-		boolean flag = false;
+		boolean flag = true;
 		try {
 			Session session = getSession();
 			session.save(bysjglxt_teacher_user);
@@ -69,10 +70,10 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	}
 
 	@Override
-	public bysjglxt_teacher_user getStudentByNum(String teacher_num) {
+	public bysjglxt_teacher_user getStudentById(String teacher_id) {
 		Session session = getSession();
 		bysjglxt_teacher_user TeacherInformation = null;
-		String hql = "from bysjglxt_teacher_user where user_teacher_num='" + teacher_num + "'";
+		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + teacher_id + "'";
 		Query query = session.createQuery(hql);
 		TeacherInformation = (bysjglxt_teacher_user) query.uniqueResult();
 		return TeacherInformation;
@@ -80,11 +81,18 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 
 	@Override
 	public boolean deleteTeacherBasicInfoById(String user_teacher_basic) {
-		Session session = getSession();
-		String hql = "delete from bysjglxt_teacher_basic where teacher_basic_id='" + user_teacher_basic + "'";
-		Query query = session.createQuery(hql);
-		query.executeUpdate();
-		return true;
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_teacher_basic where teacher_basic_id='" + user_teacher_basic + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+
+		return flag;
 	}
 
 	@Override

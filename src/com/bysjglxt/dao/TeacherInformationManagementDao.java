@@ -15,7 +15,7 @@ public interface TeacherInformationManagementDao {
 
 	boolean saveTeacher(bysjglxt_teacher_user bysjglxt_teacher_user);
 
-	bysjglxt_teacher_user getStudentByNum(String teacher_num);
+	bysjglxt_teacher_user getStudentById(String teacher_id);
 
 	boolean deleteTeacherBasicInfoById(String user_teacher_basic);
 

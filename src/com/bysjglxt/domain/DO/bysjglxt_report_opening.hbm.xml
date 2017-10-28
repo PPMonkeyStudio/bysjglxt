@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-27 12:56:31 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-28 17:51:36 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_report_opening" table="BYSJGLXT_REPORT_OPENING">
         <id name="report_opening_id" type="java.lang.String">

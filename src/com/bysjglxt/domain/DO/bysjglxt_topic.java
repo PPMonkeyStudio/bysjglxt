@@ -14,7 +14,7 @@ public class bysjglxt_topic {
 	private String topic_student;
 	private String topic_gmt_create;
 	private String topic_gmt_modified;
-	private int topic_examine_state;
+	private String topic_examine_state;
 
 	public String getTopic_id() {
 		return topic_id;
@@ -120,11 +120,11 @@ public class bysjglxt_topic {
 		this.topic_gmt_modified = topic_gmt_modified;
 	}
 
-	public int getTopic_examine_state() {
+	public String getTopic_examine_state() {
 		return topic_examine_state;
 	}
 
-	public void setTopic_examine_state(int topic_examine_state) {
+	public void setTopic_examine_state(String topic_examine_state) {
 		this.topic_examine_state = topic_examine_state;
 	}
 
@@ -137,4 +137,5 @@ public class bysjglxt_topic {
 				+ topic_teacher + ", topic_student=" + topic_student + ", topic_gmt_create=" + topic_gmt_create
 				+ ", topic_gmt_modified=" + topic_gmt_modified + ", topic_examine_state=" + topic_examine_state + "]";
 	}
+
 }
