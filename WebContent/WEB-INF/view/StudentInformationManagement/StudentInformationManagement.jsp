@@ -74,21 +74,21 @@
 						<tr>
 							<th>学号</th>
 							<th>姓名</th>
-							<th><select id="select_sex"
+							<th><select class="form-control" id="select_sex" style="width: auto;"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="男">男</option>
 									<option value="女">女</option>
 							</select></th>
-							<th><select id="select_major" data-live-search="true"
+							<th><select class="form-control" id="select_major" data-live-search="true"  style="width: auto;"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">专业名称</option>
 							</select></th>
-							<th><select id="select_grade" data-live-search="true"
+							<th><select class="form-control" id="select_grade" data-live-search="true" style="width: auto;"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">年级</option>
 							</select></th>
-							<th><select id="select_premission"
+							<th><select class="form-control"  id="select_premission" style="width: auto;"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">操作权限</option>
 									<option value="1">有操作权限</option>
