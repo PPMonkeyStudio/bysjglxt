@@ -12,7 +12,6 @@ public interface TeacherInformationManagementService {
 	 * 教师信息的Excel文件流转化为bysjglxt_Teacher_basic的List
 	 *
 	 * @param TeacherExcel
-	 * 
 	 * @return List<bysjglxt_teacher_basic>
 	 * @throws Exception
 	 */

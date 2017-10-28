@@ -7,12 +7,11 @@ import com.opensymphony.xwork2.ActionSupport;
 public class TeacherformationManagementAction extends ActionSupport {
 
 	// service层注入
-	private TeacherInformationManagementService TeacherInformationManagementService;
+	private TeacherInformationManagementService teacherInformationManagementService;
 
 	public void setTeacherInformationManagementService(
 			TeacherInformationManagementService teacherInformationManagementService) {
-		TeacherInformationManagementService = teacherInformationManagementService;
+		this.teacherInformationManagementService = teacherInformationManagementService;
 	}
-	
 
 }

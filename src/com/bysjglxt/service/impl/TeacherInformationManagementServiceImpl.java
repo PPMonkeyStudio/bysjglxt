@@ -30,6 +30,9 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		this.teacherInformationManagementDao = teacherInformationManagementDao;
 	}
 
+	/**
+	 * OK
+	 */
 	@Override
 	public List<bysjglxt_teacher_basic> convertTeacherExcelToList(File teacherExcel, String EXCEL_TeacherFileName)
 			throws Exception {
@@ -47,6 +50,9 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		return lists;
 	}
 
+	/**
+	 * OK
+	 */
 	@Override
 	public boolean saveTeacherList(List<bysjglxt_teacher_basic> teacherBasicList) {
 		boolean flag = false;
@@ -59,7 +65,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			flag = teacherInformationManagementDao.saveTeacherBasic(bysjglxt_teacher_basic);
 			bysjglxt_teacher_user.setUser_teacher_id(TeamUtil.getUuid());
 			// 工号
-			bysjglxt_teacher_user.setUser_teacher_num("1111111111111");
+			bysjglxt_teacher_user.setUser_teacher_num(bysjglxt_teacher_basic.getJob_number());
 			// 密码
 			bysjglxt_teacher_user.setUser_teacher_password(bysjglxt_teacher_user.getUser_teacher_num());
 			bysjglxt_teacher_user.setUser_teacher_basic(bysjglxt_teacher_basic.getTeacher_basic_id());
@@ -75,6 +81,9 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		return flag;
 	}
 
+	/**
+	 * 此方式暂时被弃用
+	 */
 	@Override
 	public List<TeacherInformationDTO> list_TeacherInformationDTO_All() {
 		List<TeacherInformationDTO> list_TeacherInformationDTO_All = new ArrayList<TeacherInformationDTO>();
@@ -92,6 +101,9 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		return list_TeacherInformationDTO_All;
 	}
 
+	/**
+	 * OK
+	 */
 	@Override
 	public boolean save_NewTeacher(bysjglxt_teacher_basic teacher_basic) {
 		boolean flag = false;
@@ -102,7 +114,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		flag = teacherInformationManagementDao.saveTeacherBasic(teacher_basic);
 		bysjglxt_teacher_user.setUser_teacher_id(TeamUtil.getUuid());
 		// 工号
-		bysjglxt_teacher_user.setUser_teacher_num("1111111111111");
+		bysjglxt_teacher_user.setUser_teacher_num(teacher_basic.getJob_number());
 		// 密码
 		bysjglxt_teacher_user.setUser_teacher_password(bysjglxt_teacher_user.getUser_teacher_num());
 		bysjglxt_teacher_user.setUser_teacher_basic(teacher_basic.getTeacher_basic_id());
@@ -112,20 +124,23 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		bysjglxt_teacher_user.setUser_teacher_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_teacher_user.setUser_teacher_gmt_modified(bysjglxt_teacher_user.getUser_teacher_gmt_create());
 		flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
-		return false;
+		return flag;
 	}
 
+	/**
+	 * OK
+	 */
 	@Override
-	public boolean remove_TeacherList(List<String> useTeacherNumList) {
+	public boolean remove_TeacherList(List<String> useTeacherIdList) {
 		boolean flag = false;
-		for (String teacher_num : useTeacherNumList) {
-			bysjglxt_teacher_user bysjglxt_teacher_user = teacherInformationManagementDao.getStudentByNum(teacher_num);
+		for (String teacher_user_id : useTeacherIdList) {
+			bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(teacher_user_id);
 			flag = teacherInformationManagementDao
 					.deleteTeacherBasicInfoById(bysjglxt_teacher_user.getUser_teacher_basic());
-			flag = teacherInformationManagementDao.deleteTeacherInfoById(bysjglxt_teacher_user.getUser_teacher_id());
+			flag = teacherInformationManagementDao.deleteTeacherInfoById(teacher_user_id);
 		}
 		return flag;
-
 	}
 
 }

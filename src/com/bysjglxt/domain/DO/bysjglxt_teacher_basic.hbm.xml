@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-28 15:46:56 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-28 15:55:33 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_teacher_basic" table="BYSJGLXT_TEACHER_BASIC">
         <id name="teacher_basic_id" type="java.lang.String">
             <column name="TEACHER_BASIC_ID" />
             <generator class="assigned" />
         </id>
-        <property name="job_num" type="java.lang.String">
-            <column name="JOB_NUM" />
+        <property name="job_number" type="java.lang.String">
+            <column name="JOB_NUMBER" />
         </property>
         <property name="name" type="java.lang.String">
             <column name="NAME" />
