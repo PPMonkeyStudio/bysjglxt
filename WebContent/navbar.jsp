@@ -96,7 +96,8 @@
 					class="icon-submenu lnr lnr-chevron-left"></i></a>
 				<div id="topic" class="collapse ">
 					<ul class="nav">
-						<li><a href="#">创建课题</a></li></li>
+						<li><a
+							href="<%=basePath%>topic/TopicManagement_CreateTopicPage">创建课题</a></li></li>
 			<li><a href="#">课题列表</a></li>
 			<li><a href="#">选题列表</a></li>
 
@@ -124,7 +125,7 @@
 					<li><a href="#">我的任务</a></li>
 				</ul>
 			</div></li>
-		
+
 		<!----------------------------------------------------------------------->
 		<li><a href="#" class=""><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
 		<!----------------------------------------------------------------------->
