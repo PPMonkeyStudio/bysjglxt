@@ -72,36 +72,67 @@
 
 		<div id="sidebar-nav" class="sidebar">
 			<div class="sidebar-scroll">
-				<nav>
 				<ul class="nav">
 					<!----------------------------------------------------------------------->
-					<li><a href="#subPages" data-toggle="collapse"
-						class="collapsed"><i class="lnr lnr-user"></i> <span>信息管理</span>
+					<li><a href="#informationManagement" data-toggle="collapse"
+						class="collapsed"><i class="lnr lnr-user"></i> <span>信息</span>
 							<i class="icon-submenu lnr lnr-chevron-left"></i></a>
-						<div id="subPages" class="collapse ">
+						<div id="informationManagement" class="collapse ">
 							<ul class="nav">
-								<!--  -->
 								<li><a
 									href="<%=basePath%>student/StudentInformationManagement_CreateStudentPage">添加学生信息</a></li></li>
-					<!--  -->
 					<li><a
 						href="<%=basePath%>student/StudentInformationManagement_listPage"
 						class="">学生信息列表</a></li>
 					<li><a href="#">添加教师信息</a></li>
-					</li>
 					<li><a href="#">教师信息列表</a></li>
-					</li>
+					<li><a href="#">我的信息</a></li>
 				</ul>
 			</div>
 			</li>
 			<!----------------------------------------------------------------------->
-			<li><a href="#" class=""><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
-			<!----------------------------------------------------------------------->
+			<li><a href="#topic" data-toggle="collapse" class="collapsed"><i
+					class="lnr lnr-book"></i> <span>课题</span> <i
+					class="icon-submenu lnr lnr-chevron-left"></i></a>
+				<div id="topic" class="collapse ">
+					<ul class="nav">
+						<li><a href="#">创建课题</a></li></li>
+			<li><a href="#">课题列表</a></li>
+			<li><a href="#">选题列表</a></li>
+
 			</ul>
-			</nav>
+			<!----------------------------------------------------------------------->
+			<li><a href="#process" data-toggle="collapse" class="collapsed"><i
+					class="lnr lnr-list"></i> <span>流程</span> <i
+					class="icon-submenu lnr lnr-chevron-left"></i></a>
+				<div id="process" class="collapse ">
+					<ul class="nav">
+						<li><a href="#">流程定义列表</a></li></li>
+			<li><a href="#">流程实例列表</a></li>
+			<li><a href="#">我的流程</a></li>
+			</ul>
 		</div>
-		<!--  -->
+		</li>
+		<!----------------------------------------------------------------------->
+		<li><a href="#task" data-toggle="collapse" class="collapsed"><i
+				class="lnr lnr lnr-map"></i> <span>任务</span> <i
+				class="icon-submenu lnr lnr-chevron-left"></i></a>
+			<div id="task" class="collapse ">
+				<ul class="nav">
+					<li><a href="#">任务定义列表</a></li>
+					<li><a href="#">任务实例列表</a></li>
+					<li><a href="#">我的任务</a></li>
+				</ul>
+			</div></li>
+		
+		<!----------------------------------------------------------------------->
+		<li><a href="#" class=""><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
+		<!----------------------------------------------------------------------->
+		</ul>
 	</div>
+	</div>
+	<!--  -->
+
 
 
 	<!-- END WRAPPER -->
