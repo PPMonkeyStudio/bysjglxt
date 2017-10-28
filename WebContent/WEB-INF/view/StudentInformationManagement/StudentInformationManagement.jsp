@@ -25,6 +25,8 @@
 	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Grade.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Update_Student.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -74,22 +76,24 @@
 						<tr>
 							<th>学号</th>
 							<th>姓名</th>
-							<th><select class="form-control" id="select_sex" style="width: auto;"
-								onchange="List_Student_By_PageAndSearch(1)">
+							<th><select class="form-control" id="select_sex"
+								style="width: auto;" onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="男">男</option>
 									<option value="女">女</option>
 							</select></th>
-							<th><select class="form-control" id="select_major" data-live-search="true"  style="width: auto;"
+							<th><select class="form-control" id="select_major"
+								data-live-search="true" style="width: auto;"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">专业名称</option>
 							</select></th>
-							<th><select class="form-control" id="select_grade" data-live-search="true" style="width: auto;"
+							<th><select class="form-control" id="select_grade"
+								data-live-search="true" style="width: auto;"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">年级</option>
 							</select></th>
-							<th><select class="form-control"  id="select_premission" style="width: auto;"
-								onchange="List_Student_By_PageAndSearch(1)">
+							<th><select class="form-control" id="select_premission"
+								style="width: auto;" onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">操作权限</option>
 									<option value="1">有操作权限</option>
 									<option value="0">无操作权限</option>
@@ -104,7 +108,7 @@
 				<div id="i_pulse" style="text-align: center;">
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
 				</div>
-				<div style="height: 34px;margin: 0 0 20px 0;">
+				<div style="height: 34px; margin: 0 0 20px 0;">
 
 					<button class="btn btn-danger" onclick="Delete_Student()"
 						style="float: right; margin: 0 10px;">
@@ -168,7 +172,23 @@
 					</table>
 				</div>
 				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
-				<div class="modal-footer"></div>
+				<div class="modal-footer">
+					<button class="btn btn-default" id="button_sure_update"
+						onclick="Update_Student()"
+						style="float: right; margin: 0 10px; display: none;">
+						<i class="fa fa-check"></i> 确认修改
+					</button>
+					<button class="btn btn-default" id="button_stop_update"
+						onclick="stop_Update_Student()"
+						style="float: right; margin: 0 10px; display: none;">
+						<i class="fa fa-times"></i> 放弃修改
+					</button>
+					<button class="btn btn-default" id="button_start_update"
+						onclick="start_Update_Student()"
+						style="float: right; margin: 0 10px;">
+						<i class="fa fa-pencil-square-o"></i> 修改
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>

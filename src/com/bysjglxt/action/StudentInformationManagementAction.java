@@ -54,6 +54,10 @@ public class StudentInformationManagementAction extends ActionSupport
 	 * 手动添加的学生
 	 */
 	private bysjglxt_student_basic newStudent;
+	/*
+	 * 修改的学生基础信息
+	 */
+	private bysjglxt_student_basic updateStudent;
 
 	/**
 	 * @说明 跳转列表页
@@ -188,6 +192,13 @@ public class StudentInformationManagementAction extends ActionSupport
 		http_response.getWriter().write("success");
 	}
 
+	/**
+	 * @说明 修改学生基础信息
+	 */
+	public void UpdateStudent() {
+		System.out.println(updateStudent);
+	}
+
 	/*
 	 * 
 	 */
@@ -284,6 +295,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	public void setNewStudent(bysjglxt_student_basic newStudent) {
 		this.newStudent = newStudent;
+	}
+
+	public bysjglxt_student_basic getUpdateStudent() {
+		return updateStudent;
+	}
+
+	public void setUpdateStudent(bysjglxt_student_basic updateStudent) {
+		this.updateStudent = updateStudent;
 	}
 
 }
