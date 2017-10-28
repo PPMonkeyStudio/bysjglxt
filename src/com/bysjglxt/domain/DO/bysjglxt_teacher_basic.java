@@ -2,6 +2,7 @@ package com.bysjglxt.domain.DO;
 
 public class bysjglxt_teacher_basic {
 
+	private String job_num;
 	private String teacher_basic_id;
 	private String name;
 	private String nation;
@@ -45,6 +46,14 @@ public class bysjglxt_teacher_basic {
 	private String off_campus_teacher_type;
 	private String teacher_basic_gmt_create;
 	private String teacher_basic_gmt_modified;
+
+	public String getJob_num() {
+		return job_num;
+	}
+
+	public void setJob_num(String job_num) {
+		this.job_num = job_num;
+	}
 
 	public String getUniversity_transfer() {
 		return university_transfer;
