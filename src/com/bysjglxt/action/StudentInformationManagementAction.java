@@ -53,7 +53,7 @@ public class StudentInformationManagementAction extends ActionSupport
 	/*
 	 * 手动添加的学生
 	 */
-	private bysjglxt_student_basic NewStudent;
+	private bysjglxt_student_basic newStudent;
 
 	/**
 	 * @说明 跳转列表页
@@ -88,9 +88,8 @@ public class StudentInformationManagementAction extends ActionSupport
 		// 获取所有学生信息列表
 		studentInformationManagementVO = studentInformationManagementService
 				.VO_Student_By_PageAndSearch(studentInformationManagementVO);
-
+		System.out.println(studentInformationManagementVO.getUser_student_is_operate_premission());
 		http_response.setContentType("text/html;charset=utf-8");
-		System.out.println(gson.toJson(studentInformationManagementVO));
 		http_response.getWriter().write(gson.toJson(studentInformationManagementVO));
 
 	}
@@ -180,11 +179,14 @@ public class StudentInformationManagementAction extends ActionSupport
 	}
 
 	/**
+	 * @throws IOException
 	 * @说明 手动添加的学生
 	 */
-	public void CreateStudent() {
-		System.out.println(NewStudent.toString());
-		// studentInformationManagementService.save_NewStudent(NewStudent);
+	public void CreateStudent() throws IOException {
+		studentInformationManagementService.save_NewStudent(newStudent);
+		http_response.setContentType("text/html;charset=utf-8");
+
+		http_response.getWriter().write("success");
 	}
 
 	/*
@@ -278,11 +280,11 @@ public class StudentInformationManagementAction extends ActionSupport
 	}
 
 	public bysjglxt_student_basic getNewStudent() {
-		return NewStudent;
+		return newStudent;
 	}
 
 	public void setNewStudent(bysjglxt_student_basic newStudent) {
-		NewStudent = newStudent;
+		this.newStudent = newStudent;
 	}
 
 }

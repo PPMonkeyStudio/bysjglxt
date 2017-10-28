@@ -62,8 +62,8 @@
 						<td><input id="student_basic_age" class="form-control"
 							type="text"></td>
 						<th>性别</th>
-						<td><select id="student_basic_sex"><option value="1">男</option>
-								<option value="0">女</option>
+						<td><select id="student_basic_sex"><option value="男">男</option>
+								<option value="女">女</option>
 						</select></td>
 					</tr>
 					<tr>

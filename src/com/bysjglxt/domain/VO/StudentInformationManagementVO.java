@@ -37,7 +37,7 @@ public class StudentInformationManagementVO {
 	// 年级筛选
 	private String student_basic_grade;
 	// 操作权限筛选
-	private int user_student_is_operate_premission;
+	private int user_student_is_operate_premission = -1;
 
 	/*
 	 * 
