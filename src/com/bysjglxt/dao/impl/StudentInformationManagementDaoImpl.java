@@ -140,12 +140,13 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 								+ studentInformationManagementVO.getSearch().trim() + "</span>"));
 			}
 		}
+
 		return listStudentBasicInformationByPageAndSearch;
 	}
 
-	
 	/**
 	 * 改方法暂时被弃用
+	 * 
 	 * @param search
 	 * @return
 	 */
@@ -176,22 +177,53 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public List<String> listStudent_Major() throws Exception{
+	public List<String> listStudent_Major() throws Exception {
 		Session session = getSession();
 		List<String> listStudent_Major = new ArrayList<String>();
 		String hql = "select distinct(student_basic_major) from bysjglxt_student_basic";
 		Query query = session.createQuery(hql);
-		listStudent_Major = (List<String>) query.uniqueResult();
+		listStudent_Major = query.list();
 		return listStudent_Major;
 	}
 
 	@Override
-	public List<String> listStudent_Grade()throws Exception {
+	public List<String> listStudent_Grade() throws Exception {
 		Session session = getSession();
 		List<String> listStudent_Grade = new ArrayList<String>();
 		String hql = "select distinct(student_basic_grade) from bysjglxt_student_basic";
 		Query query = session.createQuery(hql);
-		listStudent_Grade = (List<String>) query.uniqueResult();
+		listStudent_Grade = query.list();
 		return listStudent_Grade;
 	}
+
+	@Override
+	public List<bysjglxt_student_basic> listStudentAllBasicInformationByAndSearch(
+			StudentInformationManagementVO studentInformationManagementVO) {
+		Session session = getSession();
+		String hql = "from bysjglxt_student_basic where 1=1";
+		if (studentInformationManagementVO.getSearch() != null
+				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + studentInformationManagementVO.getSearch() + "%";
+			hql = hql + " and student_basic_name like '" + search + "'";
+			System.out.println(hql);
+		}
+		if (studentInformationManagementVO.getSex() != null
+				&& studentInformationManagementVO.getSex().trim().length() > 0) {
+			hql = hql + " and student_basic_sex ='" + studentInformationManagementVO.getSex() + "'";
+		}
+		if (studentInformationManagementVO.getStudent_basic_major() != null
+				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0) {
+			hql = hql + " and student_basic_major='" + studentInformationManagementVO.getStudent_basic_major() + "'";
+		}
+		if (studentInformationManagementVO.getStudent_basic_grade() != null
+				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0) {
+			hql = hql + " and student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade() + "'";
+		}
+		hql = hql + " order by student_basic_num";
+		Query query = session.createQuery(hql);
+		List<bysjglxt_student_basic> listStudentAllBasicInformationByAndSearch = query.list();
+		session.clear();
+		return listStudentAllBasicInformationByAndSearch;
+	}
+
 }

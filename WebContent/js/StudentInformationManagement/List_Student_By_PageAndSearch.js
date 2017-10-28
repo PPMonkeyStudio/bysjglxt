@@ -106,9 +106,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 	 */
 	// 性别
 	var select_sex = document.getElementById("select_sex");
-	if (select_sex.value == "1") {
+	if (select_sex.value == "男") {
 		formData.append("studentInformationManagementVO.sex", select_sex.value);
-	} else if (select_sex.value == "0") {
+	} else if (select_sex.value == "女") {
 		formData.append("studentInformationManagementVO.sex", select_sex.value);
 	}
 	// 权限

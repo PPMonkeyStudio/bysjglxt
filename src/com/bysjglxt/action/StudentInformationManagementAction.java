@@ -90,7 +90,7 @@ public class StudentInformationManagementAction extends ActionSupport
 				.VO_Student_By_PageAndSearch(studentInformationManagementVO);
 
 		http_response.setContentType("text/html;charset=utf-8");
-
+		System.out.println(gson.toJson(studentInformationManagementVO));
 		http_response.getWriter().write(gson.toJson(studentInformationManagementVO));
 
 	}
@@ -148,32 +148,35 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	/**
 	 * 
+	 * @throws Exception
 	 * @说明 获取学生专业
-	 * @throws IOException
 	 */
-	public void GetStudentMajor() throws IOException {
+	public void GetStudentMajor() throws Exception {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
+		List<String> list_Student_Major = studentInformationManagementService.list_Student_Major();
 
-		http_response.getWriter().write(gson.toJson(studentInformationManagementService.list_Student_Major()));
+		http_response.getWriter().write(gson.toJson(list_Student_Major));
+
 	}
 
 	/**
 	 * 
+	 * @throws Exception
 	 * @说明 获取学生年级
-	 * @throws IOException
 	 */
-	public void GetStudentGrade() throws IOException {
+	public void GetStudentGrade() throws Exception {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
+		List<String> list_Student_Grade = studentInformationManagementService.list_Student_Grade();
 
-		http_response.getWriter().write(gson.toJson(studentInformationManagementService.list_Student_Grade()));
+		http_response.getWriter().write(gson.toJson(list_Student_Grade));
 	}
 
 	/**

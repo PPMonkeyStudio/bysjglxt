@@ -35,17 +35,14 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		FileInputStream input = new FileInputStream(studentExcel);
 		List<Map<String, Object>> list = null;
 		if ("xlsx".equals(houzhui)) {
-			System.out.println("xlsx");
 			XSSFWorkbook workbook = new XSSFWorkbook(input);
 			list = ExcelToBean.parseUpdateExcel(workbook, "bysjglxt_student_basic");
 		} else {
-			System.out.println("xls");
 			HSSFWorkbook workbook = new HSSFWorkbook(input);
 			list = ExcelToBean.parseExcel(workbook, "bysjglxt_student_basic");
 		}
 		List<bysjglxt_student_basic> lists = ExcelToBean.toObjectPerproList(list, bysjglxt_student_basic.class);
 		for (bysjglxt_student_basic bysjglxt_student_basic : lists) {
-			System.out.println("\tk\t" + bysjglxt_student_basic);
 		}
 		return lists;
 	}
@@ -78,7 +75,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		StudentInformationDTO studentInformationDTO = null;
 		List<bysjglxt_student_user> listAllStudentUserInformation = studentInformationManagementDao
 				.list_StudentUserInformation_All();
-		System.out.println(listAllStudentUserInformation.size());
 
 		for (bysjglxt_student_user student_user : listAllStudentUserInformation) {
 			studentInformationDTO = new StudentInformationDTO();
@@ -129,25 +125,20 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user bysjglxt_student_user = null;
 		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = studentInformationManagementDao
 				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO);
+		List<bysjglxt_student_basic> listStudentAllBasicInformationBySearch = studentInformationManagementDao
+				.listStudentAllBasicInformationByAndSearch(studentInformationManagementVO);
 		int i = 0;
-		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
-			studentInformationDTO = new StudentInformationDTO();
-			student_basic = new bysjglxt_student_basic();
-			bysjglxt_student_user = new bysjglxt_student_user();
+		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentAllBasicInformationBySearch) {
 			bysjglxt_student_user = studentInformationManagementDao.getStudentInfoByBasicId(
 					bysjglxt_student_basic.getStudent_basic_id(),
 					studentInformationManagementVO.getUser_student_is_operate_premission());
 			if (bysjglxt_student_user.getUser_student_id() != null
 					&& bysjglxt_student_user.getUser_student_id().trim().length() > 0) {
-				studentInformationDTO.setBysjglxtStudentUser(bysjglxt_student_user);
 				i++;
-				student_basic = studentInformationManagementDao
-						.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_user.getUser_student_basic());
-				studentInformationDTO.setBysjglxtStudentBasic(bysjglxt_student_basic);
 			}
 		}
+		System.out.println("d" + i);
 		studentInformationManagementVO.setTotalRecords(i);
-		System.out.println("总记录数:\t" + i);
 		studentInformationManagementVO.setTotalPages(((i - 1) / studentInformationManagementVO.getPageSize()) + 1);
 		if (studentInformationManagementVO.getPageIndex() <= 1) {
 			studentInformationManagementVO.setHavePrePage(false);
@@ -158,6 +149,22 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			studentInformationManagementVO.setHaveNextPage(false);
 		} else {
 			studentInformationManagementVO.setHaveNextPage(true);
+		}
+		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
+			studentInformationDTO = new StudentInformationDTO();
+			student_basic = new bysjglxt_student_basic();
+			bysjglxt_student_user = new bysjglxt_student_user();
+			bysjglxt_student_user = studentInformationManagementDao.getStudentInfoByBasicId(
+					bysjglxt_student_basic.getStudent_basic_id(),
+					studentInformationManagementVO.getUser_student_is_operate_premission());
+			if (bysjglxt_student_user.getUser_student_id() != null
+					&& bysjglxt_student_user.getUser_student_id().trim().length() > 0) {
+				studentInformationDTO.setBysjglxtStudentUser(bysjglxt_student_user);
+				student_basic = studentInformationManagementDao
+						.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_user.getUser_student_basic());
+				studentInformationDTO.setBysjglxtStudentBasic(bysjglxt_student_basic);
+			}
+			listStudentInformationDTO.add(studentInformationDTO);
 		}
 		studentInformationManagementVO.setList_StudentInformationDTO(listStudentInformationDTO);
 		return studentInformationManagementVO;
