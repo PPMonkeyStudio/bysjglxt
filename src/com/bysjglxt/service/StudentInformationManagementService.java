@@ -94,19 +94,28 @@ public interface StudentInformationManagementService {
 	 * @DOTO
 	 * @DATE 2017-10-28
 	 * @说明 批量赋予操作权限
-	 * @param listString
-	 * @return
+	 * @param listString 学生user表id 组成的list
+	 * @return 成功与否
 	 */
 	public boolean update_Give_Student_Operate_Permission(List<String> listString);
-	
+
 	/**
-	 * @DOTO 
+	 * @DOTO
 	 * @DATE 2017-10-28
 	 * @说明 批量剥夺操作权限
-	 * @param listString
-	 * @return
+	 * @param listStringd  学生user表id 组成的list
+	 * @return 成功与否
 	 */
 	public boolean update_Take_Student_Operate_Permission(List<String> listString);
-	
+
+	/**
+	 * 
+	 * @DOTO
+	 * @DATE 2017-10-28
+	 * @说明 修改学生基础信息
+	 * @param bysjglxt_student_basic 学生基础信息对象
+	 * @return 成功与否
+	 */
+	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic);
 	
 }

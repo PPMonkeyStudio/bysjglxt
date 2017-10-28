@@ -258,4 +258,18 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		return flag;
 	}
 
+	@Override
+	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_student_basic);
+		} catch (Exception e) {
+			e.printStackTrace();
+			flag = false;
+		}
+		
+		return flag;
+	}
+
 }

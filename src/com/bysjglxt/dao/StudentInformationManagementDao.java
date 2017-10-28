@@ -40,4 +40,6 @@ public interface StudentInformationManagementDao {
 
 	boolean update_Take_Student_Operate_Permission(String string);
 
+	boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic);
+
 }

@@ -198,4 +198,9 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		return flag;
 	}
 
+	@Override
+	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic) {
+		return studentInformationManagementDao.update_StudentBasicInfomation(bysjglxt_student_basic);
+	}
+
 }
