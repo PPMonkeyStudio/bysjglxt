@@ -42,16 +42,18 @@ public class StudentInformationManagementVO {
 	/*
 	 * 
 	 */
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
 	@Override
 	public String toString() {
 		return "StudentInformationManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords
 				+ ", pageSize=" + pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage
 				+ ", HaveNextPage=" + HaveNextPage + ", list_StudentInformationDTO=" + list_StudentInformationDTO
-				+ ", search=" + search + "]";
-	}
-
-	public int getPageIndex() {
-		return pageIndex;
+				+ ", search=" + search + ", sex=" + sex + ", student_basic_major=" + student_basic_major
+				+ ", student_basic_grade=" + student_basic_grade + ", user_student_is_operate_premission="
+				+ user_student_is_operate_premission + "]";
 	}
 
 	public String getSex() {

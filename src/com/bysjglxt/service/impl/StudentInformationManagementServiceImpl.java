@@ -123,21 +123,22 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		StudentInformationDTO studentInformationDTO = null;
 		bysjglxt_student_basic student_basic = null;
 		bysjglxt_student_user bysjglxt_student_user = null;
+		// 得到分页之后的list
 		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = studentInformationManagementDao
 				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO);
+		// 得到未经过分页的list
 		List<bysjglxt_student_basic> listStudentAllBasicInformationBySearch = studentInformationManagementDao
 				.listStudentAllBasicInformationByAndSearch(studentInformationManagementVO);
+		// 为了得到满足条件的总条数
 		int i = 0;
 		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentAllBasicInformationBySearch) {
 			bysjglxt_student_user = studentInformationManagementDao.getStudentInfoByBasicId(
 					bysjglxt_student_basic.getStudent_basic_id(),
 					studentInformationManagementVO.getUser_student_is_operate_premission());
-			if (bysjglxt_student_user.getUser_student_id() != null
-					&& bysjglxt_student_user.getUser_student_id().trim().length() > 0) {
+			if (bysjglxt_student_user != null) {
 				i++;
 			}
 		}
-		System.out.println("d" + i);
 		studentInformationManagementVO.setTotalRecords(i);
 		studentInformationManagementVO.setTotalPages(((i - 1) / studentInformationManagementVO.getPageSize()) + 1);
 		if (studentInformationManagementVO.getPageIndex() <= 1) {
@@ -151,20 +152,21 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			studentInformationManagementVO.setHaveNextPage(true);
 		}
 		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
+			System.out.println("okokokoko\t" + bysjglxt_student_basic.getStudent_basic_id());
 			studentInformationDTO = new StudentInformationDTO();
 			student_basic = new bysjglxt_student_basic();
 			bysjglxt_student_user = new bysjglxt_student_user();
 			bysjglxt_student_user = studentInformationManagementDao.getStudentInfoByBasicId(
 					bysjglxt_student_basic.getStudent_basic_id(),
 					studentInformationManagementVO.getUser_student_is_operate_premission());
-			if (bysjglxt_student_user.getUser_student_id() != null
-					&& bysjglxt_student_user.getUser_student_id().trim().length() > 0) {
+			if (bysjglxt_student_user != null) {
+				System.out.println("kokoo\t" + bysjglxt_student_user);
 				studentInformationDTO.setBysjglxtStudentUser(bysjglxt_student_user);
 				student_basic = studentInformationManagementDao
 						.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_user.getUser_student_basic());
 				studentInformationDTO.setBysjglxtStudentBasic(bysjglxt_student_basic);
+				listStudentInformationDTO.add(studentInformationDTO);
 			}
-			listStudentInformationDTO.add(studentInformationDTO);
 		}
 		studentInformationManagementVO.setList_StudentInformationDTO(listStudentInformationDTO);
 		return studentInformationManagementVO;

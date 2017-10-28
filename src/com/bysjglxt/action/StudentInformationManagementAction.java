@@ -84,7 +84,6 @@ public class StudentInformationManagementAction extends ActionSupport
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-
 		// 获取所有学生信息列表
 		studentInformationManagementVO = studentInformationManagementService
 				.VO_Student_By_PageAndSearch(studentInformationManagementVO);
