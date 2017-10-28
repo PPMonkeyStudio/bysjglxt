@@ -52,20 +52,19 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			session.save(bysjglxt_student_basic);
+			session.saveOrUpdate(bysjglxt_student_basic);
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
 		}
 		return flag;
 	}
-
 	@Override
 	public boolean saveStudent(bysjglxt_student_user bysjglxt_student_user) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			session.save(bysjglxt_student_user);
+			session.saveOrUpdate(bysjglxt_student_user);
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
@@ -108,7 +107,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		String hql = "from bysjglxt_student_basic where 1=1";
 		if (studentInformationManagementVO.getSearch() != null
 				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
-			String search = "%" + studentInformationManagementVO.getSearch() + "%";
+			String search = "%" + studentInformationManagementVO.getSearch().trim() + "%";
 			hql = hql + " and student_basic_name like '" + search + "'";
 		}
 		if (studentInformationManagementVO.getSex() != null
@@ -202,7 +201,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		String hql = "from bysjglxt_student_basic where 1=1";
 		if (studentInformationManagementVO.getSearch() != null
 				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
-			String search = "%" + studentInformationManagementVO.getSearch() + "%";
+			String search = "%" + studentInformationManagementVO.getSearch().trim() + "%";
 			hql = hql + " and student_basic_name like '" + search + "'";
 		}
 		if (studentInformationManagementVO.getSex() != null
