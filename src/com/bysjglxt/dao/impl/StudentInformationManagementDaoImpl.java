@@ -89,7 +89,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		String hql = "delete from bysjglxt_student_basic where student_basic_id='" + user_student_basic + "'";
 		Query query = session.createQuery(hql);
 		query.executeUpdate();
-		System.out.println(hql);
 		return true;
 	}
 
@@ -111,7 +110,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + studentInformationManagementVO.getSearch() + "%";
 			hql = hql + " and student_basic_name like '" + search + "'";
-			System.out.println(hql);
 		}
 		if (studentInformationManagementVO.getSex() != null
 				&& studentInformationManagementVO.getSex().trim().length() > 0) {
@@ -130,6 +128,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		query.setFirstResult(
 				(studentInformationManagementVO.getPageIndex() - 1) * studentInformationManagementVO.getPageSize());
 		query.setMaxResults(studentInformationManagementVO.getPageSize());
+
 		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = query.list();
 		session.clear();
 		if (studentInformationManagementVO.getSearch() != null
@@ -168,8 +167,8 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		Session session = getSession();
 		String hql = "from bysjglxt_student_user where user_student_basic='" + student_basic_id + "'";
-		if (permission != 0) {
-			hql = hql + " and user_student_is_operate_premission='" + permission + "'";
+		if (permission != -1) {
+			hql = hql + " and user_student_is_operate_premission=" + permission;
 		}
 		Query query = session.createQuery(hql);
 		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
@@ -205,7 +204,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + studentInformationManagementVO.getSearch() + "%";
 			hql = hql + " and student_basic_name like '" + search + "'";
-			System.out.println(hql);
 		}
 		if (studentInformationManagementVO.getSex() != null
 				&& studentInformationManagementVO.getSex().trim().length() > 0) {

@@ -37,21 +37,23 @@ public class StudentInformationManagementVO {
 	// 年级筛选
 	private String student_basic_grade;
 	// 操作权限筛选
-	private int user_student_is_operate_premission;
+	private int user_student_is_operate_premission = -1;
 
 	/*
 	 * 
 	 */
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
 	@Override
 	public String toString() {
 		return "StudentInformationManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords
 				+ ", pageSize=" + pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage
 				+ ", HaveNextPage=" + HaveNextPage + ", list_StudentInformationDTO=" + list_StudentInformationDTO
-				+ ", search=" + search + "]";
-	}
-
-	public int getPageIndex() {
-		return pageIndex;
+				+ ", search=" + search + ", sex=" + sex + ", student_basic_major=" + student_basic_major
+				+ ", student_basic_grade=" + student_basic_grade + ", user_student_is_operate_premission="
+				+ user_student_is_operate_premission + "]";
 	}
 
 	public String getSex() {
