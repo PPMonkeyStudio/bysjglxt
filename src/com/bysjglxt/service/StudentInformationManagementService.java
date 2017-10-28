@@ -76,17 +76,37 @@ public interface StudentInformationManagementService {
 	 * @说明 获取bysjglxt_student_basic表中所有学生信息中所有包括的专业student_basic_major
 	 * 
 	 * @return 返回List<String>专业名
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public List<String> list_Student_Major() throws Exception;
 
 	/**
 	 * @DOTO
+	 * @DATE 2017-10-27
 	 * @说明 获取bysjglxt_student_basic表中所有学生信息中所有包括的专业student_basic_grade
 	 * 
 	 * @return 返回List<String>年级
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public List<String> list_Student_Grade() throws Exception;
+
+	/**
+	 * @DOTO
+	 * @DATE 2017-10-28
+	 * @说明 批量赋予操作权限
+	 * @param listString
+	 * @return
+	 */
+	public boolean update_Give_Student_Operate_Permission(List<String> listString);
+	
+	/**
+	 * @DOTO 
+	 * @DATE 2017-10-28
+	 * @说明 批量剥夺操作权限
+	 * @param listString
+	 * @return
+	 */
+	public boolean update_Take_Student_Operate_Permission(List<String> listString);
+	
 	
 }

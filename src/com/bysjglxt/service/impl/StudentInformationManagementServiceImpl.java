@@ -180,4 +180,22 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		return studentInformationManagementDao.listStudent_Grade();
 	}
 
+	@Override
+	public boolean update_Give_Student_Operate_Permission(List<String> listString) {
+		boolean flag = false;
+		for (String string : listString) {
+			flag = studentInformationManagementDao.update_Give_Student_Operate_Permission(string);
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean update_Take_Student_Operate_Permission(List<String> listString) {
+		boolean flag = false;
+		for (String string : listString) {
+			flag = studentInformationManagementDao.update_Take_Student_Operate_Permission(string);
+		}
+		return flag;
+	}
+
 }
