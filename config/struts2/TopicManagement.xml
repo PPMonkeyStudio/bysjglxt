@@ -8,7 +8,7 @@
 		<action name="TopicManagement_*"
 			class="com.bysjglxt.action.TopicManagementAction"
 			method="{1}">
-			<result name="TopicListPage">/WEB-INF/view/TopicManagement/StudentInformationManagement.jsp
+			<result name="TopicListPage">/WEB-INF/view/TopicManagement/TopicManagement.jsp
 			</result>
 			<result name="CreateTopicPage">/WEB-INF/view/TopicManagement/CreateTopic.jsp
 			</result>

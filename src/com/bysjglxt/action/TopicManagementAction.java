@@ -1,5 +1,7 @@
 package com.bysjglxt.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,7 +38,7 @@ public class TopicManagementAction extends ActionSupport implements ServletRespo
 	}
 
 	/**
-	 * @说明 跳转手动添加学生页
+	 * @说明 跳转创建课题页
 	 * 
 	 * @return
 	 */
@@ -44,9 +46,15 @@ public class TopicManagementAction extends ActionSupport implements ServletRespo
 		return "CreateTopicPage";
 	}
 
-	public void CreateTopic() {
-		System.out.println(newTopic);
-
+	/**
+	 * 创建新的课题
+	 * 
+	 * @throws IOException
+	 */
+	public void CreateTopic() throws IOException {
+		topicManagementService.CreateTopic(newTopic);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
 	}
 
 	/*

@@ -17,8 +17,8 @@ function Create_Topic() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				// window.location =
-				// "/bysjglxt/student/StudentInformationManagement_listPage";
+
+				window.location = "/bysjglxt/topic/TopicManagement_TopicListPage";
 			} else {
 				toastr.error(xhr.status);
 			}

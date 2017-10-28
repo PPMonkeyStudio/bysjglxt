@@ -66,7 +66,9 @@ function Create_Student() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+
 				window.location = "/bysjglxt/student/StudentInformationManagement_listPage";
+
 			} else {
 				toastr.error(xhr.status);
 			}
