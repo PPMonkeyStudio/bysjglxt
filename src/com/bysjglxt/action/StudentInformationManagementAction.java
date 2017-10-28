@@ -104,6 +104,7 @@ public class StudentInformationManagementAction extends ActionSupport
 	 * @throws Exception
 	 */
 	public void PreviewStudentEXCEL() throws Exception {
+		System.out.println();
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -193,10 +194,14 @@ public class StudentInformationManagementAction extends ActionSupport
 	}
 
 	/**
+	 * @throws IOException
 	 * @说明 修改学生基础信息
 	 */
-	public void UpdateStudent() {
-		System.out.println(updateStudent);
+	public void UpdateStudent() throws IOException {
+		studentInformationManagementService.update_StudentBasicInfomation(updateStudent);
+		http_response.setContentType("text/html;charset=utf-8");
+
+		http_response.getWriter().write("success");
 	}
 
 	/*

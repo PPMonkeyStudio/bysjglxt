@@ -56,7 +56,7 @@ function Update_Student() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				if (xhr.responseText == "success") {
-					toastr.success("删除成功");
+					toastr.success("更新成功");
 					List_Student_By_PageAndSearch(1);
 				}
 			} else {
