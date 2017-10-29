@@ -16,6 +16,7 @@ public interface TopicManagementService {
 	public boolean CreateTopic(bysjglxt_topic newTopic);
 
 	/**
+	 * @DATE 2017-10-28
 	 * @说明 删除课题
 	 * @param topic_id
 	 * @return 1成功 0失败
@@ -23,7 +24,7 @@ public interface TopicManagementService {
 	public boolean DeleteTopic(List<String> topicID);
 
 	/**
-	 * 
+	 * @DATE 2017-10-28
 	 * @说明 采纳课题
 	 * @param topicID
 	 * @return 1成功 0失败
@@ -31,11 +32,20 @@ public interface TopicManagementService {
 	public boolean adoptTopic(List<String> topicID);
 
 	/**
+	 * @DATE 2017-10-28
 	 * @说明 关闭课题，(已采纳的课题关闭后不可选)
 	 * @param topicID
 	 * @return 1成功 0失败
 	 */
 	public boolean closeTopic(List<String> topicID);
+
+	/**
+	 * @DATE 2017-10-29
+	 * @说明 未通过课题
+	 * @param topicID
+	 * @return
+	 */
+	public boolean notAdoptTopic(List<String> topicID);
 
 	/**
 	 * @DOTO

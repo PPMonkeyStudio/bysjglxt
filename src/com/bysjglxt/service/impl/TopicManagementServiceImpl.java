@@ -24,6 +24,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		newTopic.setTopic_gmt_create(TeamUtil.getStringSecond());
 		newTopic.setTopic_gmt_modified(TeamUtil.getStringSecond());
 		newTopic.setTopic_examine_state("未审核");
+		newTopic.setTopic_student_num(0);
 		return topicManagementDao.CreateTopic(newTopic);
 	}
 
@@ -55,8 +56,19 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	}
 
 	@Override
+	public boolean notAdoptTopic(List<String> topicID) {
+		boolean flag = false;
+		for (String string : topicID) {
+			flag = topicManagementDao.notAdoptTopic(string);
+		}
+		return flag;
+	}
+
+	@Override
 	public TopicManagementVO VO_Topic_By_PageAndSearch(TopicManagementVO topicManagementVO) {
-		// TODO Auto-generated method stub
+		
+		
+		
 		return null;
 	}
 
@@ -71,6 +83,5 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
 
 }

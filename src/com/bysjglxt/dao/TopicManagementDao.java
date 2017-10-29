@@ -12,4 +12,6 @@ public interface TopicManagementDao {
 
 	boolean closeTopic(String string);
 
+	boolean notAdoptTopic(String string);
+
 }

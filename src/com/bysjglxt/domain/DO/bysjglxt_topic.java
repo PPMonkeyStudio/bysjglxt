@@ -15,13 +15,13 @@ public class bysjglxt_topic {
 	private String topic_gmt_create;
 	private String topic_gmt_modified;
 	private String topic_examine_state;
-	private String topic_student_num;
+	private int topic_student_num;
 
-	public String getTopic_student_num() {
+	public int getTopic_student_num() {
 		return topic_student_num;
 	}
 
-	public void setTopic_student_num(String topic_student_num) {
+	public void setTopic_student_num(int topic_student_num) {
 		this.topic_student_num = topic_student_num;
 	}
 
@@ -136,6 +136,7 @@ public class bysjglxt_topic {
 	public void setTopic_examine_state(String topic_examine_state) {
 		this.topic_examine_state = topic_examine_state;
 	}
+
 	@Override
 	public String toString() {
 		return "bysjglxt_topic [topic_id=" + topic_id + ", topic_num=" + topic_num + ", topic_name_chinese="

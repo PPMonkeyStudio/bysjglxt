@@ -80,4 +80,19 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 		return flag;
 	}
 
+	@Override
+	public boolean notAdoptTopic(String string) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_topic set topic_examine_state = '审核未通过' where topic_id='" + string + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }
