@@ -1,5 +1,6 @@
 package com.bysjglxt.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.bysjglxt.dao.TopicManagementDao;
@@ -35,6 +36,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		flag = topicManagementDao.CreateTopic(newTopic);
 		if (flag) {
 			invite_teacher.setTopic_invite_teacher_id(TeamUtil.getUuid());
+			invite_teacher.setTopic_invite_teacher_topic_id(newTopic.getTopic_id());
 			invite_teacher.setTopic_invite__teacher_gmt_create(TeamUtil.getStringSecond());
 			invite_teacher.setTopic_invite_teacher_gmt_modify(invite_teacher.getTopic_invite__teacher_gmt_create());
 			flag = topicManagementDao.createTopicInviteTeacher(invite_teacher);
@@ -43,10 +45,13 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	}
 
 	@Override
-	public boolean DeleteTopic(List<String> topicID) {
+	public boolean DeleteTopic(List<String> topic_id) {
 		boolean flag = false;
-		for (String string : topicID) {
-			flag = topicManagementDao.DeleteTopic(string);
+		for (String topicId : topic_id) {
+			flag = topicManagementDao.deleteTopicInviteTeacher(topicId);
+			if (flag) {
+				flag = topicManagementDao.DeleteTopic(topicId);
+			}
 		}
 		return flag;
 	}
@@ -80,8 +85,38 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 
 	@Override
 	public TopicManagementVO VO_Topic_By_PageAndSearch(TopicManagementVO topicManagementVO) {
+		List<TopicInformationDTO> listTopicInformationDTO = new ArrayList<TopicInformationDTO>();
+		TopicInformationDTO topicInformationDTO = null;
+		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = null;
+		List<bysjglxt_topic> list_bysjglxt_topic = new ArrayList<bysjglxt_topic>();
+		// 获得符合条件的所有课题
+		list_bysjglxt_topic = topicManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO);
+		int i = 0;
+		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
+			topicInformationDTO = new TopicInformationDTO();
+			topicInformationDTO.setBysjglxtTopic(tbysjglxt_topic);
+			bysjglxt_topic_invite_teacher = topicManagementDao
+					.getBysjglxtTopicInviteTeacher(tbysjglxt_topic.getTopic_id());
+			topicInformationDTO.setBysjglxtTopicInviteTeacher(bysjglxt_topic_invite_teacher);
+			listTopicInformationDTO.add(topicInformationDTO);
+			i++;
+		}
+		topicManagementVO.setListTopicInformationDTO(listTopicInformationDTO);
+		System.out.println(i);
+		topicManagementVO.setTotalRecords(i);
+		topicManagementVO.setTotalPages(((i - 1) / topicManagementVO.getPageSize()) + 1);
+		if (topicManagementVO.getPageIndex() <= 1) {
+			topicManagementVO.setHavePrePage(false);
+		} else {
+			topicManagementVO.setHavePrePage(true);
+		}
+		if (topicManagementVO.getPageIndex() >= topicManagementVO.getTotalPages()) {
+			topicManagementVO.setHaveNextPage(false);
+		} else {
+			topicManagementVO.setHaveNextPage(true);
+		}
 
-		return null;
+		return topicManagementVO;
 	}
 
 	@Override

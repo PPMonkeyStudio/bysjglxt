@@ -77,6 +77,21 @@ public interface TeacherInformationManagementService {
 	public boolean Create_Section(bysjglxt_section newSection);
 
 	/**
+	 * @说明 删除教研室
+	 * @DATE 2017-10-29
+	 * @param listSectionId
+	 * @return
+	 */
+	public boolean deleteSection(List<String> listSectionId);
+
+	/**
+	 * 遍历得到所有的教研室
+	 * 
+	 * @return
+	 */
+	public List<String> listBysjglxtSection();
+
+	/**
 	 * 
 	 * @DATE 2017-10-29
 	 * 

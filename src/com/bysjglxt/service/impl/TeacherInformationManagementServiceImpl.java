@@ -207,4 +207,20 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		teacherInformationManagementVO.setList_TeacherInformationDTO(list_TeacherInformationDTO);
 		return teacherInformationManagementVO;
 	}
+
+	@Override
+	public boolean deleteSection(List<String> listSectionId) {
+		boolean flag = false;
+		for (String string : listSectionId) {
+			flag = teacherInformationManagementDao.deleteSection(string);
+			if (!flag)
+				break;
+		}
+		return flag;
+	}
+
+	@Override
+	public List<String> listBysjglxtSection() {
+		return teacherInformationManagementDao.listBysjglxtSection();
+	}
 }

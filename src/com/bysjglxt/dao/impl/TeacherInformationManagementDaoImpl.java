@@ -1,5 +1,6 @@
 package com.bysjglxt.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -9,8 +10,6 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
-import com.bysjglxt.domain.DO.bysjglxt_student_basic;
-import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
@@ -101,11 +100,17 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 
 	@Override
 	public boolean deleteTeacherInfoById(String user_teacher_id) {
-		Session session = getSession();
-		String hql = "delete from bysjglxt_teacher_user where user_teacher_id='" + user_teacher_id + "'";
-		Query query = session.createQuery(hql);
-		query.executeUpdate();
-		return true;
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_teacher_user where user_teacher_id='" + user_teacher_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 	@Override
@@ -185,5 +190,30 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			}
 		}
 		return listTeacherBasicInformationByPageAndSearch;
+	}
+
+	@Override
+	public boolean deleteSection(String string) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_section where section_id='" + string + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public List<String> listBysjglxtSection() {
+		Session session = getSession();
+		List<String> listSection = new ArrayList<String>();
+		String hql = "select distinct(section_name) from bysjglxt_section";
+		Query query = session.createQuery(hql);
+		listSection = query.list();
+		return listSection;
 	}
 }

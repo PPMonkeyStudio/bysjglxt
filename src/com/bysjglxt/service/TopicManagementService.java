@@ -21,7 +21,7 @@ public interface TopicManagementService {
 	 * @param topic_id
 	 * @return 1成功 0失败
 	 */
-	public boolean DeleteTopic(List<String> topicID);
+	public boolean DeleteTopic(List<String> topic_id);
 
 	/**
 	 * @DATE 2017-10-28
@@ -48,7 +48,7 @@ public interface TopicManagementService {
 	public boolean notAdoptTopic(List<String> topicID);
 
 	/**
-	 * @DOTO
+	 * @DATE 2017-10-29
 	 * 
 	 * @说明 根据页数以及搜索关键词，查询课题信息，并连同页面信息一起封装进TopicManagementVO
 	 * 
@@ -64,7 +64,6 @@ public interface TopicManagementService {
 	 * @说明 1、判断课题是否可选，若可以则下一步操作，不可以则返回false。
 	 *     2、创建一条bysjglxt_topic_select学生选题表的记录，指导老师和评阅老师为null。
 	 *     3、学生课题bysjglxt_topic所属的记录中，课题已选学生数topic_student_num加1。
-	 * 
 	 * @param studentID
 	 *            选题的学生
 	 * 

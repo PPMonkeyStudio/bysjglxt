@@ -33,4 +33,8 @@ public interface TeacherInformationManagementDao {
 	List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO);
 
+	boolean deleteSection(String string);
+
+	List<String> listBysjglxtSection();
+
 }
