@@ -5,6 +5,7 @@ import java.util.List;
 import com.bysjglxt.dao.TopicManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
+import com.bysjglxt.domain.DTO.TopicInformationDTO;
 import com.bysjglxt.domain.VO.TopicManagementVO;
 import com.bysjglxt.service.TopicManagementService;
 
@@ -20,8 +21,12 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	}
 
 	@Override
-	public boolean CreateTopic(bysjglxt_topic newTopic, bysjglxt_topic_invite_teacher invite_teacher) {
+	public boolean CreateTopic(TopicInformationDTO topicInformationDTO) {
 		boolean flag = false;
+		bysjglxt_topic newTopic = new bysjglxt_topic();
+		bysjglxt_topic_invite_teacher invite_teacher = new bysjglxt_topic_invite_teacher();
+		invite_teacher = topicInformationDTO.getBysjglxtTopicInviteTeacher();
+		newTopic = topicInformationDTO.getBysjglxtTopic();
 		newTopic.setTopic_id(TeamUtil.getUuid());
 		newTopic.setTopic_gmt_create(TeamUtil.getStringSecond());
 		newTopic.setTopic_gmt_modified(TeamUtil.getStringSecond());

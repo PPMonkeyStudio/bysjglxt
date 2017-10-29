@@ -2,8 +2,7 @@ package com.bysjglxt.service;
 
 import java.util.List;
 
-import com.bysjglxt.domain.DO.bysjglxt_topic;
-import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
+import com.bysjglxt.domain.DTO.TopicInformationDTO;
 import com.bysjglxt.domain.VO.TopicManagementVO;
 
 public interface TopicManagementService {
@@ -14,7 +13,7 @@ public interface TopicManagementService {
 	 * @param newTopic
 	 * @return 1成功 0失败
 	 */
-	public boolean CreateTopic(bysjglxt_topic newTopic,bysjglxt_topic_invite_teacher invite_teacher);
+	public boolean CreateTopic(TopicInformationDTO topicInformationDTO);
 
 	/**
 	 * @DATE 2017-10-28
