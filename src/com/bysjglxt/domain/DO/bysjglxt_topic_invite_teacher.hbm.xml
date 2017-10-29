@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-29 11:51:54 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-29 12:07:02 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher" table="BYSJGLXT_TOPIC_INVITE_TEACHER">
         <id name="topic_invite_teacher_id" type="java.lang.String">
@@ -17,17 +17,17 @@
         <property name="topic_invite_teacher_unitname" type="java.lang.String">
             <column name="TOPIC_INVITE_TEACHER_UNITNAME" />
         </property>
-        <property name="topic_invite_technicalitle" type="java.lang.String">
-            <column name="TOPIC_INVITE_TECHNICALITLE" />
+        <property name="topic_invite_teacher_technicalitle" type="java.lang.String">
+            <column name="TOPIC_INVITE_TEACHER_TECHNICALITLE" />
         </property>
-        <property name="topic_invite_duties" type="java.lang.String">
-            <column name="TOPIC_INVITE_DUTIES" />
+        <property name="topic_invite__teacher_duties" type="java.lang.String">
+            <column name="TOPIC_INVITE__TEACHER_DUTIES" />
         </property>
-        <property name="topic_invite_create" type="java.lang.String">
-            <column name="TOPIC_INVITE_CREATE" />
+        <property name="topic_invite__teacher_gmt_create" type="java.lang.String">
+            <column name="TOPIC_INVITE__TEACHER_GMT_CREATE" />
         </property>
-        <property name="topic_invite_modify" type="java.lang.String">
-            <column name="TOPIC_INVITE_MODIFY" />
+        <property name="topic_invite_teacher_gmt_modify" type="java.lang.String">
+            <column name="TOPIC_INVITE_TEACHER_GMT_MODIFY" />
         </property>
     </class>
 </hibernate-mapping>

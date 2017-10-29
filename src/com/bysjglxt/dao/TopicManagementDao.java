@@ -1,6 +1,7 @@
 package com.bysjglxt.dao;
 
 import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 
 public interface TopicManagementDao {
 
@@ -13,5 +14,7 @@ public interface TopicManagementDao {
 	boolean closeTopic(String string);
 
 	boolean notAdoptTopic(String string);
+
+	boolean createTopicInviteTeacher(bysjglxt_topic_invite_teacher invite_teacher);
 
 }

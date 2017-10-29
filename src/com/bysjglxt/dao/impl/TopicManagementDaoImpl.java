@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TopicManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 
 public class TopicManagementDaoImpl implements TopicManagementDao {
 	private SessionFactory sessionFactory;
@@ -30,6 +31,19 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 			e.printStackTrace();
 		}
 
+		return flag;
+	}
+
+	@Override
+	public boolean createTopicInviteTeacher(bysjglxt_topic_invite_teacher invite_teacher) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(invite_teacher);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
 		return flag;
 	}
 

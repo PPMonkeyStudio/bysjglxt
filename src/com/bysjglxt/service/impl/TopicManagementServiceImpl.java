@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bysjglxt.dao.TopicManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.VO.TopicManagementVO;
 import com.bysjglxt.service.TopicManagementService;
 
@@ -19,13 +20,21 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	}
 
 	@Override
-	public boolean CreateTopic(bysjglxt_topic newTopic) {
+	public boolean CreateTopic(bysjglxt_topic newTopic, bysjglxt_topic_invite_teacher invite_teacher) {
+		boolean flag = false;
 		newTopic.setTopic_id(TeamUtil.getUuid());
 		newTopic.setTopic_gmt_create(TeamUtil.getStringSecond());
 		newTopic.setTopic_gmt_modified(TeamUtil.getStringSecond());
 		newTopic.setTopic_examine_state("未审核");
 		newTopic.setTopic_student_num(0);
-		return topicManagementDao.CreateTopic(newTopic);
+		flag = topicManagementDao.CreateTopic(newTopic);
+		if (flag) {
+			invite_teacher.setTopic_invite_teacher_id(TeamUtil.getUuid());
+			invite_teacher.setTopic_invite__teacher_gmt_create(TeamUtil.getStringSecond());
+			invite_teacher.setTopic_invite_teacher_gmt_modify(invite_teacher.getTopic_invite__teacher_gmt_create());
+			flag = topicManagementDao.createTopicInviteTeacher(invite_teacher);
+		}
+		return flag;
 	}
 
 	@Override
@@ -66,9 +75,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 
 	@Override
 	public TopicManagementVO VO_Topic_By_PageAndSearch(TopicManagementVO topicManagementVO) {
-		
-		
-		
+
 		return null;
 	}
 
