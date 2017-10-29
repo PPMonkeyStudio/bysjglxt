@@ -15,6 +15,15 @@ public class bysjglxt_topic {
 	private String topic_gmt_create;
 	private String topic_gmt_modified;
 	private String topic_examine_state;
+	private String topic_student_num;
+
+	public String getTopic_student_num() {
+		return topic_student_num;
+	}
+
+	public void setTopic_student_num(String topic_student_num) {
+		this.topic_student_num = topic_student_num;
+	}
 
 	public String getTopic_id() {
 		return topic_id;
@@ -127,7 +136,6 @@ public class bysjglxt_topic {
 	public void setTopic_examine_state(String topic_examine_state) {
 		this.topic_examine_state = topic_examine_state;
 	}
-
 	@Override
 	public String toString() {
 		return "bysjglxt_topic [topic_id=" + topic_id + ", topic_num=" + topic_num + ", topic_name_chinese="
@@ -135,7 +143,8 @@ public class bysjglxt_topic {
 				+ topic_requirement + ", topic_source=" + topic_source + ", topic_type=" + topic_type
 				+ ", topic_student_max=" + topic_student_max + ", topic_remark=" + topic_remark + ", topic_teacher="
 				+ topic_teacher + ", topic_student=" + topic_student + ", topic_gmt_create=" + topic_gmt_create
-				+ ", topic_gmt_modified=" + topic_gmt_modified + ", topic_examine_state=" + topic_examine_state + "]";
+				+ ", topic_gmt_modified=" + topic_gmt_modified + ", topic_examine_state=" + topic_examine_state
+				+ ", topic_student_num=" + topic_student_num + "]";
 	}
 
 }

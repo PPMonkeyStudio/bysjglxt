@@ -42,8 +42,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			list = ExcelToBean.parseExcel(workbook, "bysjglxt_student_basic");
 		}
 		List<bysjglxt_student_basic> lists = ExcelToBean.toObjectPerproList(list, bysjglxt_student_basic.class);
-		for (bysjglxt_student_basic bysjglxt_student_basic : lists) {
-		}
 		return lists;
 	}
 
@@ -123,9 +121,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		StudentInformationDTO studentInformationDTO = null;
 		bysjglxt_student_basic student_basic = null;
 		bysjglxt_student_user bysjglxt_student_user = null;
-		// 得到分页之后的list
-		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = studentInformationManagementDao
-				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO);
 		// 得到未经过分页的list
 		List<bysjglxt_student_basic> listStudentAllBasicInformationBySearch = studentInformationManagementDao
 				.listStudentAllBasicInformationByAndSearch(studentInformationManagementVO);
@@ -151,6 +146,9 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		} else {
 			studentInformationManagementVO.setHaveNextPage(true);
 		}
+		// 得到分页之后的list
+		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = studentInformationManagementDao
+				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO);
 		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
 			studentInformationDTO = new StudentInformationDTO();
 			student_basic = new bysjglxt_student_basic();

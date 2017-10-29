@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bysjglxt.dao.TopicManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.VO.TopicManagementVO;
 import com.bysjglxt.service.TopicManagementService;
 
 import util.TeamUtil;
@@ -51,6 +52,24 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 			flag = topicManagementDao.closeTopic(string);
 		}
 		return flag;
+	}
+
+	@Override
+	public TopicManagementVO VO_Topic_By_PageAndSearch(TopicManagementVO topicManagementVO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean selectTopic(String studentID, String topicID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean topicSelectStudent(String TeacherID, String topicID, List<String> studentIDList) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 

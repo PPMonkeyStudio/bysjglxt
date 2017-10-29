@@ -10,12 +10,14 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
+import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 import com.bysjglxt.service.TeacherInformationManagementService;
 
 import util.ExcelToBean;
@@ -141,6 +143,32 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			flag = teacherInformationManagementDao.deleteTeacherInfoById(teacher_user_id);
 		}
 		return flag;
+	}
+
+	/**
+	 * 创建教研室
+	 */
+	@Override
+	public boolean Create_Section(bysjglxt_section newSection) {
+		newSection.setSection_id(TeamUtil.getUuid());
+		newSection.setSection_gmt_create(TeamUtil.getStringSecond());
+		newSection.setSection_gmt_modified(TeamUtil.getStringSecond());
+		return teacherInformationManagementDao.create_Section(newSection);
+	}
+
+	@Override
+	public TeacherInformationManagementVO VO_TEACHER_By_PageAndSearch(
+			TeacherInformationManagementVO teacherInformationManagementVO) {
+
+		List<TeacherInformationDTO> list_TeacherInformationDTO = new ArrayList<TeacherInformationDTO>();
+		TeacherInformationDTO teacherInformationDTO = null;
+		bysjglxt_teacher_basic teacher_basic = null;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		// 得到符合条件的总记录数
+		// 得到basiclist
+		List<bysjglxt_teacher_basic> listTeacherAllBasicInformationBySearch = teacherInformationManagementDao
+				.listTeacherAllBasicInformationByAndSearch(teacherInformationManagementVO);
+		return null;
 	}
 
 }

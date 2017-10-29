@@ -55,7 +55,7 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_topic set topic_examine_state = '已通过' where topic_id='" + topicID + "'";
+			String hql = "update bysjglxt_topic set topic_examine_state = '审核已通过' where topic_id='" + topicID + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {

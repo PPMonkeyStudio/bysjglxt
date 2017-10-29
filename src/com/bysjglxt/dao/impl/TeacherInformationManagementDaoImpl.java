@@ -8,8 +8,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 
 public class TeacherInformationManagementDaoImpl implements TeacherInformationManagementDao {
 
@@ -102,5 +104,26 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		Query query = session.createQuery(hql);
 		query.executeUpdate();
 		return true;
+	}
+
+	@Override
+	public boolean create_Section(bysjglxt_section newSection) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(newSection);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch(
+			TeacherInformationManagementVO teacherInformationManagementVO) {
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_basic where 1=1";
+		return null;
 	}
 }
