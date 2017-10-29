@@ -93,7 +93,6 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		List<bysjglxt_teacher_user> listAllTeacherUserInformation = teacherInformationManagementDao
 				.list_TeacherUserInformation_All();
 		for (bysjglxt_teacher_user teacher_user : listAllTeacherUserInformation) {
-			System.out.println("gg");
 			teacherInformationDTO = new TeacherInformationDTO();
 			teacherInformationDTO.setBysjglxtTeacherUser(teacher_user);
 			teacherInformationDTO.setBysjglxtTeacherBasic(teacherInformationManagementDao
@@ -164,11 +163,48 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		TeacherInformationDTO teacherInformationDTO = null;
 		bysjglxt_teacher_basic teacher_basic = null;
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
-		// 得到符合条件的总记录数
-		// 得到basiclist
+		// 得到总basiclist
 		List<bysjglxt_teacher_basic> listTeacherAllBasicInformationBySearch = teacherInformationManagementDao
 				.listTeacherAllBasicInformationByAndSearch(teacherInformationManagementVO);
-		return null;
+		// 得到总条数
+		int i = 0;
+		for (bysjglxt_teacher_basic bysjglxt_teacher_basic : listTeacherAllBasicInformationBySearch) {
+			bysjglxt_teacher_user = teacherInformationManagementDao.getTeacherInfoByBasicId(
+					bysjglxt_teacher_basic.getTeacher_basic_id(), teacherInformationManagementVO.getSection());
+			if (bysjglxt_teacher_user != null) {
+				i++;
+			}
+		}
+		teacherInformationManagementVO.setTotalRecords(i);
+		teacherInformationManagementVO.setTotalPages(((i - 1) / teacherInformationManagementVO.getPageSize()) + 1);
+		if (teacherInformationManagementVO.getPageIndex() <= 1) {
+			teacherInformationManagementVO.setHavePrePage(false);
+		} else {
+			teacherInformationManagementVO.setHavePrePage(true);
+		}
+		if (teacherInformationManagementVO.getPageIndex() >= teacherInformationManagementVO.getTotalPages()) {
+			teacherInformationManagementVO.setHaveNextPage(false);
+		} else {
+			teacherInformationManagementVO.setHaveNextPage(true);
+		}
+		// 得到分页后的list
+		List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch = teacherInformationManagementDao
+				.listTeacherBasicInformationByPageAndSearch(teacherInformationManagementVO);
+		for (bysjglxt_teacher_basic bysjglxt_teacher_basic : listTeacherBasicInformationByPageAndSearch) {
+			teacherInformationDTO = new TeacherInformationDTO();
+			teacher_basic = new bysjglxt_teacher_basic();
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_teacher_user = teacherInformationManagementDao.getTeacherInfoByBasicId(
+					bysjglxt_teacher_basic.getTeacher_basic_id(), teacherInformationManagementVO.getSection());
+			if (bysjglxt_teacher_user != null) {
+				teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
+				teacher_basic = teacherInformationManagementDao
+						.get_TeacherBasicInformation_ByUserBasic(bysjglxt_teacher_user.getUser_teacher_basic());
+				teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxt_teacher_basic);
+				list_TeacherInformationDTO.add(teacherInformationDTO);
+			}
+		}
+		teacherInformationManagementVO.setList_TeacherInformationDTO(list_TeacherInformationDTO);
+		return teacherInformationManagementVO;
 	}
-
 }

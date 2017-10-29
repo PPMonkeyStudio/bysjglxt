@@ -28,4 +28,9 @@ public interface TeacherInformationManagementDao {
 	List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO);
 
+	bysjglxt_teacher_user getTeacherInfoByBasicId(String teacher_basic_id, String section);
+
+	List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch(
+			TeacherInformationManagementVO teacherInformationManagementVO);
+
 }

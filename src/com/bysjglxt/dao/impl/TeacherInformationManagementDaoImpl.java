@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
@@ -39,7 +41,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	public bysjglxt_teacher_basic get_TeacherBasicInformation_ByUserBasic(String user_teacher_basic) {
 		Session session = getSession();
 		bysjglxt_teacher_basic TeacherBasicInformation = null;
-		String hql = "from bysjglxt_teacher_basic where user_teacher_basic='" + user_teacher_basic + "'";
+		String hql = "from bysjglxt_teacher_basic where teacher_basic_id='" + user_teacher_basic + "'";
 		Query query = session.createQuery(hql);
 		TeacherBasicInformation = (bysjglxt_teacher_basic) query.uniqueResult();
 		return TeacherBasicInformation;
@@ -124,6 +126,64 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			TeacherInformationManagementVO teacherInformationManagementVO) {
 		Session session = getSession();
 		String hql = "from bysjglxt_teacher_basic where 1=1";
-		return null;
+		if (teacherInformationManagementVO.getSearch() != null
+				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
+			hql = hql + " and name like '" + search + "'";
+		}
+		if (teacherInformationManagementVO.getSex() != null
+				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
+			hql = hql + " and sex='" + teacherInformationManagementVO.getSex() + "'";
+		}
+		hql = hql + " order by job_number";
+		Query query = session.createQuery(hql);
+		List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch = query.list();
+		session.clear();
+		return listTeacherAllBasicInformationByAndSearch;
+	}
+
+	@Override
+	public bysjglxt_teacher_user getTeacherInfoByBasicId(String teacher_basic_id, String section) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_basic='" + teacher_basic_id + "'";
+		if (section != null && section.trim().length() > 0) {
+			hql = hql + " and user_teacher_section = '" + section + "'";
+		}
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		return bysjglxt_teacher_user;
+	}
+
+	@Override
+	public List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch(
+			TeacherInformationManagementVO teacherInformationManagementVO) {
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_basic where 1=1";
+		if (teacherInformationManagementVO.getSearch() != null
+				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
+			hql = hql + " and name like '" + search + "'";
+		}
+		if (teacherInformationManagementVO.getSex() != null
+				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
+			hql = hql + " and sex='" + teacherInformationManagementVO.getSex() + "'";
+		}
+		hql = hql + " order by job_number";
+		Query query = session.createQuery(hql);
+		query.setFirstResult(
+				(teacherInformationManagementVO.getPageIndex() - 1) * teacherInformationManagementVO.getPageSize());
+		query.setMaxResults(teacherInformationManagementVO.getPageSize());
+		List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch = query.list();
+		session.clear();
+		if (teacherInformationManagementVO.getSearch() != null
+				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
+			for (bysjglxt_teacher_basic bysjglxt_teacher_basic : listTeacherBasicInformationByPageAndSearch) {
+				bysjglxt_teacher_basic.setName(bysjglxt_teacher_basic.getName()
+						.replaceAll(teacherInformationManagementVO.getSearch().trim(), "<span style='color: #ff5063;'>"
+								+ teacherInformationManagementVO.getSearch().trim() + "</span>"));
+			}
+		}
+		return listTeacherBasicInformationByPageAndSearch;
 	}
 }

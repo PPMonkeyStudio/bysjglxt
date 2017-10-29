@@ -78,7 +78,7 @@ public interface TeacherInformationManagementService {
 
 	/**
 	 * 
-	 * @DOTO
+	 * @DATE 2017-10-29
 	 * 
 	 * @说明 根据页数以及搜索关键词，查询教师信息，并连同页面信息一起封装进TeacherInformationManagementVO
 	 *     筛选：教研室（名称）、性别（中文）
