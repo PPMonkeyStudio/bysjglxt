@@ -88,10 +88,8 @@ public class StudentInformationManagementAction extends ActionSupport
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-		// 获取所有学生信息列表
 		studentInformationManagementVO = studentInformationManagementService
 				.VO_Student_By_PageAndSearch(studentInformationManagementVO);
-		System.out.println(studentInformationManagementVO.getUser_student_is_operate_premission());
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(studentInformationManagementVO));
 
@@ -104,7 +102,6 @@ public class StudentInformationManagementAction extends ActionSupport
 	 * @throws Exception
 	 */
 	public void PreviewStudentEXCEL() throws Exception {
-		System.out.println();
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
