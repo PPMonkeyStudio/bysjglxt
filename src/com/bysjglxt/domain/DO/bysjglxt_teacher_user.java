@@ -8,8 +8,17 @@ public class bysjglxt_teacher_user {
 	private String user_teacher_basic;
 	private String user_teacher_section;
 	private int user_teacher_max_guidance;
+	private int user_teacher_guidance_num;
 	private String user_teacher_gmt_create;
 	private String user_teacher_gmt_modified;
+
+	public int getUser_teacher_guidance_num() {
+		return user_teacher_guidance_num;
+	}
+
+	public void setUser_teacher_guidance_num(int user_teacher_guidance_num) {
+		this.user_teacher_guidance_num = user_teacher_guidance_num;
+	}
 
 	public String getUser_teacher_id() {
 		return user_teacher_id;
@@ -77,10 +86,12 @@ public class bysjglxt_teacher_user {
 
 	@Override
 	public String toString() {
-		return "bysjglxt_user_teacher [user_teacher_id=" + user_teacher_id + ", user_teacher_num=" + user_teacher_num
+		return "bysjglxt_teacher_user [user_teacher_id=" + user_teacher_id + ", user_teacher_num=" + user_teacher_num
 				+ ", user_teacher_password=" + user_teacher_password + ", user_teacher_basic=" + user_teacher_basic
 				+ ", user_teacher_section=" + user_teacher_section + ", user_teacher_max_guidance="
-				+ user_teacher_max_guidance + ", user_teacher_gmt_create=" + user_teacher_gmt_create
-				+ ", user_teacher_gmt_modified=" + user_teacher_gmt_modified + "]";
+				+ user_teacher_max_guidance + ", user_teacher_guidance_num=" + user_teacher_guidance_num
+				+ ", user_teacher_gmt_create=" + user_teacher_gmt_create + ", user_teacher_gmt_modified="
+				+ user_teacher_gmt_modified + "]";
 	}
+
 }

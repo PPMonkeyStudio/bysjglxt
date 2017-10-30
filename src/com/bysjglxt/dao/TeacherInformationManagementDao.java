@@ -37,4 +37,6 @@ public interface TeacherInformationManagementDao {
 
 	List<String> listBysjglxtSection();
 
+	com.bysjglxt.domain.DO.bysjglxt_section get_TeacherSectionInformation_ByUserSectionId(String user_teacher_section);
+
 }

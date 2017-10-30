@@ -14,6 +14,8 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 
+import util.TeamUtil;
+
 public class TeacherInformationManagementDaoImpl implements TeacherInformationManagementDao {
 
 	private SessionFactory sessionFactory;
@@ -130,17 +132,32 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	public List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO) {
 		Session session = getSession();
+		boolean flag = false;
 		String hql = "from bysjglxt_teacher_basic where 1=1";
-		if (teacherInformationManagementVO.getSearch() != null
+
+		// 判断搜索框中的字符串是不是全是数字
+		if (TeamUtil.isDigit(teacherInformationManagementVO.getSearch())) {
+			flag = true;
+		}
+		if (!flag && teacherInformationManagementVO.getSearch() != null
 				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
 			hql = hql + " and name like '" + search + "'";
+
 		}
+
+		if (flag && teacherInformationManagementVO.getSearch() != null
+				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
+			hql = hql + " and job_number like '" + search + "'";
+		}
+
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
 			hql = hql + " and sex='" + teacherInformationManagementVO.getSex() + "'";
 		}
 		hql = hql + " order by job_number";
+		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch = query.list();
 		session.clear();
@@ -164,17 +181,30 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	public List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO) {
 		Session session = getSession();
+		boolean flag = false;
 		String hql = "from bysjglxt_teacher_basic where 1=1";
-		if (teacherInformationManagementVO.getSearch() != null
+		// 判断搜索框中的字符串是不是全是数字
+		if (TeamUtil.isDigit(teacherInformationManagementVO.getSearch())) {
+			flag = true;
+		}
+		if (!flag && teacherInformationManagementVO.getSearch() != null
 				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
 			hql = hql + " and name like '" + search + "'";
+
+		}
+
+		if (flag && teacherInformationManagementVO.getSearch() != null
+				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
+			hql = hql + " and job_number like '" + search + "'";
 		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
 			hql = hql + " and sex='" + teacherInformationManagementVO.getSex() + "'";
 		}
 		hql = hql + " order by job_number";
+		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		query.setFirstResult(
 				(teacherInformationManagementVO.getPageIndex() - 1) * teacherInformationManagementVO.getPageSize());
@@ -190,6 +220,16 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			}
 		}
 		return listTeacherBasicInformationByPageAndSearch;
+	}
+
+	@Override
+	public bysjglxt_section get_TeacherSectionInformation_ByUserSectionId(String user_teacher_section) {
+		Session session = getSession();
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		String hql = "from bysjglxt_section where section_id ='" + user_teacher_section + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section  = (bysjglxt_section) query.uniqueResult();
+		return bysjglxt_section;
 	}
 
 	@Override
@@ -216,4 +256,5 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		listSection = query.list();
 		return listSection;
 	}
+
 }

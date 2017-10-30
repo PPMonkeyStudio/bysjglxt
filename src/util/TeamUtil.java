@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Test;
 
@@ -114,4 +116,12 @@ public class TeamUtil {
 		return false;
 	}
 
+	// 判断一个字符串是否都为数字
+	public static boolean isDigit(String strNum) {
+		if(strNum == null)
+			return false;
+		Pattern pattern = Pattern.compile("[0-9]{1,}");
+		Matcher matcher = pattern.matcher((CharSequence) strNum);
+		return matcher.matches();
+	}
 }

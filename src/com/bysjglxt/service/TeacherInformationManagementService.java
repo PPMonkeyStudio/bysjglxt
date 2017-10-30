@@ -37,6 +37,7 @@ public interface TeacherInformationManagementService {
 
 	/**
 	 * @待测试
+	 * @被弃用
 	 * @DATE 2017-10-29
 	 * @说明 获取数据库中所有的bysjglxt_teacher_basic记录以及bysjglxt_user_teacher记录，
 	 *     并封装成TeacherInformationDTO的List返回
@@ -66,6 +67,9 @@ public interface TeacherInformationManagementService {
 	 * @return 是否删除成功,1是 0否
 	 */
 	public boolean remove_TeacherList(List<String> useTeacherNumList);
+	
+	
+	
 
 	/**
 	 * @DATE 2017-10-29
