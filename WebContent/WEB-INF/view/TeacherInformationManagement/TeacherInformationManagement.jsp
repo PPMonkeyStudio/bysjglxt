@@ -62,7 +62,7 @@
 							class="input-group-addon"><i class="fa fa-search"></i></span>
 					</div>
 				</div>
-				<table id="table_Teacher" class="table table-hover table-bordered"
+				<table id="table_teacher" class="table table-hover table-bordered"
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
@@ -138,7 +138,7 @@
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">
-					<table id="table_Teacher_detail"
+					<table id="table_teacher_detail"
 						class="table table-hover table-bordered"
 						style="text-align: center;">
 						<tbody></tbody>

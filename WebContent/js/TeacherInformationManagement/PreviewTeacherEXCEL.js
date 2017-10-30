@@ -52,58 +52,54 @@ function Preview_Teacher_EXCEL(file) {
 					table_excel_Teacher.firstElementChild.appendChild(new_tr);
 
 					new_tr.innerHTML = '<td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_num
+							+ EXCEL_Teacher_List[num].job_number
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_name
+							+ EXCEL_Teacher_List[num].name
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_year
+							+ EXCEL_Teacher_List[num].sex
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_grade
+							+ EXCEL_Teacher_List[num].birthday
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_idtype
+							+ EXCEL_Teacher_List[num].induction_date
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_idcaard
+							+ EXCEL_Teacher_List[num].job_statue
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_age
+							+ EXCEL_Teacher_List[num].unit_number
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_sex
+							+ EXCEL_Teacher_List[num].unit_name
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_nation
+							+ EXCEL_Teacher_List[num].highest_education
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_politicalvisage
+							+ EXCEL_Teacher_List[num].highest_degree
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_native_place
+							+ EXCEL_Teacher_List[num].learn_edge_structure
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_Teachertype
+							+ EXCEL_Teacher_List[num].professional_title
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_enrollmenttype
+							+ EXCEL_Teacher_List[num].subject_category
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_teachingmethods
+							+ EXCEL_Teacher_List[num].teaching_type
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_professionalcode
+							+ EXCEL_Teacher_List[num].teaching_profession_name
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_major
+							+ EXCEL_Teacher_List[num].teaching_profession_no
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_independentmajorname
+							+ EXCEL_Teacher_List[num].profession_teaching_date
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_is_normalmajor
+							+ EXCEL_Teacher_List[num].experimental_technical_personnel
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_is_disability
+							+ EXCEL_Teacher_List[num].double_teacher_type
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_householdregistrationtype
+							+ EXCEL_Teacher_List[num].engineering_background
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_transactiontypes
+							+ EXCEL_Teacher_List[num].industry_background
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_entranceeducation
+							+ EXCEL_Teacher_List[num].graduate_tutor_type
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_enrollmentmode
+							+ EXCEL_Teacher_List[num].number_of_doctor
 							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_reasonsfordroppingoutofschool
-							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_phone
-							+ '</td><td>'
-							+ EXCEL_Teacher_List[num].Teacher_basic_college
-							+ '</td>';
+							+ EXCEL_Teacher_List[num].number_of_master
+							+ '</td><td>';
 				}
 				// 让加载图标消失
 				document.getElementById("i_pulse_2").style.display = "none";
@@ -117,7 +113,7 @@ function Preview_Teacher_EXCEL(file) {
 
 	xhr
 			.open("POST",
-					"/bysjglxt/Teacher/TeacherInformationManagement_PreviewTeacherEXCEL");
+					"/bysjglxt/teacher/TeacherInformationManagement_PreviewTeacherEXCEL");
 
 	var formData = new FormData();
 	formData.append("EXCEL_Teacher", file.files[0]);
@@ -170,7 +166,7 @@ function Save_Teacher_EXCEL() {
 	}
 
 	xhr.open("POST",
-			"/bysjglxt/Teacher/TeacherInformationManagement_SaveTeacherEXCEL");
+			"/bysjglxt/teacher/TeacherInformationManagement_SaveTeacherEXCEL");
 
 	var formData = new FormData();
 	formData.append("EXCEL_Teacher", EXCEL_Teacher_File.files[0]);

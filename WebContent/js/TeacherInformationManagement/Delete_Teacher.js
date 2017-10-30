@@ -1,4 +1,4 @@
-function Delete_Student() {
+function Delete_Teacher() {
 
 	/*
 	 * 
@@ -12,7 +12,7 @@ function Delete_Student() {
 			if (xhr.status == 200) {
 				if (xhr.responseText == "success") {
 					toastr.success("删除成功");
-					List_Student_By_PageAndSearch(1);
+					List_Teacher_By_PageAndSearch(1);
 				}
 			} else {
 				toastr.error(xhr.status);
@@ -22,19 +22,19 @@ function Delete_Student() {
 
 	var checkbox_select = document.getElementsByClassName("checkbox_select");
 
-	var ListDeleteStudentNum = null;
+	var ListDeleteTeacherNum = null;
 
 	var formData = new FormData();
 
 	for (var num = 0; num < checkbox_select.length; num++) {
 		if (checkbox_select[num].checked) {
-			formData.append("ListDeleteStudentID", checkbox_select[num].id);
+			formData.append("ListDeleteTeacherID", checkbox_select[num].id);
 		}
 
 	}
 
 	xhr.open("POST",
-			"/bysjglxt/student/StudentInformationManagement_DeleteStudent");
+			"/bysjglxt/teacher/TeacherInformationManagement_DeleteTeacher");
 
 	xhr.send(formData);
 
