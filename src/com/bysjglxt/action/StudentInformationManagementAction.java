@@ -94,7 +94,6 @@ public class StudentInformationManagementAction extends ActionSupport
 		System.out.println(studentInformationManagementVO.getUser_student_is_operate_premission());
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(studentInformationManagementVO));
-
 	}
 
 	/**
