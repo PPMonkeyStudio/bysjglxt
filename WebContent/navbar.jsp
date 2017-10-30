@@ -79,7 +79,8 @@
 									class="">学生</a></li>
 								<li><a
 									href="<%=basePath%>teacher/TeacherInformationManagement_TeacherManagementPage">教师</a></li>
-								<li><a href="#">教研室</a></li>
+								<li><a
+									href="<%=basePath%>section/SectionInformationManagement_SectionManagementPage">教研室</a></li>
 							</ul>
 						</div></li>
 					<!----------------------------------------------------------------------->

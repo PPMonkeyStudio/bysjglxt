@@ -23,8 +23,10 @@
 	src="<%=basePath%>js/TeacherInformationManagement/Delete_Teacher.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TeacherInformationManagement/Update_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TeacherInformationManagement/Teacher_Fix_User.js"></script>
 <!---------------------------------------------------------------------------------------------------->
-<title>学生信息管理</title>
+<title>教师信息</title>
 </head>
 <body>
 	<jsp:include page="/navbar.jsp" flush="true"></jsp:include>
@@ -68,19 +70,22 @@
 						<tr>
 							<th>工号</th>
 							<th>姓名</th>
-							<th style="padding: 3px 0 0 0;"><select class="form-control"
-								id="select_sex" style="width: auto;"
-								onchange="List_Teacher_By_PageAndSearch(1)">
+							<th><select class="form-control" id="select_sex"
+								style="width: auto;" onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="男">男</option>
 									<option value="女">女</option>
 							</select></th>
-							<th style="padding: 3px 0 0 0;"><select class="form-control"
-								id="select_section" data-live-search="true" style="width: auto;"
+							<th><select class="form-control" id="select_section"
+								data-live-search="true" style="width: auto;"
 								onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">教研室</option>
 							</select></th>
-							<th>职称</th>
+							<th><select class="form-control" id="" style="width: auto;"
+								data-live-search="true"
+								onchange="List_Teacher_By_PageAndSearch(1)">
+									<option value="-1">职称</option>
+							</select></th>
 							<th>指导学生数</th>
 							<th>操作</th>
 							<th><label class="fancy-checkbox"> <input
@@ -162,6 +167,44 @@
 						onclick="start_Update_Teacher()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-pencil-square-o"></i> 修改
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!-------修改教师用户信息模态框------->
+	<div class="modal fade" id="modal_Teacher_Fix_User"
+		data-keyboard="true" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- 模态弹出窗内容 -->
+				<!--弹出框头部，一般使用“modal-header”表示，主要包括标题和关闭按钮-->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">修改其他信息</h4>
+				</div>
+				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
+				<div class="modal-body">
+					<table id="table_teacher_user"
+						class="table table-hover table-bordered"
+						style="text-align: center;">
+						<tbody></tbody>
+					</table>
+				</div>
+				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
+				<div class="modal-footer">
+					<button class="btn btn-default" id="" onclick=""
+						style="float: right; margin: 0 10px;">
+						<i class="fa fa-check"></i> 确认修改
+					</button>
+					<button class="btn btn-default" id="" onclick=""
+						style="float: right; margin: 0 10px;">
+						<i class="fa fa-times"></i> 放弃修改
 					</button>
 				</div>
 			</div>

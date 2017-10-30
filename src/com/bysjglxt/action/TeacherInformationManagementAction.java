@@ -71,11 +71,9 @@ public class TeacherInformationManagementAction extends ActionSupport
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-		System.out.println(gson.toJson(teacherInformationManagementVO));
 		teacherInformationManagementVO = teacherInformationManagementService
 				.VO_TEACHER_By_PageAndSearch(teacherInformationManagementVO);
 		http_response.setContentType("text/html;charset=utf-8");
-		System.out.println(gson.toJson(teacherInformationManagementVO));
 		http_response.getWriter().write(gson.toJson(teacherInformationManagementVO));
 
 	}
@@ -135,7 +133,6 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 */
 	public void UpdateTeacher() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-
 		http_response.getWriter().write("success");
 	}
 	/*
