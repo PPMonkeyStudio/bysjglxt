@@ -46,22 +46,18 @@
 				</a>
 					<ul class="dropdown-menu notifications">
 						<li><a href="#" class="notification-item"><span
-								class="dot bg-warning"></span>任务一</a></li>
+								class="dot bg-success"></span>指导老师审核开题报告——江鑫鑫</a></li>
 						<li><a href="#" class="notification-item"><span
-								class="dot bg-success"></span>任务一</a></li>
+								class="dot bg-success"></span>指导老师填写评价审阅表——李文凯</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <span>江鑫鑫</span> <i
 						class="icon-submenu lnr lnr-chevron-down"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="#"><i class="lnr lnr-user"></i> <span>My
-									Profile</span></a></li>
-						<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a>
-						</li>
-						<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a>
-						</li>
-						<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a>
+						<li><a href="#"><i class="lnr lnr-user"></i> <span>我的信息</span></a></li>
+						<li><a href="#"><i class="lnr lnr-lock"></i> <span>修改密码</span></a></li>
+						<li><a href="#"><i class="lnr lnr-exit"></i> <span>退出登录</span></a>
 						</li>
 					</ul></li>
 
@@ -74,61 +70,45 @@
 				<ul class="nav">
 					<!----------------------------------------------------------------------->
 					<li><a href="#informationManagement" data-toggle="collapse"
-						class="collapsed"><i class="lnr lnr-user"></i> <span>信息</span>
+						class="collapsed"><i class="lnr lnr-database"></i> <span>信息</span>
 							<i class="icon-submenu lnr lnr-chevron-left"></i></a>
 						<div id="informationManagement" class="collapse ">
 							<ul class="nav">
 								<li><a
-									href="<%=basePath%>student/StudentInformationManagement_CreateStudentPage">添加学生信息</a></li></li>
-					<li><a
-						href="<%=basePath%>student/StudentInformationManagement_listPage"
-						class="">学生信息列表</a></li>
-					<li><a href="#">添加教师信息</a></li>
-					<li><a href="#">教师信息列表</a></li>
+									href="<%=basePath%>student/StudentInformationManagement_listPage"
+									class="">学生</a></li>
+								<li><a
+									href="<%=basePath%>teacher/TeacherInformationManagement_TeacherManagementPage">教师</a></li>
+								<li><a href="#">教研室</a></li>
+							</ul>
+						</div></li>
+					<!----------------------------------------------------------------------->
+					<li><a href="#topic" data-toggle="collapse" class="collapsed"><i
+							class="lnr lnr-book"></i> <span>课题</span> <i
+							class="icon-submenu lnr lnr-chevron-left"></i></a>
+						<div id="topic" class="collapse ">
+							<ul class="nav">
+								<li><a
+									href="<%=basePath%>topic/TopicManagement_TopicListPage">课题</a></li>
+								<li><a href="#">选题</a></li>
+
+							</ul>
+							<!----------------------------------------------------------------------->
+							<li><a href="#process" data-toggle="collapse"
+								class="collapsed"><i class="lnr lnr lnr-map"></i> <span>流程及任务</span>
+									<i class="icon-submenu lnr lnr-chevron-left"></i></a>
+								<div id="process" class="collapse ">
+									<ul class="nav">
+										<li><a href="#">流程定义列表</a></li></li>
+							<li><a href="#">流程实例列表</a></li>
+							<li><a href="#">任务定义列表</a></li>
+							<li><a href="#">任务实例列表</a></li>
 				</ul>
 			</div>
 			</li>
 			<!----------------------------------------------------------------------->
-			<li><a href="#topic" data-toggle="collapse" class="collapsed"><i
-					class="lnr lnr-book"></i> <span>课题</span> <i
-					class="icon-submenu lnr lnr-chevron-left"></i></a>
-				<div id="topic" class="collapse ">
-					<ul class="nav">
-						<li><a
-							href="<%=basePath%>topic/TopicManagement_CreateTopicPage">创建课题</a></li></li>
-			<li><a href="#">课题列表</a></li>
-			<li><a href="#">选题列表</a></li>
-
-			</ul>
-			<!----------------------------------------------------------------------->
-			<li><a href="#process" data-toggle="collapse" class="collapsed"><i
-					class="lnr lnr-list"></i> <span>流程</span> <i
-					class="icon-submenu lnr lnr-chevron-left"></i></a>
-				<div id="process" class="collapse ">
-					<ul class="nav">
-						<li><a href="#">流程定义列表</a></li></li>
-			<li><a href="#">流程实例列表</a></li>
-			<li><a href="#">我的流程</a></li>
 			</ul>
 		</div>
-		</li>
-		<!----------------------------------------------------------------------->
-		<li><a href="#task" data-toggle="collapse" class="collapsed"><i
-				class="lnr lnr lnr-map"></i> <span>任务</span> <i
-				class="icon-submenu lnr lnr-chevron-left"></i></a>
-			<div id="task" class="collapse ">
-				<ul class="nav">
-					<li><a href="#">任务定义列表</a></li>
-					<li><a href="#">任务实例列表</a></li>
-					<li><a href="#">我的任务</a></li>
-				</ul>
-			</div></li>
-
-		<!----------------------------------------------------------------------->
-		<li><a href="#" class=""><i class="lnr lnr-exit"></i> <span>退出登录</span></a></li>
-		<!----------------------------------------------------------------------->
-		</ul>
-	</div>
 	</div>
 	<!--  -->
 
