@@ -92,7 +92,6 @@ public class StudentInformationManagementAction extends ActionSupport
 				.VO_Student_By_PageAndSearch(studentInformationManagementVO);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(studentInformationManagementVO));
-
 	}
 
 	/**

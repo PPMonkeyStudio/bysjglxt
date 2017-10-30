@@ -101,9 +101,14 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				
 				<div id="i_pulse" style="text-align: center;">
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
 				</div>
+				
+				
+				
 				<div style="height: 34px; margin: 0 0 20px 0;">
 
 					<button class="btn btn-danger" onclick="Delete_Student()"

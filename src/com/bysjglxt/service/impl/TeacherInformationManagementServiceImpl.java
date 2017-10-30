@@ -66,13 +66,12 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			bysjglxt_teacher_basic.setTeacher_basic_gmt_modified(bysjglxt_teacher_basic.getTeacher_basic_gmt_create());
 			flag = teacherInformationManagementDao.saveTeacherBasic(bysjglxt_teacher_basic);
 			bysjglxt_teacher_user.setUser_teacher_id(TeamUtil.getUuid());
+			bysjglxt_teacher_user.setUser_teacher_guidance_num(0);
 			// 工号
 			bysjglxt_teacher_user.setUser_teacher_num(bysjglxt_teacher_basic.getJob_number());
 			// 密码
 			bysjglxt_teacher_user.setUser_teacher_password(bysjglxt_teacher_user.getUser_teacher_num());
 			bysjglxt_teacher_user.setUser_teacher_basic(bysjglxt_teacher_basic.getTeacher_basic_id());
-			// 教研室
-			bysjglxt_teacher_user.setUser_teacher_section("1");
 			bysjglxt_teacher_user.setUser_teacher_max_guidance(-1);
 			bysjglxt_teacher_user.setUser_teacher_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_teacher_user.setUser_teacher_gmt_modified(bysjglxt_teacher_user.getUser_teacher_gmt_create());
@@ -98,6 +97,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			teacherInformationDTO.setBysjglxtTeacherBasic(teacherInformationManagementDao
 					.get_TeacherBasicInformation_ByUserBasic(teacher_user.getUser_teacher_basic()));
 			list_TeacherInformationDTO_All.add(teacherInformationDTO);
+
 		}
 		return list_TeacherInformationDTO_All;
 	}
@@ -114,13 +114,13 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		teacher_basic.setTeacher_basic_gmt_modified(teacher_basic.getTeacher_basic_gmt_create());
 		flag = teacherInformationManagementDao.saveTeacherBasic(teacher_basic);
 		bysjglxt_teacher_user.setUser_teacher_id(TeamUtil.getUuid());
+		bysjglxt_teacher_user.setUser_teacher_guidance_num(0);
 		// 工号
 		bysjglxt_teacher_user.setUser_teacher_num(teacher_basic.getJob_number());
 		// 密码
 		bysjglxt_teacher_user.setUser_teacher_password(bysjglxt_teacher_user.getUser_teacher_num());
 		bysjglxt_teacher_user.setUser_teacher_basic(teacher_basic.getTeacher_basic_id());
 		// 教研室
-		bysjglxt_teacher_user.setUser_teacher_section("1");
 		bysjglxt_teacher_user.setUser_teacher_max_guidance(-1);
 		bysjglxt_teacher_user.setUser_teacher_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_teacher_user.setUser_teacher_gmt_modified(bysjglxt_teacher_user.getUser_teacher_gmt_create());
@@ -158,10 +158,10 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	@Override
 	public TeacherInformationManagementVO VO_TEACHER_By_PageAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO) {
-
 		List<TeacherInformationDTO> list_TeacherInformationDTO = new ArrayList<TeacherInformationDTO>();
 		TeacherInformationDTO teacherInformationDTO = null;
 		bysjglxt_teacher_basic teacher_basic = null;
+		bysjglxt_section bysjglxt_section = null;
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		// 得到总basiclist
 		List<bysjglxt_teacher_basic> listTeacherAllBasicInformationBySearch = teacherInformationManagementDao
@@ -194,6 +194,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			teacherInformationDTO = new TeacherInformationDTO();
 			teacher_basic = new bysjglxt_teacher_basic();
 			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_section = new bysjglxt_section();
 			bysjglxt_teacher_user = teacherInformationManagementDao.getTeacherInfoByBasicId(
 					bysjglxt_teacher_basic.getTeacher_basic_id(), teacherInformationManagementVO.getSection());
 			if (bysjglxt_teacher_user != null) {
@@ -201,6 +202,9 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 				teacher_basic = teacherInformationManagementDao
 						.get_TeacherBasicInformation_ByUserBasic(bysjglxt_teacher_user.getUser_teacher_basic());
 				teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxt_teacher_basic);
+				bysjglxt_section = teacherInformationManagementDao
+						.get_TeacherSectionInformation_ByUserSectionId(bysjglxt_teacher_user.getUser_teacher_section());
+				teacherInformationDTO.setBysjglxtSection(bysjglxt_section);
 				list_TeacherInformationDTO.add(teacherInformationDTO);
 			}
 		}
@@ -220,7 +224,25 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	}
 
 	@Override
-	public List<String> listBysjglxtSection() {
+	public List<bysjglxt_section> listBysjglxtSection() {
 		return teacherInformationManagementDao.listBysjglxtSection();
+	}
+
+	@Override
+	public boolean updateBasicAndUser(TeacherInformationDTO teacherInformationDTO) {
+		// 修改基础表信息
+		boolean flag = false;
+		flag = teacherInformationManagementDao.updateBasic(teacherInformationDTO.getBysjglxtTeacherBasic());
+		if (!flag)
+			return flag;
+		flag = teacherInformationManagementDao.updateUser(teacherInformationDTO.getBysjglxtTeacherUser());
+		if (!flag)
+			return flag;
+		return flag;
+	}
+
+	@Override
+	public boolean updateSection(bysjglxt_section bysjglxt_section) {
+		return teacherInformationManagementDao.updateSection(bysjglxt_section);
 	}
 }

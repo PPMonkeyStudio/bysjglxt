@@ -17,7 +17,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 			if (xhr.status == 200) {
 				student_json = JSON.parse(xhr.responseText);
 				/*
+				 * 
 				 * 清空原表数据
+				 * 
 				 */
 				var new_tr_list = document.getElementsByClassName("new_tr");
 				var long = new_tr_list.length;
@@ -27,6 +29,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 				}
 				/*
 				 * 
+				 * 
 				 */
 				var table_student = document.getElementById("table_student");
 
@@ -35,11 +38,8 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					var new_tr = document.createElement("tr");
 
 					new_tr.appendChild(document.createTextNode(''));
-
 					table_student.firstElementChild.appendChild(new_tr);
-
 					new_tr.className = "new_tr";
-
 					new_tr.innerHTML = '<td>'
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_num
 							+ '</td><td>'
@@ -69,13 +69,10 @@ function List_Student_By_PageAndSearch(pageIndex) {
 				document.getElementById("span_pageIndex").innerHTML = student_json.pageIndex;
 				document.getElementById("span_totalPages").innerHTML = student_json.totalPages;
 				document.getElementById("span_totalRecords").innerHTML = student_json.totalRecords;
-
 				// 让加载图标消失
 				document.getElementById("i_pulse").style.display = "none";
-
 				// 让全选框取消选择
 				document.getElementById("checkbox_all_select").checked = false;
-
 			} else {
 				toastr.error(xhr.status);
 			}
