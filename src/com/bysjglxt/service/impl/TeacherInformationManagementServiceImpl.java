@@ -224,7 +224,25 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	}
 
 	@Override
-	public List<String> listBysjglxtSection() {
+	public List<bysjglxt_section> listBysjglxtSection() {
 		return teacherInformationManagementDao.listBysjglxtSection();
+	}
+
+	@Override
+	public boolean updateBasicAndUser(TeacherInformationDTO teacherInformationDTO) {
+		// 修改基础表信息
+		boolean flag = false;
+		flag = teacherInformationManagementDao.updateBasic(teacherInformationDTO.getBysjglxtTeacherBasic());
+		if (!flag)
+			return flag;
+		flag = teacherInformationManagementDao.updateUser(teacherInformationDTO.getBysjglxtTeacherUser());
+		if (!flag)
+			return flag;
+		return flag;
+	}
+
+	@Override
+	public boolean updateSection(bysjglxt_section bysjglxt_section) {
+		return teacherInformationManagementDao.updateSection(bysjglxt_section);
 	}
 }

@@ -67,9 +67,6 @@ public interface TeacherInformationManagementService {
 	 * @return 是否删除成功,1是 0否
 	 */
 	public boolean remove_TeacherList(List<String> useTeacherNumList);
-	
-	
-	
 
 	/**
 	 * @DATE 2017-10-29
@@ -93,7 +90,7 @@ public interface TeacherInformationManagementService {
 	 * 
 	 * @return
 	 */
-	public List<String> listBysjglxtSection();
+	public List<bysjglxt_section> listBysjglxtSection();
 
 	/**
 	 * 
@@ -108,5 +105,17 @@ public interface TeacherInformationManagementService {
 	 */
 	public TeacherInformationManagementVO VO_TEACHER_By_PageAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO);
+
+	/**
+	 * 更新教师信息
+	 */
+	public boolean updateBasicAndUser(TeacherInformationDTO teacherInformationDTO);
+
+	/**
+	 * 更新教研室信息
+	 * @param bysjglxt_section
+	 * @return
+	 */
+	public boolean updateSection(bysjglxt_section bysjglxt_section);
 
 }

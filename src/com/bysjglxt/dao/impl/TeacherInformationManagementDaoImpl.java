@@ -228,7 +228,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		bysjglxt_section bysjglxt_section = new bysjglxt_section();
 		String hql = "from bysjglxt_section where section_id ='" + user_teacher_section + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_section  = (bysjglxt_section) query.uniqueResult();
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
 		return bysjglxt_section;
 	}
 
@@ -248,13 +248,52 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	}
 
 	@Override
-	public List<String> listBysjglxtSection() {
+	public List<bysjglxt_section> listBysjglxtSection() {
 		Session session = getSession();
-		List<String> listSection = new ArrayList<String>();
-		String hql = "select distinct(section_name) from bysjglxt_section";
+		List<bysjglxt_section> listSection = new ArrayList<bysjglxt_section>();
+		String hql = "from bysjglxt_section";
 		Query query = session.createQuery(hql);
 		listSection = query.list();
 		return listSection;
+	}
+
+	@Override
+	public boolean updateBasic(bysjglxt_teacher_basic bysjglxtTeacherBasic) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxtTeacherBasic);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updateUser(bysjglxt_teacher_user bysjglxtTeacherUser) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxtTeacherUser);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updateSection(bysjglxt_section bysjglxt_section) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_section);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

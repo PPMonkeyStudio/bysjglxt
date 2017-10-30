@@ -35,8 +35,14 @@ public interface TeacherInformationManagementDao {
 
 	boolean deleteSection(String string);
 
-	List<String> listBysjglxtSection();
+	List<bysjglxt_section> listBysjglxtSection();
 
 	com.bysjglxt.domain.DO.bysjglxt_section get_TeacherSectionInformation_ByUserSectionId(String user_teacher_section);
+
+	boolean updateBasic(bysjglxt_teacher_basic bysjglxtTeacherBasic);
+
+	boolean updateUser(bysjglxt_teacher_user bysjglxtTeacherUser);
+
+	boolean updateSection(bysjglxt_section bysjglxt_section);
 
 }
