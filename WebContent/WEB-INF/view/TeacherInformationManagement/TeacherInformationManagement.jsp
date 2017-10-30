@@ -12,21 +12,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/List_Student_By_PageAndSearch.js"></script>
+	src="<%=basePath%>js/TeacherInformationManagement/List_Teacher_By_PageAndSearch.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Student_Information_Display.js"></script>
+	src="<%=basePath%>js/TeacherInformationManagement/Teacher_Information_Display.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/PreviewStudentEXCEL.js"></script>
+	src="<%=basePath%>js/TeacherInformationManagement/PreviewTeacherEXCEL.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Input_Select.js"></script>
+	src="<%=basePath%>js/TeacherInformationManagement/Input_Select.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Delete_Student.js"></script>
+	src="<%=basePath%>js/TeacherInformationManagement/Delete_Teacher.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Grade.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Update_Student.js"></script>
+	src="<%=basePath%>js/TeacherInformationManagement/Update_Teacher.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -43,7 +39,7 @@
 		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
-				<h3 class="panel-title">学生信息列表</h3>
+				<h3 class="panel-title">教师列表</h3>
 			</div>
 			<!--  -->
 			<div class="panel-body">
@@ -51,7 +47,7 @@
 
 					<div style="width: 500px; float: left;">
 						<button class="btn btn-default"
-							onclick="window.location='<%=basePath%>student/StudentInformationManagement_CreateStudentPage'">
+							onclick="window.location='<%=basePath%>teacher/TeacherInformationManagement_CreateTeacherPage'">
 							<i class="fa fa-plus-square"></i> 手动新增
 						</button>
 						<button class="btn btn-default" data-toggle="modal"
@@ -62,38 +58,30 @@
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
 						<input id="input_search" class="form-control"
-							oninput="List_Student_By_PageAndSearch(1)" type="text"><span
+							oninput="List_Teacher_By_PageAndSearch(1)" type="text"><span
 							class="input-group-addon"><i class="fa fa-search"></i></span>
 					</div>
 				</div>
-				<table id="table_student" class="table table-hover table-bordered"
+				<table id="table_teacher" class="table table-hover table-bordered"
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
-							<th>学号</th>
+							<th>工号</th>
 							<th>姓名</th>
-							<th><select class="form-control" id="select_sex"
-								style="width: auto;" onchange="List_Student_By_PageAndSearch(1)">
+							<th style="padding: 3px 0 0 0;"><select class="form-control"
+								id="select_sex" style="width: auto;"
+								onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="男">男</option>
 									<option value="女">女</option>
 							</select></th>
-							<th><select class="form-control" id="select_major"
-								data-live-search="true" style="width: auto;"
-								onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">专业名称</option>
+							<th style="padding: 3px 0 0 0;"><select class="form-control"
+								id="select_section" data-live-search="true" style="width: auto;"
+								onchange="List_Teacher_By_PageAndSearch(1)">
+									<option value="-1">教研室</option>
 							</select></th>
-							<th><select class="form-control" id="select_grade"
-								data-live-search="true" style="width: auto;"
-								onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">年级</option>
-							</select></th>
-							<th><select class="form-control" id="select_premission"
-								style="width: auto;" onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">操作权限</option>
-									<option value="1">有操作权限</option>
-									<option value="0">无操作权限</option>
-							</select></th>
+							<th>职称</th>
+							<th>指导学生数</th>
 							<th>操作</th>
 							<th><label class="fancy-checkbox"> <input
 									id="checkbox_all_select" type="checkbox" onclick="all_select()"><span>全选</span>
@@ -101,28 +89,14 @@
 						</tr>
 					</tbody>
 				</table>
-				
-				
 				<div id="i_pulse" style="text-align: center;">
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
 				</div>
-				
-				
-				
 				<div style="height: 34px; margin: 0 0 20px 0;">
 
-					<button class="btn btn-danger" onclick="Delete_Student()"
+					<button class="btn btn-danger" onclick="Delete_Teacher()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-trash-o"></i> 删除所选
-					</button>
-
-					<button class="btn btn-default"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-reply-all"></i> 收回操作权限
-					</button>
-					<button class="btn btn-default"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-handshake-o"></i> 赋予操作权限
 					</button>
 				</div>
 				<div style="margin: 0 auto; width: 400px; text-align: center;">
@@ -152,7 +126,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!-------详细信息模态框------->
-	<div class="modal fade" id="modal_Student_Information"
+	<div class="modal fade" id="modal_Teacher_Information"
 		data-keyboard="true" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -166,7 +140,7 @@
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">
-					<table id="table_student_detail"
+					<table id="table_teacher_detail"
 						class="table table-hover table-bordered"
 						style="text-align: center;">
 						<tbody></tbody>
@@ -175,17 +149,17 @@
 				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
 				<div class="modal-footer">
 					<button class="btn btn-default" id="button_sure_update"
-						onclick="Update_Student()"
+						onclick="Update_Teacher()"
 						style="float: right; margin: 0 10px; display: none;">
 						<i class="fa fa-check"></i> 确认修改
 					</button>
 					<button class="btn btn-default" id="button_stop_update"
-						onclick="stop_Update_Student()"
+						onclick="stop_Update_Teacher()"
 						style="float: right; margin: 0 10px; display: none;">
 						<i class="fa fa-times"></i> 放弃修改
 					</button>
 					<button class="btn btn-default" id="button_start_update"
-						onclick="start_Update_Student()"
+						onclick="start_Update_Teacher()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-pencil-square-o"></i> 修改
 					</button>
@@ -212,12 +186,12 @@
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">
-					<input id="input_upload_student_excel" type="file"
-						onchange="Preview_Student_EXCEL(this)">
+					<input id="input_upload_Teacher_excel" type="file"
+						onchange="Preview_Teacher_EXCEL(this)">
 					<!--  -->
 					<div
 						style="width: 100%; max-height: 400px; min-height: 0px; overflow-x: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; border: 1px solid #ddd;">
-						<table id="table_excel_student"
+						<table id="table_excel_Teacher"
 							class="table table-bordered table-hover"
 							style="text-align: center;">
 							<tbody></tbody>
@@ -231,10 +205,10 @@
 				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
 				<div class="modal-footer">
 					<button class="btn btn-danger"
-						onclick="remove_Preview_Student_EXCEL()">
+						onclick="remove_Preview_Teacher_EXCEL()">
 						<i class="fa fa-trash-o"></i> 重置数据
 					</button>
-					<button class="btn btn-default" onclick="Save_Student_EXCEL()">
+					<button class="btn btn-default" onclick="Save_Teacher_EXCEL()">
 						<i class="fa fa-check"></i> 确认导入
 					</button>
 				</div>
@@ -249,9 +223,6 @@
 	$('select').selectpicker('refresh');
 </script>
 <script>
-	var select_major = document.getElementById("select_major");
-	var select_grade = document.getElementById("select_grade")
-	Get_Student_Major(select_major);
-	Get_Student_Grade(select_grade);
+	
 </script>
 </html>

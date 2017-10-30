@@ -54,7 +54,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission
 							+ '</td><td style="padding: 0;"><button id="'
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-							+ '" onclick="Student_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default btn-ms">详细信息</button></td>'
+							+ '" onclick="Student_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default btn-ms">详细</button></td>'
 							+ '<td>'
 							+ '<label class="fancy-checkbox">'
 							+ '<input id="'
