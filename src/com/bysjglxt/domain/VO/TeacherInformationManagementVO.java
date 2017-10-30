@@ -24,7 +24,7 @@ public class TeacherInformationManagementVO {
 	// 是否有下一页
 	private boolean HaveNextPage = false;
 
-	// 学生列表
+	// 教师列表
 	private List<TeacherInformationDTO> list_TeacherInformationDTO;
 
 	// 搜索

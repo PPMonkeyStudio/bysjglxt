@@ -3,6 +3,7 @@ package com.bysjglxt.domain.VO;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DTO.TopicInformationDTO;
 
 public class TopicManagementVO {
 
@@ -24,23 +25,24 @@ public class TopicManagementVO {
 	// 是否有下一页
 	private boolean HaveNextPage = false;
 
-	// 学生列表
-	private List<bysjglxt_topic> list_topic;
+	// 课题列表
+	private List<TopicInformationDTO> listTopicInformationDTO;
 
 	// 搜索
-	private String search;
+	private String search = null;
 
 	// 课题来源筛选
-	private String source;
+	private String source = null;
 
 	// 课题性质筛选
-	private String type;
+	private String type = null;
 
 	@Override
 	public String toString() {
 		return "TopicManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords + ", pageSize=" + pageSize
 				+ ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage + ", HaveNextPage=" + HaveNextPage
-				+ ", list_topic=" + list_topic + ", search=" + search + ", source=" + source + ", type=" + type + "]";
+				+ ", listTopicInformationDTO=" + listTopicInformationDTO + ", search=" + search + ", source=" + source
+				+ ", type=" + type + "]";
 	}
 
 	public int getPageIndex() {
@@ -91,12 +93,12 @@ public class TopicManagementVO {
 		HaveNextPage = haveNextPage;
 	}
 
-	public List<bysjglxt_topic> getList_topic() {
-		return list_topic;
+	public List<TopicInformationDTO> getListTopicInformationDTO() {
+		return listTopicInformationDTO;
 	}
 
-	public void setList_topic(List<bysjglxt_topic> list_topic) {
-		this.list_topic = list_topic;
+	public void setListTopicInformationDTO(List<TopicInformationDTO> listTopicInformationDTO) {
+		this.listTopicInformationDTO = listTopicInformationDTO;
 	}
 
 	public String getSearch() {
