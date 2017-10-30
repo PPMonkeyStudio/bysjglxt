@@ -68,18 +68,20 @@
 						<tr>
 							<th>工号</th>
 							<th>姓名</th>
-							<th style="padding:3px 0 0 0;"><select class="form-control" id="select_sex"
-								style="width: auto;" onchange="List_Teacher_By_PageAndSearch(1)">
+							<th style="padding: 3px 0 0 0;"><select class="form-control"
+								id="select_sex" style="width: auto;"
+								onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="男">男</option>
 									<option value="女">女</option>
 							</select></th>
-							<th style="padding:3px 0 0 0;"><select class="form-control" id="select_section"
-								data-live-search="true" style="width: auto;"
+							<th style="padding: 3px 0 0 0;"><select class="form-control"
+								id="select_section" data-live-search="true" style="width: auto;"
 								onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">教研室</option>
 							</select></th>
 							<th>职称</th>
+							<th>指导学生数</th>
 							<th>操作</th>
 							<th><label class="fancy-checkbox"> <input
 									id="checkbox_all_select" type="checkbox" onclick="all_select()"><span>全选</span>
@@ -221,5 +223,6 @@
 	$('select').selectpicker('refresh');
 </script>
 <script>
+	
 </script>
 </html>
