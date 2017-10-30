@@ -12,6 +12,7 @@ public interface TeacherInformationManagementService {
 
 	/**
 	 * @待测试
+	 * @DATE 2017-10-29
 	 * 
 	 * @说明 教师信息的Excel文件流转化为bysjglxt_Teacher_basic的List
 	 *
@@ -24,7 +25,7 @@ public interface TeacherInformationManagementService {
 
 	/**
 	 * @待测试
-	 * 
+	 * @DATE 2017-10-29
 	 * @说明 将教师基础信息List生成bysjglxt_teacher_basic以及基于此生成的bysjglxt_user_teacher，
 	 *     存储到数据库中
 	 * 
@@ -36,7 +37,7 @@ public interface TeacherInformationManagementService {
 
 	/**
 	 * @待测试
-	 * 
+	 * @DATE 2017-10-29
 	 * @说明 获取数据库中所有的bysjglxt_teacher_basic记录以及bysjglxt_user_teacher记录，
 	 *     并封装成TeacherInformationDTO的List返回
 	 * 
@@ -46,7 +47,7 @@ public interface TeacherInformationManagementService {
 
 	/**
 	 * @待测试
-	 * 
+	 * @DATE 2017-10-29
 	 * @说明 通过领导小组组长手动添加的教师记录，生成用户表及基础信息表，一并存入数据库中
 	 * 
 	 * @param student_basic
@@ -67,7 +68,7 @@ public interface TeacherInformationManagementService {
 	public boolean remove_TeacherList(List<String> useTeacherNumList);
 
 	/**
-	 * @DOTO
+	 * @DATE 2017-10-29
 	 * 
 	 * @说明 创建教研室
 	 * @param newSection
@@ -76,8 +77,23 @@ public interface TeacherInformationManagementService {
 	public boolean Create_Section(bysjglxt_section newSection);
 
 	/**
+	 * @说明 删除教研室
+	 * @DATE 2017-10-29
+	 * @param listSectionId
+	 * @return
+	 */
+	public boolean deleteSection(List<String> listSectionId);
+
+	/**
+	 * 遍历得到所有的教研室
 	 * 
-	 * @DOTO
+	 * @return
+	 */
+	public List<String> listBysjglxtSection();
+
+	/**
+	 * 
+	 * @DATE 2017-10-29
 	 * 
 	 * @说明 根据页数以及搜索关键词，查询教师信息，并连同页面信息一起封装进TeacherInformationManagementVO
 	 *     筛选：教研室（名称）、性别（中文）

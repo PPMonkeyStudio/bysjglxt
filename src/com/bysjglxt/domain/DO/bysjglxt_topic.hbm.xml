@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-28 17:51:36 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-10-30 8:58:00 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_topic" table="BYSJGLXT_TOPIC">
         <id name="topic_id" type="java.lang.String">
@@ -46,6 +46,9 @@
         </property>
         <property name="topic_examine_state" type="java.lang.String">
             <column name="TOPIC_EXAMINE_STATE" />
+        </property>
+        <property name="topic_student_num" type="int">
+            <column name="TOPIC_STUDENT_NUM" />
         </property>
     </class>
 </hibernate-mapping>

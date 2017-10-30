@@ -2,29 +2,21 @@ package com.bysjglxt.domain.DO;
 
 public class bysjglxt_teacher_basic {
 
-	private String job_number;
 	private String teacher_basic_id;
+	private String job_number;
 	private String name;
-	private String nation;
 	private String sex;
 	private String birthday;
-	private String nationality;
-	private String certificate_type;
-	private String certificate_no;
-	private String g_a_t;
-	private String hua_qiao;
-	private String political_status;
+	private String induction_date;
+	private String job_statue;
+	private String unit_number;
+	private String unit_name;
 	private String highest_education;
 	private String highest_degree;
 	private String learn_edge_structure;
 	private String professional_title;
-	private String professional_grade;
 	private String subject_category;
-	private String work_date;
-	private String induction_date;
-	private String teacher_certificate_no;
 	private String teaching_type;
-	private String teaching_status;
 	private String teaching_profession_name;
 	private String teaching_profession_no;
 	private String profession_teaching_date;
@@ -32,76 +24,11 @@ public class bysjglxt_teacher_basic {
 	private String double_teacher_type;
 	private String engineering_background;
 	private String industry_background;
-	private String administrative_rank;
 	private String graduate_tutor_type;
 	private String number_of_doctor;
 	private String number_of_master;
-	private String employee_type;
-	private String employment_type;
-	private String job_statue;
-	private String transaction_type;
-	private String university_transfer;
-	private String school_graduation;
-	private String school_adjustment;
-	private String off_campus_teacher_type;
 	private String teacher_basic_gmt_create;
 	private String teacher_basic_gmt_modified;
-
-	public String getJob_number() {
-		return job_number;
-	}
-
-	public void setJob_number(String job_number) {
-		this.job_number = job_number;
-	}
-
-	public String getUniversity_transfer() {
-		return university_transfer;
-	}
-
-	public void setUniversity_transfer(String university_transfer) {
-		this.university_transfer = university_transfer;
-	}
-
-	public String getSchool_graduation() {
-		return school_graduation;
-	}
-
-	public void setSchool_graduation(String school_graduation) {
-		this.school_graduation = school_graduation;
-	}
-
-	public String getSchool_adjustment() {
-		return school_adjustment;
-	}
-
-	public void setSchool_adjustment(String school_adjustment) {
-		this.school_adjustment = school_adjustment;
-	}
-
-	public String getOff_campus_teacher_type() {
-		return off_campus_teacher_type;
-	}
-
-	public void setOff_campus_teacher_type(String off_campus_teacher_type) {
-		this.off_campus_teacher_type = off_campus_teacher_type;
-	}
-
-	public String getTeacher_basic_gmt_create() {
-		return teacher_basic_gmt_create;
-	}
-
-	public void setTeacher_basic_gmt_create(String teacher_basic_gmt_create) {
-		this.teacher_basic_gmt_create = teacher_basic_gmt_create;
-	}
-
-	public String getTeacher_basic_gmt_modified() {
-		return teacher_basic_gmt_modified;
-	}
-
-	public void setTeacher_basic_gmt_modified(String teacher_basic_gmt_modified) {
-		this.teacher_basic_gmt_modified = teacher_basic_gmt_modified;
-	}
 
 	public String getTeacher_basic_id() {
 		return teacher_basic_id;
@@ -111,12 +38,12 @@ public class bysjglxt_teacher_basic {
 		this.teacher_basic_id = teacher_basic_id;
 	}
 
-	public String getCertificate_type() {
-		return certificate_type;
+	public String getJob_number() {
+		return job_number;
 	}
 
-	public void setCertificate_type(String certificate_type) {
-		this.certificate_type = certificate_type;
+	public void setJob_number(String job_number) {
+		this.job_number = job_number;
 	}
 
 	public String getName() {
@@ -125,54 +52,6 @@ public class bysjglxt_teacher_basic {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getCertificate_no() {
-		return certificate_no;
-	}
-
-	public void setCertificate_no(String certificate_no) {
-		this.certificate_no = certificate_no;
-	}
-
-	public String getNation() {
-		return nation;
-	}
-
-	public void setNation(String nation) {
-		this.nation = nation;
-	}
-
-	public String getNationality() {
-		return nationality;
-	}
-
-	public void setNationality(String nationality) {
-		this.nationality = nationality;
-	}
-
-	public String getG_a_t() {
-		return g_a_t;
-	}
-
-	public void setG_a_t(String g_a_t) {
-		this.g_a_t = g_a_t;
-	}
-
-	public String getHua_qiao() {
-		return hua_qiao;
-	}
-
-	public void setHua_qiao(String hua_qiao) {
-		this.hua_qiao = hua_qiao;
-	}
-
-	public String getPolitical_status() {
-		return political_status;
-	}
-
-	public void setPolitical_status(String political_status) {
-		this.political_status = political_status;
 	}
 
 	public String getSex() {
@@ -189,6 +68,38 @@ public class bysjglxt_teacher_basic {
 
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
+	}
+
+	public String getInduction_date() {
+		return induction_date;
+	}
+
+	public void setInduction_date(String induction_date) {
+		this.induction_date = induction_date;
+	}
+
+	public String getJob_statue() {
+		return job_statue;
+	}
+
+	public void setJob_statue(String job_statue) {
+		this.job_statue = job_statue;
+	}
+
+	public String getUnit_number() {
+		return unit_number;
+	}
+
+	public void setUnit_number(String unit_number) {
+		this.unit_number = unit_number;
+	}
+
+	public String getUnit_name() {
+		return unit_name;
+	}
+
+	public void setUnit_name(String unit_name) {
+		this.unit_name = unit_name;
 	}
 
 	public String getHighest_education() {
@@ -223,14 +134,6 @@ public class bysjglxt_teacher_basic {
 		this.professional_title = professional_title;
 	}
 
-	public String getProfessional_grade() {
-		return professional_grade;
-	}
-
-	public void setProfessional_grade(String professional_grade) {
-		this.professional_grade = professional_grade;
-	}
-
 	public String getSubject_category() {
 		return subject_category;
 	}
@@ -239,44 +142,12 @@ public class bysjglxt_teacher_basic {
 		this.subject_category = subject_category;
 	}
 
-	public String getWork_date() {
-		return work_date;
-	}
-
-	public void setWork_date(String work_date) {
-		this.work_date = work_date;
-	}
-
-	public String getInduction_date() {
-		return induction_date;
-	}
-
-	public void setInduction_date(String induction_date) {
-		this.induction_date = induction_date;
-	}
-
-	public String getTeacher_certificate_no() {
-		return teacher_certificate_no;
-	}
-
-	public void setTeacher_certificate_no(String teacher_certificate_no) {
-		this.teacher_certificate_no = teacher_certificate_no;
-	}
-
 	public String getTeaching_type() {
 		return teaching_type;
 	}
 
 	public void setTeaching_type(String teaching_type) {
 		this.teaching_type = teaching_type;
-	}
-
-	public String getTeaching_status() {
-		return teaching_status;
-	}
-
-	public void setTeaching_status(String teaching_status) {
-		this.teaching_status = teaching_status;
 	}
 
 	public String getTeaching_profession_name() {
@@ -335,14 +206,6 @@ public class bysjglxt_teacher_basic {
 		this.industry_background = industry_background;
 	}
 
-	public String getAdministrative_rank() {
-		return administrative_rank;
-	}
-
-	public void setAdministrative_rank(String administrative_rank) {
-		this.administrative_rank = administrative_rank;
-	}
-
 	public String getGraduate_tutor_type() {
 		return graduate_tutor_type;
 	}
@@ -367,61 +230,37 @@ public class bysjglxt_teacher_basic {
 		this.number_of_master = number_of_master;
 	}
 
-	public String getEmployee_type() {
-		return employee_type;
+	public String getTeacher_basic_gmt_create() {
+		return teacher_basic_gmt_create;
 	}
 
-	public void setEmployee_type(String employee_type) {
-		this.employee_type = employee_type;
+	public void setTeacher_basic_gmt_create(String teacher_basic_gmt_create) {
+		this.teacher_basic_gmt_create = teacher_basic_gmt_create;
 	}
 
-	public String getEmployment_type() {
-		return employment_type;
+	public String getTeacher_basic_gmt_modified() {
+		return teacher_basic_gmt_modified;
 	}
 
-	public void setEmployment_type(String employment_type) {
-		this.employment_type = employment_type;
-	}
-
-	public String getJob_statue() {
-		return job_statue;
-	}
-
-	public void setJob_statue(String job_statue) {
-		this.job_statue = job_statue;
-	}
-
-	public String getTransaction_type() {
-		return transaction_type;
-	}
-
-	public void setTransaction_type(String transaction_type) {
-		this.transaction_type = transaction_type;
+	public void setTeacher_basic_gmt_modified(String teacher_basic_gmt_modified) {
+		this.teacher_basic_gmt_modified = teacher_basic_gmt_modified;
 	}
 
 	@Override
 	public String toString() {
-		return "bysjglxt_teacher_basic [job_number=" + job_number + ", teacher_basic_id=" + teacher_basic_id + ", name="
-				+ name + ", nation=" + nation + ", sex=" + sex + ", birthday=" + birthday + ", nationality="
-				+ nationality + ", certificate_type=" + certificate_type + ", certificate_no=" + certificate_no
-				+ ", g_a_t=" + g_a_t + ", hua_qiao=" + hua_qiao + ", political_status=" + political_status
+		return "bysjglxt_teacher_basic [teacher_basic_id=" + teacher_basic_id + ", job_number=" + job_number + ", name="
+				+ name + ", sex=" + sex + ", birthday=" + birthday + ", induction_date=" + induction_date
+				+ ", job_statue=" + job_statue + ", unit_number=" + unit_number + ", unit_name=" + unit_name
 				+ ", highest_education=" + highest_education + ", highest_degree=" + highest_degree
 				+ ", learn_edge_structure=" + learn_edge_structure + ", professional_title=" + professional_title
-				+ ", professional_grade=" + professional_grade + ", subject_category=" + subject_category
-				+ ", work_date=" + work_date + ", induction_date=" + induction_date + ", teacher_certificate_no="
-				+ teacher_certificate_no + ", teaching_type=" + teaching_type + ", teaching_status=" + teaching_status
+				+ ", subject_category=" + subject_category + ", teaching_type=" + teaching_type
 				+ ", teaching_profession_name=" + teaching_profession_name + ", teaching_profession_no="
 				+ teaching_profession_no + ", profession_teaching_date=" + profession_teaching_date
 				+ ", experimental_technical_personnel=" + experimental_technical_personnel + ", double_teacher_type="
 				+ double_teacher_type + ", engineering_background=" + engineering_background + ", industry_background="
-				+ industry_background + ", administrative_rank=" + administrative_rank + ", graduate_tutor_type="
-				+ graduate_tutor_type + ", number_of_doctor=" + number_of_doctor + ", number_of_master="
-				+ number_of_master + ", employee_type=" + employee_type + ", employment_type=" + employment_type
-				+ ", job_statue=" + job_statue + ", transaction_type=" + transaction_type + ", university_transfer="
-				+ university_transfer + ", school_graduation=" + school_graduation + ", school_adjustment="
-				+ school_adjustment + ", off_campus_teacher_type=" + off_campus_teacher_type
-				+ ", teacher_basic_gmt_create=" + teacher_basic_gmt_create + ", teacher_basic_gmt_modified="
-				+ teacher_basic_gmt_modified + "]";
+				+ industry_background + ", graduate_tutor_type=" + graduate_tutor_type + ", number_of_doctor="
+				+ number_of_doctor + ", number_of_master=" + number_of_master + ", teacher_basic_gmt_create="
+				+ teacher_basic_gmt_create + ", teacher_basic_gmt_modified=" + teacher_basic_gmt_modified + "]";
 	}
 
 }
