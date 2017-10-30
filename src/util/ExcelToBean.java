@@ -171,7 +171,6 @@ public class ExcelToBean {
 		// 空值
 		case Cell.CELL_TYPE_BLANK:
 			value = "";
-			System.out.println("excel出现空值");
 			break;
 		// 故障
 		case Cell.CELL_TYPE_ERROR:
