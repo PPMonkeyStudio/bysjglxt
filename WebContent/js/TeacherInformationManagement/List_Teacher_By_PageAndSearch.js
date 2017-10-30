@@ -50,9 +50,16 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_section
 							+ '</td><td>'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title
+							+ '</td><td>'
+							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance
+							+ '/'
+							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance
 							+ '</td><td style="padding: 0;"><button id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
-							+ '" onclick="Teacher_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default btn-ms">详细</button></td>'
+							+ '" onclick="Teacher_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default">基础信息</button>'
+							+ '<button id="'
+							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
+							+ '" onclick="Teacher_Fix_User(this)" style="margin:3px 0 0 10px;"class="btn btn-default">其他信息</button></td>'
 							+ '<td>'
 							+ '<label class="fancy-checkbox">'
 							+ '<input id="'

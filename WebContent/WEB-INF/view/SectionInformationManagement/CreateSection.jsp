@@ -148,7 +148,7 @@
 						<i class="fa  fa-check "></i> 确认创建
 					</button>
 					<button class="btn btn-default"
-						onclick="window.location='<%=basePath%>teacher/TeacherInformationManagement_TeacherManagementPage'"
+						onclick="window.location='<%=basePath%>student/StudentInformationManagement_listPage'"
 						style="float: right; margin: 0 10px;">
 						<i class="fa  fa-close "></i> 返回
 					</button>
