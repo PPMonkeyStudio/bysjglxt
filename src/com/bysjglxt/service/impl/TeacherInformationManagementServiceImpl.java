@@ -66,6 +66,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			bysjglxt_teacher_user.setUser_teacher_guidance_num(0);
 			// 工号
 			bysjglxt_teacher_user.setUser_teacher_num(bysjglxt_teacher_basic.getJob_number());
+			bysjglxt_teacher_user.setUser_teacher_section(null);
 			// 密码
 			bysjglxt_teacher_user.setUser_teacher_password(bysjglxt_teacher_user.getUser_teacher_num());
 			bysjglxt_teacher_user.setUser_teacher_basic(bysjglxt_teacher_basic.getTeacher_basic_id());
@@ -142,6 +143,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	}
 
 	/**
+	 * 弃用 
 	 * 创建教研室
 	 */
 	@Override
@@ -199,8 +201,11 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 				teacher_basic = teacherInformationManagementDao
 						.get_TeacherBasicInformation_ByUserBasic(bysjglxt_teacher_user.getUser_teacher_basic());
 				teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxt_teacher_basic);
-				bysjglxt_section = teacherInformationManagementDao
-						.get_TeacherSectionInformation_ByUserSectionId(bysjglxt_teacher_user.getUser_teacher_section());
+				if (bysjglxt_teacher_user.getUser_teacher_section() != null) {
+					bysjglxt_section = teacherInformationManagementDao.get_TeacherSectionInformation_ByUserSectionId(
+							bysjglxt_teacher_user.getUser_teacher_section());
+				}
+
 				teacherInformationDTO.setBysjglxtSection(bysjglxt_section);
 				list_TeacherInformationDTO.add(teacherInformationDTO);
 			}
@@ -209,6 +214,9 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		return teacherInformationManagementVO;
 	}
 
+	/**
+	 * 弃用
+	 */
 	@Override
 	public boolean deleteSection(List<String> listSectionId) {
 		boolean flag = false;
@@ -220,6 +228,9 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		return flag;
 	}
 
+	/**
+	 * 弃用
+	 */
 	@Override
 	public List<bysjglxt_section> listBysjglxtSection() {
 		return teacherInformationManagementDao.listBysjglxtSection();
@@ -238,6 +249,9 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		return flag;
 	}
 
+	/**
+	 * 弃用
+	 */
 	@Override
 	public boolean updateSection(bysjglxt_section bysjglxt_section) {
 		return teacherInformationManagementDao.updateSection(bysjglxt_section);

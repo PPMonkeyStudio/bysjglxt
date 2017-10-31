@@ -70,8 +70,9 @@ public interface TeacherInformationManagementService {
 	public boolean remove_TeacherList(List<String> useTeacherNumList);
 
 	/**
-	 * @DATE 2017-10-29
 	 * 
+	 * @DATE 2017-10-29
+	 * 	弃用
 	 * @说明 创建教研室
 	 * @param newSection
 	 * @return
@@ -79,6 +80,7 @@ public interface TeacherInformationManagementService {
 	public boolean Create_Section(bysjglxt_section newSection);
 
 	/**
+	 *  弃用
 	 * @说明 删除教研室
 	 * @DATE 2017-10-29
 	 * @param listSectionId
@@ -88,7 +90,7 @@ public interface TeacherInformationManagementService {
 
 	/**
 	 * 遍历得到所有的教研室
-	 * 
+	 * 弃用 
 	 * @return
 	 */
 	public List<bysjglxt_section> listBysjglxtSection();
@@ -113,6 +115,7 @@ public interface TeacherInformationManagementService {
 	public boolean updateBasicAndUser(TeacherInformationDTO teacherInformationDTO);
 
 	/**
+	 * 弃用
 	 * 更新教研室信息
 	 * @param bysjglxt_section
 	 * @return
