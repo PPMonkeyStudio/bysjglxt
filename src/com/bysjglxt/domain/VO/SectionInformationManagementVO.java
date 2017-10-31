@@ -2,7 +2,7 @@ package com.bysjglxt.domain.VO;
 
 import java.util.List;
 
-import com.bysjglxt.domain.DTO.SectionInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 
 public class SectionInformationManagementVO {
 
@@ -25,7 +25,7 @@ public class SectionInformationManagementVO {
 	private boolean HaveNextPage = false;
 
 	// 教研室主任
-	private List<SectionInformationDTO> SectionInformationDTO;
+	private List<TeacherInformationDTO> teacherInformationDTO;
 
 	/*
 	 * 
@@ -39,7 +39,7 @@ public class SectionInformationManagementVO {
 	public String toString() {
 		return "SectionInformationManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords
 				+ ", pageSize=" + pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage
-				+ ", HaveNextPage=" + HaveNextPage + ", SectionInformationDTO=" + SectionInformationDTO + "]";
+				+ ", HaveNextPage=" + HaveNextPage + ", teacherInformationDTO=" + teacherInformationDTO + "]";
 	}
 
 	public void setPageIndex(int pageIndex) {
@@ -86,12 +86,12 @@ public class SectionInformationManagementVO {
 		HaveNextPage = haveNextPage;
 	}
 
-	public List<SectionInformationDTO> getSectionInformationDTO() {
-		return SectionInformationDTO;
+	public List<TeacherInformationDTO> getTeacherInformationDTO() {
+		return teacherInformationDTO;
 	}
 
-	public void setSectionInformationDTO(List<SectionInformationDTO> sectionInformationDTO) {
-		SectionInformationDTO = sectionInformationDTO;
+	public void setTeacherInformationDTO(List<TeacherInformationDTO> teacherInformationDTO) {
+		this.teacherInformationDTO = teacherInformationDTO;
 	}
 
 }

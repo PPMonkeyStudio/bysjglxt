@@ -211,10 +211,18 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		query.setMaxResults(teacherInformationManagementVO.getPageSize());
 		List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch = query.list();
 		session.clear();
-		if (teacherInformationManagementVO.getSearch() != null
+		if (!flag && teacherInformationManagementVO.getSearch() != null
 				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
 			for (bysjglxt_teacher_basic bysjglxt_teacher_basic : listTeacherBasicInformationByPageAndSearch) {
 				bysjglxt_teacher_basic.setName(bysjglxt_teacher_basic.getName()
+						.replaceAll(teacherInformationManagementVO.getSearch().trim(), "<span style='color: #ff5063;'>"
+								+ teacherInformationManagementVO.getSearch().trim() + "</span>"));
+			}
+		}
+		if (flag && teacherInformationManagementVO.getSearch() != null
+				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
+			for (bysjglxt_teacher_basic bysjglxt_teacher_basic : listTeacherBasicInformationByPageAndSearch) {
+				bysjglxt_teacher_basic.setJob_number(bysjglxt_teacher_basic.getJob_number()
 						.replaceAll(teacherInformationManagementVO.getSearch().trim(), "<span style='color: #ff5063;'>"
 								+ teacherInformationManagementVO.getSearch().trim() + "</span>"));
 			}
