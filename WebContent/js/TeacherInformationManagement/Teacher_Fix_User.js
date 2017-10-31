@@ -4,6 +4,10 @@
 
 	// 将undefined换成空格
 	for (var num = 0; num < teacher_json.list_TeacherInformationDTO.length; num++) {
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance == undefined
+				|| teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance == "∞") {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance = "-1";
+		}
 
 	}
 

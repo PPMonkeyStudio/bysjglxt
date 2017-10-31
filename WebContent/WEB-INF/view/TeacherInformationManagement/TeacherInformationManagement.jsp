@@ -25,6 +25,8 @@
 	src="<%=basePath%>js/TeacherInformationManagement/Update_Teacher.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TeacherInformationManagement/Teacher_Fix_User.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TeacherInformationManagement/Get_Teacher_Section.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>教师信息</title>
 </head>
@@ -266,6 +268,7 @@
 	$('select').selectpicker('refresh');
 </script>
 <script>
-	
+	var select_section = document.getElementById("select_section");
+	Get_Teacher_Section(select_section);
 </script>
 </html>

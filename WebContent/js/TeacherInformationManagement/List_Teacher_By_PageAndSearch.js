@@ -26,6 +26,31 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					new_tr_list[0].parentNode.removeChild(new_tr_list[0]);
 				}
 				/*
+				 * 将undefinded转化为空字符串
+				 */
+				for (var num = 0; num < teacher_json.list_TeacherInformationDTO.length; num++) {
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex == undefined) {
+						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex = "";
+					}
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name == undefined) {
+						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name = "";
+					}
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_section == undefined) {
+						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_section = "";
+					}
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title == undefined) {
+						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title = "";
+					}
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num == undefined) {
+						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num = "0";
+					}
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance == undefined
+							|| teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance == "-1") {
+						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance = "∞";
+					}
+				}
+
+				/*
 				 * 
 				 */
 				var table_teacher = document.getElementById("table_teacher");
@@ -47,11 +72,11 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 							+ '</td><td>'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex
 							+ '</td><td>'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_section
+							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name
 							+ '</td><td>'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title
 							+ '</td><td>'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance
+							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num
 							+ '/'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance
 							+ '</td><td style="padding: 0;"><button id="'
@@ -116,6 +141,14 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 	} else if (select_sex.value == "女") {
 		formData.append("teacherInformationManagementVO.sex", select_sex.value);
 	}
+	/*
+	 * 教研室
+	 */
+	if (!document.getElementById("select_section").value == "-1") {
+		formData.append("teacherInformationManagementVO.section", document
+				.getElementById("select_section").value);
+	}
+	alert(document.getElementById("select_section").value);
 	/*
 	 * 
 	 */

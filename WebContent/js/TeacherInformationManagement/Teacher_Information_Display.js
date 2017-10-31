@@ -4,7 +4,75 @@
 
 	// 将undefined换成空格
 	for (var num = 0; num < teacher_json.list_TeacherInformationDTO.length; num++) {
-
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.birthday == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.birthday = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.induction_date == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.induction_date = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.job_statue == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.job_statue = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.unit_number == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.unit_number = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.unit_name == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.unit_name = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_education == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_education = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_degree == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_degree = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.learn_edge_structure == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.learn_edge_structure = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.subject_category == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.subject_category = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.teaching_type == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.teaching_type = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.teaching_profession_name == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.teaching_profession_name = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.teaching_profession_no == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.teaching_profession_no = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.profession_teaching_date == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.profession_teaching_date = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.experimental_technical_personnel == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.experimental_technical_personnel = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.double_teacher_type == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.double_teacher_type = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.engineering_background == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.engineering_background = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.industry_background == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.industry_background = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.graduate_tutor_type == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.graduate_tutor_type = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.number_of_doctor == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.number_of_doctor = "";
+		}
+		if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.number_of_master == undefined) {
+			teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.number_of_master = "";
+		}
 	}
 
 	var new_tr_1 = null;

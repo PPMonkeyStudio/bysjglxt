@@ -37,7 +37,7 @@ public interface TeacherInformationManagementDao {
 
 	List<bysjglxt_section> listBysjglxtSection();
 
-	com.bysjglxt.domain.DO.bysjglxt_section get_TeacherSectionInformation_ByUserSectionId(String user_teacher_section);
+	bysjglxt_section get_TeacherSectionInformation_ByUserSectionId(String user_teacher_section);
 
 	boolean updateBasic(bysjglxt_teacher_basic bysjglxtTeacherBasic);
 
