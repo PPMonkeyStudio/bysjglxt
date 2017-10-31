@@ -35,12 +35,24 @@ public class TeacherInformationManagementVO {
 	// 教研室筛选
 	private String section;
 
+	// 专业技术职称筛选
+	private String professional_title;
+
 	@Override
 	public String toString() {
 		return "TeacherInformationManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords
 				+ ", pageSize=" + pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage
 				+ ", HaveNextPage=" + HaveNextPage + ", list_TeacherInformationDTO=" + list_TeacherInformationDTO
-				+ ", search=" + search + ", sex=" + sex + ", section=" + section + "]";
+				+ ", search=" + search + ", sex=" + sex + ", section=" + section + ", professional_title="
+				+ professional_title + "]";
+	}
+
+	public String getProfessional_title() {
+		return professional_title;
+	}
+
+	public void setProfessional_title(String professional_title) {
+		this.professional_title = professional_title;
 	}
 
 	public int getPageIndex() {

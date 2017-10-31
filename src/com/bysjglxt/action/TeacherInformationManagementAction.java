@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
+import com.bysjglxt.service.SectionInformationManagementService;
 import com.bysjglxt.service.TeacherInformationManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,6 +24,8 @@ public class TeacherInformationManagementAction extends ActionSupport
 		implements ServletResponseAware, ServletRequestAware {
 
 	private TeacherInformationManagementService teacherInformationManagementService;
+
+	private SectionInformationManagementService sectionInformationManagementService;
 
 	private HttpServletResponse http_response;
 
@@ -47,6 +51,10 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * 修改的学生基础信息
 	 */
 	private bysjglxt_teacher_basic updateTeacher;
+	/*
+	 * 修改的学生基础信息
+	 */
+	private bysjglxt_teacher_basic newTeacher;
 
 	/*
 	 * 
@@ -67,7 +75,6 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void ListTeacherByPageAndSearch() throws IOException {
-
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -134,6 +141,36 @@ public class TeacherInformationManagementAction extends ActionSupport
 	public void UpdateTeacher() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
+	}
+
+	/**
+	 * @创建教师
+	 */
+	public void CreateTeacher() {
+		teacherInformationManagementService.save_NewTeacher(newTeacher);
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			http_response.getWriter().write("success");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @throws Exception
+	 * @说明 获取学生专业
+	 */
+	public void GetTeacherSection() throws Exception {
+
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		List<bysjglxt_section> list_Section = teacherInformationManagementService.listBysjglxtSection();
+
+		http_response.getWriter().write(gson.toJson(list_Section));
+
 	}
 	/*
 	 * 
@@ -216,6 +253,31 @@ public class TeacherInformationManagementAction extends ActionSupport
 
 	public void setListDeleteTeacherID(List<String> listDeleteTeacherID) {
 		ListDeleteTeacherID = listDeleteTeacherID;
+	}
+
+	public bysjglxt_teacher_basic getUpdateTeacher() {
+		return updateTeacher;
+	}
+
+	public void setUpdateTeacher(bysjglxt_teacher_basic updateTeacher) {
+		this.updateTeacher = updateTeacher;
+	}
+
+	public bysjglxt_teacher_basic getNewTeacher() {
+		return newTeacher;
+	}
+
+	public void setNewTeacher(bysjglxt_teacher_basic newTeacher) {
+		this.newTeacher = newTeacher;
+	}
+
+	public SectionInformationManagementService getSectionInformationManagementService() {
+		return sectionInformationManagementService;
+	}
+
+	public void setSectionInformationManagementService(
+			SectionInformationManagementService sectionInformationManagementService) {
+		this.sectionInformationManagementService = sectionInformationManagementService;
 	}
 
 }

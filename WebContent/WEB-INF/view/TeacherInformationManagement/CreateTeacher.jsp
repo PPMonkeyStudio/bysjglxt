@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Create_Student.js"></script>
+	src="<%=basePath%>js/TeacherInformationManagement/Create_Teacher.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -28,122 +28,113 @@
 		<!---------------------------------------------------------------------------------------------------->
 		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<div class="panel-heading">
-				<h3 class="panel-title">新增学生信息</h3>
+				<h3 class="panel-title">新增教师</h3>
 			</div>
 			<div class="panel-body">
 				<table id="" class="table table-hover table-bordered  table-striped"
 					style="text-align: center;">
 					<tbody>
 						<tr>
-							<th>学号</th>
-							<td><input id="student_basic_num" class="form-control"
+							<th>工号</th>
+							<td><input id="input_job_number" class="form-control"
 								type="text"></td>
 							<th>姓名</th>
-							<td><input id="student_basic_name" class="form-control"
-								type="text"></td>
+							<td><input id="input_name" class="form-control" type="text"></td>
 						</tr>
 						<tr>
-							<th>年制</th>
-							<td><input id="student_basic_year" class="form-control"
-								type="text"></td>
-							<th>年级</th>
-							<td><input id="student_basic_grade" class="form-control"
-								type="text"></td>
-						</tr>
-						<tr>
-							<th>证件类型</th>
-							<td><input id="student_basic_idtype" class="form-control"
-								type="text"></td>
-							<th>身份证/护照号码</th>
-							<td><input id="student_basic_idcaard" class="form-control"
-								type="text"></td>
-						</tr>
-						<tr>
-							<th>年龄</th>
-							<td><input id="student_basic_age" class="form-control"
-								type="text"></td>
 							<th>性别</th>
 							<td><select class="form-control" style="width: auto;"
-								id="student_basic_sex"><option value="男">男</option>
+								id="input_sex"><option value="男">男</option>
 									<option value="女">女</option>
 							</select></td>
-						</tr>
-						<tr>
-							<th>民族</th>
-							<td><input id="student_basic_nation" class="form-control"
-								type="text"></td>
-							<th>政治面貌</th>
-							<td><input id="student_basic_politicalvisage"
-								class="form-control" type="text"></td>
-						</tr>
-						<tr>
-							<th>籍贯</th>
-							<td><input id="student_basic_native_place"
-								class="form-control" type="text"></td>
-							<th>学生类型</th>
-							<td><input id="student_basic_studenttype"
-								class="form-control" type="text"></td>
-						</tr>
-						<tr>
-							<th>招生类型</th>
-							<td><input id="student_basic_enrollmenttype"
-								class="form-control" type="text"></td>
-							<th>授课方式</th>
-							<td><input id="student_basic_teachingmethods"
-								class="form-control" type="text"></td>
-						</tr>
-						<tr>
-							<th>专业代码</th>
-							<td><input id="student_basic_professionalcode"
-								class="form-control" type="text"></td>
-							<th>专业名称</th>
-							<td><input id="student_basic_major" class="form-control"
+							<th>出生年月</th>
+							<td><input id="input_birthday" class="form-control"
 								type="text"></td>
 						</tr>
 						<tr>
-							<th>自主专业名称</th>
-							<td><input id="student_basic_independentmajorname"
-								class="form-control" type="text"></td>
-							<th>是否是师范类专业</th>
-							<td><input id="student_basic_is_normalmajor"
-								class="form-control" type="text"></td>
-						</tr>
-						<tr>
-							<th>是否残疾</th>
-							<td><input id="student_basic_is_disability"
-								class="form-control" type="text"></td>
-							<th>户口类型</th>
-							<td><input id="student_basic_householdregistrationtype"
-								class="form-control" type="text"></td>
-						</tr>
-						<tr>
-							<th>异动类型</th>
-							<td><input id="student_basic_transactiontypes"
-								class="form-control" type="text"></td>
-							<th>入学学历</th>
-							<td><input id="student_basic_entranceeducation"
-								class="form-control" type="text"></td>
-						</tr>
-						<tr>
-							<th>招生方式</th>
-							<td><input id="student_basic_enrollmentmode"
-								class="form-control" type="text"></td>
-							<th>休退学原因</th>
-							<td><input id="student_basic_reasonsfordroppingoutofschool"
-								class="form-control" type="text"></td>
-						</tr>
-						<tr>
-							<th>联系方式</th>
-							<td><input id="student_basic_phone" class="form-control"
+							<th>入校时间</th>
+							<td><input id="input_induction_date" class="form-control"
 								type="text"></td>
-							<th>学院</th>
-							<td><input id="student_basic_college" class="form-control"
+							<th>任职状态</th>
+							<td><input id="input_job_statue" class="form-control"
+								type="text"></td>
+						</tr>
+						<tr>
+							<th>单位编号</th>
+							<td><input id="input_unit_number" class="form-control"
+								type="text"></td>
+							<th>单位名称</th>
+							<td><input id="input_unit_name" class="form-control"
+								type="text"></td>
+						</tr>
+						<tr>
+							<th>最高学历</th>
+							<td><input id="input_highest_education" class="form-control"
+								type="text"></td>
+							<th>最高学位</th>
+							<td><input id="input_highest_degree" class="form-control"
+								type="text"></td>
+						</tr>
+						<tr>
+							<th>学缘</th>
+							<td><input id="input_learn_edge_structure"
+								class="form-control" type="text"></td>
+							<th>专业技术职称</th>
+							<td><input id="input_professional_title"
+								class="form-control" type="text"></td>
+						</tr>
+						<tr>
+							<th>学科类别</th>
+							<td><input id="input_subject_category" class="form-control"
+								type="text"></td>
+							<th>授课类型</th>
+							<td><input id="input_teaching_type" class="form-control"
+								type="text"></td>
+						</tr>
+						<tr>
+							<th>任教专业名称</th>
+							<td><input id="input_teaching_profession_name"
+								class="form-control" type="text"></td>
+							<th>任教专业代码</th>
+							<td><input id="input_teaching_profession_no"
+								class="form-control" type="text"></td>
+						</tr>
+						<tr>
+							<th>专业任教时间</th>
+							<td><input id="input_profession_teaching_date"
+								class="form-control" type="text"></td>
+							<th>是否实验技术人员</th>
+							<td><input id="input_experimental_technical_personnel"
+								class="form-control" type="text"></td>
+						</tr>
+						<tr>
+							<th>是否双师型</th>
+							<td><input id="input_double_teacher_type"
+								class="form-control" type="text"></td>
+							<th>是否工程背景</th>
+							<td><input id="input_engineering_background"
+								class="form-control" type="text"></td>
+						</tr>
+						<tr>
+							<th>是否行业背景</th>
+							<td><input id="input_industry_background"
+								class="form-control" type="text"></td>
+							<th>研究生导师类型</th>
+							<td><input id="input_graduate_tutor_type"
+								class="form-control" type="text"></td>
+						</tr>
+						<tr>
+							<th>校内指导博士生人数</th>
+							<td><input id="input_number_of_doctor" class="form-control"
+								type="text"></td>
+							<th>校内指导硕士生人数</th>
+							<td><input id="input_number_of_master" class="form-control"
 								type="text"></td>
 						</tr>
 					</tbody>
 				</table>
 				<div style="height: 34px; margin: 30px 0;">
-					<button class="btn btn-default" onclick="Create_Student()"
+					<button class="btn btn-default" onclick="Create_Teacher()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa  fa-check "></i> 确认创建
 					</button>
