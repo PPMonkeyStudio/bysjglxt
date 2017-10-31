@@ -145,13 +145,16 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			hql = hql + " and name like '" + search + "'";
 
 		}
-
 		if (flag && teacherInformationManagementVO.getSearch() != null
 				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
 			hql = hql + " and job_number like '" + search + "'";
 		}
 
+		if (teacherInformationManagementVO.getProfessional_title() != null
+				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0) {
+			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title() + "'";
+		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
 			hql = hql + " and sex='" + teacherInformationManagementVO.getSex() + "'";
@@ -198,6 +201,10 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
 			hql = hql + " and job_number like '" + search + "'";
+		}
+		if (teacherInformationManagementVO.getProfessional_title() != null
+				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0) {
+			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title() + "'";
 		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
