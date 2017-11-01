@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.VO.SectionInformationManagementVO;
 import com.bysjglxt.service.SectionInformationManagementService;
 import com.google.gson.Gson;
@@ -30,6 +31,8 @@ public class SectionInformationManagementAction extends ActionSupport
 	 * 
 	 */
 	private SectionInformationManagementVO sectionInformationManagementVO;
+
+	private bysjglxt_section newSection;
 
 	/**
 	 * @说明 跳转列表页
@@ -66,6 +69,13 @@ public class SectionInformationManagementAction extends ActionSupport
 			e.printStackTrace();
 		}
 
+	}
+
+	public void CreateSection() throws IOException {
+		sectionInformationManagementService.Create_Section(newSection);
+
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
 	}
 
 	/*
@@ -119,6 +129,14 @@ public class SectionInformationManagementAction extends ActionSupport
 
 	public void setSectionInformationManagementVO(SectionInformationManagementVO sectionInformationManagementVO) {
 		this.sectionInformationManagementVO = sectionInformationManagementVO;
+	}
+
+	public bysjglxt_section getNewSection() {
+		return newSection;
+	}
+
+	public void setNewSection(bysjglxt_section newSection) {
+		this.newSection = newSection;
 	}
 
 }
