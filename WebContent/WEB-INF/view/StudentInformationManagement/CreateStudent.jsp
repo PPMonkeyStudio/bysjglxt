@@ -21,17 +21,16 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
-	<div
-		style="margin: 80px 0 0 260px; width: calc(100% - 260px); float: left;">
+	<div style="margin: 80px 0 0 0; float: left; width: 100%;">
 		<!--  -->
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
-		<div class="panel" style="width: 95%; margin: 20px auto;">
+		<div class="panel" style="width: 900px; margin: 20px auto;">
 			<div class="panel-heading">
 				<h3 class="panel-title">新增学生信息</h3>
 			</div>
 			<div class="panel-body">
-				<table id="" class="table table-hover table-bordered  table-striped"
+				<table id="" class="table table-hover   "
 					style="text-align: center;">
 					<tbody>
 						<tr>

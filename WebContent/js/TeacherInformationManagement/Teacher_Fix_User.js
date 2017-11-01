@@ -52,3 +52,29 @@
 	 */
 
 }
+
+function Commit_Fix_Teacher_User(this_button) {
+
+	var xhr = false;
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		var message;
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				if (xhr.responseText == "success") {
+					toastr.success("更新成功");
+					List_Student_By_PageAndSearch(1);
+				}
+			} else {
+				toastr.error(xhr.status);
+			}
+		}
+	}
+
+	var formData = new FormData();
+	formData.append("updateTeacherUser.user_teacher_max_guidance", document
+			.getElementById("info_user_teacher_max_guidance").value);
+	formData.append("updateTeacherUser.user_teacher_section", document
+			.getElementById("info_section").value);
+	xhr.send(formData);
+}
