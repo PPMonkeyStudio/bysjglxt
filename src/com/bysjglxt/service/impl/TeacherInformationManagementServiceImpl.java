@@ -194,6 +194,9 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		return teacherInformationManagementDao.listBysjglxtSection();
 	}
 
+	/**
+	 * 弃用
+	 */
 	@Override
 	public boolean updateBasicAndUser(TeacherInformationDTO teacherInformationDTO) {
 		// 修改基础表信息
@@ -206,7 +209,18 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			return flag;
 		return flag;
 	}
-
+	/**
+	 * 修改教师基础表信息
+	 */
+	@Override
+	public boolean updateTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic) {
+		return teacherInformationManagementDao.updateBasic(bysjglxt_teacher_basic);
+	}
+	@Override
+	public boolean updateTeacherUser(bysjglxt_teacher_user bysjglxt_teacher_user) {
+		return teacherInformationManagementDao.updateUser(bysjglxt_teacher_user);
+	}
+	
 	/**
 	 * 获取老师的职称
 	 */
@@ -214,4 +228,6 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	public List<String> list_Teacher_Title() {
 		return teacherInformationManagementDao.list_Teacher_Title();
 	}
+
+	
 }

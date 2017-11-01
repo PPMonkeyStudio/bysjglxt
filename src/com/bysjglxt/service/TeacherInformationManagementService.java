@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 
@@ -66,7 +67,6 @@ public interface TeacherInformationManagementService {
 	 */
 	public boolean remove_TeacherList(List<String> useTeacherNumList);
 
-
 	/**
 	 * 遍历得到所有的教研室
 	 * 
@@ -89,11 +89,26 @@ public interface TeacherInformationManagementService {
 			TeacherInformationManagementVO teacherInformationManagementVO);
 
 	/**
-	 * 更新教师信息
+	 * @DATE 2017-11-1 弃用 使用DTO更新教师信息
 	 */
 	public boolean updateBasicAndUser(TeacherInformationDTO teacherInformationDTO);
 
+	/**
+	 * 更改教师基础表信息
+	 * 
+	 * @param bysjglxt_teacher_basic
+	 * @return
+	 */
+	public boolean updateTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic);
 
+	/**
+	 * 修改教师登陆信息
+	 * @param bysjglxt_teacher_user
+	 * @return
+	 */
+	public boolean updateTeacherUser(bysjglxt_teacher_user bysjglxt_teacher_user);
+	
+	
 	/**
 	 * 遍历获得所有职称
 	 * 
