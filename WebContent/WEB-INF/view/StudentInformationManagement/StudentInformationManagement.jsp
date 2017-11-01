@@ -250,7 +250,7 @@
 </script>
 <script>
 	var select_major = document.getElementById("select_major");
-	var select_grade = document.getElementById("select_grade")
+	var select_grade = document.getElementById("select_grade");
 	Get_Student_Major(select_major);
 	Get_Student_Grade(select_grade);
 </script>

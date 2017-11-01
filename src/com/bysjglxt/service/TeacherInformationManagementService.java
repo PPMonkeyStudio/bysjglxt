@@ -36,9 +36,7 @@ public interface TeacherInformationManagementService {
 	public boolean saveTeacherList(List<bysjglxt_teacher_basic> teacherBasicList);
 
 	/**
-
 	 * @待测试 暂时用不到
-
 	 * @DATE 2017-10-29
 	 * @说明 获取数据库中所有的bysjglxt_teacher_basic记录以及bysjglxt_user_teacher记录，
 	 *     并封装成TeacherInformationDTO的List返回
@@ -71,8 +69,7 @@ public interface TeacherInformationManagementService {
 
 	/**
 	 * 
-	 * @DATE 2017-10-29
-	 * 	弃用
+	 * @DATE 2017-10-29 弃用
 	 * @说明 创建教研室
 	 * @param newSection
 	 * @return
@@ -80,7 +77,8 @@ public interface TeacherInformationManagementService {
 	public boolean Create_Section(bysjglxt_section newSection);
 
 	/**
-	 *  弃用
+	 * 弃用
+	 * 
 	 * @说明 删除教研室
 	 * @DATE 2017-10-29
 	 * @param listSectionId
@@ -89,8 +87,8 @@ public interface TeacherInformationManagementService {
 	public boolean deleteSection(List<String> listSectionId);
 
 	/**
-	 * 遍历得到所有的教研室
-	 * 弃用 
+	 * 遍历得到所有的教研室 弃用
+	 * 
 	 * @return
 	 */
 	public List<bysjglxt_section> listBysjglxtSection();
@@ -115,8 +113,8 @@ public interface TeacherInformationManagementService {
 	public boolean updateBasicAndUser(TeacherInformationDTO teacherInformationDTO);
 
 	/**
-	 * 弃用
-	 * 更新教研室信息
+	 * 弃用 更新教研室信息
+	 * 
 	 * @param bysjglxt_section
 	 * @return
 	 */

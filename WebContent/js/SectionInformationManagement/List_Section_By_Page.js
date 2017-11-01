@@ -31,24 +31,49 @@ function List_Section_By_Page(pageIndex) {
 				 */
 				var table_section = document.getElementById("table_section");
 
-				for (var num = 0; num < section_json.list_SectionInformationDTO.length; num++) {
+				var new_tr;
+				var new_td;
+				for (var num = 0; num < section_json.teacherInformationDTO.length; num++) {
 
-					var new_tr = document.createElement("tr");
-
+					new_tr = document.createElement("tr");
 					new_tr.appendChild(document.createTextNode(''));
-
 					table_section.firstElementChild.appendChild(new_tr);
-
 					new_tr.className = "new_tr";
 
-					new_tr.innerHTML = '<td>'
-							+ section_json.list_SectionInformationDTO[num].bysjglxtSection.section_name
-							+ '</td><td>'
-							+ '<label class="fancy-checkbox">'
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (section_json.teacherInformationDTO[num].bysjglxtSection != undefined
+							&& section_json.teacherInformationDTO[num].bysjglxtSection.section_name != undefined) {
+						new_td.innerHTML = section_json.teacherInformationDTO[num].bysjglxtSection.section_name;
+					} else {
+						new_td.innerHTML = '无';
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (section_json.teacherInformationDTO[num].bysjglxtTeacherBasic != undefined
+							&& section_json.teacherInformationDTO[num].bysjglxtTeacherBasic.name != undefined) {
+						new_td.innerHTML = section_json.teacherInformationDTO[num].bysjglxtTeacherBasic.name;
+					} else {
+						new_td.innerHTML = '无';
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = '<button onclick="" class="btn btn-default">修改</button>';
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = '<label class="fancy-checkbox">'
 							+ '<input id="'
-							+ section_json.list_SectionInformationDTO[num].bysjglxtSection.section_id
+							+ section_json.teacherInformationDTO[num].bysjglxtSection.section_id
 							+ '" type="checkbox" class="checkbox_select">'
 							+ '<span></span></label></td>';
+
 				}
 
 				/*
