@@ -157,9 +157,9 @@ public class TeacherInformationManagementAction extends ActionSupport
 	}
 
 	/**
-	 * 
+	 * @说明
 	 * @throws Exception
-	 * @说明 获取学生专业
+	 * 
 	 */
 	public void GetTeacherSection() throws Exception {
 
@@ -173,6 +173,11 @@ public class TeacherInformationManagementAction extends ActionSupport
 
 	}
 
+	/**
+	 * @说明 获得所有教师dto
+	 * 
+	 * @throws IOException
+	 */
 	public void ListTeacherAll() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -181,6 +186,14 @@ public class TeacherInformationManagementAction extends ActionSupport
 		http_response.getWriter()
 				.write(gson.toJson(teacherInformationManagementService.list_TeacherInformationDTO_All()));
 
+	}
+
+	public void GetTeacherTitle() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(teacherInformationManagementService.list_Teacher_Title()));
 	}
 	/*
 	 * 

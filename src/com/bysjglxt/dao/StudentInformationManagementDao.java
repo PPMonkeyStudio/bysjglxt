@@ -27,7 +27,7 @@ public interface StudentInformationManagementDao {
 
 	int get_StudentInfor_TotalRecords_BySearch(String search);
 
-	bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id, int operationPermission);
+	bysjglxt_student_user getStudentInfoByBasicId(String student_basic_id);
 
 	List<String> listStudent_Major() throws Exception;
 
@@ -41,5 +41,7 @@ public interface StudentInformationManagementDao {
 	boolean update_Take_Student_Operate_Permission(String string);
 
 	boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic);
+
+	List<bysjglxt_student_basic> getResultBySearch(StudentInformationManagementVO studentInformationManagementVO);
 
 }

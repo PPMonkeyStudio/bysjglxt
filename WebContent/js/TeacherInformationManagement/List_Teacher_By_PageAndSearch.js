@@ -177,6 +177,13 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 				.getElementById("select_section").value);
 	}
 	/*
+	 * 职称
+	 */
+	if (document.getElementById("select_title").value != "-1") {
+		formData.append("teacherInformationManagementVO.professional_title",
+				document.getElementById("select_title").value);
+	}
+	/*
 	 * 
 	 */
 	formData.append("teacherInformationManagementVO.pageIndex", pageIndex);

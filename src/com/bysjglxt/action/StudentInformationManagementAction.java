@@ -49,6 +49,14 @@ public class StudentInformationManagementAction extends ActionSupport
 	 * 删除所选学生列表
 	 */
 	private List<String> ListDeleteStudentID;
+	/*
+	 * 删除所选学生列表
+	 */
+	private List<String> ListGiveOperatePremissionStudentID;
+	/*
+	 * 删除所选学生列表
+	 */
+	private List<String> ListTakeOperatePremissionStudentID;
 
 	/*
 	 * 手动添加的学生
@@ -139,6 +147,22 @@ public class StudentInformationManagementAction extends ActionSupport
 	 */
 	public void DeleteStudent() throws IOException {
 		studentInformationManagementService.remove_StudentList(ListDeleteStudentID);
+
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+
+	}
+
+	public void GiveStudentOperatePremission() throws IOException {
+		studentInformationManagementService.update_Give_Student_Operate_Permission(ListGiveOperatePremissionStudentID);
+
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+
+	}
+
+	public void TakeStudentOperatePremission() throws IOException {
+		studentInformationManagementService.update_Take_Student_Operate_Permission(ListTakeOperatePremissionStudentID);
 
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
@@ -304,6 +328,22 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	public void setUpdateStudent(bysjglxt_student_basic updateStudent) {
 		this.updateStudent = updateStudent;
+	}
+
+	public List<String> getListGiveOperatePremissionStudentID() {
+		return ListGiveOperatePremissionStudentID;
+	}
+
+	public void setListGiveOperatePremissionStudentID(List<String> listGiveOperatePremissionStudentID) {
+		ListGiveOperatePremissionStudentID = listGiveOperatePremissionStudentID;
+	}
+
+	public List<String> getListTakeOperatePremissionStudentID() {
+		return ListTakeOperatePremissionStudentID;
+	}
+
+	public void setListTakeOperatePremissionStudentID(List<String> listTakeOperatePremissionStudentID) {
+		ListTakeOperatePremissionStudentID = listTakeOperatePremissionStudentID;
 	}
 
 }

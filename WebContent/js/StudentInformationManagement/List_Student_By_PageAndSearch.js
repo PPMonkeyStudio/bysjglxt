@@ -32,10 +32,11 @@ function List_Student_By_PageAndSearch(pageIndex) {
 				 * 
 				 */
 				var table_student = document.getElementById("table_student");
+				var new_tr = null;
 
 				for (var num = 0; num < student_json.list_StudentInformationDTO.length; num++) {
 
-					var new_tr = document.createElement("tr");
+					new_tr = document.createElement("tr");
 
 					new_tr.appendChild(document.createTextNode(''));
 					table_student.firstElementChild.appendChild(new_tr);

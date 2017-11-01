@@ -27,6 +27,10 @@
 	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Grade.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Update_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Student_Give_Operate_Premission.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Student_Take_Operate_Premission.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -101,14 +105,14 @@
 						</tr>
 					</tbody>
 				</table>
-				
-				
+
+
 				<div id="i_pulse" style="text-align: center;">
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
 				</div>
-				
-				
-				
+
+
+
 				<div style="height: 34px; margin: 0 0 20px 0;">
 
 					<button class="btn btn-danger" onclick="Delete_Student()"
@@ -117,10 +121,12 @@
 					</button>
 
 					<button class="btn btn-default"
+						onclick="Student_Take_Operate_Premission()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-reply-all"></i> 收回操作权限
 					</button>
 					<button class="btn btn-default"
+						onclick="Student_Give_Operate_Premission()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-handshake-o"></i> 赋予操作权限
 					</button>
