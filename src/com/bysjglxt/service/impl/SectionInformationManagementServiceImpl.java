@@ -52,14 +52,17 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 			teacherInformationDTO = new TeacherInformationDTO();
 			teacherInformationDTO.setBysjglxtSection(bysjglxt_section);
 			bysjglxt_teacher_user = new bysjglxt_teacher_user();
-			//根据教研室主任user的id来获取user表所有信息
-			bysjglxt_teacher_user = sectionInformationManagementDao
-					.getBysjglxtTeacherUserById(bysjglxt_section.getSection_leader());
-			teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
-			bysjglxtTeacherBasic = new bysjglxt_teacher_basic();
-			bysjglxtTeacherBasic = sectionInformationManagementDao
-					.getBysjglxtTeacherBasicById(bysjglxt_teacher_user.getUser_teacher_basic());
-			teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxtTeacherBasic);
+			// 根据教研室主任user的id来获取user表所有信息
+			if (bysjglxt_section.getSection_leader() != null
+					&& bysjglxt_section.getSection_leader().trim().length() > 0) {
+				bysjglxt_teacher_user = sectionInformationManagementDao
+						.getBysjglxtTeacherUserById(bysjglxt_section.getSection_leader());
+				teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
+				bysjglxtTeacherBasic = new bysjglxt_teacher_basic();
+				bysjglxtTeacherBasic = sectionInformationManagementDao
+						.getBysjglxtTeacherBasicById(bysjglxt_teacher_user.getUser_teacher_basic());
+				teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxtTeacherBasic);
+			}
 			listTeacherInformationDTO.add(teacherInformationDTO);
 		}
 		sectionInformationManagementVO.setTeacherInformationDTO(listTeacherInformationDTO);
@@ -78,6 +81,9 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 	public boolean deleteSection(List<String> listSectionId) {
 		boolean flag = false;
 		for (String string : listSectionId) {
+			
+			
+			
 			flag = sectionInformationManagementDao.deleteSection(string);
 			if (!flag)
 				break;

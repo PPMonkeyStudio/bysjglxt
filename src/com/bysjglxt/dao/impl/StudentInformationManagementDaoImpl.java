@@ -268,7 +268,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			e.printStackTrace();
 			flag = false;
 		}
-		
+
 		return flag;
 	}
 

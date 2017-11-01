@@ -61,10 +61,10 @@ public interface TopicManagementService {
 	/**
 	 * @DOTO
 	 * 
-	 * @说明 1、判断课题是否可选，若可以则下一步操作，不可以则返回false。
-	 * 				如何判断课题是否可选:
-	 * 						①可选人数和最大上限之间
-	 * 						②判断教师
+	 * @说明 1、判断课题是否可选，若可以则下一步操作，不可以则返回false。 如何判断课题是否可选: 
+	 * 			①可选人数和最大上限之间
+	 * 			 ②判断是否达到教师可选上限
+	 * 			
 	 *     2、创建一条bysjglxt_topic_select学生选题表的记录，指导老师和评阅老师为null。
 	 *     3、学生课题bysjglxt_topic所属的记录中，课题已选学生数topic_student_num加1。
 	 * @param studentID
