@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 
@@ -67,26 +68,7 @@ public interface TeacherInformationManagementService {
 	public boolean remove_TeacherList(List<String> useTeacherNumList);
 
 	/**
-	 * 
-	 * @DATE 2017-10-29 弃用
-	 * @说明 创建教研室
-	 * @param newSection
-	 * @return
-	 */
-	public boolean Create_Section(bysjglxt_section newSection);
-
-	/**
-	 * 弃用
-	 * 
-	 * @说明 删除教研室
-	 * @DATE 2017-10-29
-	 * @param listSectionId
-	 * @return
-	 */
-	public boolean deleteSection(List<String> listSectionId);
-
-	/**
-	 * 遍历得到所有的教研室 弃用
+	 * 遍历得到所有的教研室
 	 * 
 	 * @return
 	 */
@@ -107,20 +89,29 @@ public interface TeacherInformationManagementService {
 			TeacherInformationManagementVO teacherInformationManagementVO);
 
 	/**
-	 * 更新教师信息
+	 * @DATE 2017-11-1 弃用 使用DTO更新教师信息
 	 */
 	public boolean updateBasicAndUser(TeacherInformationDTO teacherInformationDTO);
 
 	/**
-	 * 弃用 更新教研室信息
+	 * 更改教师基础表信息
 	 * 
-	 * @param bysjglxt_section
+	 * @param bysjglxt_teacher_basic
 	 * @return
 	 */
-	public boolean updateSection(bysjglxt_section bysjglxt_section);
+	public boolean updateTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic);
 
 	/**
+	 * 修改教师登陆信息
+	 * @param bysjglxt_teacher_user
+	 * @return
+	 */
+	public boolean updateTeacherUser(bysjglxt_teacher_user bysjglxt_teacher_user);
+	
+	
+	/**
 	 * 遍历获得所有职称
+	 * 
 	 * @return
 	 */
 	public List<String> list_Teacher_Title();

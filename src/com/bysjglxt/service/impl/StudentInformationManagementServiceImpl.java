@@ -138,7 +138,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		List<bysjglxt_student_basic> listStudentBasicInformationByPage = studentInformationManagementDao
 				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO);
-		System.out.println(listStudentBasicInformationByPage);
 		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPage) {
 			studentInformationDTO = new StudentInformationDTO();
 			bysjglxt_student_user = studentInformationManagementDao
@@ -148,7 +147,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			listStudentInformationDTO.add(studentInformationDTO);
 		}
 		studentInformationManagementVO.setList_StudentInformationDTO(listStudentInformationDTO);
-
+		
 		return studentInformationManagementVO;
 	}
 
