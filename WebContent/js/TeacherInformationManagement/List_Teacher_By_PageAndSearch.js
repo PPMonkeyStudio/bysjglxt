@@ -25,39 +25,16 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 				for (var num = 0; num < long; num++) {
 					new_tr_list[0].parentNode.removeChild(new_tr_list[0]);
 				}
-				/*
-				 * 将undefinded转化为空字符串
-				 */
-				for (var num = 0; num < teacher_json.list_TeacherInformationDTO.length; num++) {
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex == undefined) {
-						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex = "";
-					}
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name == undefined) {
-						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name = "";
-					}
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_section == undefined) {
-						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_section = "";
-					}
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title == undefined) {
-						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title = "";
-					}
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num == undefined) {
-						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num = "0";
-					}
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance == undefined
-							|| teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance == "-1") {
-						teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance = "∞";
-					}
-				}
 
 				/*
 				 * 
 				 */
 				var table_teacher = document.getElementById("table_teacher");
-
+				var new_td;
+				var new_tr;
 				for (var num = 0; num < teacher_json.list_TeacherInformationDTO.length; num++) {
 
-					var new_tr = document.createElement("tr");
+					new_tr = document.createElement("tr");
 
 					new_tr.appendChild(document.createTextNode(''));
 
@@ -65,32 +42,83 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 
 					new_tr.className = "new_tr";
 
-					new_tr.innerHTML = '<td>'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.job_number
-							+ '</td><td>'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name
-							+ '</td><td>'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex
-							+ '</td><td>'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name
-							+ '</td><td>'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title
-							+ '</td><td>'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num
-							+ '/'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance
-							+ '</td><td style="padding: 0;"><button id="'
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.job_number;
+					} else {
+						new_td.innerHTML = '无';
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name;
+					} else {
+						new_td.innerHTML = '无';
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex;
+					} else {
+						new_td.innerHTML = '无';
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtSection != undefined
+							&& teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name != "") {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name;
+					} else {
+						new_td.innerHTML = '无';
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined
+							&& teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title != "") {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title;
+					} else {
+						new_td.innerHTML = '无';
+					}
+					//
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance != "-1") {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num
+								+ '/'
+								+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance;
+					} else {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num;
+					}
+
+					//
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = '<button id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
 							+ '" onclick="Teacher_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default">基础信息</button>'
 							+ '<button id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
-							+ '" onclick="Teacher_Fix_User(this)" style="margin:3px 0 0 10px;"class="btn btn-default">其他信息</button></td>'
-							+ '<td>'
-							+ '<label class="fancy-checkbox">'
+							+ '" onclick="Teacher_Fix_User(this)" style="margin:3px 0 0 10px;"class="btn btn-default">其他信息</button>';
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = '<label class="fancy-checkbox">'
 							+ '<input id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
 							+ '" type="checkbox" class="checkbox_select">'
-							+ '<span></span></label></td>';
+							+ '<span></span></label>';
+
 				}
 
 				/*
