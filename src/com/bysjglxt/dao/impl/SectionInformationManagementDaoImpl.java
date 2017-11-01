@@ -51,7 +51,7 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 	public bysjglxt_teacher_user getBysjglxtTeacherUserById(String section_id) {
 		Session session = getSession();
 		bysjglxt_teacher_user teacherUserInformation = null;
-		String hql = "from bysjglxt_teacher_user where section_id='" + section_id + "'";
+		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + section_id + "'";
 		Query query = session.createQuery(hql);
 		teacherUserInformation = (bysjglxt_teacher_user) query.uniqueResult();
 		return teacherUserInformation;

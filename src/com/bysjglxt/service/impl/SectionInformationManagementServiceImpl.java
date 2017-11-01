@@ -49,10 +49,12 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 		listBysjglxtSection = sectionInformationManagementDao.getListSectionByPage(sectionInformationManagementVO);
 		// 遍历所有教研室资料得到教研室主任信息
 		for (bysjglxt_section bysjglxt_section : listBysjglxtSection) {
+			teacherInformationDTO = new TeacherInformationDTO();
 			teacherInformationDTO.setBysjglxtSection(bysjglxt_section);
 			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			//根据教研室主任user的id来获取user表所有信息
 			bysjglxt_teacher_user = sectionInformationManagementDao
-					.getBysjglxtTeacherUserById(bysjglxt_section.getSection_id());
+					.getBysjglxtTeacherUserById(bysjglxt_section.getSection_leader());
 			teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
 			bysjglxtTeacherBasic = new bysjglxt_teacher_basic();
 			bysjglxtTeacherBasic = sectionInformationManagementDao
