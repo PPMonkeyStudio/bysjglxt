@@ -10,15 +10,6 @@ public class bysjglxt_topic_invite_teacher {
 	private String topic_invite__teacher_duties;
 	private String topic_invite__teacher_gmt_create;
 	private String topic_invite_teacher_gmt_modify;
-	private String topic_invite_teacher_topic_id;
-
-	public String getTopic_invite_teacher_topic_id() {
-		return topic_invite_teacher_topic_id;
-	}
-
-	public void setTopic_invite_teacher_topic_id(String topic_invite_teacher_topic_id) {
-		this.topic_invite_teacher_topic_id = topic_invite_teacher_topic_id;
-	}
 
 	public String getTopic_invite_teacher_id() {
 		return topic_invite_teacher_id;
@@ -92,8 +83,7 @@ public class bysjglxt_topic_invite_teacher {
 				+ ", topic_invite_teacher_technicalitle=" + topic_invite_teacher_technicalitle
 				+ ", topic_invite__teacher_duties=" + topic_invite__teacher_duties
 				+ ", topic_invite__teacher_gmt_create=" + topic_invite__teacher_gmt_create
-				+ ", topic_invite_teacher_gmt_modify=" + topic_invite_teacher_gmt_modify
-				+ ", topic_invite_teacher_topic_id=" + topic_invite_teacher_topic_id + "]";
+				+ ", topic_invite_teacher_gmt_modify=" + topic_invite_teacher_gmt_modify + "]";
 	}
 
 }

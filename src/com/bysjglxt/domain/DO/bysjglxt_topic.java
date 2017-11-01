@@ -10,11 +10,20 @@ public class bysjglxt_topic {
 	private int topic_student_max;
 	private String topic_remark;
 	private String topic_teacher;
+	private String topic_invite_teache_id;
 	private String topic_student;
 	private String topic_gmt_create;
 	private String topic_gmt_modified;
 	private String topic_examine_state;
 	private int topic_student_num;
+
+	public String getTopic_invite_teache_id() {
+		return topic_invite_teache_id;
+	}
+
+	public void setTopic_invite_teache_id(String topic_invite_teache_id) {
+		this.topic_invite_teache_id = topic_invite_teache_id;
+	}
 
 	public int getTopic_student_num() {
 		return topic_student_num;
@@ -134,9 +143,9 @@ public class bysjglxt_topic {
 				+ ", topic_name_english=" + topic_name_english + ", topic_requirement=" + topic_requirement
 				+ ", topic_source=" + topic_source + ", topic_type=" + topic_type + ", topic_student_max="
 				+ topic_student_max + ", topic_remark=" + topic_remark + ", topic_teacher=" + topic_teacher
-				+ ", topic_student=" + topic_student + ", topic_gmt_create=" + topic_gmt_create
-				+ ", topic_gmt_modified=" + topic_gmt_modified + ", topic_examine_state=" + topic_examine_state
-				+ ", topic_student_num=" + topic_student_num + "]";
+				+ ", topic_invite_teache_id=" + topic_invite_teache_id + ", topic_student=" + topic_student
+				+ ", topic_gmt_create=" + topic_gmt_create + ", topic_gmt_modified=" + topic_gmt_modified
+				+ ", topic_examine_state=" + topic_examine_state + ", topic_student_num=" + topic_student_num + "]";
 	}
 
 }

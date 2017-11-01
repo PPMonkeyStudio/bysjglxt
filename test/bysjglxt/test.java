@@ -33,8 +33,8 @@ public class test {
 		TopicInformationDTO topicInformationDTO = new TopicInformationDTO();
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
 		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = new bysjglxt_topic_invite_teacher();
-		bysjglxt_topic.setTopic_name_chinese("thetwo");
-		bysjglxt_topic_invite_teacher.setTopic_invite_teacher_name("jijiji");
+		bysjglxt_topic.setTopic_name_chinese("thefour");
+		bysjglxt_topic_invite_teacher.setTopic_invite_teacher_name("2");
 		topicInformationDTO.setBysjglxtTopic(bysjglxt_topic);
 		topicInformationDTO.setBysjglxtTopicInviteTeacher(bysjglxt_topic_invite_teacher);
 		boolean flag = topicManagementService.CreateTopic(topicInformationDTO);
@@ -45,7 +45,7 @@ public class test {
 	@Test
 	public void testt() {
 		List<String> topic_id = new ArrayList<String>();
-		topic_id.add("1cd5f25a-63e4-4814-8047-f271e4fc5a5c");
+		topic_id.add("1a107c81-da1c-4a0f-b15c-7ccdbdd2c208");
 		boolean flag = topicManagementService.DeleteTopic(topic_id);
 		System.out.println(flag);
 
@@ -77,16 +77,14 @@ public class test {
 		boolean flag = topicManagementService.notAdoptTopic(topic_id);
 		System.out.println(flag);
 	}
-	
-	//测试分页显示
+
+	// 测试分页显示
 	@Test
-	public void testttttt(){
+	public void testttttt() {
 		TopicManagementVO VO_Topic_By_PageAndSearch = new TopicManagementVO();
 		VO_Topic_By_PageAndSearch.setSearch("theone");
 		VO_Topic_By_PageAndSearch = topicManagementService.VO_Topic_By_PageAndSearch(VO_Topic_By_PageAndSearch);
 		System.out.println(VO_Topic_By_PageAndSearch.toString());
 	}
-	
-	
 
 }
