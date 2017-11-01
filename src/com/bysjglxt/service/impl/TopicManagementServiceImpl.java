@@ -179,8 +179,28 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	}
 
 	@Override
-	public boolean topicSelectStudent(String TeacherID, String topicID, List<String> studentIDList) {
-		// TODO Auto-generated method stub
+	public boolean teacherIsPermissionAddStudentInTopic(String teacherId, String topicId) {
+		boolean flag = false;
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		bysjglxt_topic = topicManagementDao.getBysjglxtTopicById(topicId);
+		if (bysjglxt_topic != null) {
+			if (teacherId.equals(bysjglxt_topic.getTopic_teacher())) {
+				flag = true;
+			} else {
+				flag = false;
+			}
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean topicSelectStudent(String topicID, List<String> studentIDList) {
+		boolean flag = false;
+		String studentIdList = "";
+		for (String string : studentIDList) {
+			studentIdList = studentIdList + string + "#&#";
+		}
+		flag = topicManagementDao.updateStudentList(topicID,studentIdList);
 		return false;
 	}
 

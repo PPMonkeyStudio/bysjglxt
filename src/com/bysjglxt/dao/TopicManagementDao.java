@@ -41,4 +41,6 @@ public interface TopicManagementDao {
 
 	public boolean addTeacherUserSrtudentNum(String user_teacher_id);
 
+	public boolean updateStudentList(String topicId,String studentIdList);
+
 }

@@ -58,19 +58,13 @@ public interface TopicManagementService {
 	 */
 	public TopicManagementVO VO_Topic_By_PageAndSearch(TopicManagementVO topicManagementVO);
 
-	
-	
-	
 	/**
 	 * @DOTO
 	 * 
-	 * @说明 1、判断课题是否可选，若可以则下一步操作，不可以则返回false。 如何判断课题是否可选: 
-	 * 			(1)：大众选题
-	 * 				 ②判断是否达到教师可选上限
-	 * 				③判断是否到达课题学生上限
-	 *     2、创建一条bysjglxt_topic_select学生选题表的记录，评阅老师为null。
-	 *     3、学生课题bysjglxt_topic所属的记录中，课题已选学生数topic_student_num加1。
-	 *     4. 教师的学生指导数+1
+	 * @DATE 2017-11-01
+	 * @说明 1、判断课题是否可选，若可以则下一步操作，不可以则返回false。 如何判断课题是否可选: (1)：大众选题 ②判断是否达到教师可选上限
+	 *     ③判断是否到达课题学生上限 2、创建一条bysjglxt_topic_select学生选题表的记录，评阅老师为null。
+	 *     3、学生课题bysjglxt_topic所属的记录中，课题已选学生数topic_student_num加1。 4. 教师的学生指导数+1
 	 * @param studentID
 	 *            选题的学生
 	 * 
@@ -83,13 +77,23 @@ public interface TopicManagementService {
 
 	/**
 	 * 
+	 * 
+	 * @说明 教师点击添加指定学生,判断该教师是否有权限(以点击者是否是该课题指导老师为标准判断)
+	 * @param teacherID
+	 *            教师user表ID
+	 * @param topicID
+	 *            课题表ID
+	 * 
+	 * 
+	 */
+	public boolean teacherIsPermissionAddStudentInTopic(String teacherId, String topicId);
+
+	/**
+	 * 
 	 * @DOTO
 	 * 
-	 * @说明 某教师提前开放某题给某些学生： 1、判断该教师是否是该课题的指导老师，若可以则下一步操作，不可以则返回false。
-	 *     2、将这个学生列表设为改课题的指定学生，（此后该列表中学生就可以提前选该题）
+	 * @说明 某教师提前开放某题给某些学生： 2、将这个学生列表设为改课题的指定学生（此后该列表中学生就可以提前选该题）
 	 * 
-	 * @param TeacherID
-	 *            教师ID
 	 * @param topicID
 	 *            课题ID
 	 * @param studentIDList
@@ -97,6 +101,6 @@ public interface TopicManagementService {
 	 * 
 	 * @return 1成功 0失败
 	 */
-	public boolean topicSelectStudent(String TeacherID, String topicID, List<String> studentIDList);
+	public boolean topicSelectStudent(String topicID, List<String> studentIDList);
 
 }

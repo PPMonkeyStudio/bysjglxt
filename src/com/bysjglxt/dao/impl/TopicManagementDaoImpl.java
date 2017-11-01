@@ -282,4 +282,19 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 		return flag;
 	}
 
+	@Override
+	public boolean updateStudentList(String topicId, String studentIdList) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_topic set topic_student = '" + studentIdList + "' where topic_id = '"
+					+ topicId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
 }
