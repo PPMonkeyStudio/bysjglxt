@@ -136,11 +136,11 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			hql = hql + " and basic.student_basic_major='"
 					+ studentInformationManagementVO.getStudent_basic_major().trim() + "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_grade() != null
-				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0) {
-			hql = hql + " and basic.student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade()
-
-					+ "'";
+		if ((studentInformationManagementVO.getStudent_basic_grade() != null
+				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_grade())) {
+			hql = hql + " and basic.student_basic_grade='"
+					+ studentInformationManagementVO.getStudent_basic_grade().trim() + "'";
 		}
 		if (studentInformationManagementVO.getUser_student_is_operate_premission() != -1) {
 			hql = hql + "and student_user.user_student_is_operate_premission='"
@@ -155,7 +155,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		query.setMaxResults(studentInformationManagementVO.getPageSize());
 		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = query.list();
 		System.out.println(listStudentBasicInformationByPageAndSearch.size());
-
 		if (!flag && studentInformationManagementVO.getSearch() != null
 				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
 			for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
@@ -296,15 +295,17 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 				&& studentInformationManagementVO.getSex().trim().length() > 0) {
 			hql = hql + " and basic.student_basic_sex ='" + studentInformationManagementVO.getSex() + "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_major() != null
-				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0) {
-			hql = hql + " and basic.student_basic_major='" + studentInformationManagementVO.getStudent_basic_major()
-					+ "'";
+		if ((studentInformationManagementVO.getStudent_basic_major() != null
+				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_major())) {
+			hql = hql + " and basic.student_basic_major='"
+					+ studentInformationManagementVO.getStudent_basic_major().trim() + "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_grade() != null
-				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0) {
-			hql = hql + " and basic.student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade()
-					+ "'";
+		if ((studentInformationManagementVO.getStudent_basic_grade() != null
+				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_grade())) {
+			hql = hql + " and basic.student_basic_grade='"
+					+ studentInformationManagementVO.getStudent_basic_grade().trim() + "'";
 		}
 		if (studentInformationManagementVO.getUser_student_is_operate_premission() != -1) {
 			hql = hql + " and student_user.user_student_is_operate_premission='"
