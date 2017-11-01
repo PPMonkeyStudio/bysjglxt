@@ -31,7 +31,7 @@
 				<h3 class="panel-title">新增课题</h3>
 			</div>
 			<div class="panel-body">
-				<table id="" class="table table-hover table-bordered  "
+				<table id="" class="table table-bordered  "
 					style="text-align: center; width: 700px; margin: 0 auto;">
 					<tbody>
 						<tr>
