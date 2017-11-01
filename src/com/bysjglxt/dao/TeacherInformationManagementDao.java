@@ -43,4 +43,6 @@ public interface TeacherInformationManagementDao {
 
 	public List<bysjglxt_teacher_basic> getResultBySearch(TeacherInformationManagementVO teacherInformationManagementVO);
 
+	public boolean updatePassword(String user_teacher_id, String password);
+
 }

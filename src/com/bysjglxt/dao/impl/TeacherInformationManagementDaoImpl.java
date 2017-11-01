@@ -334,4 +334,20 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		return listTeacherAllBasicInformationByAndSearch;
 	}
 
+	@Override
+	public boolean updatePassword(String user_teacher_id, String password) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_teacher_user set user_teacher_password = '" + password
+					+ "' where user_teacger_id='" + user_teacher_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

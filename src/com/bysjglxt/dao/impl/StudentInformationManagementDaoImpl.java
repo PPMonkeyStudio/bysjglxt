@@ -3,6 +3,7 @@ package com.bysjglxt.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -317,6 +318,23 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		List<bysjglxt_student_basic> list_bysjglxt_student_basic = query.list();
 		session.clear();
 		return list_bysjglxt_student_basic;
+	}
+
+	@Override
+	public boolean updatePassword(String user_student_id, String password) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_student_user set user_student_password = '" + password
+					+ "' where user_student_id='" + user_student_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+
+		return flag;
 	}
 
 }

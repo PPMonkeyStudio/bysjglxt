@@ -121,4 +121,18 @@ public interface StudentInformationManagementService {
 	 */
 	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic);
 
+	/**
+	 * 重置密码 将密码设置为学号
+	 * 
+	 * @param user_student_id
+	 * @return
+	 */
+	public boolean resetPassword(String user_student_id);
+
+	/**
+	 * 更改密码
+	 * 
+	 */
+	public boolean updatePassword(String user_student_id, String password);
+
 }

@@ -147,7 +147,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			listStudentInformationDTO.add(studentInformationDTO);
 		}
 		studentInformationManagementVO.setList_StudentInformationDTO(listStudentInformationDTO);
-		
+
 		return studentInformationManagementVO;
 	}
 
@@ -182,6 +182,34 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	@Override
 	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic) {
 		return studentInformationManagementDao.update_StudentBasicInfomation(bysjglxt_student_basic);
+	}
+
+	@Override
+	public boolean resetPassword(String user_student_id) {
+		boolean flag = false;
+		if (user_student_id == null || user_student_id.trim().length() <= 0) {
+			return false;
+		}
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		bysjglxt_student_user = studentInformationManagementDao.getStudentByNum(user_student_id);
+		if (bysjglxt_student_user != null) {
+			bysjglxt_student_user.setUser_student_password(bysjglxt_student_user.getUser_student_num());
+			flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updatePassword(String user_student_id, String password) {
+		boolean flag = false;
+		if (user_student_id == null || user_student_id.trim().length() <= 0) {
+			return false;
+		}
+		if (password == null || password.trim().length() <= 0) {
+			return false;
+		}
+		flag = studentInformationManagementDao.updatePassword(user_student_id, password);
+		return flag;
 	}
 
 }

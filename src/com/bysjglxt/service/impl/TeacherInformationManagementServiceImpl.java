@@ -11,11 +11,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
-import com.bysjglxt.domain.DO.bysjglxt_student_basic;
-import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
-import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 import com.bysjglxt.service.TeacherInformationManagementService;
@@ -209,6 +206,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			return flag;
 		return flag;
 	}
+
 	/**
 	 * 修改教师基础表信息
 	 */
@@ -216,11 +214,12 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	public boolean updateTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic) {
 		return teacherInformationManagementDao.updateBasic(bysjglxt_teacher_basic);
 	}
+
 	@Override
 	public boolean updateTeacherUser(bysjglxt_teacher_user bysjglxt_teacher_user) {
 		return teacherInformationManagementDao.updateUser(bysjglxt_teacher_user);
 	}
-	
+
 	/**
 	 * 获取老师的职称
 	 */
@@ -229,5 +228,33 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		return teacherInformationManagementDao.list_Teacher_Title();
 	}
 
-	
+	@Override
+	public boolean resetPassword(String user_teacher_id) {
+		boolean flag = false;
+		if (user_teacher_id == null || user_teacher_id.trim().length() <= 0) {
+			return false;
+		}
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(user_teacher_id);
+		if (bysjglxt_teacher_user != null) {
+			bysjglxt_teacher_user.setUser_teacher_password(bysjglxt_teacher_user.getUser_teacher_num());
+			bysjglxt_teacher_user.setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
+			flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updatePassword(String user_teacher_id, String password) {
+		boolean flag = false;
+		if (user_teacher_id == null || user_teacher_id.trim().length() <= 0) {
+			return false;
+		}
+		if (password == null || password.trim().length() <= 0) {
+			return false;
+		}
+		flag = teacherInformationManagementDao.updatePassword(user_teacher_id, password);
+		return flag;
+	}
+
 }
