@@ -150,9 +150,8 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
 			hql = hql + " and job_number like '" + search + "'";
 		}
-
-		if (teacherInformationManagementVO.getProfessional_title() != null
-				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0) {
+		if ((teacherInformationManagementVO.getProfessional_title() != null
+				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)||"".equals(teacherInformationManagementVO.getProfessional_title())) {
 			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title() + "'";
 		}
 		if (teacherInformationManagementVO.getSex() != null

@@ -72,7 +72,7 @@ public class testteacher {
 	@Test
 	public void efdsfdsf() {
 		TeacherInformationManagementVO VO_TEACHER_By_PageAndSearch = new TeacherInformationManagementVO();
-		VO_TEACHER_By_PageAndSearch.setSection("94943b03-e8c9-4743-a742-3c8bf95efad3");
+		VO_TEACHER_By_PageAndSearch.setProfessional_title("讲师");
 		VO_TEACHER_By_PageAndSearch = teacherInformationManagementService
 				.VO_TEACHER_By_PageAndSearch(VO_TEACHER_By_PageAndSearch);
 
