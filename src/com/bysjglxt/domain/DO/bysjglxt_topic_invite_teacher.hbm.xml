@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-30 20:08:33 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-11-1 13:18:37 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher" table="BYSJGLXT_TOPIC_INVITE_TEACHER">
         <id name="topic_invite_teacher_id" type="java.lang.String">
@@ -28,9 +28,6 @@
         </property>
         <property name="topic_invite_teacher_gmt_modify" type="java.lang.String">
             <column name="TOPIC_INVITE_TEACHER_GMT_MODIFY" />
-        </property>
-        <property name="topic_invite_teacher_topic_id" type="java.lang.String">
-            <column name="TOPIC_INVITE_TEACHER_TOPIC_ID" />
         </property>
     </class>
 </hibernate-mapping>

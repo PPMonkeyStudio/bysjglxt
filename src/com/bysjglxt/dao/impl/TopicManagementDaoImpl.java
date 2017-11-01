@@ -58,7 +58,6 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			System.out.println(topicID);
 			String hql = "delete from bysjglxt_topic where topic_id='" + topicID + "'";
 			Query query = session.createQuery(hql);
 			System.out.println(hql);
@@ -120,9 +119,7 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			System.out.println(topicId);
-			String hql = "delete from bysjglxt_topic_invite_teacher where topic_invite_teacher_topic_id='" + topicId
-					+ "'";
+			String hql = "delete from bysjglxt_topic_invite_teacher where topic_invite_teacher_id='" + topicId + "'";
 			Query query = session.createQuery(hql);
 			System.out.println(hql);
 			query.executeUpdate();
@@ -180,10 +177,21 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 	}
 
 	@Override
-	public bysjglxt_topic_invite_teacher getBysjglxtTopicInviteTeacher(String topic_id) {
-		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = new bysjglxt_topic_invite_teacher();
+	public bysjglxt_topic getBysjglxtTopicById(String topic_id) {
 		Session session = getSession();
-		String hql = "from bysjglxt_topic_invite_teacher where topic_invite_teacher_topic_id = '" + topic_id + "'";
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		String hql = "from bysjglxt_topic where topic_id ='" + topic_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		return bysjglxt_topic;
+	}
+
+	@Override
+	public bysjglxt_topic_invite_teacher getBysjglxtTopicInviteTeacher(String topic_invite_teache_id) {
+		Session session = getSession();
+		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = new bysjglxt_topic_invite_teacher();
+		String hql = "from bysjglxt_topic_invite_teacher where topic_invite_teacher_id ='" + topic_invite_teache_id
+				+ "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_topic_invite_teacher = (bysjglxt_topic_invite_teacher) query.uniqueResult();
 		return bysjglxt_topic_invite_teacher;

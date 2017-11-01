@@ -27,29 +27,37 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		bysjglxt_topic newTopic = new bysjglxt_topic();
 		bysjglxt_topic_invite_teacher invite_teacher = new bysjglxt_topic_invite_teacher();
 		invite_teacher = topicInformationDTO.getBysjglxtTopicInviteTeacher();
+		invite_teacher.setTopic_invite_teacher_id(TeamUtil.getUuid());
+		invite_teacher.setTopic_invite__teacher_gmt_create(TeamUtil.getStringSecond());
+		invite_teacher.setTopic_invite_teacher_gmt_modify(invite_teacher.getTopic_invite__teacher_gmt_create());
+		flag = topicManagementDao.createTopicInviteTeacher(invite_teacher);
+		if (!flag) {
+			return flag;
+		}
 		newTopic = topicInformationDTO.getBysjglxtTopic();
 		newTopic.setTopic_id(TeamUtil.getUuid());
 		newTopic.setTopic_gmt_create(TeamUtil.getStringSecond());
 		newTopic.setTopic_gmt_modified(TeamUtil.getStringSecond());
 		newTopic.setTopic_examine_state("未审核");
 		newTopic.setTopic_student_num(0);
+		newTopic.setTopic_invite_teache_id(invite_teacher.getTopic_invite_teacher_id());
 		flag = topicManagementDao.CreateTopic(newTopic);
-		if (flag) {
-			invite_teacher.setTopic_invite_teacher_id(TeamUtil.getUuid());
-			invite_teacher.setTopic_invite_teacher_topic_id(newTopic.getTopic_id());
-			invite_teacher.setTopic_invite__teacher_gmt_create(TeamUtil.getStringSecond());
-			invite_teacher.setTopic_invite_teacher_gmt_modify(invite_teacher.getTopic_invite__teacher_gmt_create());
-			flag = topicManagementDao.createTopicInviteTeacher(invite_teacher);
-		}
 		return flag;
 	}
 
 	@Override
 	public boolean DeleteTopic(List<String> topic_id) {
 		boolean flag = false;
+		bysjglxt_topic bysjglxt_topic = null;
 		for (String topicId : topic_id) {
-			flag = topicManagementDao.deleteTopicInviteTeacher(topicId);
-			if (flag) {
+			bysjglxt_topic = new bysjglxt_topic();
+			// 根据课题ID获得课题对象
+			bysjglxt_topic = topicManagementDao.getBysjglxtTopicById(topicId);
+			if (bysjglxt_topic != null) {
+				// 根据课题对象中被邀请老师ID删除被邀请老师信息
+				flag = topicManagementDao.deleteTopicInviteTeacher(bysjglxt_topic.getTopic_invite_teache_id());
+				if (!flag)
+					break;
 				flag = topicManagementDao.DeleteTopic(topicId);
 			}
 		}
@@ -95,8 +103,9 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
 			topicInformationDTO = new TopicInformationDTO();
 			topicInformationDTO.setBysjglxtTopic(tbysjglxt_topic);
+			// 根据课题表中被邀请老师ID，获得被邀请老师的信息
 			bysjglxt_topic_invite_teacher = topicManagementDao
-					.getBysjglxtTopicInviteTeacher(tbysjglxt_topic.getTopic_id());
+					.getBysjglxtTopicInviteTeacher(tbysjglxt_topic.getTopic_invite_teache_id());
 			topicInformationDTO.setBysjglxtTopicInviteTeacher(bysjglxt_topic_invite_teacher);
 			listTopicInformationDTO.add(topicInformationDTO);
 			i++;
@@ -115,7 +124,6 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		} else {
 			topicManagementVO.setHaveNextPage(true);
 		}
-
 		return topicManagementVO;
 	}
 
