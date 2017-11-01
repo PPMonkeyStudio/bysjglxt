@@ -1,6 +1,7 @@
 package com.bysjglxt.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,6 +34,10 @@ public class SectionInformationManagementAction extends ActionSupport
 	private SectionInformationManagementVO sectionInformationManagementVO;
 
 	private bysjglxt_section newSection;
+	/*
+	 * 删除所选教研室列表
+	 */
+	private List<String> ListDeleteSectionID;
 
 	/**
 	 * @说明 跳转列表页
@@ -51,6 +56,17 @@ public class SectionInformationManagementAction extends ActionSupport
 	 */
 	public String CreateSectionPage() {
 		return "CreateSectionPage";
+	}
+
+	/**
+	 * 删除所选教研室
+	 * 
+	 * @throws IOException
+	 */
+	public void DeleteSection() throws IOException {
+		sectionInformationManagementService.deleteSection(ListDeleteSectionID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
 	}
 
 	/**
@@ -137,6 +153,14 @@ public class SectionInformationManagementAction extends ActionSupport
 
 	public void setNewSection(bysjglxt_section newSection) {
 		this.newSection = newSection;
+	}
+
+	public List<String> getListDeleteSectionID() {
+		return ListDeleteSectionID;
+	}
+
+	public void setListDeleteSectionID(List<String> listDeleteSectionID) {
+		ListDeleteSectionID = listDeleteSectionID;
 	}
 
 }

@@ -78,8 +78,8 @@
 									<option value="男">男</option>
 									<option value="女">女</option>
 							</select></th>
-							<th><select class="form-control" id="select_section"
-								data-live-search="true" style="width: auto;"
+							<th><select class="select_section form-control"
+								id="select_section" style="width: auto;"
 								onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">教研室</option>
 							</select></th>
@@ -268,7 +268,6 @@
 	$('select').selectpicker('refresh');
 </script>
 <script>
-	var select_section = document.getElementById("select_section");
-	Get_Teacher_Section(select_section);
+	Get_Teacher_Section(document.getElementById("select_section"));
 </script>
 </html>
