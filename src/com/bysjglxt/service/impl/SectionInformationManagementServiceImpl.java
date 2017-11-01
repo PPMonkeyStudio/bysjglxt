@@ -81,9 +81,12 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 	public boolean deleteSection(List<String> listSectionId) {
 		boolean flag = false;
 		for (String string : listSectionId) {
-			
-			
-			
+			/**
+			 * 将所有属于这个教研室的老师的教研室所属为空
+			 */
+			flag = sectionInformationManagementDao.setTeacherUserSectionNull(string);
+			if (!flag)
+				break;
 			flag = sectionInformationManagementDao.deleteSection(string);
 			if (!flag)
 				break;

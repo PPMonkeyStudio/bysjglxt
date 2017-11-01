@@ -40,11 +40,10 @@ public class teeeee {
 	@Test
 	public void tetetet() {
 		List<String> listSectionId = new ArrayList<String>();
-		listSectionId.add("70a815da-1f9f-4ab7-8b8e-63a99dd72b0a");
+		listSectionId.add("94943b03-e8c9-4743-a742-3c8bf95efad3");
 		boolean flag = sectionInformationManagementService.deleteSection(listSectionId);
 		System.out.println(flag);
 	}
-
 	// 测试更新教研室
 	@Test
 	public void teettete() {

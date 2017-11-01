@@ -118,4 +118,21 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 		}
 		return flag;
 	}
+
+	@Override
+	public boolean setTeacherUserSectionNull(String string) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_teacher_user set user_teacher_section = '' where user_teacher_section = '"
+					+ string + "'";
+			System.out.println(hql);
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
 }
