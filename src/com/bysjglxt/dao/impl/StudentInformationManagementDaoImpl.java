@@ -130,10 +130,11 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			hql = hql + " and basic.student_basic_sex ='" + studentInformationManagementVO.getSex() + "'";
 		}
 
-		if (studentInformationManagementVO.getStudent_basic_major() != null
-				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0) {
-			hql = hql + " and basic.student_basic_major='" + studentInformationManagementVO.getStudent_basic_major()
-					+ "'";
+		if ((studentInformationManagementVO.getStudent_basic_major() != null
+				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_major())) {
+			hql = hql + " and basic.student_basic_major='"
+					+ studentInformationManagementVO.getStudent_basic_major().trim() + "'";
 		}
 		if (studentInformationManagementVO.getStudent_basic_grade() != null
 				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0) {
@@ -222,7 +223,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		listStudent_Grade = query.list();
 		return listStudent_Grade;
 	}
-
 
 	@Override
 	public boolean update_Give_Student_Operate_Permission(String string) {

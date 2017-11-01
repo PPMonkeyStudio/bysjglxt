@@ -57,11 +57,13 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 					&& bysjglxt_section.getSection_leader().trim().length() > 0) {
 				bysjglxt_teacher_user = sectionInformationManagementDao
 						.getBysjglxtTeacherUserById(bysjglxt_section.getSection_leader());
-				teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
-				bysjglxtTeacherBasic = new bysjglxt_teacher_basic();
-				bysjglxtTeacherBasic = sectionInformationManagementDao
-						.getBysjglxtTeacherBasicById(bysjglxt_teacher_user.getUser_teacher_basic());
-				teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxtTeacherBasic);
+				if(bysjglxt_teacher_user!=null){
+					teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
+					bysjglxtTeacherBasic = new bysjglxt_teacher_basic();
+					bysjglxtTeacherBasic = sectionInformationManagementDao
+							.getBysjglxtTeacherBasicById(bysjglxt_teacher_user.getUser_teacher_basic());
+					teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxtTeacherBasic);
+				}
 			}
 			listTeacherInformationDTO.add(teacherInformationDTO);
 		}

@@ -8,9 +8,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TopicManagementDao;
-import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.TopicManagementVO;
 
 import util.TeamUtil;
@@ -195,6 +196,90 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 		Query query = session.createQuery(hql);
 		bysjglxt_topic_invite_teacher = (bysjglxt_topic_invite_teacher) query.uniqueResult();
 		return bysjglxt_topic_invite_teacher;
+	}
+
+	@Override
+	public boolean teacherIsSelect(String Topic_teacher) {
+		Session session = getSession();
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		boolean flag = false;
+		String hql = "from bysjglxt_teacher_user where user_teacher_id = '" + Topic_teacher
+				+ "' and user_teacher_max_guidance > user_teacher_guidance_num";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		if (bysjglxt_teacher_user != null) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean topicIsSelect(String topic_id) {
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		boolean flag = false;
+		Session session = getSession();
+		String hql = "from bysjglxt_topic where topic_id='" + topic_id + "' and topic_student_max>topic_student_num";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		if (bysjglxt_topic != null) {
+			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_teacher_user getTeacherUser(String topic_teacher) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + topic_teacher + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		return bysjglxt_teacher_user;
+	}
+
+	@Override
+	public boolean createStudentSclectInformation(bysjglxt_topic_select bysjglxt_topic_select) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_topic_select);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean addTopicStudentNum(String topicID) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_topic set topic_student_num = topic_student_num+1 where topic_id = '"
+					+ topicID + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean addTeacherUserSrtudentNum(String user_teacher_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_teacher_user set user_teacher_guidance_num = user_teacher_guidance_num+1 where user_teacher_id = '"
+					+ user_teacher_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

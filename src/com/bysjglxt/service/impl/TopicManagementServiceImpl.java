@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bysjglxt.dao.TopicManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.TopicInformationDTO;
 import com.bysjglxt.domain.VO.TopicManagementVO;
 import com.bysjglxt.service.TopicManagementService;
@@ -129,8 +131,51 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 
 	@Override
 	public boolean selectTopic(String studentID, String topicID) {
-		// TODO Auto-generated method stub
-		return false;
+		if (topicID == null || topicID.trim().length() <= 0) {
+			return false;
+		}
+		if (studentID == null || studentID.trim().length() <= 0) {
+			return false;
+		}
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		boolean flag = true;
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_topic = topicManagementDao.getBysjglxtTopicById(topicID);
+		bysjglxt_teacher_user = topicManagementDao.getTeacherUser(bysjglxt_topic.getTopic_teacher());
+		// 1. ②判断是否达到教师可选上限
+		if (bysjglxt_teacher_user != null && bysjglxt_teacher_user.getUser_teacher_max_guidance() != -1) {
+			flag = topicManagementDao.teacherIsSelect(bysjglxt_topic.getTopic_teacher());
+		}
+		if (!flag)
+			return flag;
+		// 2.②判断是否达到课题可选上限
+		if (flag && bysjglxt_topic != null && bysjglxt_topic.getTopic_student_max() != -1) {
+			flag = topicManagementDao.topicIsSelect(bysjglxt_topic.getTopic_id());
+		}
+		if (!flag)
+			return flag;
+		// 创建学生选题记录
+		bysjglxt_topic_select.setTopic_select_id(TeamUtil.getUuid());
+		bysjglxt_topic_select.setTopic_select_student(studentID); // user表
+		System.out.println(bysjglxt_teacher_user.getUser_teacher_id());
+		bysjglxt_topic_select.setTopic_select_teacher_tutor(bysjglxt_teacher_user.getUser_teacher_id());
+		bysjglxt_topic_select.setTopic_select_teacher_review("");
+		bysjglxt_topic_select.setTopic_select_topic(topicID);
+		bysjglxt_topic_select.setTopic_select_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_topic_select.setTopic_select_gmt_modified(bysjglxt_topic_select.getTopic_select_gmt_create());
+		flag = topicManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
+		if (flag) {
+			// 课题记录中数据增加1
+			flag = topicManagementDao.addTopicStudentNum(topicID);
+		} else {
+			return flag;
+		}
+		if (flag) {
+			// 教师学生指导人数+1
+			flag = topicManagementDao.addTeacherUserSrtudentNum(bysjglxt_teacher_user.getUser_teacher_id());
+		}
+		return flag;
 	}
 
 	@Override
