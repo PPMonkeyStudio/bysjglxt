@@ -36,7 +36,6 @@ public interface TeacherInformationManagementService {
 	public boolean saveTeacherList(List<bysjglxt_teacher_basic> teacherBasicList);
 
 	/**
-	 * @待测试 暂时用不到
 	 * @DATE 2017-10-29
 	 * @说明 获取数据库中所有的bysjglxt_teacher_basic记录以及bysjglxt_user_teacher记录，
 	 *     并封装成TeacherInformationDTO的List返回
@@ -119,5 +118,7 @@ public interface TeacherInformationManagementService {
 	 * @return
 	 */
 	public boolean updateSection(bysjglxt_section bysjglxt_section);
+
+	public List<String> list_Teacher_Title();
 
 }

@@ -211,7 +211,6 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			hql = hql + " and sex='" + teacherInformationManagementVO.getSex() + "'";
 		}
 		hql = hql + " order by job_number";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		query.setFirstResult(
 				(teacherInformationManagementVO.getPageIndex() - 1) * teacherInformationManagementVO.getPageSize());
@@ -309,6 +308,16 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	@Override
+	public List<String> list_Teacher_Title() {
+		Session session = getSession();
+		List<String> listTeacher_Title = new ArrayList<String>();
+		String hql = "select distinct(professional_title) from bysjglxt_teacher_basic";
+		Query query = session.createQuery(hql);
+		listTeacher_Title = query.list();
+		return listTeacher_Title;
 	}
 
 }

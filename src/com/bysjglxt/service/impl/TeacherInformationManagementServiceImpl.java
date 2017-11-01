@@ -143,8 +143,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	}
 
 	/**
-	 * 弃用 
-	 * 创建教研室
+	 * 弃用 创建教研室
 	 */
 	@Override
 	public boolean Create_Section(bysjglxt_section newSection) {
@@ -255,5 +254,13 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	@Override
 	public boolean updateSection(bysjglxt_section bysjglxt_section) {
 		return teacherInformationManagementDao.updateSection(bysjglxt_section);
+	}
+
+	/**
+	 * 获取老师的职称
+	 */
+	@Override
+	public List<String> list_Teacher_Title() {
+		return teacherInformationManagementDao.list_Teacher_Title();
 	}
 }

@@ -45,4 +45,6 @@ public interface TeacherInformationManagementDao {
 
 	boolean updateSection(bysjglxt_section bysjglxt_section);
 
+	List<String> list_Teacher_Title();
+
 }
