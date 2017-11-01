@@ -129,13 +129,17 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 				&& studentInformationManagementVO.getSex().trim().length() > 0) {
 			hql = hql + " and student_basic_sex ='" + studentInformationManagementVO.getSex() + "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_major() != null
-				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0) {
-			hql = hql + " and student_basic_major='" + studentInformationManagementVO.getStudent_basic_major() + "'";
+		if ((studentInformationManagementVO.getStudent_basic_major() != null
+				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_major().trim())) {
+			hql = hql + " and student_basic_major='" + studentInformationManagementVO.getStudent_basic_major().trim()
+					+ "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_grade() != null
-				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0) {
-			hql = hql + " and student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade() + "'";
+		if ((studentInformationManagementVO.getStudent_basic_grade() != null
+				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_grade().trim())) {
+			hql = hql + " and student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade().trim()
+					+ "'";
 		}
 		hql = hql + " order by student_basic_num";
 		System.out.println(hql);
@@ -243,13 +247,17 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 				&& studentInformationManagementVO.getSex().trim().length() > 0) {
 			hql = hql + " and student_basic_sex ='" + studentInformationManagementVO.getSex() + "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_major() != null
-				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0) {
-			hql = hql + " and student_basic_major='" + studentInformationManagementVO.getStudent_basic_major() + "'";
+		if ((studentInformationManagementVO.getStudent_basic_major() != null
+				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_major().trim())) {
+			hql = hql + " and student_basic_major='" + studentInformationManagementVO.getStudent_basic_major().trim()
+					+ "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_grade() != null
-				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0) {
-			hql = hql + " and student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade() + "'";
+		if ((studentInformationManagementVO.getStudent_basic_grade() != null
+				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_grade().trim())) {
+			hql = hql + " and student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade().trim()
+					+ "'";
 		}
 		System.out.println(hql);
 		hql = hql + " order by student_basic_num";

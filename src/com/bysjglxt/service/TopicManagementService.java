@@ -86,9 +86,10 @@ public interface TopicManagementService {
 	public boolean selectTopic(String studentID, String topicID);
 
 	/**
+	 * 
 	 * @DOTO
 	 * 
-	 * @说明 某教师提前开放某题给某些学生： 1、判断该教师是否是该课题的指导老师之一，若可以则下一步操作，不可以则返回false。
+	 * @说明 某教师提前开放某题给某些学生： 1、判断该教师是否是该课题的指导老师，若可以则下一步操作，不可以则返回false。
 	 *     2、将这个学生列表设为改课题的指定学生，（此后该列表中学生就可以提前选该题）
 	 * 
 	 * @param TeacherID
