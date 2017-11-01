@@ -43,7 +43,7 @@
 		<!--  -->
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
-		<div class="panel" style="width: 90%; margin: 20px auto;">
+		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
 				<h3 class="panel-title">学生信息列表</h3>
@@ -69,7 +69,7 @@
 							class="input-group-addon"><i class="fa fa-search"></i></span>
 					</div>
 				</div>
-				<table id="table_student" class="table table-hover table-bordered"
+				<table id="table_student" class="table table-hover"
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
@@ -85,11 +85,13 @@
 								data-live-search="true" style="width: auto;"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">专业名称</option>
+									<option value="">未填写专业名称</option>
 							</select></th>
 							<th><select class="form-control" id="select_grade"
 								data-live-search="true" style="width: auto;"
 								onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">年级</option>
+									<option value="">未填写年级</option>
 							</select></th>
 							<th><select class="form-control" id="select_premission"
 								style="width: auto;" onchange="List_Student_By_PageAndSearch(1)">

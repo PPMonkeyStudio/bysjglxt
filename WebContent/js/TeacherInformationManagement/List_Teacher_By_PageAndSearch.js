@@ -104,12 +104,12 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<button id="'
+					new_td.innerHTML = '<i style="cursor: pointer;" id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
-							+ '" onclick="Teacher_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default">基础信息</button>'
-							+ '<button id="'
+							+ '" onclick="Teacher_Information_Display(this)" class="fa fa-edit  "></i>'
+							+ '<i style="cursor: pointer;margin:0 0 0 10px;" id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
-							+ '" onclick="Teacher_Fix_User(this)" style="margin:3px 0 0 10px;"class="btn btn-default">其他信息</button>';
+							+ '" onclick="Teacher_Fix_User(this)" class="fa fa-wrench  "></i>';
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
