@@ -110,9 +110,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<button id="'
+					new_td.innerHTML = '<i style="cursor: pointer;" id="'
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-							+ '" onclick="Student_Information_Display(this)" style="margin:3px 0 0 0;"class="btn btn-default">详细</button>';
+							+ '" onclick="Student_Information_Display(this)" class="fa fa-edit "></i>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));

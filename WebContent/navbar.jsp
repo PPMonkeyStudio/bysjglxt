@@ -41,12 +41,17 @@
 		<div id="navbar-menu">
 			<ul class="nav navbar-nav navbar-left" style="margin: 0 0 0 50px">
 				<li class="dropdown" style="float: left;"><a
-					href="<%=basePath%>navbar.jsp"><!-- <i class="lnr lnr-home"></i>  --><span>首页</span></a></li>
+					href="<%=basePath%>navbar.jsp">
+						<!-- <i class="lnr lnr-home"></i>  -->
+						<span>首页</span>
+				</a></li>
 				<!--  -->
 				<li class="dropdown" style="float: left;"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"><!-- <i
-						class="lnr lnr-database"></i>  --><span>信息</span> <i
-						class="icon-submenu lnr lnr-chevron-down"></i></a>
+					class="dropdown-toggle" data-toggle="dropdown">
+						<!-- <i
+						class="lnr lnr-database"></i>  -->
+						<span>信息</span> <i class="icon-submenu lnr lnr-chevron-down"></i>
+				</a>
 					<ul class="dropdown-menu">
 						<li><a
 							href="<%=basePath%>student/StudentInformationManagement_listPage"
@@ -58,9 +63,11 @@
 					</ul></li>
 				<!--  -->
 				<li class="dropdown" style="float: left;"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"><!-- <i
-						class="lnr lnr-book"></i>  --><span>课题</span> <i
-						class="icon-submenu lnr lnr-chevron-down"></i></a>
+					class="dropdown-toggle" data-toggle="dropdown">
+						<!-- <i
+						class="lnr lnr-book"></i>  -->
+						<span>课题</span> <i class="icon-submenu lnr lnr-chevron-down"></i>
+				</a>
 					<ul class="dropdown-menu">
 						<li><a
 							href="<%=basePath%>topic/TopicManagement_TopicListPage">课题</a></li>
@@ -68,9 +75,11 @@
 					</ul></li>
 				<!--  -->
 				<li class="dropdown" style="float: left;"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"><!-- <i
-						class="lnr lnr-map"></i>  --><span>流程及任务</span> <i
-						class="icon-submenu lnr lnr-chevron-down"></i></a>
+					class="dropdown-toggle" data-toggle="dropdown">
+						<!-- <i
+						class="lnr lnr-map"></i>  -->
+						<span>流程及任务</span> <i class="icon-submenu lnr lnr-chevron-down"></i>
+				</a>
 					<ul class="dropdown-menu">
 						<li><a href="#">流程定义列表</a></li></li>
 				<li><a href="#">流程实例列表</a></li>
@@ -97,8 +106,8 @@
 
 				<!--  -->
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown"> <span>江鑫鑫</span> <i
-						class="icon-submenu lnr lnr-chevron-down"></i></a>
+					data-toggle="dropdown"><i class="fa fa-user-circle"></i> <span>江鑫鑫</span>
+						<i class="icon-submenu lnr lnr-chevron-down"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="#"><i class="lnr lnr-user"></i> <span>我的信息</span></a></li>
 						<li><a href="#"><i class="lnr lnr-lock"></i> <span>修改密码</span></a></li>

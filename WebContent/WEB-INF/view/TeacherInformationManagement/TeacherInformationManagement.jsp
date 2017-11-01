@@ -41,7 +41,7 @@
 		<!--  -->
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
-		<div class="panel" style="width: 90%; margin: 20px auto;">
+		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
 				<h3 class="panel-title">教师列表</h3>
@@ -67,7 +67,7 @@
 							class="input-group-addon"><i class="fa fa-search"></i></span>
 					</div>
 				</div>
-				<table id="table_teacher" class="table table-hover table-bordered"
+				<table id="table_teacher" class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
@@ -83,12 +83,13 @@
 								id="select_section" style="width: auto;"
 								onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">教研室</option>
+									<option value="">未填写教研室</option>
 							</select></th>
 							<th><select class="form-control" id="select_title"
 								style="width: auto;" data-live-search="true"
 								onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">职称</option>
-									<option value="">未填写</option>
+									<option value="">未填写职称</option>
 							</select></th>
 							<th>指导学生数</th>
 							<th>操作</th>
@@ -190,7 +191,7 @@
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title">修改其他信息</h4>
+					<h4 class="modal-title">设置教师</h4>
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">
@@ -202,13 +203,10 @@
 				</div>
 				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
 				<div class="modal-footer">
-					<button class="btn btn-default" id="" onclick=""
+					<button class="btn btn-default" id=""
+						onclick="Commit_Fix_Teacher_User()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-check"></i> 确认修改
-					</button>
-					<button class="btn btn-default" id="" onclick=""
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-times"></i> 放弃修改
 					</button>
 				</div>
 			</div>

@@ -12,6 +12,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 import com.bysjglxt.service.SectionInformationManagementService;
 import com.bysjglxt.service.TeacherInformationManagementService;
@@ -48,9 +49,10 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 */
 	private TeacherInformationManagementVO teacherInformationManagementVO;
 	/*
-	 * 修改的学生基础信息
+	 * 修改的教师信息
 	 */
-	private bysjglxt_teacher_basic updateTeacher;
+	private bysjglxt_teacher_basic updateTeacherBasic;
+	private bysjglxt_teacher_user updateTeacherUser;
 	/*
 	 * 修改的学生基础信息
 	 */
@@ -139,6 +141,15 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @说明 修改教师基础信息
 	 */
 	public void UpdateTeacher() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	/**
+	 * @说明 修改教师用户信息
+	 * @throws IOException
+	 */
+	public void UpdateTeacherUser() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}
@@ -278,14 +289,6 @@ public class TeacherInformationManagementAction extends ActionSupport
 		ListDeleteTeacherID = listDeleteTeacherID;
 	}
 
-	public bysjglxt_teacher_basic getUpdateTeacher() {
-		return updateTeacher;
-	}
-
-	public void setUpdateTeacher(bysjglxt_teacher_basic updateTeacher) {
-		this.updateTeacher = updateTeacher;
-	}
-
 	public bysjglxt_teacher_basic getNewTeacher() {
 		return newTeacher;
 	}
@@ -301,6 +304,22 @@ public class TeacherInformationManagementAction extends ActionSupport
 	public void setSectionInformationManagementService(
 			SectionInformationManagementService sectionInformationManagementService) {
 		this.sectionInformationManagementService = sectionInformationManagementService;
+	}
+
+	public bysjglxt_teacher_user getUpdateTeacherUser() {
+		return updateTeacherUser;
+	}
+
+	public void setUpdateTeacherUser(bysjglxt_teacher_user updateTeacherUser) {
+		this.updateTeacherUser = updateTeacherUser;
+	}
+
+	public bysjglxt_teacher_basic getUpdateTeacherBasic() {
+		return updateTeacherBasic;
+	}
+
+	public void setUpdateTeacherBasic(bysjglxt_teacher_basic updateTeacherBasic) {
+		this.updateTeacherBasic = updateTeacherBasic;
 	}
 
 }

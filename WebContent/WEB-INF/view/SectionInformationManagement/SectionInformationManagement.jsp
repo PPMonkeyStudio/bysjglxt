@@ -31,7 +31,7 @@
 		<!--  -->
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
-		<div class="panel" style="width: 90%; margin: 20px auto;">
+		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
 				<h3 class="panel-title">教研室列表</h3>
@@ -53,7 +53,7 @@
 							class="input-group-addon"><i class="fa fa-search"></i></span>
 					</div>
 				</div>
-				<table id="table_section" class="table table-hover table-bordered"
+				<table id="table_section" class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
