@@ -11,4 +11,13 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 		this.loginOrWriteOffDao = loginOrWriteOffDao;
 	}
 
+	@Override
+	public Object login(String username, String password) {
+		
+		//1.在student_user表中查询
+		
+		
+		return null;
+	}
+
 }

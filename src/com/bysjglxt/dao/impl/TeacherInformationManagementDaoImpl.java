@@ -151,9 +151,12 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			hql = hql + " and job_number like '" + search + "'";
 		}
 
-		if (teacherInformationManagementVO.getProfessional_title() != null
-				&& teacherInformationManagementVO.getProfessional_title().length() > 0) {
-			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title() + "'";
+		if ((teacherInformationManagementVO.getProfessional_title() != null
+				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)
+				|| "".equals(teacherInformationManagementVO.getProfessional_title().trim())) {
+			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title().trim()
+					+ "'";
+
 		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
@@ -172,8 +175,8 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		Session session = getSession();
 		String hql = "from bysjglxt_teacher_user where user_teacher_basic='" + teacher_basic_id + "'";
-		if (section != null && section.trim().length() > 0) {
-			hql = hql + " and user_teacher_section = '" + section + "'";
+		if ((section != null && section.trim().length() > 0) || "".equals(section.trim())) {
+			hql = hql + " and user_teacher_section = '" + section.trim() + "'";
 		}
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
@@ -202,8 +205,11 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
 			hql = hql + " and job_number like '" + search + "'";
 		}
-		if (teacherInformationManagementVO.getProfessional_title() != null
-				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0) {
+
+		if ((teacherInformationManagementVO.getProfessional_title() != null
+				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)
+				|| "".equals(teacherInformationManagementVO.getProfessional_title().trim())) {
+
 			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title().trim()
 					+ "'";
 		}

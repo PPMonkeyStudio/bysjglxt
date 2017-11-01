@@ -119,6 +119,10 @@ public interface TeacherInformationManagementService {
 	 */
 	public boolean updateSection(bysjglxt_section bysjglxt_section);
 
+	/**
+	 * 遍历获得所有职称
+	 * @return
+	 */
 	public List<String> list_Teacher_Title();
 
 }
