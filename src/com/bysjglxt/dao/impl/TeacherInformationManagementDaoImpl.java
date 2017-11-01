@@ -151,8 +151,10 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			hql = hql + " and job_number like '" + search + "'";
 		}
 		if ((teacherInformationManagementVO.getProfessional_title() != null
-				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)||"".equals(teacherInformationManagementVO.getProfessional_title())) {
-			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title() + "'";
+				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)
+				|| "".equals(teacherInformationManagementVO.getProfessional_title().trim())) {
+			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title().trim()
+					+ "'";
 		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
@@ -201,9 +203,11 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
 			hql = hql + " and job_number like '" + search + "'";
 		}
-		if (teacherInformationManagementVO.getProfessional_title() != null
-				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0) {
-			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title() + "'";
+		if ((teacherInformationManagementVO.getProfessional_title() != null
+				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)
+				|| "".equals(teacherInformationManagementVO.getProfessional_title().trim())) {
+			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title().trim()
+					+ "'";
 		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {

@@ -72,7 +72,7 @@ public class testteacher {
 	@Test
 	public void efdsfdsf() {
 		TeacherInformationManagementVO VO_TEACHER_By_PageAndSearch = new TeacherInformationManagementVO();
-		VO_TEACHER_By_PageAndSearch.setProfessional_title("讲师");
+		VO_TEACHER_By_PageAndSearch.setProfessional_title("    ");
 		VO_TEACHER_By_PageAndSearch = teacherInformationManagementService
 				.VO_TEACHER_By_PageAndSearch(VO_TEACHER_By_PageAndSearch);
 
