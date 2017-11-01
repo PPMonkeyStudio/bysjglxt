@@ -116,19 +116,6 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	}
 
 	@Override
-	public boolean create_Section(bysjglxt_section newSection) {
-		boolean flag = true;
-		try {
-			Session session = getSession();
-			session.saveOrUpdate(newSection);
-		} catch (Exception e) {
-			flag = false;
-			e.printStackTrace();
-		}
-		return flag;
-	}
-
-	@Override
 	public List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO) {
 		Session session = getSession();
@@ -171,13 +158,10 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	}
 
 	@Override
-	public bysjglxt_teacher_user getTeacherInfoByBasicId(String teacher_basic_id, String section) {
+	public bysjglxt_teacher_user getTeacherInfoByBasicId(String teacher_basic_id) {
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		Session session = getSession();
 		String hql = "from bysjglxt_teacher_user where user_teacher_basic='" + teacher_basic_id + "'";
-		if ((section != null && section.trim().length() > 0) || "".equals(section.trim())) {
-			hql = hql + " and user_teacher_section = '" + section.trim() + "'";
-		}
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
 		return bysjglxt_teacher_user;
@@ -188,7 +172,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			TeacherInformationManagementVO teacherInformationManagementVO) {
 		Session session = getSession();
 		boolean flag = false;
-		String hql = "from bysjglxt_teacher_basic where 1=1";
+		String hql = "select distinct(basic) from bysjglxt_teacher_basic basic,bysjglxt_teacher_user teacher_user where basic.teacher_basic_id=teacher_user.user_teacher_basic";
 		// 判断搜索框中的字符串是不是全是数字
 		if (TeamUtil.isDigit(teacherInformationManagementVO.getSearch())) {
 			flag = true;
@@ -196,26 +180,31 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		if (!flag && teacherInformationManagementVO.getSearch() != null
 				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
-			hql = hql + " and name like '" + search + "'";
+			hql = hql + " and basic.name like '" + search + "'";
 
 		}
-
 		if (flag && teacherInformationManagementVO.getSearch() != null
 				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
-			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
-			hql = hql + " and job_number like '" + search + "'";
+			String search = "%" + teacherInformationManagementVO.getSearch() + "%";
+			hql = hql + " and basic.job_number like '" + search + "'";
 		}
 
 		if ((teacherInformationManagementVO.getProfessional_title() != null
 				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)
-				|| "".equals(teacherInformationManagementVO.getProfessional_title().trim())) {
+				|| "".equals(teacherInformationManagementVO.getProfessional_title())) {
+			hql = hql + " and basic.professional_title = '"
+					+ teacherInformationManagementVO.getProfessional_title().trim() + "'";
 
-			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title().trim()
-					+ "'";
 		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
-			hql = hql + " and sex='" + teacherInformationManagementVO.getSex() + "'";
+			hql = hql + " and basic.sex='" + teacherInformationManagementVO.getSex() + "'";
+		}
+		if ((teacherInformationManagementVO.getSection() != null
+				&& teacherInformationManagementVO.getSection().trim().length() > 0)
+				|| "".equals(teacherInformationManagementVO.getSection())) {
+			hql = hql + " and teacher_user.user_teacher_section = '"
+					+ teacherInformationManagementVO.getSection().trim() + "'";
 		}
 		hql = hql + " order by job_number";
 		Query query = session.createQuery(hql);
@@ -251,21 +240,6 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		Query query = session.createQuery(hql);
 		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
 		return bysjglxt_section;
-	}
-
-	@Override
-	public boolean deleteSection(String string) {
-		boolean flag = true;
-		try {
-			Session session = getSession();
-			String hql = "delete from bysjglxt_section where section_id='" + string + "'";
-			Query query = session.createQuery(hql);
-			query.executeUpdate();
-		} catch (HibernateException e) {
-			flag = false;
-			e.printStackTrace();
-		}
-		return flag;
 	}
 
 	@Override
@@ -305,19 +279,6 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	}
 
 	@Override
-	public boolean updateSection(bysjglxt_section bysjglxt_section) {
-		boolean flag = true;
-		try {
-			Session session = getSession();
-			session.saveOrUpdate(bysjglxt_section);
-		} catch (Exception e) {
-			flag = false;
-			e.printStackTrace();
-		}
-		return flag;
-	}
-
-	@Override
 	public List<String> list_Teacher_Title() {
 		Session session = getSession();
 		List<String> listTeacher_Title = new ArrayList<String>();
@@ -325,6 +286,53 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		Query query = session.createQuery(hql);
 		listTeacher_Title = query.list();
 		return listTeacher_Title;
+	}
+
+	@Override
+	public List<bysjglxt_teacher_basic> getResultBySearch(
+			TeacherInformationManagementVO teacherInformationManagementVO) {
+		Session session = getSession();
+		String hql = "select distinct(basic) from bysjglxt_teacher_basic basic,bysjglxt_teacher_user teacher_user where basic.teacher_basic_id=teacher_user.user_teacher_basic";
+		boolean flag = false;
+		// 判断搜索框中的字符串是不是全是数字
+		if (TeamUtil.isDigit(teacherInformationManagementVO.getSearch())) {
+			flag = true;
+		}
+		if (!flag && teacherInformationManagementVO.getSearch() != null
+				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + teacherInformationManagementVO.getSearch().trim() + "%";
+			hql = hql + " and basic.name like '" + search + "'";
+
+		}
+		if (flag && teacherInformationManagementVO.getSearch() != null
+				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + teacherInformationManagementVO.getSearch() + "%";
+			hql = hql + " and basic.job_number like '" + search + "'";
+		}
+
+		if ((teacherInformationManagementVO.getProfessional_title() != null
+				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)
+				|| "".equals(teacherInformationManagementVO.getProfessional_title())) {
+			hql = hql + " and basic.professional_title = '"
+					+ teacherInformationManagementVO.getProfessional_title().trim() + "'";
+
+		}
+		if (teacherInformationManagementVO.getSex() != null
+				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
+			hql = hql + " and basic.sex='" + teacherInformationManagementVO.getSex() + "'";
+		}
+		if ((teacherInformationManagementVO.getSection() != null
+				&& teacherInformationManagementVO.getSection().trim().length() > 0)
+				|| "".equals(teacherInformationManagementVO.getSection())) {
+			hql = hql + " and teacher_user.user_teacher_section = '"
+					+ teacherInformationManagementVO.getSection().trim() + "'";
+		}
+		hql = hql + " order by basic.job_number";
+		System.out.println(hql);
+		Query query = session.createQuery(hql);
+		List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch = query.list();
+		session.clear();
+		return listTeacherAllBasicInformationByAndSearch;
 	}
 
 }

@@ -9,42 +9,38 @@ import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 
 public interface TeacherInformationManagementDao {
 
-	List<bysjglxt_teacher_user> list_TeacherUserInformation_All();
+	public List<bysjglxt_teacher_user> list_TeacherUserInformation_All();
 
-	bysjglxt_teacher_basic get_TeacherBasicInformation_ByUserBasic(String user_teacher_basic);
+	public bysjglxt_teacher_basic get_TeacherBasicInformation_ByUserBasic(String user_teacher_basic);
 
 	boolean saveTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic);
 
-	boolean saveTeacher(bysjglxt_teacher_user bysjglxt_teacher_user);
+	public boolean saveTeacher(bysjglxt_teacher_user bysjglxt_teacher_user);
 
-	bysjglxt_teacher_user getStudentById(String teacher_id);
+	public bysjglxt_teacher_user getStudentById(String teacher_id);
 
-	boolean deleteTeacherBasicInfoById(String user_teacher_basic);
+	public boolean deleteTeacherBasicInfoById(String user_teacher_basic);
 
-	boolean deleteTeacherInfoById(String user_teacher_id);
+	public boolean deleteTeacherInfoById(String user_teacher_id);
 
-	boolean create_Section(bysjglxt_section newSection);
-
-	List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch(
+	public List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO);
 
-	bysjglxt_teacher_user getTeacherInfoByBasicId(String teacher_basic_id, String section);
+	public bysjglxt_teacher_user getTeacherInfoByBasicId(String teacher_basic_id);
 
-	List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch(
+	public List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO);
 
-	boolean deleteSection(String string);
+	public List<bysjglxt_section> listBysjglxtSection();
 
-	List<bysjglxt_section> listBysjglxtSection();
+	public bysjglxt_section get_TeacherSectionInformation_ByUserSectionId(String user_teacher_section);
 
-	bysjglxt_section get_TeacherSectionInformation_ByUserSectionId(String user_teacher_section);
+	public boolean updateBasic(bysjglxt_teacher_basic bysjglxtTeacherBasic);
 
-	boolean updateBasic(bysjglxt_teacher_basic bysjglxtTeacherBasic);
+	public boolean updateUser(bysjglxt_teacher_user bysjglxtTeacherUser);
 
-	boolean updateUser(bysjglxt_teacher_user bysjglxtTeacherUser);
+	public List<String> list_Teacher_Title();
 
-	boolean updateSection(bysjglxt_section bysjglxt_section);
-
-	List<String> list_Teacher_Title();
+	public List<bysjglxt_teacher_basic> getResultBySearch(TeacherInformationManagementVO teacherInformationManagementVO);
 
 }

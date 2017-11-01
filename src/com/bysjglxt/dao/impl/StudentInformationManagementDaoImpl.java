@@ -148,6 +148,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		hql = hql + " order by basic.student_basic_num";
 		System.out.println(hql);
 		Query query = session.createQuery(hql);
+		session.clear();
 		query.setFirstResult(
 				(studentInformationManagementVO.getPageIndex() - 1) * studentInformationManagementVO.getPageSize());
 		query.setMaxResults(studentInformationManagementVO.getPageSize());
@@ -222,50 +223,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		return listStudent_Grade;
 	}
 
-	@Override
-	public List<bysjglxt_student_basic> listStudentAllBasicInformationByAndSearch(
-			StudentInformationManagementVO studentInformationManagementVO) {
-		Session session = getSession();
-		String hql = "from bysjglxt_student_basic where 1=1";
-		boolean flag = false;
-		// 判断搜索框中的字符串是不是全是数字
-		if (TeamUtil.isDigit(studentInformationManagementVO.getSearch())) {
-			flag = true;
-		}
-
-		if (!flag && studentInformationManagementVO.getSearch() != null
-				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
-			String search = "%" + studentInformationManagementVO.getSearch().trim() + "%";
-			hql = hql + " and student_basic_name like '" + search + "'";
-		}
-
-		if (flag && studentInformationManagementVO.getSearch() != null
-				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
-			String search = "%" + studentInformationManagementVO.getSearch().trim() + "%";
-			hql = hql + " and student_basic_num like '" + search + "'";
-		}
-		if (studentInformationManagementVO.getSex() != null
-				&& studentInformationManagementVO.getSex().trim().length() > 0) {
-			hql = hql + " and student_basic_sex ='" + studentInformationManagementVO.getSex() + "'";
-		}
-		if ((studentInformationManagementVO.getStudent_basic_major() != null
-				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0)
-				|| "".equals(studentInformationManagementVO.getStudent_basic_major().trim())) {
-			hql = hql + " and student_basic_major='" + studentInformationManagementVO.getStudent_basic_major().trim()
-					+ "'";
-		}
-		if ((studentInformationManagementVO.getStudent_basic_grade() != null
-				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0)
-				|| "".equals(studentInformationManagementVO.getStudent_basic_grade().trim())) {
-			hql = hql + " and student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade().trim()
-					+ "'";
-		}
-		hql = hql + " order by student_basic_num";
-		Query query = session.createQuery(hql);
-		List<bysjglxt_student_basic> listStudentAllBasicInformationByAndSearch = query.list();
-		session.clear();
-		return listStudentAllBasicInformationByAndSearch;
-	}
 
 	@Override
 	public boolean update_Give_Student_Operate_Permission(String string) {
