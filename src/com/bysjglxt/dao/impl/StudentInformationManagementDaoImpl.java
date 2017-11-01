@@ -313,7 +313,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	public List<bysjglxt_student_basic> getResultBySearch(
 			StudentInformationManagementVO studentInformationManagementVO) {
 		Session session = getSession();
-		String hql = "select distinct(basic) from bysjglxt_student_basic basic,bysjglxt_student_user student_user where basic.student_basic_id=student_user.user_student_basic";
+		String hql = "select basic from bysjglxt_student_basic basic,bysjglxt_student_user student_user where basic.student_basic_id=student_user.user_student_basic";
 		boolean flag = false;
 		// 判断搜索框中的字符串是不是全是数字
 		if (TeamUtil.isDigit(studentInformationManagementVO.getSearch())) {
