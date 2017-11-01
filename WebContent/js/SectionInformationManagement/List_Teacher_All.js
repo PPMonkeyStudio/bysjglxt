@@ -1,18 +1,19 @@
-function Get_Teacher_Section(select) {
+function List_Teacher_All(select) {
 	var xhr = false;
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				var SectionList = JSON.parse(xhr.responseText);
+				var TeacherList = JSON.parse(xhr.responseText);
 
-				for (var num = 0; num < SectionList.length; num++) {
+				for (var num = 0; num < TeacherList.length; num++) {
 					var option = document.createElement("option");
-					option.appendChild(document
-							.createTextNode(SectionList[num].section_name));
+					option
+							.appendChild(document
+									.createTextNode(TeacherList[num].bysjglxtTeacherBasic.name));
 					select.appendChild(option);
-					option.value = SectionList[num].section_id;
+					option.value = TeacherList[num].bysjglxtTeacherUser.user_teacher_id;
 				}
 
 				$('#' + select.id).selectpicker('refresh');
@@ -24,7 +25,7 @@ function Get_Teacher_Section(select) {
 	}
 
 	xhr.open("POST",
-			"/bysjglxt/teacher/TeacherInformationManagement_GetTeacherSection");
+			"/bysjglxt/teacher/TeacherInformationManagement_ListTeacherAll");
 
 	xhr.send(null);
 }

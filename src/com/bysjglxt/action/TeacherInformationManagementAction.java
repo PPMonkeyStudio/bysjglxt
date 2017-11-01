@@ -172,6 +172,16 @@ public class TeacherInformationManagementAction extends ActionSupport
 		http_response.getWriter().write(gson.toJson(list_Section));
 
 	}
+
+	public void ListTeacherAll() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter()
+				.write(gson.toJson(teacherInformationManagementService.list_TeacherInformationDTO_All()));
+
+	}
 	/*
 	 * 
 	 */

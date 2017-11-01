@@ -144,11 +144,10 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 	/*
 	 * 教研室
 	 */
-	if (!document.getElementById("select_section").value == "-1") {
+	if (document.getElementById("select_section").value != "-1") {
 		formData.append("teacherInformationManagementVO.section", document
 				.getElementById("select_section").value);
 	}
-	alert(document.getElementById("select_section").value);
 	/*
 	 * 
 	 */

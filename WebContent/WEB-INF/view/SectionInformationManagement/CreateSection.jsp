@@ -13,6 +13,9 @@
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/SectionInformationManagement/Create_Section.js"></script>
+
+<script type="text/javascript"
+	src="<%=basePath%>js/SectionInformationManagement/List_Teacher_All.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>新增教研室</title>
 </head>
@@ -68,5 +71,8 @@
 </body>
 <script>
 	$('select').selectpicker('refresh');
+</script>
+<script>
+	List_Teacher_All(document.getElementById("select_section_leader"));
 </script>
 </html>
