@@ -27,6 +27,8 @@
 	src="<%=basePath%>js/TeacherInformationManagement/Teacher_Fix_User.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TeacherInformationManagement/Get_Teacher_Section.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TeacherInformationManagement/Get_Teacher_Title.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>教师信息</title>
 </head>
@@ -83,10 +85,11 @@
 								onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">教研室</option>
 							</select></th>
-							<th><select class="form-control" id="" style="width: auto;"
-								data-live-search="true"
+							<th><select class="form-control" id="select_title"
+								style="width: auto;" data-live-search="true"
 								onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">职称</option>
+									<option value="">未填写</option>
 							</select></th>
 							<th>指导学生数</th>
 							<th>操作</th>
@@ -269,5 +272,6 @@
 </script>
 <script>
 	Get_Teacher_Section(document.getElementById("select_section"));
+	Get_Teacher_Title(document.getElementById("select_title"));
 </script>
 </html>

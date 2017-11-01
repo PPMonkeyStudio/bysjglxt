@@ -152,7 +152,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		}
 
 		if (teacherInformationManagementVO.getProfessional_title() != null
-				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0) {
+				&& teacherInformationManagementVO.getProfessional_title().length() > 0) {
 			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title() + "'";
 		}
 		if (teacherInformationManagementVO.getSex() != null
@@ -204,7 +204,8 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		}
 		if (teacherInformationManagementVO.getProfessional_title() != null
 				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0) {
-			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title() + "'";
+			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title().trim()
+					+ "'";
 		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
