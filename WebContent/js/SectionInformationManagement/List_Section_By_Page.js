@@ -63,7 +63,7 @@ function List_Section_By_Page(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<button onclick="" class="btn btn-default">修改</button>';
+					new_td.innerHTML = '<button onclick="Update_Section()" class="btn btn-default">修改</button>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));

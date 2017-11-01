@@ -17,6 +17,8 @@
 	src="<%=basePath%>js/SectionInformationManagement/Input_Select.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/SectionInformationManagement/Delete_Section.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/SectionInformationManagement/Update_Section.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -25,12 +27,11 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
-	<div
-		style="margin: 80px 0 0 260px; width: calc(100% - 260px); float: left;">
+	<div style="margin: 80px 0 0 0; float: left; width: 100%;">
 		<!--  -->
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
-		<div class="panel" style="width: 95%; margin: 20px auto;">
+		<div class="panel" style="width: 90%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
 				<h3 class="panel-title">教研室列表</h3>
