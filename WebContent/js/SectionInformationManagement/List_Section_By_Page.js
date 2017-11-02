@@ -16,7 +16,6 @@ function List_Section_By_Page(pageIndex) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				section_json = JSON.parse(xhr.responseText);
-
 				/*
 				 * 清空原表数据
 				 */
@@ -63,7 +62,9 @@ function List_Section_By_Page(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<button onclick="Update_Section()" class="btn btn-default">修改</button>';
+					new_td.innerHTML = '<i id="'
+							+ section_json.teacherInformationDTO[num].bysjglxtSection.section_id
+							+ '" style="cursor: pointer;" modal_Section onclick="Start_Update_Section(this)" class="fa fa-edit "></i>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));

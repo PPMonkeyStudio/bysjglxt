@@ -19,6 +19,8 @@
 	src="<%=basePath%>js/SectionInformationManagement/Delete_Section.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/SectionInformationManagement/Update_Section.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/SectionInformationManagement/Get_Section_Teacher.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -45,12 +47,6 @@
 							onclick="window.location='<%=basePath%>section/SectionInformationManagement_CreateSectionPage'">
 							<i class="fa fa-plus-square"></i> 新增
 						</button>
-					</div>
-					<!-- 检索 -->
-					<div class="input-group" style="width: 300px; float: right;">
-						<input id="input_search" class="form-control"
-							oninput="List_Section_By_Page(1)" type="text"><span
-							class="input-group-addon"><i class="fa fa-search"></i></span>
 					</div>
 				</div>
 				<table id="table_section" class="table table-hover "
@@ -103,11 +99,55 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
+	<!-------修改教师用户信息模态框------->
+	<div class="modal fade" id="modal_Section" data-keyboard="true"
+		tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- 模态弹出窗内容 -->
+				<!--弹出框头部，一般使用“modal-header”表示，主要包括标题和关闭按钮-->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">修改教研室</h4>
+				</div>
+				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
+				<div class="modal-body">
+					<table id="table_section_update"
+						class="table table-hover table-bordered"
+						style="text-align: center;">
+						<tbody></tbody>
+					</table>
+				</div>
+				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
+				<div class="modal-footer">
+					<button class="btn btn-default" id=""
+						onclick="Update_Section()"
+						style="float: right; margin: 0 10px;">
+						<i class="fa fa-check"></i> 确认修改
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 </body>
 <script>
 	$('select').selectpicker('refresh');
+</script>
+<script>
+	/**
+	 * 取到所有老师的列表
+	 */
+	Get_Section_Teacher();
 </script>
 </html>
