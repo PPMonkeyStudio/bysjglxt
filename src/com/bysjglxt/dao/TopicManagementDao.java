@@ -43,4 +43,12 @@ public interface TopicManagementDao {
 
 	public boolean updateStudentList(String topicId,String studentIdList);
 
+	public boolean teacherIsUserId(String user_teacher_id);
+
+	public com.bysjglxt.domain.DO.bysjglxt_teacher_user getTeacherUserInfo(String topic_teacher);
+
+	public com.bysjglxt.domain.DO.bysjglxt_teacher_basic getTeacherBasicInfo(String user_teacher_basic);
+
+	public com.bysjglxt.domain.DO.bysjglxt_section getTeacherSection(String user_teacher_section);
+
 }

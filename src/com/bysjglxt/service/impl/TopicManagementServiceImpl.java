@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bysjglxt.dao.TopicManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationDTO;
 import com.bysjglxt.domain.VO.TopicManagementVO;
 import com.bysjglxt.service.TopicManagementService;
@@ -26,12 +29,20 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	@Override
 	public boolean CreateTopic(TopicInformationDTO topicInformationDTO) {
 		boolean flag = false;
+		/**
+		 * 判断教师userId是否符合格式
+		 */
+		flag = topicManagementDao.teacherIsUserId(
+				topicInformationDTO.getTeacherInformationDTO().getBysjglxtTeacherUser().getUser_teacher_id());
+		if (!flag) {
+			return flag;
+		}
 		bysjglxt_topic newTopic = new bysjglxt_topic();
 		bysjglxt_topic_invite_teacher invite_teacher = new bysjglxt_topic_invite_teacher();
 		invite_teacher = topicInformationDTO.getBysjglxtTopicInviteTeacher();
 		invite_teacher.setTopic_invite_teacher_id(TeamUtil.getUuid());
-		invite_teacher.setTopic_invite__teacher_gmt_create(TeamUtil.getStringSecond());
-		invite_teacher.setTopic_invite_teacher_gmt_modify(invite_teacher.getTopic_invite__teacher_gmt_create());
+		invite_teacher.setTopic_invite_teacher_gmt_create(TeamUtil.getStringSecond());
+		invite_teacher.setTopic_invite_teacher_gmt_modify(invite_teacher.getTopic_invite_teacher_gmt_create());
 		flag = topicManagementDao.createTopicInviteTeacher(invite_teacher);
 		if (!flag) {
 			return flag;
@@ -41,6 +52,8 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		newTopic.setTopic_gmt_create(TeamUtil.getStringSecond());
 		newTopic.setTopic_gmt_modified(TeamUtil.getStringSecond());
 		newTopic.setTopic_examine_state("未审核");
+		newTopic.setTopic_teacher(
+				topicInformationDTO.getTeacherInformationDTO().getBysjglxtTeacherUser().getUser_teacher_id());
 		newTopic.setTopic_student_num(0);
 		newTopic.setTopic_invite_teache_id(invite_teacher.getTopic_invite_teacher_id());
 		flag = topicManagementDao.CreateTopic(newTopic);
@@ -99,11 +112,32 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		TopicInformationDTO topicInformationDTO = null;
 		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = null;
 		List<bysjglxt_topic> list_bysjglxt_topic = new ArrayList<bysjglxt_topic>();
+		TeacherInformationDTO teacherInformationDTO = null;
+		bysjglxt_teacher_basic bysjglxt_teacher_basic = null;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		bysjglxt_section bysjglxt_section = null;
 		// 获得符合条件的所有课题
 		list_bysjglxt_topic = topicManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO);
 		int i = 0;
 		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
 			topicInformationDTO = new TopicInformationDTO();
+			// 在DTO里面设置TeacherInformationDTO
+			teacherInformationDTO = new TeacherInformationDTO();
+			bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_section = new bysjglxt_section();
+			bysjglxt_teacher_user = topicManagementDao.getTeacherUserInfo(tbysjglxt_topic.getTopic_teacher());
+			if (bysjglxt_teacher_user != null) {
+				teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
+				bysjglxt_teacher_basic = topicManagementDao
+						.getTeacherBasicInfo(bysjglxt_teacher_user.getUser_teacher_basic());
+				teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxt_teacher_basic);
+				bysjglxt_section = topicManagementDao
+						.getTeacherSection(bysjglxt_teacher_user.getUser_teacher_section());
+				teacherInformationDTO.setBysjglxtSection(bysjglxt_section);
+			}
+			topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
+			// 在DTO里面设置被邀请课题信息
 			topicInformationDTO.setBysjglxtTopic(tbysjglxt_topic);
 			// 根据课题表中被邀请老师ID，获得被邀请老师的信息
 			bysjglxt_topic_invite_teacher = topicManagementDao
