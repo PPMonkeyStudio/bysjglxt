@@ -51,6 +51,12 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user bysjglxt_student_user = null;
 		for (bysjglxt_student_basic bysjglxt_student_basic : studentBasicList) {
 			bysjglxt_student_user = new bysjglxt_student_user();
+			/**
+			 * 根据学号判断该学生 是否存在，若存在则不进行保存
+			 */
+			if (studentInformationManagementDao.studentBasicIsExist(bysjglxt_student_basic.getStudent_basic_num())) {
+				continue;
+			}
 			bysjglxt_student_basic.setStudent_basic_id(TeamUtil.getUuid());
 			flag = studentInformationManagementDao.saveStudentBasic(bysjglxt_student_basic);
 			bysjglxt_student_user.setUser_student_id(TeamUtil.getUuid());
@@ -90,6 +96,10 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		boolean flag = false;
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		student_basic.setStudent_basic_id(TeamUtil.getStringSecond());
+		flag = studentInformationManagementDao.studentBasicIsExist(student_basic.getStudent_basic_num());
+		if (flag) {
+			return false;
+		}
 		flag = studentInformationManagementDao.saveStudentBasic(student_basic);
 		bysjglxt_student_user.setUser_student_id(TeamUtil.getUuid());
 		bysjglxt_student_user.setUser_student_num(student_basic.getStudent_basic_num());

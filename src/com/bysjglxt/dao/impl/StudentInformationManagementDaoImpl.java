@@ -337,4 +337,19 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		return flag;
 	}
 
+	@Override
+	public boolean studentBasicIsExist(String student_basic_id) {
+		Session session = getSession();
+		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
+		String hql = "from bysjglxt_student_basic where student_basic_num='" + student_basic_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_student_basic = (bysjglxt_student_basic) query.uniqueResult();
+		if (bysjglxt_student_basic != null) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
 }

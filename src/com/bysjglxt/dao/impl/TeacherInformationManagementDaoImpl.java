@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
@@ -350,4 +351,17 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		return flag;
 	}
 
+	@Override
+	public boolean teacherBasicIsExist(String job_number) {
+		Session session = getSession();
+		bysjglxt_teacher_basic bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
+		String hql = "from bysjglxt_teacher_basic where job_number='" + job_number + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_basic = (bysjglxt_teacher_basic) query.uniqueResult();
+		if (bysjglxt_teacher_basic != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

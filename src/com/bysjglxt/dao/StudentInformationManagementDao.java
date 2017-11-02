@@ -43,4 +43,6 @@ public interface StudentInformationManagementDao {
 
 	boolean updatePassword(String user_student_id, String password);
 
+	public boolean studentBasicIsExist(String student_basic_id);
+
 }

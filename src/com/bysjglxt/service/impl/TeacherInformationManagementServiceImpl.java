@@ -61,6 +61,13 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			bysjglxt_teacher_basic.setTeacher_basic_id(TeamUtil.getUuid());
 			bysjglxt_teacher_basic.setTeacher_basic_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_teacher_basic.setTeacher_basic_gmt_modified(bysjglxt_teacher_basic.getTeacher_basic_gmt_create());
+
+			/**
+			 * 根据工号判断教师是否存在
+			 */
+			if (teacherInformationManagementDao.teacherBasicIsExist(bysjglxt_teacher_basic.getJob_number())) {
+				continue;
+			}
 			flag = teacherInformationManagementDao.saveTeacherBasic(bysjglxt_teacher_basic);
 			bysjglxt_teacher_user.setUser_teacher_id(TeamUtil.getUuid());
 			bysjglxt_teacher_user.setUser_teacher_guidance_num(0);
@@ -110,6 +117,12 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		teacher_basic.setTeacher_basic_id(TeamUtil.getUuid());
 		teacher_basic.setTeacher_basic_gmt_create(TeamUtil.getStringSecond());
 		teacher_basic.setTeacher_basic_gmt_modified(teacher_basic.getTeacher_basic_gmt_create());
+
+		flag = teacherInformationManagementDao.teacherBasicIsExist(teacher_basic.getJob_number());
+		if (flag) {
+			return false;
+		}
+
 		flag = teacherInformationManagementDao.saveTeacherBasic(teacher_basic);
 		bysjglxt_teacher_user.setUser_teacher_id(TeamUtil.getUuid());
 		bysjglxt_teacher_user.setUser_teacher_guidance_num(0);
