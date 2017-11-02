@@ -41,4 +41,8 @@ public interface StudentInformationManagementDao {
 
 	List<bysjglxt_student_basic> getResultBySearch(StudentInformationManagementVO studentInformationManagementVO);
 
+	boolean updatePassword(String user_student_id, String password);
+
+	public boolean studentBasicIsExist(String student_basic_id);
+
 }

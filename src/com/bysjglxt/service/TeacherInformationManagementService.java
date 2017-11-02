@@ -115,5 +115,22 @@ public interface TeacherInformationManagementService {
 	 * @return
 	 */
 	public List<String> list_Teacher_Title();
+	
+	/**
+	 * 重置密码 将密码设置为工号
+	 * 
+	 * @param user_teacher_id
+	 * @return
+	 */
+	public boolean resetPassword(String user_teacher_id);
+	
+	
+	public boolean updatePassword(String user_teacher_id,String password);
+	
+	
+	
+	
+	
+	
 
 }

@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
@@ -140,10 +141,9 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 
 		if ((teacherInformationManagementVO.getProfessional_title() != null
 				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)
-				|| "".equals(teacherInformationManagementVO.getProfessional_title().trim())) {
+				|| "".equals(teacherInformationManagementVO.getProfessional_title())) {
 			hql = hql + " and professional_title = '" + teacherInformationManagementVO.getProfessional_title().trim()
 					+ "'";
-
 		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
@@ -335,4 +335,33 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		return listTeacherAllBasicInformationByAndSearch;
 	}
 
+	@Override
+	public boolean updatePassword(String user_teacher_id, String password) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_teacher_user set user_teacher_password = '" + password
+					+ "' where user_teacger_id='" + user_teacher_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean teacherBasicIsExist(String job_number) {
+		Session session = getSession();
+		bysjglxt_teacher_basic bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
+		String hql = "from bysjglxt_teacher_basic where job_number='" + job_number + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_basic = (bysjglxt_teacher_basic) query.uniqueResult();
+		if (bysjglxt_teacher_basic != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

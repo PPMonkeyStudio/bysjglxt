@@ -51,6 +51,12 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user bysjglxt_student_user = null;
 		for (bysjglxt_student_basic bysjglxt_student_basic : studentBasicList) {
 			bysjglxt_student_user = new bysjglxt_student_user();
+			/**
+			 * 根据学号判断该学生 是否存在，若存在则不进行保存
+			 */
+			if (studentInformationManagementDao.studentBasicIsExist(bysjglxt_student_basic.getStudent_basic_num())) {
+				continue;
+			}
 			bysjglxt_student_basic.setStudent_basic_id(TeamUtil.getUuid());
 			flag = studentInformationManagementDao.saveStudentBasic(bysjglxt_student_basic);
 			bysjglxt_student_user.setUser_student_id(TeamUtil.getUuid());
@@ -90,6 +96,10 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		boolean flag = false;
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		student_basic.setStudent_basic_id(TeamUtil.getStringSecond());
+		flag = studentInformationManagementDao.studentBasicIsExist(student_basic.getStudent_basic_num());
+		if (flag) {
+			return false;
+		}
 		flag = studentInformationManagementDao.saveStudentBasic(student_basic);
 		bysjglxt_student_user.setUser_student_id(TeamUtil.getUuid());
 		bysjglxt_student_user.setUser_student_num(student_basic.getStudent_basic_num());
@@ -147,7 +157,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			listStudentInformationDTO.add(studentInformationDTO);
 		}
 		studentInformationManagementVO.setList_StudentInformationDTO(listStudentInformationDTO);
-		
+
 		return studentInformationManagementVO;
 	}
 
@@ -182,6 +192,34 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	@Override
 	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic) {
 		return studentInformationManagementDao.update_StudentBasicInfomation(bysjglxt_student_basic);
+	}
+
+	@Override
+	public boolean resetPassword(String user_student_id) {
+		boolean flag = false;
+		if (user_student_id == null || user_student_id.trim().length() <= 0) {
+			return false;
+		}
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		bysjglxt_student_user = studentInformationManagementDao.getStudentByNum(user_student_id);
+		if (bysjglxt_student_user != null) {
+			bysjglxt_student_user.setUser_student_password(bysjglxt_student_user.getUser_student_num());
+			flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updatePassword(String user_student_id, String password) {
+		boolean flag = false;
+		if (user_student_id == null || user_student_id.trim().length() <= 0) {
+			return false;
+		}
+		if (password == null || password.trim().length() <= 0) {
+			return false;
+		}
+		flag = studentInformationManagementDao.updatePassword(user_student_id, password);
+		return flag;
 	}
 
 }

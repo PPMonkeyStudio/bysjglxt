@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.TopicManagementVO;
 
 public interface TopicManagementDao {
@@ -27,5 +28,19 @@ public interface TopicManagementDao {
 	public bysjglxt_topic getBysjglxtTopicById(String topic_id);
 
 	public bysjglxt_topic_invite_teacher getBysjglxtTopicInviteTeacher(String topic_invite_teache_id);
+
+	public boolean teacherIsSelect(String topic_teacher);
+
+	public com.bysjglxt.domain.DO.bysjglxt_teacher_user getTeacherUser(String topic_teacher);
+
+	public boolean topicIsSelect(String topic_id);
+
+	public boolean createStudentSclectInformation(bysjglxt_topic_select bysjglxt_topic_select);
+
+	public boolean addTopicStudentNum(String topicID);
+
+	public boolean addTeacherUserSrtudentNum(String user_teacher_id);
+
+	public boolean updateStudentList(String topicId,String studentIdList);
 
 }

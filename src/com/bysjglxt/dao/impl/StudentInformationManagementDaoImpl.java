@@ -3,6 +3,7 @@ package com.bysjglxt.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -130,16 +131,17 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			hql = hql + " and basic.student_basic_sex ='" + studentInformationManagementVO.getSex() + "'";
 		}
 
-		if (studentInformationManagementVO.getStudent_basic_major() != null
-				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0) {
-			hql = hql + " and basic.student_basic_major='" + studentInformationManagementVO.getStudent_basic_major()
-					+ "'";
+		if ((studentInformationManagementVO.getStudent_basic_major() != null
+				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_major())) {
+			hql = hql + " and basic.student_basic_major='"
+					+ studentInformationManagementVO.getStudent_basic_major().trim() + "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_grade() != null
-				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0) {
-			hql = hql + " and basic.student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade()
-
-					+ "'";
+		if ((studentInformationManagementVO.getStudent_basic_grade() != null
+				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_grade())) {
+			hql = hql + " and basic.student_basic_grade='"
+					+ studentInformationManagementVO.getStudent_basic_grade().trim() + "'";
 		}
 		if (studentInformationManagementVO.getUser_student_is_operate_premission() != -1) {
 			hql = hql + "and student_user.user_student_is_operate_premission='"
@@ -154,7 +156,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		query.setMaxResults(studentInformationManagementVO.getPageSize());
 		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = query.list();
 		System.out.println(listStudentBasicInformationByPageAndSearch.size());
-
 		if (!flag && studentInformationManagementVO.getSearch() != null
 				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
 			for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
@@ -222,7 +223,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		listStudent_Grade = query.list();
 		return listStudent_Grade;
 	}
-
 
 	@Override
 	public boolean update_Give_Student_Operate_Permission(String string) {
@@ -296,15 +296,17 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 				&& studentInformationManagementVO.getSex().trim().length() > 0) {
 			hql = hql + " and basic.student_basic_sex ='" + studentInformationManagementVO.getSex() + "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_major() != null
-				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0) {
-			hql = hql + " and basic.student_basic_major='" + studentInformationManagementVO.getStudent_basic_major()
-					+ "'";
+		if ((studentInformationManagementVO.getStudent_basic_major() != null
+				&& studentInformationManagementVO.getStudent_basic_major().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_major())) {
+			hql = hql + " and basic.student_basic_major='"
+					+ studentInformationManagementVO.getStudent_basic_major().trim() + "'";
 		}
-		if (studentInformationManagementVO.getStudent_basic_grade() != null
-				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0) {
-			hql = hql + " and basic.student_basic_grade='" + studentInformationManagementVO.getStudent_basic_grade()
-					+ "'";
+		if ((studentInformationManagementVO.getStudent_basic_grade() != null
+				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_grade())) {
+			hql = hql + " and basic.student_basic_grade='"
+					+ studentInformationManagementVO.getStudent_basic_grade().trim() + "'";
 		}
 		if (studentInformationManagementVO.getUser_student_is_operate_premission() != -1) {
 			hql = hql + " and student_user.user_student_is_operate_premission='"
@@ -316,6 +318,38 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		List<bysjglxt_student_basic> list_bysjglxt_student_basic = query.list();
 		session.clear();
 		return list_bysjglxt_student_basic;
+	}
+
+	@Override
+	public boolean updatePassword(String user_student_id, String password) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_student_user set user_student_password = '" + password
+					+ "' where user_student_id='" + user_student_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+
+		return flag;
+	}
+
+	@Override
+	public boolean studentBasicIsExist(String student_basic_id) {
+		Session session = getSession();
+		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
+		String hql = "from bysjglxt_student_basic where student_basic_num='" + student_basic_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_student_basic = (bysjglxt_student_basic) query.uniqueResult();
+		if (bysjglxt_student_basic != null) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }
