@@ -70,7 +70,7 @@
 				</a>
 					<ul class="dropdown-menu">
 						<li><a
-							href="<%=basePath%>topic/TopicManagement_TopicListPage">课题</a></li>
+							href="<%=basePath%>topic/TopicInformationManagement_TopicListPage">课题</a></li>
 						<li><a href="#">选题</a></li>
 					</ul></li>
 				<!--  -->

@@ -10,16 +10,16 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.bysjglxt.service.TopicManagementService;
+import com.bysjglxt.service.TopicInformationManagementService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:applicationContext*.xml" })
 public class testfffff {
 
 	@Resource
-	private TopicManagementService topicManagementService;
+	private TopicInformationManagementService topicManagementService;
 
-	public void setTopicManagementService(TopicManagementService topicManagementService) {
+	public void setTopicManagementService(TopicInformationManagementService topicManagementService) {
 		this.topicManagementService = topicManagementService;
 	}
 
