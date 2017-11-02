@@ -15,14 +15,15 @@ public class TeacherInformationDTO {
 	/*
 	 * 
 	 */
+
+	public bysjglxt_teacher_basic getBysjglxtTeacherBasic() {
+		return bysjglxtTeacherBasic;
+	}
+
 	@Override
 	public String toString() {
 		return "TeacherInformationDTO [bysjglxtTeacherBasic=" + bysjglxtTeacherBasic + ", bysjglxtTeacherUser="
 				+ bysjglxtTeacherUser + ", bysjglxtSection=" + bysjglxtSection + "]";
-	}
-
-	public bysjglxt_teacher_basic getBysjglxtTeacherBasic() {
-		return bysjglxtTeacherBasic;
 	}
 
 	public void setBysjglxtTeacherBasic(bysjglxt_teacher_basic bysjglxtTeacherBasic) {

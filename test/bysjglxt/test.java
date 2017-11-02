@@ -37,7 +37,7 @@ public class test {
 		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = new bysjglxt_topic_invite_teacher();
 		bysjglxt_topic_invite_teacher.setTopic_invite_teacher_name("2");
 		TeacherInformationDTO teacherInformationDTO = new TeacherInformationDTO();
-		bysjglxt_teacher_user bysjglxt_teacher_user= new bysjglxt_teacher_user();
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		bysjglxt_teacher_user.setUser_teacher_id("02cf3c5a-a3c0-49e1-8e60-3219a782c9cd");
 		teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
 		topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
@@ -54,7 +54,6 @@ public class test {
 		topic_id.add("1a107c81-da1c-4a0f-b15c-7ccdbdd2c208");
 		boolean flag = topicManagementService.DeleteTopic(topic_id);
 		System.out.println(flag);
-
 	}
 
 	// 测试采纳课题
@@ -88,9 +87,8 @@ public class test {
 	@Test
 	public void testttttt() {
 		TopicManagementVO VO_Topic_By_PageAndSearch = new TopicManagementVO();
-		VO_Topic_By_PageAndSearch.setSearch("theone");
 		VO_Topic_By_PageAndSearch = topicManagementService.VO_Topic_By_PageAndSearch(VO_Topic_By_PageAndSearch);
-		System.out.println(VO_Topic_By_PageAndSearch.toString());
+		System.out.println(VO_Topic_By_PageAndSearch.getListTopicInformationDTO());
 	}
 
 }

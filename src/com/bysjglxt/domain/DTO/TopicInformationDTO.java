@@ -7,6 +7,7 @@ public class TopicInformationDTO {
 	private bysjglxt_topic bysjglxtTopic;
 	private bysjglxt_topic_invite_teacher bysjglxtTopicInviteTeacher;
 	private TeacherInformationDTO teacherInformationDTO;
+
 	public TeacherInformationDTO getTeacherInformationDTO() {
 		return teacherInformationDTO;
 	}
@@ -34,7 +35,7 @@ public class TopicInformationDTO {
 	@Override
 	public String toString() {
 		return "TopicInformationDTO [bysjglxtTopic=" + bysjglxtTopic + ", bysjglxtTopicInviteTeacher="
-				+ bysjglxtTopicInviteTeacher + "]";
+				+ bysjglxtTopicInviteTeacher + ", teacherInformationDTO=" + teacherInformationDTO + "]";
 	}
 
 }
