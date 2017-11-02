@@ -211,9 +211,11 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	public boolean updateBasicAndUser(TeacherInformationDTO teacherInformationDTO) {
 		// 修改基础表信息
 		boolean flag = false;
+		teacherInformationDTO.getBysjglxtTeacherBasic().setTeacher_basic_gmt_modified(TeamUtil.getStringSecond());
 		flag = teacherInformationManagementDao.updateBasic(teacherInformationDTO.getBysjglxtTeacherBasic());
 		if (!flag)
 			return flag;
+		teacherInformationDTO.getBysjglxtTeacherUser().setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
 		flag = teacherInformationManagementDao.updateUser(teacherInformationDTO.getBysjglxtTeacherUser());
 		if (!flag)
 			return flag;
@@ -225,11 +227,13 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	 */
 	@Override
 	public boolean updateTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic) {
+		bysjglxt_teacher_basic.setTeacher_basic_gmt_modified(TeamUtil.getStringSecond());
 		return teacherInformationManagementDao.updateBasic(bysjglxt_teacher_basic);
 	}
 
 	@Override
 	public boolean updateTeacherUser(bysjglxt_teacher_user bysjglxt_teacher_user) {
+		bysjglxt_teacher_user.setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
 		return teacherInformationManagementDao.updateUser(bysjglxt_teacher_user);
 	}
 
@@ -266,7 +270,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		if (password == null || password.trim().length() <= 0) {
 			return false;
 		}
-		flag = teacherInformationManagementDao.updatePassword(user_teacher_id, password);
+		flag = teacherInformationManagementDao.updatePassword(user_teacher_id, password,TeamUtil.getStringSecond());
 		return flag;
 	}
 

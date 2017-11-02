@@ -13,11 +13,11 @@ public interface TopicManagementDao {
 
 	public boolean DeleteTopic(String topicID);
 
-	public boolean updateTopicState(String topicID);
+	public boolean updateTopicState(String topicID,String moTime);
 
-	public boolean closeTopic(String string);
+	public boolean closeTopic(String string,String moTime);
 
-	public boolean notAdoptTopic(String string);
+	public boolean notAdoptTopic(String string, String moTime);
 
 	public boolean createTopicInviteTeacher(bysjglxt_topic_invite_teacher invite_teacher);
 

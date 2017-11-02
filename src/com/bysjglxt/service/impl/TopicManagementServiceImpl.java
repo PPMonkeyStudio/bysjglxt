@@ -56,7 +56,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 			// 根据课题ID获得课题对象
 			bysjglxt_topic = topicManagementDao.getBysjglxtTopicById(topicId);
 			if (bysjglxt_topic != null) {
-				// 根据课题对象中被邀请老师ID删除被邀请老师信息
+				// 根据课题对象中被邀请老师ID删除被邀请老师信息(这里是否能进行删除)
 				flag = topicManagementDao.deleteTopicInviteTeacher(bysjglxt_topic.getTopic_invite_teache_id());
 				if (!flag)
 					break;
@@ -70,7 +70,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	public boolean adoptTopic(List<String> topicID) {
 		boolean flag = false;
 		for (String string : topicID) {
-			flag = topicManagementDao.updateTopicState(string);
+			flag = topicManagementDao.updateTopicState(string, TeamUtil.getStringSecond());
 		}
 		return flag;
 	}
@@ -79,7 +79,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	public boolean closeTopic(List<String> topicID) {
 		boolean flag = false;
 		for (String string : topicID) {
-			flag = topicManagementDao.closeTopic(string);
+			flag = topicManagementDao.closeTopic(string, TeamUtil.getStringSecond());
 		}
 		return flag;
 	}
@@ -88,7 +88,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	public boolean notAdoptTopic(List<String> topicID) {
 		boolean flag = false;
 		for (String string : topicID) {
-			flag = topicManagementDao.notAdoptTopic(string);
+			flag = topicManagementDao.notAdoptTopic(string, TeamUtil.getStringSecond());
 		}
 		return flag;
 	}
@@ -200,7 +200,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		for (String string : studentIDList) {
 			studentIdList = studentIdList + string + "#&#";
 		}
-		flag = topicManagementDao.updateStudentList(topicID,studentIdList);
+		flag = topicManagementDao.updateStudentList(topicID, studentIdList);
 		return false;
 	}
 

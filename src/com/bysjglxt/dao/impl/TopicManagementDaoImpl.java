@@ -71,11 +71,12 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 	}
 
 	@Override
-	public boolean updateTopicState(String topicID) {
+	public boolean updateTopicState(String topicID, String moTime) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_topic set topic_examine_state = '审核已通过' where topic_id='" + topicID + "'";
+			String hql = "update bysjglxt_topic set topic_examine_state = '审核已通过',topic_gmt_modified='" + moTime
+					+ "' where topic_id='" + topicID + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
@@ -86,11 +87,12 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 	}
 
 	@Override
-	public boolean closeTopic(String string) {
+	public boolean closeTopic(String string, String moTime) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_topic set topic_examine_state = '关闭' where topic_id='" + string + "'";
+			String hql = "update bysjglxt_topic set topic_examine_state = '关闭',topic_gmt_modified='" + moTime
+					+ "' where topic_id='" + string + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
@@ -101,11 +103,12 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 	}
 
 	@Override
-	public boolean notAdoptTopic(String string) {
+	public boolean notAdoptTopic(String string, String moTime) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_topic set topic_examine_state = '审核未通过' where topic_id='" + string + "'";
+			String hql = "update bysjglxt_topic set topic_examine_state = '审核未通过',topic_gmt_modified='" + moTime
+					+ "' where topic_id='" + string + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {

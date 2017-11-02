@@ -33,15 +33,15 @@ public interface StudentInformationManagementDao {
 
 	List<String> listStudent_Grade() throws Exception;
 
-	boolean update_Give_Student_Operate_Permission(String string);
+	boolean update_Give_Student_Operate_Permission(String string,String moTime);
 
-	boolean update_Take_Student_Operate_Permission(String string);
+	boolean update_Take_Student_Operate_Permission(String string,String moTime);
 
 	boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic);
 
 	List<bysjglxt_student_basic> getResultBySearch(StudentInformationManagementVO studentInformationManagementVO);
 
-	boolean updatePassword(String user_student_id, String password);
+	boolean updatePassword(String user_student_id, String password,String moTime);
 
 	public boolean studentBasicIsExist(String student_basic_id);
 
