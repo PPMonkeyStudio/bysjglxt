@@ -1,20 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<!--------------------------------------------------------------------------------->
+<script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
+<!--------------------------------------------------------------------------------->
+<link rel="stylesheet" href="<%=basePath%>css/bootstrap-select.min.css">
+<script type="text/javascript" src="<%=basePath%>js/bootstrap-select.js"></script>
+<!--------------------------------------------------------------------------------->
+<link rel="stylesheet"
+	href="<%=basePath%>css/navbar/chartist-custom.css">
+<link rel="stylesheet" href="<%=basePath%>css/navbar/main.css">
+<link rel="stylesheet"
+	href="<%=basePath%>css/navbar/font-awesome.min.css">
+<link rel="stylesheet" href="<%=basePath%>css/navbar/style.css">
+<link rel="stylesheet" href="<%=basePath%>css/table.css">
+<!--------------------------------------------------------------------------------->
+<link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
+<script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
+<!--------------------------------------------------------------------------------->
+<title>毕业设计管理系统</title>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/test/emp_test">test</a>
-	<form action="${pageContext.request.contextPath}/test/emp_add"
-		method="post">
-		ID:<input name="tt.id" type="text"><br> Content:<input
-			name="tt.content" type="text"><br>
-		<button>提交</button>
-	</form>
-	<br>
+	<div class="panel" style="width: 550px; margin: 100px auto;">
+		<div class="panel-heading">
+			<div>
+				<img src="<%=basePath%>img/logo.jpg" height="40px">
+			</div>
+			<h2 style="text-align: center;">毕业设计管理系统</h2>
+		</div>
+		<div class="panel-body" style="margin: 0 0 20px 0;">
+			<div class="form-group">
+				<input type="email" class="form-control" id="signin-email"
+					placeholder="学号/工号">
+			</div>
+			<div class="form-group">
+				<input type="password" class="form-control" id="signin-password"
+					placeholder="密码">
+			</div>
+			<br>
+			<button class="btn btn-primary  btn-block">登录</button>
+		</div>
+	</div>
 </body>
 </html>

@@ -2,7 +2,6 @@ package com.bysjglxt.domain.VO;
 
 import java.util.List;
 
-import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 
 public class TopicInformationManagementVO {
@@ -26,7 +25,7 @@ public class TopicInformationManagementVO {
 	private boolean HaveNextPage = false;
 
 	// 课题列表
-	private List<TopicInformationManagementDTO> listTopicInformationDTO;
+	private List<TopicInformationManagementDTO> list_TopicInformationDTO;
 
 	// 搜索
 	private String search = null;
@@ -39,10 +38,10 @@ public class TopicInformationManagementVO {
 
 	@Override
 	public String toString() {
-		return "TopicManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords + ", pageSize=" + pageSize
-				+ ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage + ", HaveNextPage=" + HaveNextPage
-				+ ", listTopicInformationDTO=" + listTopicInformationDTO + ", search=" + search + ", source=" + source
-				+ ", type=" + type + "]";
+		return "TopicInformationManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords + ", pageSize="
+				+ pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage + ", HaveNextPage="
+				+ HaveNextPage + ", list_TopicInformationDTO=" + list_TopicInformationDTO + ", search=" + search
+				+ ", source=" + source + ", type=" + type + "]";
 	}
 
 	public int getPageIndex() {
@@ -93,12 +92,12 @@ public class TopicInformationManagementVO {
 		HaveNextPage = haveNextPage;
 	}
 
-	public List<TopicInformationManagementDTO> getListTopicInformationDTO() {
-		return listTopicInformationDTO;
+	public List<TopicInformationManagementDTO> getList_TopicInformationDTO() {
+		return list_TopicInformationDTO;
 	}
 
-	public void setListTopicInformationDTO(List<TopicInformationManagementDTO> listTopicInformationDTO) {
-		this.listTopicInformationDTO = listTopicInformationDTO;
+	public void setList_TopicInformationDTO(List<TopicInformationManagementDTO> list_TopicInformationDTO) {
+		this.list_TopicInformationDTO = list_TopicInformationDTO;
 	}
 
 	public String getSearch() {

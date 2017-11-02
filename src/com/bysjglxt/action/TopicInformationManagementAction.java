@@ -13,6 +13,8 @@ import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 import com.bysjglxt.service.TopicInformationManagementService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -68,10 +70,16 @@ public class TopicInformationManagementAction extends ActionSupport
 		topicInformationManagementService.CreateTopic(topicInformationManagementDTO);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
+
 	}
 
-	public void ListTopicByPageAndSearch() {
-		topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO);
+	public void ListTopicByPageAndSearch() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(
+				gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO)));
 	}
 
 	/*

@@ -15,7 +15,6 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				alert(xhr.responseText);
 				topic_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -45,10 +44,9 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-
-					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic != undefined
-							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_num != "") {
-						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_num;
+					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != undefined
+							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_name_chinese != "") {
+						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_name_chinese;
 					} else {
 						new_td.innerHTML = '无';
 					}
@@ -56,9 +54,9 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic != undefined
-							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_name != "") {
-						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_name;
+					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != undefined
+							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_source != "") {
+						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_source;
 					} else {
 						new_td.innerHTML = '无';
 					}
@@ -66,9 +64,9 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic != undefined
-							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_sex != "") {
-						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_sex;
+					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != undefined
+							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_type != "") {
+						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_type;
 					} else {
 						new_td.innerHTML = '无';
 					}
@@ -76,9 +74,20 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic != undefined
-							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_major != "") {
-						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_major;
+					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student_max != "-1") {
+						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student_num
+								+ '/'
+								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student_max;
+					} else {
+						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student_num;
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (topic_json.list_TopicInformationDTO[num].teacherInformationDTO != undefined
+							&& topic_json.list_TopicInformationDTO[num].teacherInformationDTO.bysjglxtTeacherBasic != "") {
+						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].teacherInformationDTO.bysjglxtTeacherBasic.name;
 					} else {
 						new_td.innerHTML = '无';
 					}
@@ -86,9 +95,9 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic != undefined
-							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_grade != "") {
-						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopicBasic.topic_basic_grade;
+					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopicInviteTeacher != undefined
+							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopicInviteTeacher.topic_invite_teacher_name != "") {
+						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopicInviteTeacher.topic_invite_teacher_name;
 					} else {
 						new_td.innerHTML = '无';
 					}
@@ -96,31 +105,26 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopicUser != undefined) {
-						if (topic_json.list_TopicInformationDTO[num].bysjglxtTopicUser.user_topic_is_operate_premission == 1) {
-							new_td.innerHTML = '✔';
-						} else {
-							new_td.innerHTML = '✘';
-							new_td.style.color = "#ff5063";
-						}
-
+					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != undefined
+							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state != "") {
+						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state;
 					} else {
-						new_td.innerHTML = '';
+						new_td.innerHTML = '无';
 					}
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i style="cursor: pointer;" id="'
-							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopicUser.user_topic_id
-							+ '" onclick="Topic_Information_Display(this)" class="fa fa-edit "></i>';
+							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
+							+ '" onclick="Topic_Information_Display(this)" class="fa fa-file-text-o  "></i>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<label class="fancy-checkbox">'
 							+ '<input id="'
-							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopicUser.user_topic_id
+							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
 							+ '" type="checkbox" class="checkbox_select">'
 							+ '<span></span></label>';
 
@@ -164,37 +168,7 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 	/*
 	 * 
 	 */
-	// 性别
-	var select_sex = document.getElementById("select_sex");
-	if (select_sex.value == "男") {
-		formData.append("topicInformationManagementVO.sex", select_sex.value);
-	} else if (select_sex.value == "女") {
-		formData.append("topicInformationManagementVO.sex", select_sex.value);
-	}
-	// 权限
-	if (document.getElementById("select_premission").value == "1") {
-		formData
-				.append(
-						"topicInformationManagementVO.user_topic_is_operate_premission",
-						document.getElementById("select_premission").value);
-	} else if (document.getElementById("select_premission").value == "0") {
-		formData
-				.append(
-						"topicInformationManagementVO.user_topic_is_operate_premission",
-						document.getElementById("select_premission").value);
-	}
-	// 专业
-	if (document.getElementById("select_major").value == "-1") {
-	} else {
-		formData.append("topicInformationManagementVO.topic_basic_major",
-				document.getElementById("select_major").value);
-	}
-	// 年级
-	if (document.getElementById("select_grade").value == "-1") {
-	} else {
-		formData.append("topicInformationManagementVO.topic_basic_grade",
-				document.getElementById("select_grade").value);
-	}
+
 	/*
 	 * 
 	 */

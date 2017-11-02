@@ -114,7 +114,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 
 	@Override
 	public TopicInformationManagementVO VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO) {
-		List<TopicInformationManagementDTO> listTopicInformationDTO = new ArrayList<TopicInformationManagementDTO>();
+		List<TopicInformationManagementDTO> list_TopicInformationDTO = new ArrayList<TopicInformationManagementDTO>();
 		TopicInformationManagementDTO topicInformationDTO = null;
 		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = null;
 		List<bysjglxt_topic> list_bysjglxt_topic = new ArrayList<bysjglxt_topic>();
@@ -150,10 +150,10 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			bysjglxt_topic_invite_teacher = topicInformationManagementDao
 					.getBysjglxtTopicInviteTeacher(tbysjglxt_topic.getTopic_invite_teache_id());
 			topicInformationDTO.setBysjglxtTopicInviteTeacher(bysjglxt_topic_invite_teacher);
-			listTopicInformationDTO.add(topicInformationDTO);
+			list_TopicInformationDTO.add(topicInformationDTO);
 			i++;
 		}
-		topicManagementVO.setListTopicInformationDTO(listTopicInformationDTO);
+		topicManagementVO.setList_TopicInformationDTO(list_TopicInformationDTO);
 		System.out.println(i);
 		topicManagementVO.setTotalRecords(i);
 		topicManagementVO.setTotalPages(((i - 1) / topicManagementVO.getPageSize()) + 1);

@@ -11,7 +11,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!---------------------------------------------------------------------------------------------------->
-
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Input_Select.js"></script>
+<!---------------------------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/List_Topic_By_PageAndSearch.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>课题管理页</title>
 </head>
@@ -34,58 +38,55 @@
 					<div style="width: 500px; float: left;">
 						<button class="btn btn-default"
 							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_CreateTopicPage'">
-							<i class="fa fa-plus-square"></i> 创建课题
+							<i class="fa fa-plus-square"></i>
+							创建课题
 						</button>
 					</div>
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
 						<input id="input_search" class="form-control"
-							oninput="List_Student_By_PageAndSearch(1)" type="text"><span
-							class="input-group-addon"><i class="fa fa-search"></i></span>
+							oninput="List_Student_By_PageAndSearch(1)" type="text">
+						<span class="input-group-addon">
+							<i class="fa fa-search"></i>
+						</span>
 					</div>
 				</div>
-				<table id="table_student" class="table table-hover "
+				<table id="table_topic" class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
 							<th>中文名称</th>
-							<th><select class="form-control" style="width: auto;">
+							<th>
+								<select class="form-control" style="width: auto;">
 									<option value="-1">课题来源</option>
 									<option value="各类课题项目">各类课题项目</option>
 									<option value="导师指定">导师指定</option>
 									<option value="题目指南">题目指南</option>
 									<option value="自选">自选</option>
 									<option value="其它">其它</option>
-							</select></th>
-							<th><select class="form-control" style="width: auto;">
+								</select>
+							</th>
+							<th>
+								<select class="form-control" style="width: auto;">
 									<option value="-1">课题性质</option>
 									<option value="理论研究">理论研究</option>
 									<option value="应用基础研究">应用基础研究</option>
 									<option value="应用与理论结合研究">应用与理论结合研究</option>
 									<option value="实际应用">实际应用</option>
-							</select></th>
+								</select>
+							</th>
 							<th>已选学生数</th>
 							<th>指导教师</th>
 							<th>协助教师</th>
 							<th>状态</th>
-							<th>详细</th>
-							<th><label class="fancy-checkbox"> <input
-									id="checkbox_all_select" type="checkbox" onclick="all_select()"><span>全选</span>
-							</label></th>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>1/8</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td style="padding: 3px 0 0 0;">
-								<button style="" class="btn btn-default btn-ms">查看</button>
-							</td>
-							<td><label class="fancy-checkbox"><input
-									type="checkbox" class="checkbox_select"><span></span></label></td>
+							<th>操作</th>
+							<th>
+								<label class="fancy-checkbox">
+									<input id="checkbox_all_select" type="checkbox"
+										onclick="all_select()">
+									<span>全选</span>
+								</label>
+							</th>
 						</tr>
 					</tbody>
 				</table>
@@ -96,7 +97,8 @@
 
 					<button class="btn btn-danger" onclick="Delete_Student()"
 						style="float: right; margin: 0 10px;">
-						<i class="fa fa-trash-o"></i> 删除所选
+						<i class="fa fa-trash-o"></i>
+						删除所选
 					</button>
 				</div>
 				<div style="margin: 0 auto; width: 400px; text-align: center;">
@@ -111,9 +113,13 @@
 				</div>
 				<div
 					style="margin: 20px auto 20px; width: 200px; text-align: center;">
-					第<span id="span_pageIndex">1</span>页<br>共<span
-						id="span_totalPages">1</span>页<br>共<span
-						id="span_totalRecords">0</span>条记录
+					第
+					<span id="span_pageIndex">1</span>
+					页<br>共
+					<span id="span_totalPages">1</span>
+					页<br>共
+					<span id="span_totalRecords">0</span>
+					条记录
 				</div>
 			</div>
 		</div>
@@ -127,8 +133,10 @@
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
 						<input id="input_search" class="form-control"
-							oninput="List_Student_By_PageAndSearch(1)" type="text"><span
-							class="input-group-addon"><i class="fa fa-search"></i></span>
+							oninput="List_Student_By_PageAndSearch(1)" type="text">
+						<span class="input-group-addon">
+							<i class="fa fa-search"></i>
+						</span>
 					</div>
 				</div>
 				<table id="table_student" class="table table-hover table-bordered"
@@ -136,39 +144,53 @@
 					<tbody>
 						<tr>
 							<th>中文名称</th>
-							<th><select class="form-control" style="width: auto;">
+							<th>
+								<select class="form-control" style="width: auto;">
 									<option value="-1">课题来源</option>
 									<option value="各类课题项目">各类课题项目</option>
 									<option value="导师指定">导师指定</option>
 									<option value="题目指南">题目指南</option>
 									<option value="自选">自选</option>
 									<option value="其它">其它</option>
-							</select></th>
-							<th><select class="form-control" style="width: auto;">
+								</select>
+							</th>
+							<th>
+								<select class="form-control" style="width: auto;">
 									<option value="-1">课题性质</option>
 									<option value="理论研究">理论研究</option>
 									<option value="应用基础研究">应用基础研究</option>
 									<option value="应用与理论结合研究">应用与理论结合研究</option>
 									<option value="实际应用">实际应用</option>
-							</select></th>
+								</select>
+							</th>
 							<th>已选学生数</th>
 							<th>指导老师</th>
 							<th>协助老师</th>
 							<th>状态</th>
 							<th>操作</th>
-							<th><label class="fancy-checkbox"> <input
-									id="checkbox_all_select" type="checkbox" onclick="all_select()"><span>全选</span>
-							</label></th>
+							<th>
+								<label class="fancy-checkbox">
+									<input id="checkbox_all_select" type="checkbox"
+										onclick="all_select()">
+									<span>全选</span>
+								</label>
+							</th>
 						</tr>
 						<tr>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td>1/8</td>
-							<td style="padding: 0;"><button style="margin: 3px 0 0 0;"
-									class="btn btn-default btn-ms">详细</button></td>
-							<td><label class="fancy-checkbox"><input
-									type="checkbox" class="checkbox_select"><span></span></label></td>
+							<td style="padding: 0;">
+								<button style="margin: 3px 0 0 0;"
+									class="btn btn-default btn-ms">详细</button>
+							</td>
+							<td>
+								<label class="fancy-checkbox">
+									<input type="checkbox" class="checkbox_select">
+									<span></span>
+								</label>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -178,7 +200,8 @@
 				<div style="height: 34px; margin: 0 0 20px 0;">
 					<button class="btn btn-danger" onclick="Delete_Student()"
 						style="float: right; margin: 0 10px;">
-						<i class="fa fa-trash-o"></i> 删除所选
+						<i class="fa fa-trash-o"></i>
+						删除所选
 					</button>
 				</div>
 				<div style="margin: 0 auto; width: 400px; text-align: center;">
@@ -193,9 +216,13 @@
 				</div>
 				<div
 					style="margin: 20px auto 20px; width: 200px; text-align: center;">
-					第<span id="span_pageIndex">1</span>页<br>共<span
-						id="span_totalPages">1</span>页<br>共<span
-						id="span_totalRecords">0</span>条记录
+					第
+					<span id="span_pageIndex">1</span>
+					页<br>共
+					<span id="span_totalPages">1</span>
+					页<br>共
+					<span id="span_totalRecords">0</span>
+					条记录
 				</div>
 			</div>
 
@@ -209,9 +236,6 @@
 	$('select').selectpicker('refresh');
 </script>
 <script>
-	var select_major = document.getElementById("select_major");
-	var select_grade = document.getElementById("select_grade")
-	Get_Student_Major(select_major);
-	Get_Student_Grade(select_grade);
+	
 </script>
 </html>
