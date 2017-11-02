@@ -307,9 +307,9 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 	public boolean teacherIsUserId(String user_teacher_id) {
 		Session session = getSession();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
-		String hql = "from bysjglxt_user_teacher where user_teacher_id='" + user_teacher_id + "'";
+		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + user_teacher_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.list();
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
 		if (bysjglxt_teacher_user == null) {
 			System.out.println("false");
 			return false;
