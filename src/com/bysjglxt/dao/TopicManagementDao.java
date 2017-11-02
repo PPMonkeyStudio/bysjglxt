@@ -13,11 +13,11 @@ public interface TopicManagementDao {
 
 	public boolean DeleteTopic(String topicID);
 
-	public boolean updateTopicState(String topicID);
+	public boolean updateTopicState(String topicID,String moTime);
 
-	public boolean closeTopic(String string);
+	public boolean closeTopic(String string,String moTime);
 
-	public boolean notAdoptTopic(String string);
+	public boolean notAdoptTopic(String string, String moTime);
 
 	public boolean createTopicInviteTeacher(bysjglxt_topic_invite_teacher invite_teacher);
 
@@ -42,5 +42,13 @@ public interface TopicManagementDao {
 	public boolean addTeacherUserSrtudentNum(String user_teacher_id);
 
 	public boolean updateStudentList(String topicId,String studentIdList);
+
+	public boolean teacherIsUserId(String user_teacher_id);
+
+	public com.bysjglxt.domain.DO.bysjglxt_teacher_user getTeacherUserInfo(String topic_teacher);
+
+	public com.bysjglxt.domain.DO.bysjglxt_teacher_basic getTeacherBasicInfo(String user_teacher_basic);
+
+	public com.bysjglxt.domain.DO.bysjglxt_section getTeacherSection(String user_teacher_section);
 
 }

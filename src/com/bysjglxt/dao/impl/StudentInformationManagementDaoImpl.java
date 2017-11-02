@@ -225,12 +225,12 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public boolean update_Give_Student_Operate_Permission(String string) {
+	public boolean update_Give_Student_Operate_Permission(String string, String moTime) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_student_user set user_student_is_operate_premission=1 where user_student_id='"
-					+ string + "'";
+			String hql = "update bysjglxt_student_user set user_student_is_operate_premission=1,user_student_gmt_modified='"
+					+ moTime + "' where user_student_id='" + string + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (Exception e) {
@@ -242,12 +242,12 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public boolean update_Take_Student_Operate_Permission(String string) {
+	public boolean update_Take_Student_Operate_Permission(String string, String moTime) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_student_user set user_student_is_operate_premission=0 where user_student_id='"
-					+ string + "'";
+			String hql = "update bysjglxt_student_user set user_student_is_operate_premission=0,user_student_gmt_modified='"
+					+ moTime + "' where user_student_id='" + string + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (Exception e) {
@@ -321,12 +321,12 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public boolean updatePassword(String user_student_id, String password) {
+	public boolean updatePassword(String user_student_id, String password, String moTime) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
 			String hql = "update bysjglxt_student_user set user_student_password = '" + password
-					+ "' where user_student_id='" + user_student_id + "'";
+					+ "',user_student_gmt_modified='" + moTime + "' where user_student_id='" + user_student_id + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {

@@ -103,6 +103,7 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 
 	@Override
 	public boolean updateSection(bysjglxt_section bysjglxt_section) {
+		bysjglxt_section.setSection_gmt_modified(TeamUtil.getStringSecond());
 		return sectionInformationManagementDao.updateSection(bysjglxt_section);
 	}
 

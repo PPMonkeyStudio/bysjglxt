@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TopicManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
@@ -71,11 +73,12 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 	}
 
 	@Override
-	public boolean updateTopicState(String topicID) {
+	public boolean updateTopicState(String topicID, String moTime) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_topic set topic_examine_state = '审核已通过' where topic_id='" + topicID + "'";
+			String hql = "update bysjglxt_topic set topic_examine_state = '审核已通过',topic_gmt_modified='" + moTime
+					+ "' where topic_id='" + topicID + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
@@ -86,11 +89,12 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 	}
 
 	@Override
-	public boolean closeTopic(String string) {
+	public boolean closeTopic(String string, String moTime) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_topic set topic_examine_state = '关闭' where topic_id='" + string + "'";
+			String hql = "update bysjglxt_topic set topic_examine_state = '关闭',topic_gmt_modified='" + moTime
+					+ "' where topic_id='" + string + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
@@ -101,11 +105,12 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 	}
 
 	@Override
-	public boolean notAdoptTopic(String string) {
+	public boolean notAdoptTopic(String string, String moTime) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_topic set topic_examine_state = '审核未通过' where topic_id='" + string + "'";
+			String hql = "update bysjglxt_topic set topic_examine_state = '审核未通过',topic_gmt_modified='" + moTime
+					+ "' where topic_id='" + string + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
@@ -296,5 +301,51 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	@Override
+	public boolean teacherIsUserId(String user_teacher_id) {
+		Session session = getSession();
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		String hql = "from bysjglxt_user_teacher where user_teacher_id='" + user_teacher_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.list();
+		if (bysjglxt_teacher_user == null) {
+			System.out.println("false");
+			return false;
+		} else {
+			System.out.println("true");
+			return true;
+		}
+	}
+
+	@Override
+	public bysjglxt_teacher_user getTeacherUserInfo(String topic_teacher) {
+		Session session = getSession();
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + topic_teacher + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		return bysjglxt_teacher_user;
+	}
+
+	@Override
+	public bysjglxt_teacher_basic getTeacherBasicInfo(String user_teacher_basic) {
+		Session session = getSession();
+		bysjglxt_teacher_basic TeacherBasicInformation = null;
+		String hql = "from bysjglxt_teacher_basic where teacher_basic_id='" + user_teacher_basic + "'";
+		Query query = session.createQuery(hql);
+		TeacherBasicInformation = (bysjglxt_teacher_basic) query.uniqueResult();
+		return TeacherBasicInformation;
+	}
+
+	@Override
+	public bysjglxt_section getTeacherSection(String user_teacher_section) {
+		Session session = getSession();
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		String hql = "from bysjglxt_section where section_id ='" + user_teacher_section + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		return bysjglxt_section;
 	}
 }

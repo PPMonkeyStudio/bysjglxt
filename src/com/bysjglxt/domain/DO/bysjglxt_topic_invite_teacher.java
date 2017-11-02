@@ -7,9 +7,20 @@ public class bysjglxt_topic_invite_teacher {
 	private String topic_invite_teacher_sex;
 	private String topic_invite_teacher_unitname;
 	private String topic_invite_teacher_technicalitle;
-	private String topic_invite__teacher_duties;
-	private String topic_invite__teacher_gmt_create;
+	private String topic_invite_teacher_duties;
+	private String topic_invite_teacher_gmt_create;
 	private String topic_invite_teacher_gmt_modify;
+
+	@Override
+	public String toString() {
+		return "bysjglxt_topic_invite_teacher [topic_invite_teacher_id=" + topic_invite_teacher_id
+				+ ", topic_invite_teacher_name=" + topic_invite_teacher_name + ", topic_invite_teacher_sex="
+				+ topic_invite_teacher_sex + ", topic_invite_teacher_unitname=" + topic_invite_teacher_unitname
+				+ ", topic_invite_teacher_technicalitle=" + topic_invite_teacher_technicalitle
+				+ ", topic_invite_teacher_duties=" + topic_invite_teacher_duties + ", topic_invite_teacher_gmt_create="
+				+ topic_invite_teacher_gmt_create + ", topic_invite_teacher_gmt_modify="
+				+ topic_invite_teacher_gmt_modify + "]";
+	}
 
 	public String getTopic_invite_teacher_id() {
 		return topic_invite_teacher_id;
@@ -51,20 +62,20 @@ public class bysjglxt_topic_invite_teacher {
 		this.topic_invite_teacher_technicalitle = topic_invite_teacher_technicalitle;
 	}
 
-	public String getTopic_invite__teacher_duties() {
-		return topic_invite__teacher_duties;
+	public String getTopic_invite_teacher_duties() {
+		return topic_invite_teacher_duties;
 	}
 
-	public void setTopic_invite__teacher_duties(String topic_invite__teacher_duties) {
-		this.topic_invite__teacher_duties = topic_invite__teacher_duties;
+	public void setTopic_invite_teacher_duties(String topic_invite_teacher_duties) {
+		this.topic_invite_teacher_duties = topic_invite_teacher_duties;
 	}
 
-	public String getTopic_invite__teacher_gmt_create() {
-		return topic_invite__teacher_gmt_create;
+	public String getTopic_invite_teacher_gmt_create() {
+		return topic_invite_teacher_gmt_create;
 	}
 
-	public void setTopic_invite__teacher_gmt_create(String topic_invite__teacher_gmt_create) {
-		this.topic_invite__teacher_gmt_create = topic_invite__teacher_gmt_create;
+	public void setTopic_invite_teacher_gmt_create(String topic_invite_teacher_gmt_create) {
+		this.topic_invite_teacher_gmt_create = topic_invite_teacher_gmt_create;
 	}
 
 	public String getTopic_invite_teacher_gmt_modify() {
@@ -73,17 +84,6 @@ public class bysjglxt_topic_invite_teacher {
 
 	public void setTopic_invite_teacher_gmt_modify(String topic_invite_teacher_gmt_modify) {
 		this.topic_invite_teacher_gmt_modify = topic_invite_teacher_gmt_modify;
-	}
-
-	@Override
-	public String toString() {
-		return "bysjglxt_topic_invite_teacher [topic_invite_teacher_id=" + topic_invite_teacher_id
-				+ ", topic_invite_teacher_name=" + topic_invite_teacher_name + ", topic_invite_teacher_sex="
-				+ topic_invite_teacher_sex + ", topic_invite_teacher_unitname=" + topic_invite_teacher_unitname
-				+ ", topic_invite_teacher_technicalitle=" + topic_invite_teacher_technicalitle
-				+ ", topic_invite__teacher_duties=" + topic_invite__teacher_duties
-				+ ", topic_invite__teacher_gmt_create=" + topic_invite__teacher_gmt_create
-				+ ", topic_invite_teacher_gmt_modify=" + topic_invite_teacher_gmt_modify + "]";
 	}
 
 }

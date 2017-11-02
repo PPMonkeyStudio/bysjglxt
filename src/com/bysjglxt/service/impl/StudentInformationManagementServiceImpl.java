@@ -175,7 +175,8 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	public boolean update_Give_Student_Operate_Permission(List<String> listString) {
 		boolean flag = false;
 		for (String string : listString) {
-			flag = studentInformationManagementDao.update_Give_Student_Operate_Permission(string);
+			flag = studentInformationManagementDao.update_Give_Student_Operate_Permission(string,
+					TeamUtil.getStringSecond());
 		}
 		return flag;
 	}
@@ -184,7 +185,8 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	public boolean update_Take_Student_Operate_Permission(List<String> listString) {
 		boolean flag = false;
 		for (String string : listString) {
-			flag = studentInformationManagementDao.update_Take_Student_Operate_Permission(string);
+			flag = studentInformationManagementDao.update_Take_Student_Operate_Permission(string,
+					TeamUtil.getStringSecond());
 		}
 		return flag;
 	}
@@ -204,6 +206,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user = studentInformationManagementDao.getStudentByNum(user_student_id);
 		if (bysjglxt_student_user != null) {
 			bysjglxt_student_user.setUser_student_password(bysjglxt_student_user.getUser_student_num());
+			bysjglxt_student_user.setUser_student_gmt_modified(TeamUtil.getStringSecond());
 			flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
 		}
 		return flag;
@@ -218,7 +221,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		if (password == null || password.trim().length() <= 0) {
 			return false;
 		}
-		flag = studentInformationManagementDao.updatePassword(user_student_id, password);
+		flag = studentInformationManagementDao.updatePassword(user_student_id, password, TeamUtil.getStringSecond());
 		return flag;
 	}
 
