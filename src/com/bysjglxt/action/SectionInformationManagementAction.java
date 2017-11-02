@@ -32,8 +32,11 @@ public class SectionInformationManagementAction extends ActionSupport
 	 * 
 	 */
 	private SectionInformationManagementVO sectionInformationManagementVO;
-
+	/*
+	 * 
+	 */
 	private bysjglxt_section newSection;
+	private bysjglxt_section updateSection;
 	/*
 	 * 删除所选教研室列表
 	 */
@@ -87,9 +90,23 @@ public class SectionInformationManagementAction extends ActionSupport
 
 	}
 
+	/**
+	 * 
+	 * @throws IOException
+	 */
 	public void CreateSection() throws IOException {
 		sectionInformationManagementService.Create_Section(newSection);
 
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	/**
+	 * @throws IOException
+	 * 
+	 */
+	public void UpdateSection() throws IOException {
+		sectionInformationManagementService.updateSection(updateSection);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}
@@ -161,6 +178,14 @@ public class SectionInformationManagementAction extends ActionSupport
 
 	public void setListDeleteSectionID(List<String> listDeleteSectionID) {
 		ListDeleteSectionID = listDeleteSectionID;
+	}
+
+	public bysjglxt_section getUpdateSection() {
+		return updateSection;
+	}
+
+	public void setUpdateSection(bysjglxt_section updateSection) {
+		this.updateSection = updateSection;
 	}
 
 }

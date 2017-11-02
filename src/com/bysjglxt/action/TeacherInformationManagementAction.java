@@ -140,7 +140,8 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 * @说明 修改教师基础信息
 	 */
-	public void UpdateTeacher() throws IOException {
+	public void UpdateTeacherBasic() throws IOException {
+		teacherInformationManagementService.updateTeacherBasic(updateTeacherBasic);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}
@@ -150,6 +151,8 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void UpdateTeacherUser() throws IOException {
+		System.out.println(updateTeacherUser);
+		teacherInformationManagementService.updateTeacherUser(updateTeacherUser);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}
