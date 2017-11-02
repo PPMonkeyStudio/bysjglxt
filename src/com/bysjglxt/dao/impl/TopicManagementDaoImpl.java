@@ -63,7 +63,6 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 			Session session = getSession();
 			String hql = "delete from bysjglxt_topic where topic_id='" + topicID + "'";
 			Query query = session.createQuery(hql);
-			System.out.println(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
 			flag = false;
@@ -127,7 +126,6 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 			Session session = getSession();
 			String hql = "delete from bysjglxt_topic_invite_teacher where topic_invite_teacher_id='" + topicId + "'";
 			Query query = session.createQuery(hql);
-			System.out.println(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
 			flag = false;
@@ -159,7 +157,6 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 			hql = hql + " and topic_name_english like '" + search + "'";
 		}
 		hql = hql + " order by topic_gmt_create";
-		System.out.println("kk\t" + hql);
 		Query query = session.createQuery(hql);
 		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
 		query.setMaxResults(topicManagementVO.getPageSize());
@@ -311,10 +308,8 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
 		if (bysjglxt_teacher_user == null) {
-			System.out.println("false");
 			return false;
 		} else {
-			System.out.println("true");
 			return true;
 		}
 	}

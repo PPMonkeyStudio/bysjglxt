@@ -88,7 +88,7 @@ public class test {
 	public void testttttt() {
 		TopicManagementVO VO_Topic_By_PageAndSearch = new TopicManagementVO();
 		VO_Topic_By_PageAndSearch = topicManagementService.VO_Topic_By_PageAndSearch(VO_Topic_By_PageAndSearch);
-		System.out.println(VO_Topic_By_PageAndSearch.getListTopicInformationDTO());
+		System.out.println(VO_Topic_By_PageAndSearch);
 	}
 
 }
