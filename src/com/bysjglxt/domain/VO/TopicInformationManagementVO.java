@@ -3,9 +3,9 @@ package com.bysjglxt.domain.VO;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_topic;
-import com.bysjglxt.domain.DTO.TopicInformationDTO;
+import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 
-public class TopicManagementVO {
+public class TopicInformationManagementVO {
 
 	// 当前页
 	private int pageIndex = 1;
@@ -26,7 +26,7 @@ public class TopicManagementVO {
 	private boolean HaveNextPage = false;
 
 	// 课题列表
-	private List<TopicInformationDTO> listTopicInformationDTO;
+	private List<TopicInformationManagementDTO> listTopicInformationDTO;
 
 	// 搜索
 	private String search = null;
@@ -93,11 +93,11 @@ public class TopicManagementVO {
 		HaveNextPage = haveNextPage;
 	}
 
-	public List<TopicInformationDTO> getListTopicInformationDTO() {
+	public List<TopicInformationManagementDTO> getListTopicInformationDTO() {
 		return listTopicInformationDTO;
 	}
 
-	public void setListTopicInformationDTO(List<TopicInformationDTO> listTopicInformationDTO) {
+	public void setListTopicInformationDTO(List<TopicInformationManagementDTO> listTopicInformationDTO) {
 		this.listTopicInformationDTO = listTopicInformationDTO;
 	}
 

@@ -3,7 +3,7 @@ package com.bysjglxt.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bysjglxt.dao.TopicManagementDao;
+import com.bysjglxt.dao.TopicInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
@@ -11,28 +11,32 @@ import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
-import com.bysjglxt.domain.DTO.TopicInformationDTO;
-import com.bysjglxt.domain.VO.TopicManagementVO;
-import com.bysjglxt.service.TopicManagementService;
+import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
+import com.bysjglxt.domain.VO.TopicInformationManagementVO;
+import com.bysjglxt.service.TopicInformationManagementService;
 
 import util.TeamUtil;
 
-public class TopicManagementServiceImpl implements TopicManagementService {
+public class TopicInformationManagementServiceImpl implements TopicInformationManagementService {
 
 	// Dao层的注入
-	private TopicManagementDao topicManagementDao;
+	private TopicInformationManagementDao topicInformationManagementDao;
 
-	public void setTopicManagementDao(TopicManagementDao topicManagementDao) {
-		this.topicManagementDao = topicManagementDao;
+	public TopicInformationManagementDao getTopicInformationManagementDao() {
+		return topicInformationManagementDao;
+	}
+
+	public void setTopicInformationManagementDao(TopicInformationManagementDao topicInformationManagementDao) {
+		this.topicInformationManagementDao = topicInformationManagementDao;
 	}
 
 	@Override
-	public boolean CreateTopic(TopicInformationDTO topicInformationDTO) {
+	public boolean CreateTopic(TopicInformationManagementDTO topicInformationDTO) {
 		boolean flag = false;
 		/**
 		 * 判断教师userId是否符合格式
 		 */
-		flag = topicManagementDao.teacherIsUserId(
+		flag = topicInformationManagementDao.teacherIsUserId(
 				topicInformationDTO.getTeacherInformationDTO().getBysjglxtTeacherUser().getUser_teacher_id());
 		if (!flag) {
 			return flag;
@@ -43,7 +47,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		invite_teacher.setTopic_invite_teacher_id(TeamUtil.getUuid());
 		invite_teacher.setTopic_invite_teacher_gmt_create(TeamUtil.getStringSecond());
 		invite_teacher.setTopic_invite_teacher_gmt_modify(invite_teacher.getTopic_invite_teacher_gmt_create());
-		flag = topicManagementDao.createTopicInviteTeacher(invite_teacher);
+		flag = topicInformationManagementDao.createTopicInviteTeacher(invite_teacher);
 		if (!flag) {
 			return flag;
 		}
@@ -56,7 +60,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 				topicInformationDTO.getTeacherInformationDTO().getBysjglxtTeacherUser().getUser_teacher_id());
 		newTopic.setTopic_student_num(0);
 		newTopic.setTopic_invite_teache_id(invite_teacher.getTopic_invite_teacher_id());
-		flag = topicManagementDao.CreateTopic(newTopic);
+		flag = topicInformationManagementDao.CreateTopic(newTopic);
 		return flag;
 	}
 
@@ -67,13 +71,14 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		for (String topicId : topic_id) {
 			bysjglxt_topic = new bysjglxt_topic();
 			// 根据课题ID获得课题对象
-			bysjglxt_topic = topicManagementDao.getBysjglxtTopicById(topicId);
+			bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicId);
 			if (bysjglxt_topic != null) {
 				// 根据课题对象中被邀请老师ID删除被邀请老师信息(这里是否能进行删除)
-				flag = topicManagementDao.deleteTopicInviteTeacher(bysjglxt_topic.getTopic_invite_teache_id());
+				flag = topicInformationManagementDao
+						.deleteTopicInviteTeacher(bysjglxt_topic.getTopic_invite_teache_id());
 				if (!flag)
 					break;
-				flag = topicManagementDao.DeleteTopic(topicId);
+				flag = topicInformationManagementDao.DeleteTopic(topicId);
 			}
 		}
 		return flag;
@@ -83,7 +88,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	public boolean adoptTopic(List<String> topicID) {
 		boolean flag = false;
 		for (String string : topicID) {
-			flag = topicManagementDao.updateTopicState(string, TeamUtil.getStringSecond());
+			flag = topicInformationManagementDao.updateTopicState(string, TeamUtil.getStringSecond());
 		}
 		return flag;
 	}
@@ -92,7 +97,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	public boolean closeTopic(List<String> topicID) {
 		boolean flag = false;
 		for (String string : topicID) {
-			flag = topicManagementDao.closeTopic(string, TeamUtil.getStringSecond());
+			flag = topicInformationManagementDao.closeTopic(string, TeamUtil.getStringSecond());
 		}
 		return flag;
 	}
@@ -101,15 +106,15 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	public boolean notAdoptTopic(List<String> topicID) {
 		boolean flag = false;
 		for (String string : topicID) {
-			flag = topicManagementDao.notAdoptTopic(string, TeamUtil.getStringSecond());
+			flag = topicInformationManagementDao.notAdoptTopic(string, TeamUtil.getStringSecond());
 		}
 		return flag;
 	}
 
 	@Override
-	public TopicManagementVO VO_Topic_By_PageAndSearch(TopicManagementVO topicManagementVO) {
-		List<TopicInformationDTO> listTopicInformationDTO = new ArrayList<TopicInformationDTO>();
-		TopicInformationDTO topicInformationDTO = null;
+	public TopicInformationManagementVO VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO) {
+		List<TopicInformationManagementDTO> listTopicInformationDTO = new ArrayList<TopicInformationManagementDTO>();
+		TopicInformationManagementDTO topicInformationDTO = null;
 		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = null;
 		List<bysjglxt_topic> list_bysjglxt_topic = new ArrayList<bysjglxt_topic>();
 		TeacherInformationDTO teacherInformationDTO = null;
@@ -117,22 +122,23 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		bysjglxt_section bysjglxt_section = null;
 		// 获得符合条件的所有课题
-		list_bysjglxt_topic = topicManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO);
+		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO);
 		int i = 0;
 		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
-			topicInformationDTO = new TopicInformationDTO();
+			topicInformationDTO = new TopicInformationManagementDTO();
 			// 在DTO里面设置TeacherInformationDTO
 			teacherInformationDTO = new TeacherInformationDTO();
 			bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
 			bysjglxt_teacher_user = new bysjglxt_teacher_user();
 			bysjglxt_section = new bysjglxt_section();
-			bysjglxt_teacher_user = topicManagementDao.getTeacherUserInfo(tbysjglxt_topic.getTopic_teacher());
+			bysjglxt_teacher_user = topicInformationManagementDao
+					.getTeacherUserInfo(tbysjglxt_topic.getTopic_teacher());
 			if (bysjglxt_teacher_user != null) {
 				teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
-				bysjglxt_teacher_basic = topicManagementDao
+				bysjglxt_teacher_basic = topicInformationManagementDao
 						.getTeacherBasicInfo(bysjglxt_teacher_user.getUser_teacher_basic());
 				teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxt_teacher_basic);
-				bysjglxt_section = topicManagementDao
+				bysjglxt_section = topicInformationManagementDao
 						.getTeacherSection(bysjglxt_teacher_user.getUser_teacher_section());
 				teacherInformationDTO.setBysjglxtSection(bysjglxt_section);
 			}
@@ -140,7 +146,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 			// 在DTO里面设置被邀请课题信息
 			topicInformationDTO.setBysjglxtTopic(tbysjglxt_topic);
 			// 根据课题表中被邀请老师ID，获得被邀请老师的信息
-			bysjglxt_topic_invite_teacher = topicManagementDao
+			bysjglxt_topic_invite_teacher = topicInformationManagementDao
 					.getBysjglxtTopicInviteTeacher(tbysjglxt_topic.getTopic_invite_teache_id());
 			topicInformationDTO.setBysjglxtTopicInviteTeacher(bysjglxt_topic_invite_teacher);
 			listTopicInformationDTO.add(topicInformationDTO);
@@ -175,17 +181,17 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		boolean flag = true;
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
-		bysjglxt_topic = topicManagementDao.getBysjglxtTopicById(topicID);
-		bysjglxt_teacher_user = topicManagementDao.getTeacherUser(bysjglxt_topic.getTopic_teacher());
+		bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicID);
+		bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUser(bysjglxt_topic.getTopic_teacher());
 		// 1. ②判断是否达到教师可选上限
 		if (bysjglxt_teacher_user != null && bysjglxt_teacher_user.getUser_teacher_max_guidance() != -1) {
-			flag = topicManagementDao.teacherIsSelect(bysjglxt_topic.getTopic_teacher());
+			flag = topicInformationManagementDao.teacherIsSelect(bysjglxt_topic.getTopic_teacher());
 		}
 		if (!flag)
 			return flag;
 		// 2.②判断是否达到课题可选上限
 		if (flag && bysjglxt_topic != null && bysjglxt_topic.getTopic_student_max() != -1) {
-			flag = topicManagementDao.topicIsSelect(bysjglxt_topic.getTopic_id());
+			flag = topicInformationManagementDao.topicIsSelect(bysjglxt_topic.getTopic_id());
 		}
 		if (!flag)
 			return flag;
@@ -198,16 +204,16 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		bysjglxt_topic_select.setTopic_select_topic(topicID);
 		bysjglxt_topic_select.setTopic_select_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_topic_select.setTopic_select_gmt_modified(bysjglxt_topic_select.getTopic_select_gmt_create());
-		flag = topicManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
+		flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
 		if (flag) {
 			// 课题记录中数据增加1
-			flag = topicManagementDao.addTopicStudentNum(topicID);
+			flag = topicInformationManagementDao.addTopicStudentNum(topicID);
 		} else {
 			return flag;
 		}
 		if (flag) {
 			// 教师学生指导人数+1
-			flag = topicManagementDao.addTeacherUserSrtudentNum(bysjglxt_teacher_user.getUser_teacher_id());
+			flag = topicInformationManagementDao.addTeacherUserSrtudentNum(bysjglxt_teacher_user.getUser_teacher_id());
 		}
 		return flag;
 	}
@@ -216,7 +222,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 	public boolean teacherIsPermissionAddStudentInTopic(String teacherId, String topicId) {
 		boolean flag = false;
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
-		bysjglxt_topic = topicManagementDao.getBysjglxtTopicById(topicId);
+		bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicId);
 		if (bysjglxt_topic != null) {
 			if (teacherId.equals(bysjglxt_topic.getTopic_teacher())) {
 				flag = true;
@@ -234,7 +240,7 @@ public class TopicManagementServiceImpl implements TopicManagementService {
 		for (String string : studentIDList) {
 			studentIdList = studentIdList + string + "#&#";
 		}
-		flag = topicManagementDao.updateStudentList(topicID, studentIdList);
+		flag = topicInformationManagementDao.updateStudentList(topicID, studentIdList);
 		return false;
 	}
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="topicInformationManagementAction" class="com.bysjglxt.action.TopicInformationManagementAction"
+		scope="prototype">
+		<property name="topicInformationManagementService" ref="topicInformationManagementService"></property>
+	</bean>
+
+	<bean id="topicInformationManagementService" class="com.bysjglxt.service.impl.TopicInformationManagementServiceImpl">
+		<property name="topicInformationManagementDao" ref="topicInformationManagementDao"></property>
+	</bean>
+
+	<bean id="topicInformationManagementDao" class="com.bysjglxt.dao.impl.TopicInformationManagementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+</beans>

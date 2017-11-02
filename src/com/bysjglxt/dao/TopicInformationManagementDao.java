@@ -5,9 +5,9 @@ import java.util.List;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
-import com.bysjglxt.domain.VO.TopicManagementVO;
+import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
-public interface TopicManagementDao {
+public interface TopicInformationManagementDao {
 
 	public boolean CreateTopic(bysjglxt_topic newTopic);
 
@@ -23,7 +23,7 @@ public interface TopicManagementDao {
 
 	public boolean deleteTopicInviteTeacher(String topicId);
 
-	public List<com.bysjglxt.domain.DO.bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicManagementVO topicManagementVO);
+	public List<com.bysjglxt.domain.DO.bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO);
 
 	public bysjglxt_topic getBysjglxtTopicById(String topic_id);
 

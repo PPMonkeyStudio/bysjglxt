@@ -3,7 +3,7 @@ package com.bysjglxt.domain.DTO;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 
-public class TopicInformationDTO {
+public class TopicInformationManagementDTO {
 	private bysjglxt_topic bysjglxtTopic;
 	private bysjglxt_topic_invite_teacher bysjglxtTopicInviteTeacher;
 	private TeacherInformationDTO teacherInformationDTO;

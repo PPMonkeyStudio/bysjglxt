@@ -7,18 +7,18 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.bysjglxt.dao.TopicManagementDao;
+import com.bysjglxt.dao.TopicInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
-import com.bysjglxt.domain.VO.TopicManagementVO;
+import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
 import util.TeamUtil;
 
-public class TopicManagementDaoImpl implements TopicManagementDao {
+public class TopicInformationManagementDaoImpl implements TopicInformationManagementDao {
 	private SessionFactory sessionFactory;
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -137,7 +137,7 @@ public class TopicManagementDaoImpl implements TopicManagementDao {
 	}
 
 	@Override
-	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicManagementVO topicManagementVO) {
+	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO) {
 		Session session = getSession();
 		String hql = "from bysjglxt_topic where 1=1";
 		boolean isChinese = false;

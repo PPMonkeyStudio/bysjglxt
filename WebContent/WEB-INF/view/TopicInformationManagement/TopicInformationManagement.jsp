@@ -33,7 +33,7 @@
 				<div style="height: 34px;">
 					<div style="width: 500px; float: left;">
 						<button class="btn btn-default"
-							onclick="window.location='<%=basePath%>topic/TopicManagement_CreateTopicPage'">
+							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_CreateTopicPage'">
 							<i class="fa fa-plus-square"></i> 创建课题
 						</button>
 					</div>

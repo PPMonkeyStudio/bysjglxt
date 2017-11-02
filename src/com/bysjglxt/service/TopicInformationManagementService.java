@@ -2,10 +2,10 @@ package com.bysjglxt.service;
 
 import java.util.List;
 
-import com.bysjglxt.domain.DTO.TopicInformationDTO;
-import com.bysjglxt.domain.VO.TopicManagementVO;
+import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
+import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
-public interface TopicManagementService {
+public interface TopicInformationManagementService {
 
 	/**
 	 * @DATE 2017-10-28
@@ -13,7 +13,7 @@ public interface TopicManagementService {
 	 * @param newTopic
 	 * @return 1成功 0失败
 	 */
-	public boolean CreateTopic(TopicInformationDTO topicInformationDTO);
+	public boolean CreateTopic(TopicInformationManagementDTO topicInformationDTO);
 
 	/**
 	 * @DATE 2017-10-28
@@ -56,7 +56,7 @@ public interface TopicManagementService {
 	 *            存有需要查询的当前页pageIndex 以及搜索信息search模糊查询课题名，并匹配变色并按照创建时间排序，
 	 * @return 封装好的topicManagementVO
 	 */
-	public TopicManagementVO VO_Topic_By_PageAndSearch(TopicManagementVO topicManagementVO);
+	public TopicInformationManagementVO VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO);
 
 	/**
 	 * @DOTO

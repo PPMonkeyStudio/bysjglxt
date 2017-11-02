@@ -14,25 +14,25 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
-import com.bysjglxt.domain.DTO.TopicInformationDTO;
-import com.bysjglxt.domain.VO.TopicManagementVO;
-import com.bysjglxt.service.TopicManagementService;
+import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
+import com.bysjglxt.domain.VO.TopicInformationManagementVO;
+import com.bysjglxt.service.TopicInformationManagementService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:applicationContext*.xml" })
 public class test {
 
 	@Resource
-	private TopicManagementService topicManagementService;
+	private TopicInformationManagementService topicManagementService;
 
-	public void setTopicManagementService(TopicManagementService topicManagementService) {
+	public void setTopicManagementService(TopicInformationManagementService topicManagementService) {
 		this.topicManagementService = topicManagementService;
 	}
 
 	// 测试创建课题
 	@Test
 	public void test() {
-		TopicInformationDTO topicInformationDTO = new TopicInformationDTO();
+		TopicInformationManagementDTO topicInformationDTO = new TopicInformationManagementDTO();
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
 		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = new bysjglxt_topic_invite_teacher();
 		bysjglxt_topic_invite_teacher.setTopic_invite_teacher_name("2");
@@ -87,7 +87,7 @@ public class test {
 	// 测试分页显示
 	@Test
 	public void testttttt() {
-		TopicManagementVO VO_Topic_By_PageAndSearch = new TopicManagementVO();
+		TopicInformationManagementVO VO_Topic_By_PageAndSearch = new TopicInformationManagementVO();
 		VO_Topic_By_PageAndSearch.setSearch("theone");
 		VO_Topic_By_PageAndSearch = topicManagementService.VO_Topic_By_PageAndSearch(VO_Topic_By_PageAndSearch);
 		System.out.println(VO_Topic_By_PageAndSearch.toString());
