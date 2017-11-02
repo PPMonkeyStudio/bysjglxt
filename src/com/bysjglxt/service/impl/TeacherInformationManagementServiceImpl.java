@@ -19,6 +19,7 @@ import com.bysjglxt.service.TeacherInformationManagementService;
 
 import util.ExcelToBean;
 import util.TeamUtil;
+import util.md5;
 
 public class TeacherInformationManagementServiceImpl implements TeacherInformationManagementService {
 
@@ -75,7 +76,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			bysjglxt_teacher_user.setUser_teacher_num(bysjglxt_teacher_basic.getJob_number());
 			bysjglxt_teacher_user.setUser_teacher_section(null);
 			// 密码
-			bysjglxt_teacher_user.setUser_teacher_password(bysjglxt_teacher_user.getUser_teacher_num());
+			bysjglxt_teacher_user.setUser_teacher_password(md5.GetMD5Code(bysjglxt_teacher_user.getUser_teacher_num()));
 			bysjglxt_teacher_user.setUser_teacher_basic(bysjglxt_teacher_basic.getTeacher_basic_id());
 			bysjglxt_teacher_user.setUser_teacher_max_guidance(-1);
 			bysjglxt_teacher_user.setUser_teacher_gmt_create(TeamUtil.getStringSecond());
@@ -102,7 +103,6 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			teacherInformationDTO.setBysjglxtTeacherBasic(teacherInformationManagementDao
 					.get_TeacherBasicInformation_ByUserBasic(teacher_user.getUser_teacher_basic()));
 			list_TeacherInformationDTO_All.add(teacherInformationDTO);
-
 		}
 		return list_TeacherInformationDTO_All;
 	}
@@ -129,7 +129,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		// 工号
 		bysjglxt_teacher_user.setUser_teacher_num(teacher_basic.getJob_number());
 		// 密码
-		bysjglxt_teacher_user.setUser_teacher_password(bysjglxt_teacher_user.getUser_teacher_num());
+		bysjglxt_teacher_user.setUser_teacher_password(md5.GetMD5Code(bysjglxt_teacher_user.getUser_teacher_num()));
 		bysjglxt_teacher_user.setUser_teacher_basic(teacher_basic.getTeacher_basic_id());
 		// 教研室
 		bysjglxt_teacher_user.setUser_teacher_max_guidance(-1);
@@ -254,7 +254,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(user_teacher_id);
 		if (bysjglxt_teacher_user != null) {
-			bysjglxt_teacher_user.setUser_teacher_password(bysjglxt_teacher_user.getUser_teacher_num());
+			bysjglxt_teacher_user.setUser_teacher_password(md5.GetMD5Code(bysjglxt_teacher_user.getUser_teacher_num()));
 			bysjglxt_teacher_user.setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
 			flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
 		}
@@ -270,7 +270,8 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		if (password == null || password.trim().length() <= 0) {
 			return false;
 		}
-		flag = teacherInformationManagementDao.updatePassword(user_teacher_id, password,TeamUtil.getStringSecond());
+		flag = teacherInformationManagementDao.updatePassword(user_teacher_id, md5.GetMD5Code(password),
+				TeamUtil.getStringSecond());
 		return flag;
 	}
 

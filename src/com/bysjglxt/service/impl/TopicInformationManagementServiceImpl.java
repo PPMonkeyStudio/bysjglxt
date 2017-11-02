@@ -59,6 +59,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		newTopic.setTopic_teacher(
 				topicInformationDTO.getTeacherInformationDTO().getBysjglxtTeacherUser().getUser_teacher_id());
 		newTopic.setTopic_student_num(0);
+		newTopic.setTopic_student_max(-1);
 		newTopic.setTopic_invite_teache_id(invite_teacher.getTopic_invite_teacher_id());
 		flag = topicInformationManagementDao.CreateTopic(newTopic);
 		return flag;
@@ -244,10 +245,37 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		return false;
 	}
 
+	/**
+	 * 遍历出所有可以进行选择的课题
+	 */
 	@Override
 	public List<bysjglxt_topic> listSelectBysjglxtTopic() {
-		// TODO Auto-generated method stub
-		return null;
+		boolean flag = true;
+		List<bysjglxt_topic> listAllBysjglxtTopic = new ArrayList<bysjglxt_topic>();
+		List<bysjglxt_topic> listSelectBysjglxtTopic = new ArrayList<bysjglxt_topic>();
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		listAllBysjglxtTopic = topicInformationManagementDao.getAllTopic();
+		System.out.println(listAllBysjglxtTopic.size());
+		for (bysjglxt_topic bysjglxt_topic : listAllBysjglxtTopic) {
+			flag = true;
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUserInfo(bysjglxt_topic.getTopic_teacher());
+			// 1. ②判断是否达到教师可选上限
+			if (bysjglxt_teacher_user != null && bysjglxt_teacher_user.getUser_teacher_max_guidance() != -1) {
+				flag = topicInformationManagementDao.teacherIsSelect(bysjglxt_topic.getTopic_teacher());
+			}
+			if (!flag) {
+				continue;
+			}
+			// 2.②判断是否达到课题可选上限
+			if (flag && bysjglxt_topic != null && bysjglxt_topic.getTopic_student_max() != -1) {
+				flag = topicInformationManagementDao.topicIsSelect(bysjglxt_topic.getTopic_id());
+			}
+			if (!flag) {
+				continue;
+			}
+			listSelectBysjglxtTopic.add(bysjglxt_topic);
+		}
+		return listSelectBysjglxtTopic;
 	}
-
 }

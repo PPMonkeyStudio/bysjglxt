@@ -51,4 +51,6 @@ public interface TopicInformationManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_section getTeacherSection(String user_teacher_section);
 
+	public List<bysjglxt_topic> getAllTopic();
+
 }
