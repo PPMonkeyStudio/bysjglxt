@@ -17,7 +17,6 @@ function Get_Teacher_Section(select) {
 				}
 
 				$('#' + select.id).selectpicker('refresh');
-				return SectionList;
 			} else {
 				toastr.error(xhr.status);
 			}
