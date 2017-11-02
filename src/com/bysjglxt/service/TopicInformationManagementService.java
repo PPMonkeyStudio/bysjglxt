@@ -2,6 +2,7 @@ package com.bysjglxt.service;
 
 import java.util.List;
 
+import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
@@ -103,6 +104,17 @@ public interface TopicInformationManagementService {
 	 */
 	public boolean topicSelectStudent(String topicID, List<String> studentIDList);
 
+	/**
+	 * @说明 遍历出所有可以选择的课题用于分配最后剩余的学生
+	 * @return
+	 */
+	public List<bysjglxt_topic> listSelectBysjglxtTopic();
+	
+	
+	
+	
+	
+	
 	
 	
 	

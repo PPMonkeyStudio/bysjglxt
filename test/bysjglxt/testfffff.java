@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.service.TopicInformationManagementService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,6 +47,16 @@ public class testfffff {
 		studentIDList.add("035978e1-be36-4202-83f2-6ca275bd04ba");
 		studentIDList.add("03b0b3c1-04a9-4c43-ba29-785e660fa6ac");
 		boolean flag = topicManagementService.topicSelectStudent("3ac6eefb-7ff8-4173-bf89-c6425d024636", studentIDList);
+	}
+
+	// 遍历出所有可以进行选择的课题
+	@Test
+	public void testD() {
+		List<bysjglxt_topic> listSelectBysjglxtTopic = new ArrayList<bysjglxt_topic>();
+		listSelectBysjglxtTopic = topicManagementService.listSelectBysjglxtTopic();
+		System.out.println(listSelectBysjglxtTopic.size());
+		System.out.println(listSelectBysjglxtTopic);
+
 	}
 
 }

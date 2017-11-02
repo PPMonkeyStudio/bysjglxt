@@ -1,5 +1,6 @@
 package com.bysjglxt.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -342,5 +343,15 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		Query query = session.createQuery(hql);
 		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
 		return bysjglxt_section;
+	}
+
+	@Override
+	public List<bysjglxt_topic> getAllTopic() {
+		Session session = getSession();
+		List<bysjglxt_topic> listAllTopic = new ArrayList<bysjglxt_topic>();
+		String hql = "from bysjglxt_topic";
+		Query query = session.createQuery(hql);
+		listAllTopic = query.list();
+		return listAllTopic;
 	}
 }
