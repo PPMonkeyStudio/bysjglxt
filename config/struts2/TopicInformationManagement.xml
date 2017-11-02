@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="TopicInformationManagement" namespace="/topic"
+		extends="struts-default">
+		<action name="TopicInformationManagement_*"
+			class="com.bysjglxt.action.TopicInformationManagementAction"
+			method="{1}">
+			<result name="TopicListPage">/WEB-INF/view/TopicInformationManagement/TopicInformationManagement.jsp
+			</result>
+			<result name="CreateTopicPage">/WEB-INF/view/TopicInformationManagement/CreateTopic.jsp
+			</result>
+		</action>
+	</package>
+</struts>
