@@ -194,7 +194,6 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 				|| "".equals(teacherInformationManagementVO.getProfessional_title())) {
 			hql = hql + " and basic.professional_title = '"
 					+ teacherInformationManagementVO.getProfessional_title().trim() + "'";
-
 		}
 		if (teacherInformationManagementVO.getSex() != null
 				&& teacherInformationManagementVO.getSex().trim().length() > 0) {
@@ -212,7 +211,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 				(teacherInformationManagementVO.getPageIndex() - 1) * teacherInformationManagementVO.getPageSize());
 		query.setMaxResults(teacherInformationManagementVO.getPageSize());
 		List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch = query.list();
-		session.clear();
+
 		if (!flag && teacherInformationManagementVO.getSearch() != null
 				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
 			for (bysjglxt_teacher_basic bysjglxt_teacher_basic : listTeacherBasicInformationByPageAndSearch) {
@@ -229,6 +228,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 								+ teacherInformationManagementVO.getSearch().trim() + "</span>"));
 			}
 		}
+		session.clear();
 		return listTeacherBasicInformationByPageAndSearch;
 	}
 

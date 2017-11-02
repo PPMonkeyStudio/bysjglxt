@@ -86,12 +86,8 @@ public class test {
 	// 测试分页显示
 	@Test
 	public void testttttt() {
-<<<<<<< HEAD
-		TopicManagementVO VO_Topic_By_PageAndSearch = new TopicManagementVO();
-=======
 		TopicInformationManagementVO VO_Topic_By_PageAndSearch = new TopicInformationManagementVO();
 		VO_Topic_By_PageAndSearch.setSearch("theone");
->>>>>>> ZB
 		VO_Topic_By_PageAndSearch = topicManagementService.VO_Topic_By_PageAndSearch(VO_Topic_By_PageAndSearch);
 		System.out.println(VO_Topic_By_PageAndSearch);
 	}

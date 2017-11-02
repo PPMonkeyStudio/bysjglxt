@@ -244,4 +244,10 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		return false;
 	}
 
+	@Override
+	public List<bysjglxt_topic> listSelectBysjglxtTopic() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

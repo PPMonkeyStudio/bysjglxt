@@ -150,7 +150,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		hql = hql + " order by basic.student_basic_num";
 		System.out.println(hql);
 		Query query = session.createQuery(hql);
-		session.clear();
 		query.setFirstResult(
 				(studentInformationManagementVO.getPageIndex() - 1) * studentInformationManagementVO.getPageSize());
 		query.setMaxResults(studentInformationManagementVO.getPageSize());
@@ -172,6 +171,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 								+ studentInformationManagementVO.getSearch().trim() + "</span>"));
 			}
 		}
+		session.clear();
 		return listStudentBasicInformationByPageAndSearch;
 	}
 
