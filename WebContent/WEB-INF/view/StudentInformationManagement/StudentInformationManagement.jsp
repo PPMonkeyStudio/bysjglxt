@@ -99,6 +99,11 @@
 									<option value="-1">操作权限</option>
 									<option value="1">有操作权限</option>
 									<option value="0">无操作权限</option>
+							</select></th><th><select class="form-control" id="select_is_select_topic"
+								style="width: auto;" onchange="List_Student_By_PageAndSearch(1)">
+									<option value="-1">是否选题</option>
+									<option value="1">已选题</option>
+									<option value="2">未选题</option>
 							</select></th>
 							<th>操作</th>
 							<th><label class="fancy-checkbox"> <input

@@ -129,16 +129,13 @@ public class StudentInformationManagementAction extends ActionSupport
 	 */
 	public void SaveStudentEXCEL() throws Exception {
 		http_response.setContentType("text/html;charset=utf-8");
-
 		List<bysjglxt_student_basic> list_PreviewStudentEXCEL = studentInformationManagementService
 				.convertStudentExcelToList(EXCEL_Student, EXCEL_StudentFileName);
-
 		if (studentInformationManagementService.saveStudentList(list_PreviewStudentEXCEL)) {
 			http_response.getWriter().write("success");
 		} else {
-			http_response.getWriter().write("fail");
+			http_response.getWriter().write("数据重复");
 		}
-
 	}
 
 	/**

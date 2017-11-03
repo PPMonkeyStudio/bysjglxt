@@ -15,8 +15,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				alert(xhr.responseText);
-
 				student_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -112,6 +110,21 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
+					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser != undefined) {
+						if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 1) {
+							new_td.innerHTML = '✔';
+						} else {
+							new_td.innerHTML = '✘';
+							new_td.style.color = "#ff5063";
+						}
+
+					} else {
+						new_td.innerHTML = '';
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i style="cursor: pointer;" id="'
 							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
 							+ '" onclick="Student_Information_Display(this)" class="fa fa-edit "></i>';
@@ -183,6 +196,16 @@ function List_Student_By_PageAndSearch(pageIndex) {
 				.append(
 						"studentInformationManagementVO.user_student_is_operate_premission",
 						document.getElementById("select_premission").value);
+	}
+	// 选题
+	if (document.getElementById("select_is_select_topic").value == "1") {
+		formData.append(
+				"studentInformationManagementVO.user_student_is_select_topic",
+				document.getElementById("select_is_select_topic").value);
+	} else if (document.getElementById("select_is_select_topic").value == "0") {
+		formData.append(
+				"studentInformationManagementVO.user_student_is_select_topic",
+				document.getElementById("select_is_select_topic").value);
 	}
 	// 专业
 	if (document.getElementById("select_major").value == "-1") {

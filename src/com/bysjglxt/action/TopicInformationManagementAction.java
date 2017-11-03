@@ -1,6 +1,7 @@
 package com.bysjglxt.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
@@ -36,6 +38,21 @@ public class TopicInformationManagementAction extends ActionSupport
 	private TopicInformationManagementDTO topicInformationManagementDTO;
 
 	private TopicInformationManagementVO topicInformationManagementVO;
+
+	/*
+	 * 
+	 */
+	private List<String> listAgreeTopicID;
+	private List<String> listRefuseTopicID;
+	private List<String> listCloseTopicID;
+	private List<String> listDeleteTopicID;
+	/*
+	 * 学生选题
+	 */
+	private String studentSelectTopic;
+	/*
+	 * 
+	 */
 
 	/**
 	 * 创建新的课题
@@ -65,13 +82,56 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	}
 
+	/**
+	 * 
+	 * @throws IOException
+	 */
 	public void ListTopicByPageAndSearch() throws IOException {
+
 		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(
 				gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO)));
+	}
+
+	public void agreeTopicList() throws IOException {
+		topicInformationManagementService.adoptTopic(listAgreeTopicID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	public void refuseTopicList() throws IOException {
+		topicInformationManagementService.notAdoptTopic(listRefuseTopicID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	public void closeTopicList() throws IOException {
+		topicInformationManagementService.closeTopic(listCloseTopicID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	public void deleteTopicList() throws IOException {
+		topicInformationManagementService.DeleteTopic(listDeleteTopicID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	public void studentSelectTopic() throws IOException {
+		StudentInformationDTO userStudentDTO = (StudentInformationDTO) ActionContext.getContext().getSession()
+				.get("userStudentDTO");
+		if (topicInformationManagementService.selectTopic(userStudentDTO.getBysjglxtStudentUser().getUser_student_id(),
+				studentSelectTopic)) {
+			http_response.setContentType("text/html;charset=utf-8");
+			http_response.getWriter().write("success");
+		} else {
+			http_response.setContentType("text/html;charset=utf-8");
+			http_response.getWriter().write("");
+		}
+
 	}
 
 	/**
@@ -157,6 +217,46 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	public void setTopicInformationManagementVO(TopicInformationManagementVO topicInformationManagementVO) {
 		this.topicInformationManagementVO = topicInformationManagementVO;
+	}
+
+	public List<String> getListAgreeTopicID() {
+		return listAgreeTopicID;
+	}
+
+	public void setListAgreeTopicID(List<String> listAgreeTopicID) {
+		this.listAgreeTopicID = listAgreeTopicID;
+	}
+
+	public List<String> getListRefuseTopicID() {
+		return listRefuseTopicID;
+	}
+
+	public void setListRefuseTopicID(List<String> listRefuseTopicID) {
+		this.listRefuseTopicID = listRefuseTopicID;
+	}
+
+	public List<String> getListCloseTopicID() {
+		return listCloseTopicID;
+	}
+
+	public void setListCloseTopicID(List<String> listCloseTopicID) {
+		this.listCloseTopicID = listCloseTopicID;
+	}
+
+	public List<String> getListDeleteTopicID() {
+		return listDeleteTopicID;
+	}
+
+	public void setListDeleteTopicID(List<String> listDeleteTopicID) {
+		this.listDeleteTopicID = listDeleteTopicID;
+	}
+
+	public String getStudentSelectTopic() {
+		return studentSelectTopic;
+	}
+
+	public void setStudentSelectTopic(String studentSelectTopic) {
+		this.studentSelectTopic = studentSelectTopic;
 	}
 
 }
