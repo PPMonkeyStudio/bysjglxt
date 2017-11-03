@@ -108,7 +108,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				}
 			}
 			flag = topicInformationManagementDao.updateTopicState(string, TeamUtil.getStringSecond());
-
 		}
 		return flag;
 	}

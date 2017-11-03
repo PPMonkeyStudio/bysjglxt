@@ -152,13 +152,11 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 					+ studentInformationManagementVO.getUser_student_is_operate_premission() + "'";
 		}
 		hql = hql + " order by basic.student_basic_num";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		query.setFirstResult(
 				(studentInformationManagementVO.getPageIndex() - 1) * studentInformationManagementVO.getPageSize());
 		query.setMaxResults(studentInformationManagementVO.getPageSize());
 		List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch = query.list();
-		System.out.println(listStudentBasicInformationByPageAndSearch.size());
 		if (!flag && studentInformationManagementVO.getSearch() != null
 				&& studentInformationManagementVO.getSearch().trim().length() > 0) {
 			for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPageAndSearch) {
@@ -321,7 +319,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 					+ studentInformationManagementVO.getUser_student_is_operate_premission() + "'";
 		}
 		hql = hql + " order by basic.student_basic_num";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		List<bysjglxt_student_basic> list_bysjglxt_student_basic = query.list();
 		session.clear();
