@@ -158,7 +158,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
 			for (bysjglxt_topic bysjglxt_topic : listbysjglxt_topicByPageAndSearch) {
 				bysjglxt_topic.setTopic_name_chinese(
-						bysjglxt_topic.getTopic_name_chinese().replaceAll(bysjglxt_topic.getTopic_name_chinese(),
+						bysjglxt_topic.getTopic_name_chinese().replaceAll(topicManagementVO.getSearch().trim(),
 								"<span style='color: #ff5063;'>" + topicManagementVO.getSearch().trim() + "</span>"));
 			}
 		}
