@@ -93,7 +93,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_topic set topic_examine_state = '关闭',topic_gmt_modified='" + moTime
+			String hql = "update bysjglxt_topic set topic_examine_state = '已关闭',topic_gmt_modified='" + moTime
 					+ "' where topic_id='" + string + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
@@ -148,6 +148,9 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + topicManagementVO.getSearch().trim() + "%";
 			hql = hql + " and topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "' ";
+		}
+		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
+			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
 		}
 		hql = hql + " order by topic_gmt_create";
 		Query query = session.createQuery(hql);
@@ -353,6 +356,9 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + topicManagementVO.getSearch().trim() + "%";
 			hql = hql + " and topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "'";
+		}
+		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
+			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
 		}
 		hql = hql + " order by topic_gmt_create";
 		Query query = session.createQuery(hql);

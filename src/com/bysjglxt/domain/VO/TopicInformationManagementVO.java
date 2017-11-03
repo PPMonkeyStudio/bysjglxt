@@ -36,12 +36,23 @@ public class TopicInformationManagementVO {
 	// 课题性质筛选
 	private String type = null;
 
+	// 审核筛选
+	private String state;
+
 	@Override
 	public String toString() {
 		return "TopicInformationManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords + ", pageSize="
 				+ pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage + ", HaveNextPage="
 				+ HaveNextPage + ", list_TopicInformationDTO=" + list_TopicInformationDTO + ", search=" + search
-				+ ", source=" + source + ", type=" + type + "]";
+				+ ", source=" + source + ", type=" + type + ", state=" + state + "]";
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public int getPageIndex() {

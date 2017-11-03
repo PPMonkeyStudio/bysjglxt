@@ -40,7 +40,6 @@ public class StudentInformationManagementVO {
 	private int user_student_is_operate_premission = -1;
 	// 学生是否选题
 	private int user_student_is_select_topic = -1;
-
 	/*
 	 * 
 	 */
