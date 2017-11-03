@@ -224,6 +224,10 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			// 教师学生指导人数+1
 			flag = topicInformationManagementDao.addTeacherUserSrtudentNum(bysjglxt_teacher_user.getUser_teacher_id());
 		}
+		if(flag){
+			//修改学生登陆表状态
+			flag = topicInformationManagementDao.updateStudentUserRecord(studentID);
+		}
 		return flag;
 	}
 
@@ -263,7 +267,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		List<bysjglxt_topic> listSelectBysjglxtTopic = new ArrayList<bysjglxt_topic>();
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		listAllBysjglxtTopic = topicInformationManagementDao.getAllTopic();
-
 		for (bysjglxt_topic bysjglxt_topic : listAllBysjglxtTopic) {
 			flag = true;
 			bysjglxt_teacher_user = new bysjglxt_teacher_user();

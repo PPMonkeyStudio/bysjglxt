@@ -65,6 +65,8 @@ public interface StudentInformationManagementService {
 	 *            存有需要查询的当前页pageIndex
 	 *            以及搜索信息search模糊查询学生姓名，并匹配变色并按照学号排序（搜索信息需要判断是否为null），
 	 * 
+	 *            user_student_is_select_topic -1 不进行筛选 2 未选 1已选
+	 * 
 	 * @return 封装好的StudentInformationManagementVO（类中所有页面信息均要封装）
 	 */
 	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
