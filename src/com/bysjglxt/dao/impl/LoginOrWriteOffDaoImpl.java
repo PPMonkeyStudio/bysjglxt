@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.LoginOrWriteOffDao;
+import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
@@ -73,5 +74,15 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 		Query query = session.createQuery(hql);
 		bysjglxt_student_basic = (bysjglxt_student_basic) query.uniqueResult();
 		return bysjglxt_student_basic;
+	}
+
+	@Override
+	public bysjglxt_leader getLeaderById(String user_teacher_id) {
+		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
+		Session session = getSession();
+		String hql = "from bysjglxt_leader where leader_teacher_id = '" + user_teacher_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_leader = (bysjglxt_leader) query.uniqueResult();
+		return bysjglxt_leader;
 	}
 }

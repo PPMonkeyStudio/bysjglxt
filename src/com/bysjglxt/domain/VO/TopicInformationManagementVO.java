@@ -35,6 +35,8 @@ public class TopicInformationManagementVO {
 
 	// 课题性质筛选
 	private String type = null;
+	// 对指导老师进行筛选
+	private String teacher = null;
 
 	// 审核筛选
 	private String state;
@@ -44,7 +46,15 @@ public class TopicInformationManagementVO {
 		return "TopicInformationManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords + ", pageSize="
 				+ pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage + ", HaveNextPage="
 				+ HaveNextPage + ", list_TopicInformationDTO=" + list_TopicInformationDTO + ", search=" + search
-				+ ", source=" + source + ", type=" + type + ", state=" + state + "]";
+				+ ", source=" + source + ", type=" + type + ", teacher=" + teacher + ", state=" + state + "]";
+	}
+
+	public String getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(String teacher) {
+		this.teacher = teacher;
 	}
 
 	public String getState() {

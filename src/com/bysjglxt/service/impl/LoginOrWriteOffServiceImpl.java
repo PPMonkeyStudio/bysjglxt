@@ -1,6 +1,7 @@
 package com.bysjglxt.service.impl;
 
 import com.bysjglxt.dao.LoginOrWriteOffDao;
+import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
@@ -68,8 +69,8 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 			bysjglxt_teacher_basic bysjglxtTeacherBasic = new bysjglxt_teacher_basic();
 			bysjglxt_teacher_user bysjglxtTeacherUser = new bysjglxt_teacher_user();
 			bysjglxt_section bysjglxtSection = new bysjglxt_section();
+			bysjglxt_leader bysjglxtLeader = new bysjglxt_leader();
 			bysjglxtTeacherUser = loginOrWriteOffDao.getBysjglxtTeacherUserByNum(username);
-			
 			if (bysjglxtTeacherUser != null) {
 				bysjglxtTeacherBasic = loginOrWriteOffDao
 						.getBysjglxtTeacherBasicById(bysjglxtTeacherUser.getUser_teacher_basic());
@@ -77,6 +78,12 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 			if (bysjglxtTeacherUser != null) {
 				bysjglxtSection = loginOrWriteOffDao
 						.getBysjglxtTeacherSection(bysjglxtTeacherUser.getUser_teacher_section());
+			}
+			if (bysjglxtTeacherUser != null) {
+				bysjglxtLeader = loginOrWriteOffDao.getLeaderById(bysjglxtTeacherUser.getUser_teacher_id());
+				if (bysjglxtLeader != null) {
+					teacherInformationDTO.setBysjglxtLeader(bysjglxtLeader);
+				}
 			}
 			teacherInformationDTO.setBysjglxtSection(bysjglxtSection);
 			teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxtTeacherBasic);
