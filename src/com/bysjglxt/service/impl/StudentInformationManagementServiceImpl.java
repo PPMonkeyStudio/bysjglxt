@@ -64,6 +64,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			bysjglxt_student_user.setUser_student_num(bysjglxt_student_basic.getStudent_basic_num());
 			bysjglxt_student_user
 					.setUser_student_password(md5.GetMD5Code(bysjglxt_student_basic.getStudent_basic_num()));
+			bysjglxt_student_user.setUser_student_is_select_topic(0);
 			bysjglxt_student_user.setUser_student_basic(bysjglxt_student_basic.getStudent_basic_id());
 			bysjglxt_student_user.setUser_student_is_operate_premission(1);
 			bysjglxt_student_user.setUser_student_gmt_create(TeamUtil.getStringSecond());
@@ -107,6 +108,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user.setUser_student_num(student_basic.getStudent_basic_num());
 		bysjglxt_student_user.setUser_student_password(md5.GetMD5Code(student_basic.getStudent_basic_num()));
 		bysjglxt_student_user.setUser_student_basic(student_basic.getStudent_basic_id());
+		bysjglxt_student_user.setUser_student_is_select_topic(0);
 		bysjglxt_student_user.setUser_student_is_operate_premission(1);
 		bysjglxt_student_user.setUser_student_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_student_user.setUser_student_gmt_modified(bysjglxt_student_user.getUser_student_gmt_create());
@@ -223,7 +225,8 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		if (password == null || password.trim().length() <= 0) {
 			return false;
 		}
-		flag = studentInformationManagementDao.updatePassword(user_student_id, md5.GetMD5Code(password), TeamUtil.getStringSecond());
+		flag = studentInformationManagementDao.updatePassword(user_student_id, md5.GetMD5Code(password),
+				TeamUtil.getStringSecond());
 		return flag;
 	}
 

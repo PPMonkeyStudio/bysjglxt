@@ -383,4 +383,21 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		session.clear();
 		return listbysjglxt_topicByPageAndSearch;
 	}
+
+	@Override
+	public boolean updateStudentUserRecord(String studentID) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_student_user set user_student_is_select_topic = '1' where user_student_id = '"
+					+ studentID + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+
+	}
 }

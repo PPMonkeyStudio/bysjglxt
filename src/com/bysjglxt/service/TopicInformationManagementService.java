@@ -67,7 +67,7 @@ public interface TopicInformationManagementService {
 	 *     ③判断是否到达课题学生上限 2、创建一条bysjglxt_topic_select学生选题表的记录，评阅老师为null。
 	 *     3、学生课题bysjglxt_topic所属的记录中，课题已选学生数topic_student_num加1。 4. 教师的学生指导数+1
 	 * @param studentID
-	 *            选题的学生
+	 *            选题的学生 user表
 	 * 
 	 * @param topicID
 	 *            所选课题
