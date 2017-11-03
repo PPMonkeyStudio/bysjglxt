@@ -69,12 +69,10 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 	 * @return
 	 */
 	public String index() {
-		System.out.println("进入首页");
 		return "index";
 	}
 
 	public String navbar() {
-		System.out.println("获取导航");
 		return "navbar";
 	}
 
