@@ -11,4 +11,10 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
 
+	@Override
+	public int startGraduationProjectProcess() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

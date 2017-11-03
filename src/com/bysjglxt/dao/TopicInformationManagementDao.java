@@ -57,4 +57,6 @@ public interface TopicInformationManagementDao {
 
 	public boolean updateStudentUserRecord(String studentID);
 
+	public com.bysjglxt.domain.DO.bysjglxt_student_user studentIsSelectTopic(String studentID);
+
 }

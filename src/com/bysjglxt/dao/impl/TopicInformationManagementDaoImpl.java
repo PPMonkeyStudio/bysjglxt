@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
@@ -382,5 +383,15 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		}
 		return flag;
 
+	}
+
+	@Override
+	public bysjglxt_student_user studentIsSelectTopic(String studentID) {
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_student_user where user_student_id ='" + studentID + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
+		return bysjglxt_student_user;
 	}
 }

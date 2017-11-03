@@ -37,11 +37,17 @@ public class ExcelToBean {
 		List<Map<String, Object>> result = new LinkedList<Map<String, Object>>();
 		int excleRowLength = workbook.getSheetAt(0).getRow(0).getPhysicalNumberOfCells();
 		String[] columnName = new String[excleRowLength]; // 相应的javabean类的属性名称数组
+		
+		
+		
 		for (int i = 0; i < columnName.length; i++) { // 从资源文件中获取
 			if (userPropertiesBundle.containsKey((String.valueOf(i)))) {
 				columnName[i] = userPropertiesBundle.getString(String.valueOf(i));
 			}
 		}
+		
+		
+		
 		for (int sheetIndex = 0; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++) {
 			// sheet
 			XSSFSheet sheet = (XSSFSheet) workbook.getSheetAt(sheetIndex);
@@ -52,10 +58,15 @@ public class ExcelToBean {
 				for (int cellIndex = 0; cellIndex < row.getPhysicalNumberOfCells(); cellIndex++) {
 					// cell
 					XSSFCell cell = row.getCell(cellIndex);
+					
+					
 					if (columnName[cellIndex] != null && columnName[cellIndex].trim().length() > 0) { // 该列值在对应的java对象中有值
 						// 取出当前cell的值和对应Javabean类的属性放入到map中
 						map.put(columnName[cellIndex].trim(), getCellValue(cell));
 					}
+					
+					
+					
 				}
 				result.add(map);
 			}

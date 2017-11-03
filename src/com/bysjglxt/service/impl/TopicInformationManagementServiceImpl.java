@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
@@ -201,6 +202,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		boolean flag = true;
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicID);
 		bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUser(bysjglxt_topic.getTopic_teacher());
 		// 1. ②判断是否达到教师可选上限
@@ -212,6 +214,17 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		// 2.②判断是否达到课题可选上限
 		if (flag && bysjglxt_topic != null && bysjglxt_topic.getTopic_student_max() != -1) {
 			flag = topicInformationManagementDao.topicIsSelect(bysjglxt_topic.getTopic_id());
+		}
+		if (!flag)
+			return flag;
+		// 3.③学生是否已选题
+		if (flag) {
+			bysjglxt_student_user = topicInformationManagementDao.studentIsSelectTopic(studentID);
+			if (bysjglxt_student_user != null) {
+				if (bysjglxt_student_user.getUser_student_is_select_topic() == 1) {
+					return false;
+				}
+			}
 		}
 		if (!flag)
 			return flag;
