@@ -46,7 +46,7 @@
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
 						<input id="input_search" class="form-control"
-							oninput="List_Student_By_PageAndSearch(1)" type="text">
+							oninput="List_Topic_By_PageAndSearch(1)" type="text">
 						<span class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</span>
@@ -58,7 +58,7 @@
 						<tr>
 							<th>中文名称</th>
 							<th>
-								<select class="form-control" style="width: auto;">
+								<select class="form-control" style="width: auto;" onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">课题来源</option>
 									<option value="各类课题项目">各类课题项目</option>
 									<option value="导师指定">导师指定</option>
@@ -68,7 +68,7 @@
 								</select>
 							</th>
 							<th>
-								<select class="form-control" style="width: auto;">
+								<select class="form-control" style="width: auto;" onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">课题性质</option>
 									<option value="理论研究">理论研究</option>
 									<option value="应用基础研究">应用基础研究</option>
@@ -134,7 +134,7 @@
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
 						<input id="input_search" class="form-control"
-							oninput="List_Student_By_PageAndSearch(1)" type="text">
+							 type="text">
 						<span class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</span>
@@ -146,7 +146,8 @@
 						<tr>
 							<th>中文名称</th>
 							<th>
-								<select class="form-control" style="width: auto;">
+								<select class="form-control" style="width: auto;"
+									id="select_source">
 									<option value="-1">课题来源</option>
 									<option value="各类课题项目">各类课题项目</option>
 									<option value="导师指定">导师指定</option>
@@ -156,7 +157,8 @@
 								</select>
 							</th>
 							<th>
-								<select class="form-control" style="width: auto;">
+								<select class="form-control" style="width: auto;"
+									id="select_type" >
 									<option value="-1">课题性质</option>
 									<option value="理论研究">理论研究</option>
 									<option value="应用基础研究">应用基础研究</option>

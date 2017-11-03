@@ -166,6 +166,19 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 		formData.append("topicInformationManagementVO.search", search);
 	}
 	/*
+	 * 课题来源
+	 */
+	if (document.getElementById("select_source").value != "-1") {
+		formData.append("teacherInformationManagementVO.source", document
+				.getElementById("select_source").value);
+	}/*
+		 * 课题类型
+		 */
+	if (document.getElementById("select_type").value != "-1") {
+		formData.append("teacherInformationManagementVO.type", document
+				.getElementById("select_type").value);
+	}
+	/*
 	 * 
 	 */
 
