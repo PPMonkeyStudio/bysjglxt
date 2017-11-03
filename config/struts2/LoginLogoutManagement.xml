@@ -7,6 +7,10 @@
 		extends="struts-default">
 		<action name="LoginLogoutManagement_*" class="com.bysjglxt.action.LoginOrWriteOffAction"
 			method="{1}">
+			<result name="index">/WEB-INF/view/index.jsp
+			</result>
+			<result name="navbar">/WEB-INF/view/navbar.jsp
+			</result>
 		</action>
 	</package>
 </struts>

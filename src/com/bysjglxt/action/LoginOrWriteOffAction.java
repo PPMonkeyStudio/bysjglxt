@@ -1,15 +1,26 @@
 package com.bysjglxt.action;
 
-import com.bysjglxt.service.LoginOrWriteOffService;
+import java.io.IOException;
 
-public class LoginOrWriteOffAction {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+
+import com.bysjglxt.service.LoginOrWriteOffService;
+import com.opensymphony.xwork2.ActionSupport;
+
+public class LoginOrWriteOffAction extends ActionSupport implements ServletResponseAware, ServletRequestAware {
 
 	private LoginOrWriteOffService loginOrWriteOffService;
-
+	private HttpServletResponse http_response;
+	private HttpServletRequest http_request;
 	/*
 	 * 
 	 */
-
+	private String username;
+	private String password;
 	/*
 	 * 
 	 */
@@ -17,8 +28,32 @@ public class LoginOrWriteOffAction {
 	/*
 	 * 登录
 	 */
-	public void login() {
-
+	public void login() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		switch (loginOrWriteOffService.login(username, password)) {
+		//
+		case -1: {
+			http_response.getWriter().write("账号不存在");
+			break;
+		}
+		//
+		case -2: {
+			http_response.getWriter().write("密码不正确");
+			break;
+		}
+		// 教师登录
+		case 1: {
+			loginOrWriteOffService.loginInformation(1, username);
+			http_response.getWriter().write("教师登录成功");
+			break;
+		}
+		// 学生登录
+		case 2: {
+			loginOrWriteOffService.loginInformation(2, username);
+			http_response.getWriter().write("学生登录成功");
+			break;
+		}
+		}
 	}
 
 	/*
@@ -26,6 +61,52 @@ public class LoginOrWriteOffAction {
 	 */
 	public void logout() {
 
+	}
+
+	/**
+	 * 跳转到首页
+	 * 
+	 * @return
+	 */
+	public String index() {
+		return "index";
+	}
+
+	public String navbar() {
+		return "navbar";
+	}
+
+	/*
+	 * 
+	 */
+	/*
+	 * 
+	 */
+	@Override
+	public void setServletRequest(HttpServletRequest http_request) {
+		this.http_request = http_request;
+	}
+
+	@Override
+	public void setServletResponse(HttpServletResponse http_response) {
+		this.http_response = http_response;
+
+	}
+
+	public HttpServletResponse getHttp_response() {
+		return http_response;
+	}
+
+	public void setHttp_response(HttpServletResponse http_response) {
+		this.http_response = http_response;
+	}
+
+	public HttpServletRequest getHttp_request() {
+		return http_request;
+	}
+
+	public void setHttp_request(HttpServletRequest http_request) {
+		this.http_request = http_request;
 	}
 
 	/*
@@ -37,5 +118,21 @@ public class LoginOrWriteOffAction {
 
 	public LoginOrWriteOffService getLoginOrWriteOffService() {
 		return loginOrWriteOffService;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
