@@ -1,8 +1,10 @@
-﻿window.onload = List_Topic_By_PageAndSearch;
+﻿window.onload = getUserSessionForAjax;
 
 var topic_json = null;
 
 function List_Topic_By_PageAndSearch(pageIndex) {
+
+	roleControl();
 
 	document.getElementById("i_pulse").style.display = "block";
 
@@ -107,7 +109,33 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != undefined
 							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state != "") {
-						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state;
+						switch (topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state) {
+						case "未审核": {
+							new_td.innerHTML = '<span class="label label-primary">'
+									+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state
+									+ '</span>';
+							break;
+						}
+						case "审核已通过": {
+							new_td.innerHTML = '<span class="label label-success">'
+									+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state
+									+ '</span>';
+							break;
+						}
+						case "审核未通过": {
+							new_td.innerHTML = '<span class="label label-danger">'
+									+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state
+									+ '</span>';
+							break;
+						}
+						case "已关闭": {
+							new_td.innerHTML = '<span class="label label-default">'
+									+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state
+									+ '</span>';
+							break;
+						}
+						}
+
 					} else {
 						new_td.innerHTML = '无';
 					}
@@ -117,7 +145,7 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i style="cursor: pointer;" id="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" onclick="Topic_Information_Display(this)" class="fa fa-file-text-o  "></i>';
+							+ '" onclick="Topic_Information_Display(this)" class="fa fa-edit  "></i>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
@@ -169,14 +197,22 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 	 * 课题来源
 	 */
 	if (document.getElementById("select_source").value != "-1") {
-		formData.append("teacherInformationManagementVO.source", document
+		formData.append("topicInformationManagementVO.source", document
 				.getElementById("select_source").value);
-	}/*
-		 * 课题类型
-		 */
+	}
+	/*
+	 * 课题类型
+	 */
 	if (document.getElementById("select_type").value != "-1") {
-		formData.append("teacherInformationManagementVO.type", document
+		formData.append("topicInformationManagementVO.type", document
 				.getElementById("select_type").value);
+	}
+	/*
+	 * 课题状态
+	 */
+	if (document.getElementById("select_state").value != "-1") {
+		formData.append("topicInformationManagementVO.state", document
+				.getElementById("select_state").value);
 	}
 	/*
 	 * 

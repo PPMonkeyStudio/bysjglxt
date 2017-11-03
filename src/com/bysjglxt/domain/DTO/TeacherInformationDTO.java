@@ -1,5 +1,6 @@
 package com.bysjglxt.domain.DTO;
 
+import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
@@ -12,18 +13,20 @@ public class TeacherInformationDTO {
 
 	private bysjglxt_section bysjglxtSection;
 
+	private bysjglxt_leader bysjglxtLeader;
+
 	/*
 	 * 
 	 */
-
-	public bysjglxt_teacher_basic getBysjglxtTeacherBasic() {
-		return bysjglxtTeacherBasic;
-	}
-
 	@Override
 	public String toString() {
 		return "TeacherInformationDTO [bysjglxtTeacherBasic=" + bysjglxtTeacherBasic + ", bysjglxtTeacherUser="
-				+ bysjglxtTeacherUser + ", bysjglxtSection=" + bysjglxtSection + "]";
+				+ bysjglxtTeacherUser + ", bysjglxtSection=" + bysjglxtSection + ", bysjglxtLeader=" + bysjglxtLeader
+				+ "]";
+	}
+
+	public bysjglxt_teacher_basic getBysjglxtTeacherBasic() {
+		return bysjglxtTeacherBasic;
 	}
 
 	public void setBysjglxtTeacherBasic(bysjglxt_teacher_basic bysjglxtTeacherBasic) {
@@ -44,6 +47,14 @@ public class TeacherInformationDTO {
 
 	public void setBysjglxtSection(bysjglxt_section bysjglxtSection) {
 		this.bysjglxtSection = bysjglxtSection;
+	}
+
+	public bysjglxt_leader getBysjglxtLeader() {
+		return bysjglxtLeader;
+	}
+
+	public void setBysjglxtLeader(bysjglxt_leader bysjglxtLeader) {
+		this.bysjglxtLeader = bysjglxtLeader;
 	}
 
 }

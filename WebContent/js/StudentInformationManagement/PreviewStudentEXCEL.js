@@ -237,6 +237,7 @@ function Save_Student_EXCEL() {
 					toastr.success("导入成功");
 					List_Student_By_PageAndSearch(1);
 				} else {
+					toastr.error(xhr.responseText);
 					document.getElementById("i_pulse_2").style.display = "none";
 				}
 			} else {

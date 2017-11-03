@@ -12,10 +12,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Input_Select.js"></script>
+	src="<%=basePath%>js/TopicInformationManagement/Input_Select.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/getUserSessionForAjax.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/roleControl.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/List_Topic_By_PageAndSearch.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/Topic_Information_Display.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/topic_examine_state.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/studentSelectTopic.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>课题管理页</title>
 </head>
@@ -58,7 +68,8 @@
 						<tr>
 							<th>中文名称</th>
 							<th>
-								<select class="form-control" style="width: auto;" onchange="List_Topic_By_PageAndSearch(1)">
+								<select class="form-control" style="width: auto;"
+									id="select_source" onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">课题来源</option>
 									<option value="各类课题项目">各类课题项目</option>
 									<option value="导师指定">导师指定</option>
@@ -68,7 +79,8 @@
 								</select>
 							</th>
 							<th>
-								<select class="form-control" style="width: auto;" onchange="List_Topic_By_PageAndSearch(1)">
+								<select class="form-control" style="width: auto;"
+									id="select_type" onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">课题性质</option>
 									<option value="理论研究">理论研究</option>
 									<option value="应用基础研究">应用基础研究</option>
@@ -79,7 +91,16 @@
 							<th>已选学生数</th>
 							<th>指导教师</th>
 							<th>协助教师</th>
-							<th>状态</th>
+							<th>
+								<select class="form-control" style="width: auto;"
+									id="select_state" onchange="List_Topic_By_PageAndSearch(1)">
+									<option value="-1">状态</option>
+									<option value="已关闭">已关闭</option>
+									<option value="审核已通过">审核已通过</option>
+									<option value="未审核">未审核</option>
+									<option value="审核未通过">审核未通过</option>
+								</select>
+							</th>
 							<th>操作</th>
 							<th>
 								<label class="fancy-checkbox">
@@ -95,11 +116,25 @@
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
 				</div>
 				<div style="height: 34px; margin: 0 0 20px 0;">
-
-					<button class="btn btn-danger" onclick="Delete_Student()"
+					<button class="btn btn-danger" onclick="deleteTopicList()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-trash-o"></i>
 						删除所选
+					</button>
+					<button class="btn btn-default" onclick="agreeTopicList()"
+						style="float: right; margin: 0 10px;">
+						<i class="fa fa-legal"></i>
+						通过
+					</button>
+					<button class="btn btn-default" onclick="refuseTopicList()"
+						style="float: right; margin: 0 10px;">
+						<i class="fa fa-recycle"></i>
+						拒绝
+					</button>
+					<button class="btn btn-default" onclick="closeTopicList()"
+						style="float: right; margin: 0 10px;">
+						<i class="fa fa-lock"></i>
+						关闭
 					</button>
 				</div>
 				<div style="margin: 0 auto; width: 400px; text-align: center;">
@@ -124,7 +159,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel" style="width: 95%; margin: 20px auto;">
+		<%-- <div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
 				<h3 class="panel-title">我的课题</h3>
@@ -133,8 +168,7 @@
 				<div style="height: 34px;">
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
-						<input id="input_search" class="form-control"
-							 type="text">
+						<input id="input_search" class="form-control" type="text">
 						<span class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</span>
@@ -158,7 +192,7 @@
 							</th>
 							<th>
 								<select class="form-control" style="width: auto;"
-									id="select_type" >
+									id="select_type">
 									<option value="-1">课题性质</option>
 									<option value="理论研究">理论研究</option>
 									<option value="应用基础研究">应用基础研究</option>
@@ -229,8 +263,53 @@
 				</div>
 			</div>
 
+		</div> --%>
+	</div>
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!-------修改教师用户信息模态框------->
+	<div class="modal fade" id="modal_Topic_Information"
+		data-keyboard="true" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- 模态弹出窗内容 -->
+				<!--弹出框头部，一般使用“modal-header”表示，主要包括标题和关闭按钮-->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">课题详细信息</h4>
+				</div>
+				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
+				<div class="modal-body">
+					<table id="table_topic_detail"
+						class="table table-hover table-bordered"
+						style="text-align: center;">
+						<tbody></tbody>
+					</table>
+				</div>
+				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
+				<div class="modal-footer">
+					<button class="btn btn-default" id="button_selectTopic"
+						onclick="studentSelectTopic()"
+						style="float: right; margin: 0 10px; display: none;">
+						<i class="fa fa-check"></i>
+						选题
+					</button>
+					<button class="btn btn-default" id="button_updateTopic" onclick=""
+						style="float: right; margin: 0 10px; display: none;">
+						<i class="fa fa-check"></i>
+						修改
+					</button>
+				</div>
+			</div>
 		</div>
 	</div>
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->

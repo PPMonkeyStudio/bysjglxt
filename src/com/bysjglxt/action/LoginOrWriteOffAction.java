@@ -11,6 +11,8 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.service.LoginOrWriteOffService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -78,6 +80,20 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 			ActionContext.getContext().getSession().remove("userStudentDTO");
 		}
 
+	}
+
+	public void getUserSessionForAjax() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			System.out.println("教师");
+			http_response.getWriter().write(gson.toJson(ActionContext.getContext().getSession().get("userTeacherDTO")));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			System.out.println("学生");
+			http_response.getWriter().write(gson.toJson(ActionContext.getContext().getSession().get("userStudentDTO")));
+		}
 	}
 
 	/**
