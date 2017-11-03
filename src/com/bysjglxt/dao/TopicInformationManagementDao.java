@@ -53,4 +53,6 @@ public interface TopicInformationManagementDao {
 
 	public List<bysjglxt_topic> getAllTopic();
 
+	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO);
+
 }

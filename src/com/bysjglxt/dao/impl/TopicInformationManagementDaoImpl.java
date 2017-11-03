@@ -354,4 +354,33 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		listAllTopic = query.list();
 		return listAllTopic;
 	}
+
+	@Override
+	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO) {
+		Session session = getSession();
+		String hql = "from bysjglxt_topic where 1=1";
+		boolean isChinese = false;
+		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
+			hql = hql + " and topic_source='" + topicManagementVO.getSource().trim() + "'";
+		}
+		if (topicManagementVO.getType() != null && topicManagementVO.getType().trim().length() > 0) {
+			hql = hql + " and topic_type='" + topicManagementVO.getType().trim() + "'";
+		}
+		if (TeamUtil.isChinese(topicManagementVO.getSearch())) {
+			isChinese = true;
+		}
+		if (isChinese && topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + topicManagementVO.getSearch().trim() + "%";
+			hql = hql + " and topic_name_chinese like '" + search + "'";
+		}
+		if (!isChinese && topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + topicManagementVO.getSearch().trim() + "%";
+			hql = hql + " and topic_name_english like '" + search + "'";
+		}
+		hql = hql + " order by topic_gmt_create";
+		Query query = session.createQuery(hql);
+		List<bysjglxt_topic> listbysjglxt_topicByPageAndSearch = query.list();
+		session.clear();
+		return listbysjglxt_topicByPageAndSearch;
+	}
 }
