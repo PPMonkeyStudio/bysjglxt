@@ -28,7 +28,12 @@ function Create_Topic() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				window.location = "/bysjglxt/topic/TopicInformationManagement_TopicListPage";
+				if (xhr.responseText != "登录状态已失效") {
+					window.location = "/bysjglxt/topic/TopicInformationManagement_TopicListPage";
+				} else {
+					toastr.error("登录状态已失效");
+					window.location = "/bysjglxt/login.jsp";
+				}
 			} else {
 				toastr.error(xhr.status);
 			}

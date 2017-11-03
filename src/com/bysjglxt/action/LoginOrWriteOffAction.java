@@ -8,7 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.service.LoginOrWriteOffService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginOrWriteOffAction extends ActionSupport implements ServletResponseAware, ServletRequestAware {
@@ -33,23 +36,31 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 		switch (loginOrWriteOffService.login(username, password)) {
 		//
 		case -1: {
+			System.out.println("账号不存在");
 			http_response.getWriter().write("账号不存在");
 			break;
 		}
 		//
 		case -2: {
+			System.out.println("密码不正确");
 			http_response.getWriter().write("密码不正确");
 			break;
 		}
 		// 教师登录
 		case 1: {
-			loginOrWriteOffService.loginInformation(1, username);
+			System.out.println("教师登录成功");
+			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) loginOrWriteOffService.loginInformation(1,
+					username);
+			ActionContext.getContext().getSession().put("userTeacherDTO", userTeacherDTO);
 			http_response.getWriter().write("教师登录成功");
 			break;
 		}
 		// 学生登录
 		case 2: {
-			loginOrWriteOffService.loginInformation(2, username);
+			System.out.println("学生登录成功");
+			StudentInformationDTO userStudentDTO = (StudentInformationDTO) loginOrWriteOffService.loginInformation(2,
+					username);
+			ActionContext.getContext().getSession().put("userStudentDTO", userStudentDTO);
 			http_response.getWriter().write("学生登录成功");
 			break;
 		}
@@ -60,6 +71,12 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 	 * 登出
 	 */
 	public void logout() {
+		// 移出session
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			ActionContext.getContext().getSession().remove("userTeacherDTO");
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			ActionContext.getContext().getSession().remove("userStudentDTO");
+		}
 
 	}
 

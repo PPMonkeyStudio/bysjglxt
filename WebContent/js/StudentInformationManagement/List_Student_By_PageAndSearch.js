@@ -15,6 +15,8 @@ function List_Student_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				alert(xhr.responseText);
+
 				student_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
