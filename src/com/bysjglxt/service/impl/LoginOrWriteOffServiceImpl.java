@@ -69,6 +69,7 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 			bysjglxt_teacher_user bysjglxtTeacherUser = new bysjglxt_teacher_user();
 			bysjglxt_section bysjglxtSection = new bysjglxt_section();
 			bysjglxtTeacherUser = loginOrWriteOffDao.getBysjglxtTeacherUserByNum(username);
+			
 			if (bysjglxtTeacherUser != null) {
 				bysjglxtTeacherBasic = loginOrWriteOffDao
 						.getBysjglxtTeacherBasicById(bysjglxtTeacherUser.getUser_teacher_basic());

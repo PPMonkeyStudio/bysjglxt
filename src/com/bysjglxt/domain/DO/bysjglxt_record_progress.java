@@ -7,7 +7,7 @@ public class bysjglxt_record_progress {
 	private String record_progress_gmt_stop;
 	private String record_progress_record;
 	private String record_progress_opinion;
-	private int record_progress_stage;
+	private String record_progress_stage;
 	private String record_progress_gmt_create;
 	private String record_progress_gmt_modified;
 
@@ -59,11 +59,11 @@ public class bysjglxt_record_progress {
 		this.record_progress_opinion = record_progress_opinion;
 	}
 
-	public int getRecord_progress_stage() {
+	public String getRecord_progress_stage() {
 		return record_progress_stage;
 	}
 
-	public void setRecord_progress_stage(int record_progress_stage) {
+	public void setRecord_progress_stage(String record_progress_stage) {
 		this.record_progress_stage = record_progress_stage;
 	}
 
