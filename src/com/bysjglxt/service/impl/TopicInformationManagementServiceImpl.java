@@ -96,8 +96,19 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	@Override
 	public boolean adoptTopic(List<String> topicID) {
 		boolean flag = false;
+		bysjglxt_topic bysjglxt_topic = null;
 		for (String string : topicID) {
+			bysjglxt_topic = new bysjglxt_topic();
+			bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(string);
+			if (bysjglxt_topic == null) {
+				return false;
+			} else {
+				if ("已关闭".equals(bysjglxt_topic.getTopic_examine_state())) {
+					continue;
+				}
+			}
 			flag = topicInformationManagementDao.updateTopicState(string, TeamUtil.getStringSecond());
+
 		}
 		return flag;
 	}
@@ -224,8 +235,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			// 教师学生指导人数+1
 			flag = topicInformationManagementDao.addTeacherUserSrtudentNum(bysjglxt_teacher_user.getUser_teacher_id());
 		}
-		if(flag){
-			//修改学生登陆表状态
+		if (flag) {
+			// 修改学生登陆表状态
 			flag = topicInformationManagementDao.updateStudentUserRecord(studentID);
 		}
 		return flag;
