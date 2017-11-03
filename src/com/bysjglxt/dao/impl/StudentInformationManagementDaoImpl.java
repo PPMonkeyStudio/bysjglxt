@@ -147,6 +147,10 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			hql = hql + "and student_user.user_student_is_operate_premission='"
 					+ studentInformationManagementVO.getUser_student_is_operate_premission() + "'";
 		}
+		if (studentInformationManagementVO.getUser_student_is_select_topic() != -1) {
+			hql = hql + " and student_user.user_student_is_select_topic = '"
+					+ studentInformationManagementVO.getUser_student_is_operate_premission() + "'";
+		}
 		hql = hql + " order by basic.student_basic_num";
 		System.out.println(hql);
 		Query query = session.createQuery(hql);
@@ -312,8 +316,9 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			hql = hql + " and student_user.user_student_is_operate_premission='"
 					+ studentInformationManagementVO.getUser_student_is_operate_premission() + "'";
 		}
-		if(studentInformationManagementVO.getUser_student_is_select_topic()!=-1){
-			
+		if (studentInformationManagementVO.getUser_student_is_select_topic() != -1) {
+			hql = hql + " and student_user.user_student_is_select_topic = '"
+					+ studentInformationManagementVO.getUser_student_is_operate_premission() + "'";
 		}
 		hql = hql + " order by basic.student_basic_num";
 		System.out.println(hql);
