@@ -191,12 +191,12 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	}
 
 	@Override
-	public boolean selectTopic(String studentID, String topicID) {
+	public int selectTopic(String studentID, String topicID) {
 		if (topicID == null || topicID.trim().length() <= 0) {
-			return false;
+			return -4;
 		}
 		if (studentID == null || studentID.trim().length() <= 0) {
-			return false;
+			return -4;
 		}
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
 		boolean flag = true;
@@ -210,24 +210,24 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			flag = topicInformationManagementDao.teacherIsSelect(bysjglxt_topic.getTopic_teacher());
 		}
 		if (!flag)
-			return flag;
+			return -1;
 		// 2.②判断是否达到课题可选上限
 		if (flag && bysjglxt_topic != null && bysjglxt_topic.getTopic_student_max() != -1) {
 			flag = topicInformationManagementDao.topicIsSelect(bysjglxt_topic.getTopic_id());
 		}
 		if (!flag)
-			return flag;
+			return -2;
 		// 3.③学生是否已选题
 		if (flag) {
 			bysjglxt_student_user = topicInformationManagementDao.studentIsSelectTopic(studentID);
 			if (bysjglxt_student_user != null) {
 				if (bysjglxt_student_user.getUser_student_is_select_topic() == 1) {
-					return false;
+					return -3;
 				}
+			} else {
+				return -4;
 			}
 		}
-		if (!flag)
-			return flag;
 		// 创建学生选题记录
 		bysjglxt_topic_select.setTopic_select_id(TeamUtil.getUuid());
 		bysjglxt_topic_select.setTopic_select_student(studentID); // user表
@@ -241,17 +241,21 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			// 课题记录中数据增加1
 			flag = topicInformationManagementDao.addTopicStudentNum(topicID);
 		} else {
-			return flag;
+			return -4;
 		}
 		if (flag) {
 			// 教师学生指导人数+1
 			flag = topicInformationManagementDao.addTeacherUserSrtudentNum(bysjglxt_teacher_user.getUser_teacher_id());
+		} else {
+			return -4;
 		}
 		if (flag) {
 			// 修改学生登陆表状态
 			flag = topicInformationManagementDao.updateStudentUserRecord(studentID);
+		} else {
+			return -4;
 		}
-		return flag;
+		return 1;
 	}
 
 	@Override

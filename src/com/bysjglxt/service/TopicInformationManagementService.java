@@ -63,18 +63,25 @@ public interface TopicInformationManagementService {
 	 * @DOTO
 	 * 
 	 * @DATE 2017-11-01
-	 * @说明 1、判断课题是否可选，若可以则下一步操作，不可以则返回false。 如何判断课题是否可选: (1)：大众选题 ②判断是否达到教师可选上限
-	 *     ③判断是否到达课题学生上限 2、创建一条bysjglxt_topic_select学生选题表的记录，评阅老师为null。
-	 *     3、学生课题bysjglxt_topic所属的记录中，课题已选学生数topic_student_num加1。 4. 教师的学生指导数+1
+	 * @说明 1、判断课题是否可选，若可以则下一步操作，不可以则返回false。 如何判断课题是否可选: 
+	 * 		  (1)：大众选题 
+	 * 		 	  判断是否达到教师可选上限             教师指导已达上限   -1
+	 *     		  判断是否到达课题学生上限 		课题已选满 		-2
+	 *     		 判断学生是否已经选题			已选题			-3
+	 *     		参数错误										-4								
+	 *     		成功											1
+	 *     	 2、创建一条bysjglxt_topic_select学生选题表的记录，评阅老师为null。
+	 *       3、学生课题bysjglxt_topic所属的记录中，课题已选学生数topic_student_num加1。
+	 *       4. 教师的学生指导数+1
+	 *       5.学生记录更改为已选题
 	 * @param studentID
 	 *            选题的学生 user表
-	 * 
 	 * @param topicID
 	 *            所选课题
 	 * 
-	 * @return 1成功 0失败
+	 * @return
 	 */
-	public boolean selectTopic(String studentID, String topicID);
+	public int selectTopic(String studentID, String topicID);
 
 	/**
 	 * 
