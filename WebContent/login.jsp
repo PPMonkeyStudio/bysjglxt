@@ -29,6 +29,12 @@
 <link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
 <script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
 <!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<script type="text/javascript" src="<%=basePath%>js/loginAndLogout/login.js"></script>
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 <title>毕业设计管理系统</title>
 </head>
 <body>
@@ -41,7 +47,7 @@
 		</div>
 		<div class="panel-body" style="margin: 0 0 20px 0;">
 			<div class="form-group">
-				<input type="email" class="form-control" id="login_num"
+				<input type="email" class="form-control" id="login_username"
 					placeholder="学号/工号">
 			</div>
 			<div class="form-group">
@@ -49,7 +55,7 @@
 					placeholder="密码">
 			</div>
 			<br>
-			<button class="btn btn-primary  btn-block">登录</button>
+			<button class="btn btn-primary  btn-block" onclick="login()">登录</button>
 		</div>
 	</div>
 </body>
