@@ -38,12 +38,22 @@ public class StudentInformationManagementVO {
 	private String student_basic_grade;
 	// 操作权限筛选
 	private int user_student_is_operate_premission = -1;
+	// 学生是否选题
+	private int user_student_is_select_topic = -1;
 
 	/*
 	 * 
 	 */
 	public int getPageIndex() {
 		return pageIndex;
+	}
+
+	public int getUser_student_is_select_topic() {
+		return user_student_is_select_topic;
+	}
+
+	public void setUser_student_is_select_topic(int user_student_is_select_topic) {
+		this.user_student_is_select_topic = user_student_is_select_topic;
 	}
 
 	@Override
