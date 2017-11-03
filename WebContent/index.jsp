@@ -41,11 +41,11 @@
 		</div>
 		<div class="panel-body" style="margin: 0 0 20px 0;">
 			<div class="form-group">
-				<input type="email" class="form-control" id="signin-email"
+				<input type="email" class="form-control" id="login_num"
 					placeholder="学号/工号">
 			</div>
 			<div class="form-group">
-				<input type="password" class="form-control" id="signin-password"
+				<input type="password" class="form-control" id="login_password"
 					placeholder="密码">
 			</div>
 			<br>
