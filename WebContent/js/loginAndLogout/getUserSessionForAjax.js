@@ -8,7 +8,13 @@ function getUserSessionForAjax() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				var userJsonDTO = JSON.parse(xhr.responseText);
+				try {
+					var userJsonDTO = JSON.parse(xhr.responseText);
+				} catch (e) {
+					toastr.error("登录状态失效");
+					toastr.error(e);
+					return;
+				}
 				if (userJsonDTO.bysjglxtStudentUser != null) {
 					toastr.success("学生");
 					userStudentDTO = userJsonDTO;
@@ -18,19 +24,30 @@ function getUserSessionForAjax() {
 				} else {
 					toastr.error("登录状态失效");
 				}
-				List_Topic_By_PageAndSearch();
-				roleControl();
+				try {
+					List_Student_By_PageAndSearch(1);
+				} catch (e) {
+					try {
+						List_Teacher_By_PageAndSearch(1);
+					} catch (e) {
+						try {
+							List_Section_By_Page(1);
+						} catch (e) {
+							try {
+								List_Topic_By_PageAndSearch(1);
+							} catch (e) {
+							}
+						}
+					}
+				}
 			} else {
 				toastr.error(xhr.status);
 			}
 		}
 	}
-
 	var formData = new FormData();
-
 	xhr
 			.open("POST",
 					"/bysjglxt/loginLogout/LoginLogoutManagement_getUserSessionForAjax");
-
 	xhr.send(formData);
 }

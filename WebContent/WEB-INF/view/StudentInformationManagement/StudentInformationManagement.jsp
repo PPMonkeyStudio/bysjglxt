@@ -18,8 +18,6 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/PreviewStudentEXCEL.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Input_Select.js"></script>
-<script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Delete_Student.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>

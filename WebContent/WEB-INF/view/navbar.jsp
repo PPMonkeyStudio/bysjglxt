@@ -32,7 +32,17 @@
 <link rel="stylesheet" href="<%=basePath%>css/jquery-confirm.css" />
 <script type="text/javascript" src="<%=basePath%>js/jquery-confirm.js"></script>
 <!--------------------------------------------------------------------------------->
-
+<!--------------------------------------------------------------------------------->
+<!---页面公用------------------------------------------------------------------------------>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/Input_Select.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/getUserSessionForAjax.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/roleControl.js"></script>
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
+<!--------------------------------------------------------------------------------->
 <title>Insert title here</title>
 </head>
 <body>
@@ -48,7 +58,7 @@
 					</a>
 				</li>
 				<!--  -->
-				<li class="dropdown" style="float: left;">
+				<li class="leader_control dropdown" style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>信息</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
@@ -155,7 +165,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="<%=basePath%>loginLogout/LoginLogoutManagement_logout">
 								<i class="lnr lnr-exit"></i>
 								<span>退出登录</span>
 							</a>
@@ -167,5 +177,7 @@
 		</div>
 		</nav>
 </body>
-
+<script type="text/javascript">
+	getUserSessionForAjax();
+</script>
 </html>

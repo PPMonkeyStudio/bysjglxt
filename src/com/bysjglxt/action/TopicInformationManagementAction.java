@@ -72,7 +72,7 @@ public class TopicInformationManagementAction extends ActionSupport
 		} else {
 			http_response.setContentType("text/html;charset=utf-8");
 			http_response.getWriter().write("登录状态已失效");
-			System.out.println("登录状态已失效");
+			System.err.println("登录状态已失效");
 			return;
 		}
 
@@ -94,6 +94,7 @@ public class TopicInformationManagementAction extends ActionSupport
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(
 				gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO)));
+
 	}
 
 	public void agreeTopicList() throws IOException {
@@ -123,15 +124,34 @@ public class TopicInformationManagementAction extends ActionSupport
 	public void studentSelectTopic() throws IOException {
 		StudentInformationDTO userStudentDTO = (StudentInformationDTO) ActionContext.getContext().getSession()
 				.get("userStudentDTO");
-		if (topicInformationManagementService.selectTopic(userStudentDTO.getBysjglxtStudentUser().getUser_student_id(),
-				studentSelectTopic)) {
-			http_response.setContentType("text/html;charset=utf-8");
-			http_response.getWriter().write("success");
-		} else {
-			http_response.setContentType("text/html;charset=utf-8");
-			http_response.getWriter().write("");
+		http_response.setContentType("text/html;charset=utf-8");
+		switch (topicInformationManagementService
+				.selectTopic(userStudentDTO.getBysjglxtStudentUser().getUser_student_id(), studentSelectTopic)) {
+		case 1: {
+			http_response.getWriter().write("1");
+			break;
 		}
-
+		case -1: {
+			http_response.getWriter().write("-1");
+			break;
+		}
+		case -2: {
+			http_response.getWriter().write("-2");
+			break;
+		}
+		case -3: {
+			http_response.getWriter().write("-3");
+			break;
+		}
+		case -4: {
+			http_response.getWriter().write("-4");
+			break;
+		}
+		default: {
+			http_response.getWriter().write("-4");
+			break;
+		}
+		}
 	}
 
 	/**

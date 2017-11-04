@@ -14,8 +14,6 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/SectionInformationManagement/List_Section_By_Page.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/SectionInformationManagement/Input_Select.js"></script>
-<script type="text/javascript"
 	src="<%=basePath%>js/SectionInformationManagement/Delete_Section.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/SectionInformationManagement/Update_Section.js"></script>

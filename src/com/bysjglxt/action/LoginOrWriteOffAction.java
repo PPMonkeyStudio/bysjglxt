@@ -72,13 +72,15 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 	/*
 	 * 登出
 	 */
-	public void logout() {
+	public String logout() {
 		// 移出session
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
 			ActionContext.getContext().getSession().remove("userTeacherDTO");
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			ActionContext.getContext().getSession().remove("userStudentDTO");
 		}
+
+		return "logout";
 
 	}
 

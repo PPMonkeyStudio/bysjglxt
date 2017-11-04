@@ -11,6 +11,8 @@
 			</result>
 			<result name="navbar">/WEB-INF/view/navbar.jsp
 			</result>
+			<result name="logout">/login.jsp
+			</result>
 		</action>
 	</package>
 </struts>

@@ -18,8 +18,6 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/TeacherInformationManagement/PreviewTeacherEXCEL.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/TeacherInformationManagement/Input_Select.js"></script>
-<script type="text/javascript"
 	src="<%=basePath%>js/TeacherInformationManagement/Delete_Teacher.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TeacherInformationManagement/Update_Teacher.js"></script>
