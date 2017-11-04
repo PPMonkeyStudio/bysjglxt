@@ -4,8 +4,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
+<<<<<<< HEAD
 	<bean id="graduationProjectManagementAction"
 		class="com.bysjglxt.action.GraduationProjectManagementAction"
+=======
+	<bean id="graduationProjectManagementAction" class="com.bysjglxt.action.GraduationProjectManagementAction"
+>>>>>>> ZB
 		scope="prototype">
 		<property name="graduationProjectManagementService" ref="graduationProjectManagementService"></property>
 	</bean>

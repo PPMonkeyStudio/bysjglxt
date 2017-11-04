@@ -18,8 +18,6 @@ import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
-import util.TeamUtil;
-
 public class TopicInformationManagementDaoImpl implements TopicInformationManagementDao {
 	private SessionFactory sessionFactory;
 

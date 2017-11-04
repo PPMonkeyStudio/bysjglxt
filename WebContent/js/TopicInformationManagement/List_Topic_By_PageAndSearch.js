@@ -1,11 +1,6 @@
-﻿window.onload = getUserSessionForAjax;
-
-var topic_json = null;
+﻿var topic_json = null;
 
 function List_Topic_By_PageAndSearch(pageIndex) {
-
-	roleControl();
-
 	document.getElementById("i_pulse").style.display = "block";
 
 	/*
@@ -37,8 +32,14 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 				var new_td = null;
 				for (var num = 0; num < topic_json.list_TopicInformationDTO.length; num++) {
 
-					new_tr = document.createElement("tr");
+					if (userStudentDTO != null) {
+						if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state == "审核已通过") {
 
+						} else {
+							continue;
+						}
+					}
+					new_tr = document.createElement("tr");
 					new_tr.appendChild(document.createTextNode(''));
 					table_topic.firstElementChild.appendChild(new_tr);
 					new_tr.className = "new_tr";
@@ -145,16 +146,17 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i style="cursor: pointer;" id="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" onclick="Topic_Information_Display(this)" class="fa fa-edit  "></i>';
+							+ '" onclick="Topic_Information_Display(this)" class="fa fa-book  "></i>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<label class="fancy-checkbox">'
-							+ '<input id="'
+					new_td.className = "leader_control";
+					new_td.innerHTML = '<label class="leader_control fancy-checkbox" >'
+							+ '<input  id="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
 							+ '" type="checkbox" class="checkbox_select">'
-							+ '<span></span></label>';
+							+ '<span></span></label></div>';
 
 				}
 
@@ -168,6 +170,12 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 				document.getElementById("i_pulse").style.display = "none";
 				// 让全选框取消选择
 				document.getElementById("checkbox_all_select").checked = false;
+
+				/*
+				 * 角色控制
+				 */
+				roleControl();
+
 			} else {
 				toastr.error(xhr.status);
 			}

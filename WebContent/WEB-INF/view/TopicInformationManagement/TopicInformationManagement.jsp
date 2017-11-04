@@ -10,13 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!---------------------------------------------------------------------------------------------------->
-<script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/Input_Select.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/loginAndLogout/getUserSessionForAjax.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/roleControl.js"></script>
+<!--页面公用-------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/List_Topic_By_PageAndSearch.js"></script>
@@ -47,7 +41,7 @@
 			<div class="panel-body">
 				<div style="height: 34px;">
 					<div style="width: 500px; float: left;">
-						<button class="btn btn-default"
+						<button class="teacher_control btn btn-default"
 							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_CreateTopicPage'">
 							<i class="fa fa-plus-square"></i>
 							创建课题
@@ -102,7 +96,7 @@
 								</select>
 							</th>
 							<th>操作</th>
-							<th>
+							<th class="leader_control" style="display: none;">
 								<label class="fancy-checkbox">
 									<input id="checkbox_all_select" type="checkbox"
 										onclick="all_select()">
@@ -116,23 +110,23 @@
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
 				</div>
 				<div style="height: 34px; margin: 0 0 20px 0;">
-					<button class="btn btn-danger" onclick="deleteTopicList()"
-						style="float: right; margin: 0 10px;">
+					<button class="leader_control btn btn-danger"
+						onclick="deleteTopicList()" style="float: right; margin: 0 10px;">
 						<i class="fa fa-trash-o"></i>
 						删除所选
 					</button>
-					<button class="btn btn-default" onclick="agreeTopicList()"
-						style="float: right; margin: 0 10px;">
+					<button class="leader_control btn btn-default"
+						onclick="agreeTopicList()" style="float: right; margin: 0 10px;">
 						<i class="fa fa-legal"></i>
 						通过
 					</button>
-					<button class="btn btn-default" onclick="refuseTopicList()"
-						style="float: right; margin: 0 10px;">
+					<button class="leader_control btn btn-default"
+						onclick="refuseTopicList()" style="float: right; margin: 0 10px;">
 						<i class="fa fa-recycle"></i>
 						拒绝
 					</button>
-					<button class="btn btn-default" onclick="closeTopicList()"
-						style="float: right; margin: 0 10px;">
+					<button class="leader_control btn btn-default"
+						onclick="closeTopicList()" style="float: right; margin: 0 10px;">
 						<i class="fa fa-lock"></i>
 						关闭
 					</button>
@@ -292,16 +286,11 @@
 				</div>
 				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
 				<div class="modal-footer">
-					<button class="btn btn-default" id="button_selectTopic"
-						onclick="studentSelectTopic()"
-						style="float: right; margin: 0 10px; display: none;">
+					<button class="student_control btn btn-default"
+						id="button_selectTopic" onclick="studentSelectTopic()"
+						style="float: right; margin: 0 10px;">
 						<i class="fa fa-check"></i>
 						选题
-					</button>
-					<button class="btn btn-default" id="button_updateTopic" onclick=""
-						style="float: right; margin: 0 10px; display: none;">
-						<i class="fa fa-check"></i>
-						修改
 					</button>
 				</div>
 			</div>
