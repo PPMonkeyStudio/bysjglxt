@@ -10,6 +10,7 @@
 	<import resource="spring/SectionInformationManagement.xml" />
 	<import resource="spring/LoginOrWriteOff.xml" />
 	<import resource="spring/GraduationProjectManagement.xml" />
+	<import resource="spring/ProcessManagement.xml" />
 
 
 </beans>

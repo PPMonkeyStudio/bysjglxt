@@ -31,10 +31,6 @@ public class testfffff {
 	// 测试课题是否可选
 	@Test
 	public void test() {
-<<<<<<< HEAD
-=======
-
->>>>>>> ZB
 	}
 
 	// 测试点击者是否有权限进行操作

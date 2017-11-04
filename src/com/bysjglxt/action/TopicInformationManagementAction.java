@@ -125,10 +125,6 @@ public class TopicInformationManagementAction extends ActionSupport
 	public void studentSelectTopic() throws IOException {
 		StudentInformationDTO userStudentDTO = (StudentInformationDTO) ActionContext.getContext().getSession()
 				.get("userStudentDTO");
-<<<<<<< HEAD
-		
-
-=======
 		http_response.setContentType("text/html;charset=utf-8");
 		switch (topicInformationManagementService
 				.selectTopic(userStudentDTO.getBysjglxtStudentUser().getUser_student_id(), studentSelectTopic)) {
@@ -157,7 +153,6 @@ public class TopicInformationManagementAction extends ActionSupport
 			break;
 		}
 		}
->>>>>>> ZB
 	}
 
 	/**
