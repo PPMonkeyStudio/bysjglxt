@@ -15,8 +15,8 @@ public class bysjglxt_defence {
 	private int defence_grade_statement;
 	private int defence_grade_answer;
 	private int defence_grade_defence;
-	private int defence_grade_evaluate_tutor;
-	private int defence_grade_evaluate_review;
+	private double defence_grade_evaluate_tutor;
+	private double defence_grade_evaluate_review;
 	private int defence_total;
 	private String defence_finally;
 	private String defence_gmt_create;
@@ -126,19 +126,19 @@ public class bysjglxt_defence {
 		this.defence_grade_defence = defence_grade_defence;
 	}
 
-	public int getDefence_grade_evaluate_tutor() {
+	public double getDefence_grade_evaluate_tutor() {
 		return defence_grade_evaluate_tutor;
 	}
 
-	public void setDefence_grade_evaluate_tutor(int defence_grade_evaluate_tutor) {
+	public void setDefence_grade_evaluate_tutor(double defence_grade_evaluate_tutor) {
 		this.defence_grade_evaluate_tutor = defence_grade_evaluate_tutor;
 	}
 
-	public int getDefence_grade_evaluate_review() {
+	public double getDefence_grade_evaluate_review() {
 		return defence_grade_evaluate_review;
 	}
 
-	public void setDefence_grade_evaluate_review(int defence_grade_evaluate_review) {
+	public void setDefence_grade_evaluate_review(double defence_grade_evaluate_review) {
 		this.defence_grade_evaluate_review = defence_grade_evaluate_review;
 	}
 
@@ -176,7 +176,7 @@ public class bysjglxt_defence {
 
 	@Override
 	public String toString() {
-		return "bysjglxt_defence_ [defence_id=" + defence_id + ", defence_student=" + defence_student
+		return "bysjglxt_defence [defence_id=" + defence_id + ", defence_student=" + defence_student
 				+ ", defence_record=" + defence_record + ", defence_leader_comment=" + defence_leader_comment
 				+ ", defence_grade_writing=" + defence_grade_writing + ", defence_grade_normalization="
 				+ defence_grade_normalization + ", defence_grade_complete=" + defence_grade_complete

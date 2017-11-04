@@ -36,4 +36,19 @@ public interface GraduationProjectManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_record_progress findRecordProgressByuserIdAndStage(
 			String report_opening_student, String string);
 
+	public com.bysjglxt.domain.DO.bysjglxt_summary findSummaryByUserId(String record_progress_id);
+
+	public com.bysjglxt.domain.DO.bysjglxt_summary findSummaryById(String summary_id);
+
+	public com.bysjglxt.domain.DO.bysjglxt_examination_formal findExaminationFormalById(String examination_formal_id);
+
+	public com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor findEvaluateTutor(String evaluate_tutor_id);
+
+	public com.bysjglxt.domain.DO.bysjglxt_evaluate_review findEvaluateReviewById(String evaluate_review_id);
+
+	public bysjglxt_defence findDefenceById(String defence_id);
+
+	public bysjglxt_defence findDefenceByUserId(String evaluate_tutor_student);
+
+
 }

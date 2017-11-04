@@ -87,7 +87,6 @@ public class test {
 	@Test
 	public void testttttt() {
 		TopicInformationManagementVO VO_Topic_By_PageAndSearch = new TopicInformationManagementVO();
-		VO_Topic_By_PageAndSearch.setSearch("theone");
 		VO_Topic_By_PageAndSearch = topicManagementService.VO_Topic_By_PageAndSearch(VO_Topic_By_PageAndSearch);
 		System.out.println(VO_Topic_By_PageAndSearch);
 	}

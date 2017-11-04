@@ -5,7 +5,7 @@
 
 
 	<bean id="graduationProjectManagementAction"
-		class="com.bysjglxt.action.com.bysjglxt.action.GraduationProjectManagementAction"
+		class="com.bysjglxt.action.GraduationProjectManagementAction"
 		scope="prototype">
 		<property name="graduationProjectManagementService" ref="graduationProjectManagementService"></property>
 	</bean>
