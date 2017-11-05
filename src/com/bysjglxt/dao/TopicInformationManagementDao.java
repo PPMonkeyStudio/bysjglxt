@@ -70,34 +70,6 @@ public interface TopicInformationManagementDao {
 
 	public boolean updateStudentUserNotSelect(String topic_select_student);
 
-	public boolean deleteTaskBook(String topic_select_student);
-
-	public boolean deleteReportOpening(String topic_select_student);
-
-	public com.bysjglxt.domain.DO.bysjglxt_taskbook getTaskBookByStudent(String topic_select_student);
-
-	public bysjglxt_report_opening getReportOpening(String topic_select_student);
-
-	public List<bysjglxt_record_progress> getProgress(String topic_select_student);
-
-	public boolean deleteProgress(String record_progress_id);
-
-	public bysjglxt_summary getSummary(String topic_select_student);
-
-	public boolean deleteSummary(String summary_id);
-
-	public bysjglxt_examination_formal getExaminationFormal(String topic_select_student);
-
-	public boolean deleteExaminationFormal(String examination_formal_id);
-
-	public bysjglxt_evaluate_tutor getEvaluateTutor(String topic_select_student);
-
-	public boolean deleteEvaluateTutor(String evaluate_tutor_id);
-
-	public bysjglxt_evaluate_review getEvaluateReview(String topic_select_student);
-
-	public boolean deleteEvaluateReview(String evaluate_review_id);
-
 	public boolean deleteTopicSelect(String topic_select_id);
 
 }

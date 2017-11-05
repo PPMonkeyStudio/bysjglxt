@@ -10,8 +10,17 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.bysjglxt.dao.StudentInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
+import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_record_progress;
+import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 import com.bysjglxt.service.StudentInformationManagementService;
@@ -178,9 +187,116 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	@Override
 	public boolean update_Give_Student_Operate_Permission(List<String> listString) {
 		boolean flag = false;
+		bysjglxt_student_user bysjglxt_student_user = null;
+		bysjglxt_topic_select bysjglxt_topic_select = null;
+		bysjglxt_taskbook bysjglxt_taskbook = null;
+		bysjglxt_report_opening bysjglxt_report_opening = null;
+		bysjglxt_summary summary = null;
+		bysjglxt_examination_formal examinationFormal = null;
+		bysjglxt_evaluate_tutor evaluateTutor = null;
+		bysjglxt_evaluate_review evaluateReview = null;
+		bysjglxt_defence defence = null;
 		for (String string : listString) {
-			flag = studentInformationManagementDao.update_Give_Student_Operate_Permission(string,
-					TeamUtil.getStringSecond());
+			bysjglxt_topic_select = new bysjglxt_topic_select();
+			bysjglxt_student_user = new bysjglxt_student_user();
+			bysjglxt_taskbook = new bysjglxt_taskbook();
+			bysjglxt_report_opening = new bysjglxt_report_opening();
+			List<bysjglxt_record_progress> listProgress = new ArrayList<bysjglxt_record_progress>();
+			summary = new bysjglxt_summary();
+			examinationFormal = new bysjglxt_examination_formal();
+			evaluateTutor = new bysjglxt_evaluate_tutor();
+			evaluateReview = new bysjglxt_evaluate_review();
+			defence = new bysjglxt_defence();
+			bysjglxt_student_user = studentInformationManagementDao.getStudentByNum(string);
+			if (bysjglxt_student_user == null) {
+				return false;
+			}
+			// 对于没有权限的重新开启，会将所有的对应的学生的所有数据进行删除
+			if (bysjglxt_student_user.getUser_student_is_operate_premission() == 0) {
+
+				// 1.删除该学生的选题
+				bysjglxt_topic_select = studentInformationManagementDao
+						.getTopicSelect(bysjglxt_student_user.getUser_student_id());
+				if (bysjglxt_topic_select != null) {
+					flag = studentInformationManagementDao
+							.deleteTopicSelect(bysjglxt_topic_select.getTopic_select_id());
+				}
+				if (!flag)
+					break;
+				// 2.删除对应学生任务书表
+				bysjglxt_taskbook = studentInformationManagementDao
+						.getTaskBookByStudent(bysjglxt_student_user.getUser_student_id());
+				if (bysjglxt_taskbook != null) {
+					flag = studentInformationManagementDao.deleteTaskBookStudent(bysjglxt_taskbook.getTaskbook_id());
+				}
+				if (!flag)
+					break;
+				// 删除开题报告表
+				bysjglxt_report_opening = studentInformationManagementDao
+						.getReportOpening(bysjglxt_student_user.getUser_student_id());
+				if (bysjglxt_report_opening != null) {
+					flag = studentInformationManagementDao
+							.deleteReportOpening(bysjglxt_report_opening.getReport_opening_id());
+				}
+				if (!flag)
+					break;
+				// 删除情况记录
+				listProgress = studentInformationManagementDao.getProgress(bysjglxt_student_user.getUser_student_id());
+				if (listProgress != null || listProgress.size() == 0) {
+					for (bysjglxt_record_progress bysjglxt_record_progress : listProgress) {
+						flag = studentInformationManagementDao
+								.deleteProgress(bysjglxt_record_progress.getRecord_progress_id());
+						if (!flag)
+							break;
+					}
+				}
+				if (!flag)
+					break;
+				// 删除个人学习总结
+				summary = studentInformationManagementDao.getSummary(bysjglxt_student_user.getUser_student_id());
+				if (summary != null) {
+					flag = studentInformationManagementDao.deleteSummary(summary.getSummary_id());
+				}
+				if (!flag)
+					break;
+				// 删除形式审查表
+				examinationFormal = studentInformationManagementDao
+						.getExaminationFormal(bysjglxt_student_user.getUser_student_id());
+				if (examinationFormal != null) {
+					flag = studentInformationManagementDao
+							.deleteExaminationFormal(examinationFormal.getExamination_formal_id());
+				}
+				if (!flag)
+					break;
+				// 删除指导教师评价表
+				evaluateTutor = studentInformationManagementDao
+						.getEvaluateTutor(bysjglxt_student_user.getUser_student_id());
+				if (evaluateTutor != null) {
+					flag = studentInformationManagementDao.deleteEvaluateTutor(evaluateTutor.getEvaluate_tutor_id());
+				}
+				if (!flag)
+					break;
+				// 删除评阅老师评价表
+				evaluateReview = studentInformationManagementDao
+						.getEvaluateReview(bysjglxt_student_user.getUser_student_id());
+				if (evaluateReview != null) {
+					flag = studentInformationManagementDao.deleteEvaluateReview(evaluateReview.getEvaluate_review_id());
+				}
+				if (!flag)
+					break;
+				// 删除答辩评分表
+				defence = studentInformationManagementDao.getDefence(bysjglxt_student_user.getUser_student_id());
+				if (defence != null) {
+					flag = studentInformationManagementDao.deleteDefence(defence.getDefence_id());
+				}
+				if (!flag)
+					break;
+				flag = studentInformationManagementDao.update_Give_Student_Operate_Permission(string,
+						TeamUtil.getStringSecond());
+			} else {
+				flag = studentInformationManagementDao.update_Give_Student_Operate_Permission(string,
+						TeamUtil.getStringSecond());
+			}
 		}
 		return flag;
 	}
