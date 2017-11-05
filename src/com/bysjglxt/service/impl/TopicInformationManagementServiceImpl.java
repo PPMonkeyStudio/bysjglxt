@@ -4,21 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
-import com.bysjglxt.domain.DO.bysjglxt_defence;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
-import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
-import com.bysjglxt.domain.DO.bysjglxt_record_progress;
-import com.bysjglxt.domain.DO.bysjglxt_report_opening;
+import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
-import com.bysjglxt.domain.DO.bysjglxt_summary;
-import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
@@ -353,4 +348,138 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		}
 		return listSelectBysjglxtTopic;
 	}
+
+	/**
+	 * 学生点击我的课题
+	 */
+	@Override
+	public TopicInformationManagementDTO studentTopicInformationManagementDTO(String studentUserId) {
+
+		TopicInformationManagementDTO topicInformationManagementDTO = new TopicInformationManagementDTO();
+		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
+		bysjglxt_topic_invite_teacher bysjglxtTopicInviteTeacher = new bysjglxt_topic_invite_teacher();
+		TeacherInformationDTO teacherInformationDTO = new TeacherInformationDTO();
+		bysjglxt_teacher_basic bysjglxtTeacherBasic = new bysjglxt_teacher_basic();
+		bysjglxt_teacher_user bysjglxtTeacherUser = new bysjglxt_teacher_user();
+		bysjglxt_section bysjglxtSection = new bysjglxt_section();
+		bysjglxt_leader bysjglxtLeader = new bysjglxt_leader();
+		bysjglxt_topic_select studentTopicSelect = new bysjglxt_topic_select();
+		// 1.根据学生userId查看学生选择了哪一个课题
+		studentTopicSelect = topicInformationManagementDao.getStudentTopicSelectByUserId(studentUserId);
+		if (studentTopicSelect == null) {
+			return null;
+		} else {
+			// 2.根据课题ID获取课题表中的信息
+			bysjglxtTopic = topicInformationManagementDao
+					.getBysjglxtTopicById(studentTopicSelect.getTopic_select_topic());
+			topicInformationManagementDTO.setBysjglxtTopic(bysjglxtTopic);
+			// 3.根据课题信息获取被邀请老师信息
+			if (bysjglxtTopic != null && bysjglxtTopic.getTopic_invite_teache_id() != null
+					&& bysjglxtTopic.getTopic_invite_teache_id().length() > 0) {
+				bysjglxtTopicInviteTeacher = topicInformationManagementDao
+						.getBysjglxtTopicInviteTeacher(bysjglxtTopic.getTopic_invite_teache_id());
+			}
+			topicInformationManagementDTO.setBysjglxtTopicInviteTeacher(bysjglxtTopicInviteTeacher);
+			// 4.根据课题信息获取课题指导老师user表信息
+			bysjglxtTeacherUser = topicInformationManagementDao.getTeacherUser(bysjglxtTopic.getTopic_teacher());
+			if (bysjglxtTeacherUser != null) {
+				bysjglxtTeacherBasic = topicInformationManagementDao
+						.getTeacherBasicInfo(bysjglxtTeacherUser.getUser_teacher_basic());
+				bysjglxtSection = topicInformationManagementDao
+						.getTeacherSection(bysjglxtTeacherUser.getUser_teacher_section());
+				bysjglxtLeader = topicInformationManagementDao.getLeader(bysjglxtTeacherUser.getUser_teacher_id());
+			}
+			teacherInformationDTO.setBysjglxtTeacherUser(bysjglxtTeacherUser);
+			teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxtTeacherBasic);
+			teacherInformationDTO.setBysjglxtSection(bysjglxtSection);
+			teacherInformationDTO.setBysjglxtLeader(bysjglxtLeader);
+			topicInformationManagementDTO.setTeacherInformationDTO(teacherInformationDTO);
+		}
+
+		return topicInformationManagementDTO;
+	}
+
+	@Override
+	public TopicInformationManagementVO VO_TopicBelongTeacher_By_PageAndSearch(
+			TopicInformationManagementVO topicManagementVO, String teacherUserId) {
+		List<TopicInformationManagementDTO> list_TopicInformationDTO = new ArrayList<TopicInformationManagementDTO>();
+		TopicInformationManagementDTO topicInformationDTO = null;
+		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = null;
+		List<bysjglxt_topic> list_bysjglxt_topic = new ArrayList<bysjglxt_topic>();
+		List<bysjglxt_topic> listAll = new ArrayList<bysjglxt_topic>();
+		TeacherInformationDTO teacherInformationDTO = null;
+		bysjglxt_teacher_basic bysjglxt_teacher_basic = null;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		bysjglxt_section bysjglxt_section = null;
+		// 获得符合条件的10条课题
+		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO, teacherUserId);
+		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
+			topicInformationDTO = new TopicInformationManagementDTO();
+			// 在DTO里面设置TeacherInformationDTO
+			teacherInformationDTO = new TeacherInformationDTO();
+			bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_section = new bysjglxt_section();
+			bysjglxt_teacher_user = topicInformationManagementDao
+					.getTeacherUserInfo(tbysjglxt_topic.getTopic_teacher());
+			if (bysjglxt_teacher_user != null) {
+				teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
+				bysjglxt_teacher_basic = topicInformationManagementDao
+						.getTeacherBasicInfo(bysjglxt_teacher_user.getUser_teacher_basic());
+				teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxt_teacher_basic);
+				bysjglxt_section = topicInformationManagementDao
+						.getTeacherSection(bysjglxt_teacher_user.getUser_teacher_section());
+				teacherInformationDTO.setBysjglxtSection(bysjglxt_section);
+			}
+			topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
+			// 在DTO里面设置被邀请课题信息
+			topicInformationDTO.setBysjglxtTopic(tbysjglxt_topic);
+			// 根据课题表中被邀请老师ID，获得被邀请老师的信息
+			bysjglxt_topic_invite_teacher = topicInformationManagementDao
+					.getBysjglxtTopicInviteTeacher(tbysjglxt_topic.getTopic_invite_teache_id());
+			topicInformationDTO.setBysjglxtTopicInviteTeacher(bysjglxt_topic_invite_teacher);
+			list_TopicInformationDTO.add(topicInformationDTO);
+		}
+		topicManagementVO.setList_TopicInformationDTO(list_TopicInformationDTO);
+		int i = 0;
+		listAll = topicInformationManagementDao.VO_Topic_BySearch(topicManagementVO, teacherUserId);
+		i = listAll.size();
+		topicManagementVO.setTotalRecords(i);
+		topicManagementVO.setTotalPages(((i - 1) / topicManagementVO.getPageSize()) + 1);
+		if (topicManagementVO.getPageIndex() <= 1) {
+			topicManagementVO.setHavePrePage(false);
+		} else {
+			topicManagementVO.setHavePrePage(true);
+		}
+		if (topicManagementVO.getPageIndex() >= topicManagementVO.getTotalPages()) {
+			topicManagementVO.setHaveNextPage(false);
+		} else {
+			topicManagementVO.setHaveNextPage(true);
+		}
+		return topicManagementVO;
+	}
+
+	@Override
+	public List<StudentInformationDTO> listStudentSelectTopic(String topicId) {
+		List<StudentInformationDTO> listStudentInfoDTO = new ArrayList<StudentInformationDTO>();
+		StudentInformationDTO studentInformationDTO = null;
+		bysjglxt_student_user bysjglxt_student_user = null;
+		bysjglxt_student_basic bysjglxt_student_basic = null;
+		List<bysjglxt_topic_select> listTopicSelect = new ArrayList<bysjglxt_topic_select>();
+		listTopicSelect = topicInformationManagementDao.getTopicSelectByTopicId(topicId);
+		for (bysjglxt_topic_select bysjglxt_topic_select : listTopicSelect) {
+			studentInformationDTO = new StudentInformationDTO();
+			bysjglxt_student_user = topicInformationManagementDao
+					.studentIsSelectTopic(bysjglxt_topic_select.getTopic_select_student());
+			if (bysjglxt_student_user != null) {
+				studentInformationDTO.setBysjglxtStudentUser(bysjglxt_student_user);
+				bysjglxt_student_basic = topicInformationManagementDao
+						.getStudentBasic(bysjglxt_student_user.getUser_student_basic());
+				studentInformationDTO.setBysjglxtStudentBasic(bysjglxt_student_basic);
+			}
+			listStudentInfoDTO.add(studentInformationDTO);
+		}
+		return listStudentInfoDTO;
+	}
+
 }

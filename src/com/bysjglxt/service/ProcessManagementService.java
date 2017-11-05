@@ -1,7 +1,8 @@
 package com.bysjglxt.service;
 
+import java.util.List;
+
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
-import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 
 public interface ProcessManagementService {
@@ -21,12 +22,20 @@ public interface ProcessManagementService {
 	public int createSelectTopicTaskDefine(bysjglxt_task_definition selectTopicTaskDefine);
 
 	/**
+	 * 遍历出流程定义
+	 * 
+	 * @return
+	 */
+	public List<bysjglxt_process_definition> listProcessDefinition();
+
+	/**
 	 * 
 	 * @说明 创建流程和任务实例
 	 * 
 	 * @param selectTopicProcessInstance
 	 * @return
 	 */
+
 	// public int openSelectTopicInstance(bysjglxt_process_instance
 	// selectTopicProcessInstance);
 

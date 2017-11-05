@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
@@ -31,6 +32,8 @@ public class testfffff {
 	// 测试课题是否可选
 	@Test
 	public void test() {
+		System.out.println(topicManagementService.selectTopic("00171b55-b96b-4f2b-97f0-58f11a22ae74",
+				"16aae43a-fcc2-4b0c-af5b-1535dc9b7aed"));
 	}
 
 	// 测试点击者是否有权限进行操作
@@ -64,7 +67,7 @@ public class testfffff {
 	@Test
 	public void testE() {
 		TopicInformationManagementVO topicManagementVO = new TopicInformationManagementVO();
-		topicManagementVO = topicManagementService.VO_Topic_By_PageAndSearch(topicManagementVO,2);
+		topicManagementVO = topicManagementService.VO_Topic_By_PageAndSearch(topicManagementVO, 2);
 		System.out.println(topicManagementVO);
 	}
 
@@ -83,6 +86,34 @@ public class testfffff {
 		topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
 		boolean flag = topicManagementService.CreateTopic(topicInformationDTO);
 		System.out.println(flag);
+
+	}
+
+	// 测试学生点击我的课题
+	@Test
+	public void testttttt() {
+		TopicInformationManagementDTO TopicInformationManagementDTO = new TopicInformationManagementDTO();
+		TopicInformationManagementDTO = topicManagementService
+				.studentTopicInformationManagementDTO("00171b55-b96b-4f2b-97f0-58f11a22ae74");
+		System.out.println(TopicInformationManagementDTO);
+	}
+
+	// 测试教师点击我的课题
+	@Test
+	public void testteew() {
+		TopicInformationManagementVO VO_TopicBelongTeacher_By_PageAndSearch = new TopicInformationManagementVO();
+		VO_TopicBelongTeacher_By_PageAndSearch = topicManagementService.VO_TopicBelongTeacher_By_PageAndSearch(
+				VO_TopicBelongTeacher_By_PageAndSearch, "0e3279e9-c25c-47c4-9e73-2ac261cf04b8");
+		System.out.println(VO_TopicBelongTeacher_By_PageAndSearch);
+
+	}
+
+	// 测试已选学生列表
+	@Test
+	public void testghss() {
+		List<StudentInformationDTO> listStudentSelectTopic = new ArrayList<StudentInformationDTO>();
+		listStudentSelectTopic = topicManagementService.listStudentSelectTopic("16aae43a-fcc2-4b0c-af5b-1535dc9b7aed");
+		System.out.println(listStudentSelectTopic);
 
 	}
 

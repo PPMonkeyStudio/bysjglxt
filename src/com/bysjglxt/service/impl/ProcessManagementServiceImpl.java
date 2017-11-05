@@ -1,8 +1,10 @@
 package com.bysjglxt.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.bysjglxt.dao.ProcessManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
-import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.service.ProcessManagementService;
 
@@ -35,6 +37,13 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		selectTopicTaskDefine.setTask_definition_gmt_modified(selectTopicTaskDefine.getTask_definition_gmt_create());
 		flag = processManagementDao.createTaskDefine(selectTopicTaskDefine);
 		return flag;
+	}
+
+	@Override
+	public List<bysjglxt_process_definition> listProcessDefinition() {
+		List<bysjglxt_process_definition> listProcessDefinition = new ArrayList<bysjglxt_process_definition>();
+		listProcessDefinition = processManagementDao.getAllProcessDefinition();
+		return listProcessDefinition;
 	}
 
 }

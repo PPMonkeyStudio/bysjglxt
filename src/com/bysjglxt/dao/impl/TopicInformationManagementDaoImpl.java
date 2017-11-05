@@ -12,9 +12,11 @@ import com.bysjglxt.dao.TopicInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
@@ -456,5 +458,107 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	@Override
+	public bysjglxt_topic_select getStudentTopicSelectByUserId(String studentUserId) {
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_student = '" + studentUserId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		return bysjglxt_topic_select;
+	}
+
+	@Override
+	public bysjglxt_leader getLeader(String user_teacher_id) {
+		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
+		Session session = getSession();
+		String hql = "from bysjglxt_leader where leader_teacher_id = '" + user_teacher_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_leader = (bysjglxt_leader) query.uniqueResult();
+		return bysjglxt_leader;
+	}
+
+	@Override
+	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
+			String teacherUserId) {
+		Session session = getSession();
+		String hql = "from bysjglxt_topic where 1=1";
+		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
+			hql = hql + " and topic_source='" + topicManagementVO.getSource().trim() + "'";
+		}
+		if (topicManagementVO.getType() != null && topicManagementVO.getType().trim().length() > 0) {
+			hql = hql + " and topic_type='" + topicManagementVO.getType().trim() + "'";
+		}
+		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + topicManagementVO.getSearch().trim() + "%";
+			hql = hql + " and topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "' ";
+		}
+
+		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
+			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
+		}
+		hql = hql + " and topic_teacher = '" + teacherUserId + "'";
+		hql = hql + " order by topic_gmt_create desc";
+		Query query = session.createQuery(hql);
+		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
+		query.setMaxResults(topicManagementVO.getPageSize());
+		List<bysjglxt_topic> listbysjglxt_topicByPageAndSearch = query.list();
+		session.clear();
+		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
+			for (bysjglxt_topic bysjglxt_topic : listbysjglxt_topicByPageAndSearch) {
+				bysjglxt_topic.setTopic_name_chinese(
+						bysjglxt_topic.getTopic_name_chinese().replaceAll(topicManagementVO.getSearch().trim(),
+								"<span style='color: #ff5063;'>" + topicManagementVO.getSearch().trim() + "</span>"));
+			}
+		}
+		return listbysjglxt_topicByPageAndSearch;
+	}
+
+	@Override
+	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO,
+			String teacherUserId) {
+		Session session = getSession();
+		String hql = "from bysjglxt_topic where 1=1";
+		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
+			hql = hql + " and topic_source='" + topicManagementVO.getSource().trim() + "'";
+		}
+		if (topicManagementVO.getType() != null && topicManagementVO.getType().trim().length() > 0) {
+			hql = hql + " and topic_type='" + topicManagementVO.getType().trim() + "'";
+		}
+		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + topicManagementVO.getSearch().trim() + "%";
+			hql = hql + " and topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "'";
+		}
+		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
+			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
+		}
+		hql = hql + " and topic_teacher = '" + teacherUserId + "'";
+		hql = hql + " order by topic_gmt_create desc";
+		Query query = session.createQuery(hql);
+		List<bysjglxt_topic> listbysjglxt_topicByPageAndSearch = query.list();
+		session.clear();
+		return listbysjglxt_topicByPageAndSearch;
+	}
+
+	@Override
+	public List<bysjglxt_topic_select> getTopicSelectByTopicId(String topicId) {
+		List<bysjglxt_topic_select> listSelect = new ArrayList<bysjglxt_topic_select>();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_topic = '" + topicId + "'";
+		Query query = session.createQuery(hql);
+		listSelect = query.list();
+		return listSelect;
+	}
+
+	@Override
+	public bysjglxt_student_basic getStudentBasic(String user_student_basic) {
+		bysjglxt_student_basic listSelect = new bysjglxt_student_basic();
+		Session session = getSession();
+		String hql = "from bysjglxt_student_basic where student_basic_id = '" + user_student_basic + "'";
+		Query query = session.createQuery(hql);
+		listSelect = (bysjglxt_student_basic) query.uniqueResult();
+		return listSelect;
 	}
 }
