@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-11-4 14:50:24 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-11-5 23:19:19 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_defence" table="BYSJGLXT_DEFENCE">
         <id name="defence_id" type="java.lang.String">
@@ -44,10 +44,10 @@
         <property name="defence_grade_defence" type="int">
             <column name="DEFENCE_GRADE_DEFENCE" />
         </property>
-        <property name="defence_grade_evaluate_tutor" type="float">
+        <property name="defence_grade_evaluate_tutor" type="double">
             <column name="DEFENCE_GRADE_EVALUATE_TUTOR" />
         </property>
-        <property name="defence_grade_evaluate_review" type="float">
+        <property name="defence_grade_evaluate_review" type="double">
             <column name="DEFENCE_GRADE_EVALUATE_REVIEW" />
         </property>
         <property name="defence_total" type="int">

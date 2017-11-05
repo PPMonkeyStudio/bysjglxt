@@ -3,7 +3,9 @@ package com.bysjglxt.service;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 
 public interface ProcessManagementService {
 
@@ -26,16 +28,21 @@ public interface ProcessManagementService {
 	 * 
 	 * @return
 	 */
-	public List<bysjglxt_process_definition> listProcessDefinition();	
-	
+	public List<bysjglxt_process_definition> listProcessDefinition();
+
 	/**
 	 * 
-	 * @说明 创建流程和任务实例
-	 * 
+	 * @说明 创建流程和任务实例 参数：流程定义ID 1.成功 -4 系统繁忙，所输入的参数有问题 -1 无权限开启流程 -3实例化流程失败
 	 * @param selectTopicProcessInstance
 	 * @return
 	 */
-	// public int openSelectTopicInstance(bysjglxt_process_instance
-	// selectTopicProcessInstance);
+	public int openSelectTopicInstance(String process_definition_id, String operation);
+
+	/**
+	 * 遍历出所有的定义表
+	 * 
+	 * @return
+	 */
+	public ProcessDefinitionDetailDTO processDefinitionDetailDTO(String processDefinitionId);
 
 }
