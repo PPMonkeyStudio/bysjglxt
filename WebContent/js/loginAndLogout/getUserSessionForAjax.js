@@ -26,14 +26,15 @@ function getUserSessionForAjax() {
 					//
 					var USER_NAME = document.getElementById("USER_NAME");
 					USER_NAME.innerHTML = userJsonDTO.bysjglxtStudentBasic.student_basic_name;
-					//
+					roleControl();
 				} else if (userJsonDTO.bysjglxtTeacherUser != null) {
 					userTeacherDTO = userJsonDTO;
 					//
 					var USER_NAME = document.getElementById("USER_NAME");
 					USER_NAME.innerHTML = userJsonDTO.bysjglxtTeacherBasic.name;
-					//
+					roleControl();
 				} else {
+					roleControl();
 					toastr.error("登录状态失效");
 				}
 				/*
@@ -58,7 +59,11 @@ function getUserSessionForAjax() {
 								try {
 									List_MyTopic_By_PageAndSearch(1);
 								} catch (e) {
-									alert("查询有错误");
+									try {
+										List_ProcessDefinition_By_PageAndSearch(1);
+										List_Process_By_PageAndSearch(1);
+									} catch (e) {
+									}
 								}
 							}
 						}
@@ -67,6 +72,7 @@ function getUserSessionForAjax() {
 				/*
 				 * 
 				 */
+
 			} else {
 				toastr.error(xhr.status);
 			}

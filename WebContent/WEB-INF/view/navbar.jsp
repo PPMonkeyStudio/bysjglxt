@@ -48,7 +48,7 @@
 	<div id="wrapper">
 		<nav class="navbar navbar-default navbar-fixed-top">
 		<div
-			style="width: auto; float: left; line-height: 78px; margin: 0 0 0 30px; font-size: 30px;">毕业设计管理系统</div>
+			style="width: auto; float: left; line-height: 78px; margin: 0 0 0 10px; font-size: 30px;">毕业设计管理系统</div>
 		<div id="navbar-menu">
 			<ul class="nav navbar-nav navbar-left" style="margin: 0 0 0 50px">
 				<li class="dropdown" style="float: left;">
@@ -103,38 +103,29 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="#">流程定义列表</a>
+							<a href="<%=basePath%>process/ProcessManagement_ProcessDefinitionListPage">流程列表</a>
 						</li>
+						<li>
+							<a href="#">我的任务</a>
+						</li>
+					</ul>
 				</li>
-				<li>
-					<a href="#">流程实例列表</a>
+				<!--  -->
+				<li class="dropdown" style="float: left;">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<span>毕业设计</span>
+						<i class="icon-submenu lnr lnr-chevron-down"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">毕业设计列表</a>
+						</li>
+						<li>
+							<a href="#">我的毕业设计</a>
+						</li>
+					</ul>
 				</li>
-				<li>
-					<a href="#">任务定义列表</a>
-				</li>
-				<li>
-					<a href="#">任务实例列表</a>
-				</li>
-			</ul>
-			</li>
-			<!--  -->
-			<li class="dropdown" style="float: left;">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<span>毕业设计</span>
-					<i class="icon-submenu lnr lnr-chevron-down"></i>
-				</a>
-				<ul class="dropdown-menu">
-					<li>
-						<a
-							href="#">毕业设计列表</a>
-					</li>
-					<li>
-						<a
-							href="#">我的毕业设计</a>
-					</li>
-				</ul>
-			</li>
-			<!--  -->
+				<!--  -->
 			</ul>
 			<!--  -->
 			<ul class="nav navbar-nav navbar-right" style="margin: 0 50px 0 0">

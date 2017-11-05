@@ -38,19 +38,16 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 		switch (loginOrWriteOffService.login(username, password)) {
 		//
 		case -1: {
-			System.out.println("账号不存在");
 			http_response.getWriter().write("账号不存在");
 			break;
 		}
 		//
 		case -2: {
-			System.out.println("密码不正确");
 			http_response.getWriter().write("密码不正确");
 			break;
 		}
 		// 教师登录
 		case 1: {
-			System.out.println("教师登录成功");
 			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) loginOrWriteOffService.loginInformation(1,
 					username);
 			ActionContext.getContext().getSession().put("userTeacherDTO", userTeacherDTO);
@@ -59,7 +56,6 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 		}
 		// 学生登录
 		case 2: {
-			System.out.println("学生登录成功");
 			StudentInformationDTO userStudentDTO = (StudentInformationDTO) loginOrWriteOffService.loginInformation(2,
 					username);
 			ActionContext.getContext().getSession().put("userStudentDTO", userStudentDTO);
