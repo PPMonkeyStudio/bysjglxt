@@ -133,7 +133,10 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 
 				// 让全选框取消选择
 				document.getElementById("checkbox_all_select").checked = false;
-
+				/*
+				 * 角色控制
+				 */
+				roleControl();
 			} else {
 				toastr.error(xhr.status);
 			}

@@ -1,6 +1,6 @@
 ﻿var topic_json = null;
 
-function List_Topic_By_PageAndSearch(pageIndex) {
+function List_MyTopic_By_PageAndSearch(pageIndex) {
 	document.getElementById("i_pulse").style.display = "block";
 	var xhr = false;
 	xhr = new XMLHttpRequest();
@@ -10,17 +10,14 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 			if (xhr.status == 200) {
 				topic_json = JSON.parse(xhr.responseText);
 				/*
-				 * *
-				 * 
-				 * 清空原表数据 /
-				 */var new_tr_list = document.getElementsByClassName("new_tr");
+				 * 清空原表数据
+				 */
+				var new_tr_list = document.getElementsByClassName("new_tr");
 				var long = new_tr_list.length;
 				for (var num = 0; num < long; num++) {
 					new_tr_list[0].parentNode.removeChild(new_tr_list[0]);
 				}
-				/*
-				 * * /
-				 */var table_topic = document.getElementById("table_topic");
+				var table_topic = document.getElementById("table_my_topic");
 				var new_tr = null;
 				var new_td = null;
 				for (var num = 0; num < topic_json.list_TopicInformationDTO.length; num++) {
@@ -93,6 +90,7 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
+					new_td.className = "teacher_control";
 					new_tr.appendChild(new_td);
 					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != undefined
 							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state != "") {
@@ -157,8 +155,9 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 				document.getElementById("checkbox_all_select").checked = false;
 
 				/*
-				 * * 角色控制 /
-				 */roleControl();
+				 * 角色控制
+				 */
+				roleControl();
 
 			} else {
 				toastr.error(xhr.status);
@@ -168,7 +167,7 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 
 	xhr
 			.open("POST",
-					"/bysjglxt/topic/TopicInformationManagement_ListTopicByPageAndSearch");
+					"/bysjglxt/topic/TopicInformationManagement_ListMyTopicByPageAndSearch");
 
 	var formData = new FormData();
 	/*
@@ -197,16 +196,12 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 	}
 	/*
 	 * * 课题状态 /
-	 */if (document.getElementById("select_state").value != "-1") {
+	 */if (document.getElementById("select_state") != null
+			&& document.getElementById("select_state").value != "-1") {
 		formData.append("topicInformationManagementVO.state", document
 				.getElementById("select_state").value);
 	}
-	/*
-	 * * 课题状态 /
-	 */if (document.getElementById("select_teacher").value != "-1") {
-		formData.append("topicInformationManagementVO.teacher", document
-				.getElementById("select_teacher").value);
-	}
+
 	/*
 	 * * /
 	 */

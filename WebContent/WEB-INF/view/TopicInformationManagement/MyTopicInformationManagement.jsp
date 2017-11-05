@@ -14,15 +14,9 @@
 
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/List_Topic_By_PageAndSearch.js"></script>
+	src="<%=basePath%>js/TopicInformationManagement/List_MyTopic_By_PageAndSearch.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/Topic_Information_Display.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/topic_examine_state.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/studentSelectTopic.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/Get_Teacher.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>课题管理页</title>
@@ -37,37 +31,33 @@
 		<!--  -->
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
+
+		<!--  -->
+
 		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
-				<h3 class="panel-title">课题列表</h3>
+				<h3 class="panel-title">我的课题</h3>
 			</div>
 			<div class="panel-body">
 				<div style="height: 34px;">
-					<div style="width: 500px; float: left;">
-						<button class="teacher_control btn btn-default"
-							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_CreateTopicPage'">
-							<i class="fa fa-plus-square"></i>
-							创建课题
-						</button>
-					</div>
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
 						<input id="input_search" class="form-control"
-							oninput="List_Topic_By_PageAndSearch(1)" type="text">
+							oninput="List_MyTopic_By_PageAndSearch(1)" type="text">
 						<span class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</span>
 					</div>
 				</div>
-				<table id="table_topic" class="table table-hover "
+				<table id="table_my_topic" class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
 							<th>中文名称</th>
 							<th>
 								<select class="form-control" style="width: auto;"
-									id="select_source" onchange="List_Topic_By_PageAndSearch(1)">
+									id="select_source" onchange="List_MyTopic_By_PageAndSearch(1)">
 									<option value="-1">课题来源</option>
 									<option value="各类课题项目">各类课题项目</option>
 									<option value="导师指定">导师指定</option>
@@ -78,7 +68,7 @@
 							</th>
 							<th>
 								<select class="form-control" style="width: auto;"
-									id="select_type" onchange="List_Topic_By_PageAndSearch(1)">
+									id="select_type" onchange="List_MyTopic_By_PageAndSearch(1)">
 									<option value="-1">课题性质</option>
 									<option value="理论研究">理论研究</option>
 									<option value="应用基础研究">应用基础研究</option>
@@ -87,17 +77,11 @@
 								</select>
 							</th>
 							<th>已选学生数</th>
-							<th>
-								<select class="form-control" style="width: auto;"
-									data-live-search="true" id="select_teacher"
-									onchange="List_Topic_By_PageAndSearch(1)">
-									<option value="-1">指导教师</option>
-								</select>
-							</th>
+							<th>指导教师</th>
 							<th>协助教师</th>
-							<th>
+							<th class="teacher_control">
 								<select class="form-control" style="width: auto;"
-									id="select_state" onchange="List_Topic_By_PageAndSearch(1)">
+									id="select_state" onchange="List_MyTopic_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
 									<option value="已关闭">已关闭</option>
 									<option value="审核已通过">审核已通过</option>
@@ -106,7 +90,7 @@
 								</select>
 							</th>
 							<th>操作</th>
-							<th class="">
+							<th>
 								<label class="fancy-checkbox">
 									<input id="checkbox_all_select" type="checkbox"
 										onclick="all_select()">
@@ -124,21 +108,6 @@
 						onclick="deleteTopicList()" style="float: right; margin: 0 10px;">
 						<i class="fa fa-trash-o"></i>
 						删除所选
-					</button>
-					<button class="leader_control btn btn-default"
-						onclick="agreeTopicList()" style="float: right; margin: 0 10px;">
-						<i class="fa fa-legal"></i>
-						通过
-					</button>
-					<button class="leader_control btn btn-default"
-						onclick="refuseTopicList()" style="float: right; margin: 0 10px;">
-						<i class="fa fa-recycle"></i>
-						拒绝
-					</button>
-					<button class="leader_control btn btn-default"
-						onclick="closeTopicList()" style="float: right; margin: 0 10px;">
-						<i class="fa fa-lock"></i>
-						关闭
 					</button>
 				</div>
 				<div style="margin: 0 auto; width: 400px; text-align: center;">
@@ -163,7 +132,6 @@
 				</div>
 			</div>
 		</div>
-		<!--  -->
 
 		<!--  -->
 
@@ -193,15 +161,6 @@
 						<tbody></tbody>
 					</table>
 				</div>
-				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
-				<div class="modal-footer">
-					<button class="student_control btn btn-default"
-						id="button_selectTopic" onclick="studentSelectTopic()"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-check"></i>
-						选题
-					</button>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -216,7 +175,6 @@
 	$('select').selectpicker('refresh');
 </script>
 <script>
-	Get_Teacher(document.getElementById("select_teacher"));
+	
 </script>
-
 </html>
