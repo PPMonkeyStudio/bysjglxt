@@ -2,7 +2,6 @@ package com.bysjglxt.domain.DO;
 
 public class bysjglxt_process_instance {
 	private String process_instance_id;
-	private String process_instance_name;
 	private String process_instance_process_definition;
 	private String process_instance_state;
 	private String process_instance_man;
@@ -15,14 +14,6 @@ public class bysjglxt_process_instance {
 
 	public void setProcess_instance_id(String process_instance_id) {
 		this.process_instance_id = process_instance_id;
-	}
-
-	public String getProcess_instance_name() {
-		return process_instance_name;
-	}
-
-	public void setProcess_instance_name(String process_instance_name) {
-		this.process_instance_name = process_instance_name;
 	}
 
 	public String getProcess_instance_process_definition() {
@@ -67,10 +58,11 @@ public class bysjglxt_process_instance {
 
 	@Override
 	public String toString() {
-		return "bysjglxt_process_instance [process_instance_id=" + process_instance_id + ", process_instance_name="
-				+ process_instance_name + ", process_instance_process_definition=" + process_instance_process_definition
+		return "bysjglxt_process_instance [process_instance_id=" + process_instance_id
+				+ ", process_instance_process_definition=" + process_instance_process_definition
 				+ ", process_instance_state=" + process_instance_state + ", process_instance_man="
 				+ process_instance_man + ", process_instance_gmt_create=" + process_instance_gmt_create
 				+ ", process_instance_gmt_modified=" + process_instance_gmt_modified + "]";
 	}
+
 }

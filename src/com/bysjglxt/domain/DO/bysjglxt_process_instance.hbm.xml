@@ -1,16 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-11-4 14:50:24 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-11-5 23:19:19 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_process_instance" table="BYSJGLXT_PROCESS_INSTANCE">
         <id name="process_instance_id" type="java.lang.String">
             <column name="PROCESS_INSTANCE_ID" />
             <generator class="assigned" />
         </id>
-        <property name="process_instance_name" type="java.lang.String">
-            <column name="PROCESS_INSTANCE_NAME" />
-        </property>
         <property name="process_instance_process_definition" type="java.lang.String">
             <column name="PROCESS_INSTANCE_PROCESS_DEFINITION" />
         </property>
