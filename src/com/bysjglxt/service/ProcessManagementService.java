@@ -10,11 +10,11 @@ import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 public interface ProcessManagementService {
 
 	/**
-	 * @说明 点击创建选题流程 1. 创建选题流程定义记录 1 成功 -1失败
+	 * @说明 点击创建流程 1. 创建流程定义记录 1 成功 -1失败
 	 * @param SelectTopicProcessDefinition
 	 * @return
 	 */
-	public int createSelectTopicProcessDefine(bysjglxt_process_definition selectTopicProcessDefinition);
+	public String createSelectTopicProcessDefine(bysjglxt_process_definition selectTopicProcessDefinition);
 
 	/**
 	 * @说明 点击创建任务定义
@@ -45,4 +45,8 @@ public interface ProcessManagementService {
 	 */
 	public ProcessDefinitionDetailDTO processDefinitionDetailDTO(String processDefinitionId);
 
+	
+	
+	
+	
 }

@@ -24,14 +24,14 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 
 	// 创建选题流程定义表
 	@Override
-	public int createSelectTopicProcessDefine(bysjglxt_process_definition selectTopicProcessDefinition) {
+	public String createSelectTopicProcessDefine(bysjglxt_process_definition selectTopicProcessDefinition) {
 		int flag = -1;
 		selectTopicProcessDefinition.setProcess_definition_id(TeamUtil.getUuid());
 		selectTopicProcessDefinition.setProcess_definition_gmt_create(TeamUtil.getStringSecond());
 		selectTopicProcessDefinition
 				.setProcess_definition_gmt_modified(selectTopicProcessDefinition.getProcess_definition_gmt_create());
 		flag = processManagementDao.createProcessDefine(selectTopicProcessDefinition);
-		return flag;
+		return selectTopicProcessDefinition.getProcess_definition_id();
 	}
 
 	@Override
