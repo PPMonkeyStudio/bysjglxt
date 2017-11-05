@@ -50,9 +50,38 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * 学生选题
 	 */
 	private String studentSelectTopic;
+
 	/*
 	 * 
 	 */
+	/**
+	 * @说明 跳转列表页
+	 * 
+	 * @return
+	 */
+	public String TopicListPage() {
+
+		return "TopicListPage";
+	}
+
+	/**
+	 * @说明 跳转列表页
+	 * 
+	 * @return
+	 */
+	public String MyTopicListPage() {
+
+		return "MyTopicListPage";
+	}
+
+	/**
+	 * @说明 跳转创建课题页
+	 * 
+	 * @return
+	 */
+	public String CreateTopicPage() {
+		return "CreateTopicPage";
+	}
 
 	/**
 	 * 创建新的课题
@@ -92,8 +121,13 @@ public class TopicInformationManagementAction extends ActionSupport
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(
-				gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO)));
+		if (ActionContext.getContext().getSession().get("userStudentDTO") == null) {
+			http_response.getWriter().write(gson.toJson(
+					topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 1)));
+		} else {
+			http_response.getWriter().write(gson.toJson(
+					topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 2)));
+		}
 
 	}
 
@@ -106,15 +140,20 @@ public class TopicInformationManagementAction extends ActionSupport
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(
-				gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO)));
-	}
+		if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			StudentInformationDTO studentInformationDTO = (StudentInformationDTO) ActionContext.getContext()
+					.getSession().get("userStudentDTO");
 
-	/*
-	 * public void aReact() throws IOException {
-	 * http_response.setContentType("text/html;charset=utf-8");
-	 * http_response.getWriter().write("readsdsds"); }
-	 */
+		} else if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			TeacherInformationDTO teacherInformationDTO = (TeacherInformationDTO) ActionContext.getContext()
+					.getSession().get("userTeacherDTO");
+			http_response.getWriter()
+					.write(gson.toJson(topicInformationManagementService.VO_TopicBelongTeacher_By_PageAndSearch(
+							topicInformationManagementVO, teacherInformationDTO.getBysjglxtTeacherUser()
+									.getUser_teacher_id())));
+		}
+
+	}
 
 	public void agreeTopicList() throws IOException {
 		topicInformationManagementService.adoptTopic(listAgreeTopicID);
@@ -171,35 +210,6 @@ public class TopicInformationManagementAction extends ActionSupport
 			break;
 		}
 		}
-	}
-
-	/**
-	 * @说明 跳转列表页
-	 * 
-	 * @return
-	 */
-	public String TopicListPage() {
-
-		return "TopicListPage";
-	}
-
-	/**
-	 * @说明 跳转列表页
-	 * 
-	 * @return
-	 */
-	public String MyTopicListPage() {
-
-		return "MyTopicListPage";
-	}
-
-	/**
-	 * @说明 跳转创建课题页
-	 * 
-	 * @return
-	 */
-	public String CreateTopicPage() {
-		return "CreateTopicPage";
 	}
 
 	/*
