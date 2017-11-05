@@ -97,6 +97,19 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	}
 
+	/**
+	 * 
+	 * @throws IOException
+	 */
+	public void ListMyTopicByPageAndSearch() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(
+				gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO)));
+	}
+
 	/*
 	 * public void aReact() throws IOException {
 	 * http_response.setContentType("text/html;charset=utf-8");
@@ -175,9 +188,9 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * 
 	 * @return
 	 */
-	public String SelectTopicListPage() {
+	public String MyTopicListPage() {
 
-		return "SelectTopicListPage";
+		return "MyTopicListPage";
 	}
 
 	/**

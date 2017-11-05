@@ -55,6 +55,11 @@ function getUserSessionForAjax() {
 							try {
 								List_Topic_By_PageAndSearch(1);
 							} catch (e) {
+								try {
+									List_MyTopic_By_PageAndSearch(1);
+								} catch (e) {
+									alert("查询有错误");
+								}
 							}
 						}
 					}

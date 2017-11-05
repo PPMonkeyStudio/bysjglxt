@@ -34,7 +34,7 @@
 <!--------------------------------------------------------------------------------->
 <!---页面公用------------------------------------------------------------------------------>
 <script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/Input_Select.js"></script>
+	src="<%=basePath%>js/loginAndLogout/Input_Select.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/loginAndLogout/getUserSessionForAjax.js"></script>
 <script type="text/javascript"
@@ -90,14 +90,15 @@
 								href="<%=basePath%>topic/TopicInformationManagement_TopicListPage">课题</a>
 						</li>
 						<li>
-							<a href="<%=basePath%>topic/TopicInformationManagement_SelectTopicListPage">选题</a>
+							<a
+								href="<%=basePath%>topic/TopicInformationManagement_MyTopicListPage">我的课题</a>
 						</li>
 					</ul>
 				</li>
 				<!--  -->
 				<li class="dropdown" style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<span>流程及任务</span>
+						<span>流程</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
 					</a>
 					<ul class="dropdown-menu">
@@ -115,6 +116,23 @@
 					<a href="#">任务实例列表</a>
 				</li>
 			</ul>
+			</li>
+			<!--  -->
+			<li class="dropdown" style="float: left;">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<span>毕业设计</span>
+					<i class="icon-submenu lnr lnr-chevron-down"></i>
+				</a>
+				<ul class="dropdown-menu">
+					<li>
+						<a
+							href="#">毕业设计列表</a>
+					</li>
+					<li>
+						<a
+							href="#">我的毕业设计</a>
+					</li>
+				</ul>
 			</li>
 			<!--  -->
 			</ul>

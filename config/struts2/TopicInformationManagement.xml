@@ -10,7 +10,7 @@
 			method="{1}">
 			<result name="TopicListPage">/WEB-INF/view/TopicInformationManagement/TopicInformationManagement.jsp
 			</result>
-			<result name="SelectTopicListPage">/WEB-INF/view/TopicInformationManagement/SelectTopicInformationManagement.jsp
+			<result name="MyTopicListPage">/WEB-INF/view/TopicInformationManagement/MyTopicInformationManagement.jsp
 			</result>
 			<result name="CreateTopicPage">/WEB-INF/view/TopicInformationManagement/CreateTopic.jsp
 			</result>
