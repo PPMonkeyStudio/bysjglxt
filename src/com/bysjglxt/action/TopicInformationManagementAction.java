@@ -92,11 +92,16 @@ public class TopicInformationManagementAction extends ActionSupport
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		System.out.println("kokoko");
 		http_response.getWriter().write(
 				gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO)));
 
 	}
+
+	/*
+	 * public void aReact() throws IOException {
+	 * http_response.setContentType("text/html;charset=utf-8");
+	 * http_response.getWriter().write("readsdsds"); }
+	 */
 
 	public void agreeTopicList() throws IOException {
 		topicInformationManagementService.adoptTopic(listAgreeTopicID);
@@ -125,10 +130,6 @@ public class TopicInformationManagementAction extends ActionSupport
 	public void studentSelectTopic() throws IOException {
 		StudentInformationDTO userStudentDTO = (StudentInformationDTO) ActionContext.getContext().getSession()
 				.get("userStudentDTO");
-<<<<<<< HEAD
-		
-
-=======
 		http_response.setContentType("text/html;charset=utf-8");
 		switch (topicInformationManagementService
 				.selectTopic(userStudentDTO.getBysjglxtStudentUser().getUser_student_id(), studentSelectTopic)) {
@@ -157,7 +158,6 @@ public class TopicInformationManagementAction extends ActionSupport
 			break;
 		}
 		}
->>>>>>> ZB
 	}
 
 	/**
@@ -168,6 +168,16 @@ public class TopicInformationManagementAction extends ActionSupport
 	public String TopicListPage() {
 
 		return "TopicListPage";
+	}
+
+	/**
+	 * @说明 跳转列表页
+	 * 
+	 * @return
+	 */
+	public String SelectTopicListPage() {
+
+		return "SelectTopicListPage";
 	}
 
 	/**

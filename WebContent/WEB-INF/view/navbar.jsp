@@ -11,12 +11,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--------------------------------------------------------------------------------->
-<script type="text/javascript" src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
+<script src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
+<script src="<%=basePath%>js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
 <!--------------------------------------------------------------------------------->
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap-select.min.css">
-<script type="text/javascript" src="<%=basePath%>js/bootstrap-select.js"></script>
+<script src="<%=basePath%>js/bootstrap-select.js"></script>
 <!--------------------------------------------------------------------------------->
 <link rel="stylesheet"
 	href="<%=basePath%>css/navbar/chartist-custom.css">
@@ -27,11 +27,10 @@
 <link rel="stylesheet" href="<%=basePath%>css/table.css">
 <!--------------------------------------------------------------------------------->
 <link rel="stylesheet" href="<%=basePath%>css/toastr.css" />
-<script type="text/javascript" src="<%=basePath%>js/toastr.js"></script>
+<script src="<%=basePath%>js/toastr.js"></script>
 <!--------------------------------------------------------------------------------->
 <link rel="stylesheet" href="<%=basePath%>css/jquery-confirm.css" />
-<script type="text/javascript" src="<%=basePath%>js/jquery-confirm.js"></script>
-<!--------------------------------------------------------------------------------->
+<script src="<%=basePath%>js/jquery-confirm.js"></script>
 <!--------------------------------------------------------------------------------->
 <!---页面公用------------------------------------------------------------------------------>
 <script type="text/javascript"
@@ -91,7 +90,7 @@
 								href="<%=basePath%>topic/TopicInformationManagement_TopicListPage">课题</a>
 						</li>
 						<li>
-							<a href="#">选题</a>
+							<a href="<%=basePath%>topic/TopicInformationManagement_SelectTopicListPage">选题</a>
 						</li>
 					</ul>
 				</li>
@@ -148,7 +147,7 @@
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-user-circle"></i>
-						<span>江鑫鑫</span>
+						<span id="USER_NAME"></span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
 					</a>
 					<ul class="dropdown-menu">

@@ -8,6 +8,9 @@ function getUserSessionForAjax() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				/*
+				 * 
+				 */
 				try {
 					var userJsonDTO = JSON.parse(xhr.responseText);
 				} catch (e) {
@@ -15,15 +18,31 @@ function getUserSessionForAjax() {
 					toastr.error(e);
 					return;
 				}
+				/*
+				 * 
+				 */
 				if (userJsonDTO.bysjglxtStudentUser != null) {
-					toastr.success("学生");
 					userStudentDTO = userJsonDTO;
+					//
+					var USER_NAME = document.getElementById("USER_NAME");
+					USER_NAME.innerHTML = userJsonDTO.bysjglxtStudentBasic.student_basic_name;
+					//
 				} else if (userJsonDTO.bysjglxtTeacherUser != null) {
-					toastr.success("教师");
 					userTeacherDTO = userJsonDTO;
+					//
+					var USER_NAME = document.getElementById("USER_NAME");
+					USER_NAME.innerHTML = userJsonDTO.bysjglxtTeacherBasic.name;
+					//
 				} else {
 					toastr.error("登录状态失效");
 				}
+				/*
+				 * 
+				 */
+
+				/*
+				 * 
+				 */
 				try {
 					List_Student_By_PageAndSearch(1);
 				} catch (e) {
@@ -40,6 +59,9 @@ function getUserSessionForAjax() {
 						}
 					}
 				}
+				/*
+				 * 
+				 */
 			} else {
 				toastr.error(xhr.status);
 			}
