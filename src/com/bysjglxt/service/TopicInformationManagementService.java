@@ -3,6 +3,7 @@ package com.bysjglxt.service;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
@@ -116,4 +117,32 @@ public interface TopicInformationManagementService {
 	 */
 	public List<bysjglxt_topic> listSelectBysjglxtTopic();
 
+	/**
+	 * 学生点击我的课题拿出属于自己已经选择的课题
+	 * 
+	 * @return
+	 */
+	public TopicInformationManagementDTO studentTopicInformationManagementDTO(String studentUserId);
+
+	/**
+	 * 
+	 * 教师点击我的课题拿出历年所有的课题
+	 * 
+	 * 
+	 */
+	public TopicInformationManagementVO VO_TopicBelongTeacher_By_PageAndSearch(
+			TopicInformationManagementVO topicManagementVO,String teacherUserId);
+
+	
+	/**
+	 * 
+	 * 获取学生列表
+	 * 
+	 * @param topicId
+	 * @return
+	 */
+	public List<StudentInformationDTO> listStudentSelectTopic(String topicId);
+	
+	
+	
 }

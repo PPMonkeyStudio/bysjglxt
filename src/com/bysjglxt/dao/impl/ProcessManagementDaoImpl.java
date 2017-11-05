@@ -1,5 +1,9 @@
 package com.bysjglxt.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -42,5 +46,15 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	@Override
+	public List<bysjglxt_process_definition> getAllProcessDefinition() {
+		List<bysjglxt_process_definition> listProcessDefinition = new ArrayList<bysjglxt_process_definition>();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_definition";
+		Query query = session.createQuery(hql);
+		listProcessDefinition = query.list();
+		return listProcessDefinition;
 	}
 }

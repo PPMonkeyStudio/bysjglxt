@@ -5,6 +5,7 @@ import java.util.List;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
@@ -71,5 +72,18 @@ public interface TopicInformationManagementDao {
 	public boolean updateStudentUserNotSelect(String topic_select_student);
 
 	public boolean deleteTopicSelect(String topic_select_id);
+
+	public bysjglxt_topic_select getStudentTopicSelectByUserId(String studentUserId);
+
+	public bysjglxt_leader getLeader(String user_teacher_id);
+
+	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
+			String teacherUserId);
+
+	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO, String teacherUserId);
+
+	public List<bysjglxt_topic_select> getTopicSelectByTopicId(String topicId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_student_basic getStudentBasic(String user_student_basic);
 
 }
