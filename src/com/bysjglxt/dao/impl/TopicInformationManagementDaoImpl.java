@@ -561,4 +561,53 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		listSelect = (bysjglxt_student_basic) query.uniqueResult();
 		return listSelect;
 	}
+
+	@Override
+	public bysjglxt_topic studentIsExistSpecial(String studentID, String topicID) {
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		Session session = getSession();
+		String sel = "%" + studentID + "%";
+		String hql = "from bysjglxt_topic where topic_id = '" + topicID + "' and topic_student like '" + sel + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		return bysjglxt_topic;
+	}
+
+	@Override
+	public List<bysjglxt_topic> VO_Topic_By_StudentPageAndSearch(TopicInformationManagementVO topicManagementVO,
+			String studentUserId) {
+		Session session = getSession();
+		String hql = "select bysjglxt_topic from bysjglxt_topic topic,bysjglxt_topic_select select where select.topic_select_topic=topic.topic_id";
+		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
+			hql = hql + " and topic.topic_source='" + topicManagementVO.getSource().trim() + "'";
+		}
+		if (topicManagementVO.getType() != null && topicManagementVO.getType().trim().length() > 0) {
+			hql = hql + " and topic.topic_type='" + topicManagementVO.getType().trim() + "'";
+		}
+		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
+			String search = "%" + topicManagementVO.getSearch().trim() + "%";
+			hql = hql + " and topic.topic_name_chinese like '" + search + "' or topic.topic_name_english like '"
+					+ search + "' ";
+		}
+
+		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
+			hql = hql + " and topic.topic_examine_state = '" + topicManagementVO.getState() + "'";
+		}
+		hql = hql + " and select.topic_select_student = '" + studentUserId + "'";
+		hql = hql + " order by topic.topic_gmt_create desc";
+		Query query = session.createQuery(hql);
+		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
+		query.setMaxResults(topicManagementVO.getPageSize());
+		List<bysjglxt_topic> listbysjglxt_topicByPageAndSearch = query.list();
+		session.clear();
+		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
+			for (bysjglxt_topic bysjglxt_topic : listbysjglxt_topicByPageAndSearch) {
+				bysjglxt_topic.setTopic_name_chinese(
+						bysjglxt_topic.getTopic_name_chinese().replaceAll(topicManagementVO.getSearch().trim(),
+								"<span style='color: #ff5063;'>" + topicManagementVO.getSearch().trim() + "</span>"));
+			}
+		}
+		return listbysjglxt_topicByPageAndSearch;
+	}
+
 }

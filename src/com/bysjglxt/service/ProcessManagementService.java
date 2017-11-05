@@ -26,8 +26,8 @@ public interface ProcessManagementService {
 	 * 
 	 * @return
 	 */
-	public List<bysjglxt_process_definition> listProcessDefinition();
-
+	public List<bysjglxt_process_definition> listProcessDefinition();	
+	
 	/**
 	 * 
 	 * @说明 创建流程和任务实例
@@ -35,7 +35,6 @@ public interface ProcessManagementService {
 	 * @param selectTopicProcessInstance
 	 * @return
 	 */
-
 	// public int openSelectTopicInstance(bysjglxt_process_instance
 	// selectTopicProcessInstance);
 

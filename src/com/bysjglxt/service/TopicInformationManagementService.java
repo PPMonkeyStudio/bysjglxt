@@ -125,15 +125,21 @@ public interface TopicInformationManagementService {
 	public TopicInformationManagementDTO studentTopicInformationManagementDTO(String studentUserId);
 
 	/**
+	 * 学生点击我的课题拿出属于自己已经选择的课题
+	 * 
+	 * @return
+	 */
+	public TopicInformationManagementVO VO_TopicBelongStudent_By_PageAndSearch(
+			TopicInformationManagementVO topicManagementVO, String studentUserId);
+	
+	/**
 	 * 
 	 * 教师点击我的课题拿出历年所有的课题
 	 * 
-	 * 
 	 */
 	public TopicInformationManagementVO VO_TopicBelongTeacher_By_PageAndSearch(
-			TopicInformationManagementVO topicManagementVO,String teacherUserId);
+			TopicInformationManagementVO topicManagementVO, String teacherUserId);
 
-	
 	/**
 	 * 
 	 * 获取学生列表
@@ -142,7 +148,13 @@ public interface TopicInformationManagementService {
 	 * @return
 	 */
 	public List<StudentInformationDTO> listStudentSelectTopic(String topicId);
-	
-	
-	
+
+	/**
+	 * 指定学生选题
+	 * 
+	 * @param studentUserId
+	 * @return
+	 */
+	public int specialStudentSelectTopic(String studentUserId, String topicId);
+
 }
