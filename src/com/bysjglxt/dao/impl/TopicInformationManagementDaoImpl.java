@@ -9,8 +9,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
+import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_record_progress;
+import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
@@ -135,7 +142,8 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	}
 
 	@Override
-	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO) {
+	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
+			int studentOrTeacher) {
 		Session session = getSession();
 		String hql = "from bysjglxt_topic where 1=1";
 		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
@@ -148,9 +156,15 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			String search = "%" + topicManagementVO.getSearch().trim() + "%";
 			hql = hql + " and topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "' ";
 		}
+
 		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
 			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
 		}
+
+		if (studentOrTeacher == 2) {
+			hql = hql + " and topic_examine_state = '已通过' ";
+		}
+
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic_teacher = '" + topicManagementVO.getTeacher() + "'";
 		}
@@ -339,14 +353,15 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public List<bysjglxt_topic> getAllTopic() {
 		Session session = getSession();
 		List<bysjglxt_topic> listAllTopic = new ArrayList<bysjglxt_topic>();
-		String hql = "from bysjglxt_topic";
+		String hql = "from bysjglxt_topic where topic_examine_state = '已通过'";
 		Query query = session.createQuery(hql);
 		listAllTopic = query.list();
 		return listAllTopic;
 	}
 
 	@Override
-	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO) {
+	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO,
+			int studentOrTeacher) {
 		Session session = getSession();
 		String hql = "from bysjglxt_topic where 1=1";
 		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
@@ -361,6 +376,9 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		}
 		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
 			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
+		}
+		if (studentOrTeacher == 2) {
+			hql = hql + " and topic_examine_state = '已通过' ";
 		}
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic_teacher = '" + topicManagementVO.getTeacher() + "'";
@@ -397,5 +415,46 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		Query query = session.createQuery(hql);
 		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
 		return bysjglxt_student_user;
+	}
+
+	@Override
+	public List<bysjglxt_topic_select> getTopicSelectList(String topicId) {
+		List<bysjglxt_topic_select> listTopicSelect = new ArrayList<bysjglxt_topic_select>();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_topic = '" + topicId + "'";
+		Query query = session.createQuery(hql);
+		listTopicSelect = query.list();
+		return listTopicSelect;
+	}
+
+	@Override
+	public boolean updateStudentUserNotSelect(String topic_select_student) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_student_user set user_student_is_select_topic = '2' where user_student_id = '"
+					+ topic_select_student + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean deleteTopicSelect(String topic_select_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_topic_select where topic_select_id='" + topic_select_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 }

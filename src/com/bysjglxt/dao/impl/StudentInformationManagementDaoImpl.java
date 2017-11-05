@@ -9,8 +9,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.StudentInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
+import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_record_progress;
+import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
 import util.TeamUtil;
@@ -355,6 +364,234 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			return false;
 		}
 
+	}
+
+	// 删除选题
+	@Override
+	public bysjglxt_topic_select getTopicSelect(String user_student_id) {
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_student = '" + user_student_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		return bysjglxt_topic_select;
+	}
+
+	@Override
+	public boolean deleteTopicSelect(String topic_select_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_topic_select where topic_select_id='" + topic_select_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_taskbook getTaskBookByStudent(String user_student_id) {
+		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
+		Session session = getSession();
+		String hql = "from bysjglxt_taskbook where bysjglxt_taskbook_student = '" + user_student_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_taskbook = (bysjglxt_taskbook) query.uniqueResult();
+		return bysjglxt_taskbook;
+	}
+
+	@Override
+	public boolean deleteTaskBookStudent(String taskbook_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_taskbook where taskbook_id='" + taskbook_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_report_opening getReportOpening(String topic_select_student) {
+		bysjglxt_report_opening bysjglxt_report_opening = new bysjglxt_report_opening();
+		Session session = getSession();
+		String hql = "from bysjglxt_report_opening where report_opening_student = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_report_opening = (bysjglxt_report_opening) query.uniqueResult();
+		return bysjglxt_report_opening;
+	}
+
+	@Override
+	public boolean deleteReportOpening(String topic_select_student) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_taskbook where report_opening_id='" + topic_select_student + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public List<bysjglxt_record_progress> getProgress(String topic_select_student) {
+		List<bysjglxt_record_progress> listProgress = new ArrayList<bysjglxt_record_progress>();
+		Session session = getSession();
+		String hql = "from bysjglxt_record_progress where record_progress _student ='" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		listProgress = query.list();
+		return listProgress;
+	}
+
+	@Override
+	public boolean deleteProgress(String record_progress_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_record_progress where record_progress _id='" + record_progress_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_summary getSummary(String topic_select_student) {
+		bysjglxt_summary bysjglxt_summary = new bysjglxt_summary();
+		Session session = getSession();
+		String hql = "from bysjglxt_summary where summary_student = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_summary = (bysjglxt_summary) query.uniqueResult();
+		return bysjglxt_summary;
+	}
+
+	@Override
+	public boolean deleteSummary(String summary_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_summary where summary_id='" + summary_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_examination_formal getExaminationFormal(String topic_select_student) {
+		bysjglxt_examination_formal bysjglxt_examination_formal = new bysjglxt_examination_formal();
+		Session session = getSession();
+		String hql = "from bysjglxt_examination_formal where examination_formal_student = '" + topic_select_student
+				+ "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_examination_formal = (bysjglxt_examination_formal) query.uniqueResult();
+		return bysjglxt_examination_formal;
+	}
+
+	@Override
+	public boolean deleteExaminationFormal(String examination_formal_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_examination_formal where examination_formal_id='" + examination_formal_id
+					+ "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_evaluate_tutor getEvaluateTutor(String topic_select_student) {
+		bysjglxt_evaluate_tutor bysjglxt_evaluate_tutor = new bysjglxt_evaluate_tutor();
+		Session session = getSession();
+		String hql = "from bysjglxt_evaluate_tutor where evaluate_tutor_student = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_evaluate_tutor = (bysjglxt_evaluate_tutor) query.uniqueResult();
+		return bysjglxt_evaluate_tutor;
+	}
+
+	@Override
+	public boolean deleteEvaluateTutor(String evaluate_tutor_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_evaluate_tutor where evaluate_tutor_id='" + evaluate_tutor_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_evaluate_review getEvaluateReview(String topic_select_student) {
+		bysjglxt_evaluate_review bysjglxt_evaluate_review = new bysjglxt_evaluate_review();
+		Session session = getSession();
+		String hql = "from bysjglxt_evaluate_review where evaluate_review_student = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_evaluate_review = (bysjglxt_evaluate_review) query.uniqueResult();
+		return bysjglxt_evaluate_review;
+	}
+
+	@Override
+	public boolean deleteEvaluateReview(String evaluate_review_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_evaluate_review where evaluate_review_id='" + evaluate_review_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_defence getDefence(String user_student_id) {
+		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
+		Session session = getSession();
+		String hql = "from bysjglxt_defence where defence_student = '" + user_student_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_defence = (bysjglxt_defence) query.uniqueResult();
+		return bysjglxt_defence;
+	}
+
+	@Override
+	public boolean deleteDefence(String defence_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_defence where defence_id='" + defence_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

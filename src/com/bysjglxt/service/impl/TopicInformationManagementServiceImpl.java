@@ -4,8 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
+import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_record_progress;
+import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
@@ -78,6 +86,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	public boolean DeleteTopic(List<String> topic_id) {
 		boolean flag = false;
 		bysjglxt_topic bysjglxt_topic = null;
+		List<bysjglxt_topic_select> listTopicSelect = new ArrayList<bysjglxt_topic_select>();
+
 		for (String topicId : topic_id) {
 			bysjglxt_topic = new bysjglxt_topic();
 			// 根据课题ID获得课题对象
@@ -86,6 +96,26 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				// 根据课题对象中被邀请老师ID删除被邀请老师信息(这里是否能进行删除)
 				flag = topicInformationManagementDao
 						.deleteTopicInviteTeacher(bysjglxt_topic.getTopic_invite_teache_id());
+				if (!flag)
+					break;
+				// 删除选题的话需要将学生选题表里面的关于该课题记录删除
+				// 1.先获得学生选题表关于该选题集合
+				listTopicSelect = topicInformationManagementDao.getTopicSelectList(topicId);
+				if (listTopicSelect != null) {
+					for (bysjglxt_topic_select bysjglxt_topic_select : listTopicSelect) {
+
+						// 根据选题表中学生字段将学生登录表中的选题字段变化
+						flag = topicInformationManagementDao
+								.updateStudentUserNotSelect(bysjglxt_topic_select.getTopic_select_student());
+						if (!flag)
+							break;
+						// 删除学生选题表
+						flag = topicInformationManagementDao
+								.deleteTopicSelect(bysjglxt_topic_select.getTopic_select_id());
+						if (!flag)
+							break;
+					}
+				}
 				if (!flag)
 					break;
 				flag = topicInformationManagementDao.DeleteTopic(topicId);
@@ -132,7 +162,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	}
 
 	@Override
-	public TopicInformationManagementVO VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO) {
+	public TopicInformationManagementVO VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
+			int studentOrTeacher) {
 		List<TopicInformationManagementDTO> list_TopicInformationDTO = new ArrayList<TopicInformationManagementDTO>();
 		TopicInformationManagementDTO topicInformationDTO = null;
 		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = null;
@@ -143,7 +174,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		bysjglxt_section bysjglxt_section = null;
 		// 获得符合条件的10条课题
-		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO);
+		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO,
+				studentOrTeacher);
 		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
 			topicInformationDTO = new TopicInformationManagementDTO();
 			// 在DTO里面设置TeacherInformationDTO
@@ -173,7 +205,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		}
 		topicManagementVO.setList_TopicInformationDTO(list_TopicInformationDTO);
 		int i = 0;
-		listAll = topicInformationManagementDao.VO_Topic_BySearch(topicManagementVO);
+		listAll = topicInformationManagementDao.VO_Topic_BySearch(topicManagementVO, studentOrTeacher);
 		i = listAll.size();
 		topicManagementVO.setTotalRecords(i);
 		topicManagementVO.setTotalPages(((i - 1) / topicManagementVO.getPageSize()) + 1);
@@ -224,10 +256,15 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				if (bysjglxt_student_user.getUser_student_is_select_topic() == 1) {
 					return -3;
 				}
+				// 判断学生是否有选题权限
+				if (bysjglxt_student_user.getUser_student_is_operate_premission() == 0) {
+					return -5;
+				}
 			} else {
 				return -4;
 			}
 		}
+
 		// 创建学生选题记录
 		bysjglxt_topic_select.setTopic_select_id(TeamUtil.getUuid());
 		bysjglxt_topic_select.setTopic_select_student(studentID); // user表
@@ -281,7 +318,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			studentIdList = studentIdList + string + "#&#";
 		}
 		flag = topicInformationManagementDao.updateStudentList(topicID, studentIdList);
-		return false;
+		return flag;
 	}
 
 	/**

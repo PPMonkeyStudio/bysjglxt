@@ -64,7 +64,7 @@ public class testfffff {
 	@Test
 	public void testE() {
 		TopicInformationManagementVO topicManagementVO = new TopicInformationManagementVO();
-		topicManagementVO = topicManagementService.VO_Topic_By_PageAndSearch(topicManagementVO);
+		topicManagementVO = topicManagementService.VO_Topic_By_PageAndSearch(topicManagementVO,2);
 		System.out.println(topicManagementVO);
 	}
 
