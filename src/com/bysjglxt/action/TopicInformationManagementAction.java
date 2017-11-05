@@ -136,21 +136,31 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void ListMyTopicByPageAndSearch() throws IOException {
+		//
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
+		//
 		if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			//
 			StudentInformationDTO studentInformationDTO = (StudentInformationDTO) ActionContext.getContext()
 					.getSession().get("userStudentDTO");
-
+			//
+			http_response.getWriter()
+					.write(gson.toJson(topicInformationManagementService.VO_TopicBelongStudent_By_PageAndSearch(
+							topicInformationManagementVO, studentInformationDTO.getBysjglxtStudentUser()
+									.getUser_student_id())));
 		} else if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			//
 			TeacherInformationDTO teacherInformationDTO = (TeacherInformationDTO) ActionContext.getContext()
 					.getSession().get("userTeacherDTO");
+			//
 			http_response.getWriter()
 					.write(gson.toJson(topicInformationManagementService.VO_TopicBelongTeacher_By_PageAndSearch(
 							topicInformationManagementVO, teacherInformationDTO.getBysjglxtTeacherUser()
 									.getUser_teacher_id())));
+
 		}
 
 	}

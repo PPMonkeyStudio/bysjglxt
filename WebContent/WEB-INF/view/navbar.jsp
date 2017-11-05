@@ -48,9 +48,9 @@
 	<div id="wrapper">
 		<nav class="navbar navbar-default navbar-fixed-top">
 		<div
-			style="width: auto; float: left; line-height: 78px; margin: 0 0 0 10px; font-size: 30px;">毕业设计管理系统</div>
+			style="width: auto; float: left; line-height: 78px; margin: 0 0 0 30px; font-size: 30px;">毕业设计管理系统</div>
 		<div id="navbar-menu">
-			<ul class="nav navbar-nav navbar-left" style="margin: 0 0 0 50px">
+			<ul class="nav navbar-nav navbar-left" style="margin: 0 0 0 30px">
 				<li class="dropdown" style="float: left;">
 					<a href="<%=basePath%>loginLogout/LoginLogoutManagement_index">
 						<span>首页</span>

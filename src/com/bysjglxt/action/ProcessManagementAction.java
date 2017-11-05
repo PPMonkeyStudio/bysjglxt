@@ -10,7 +10,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
-import com.bysjglxt.domain.VO.ProcessManagementVO;
+import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 import com.bysjglxt.service.ProcessManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,7 +23,13 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	private HttpServletResponse http_response;
 
 	private HttpServletRequest http_request;
-	private ProcessManagementVO processManagementVO;
+	/*
+	 * 
+	 * 
+	 * 
+	 */
+
+	private bysjglxt_process_definition newProcessDefinition;
 
 	/*
 	 * 
@@ -33,6 +39,10 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	 * 
 	 * 
 	 */
+	public String ProcessDefinitionDetailPage() {
+		return "ProcessDefinitionDetailPage";
+	}
+
 	public String ProcessDefinitionListPage() {
 
 		return "ProcessDefinitionListPage";
@@ -50,6 +60,21 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(ListProcessDefinition));
 
+	}
+
+	public void getProcessDefinitionDTO() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		ProcessDefinitionDetailDTO processDefinitionDetailDTO = null;
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(processDefinitionDetailDTO));
+	}
+
+	public void CreatProcessDefinition() throws IOException {
+		processManagementService.createSelectTopicProcessDefine(newProcessDefinition);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
 	}
 
 	/*
@@ -94,12 +119,12 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		this.http_request = http_request;
 	}
 
-	public ProcessManagementVO getProcessManagementVO() {
-		return processManagementVO;
+	public bysjglxt_process_definition getNewProcessDefinition() {
+		return newProcessDefinition;
 	}
 
-	public void setProcessManagementVO(ProcessManagementVO processManagementVO) {
-		this.processManagementVO = processManagementVO;
+	public void setNewProcessDefinition(bysjglxt_process_definition newProcessDefinition) {
+		this.newProcessDefinition = newProcessDefinition;
 	}
 
 }

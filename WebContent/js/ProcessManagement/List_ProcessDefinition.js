@@ -1,8 +1,6 @@
-window.onload = List_ProcessDefinition_By_PageAndSearch;
-
 var processDefinition_json = null;
 
-function List_ProcessDefinition_By_PageAndSearch(pageIndex) {
+function List_ProcessDefinition(pageIndex) {
 
 	document.getElementById("i_pulse").style.display = "block";
 
@@ -15,7 +13,6 @@ function List_ProcessDefinition_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				alert(xhr.responseText);
 				processDefinition_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -35,7 +32,7 @@ function List_ProcessDefinition_By_PageAndSearch(pageIndex) {
 						.getElementById("table_processDefinition");
 				var new_tr = null;
 				var new_td = null;
-				for (var num = 0; num < processDefinition_json.list_ProcessDefinitionInformationDTO.length; num++) {
+				for (var num = 0; num < processDefinition_json.length; num++) {
 
 					new_tr = document.createElement("tr");
 
@@ -47,12 +44,17 @@ function List_ProcessDefinition_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
+					if (processDefinition_json[num].process_definition_name != undefined) {
+						new_td.innerHTML = processDefinition_json[num].process_definition_name;
+					} else {
+						new_td.innerHTML = '无';
+					}
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i style="cursor: pointer;" id="'
-							+ processDefinition_json.list_ProcessDefinitionInformationDTO[num].bysjglxtProcessDefinitionUser.user_processDefinition_id
+							+ processDefinition_json[num].process_definition_id
 							+ '" onclick="ProcessDefinition_Information_Display(this)" class="fa fa-edit "></i>';
 
 					new_td = document.createElement("td");
@@ -60,18 +62,12 @@ function List_ProcessDefinition_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<label class="fancy-checkbox">'
 							+ '<input id="'
-							+ processDefinition_json.list_ProcessDefinitionInformationDTO[num].bysjglxtProcessDefinitionUser.user_processDefinition_id
+							+ processDefinition_json[num].process_definition_id
 							+ '" type="checkbox" class="checkbox_select">'
 							+ '<span></span></label>';
 
 				}
 
-				/*
-				 * 设置页数
-				 */
-				document.getElementById("span_pageIndex").innerHTML = processDefinition_json.pageIndex;
-				document.getElementById("span_totalPages").innerHTML = processDefinition_json.totalPages;
-				document.getElementById("span_totalRecords").innerHTML = processDefinition_json.totalRecords;
 				// 让加载图标消失
 				document.getElementById("i_pulse").style.display = "none";
 				// 让全选框取消选择

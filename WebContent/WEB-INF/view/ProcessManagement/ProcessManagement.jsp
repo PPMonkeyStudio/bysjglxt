@@ -13,10 +13,14 @@
 <!--页面公用-------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
-	src="<%=basePath%>js/ProcessManagement/List_ProcessDefinition_By_PageAndSearch.js"></script>
+	src="<%=basePath%>js/ProcessManagement/List_ProcessDefinition.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/ProcessManagement/CreatProcessDefinition.js"></script>
+	<script type="text/javascript"
+	src="<%=basePath%>js/ProcessManagement/ProcessDefinitionDetail.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
-<title>课题管理页</title>
+<title>流程</title>
 </head>
 <body>
 	<s:action name="LoginLogoutManagement_navbar" namespace="/loginLogout"
@@ -28,7 +32,16 @@
 		<!--  -->
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
-		<div class="panel" style="width: 95%; margin: 20px auto;">
+		<div id="maxDiv_ProcessDefinitionDetail" class="panel"
+			style="width: 960px; margin: 20px auto;display: none;">
+			<!--  -->
+			<div class="panel-heading">
+				<h3 class="panel-title"><span id="ProcessDefinitionTitle">123</span></h3>
+			</div>
+			<div class="panel-body"></div>
+		</div>
+		<div id="maxDiv_List_ProcessDefinition" class="panel"
+			style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
 				<h3 class="panel-title">流程定义</h3>
@@ -37,7 +50,7 @@
 				<div style="height: 34px;">
 					<div style="width: 500px; float: left;">
 						<button class="leader_control btn btn-default"
-							onclick="window.location='#'">
+							onclick="CreatProcessDefinition()">
 							<i class="fa fa-plus-square"></i>
 							创建流程
 						</button>
@@ -93,30 +106,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!-------修改教师用户信息模态框------->
-	<div class="modal fade" id="modal_Process_Information"
-		data-keyboard="true" tabindex="-1">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<!-- 模态弹出窗内容 -->
-				<!--弹出框头部，一般使用“modal-header”表示，主要包括标题和关闭按钮-->
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span>
-						<span class="sr-only">Close</span>
-					</button>
-					<h4 class="modal-title">课题详细信息</h4>
-				</div>
-				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
-				<div class="modal-body">
-					<table id="table_topic_detail"
-						class="table table-hover table-bordered"
-						style="text-align: center;">
-						<tbody></tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
