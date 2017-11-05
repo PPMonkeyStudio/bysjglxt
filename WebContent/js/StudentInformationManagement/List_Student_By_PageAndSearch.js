@@ -97,9 +97,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser != undefined) {
 						if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission == 1) {
-							new_td.innerHTML = '✔';
+							new_td.innerHTML = '活动';
 						} else {
-							new_td.innerHTML = '✘';
+							new_td.innerHTML = '已关闭';
 							new_td.style.color = "#ff5063";
 						}
 
@@ -150,6 +150,10 @@ function List_Student_By_PageAndSearch(pageIndex) {
 				document.getElementById("i_pulse").style.display = "none";
 				// 让全选框取消选择
 				document.getElementById("checkbox_all_select").checked = false;
+				/*
+				 * 角色控制
+				 */
+				roleControl();
 			} else {
 				toastr.error(xhr.status);
 			}

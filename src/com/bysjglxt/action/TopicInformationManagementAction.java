@@ -92,11 +92,29 @@ public class TopicInformationManagementAction extends ActionSupport
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		System.out.println("kokoko");
 		http_response.getWriter().write(
 				gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO)));
 
 	}
+
+	/**
+	 * 
+	 * @throws IOException
+	 */
+	public void ListMyTopicByPageAndSearch() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(
+				gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO)));
+	}
+
+	/*
+	 * public void aReact() throws IOException {
+	 * http_response.setContentType("text/html;charset=utf-8");
+	 * http_response.getWriter().write("readsdsds"); }
+	 */
 
 	public void agreeTopicList() throws IOException {
 		topicInformationManagementService.adoptTopic(listAgreeTopicID);
@@ -163,6 +181,16 @@ public class TopicInformationManagementAction extends ActionSupport
 	public String TopicListPage() {
 
 		return "TopicListPage";
+	}
+
+	/**
+	 * @说明 跳转列表页
+	 * 
+	 * @return
+	 */
+	public String MyTopicListPage() {
+
+		return "MyTopicListPage";
 	}
 
 	/**
