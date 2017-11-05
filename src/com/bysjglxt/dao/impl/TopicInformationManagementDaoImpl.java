@@ -9,8 +9,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
+import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_record_progress;
+import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
@@ -135,7 +142,8 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	}
 
 	@Override
-	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO) {
+	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
+			int studentOrTeacher) {
 		Session session = getSession();
 		String hql = "from bysjglxt_topic where 1=1";
 		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
@@ -148,9 +156,15 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			String search = "%" + topicManagementVO.getSearch().trim() + "%";
 			hql = hql + " and topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "' ";
 		}
+
 		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
 			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
 		}
+
+		if (studentOrTeacher == 2) {
+			hql = hql + " and topic_examine_state = '已通过' ";
+		}
+
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic_teacher = '" + topicManagementVO.getTeacher() + "'";
 		}
@@ -339,14 +353,14 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public List<bysjglxt_topic> getAllTopic() {
 		Session session = getSession();
 		List<bysjglxt_topic> listAllTopic = new ArrayList<bysjglxt_topic>();
-		String hql = "from bysjglxt_topic";
+		String hql = "from bysjglxt_topic where topic_examine_state = '已通过'";
 		Query query = session.createQuery(hql);
 		listAllTopic = query.list();
 		return listAllTopic;
 	}
 
 	@Override
-	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO) {
+	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO,int studentOrTeacher) {
 		Session session = getSession();
 		String hql = "from bysjglxt_topic where 1=1";
 		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
@@ -361,6 +375,9 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		}
 		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
 			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
+		}
+		if (studentOrTeacher == 2) {
+			hql = hql + " and topic_examine_state = '已通过' ";
 		}
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic_teacher = '" + topicManagementVO.getTeacher() + "'";
@@ -398,4 +415,223 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
 		return bysjglxt_student_user;
 	}
+
+	@Override
+	public List<bysjglxt_topic_select> getTopicSelectList(String topicId) {
+		List<bysjglxt_topic_select> listTopicSelect = new ArrayList<bysjglxt_topic_select>();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_topic = '" + topicId + "'";
+		Query query = session.createQuery(hql);
+		listTopicSelect = query.list();
+		return listTopicSelect;
+	}
+
+	@Override
+	public boolean updateStudentUserNotSelect(String topic_select_student) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_student_user set user_student_is_select_topic = '2' where user_student_id = '"
+					+ topic_select_student + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean deleteTopicSelect(String topic_select_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_topic_select where topic_select_id='" + topic_select_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_taskbook getTaskBookByStudent(String topic_select_student) {
+		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
+		Session session = getSession();
+		String hql = "from bysjglxt_taskbook where bysjglxt_taskbook_student = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_taskbook = (bysjglxt_taskbook) query.uniqueResult();
+		return bysjglxt_taskbook;
+	}
+
+	@Override
+	public boolean deleteTaskBook(String topic_select_student) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_taskbook where taskbook_id='" + topic_select_student + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_report_opening getReportOpening(String topic_select_student) {
+		bysjglxt_report_opening bysjglxt_report_opening = new bysjglxt_report_opening();
+		Session session = getSession();
+		String hql = "from bysjglxt_report_opening where report_opening_student = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_report_opening = (bysjglxt_report_opening) query.uniqueResult();
+		return bysjglxt_report_opening;
+	}
+
+	@Override
+	public boolean deleteReportOpening(String topic_select_student) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_taskbook where report_opening_id='" + topic_select_student + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public List<bysjglxt_record_progress> getProgress(String topic_select_student) {
+		List<bysjglxt_record_progress> listProgress = new ArrayList<bysjglxt_record_progress>();
+		Session session = getSession();
+		String hql = "from bysjglxt_record_progress where record_progress _student ='" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		listProgress = query.list();
+		return listProgress;
+	}
+
+	@Override
+	public boolean deleteProgress(String record_progress_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_record_progress where record_progress _id='" + record_progress_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_summary getSummary(String topic_select_student) {
+		bysjglxt_summary bysjglxt_summary = new bysjglxt_summary();
+		Session session = getSession();
+		String hql = "from bysjglxt_summary where summary_student = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_summary = (bysjglxt_summary) query.uniqueResult();
+		return bysjglxt_summary;
+	}
+
+	@Override
+	public boolean deleteSummary(String summary_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_summary where summary_id='" + summary_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_examination_formal getExaminationFormal(String topic_select_student) {
+		bysjglxt_examination_formal bysjglxt_examination_formal = new bysjglxt_examination_formal();
+		Session session = getSession();
+		String hql = "from bysjglxt_examination_formal where examination_formal_student = '" + topic_select_student
+				+ "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_examination_formal = (bysjglxt_examination_formal) query.uniqueResult();
+		return bysjglxt_examination_formal;
+	}
+
+	@Override
+	public boolean deleteExaminationFormal(String examination_formal_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_examination_formal where examination_formal_id='" + examination_formal_id
+					+ "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_evaluate_tutor getEvaluateTutor(String topic_select_student) {
+		bysjglxt_evaluate_tutor bysjglxt_evaluate_tutor = new bysjglxt_evaluate_tutor();
+		Session session = getSession();
+		String hql = "from bysjglxt_evaluate_tutor where evaluate_tutor_student = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_evaluate_tutor = (bysjglxt_evaluate_tutor) query.uniqueResult();
+		return bysjglxt_evaluate_tutor;
+	}
+
+	@Override
+	public boolean deleteEvaluateTutor(String evaluate_tutor_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_evaluate_tutor where evaluate_tutor_id='" + evaluate_tutor_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_evaluate_review getEvaluateReview(String topic_select_student) {
+		bysjglxt_evaluate_review bysjglxt_evaluate_review = new bysjglxt_evaluate_review();
+		Session session = getSession();
+		String hql = "from bysjglxt_evaluate_review where evaluate_review_student = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_evaluate_review = (bysjglxt_evaluate_review) query.uniqueResult();
+		return bysjglxt_evaluate_review;
+	}
+
+	@Override
+	public boolean deleteEvaluateReview(String evaluate_review_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_evaluate_review where evaluate_review_id='" + evaluate_review_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

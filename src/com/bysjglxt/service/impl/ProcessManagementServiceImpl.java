@@ -2,6 +2,7 @@ package com.bysjglxt.service.impl;
 
 import com.bysjglxt.dao.ProcessManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.service.ProcessManagementService;
 
