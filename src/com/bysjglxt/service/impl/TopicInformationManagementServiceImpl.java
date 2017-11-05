@@ -350,11 +350,12 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	}
 
 	/**
+	 * 
 	 * 学生点击我的课题
+	 * 
 	 */
 	@Override
 	public TopicInformationManagementDTO studentTopicInformationManagementDTO(String studentUserId) {
-
 		TopicInformationManagementDTO topicInformationManagementDTO = new TopicInformationManagementDTO();
 		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
 		bysjglxt_topic_invite_teacher bysjglxtTopicInviteTeacher = new bysjglxt_topic_invite_teacher();
@@ -480,6 +481,134 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			listStudentInfoDTO.add(studentInformationDTO);
 		}
 		return listStudentInfoDTO;
+	}
+
+	@Override
+	public int specialStudentSelectTopic(String studentID, String topicID) {
+
+		if (topicID == null || topicID.trim().length() <= 0) {
+			return -4;
+		}
+		if (studentID == null || studentID.trim().length() <= 0) {
+			return -4;
+		}
+		boolean flag = true;
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		bysjglxt_topic topicIsSelect = new bysjglxt_topic();
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicID);
+		bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUser(bysjglxt_topic.getTopic_teacher());
+		// 因为是指定学生先选题,所以并不存在教师指导人数已达上限或者课题已达上限
+		// 1.判断学生是否已经选题
+		bysjglxt_student_user = topicInformationManagementDao.studentIsSelectTopic(studentID);
+		if (bysjglxt_student_user != null) {
+			if (bysjglxt_student_user.getUser_student_is_select_topic() == 1) {
+				return -3;
+			}
+			// 判断学生是否有选题权限
+			if (bysjglxt_student_user.getUser_student_is_operate_premission() == 0) {
+				return -5;
+			}
+		} else {
+			return -4;
+		}
+		// 2.判断学生是否存在于老师的指定学生中
+		topicIsSelect = topicInformationManagementDao.studentIsExistSpecial(studentID, topicID);
+		if (topicIsSelect == null) {
+			return -6;
+		} else {
+
+			// 创建学生选题记录
+			bysjglxt_topic_select.setTopic_select_id(TeamUtil.getUuid());
+			bysjglxt_topic_select.setTopic_select_student(studentID); // user表
+			bysjglxt_topic_select.setTopic_select_teacher_tutor(bysjglxt_teacher_user.getUser_teacher_id());
+			bysjglxt_topic_select.setTopic_select_teacher_review("");
+			bysjglxt_topic_select.setTopic_select_topic(topicID);
+			bysjglxt_topic_select.setTopic_select_gmt_create(TeamUtil.getStringSecond());
+			bysjglxt_topic_select.setTopic_select_gmt_modified(bysjglxt_topic_select.getTopic_select_gmt_create());
+			flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
+			if (flag) {
+				// 课题记录中数据增加1
+				flag = topicInformationManagementDao.addTopicStudentNum(topicID);
+			} else {
+				return -4;
+			}
+			if (flag) {
+				// 教师学生指导人数+1
+				flag = topicInformationManagementDao
+						.addTeacherUserSrtudentNum(bysjglxt_teacher_user.getUser_teacher_id());
+			} else {
+				return -4;
+			}
+			if (flag) {
+				// 修改学生登陆表状态
+				flag = topicInformationManagementDao.updateStudentUserRecord(studentID);
+			} else {
+				return -4;
+			}
+
+		}
+		return 1;
+	}
+
+	@Override
+	public TopicInformationManagementVO VO_TopicBelongStudent_By_PageAndSearch(
+			TopicInformationManagementVO topicManagementVO, String studentUserId) {
+		List<TopicInformationManagementDTO> list_TopicInformationDTO = new ArrayList<TopicInformationManagementDTO>();
+		TopicInformationManagementDTO topicInformationDTO = null;
+		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = null;
+		List<bysjglxt_topic> list_bysjglxt_topic = new ArrayList<bysjglxt_topic>();
+		List<bysjglxt_topic> listAll = new ArrayList<bysjglxt_topic>();
+		TeacherInformationDTO teacherInformationDTO = null;
+		bysjglxt_teacher_basic bysjglxt_teacher_basic = null;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		bysjglxt_section bysjglxt_section = null;
+		// 获得符合条件的课题
+		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_StudentPageAndSearch(topicManagementVO, studentUserId);
+		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
+			topicInformationDTO = new TopicInformationManagementDTO();
+			// 在DTO里面设置TeacherInformationDTO
+			teacherInformationDTO = new TeacherInformationDTO();
+			bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_section = new bysjglxt_section();
+			bysjglxt_teacher_user = topicInformationManagementDao
+					.getTeacherUserInfo(tbysjglxt_topic.getTopic_teacher());
+			if (bysjglxt_teacher_user != null) {
+				teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
+				bysjglxt_teacher_basic = topicInformationManagementDao
+						.getTeacherBasicInfo(bysjglxt_teacher_user.getUser_teacher_basic());
+				teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxt_teacher_basic);
+				bysjglxt_section = topicInformationManagementDao
+						.getTeacherSection(bysjglxt_teacher_user.getUser_teacher_section());
+				teacherInformationDTO.setBysjglxtSection(bysjglxt_section);
+			}
+			topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
+			// 在DTO里面设置被邀请课题信息
+			topicInformationDTO.setBysjglxtTopic(tbysjglxt_topic);
+			// 根据课题表中被邀请老师ID，获得被邀请老师的信息
+			bysjglxt_topic_invite_teacher = topicInformationManagementDao
+					.getBysjglxtTopicInviteTeacher(tbysjglxt_topic.getTopic_invite_teache_id());
+			topicInformationDTO.setBysjglxtTopicInviteTeacher(bysjglxt_topic_invite_teacher);
+			list_TopicInformationDTO.add(topicInformationDTO);
+		}
+		topicManagementVO.setList_TopicInformationDTO(list_TopicInformationDTO);
+		int i = 1;
+		topicManagementVO.setTotalRecords(i);
+		topicManagementVO.setTotalPages(((i - 1) / topicManagementVO.getPageSize()) + 1);
+		if (topicManagementVO.getPageIndex() <= 1) {
+			topicManagementVO.setHavePrePage(false);
+		} else {
+			topicManagementVO.setHavePrePage(true);
+		}
+		if (topicManagementVO.getPageIndex() >= topicManagementVO.getTotalPages()) {
+			topicManagementVO.setHaveNextPage(false);
+		} else {
+			topicManagementVO.setHaveNextPage(true);
+		}
+		return topicManagementVO;
 	}
 
 }

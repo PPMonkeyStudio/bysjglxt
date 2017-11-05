@@ -61,7 +61,7 @@ public interface TopicInformationManagementDao {
 
 	public List<bysjglxt_topic> getAllTopic();
 
-	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO,int studentOrTeacher);
+	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO, int studentOrTeacher);
 
 	public boolean updateStudentUserRecord(String studentID);
 
@@ -85,5 +85,10 @@ public interface TopicInformationManagementDao {
 	public List<bysjglxt_topic_select> getTopicSelectByTopicId(String topicId);
 
 	public com.bysjglxt.domain.DO.bysjglxt_student_basic getStudentBasic(String user_student_basic);
+
+	public com.bysjglxt.domain.DO.bysjglxt_topic studentIsExistSpecial(String studentID, String topicID);
+
+	public List<bysjglxt_topic> VO_Topic_By_StudentPageAndSearch(TopicInformationManagementVO topicManagementVO,
+			String studentUserId);
 
 }
