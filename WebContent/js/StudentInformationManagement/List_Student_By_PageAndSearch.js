@@ -1,6 +1,4 @@
-﻿window.onload = List_Student_By_PageAndSearch;
-
-var student_json = null;
+﻿var student_json = null;
 
 function List_Student_By_PageAndSearch(pageIndex) {
 

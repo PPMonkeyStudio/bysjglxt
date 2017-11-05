@@ -1,6 +1,4 @@
-﻿window.onload = List_Teacher_By_PageAndSearch;
-
-var teacher_json = null;
+﻿var teacher_json = null;
 
 function List_Teacher_By_PageAndSearch(pageIndex) {
 

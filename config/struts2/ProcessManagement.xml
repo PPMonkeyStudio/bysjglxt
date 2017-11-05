@@ -9,6 +9,8 @@
 			method="{1}">
 			<result name="ProcessDefinitionListPage">/WEB-INF/view/ProcessManagement/ProcessManagement.jsp
 			</result>
+			<result name="ProcessDefinitionDetailPage">/WEB-INF/view/ProcessManagement/ProcessDefinitionDetail.jsp
+			</result>
 		</action>
 	</package>
 </struts>

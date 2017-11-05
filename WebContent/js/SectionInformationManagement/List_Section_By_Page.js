@@ -1,6 +1,4 @@
-﻿window.onload = List_Section_By_Page;
-
-var section_json = null;
+﻿var section_json = null;
 
 function List_Section_By_Page(pageIndex) {
 
