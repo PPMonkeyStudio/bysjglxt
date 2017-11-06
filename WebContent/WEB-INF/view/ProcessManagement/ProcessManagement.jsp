@@ -16,6 +16,8 @@
 	src="<%=basePath%>js/ProcessManagement/List_ProcessDefinition.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/CreatProcessDefinition.js"></script>
+	<script type="text/javascript"
+	src="<%=basePath%>js/ProcessManagement/CreatTaskDefinition.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/ProcessDefinitionDetail.js"></script>
 <script type="text/javascript"
@@ -37,27 +39,22 @@
 		<div id="maxDiv_ProcessDefinitionDetail" class="panel"
 			style="width: 960px; margin: 20px auto; display: none;">
 			<!--  -->
+			<div style="padding: 20px 0 0 20px">
+				<button class="btn btn-default"
+					onclick="window.location='<%=basePath%>process/ProcessManagement_ProcessDefinitionListPage'">
+					<i class="fa fa-reply" aria-hidden="true"></i>
+					返回
+				</button>
+			</div>
 			<div class="panel-heading">
 				<h3 class="panel-title"></h3>
 			</div>
-			<div class="panel-body">
-				<table id="" class="table table-hover "
-					style="text-align: center; margin: 20px 0;">
-					<tbody>
-						<tr>
-							<th>任务定义名称</th>
-							<th>任务类型</th>
-							<th>操作</th>
-							<th class="">
-								<label class="fancy-checkbox">
-									<input id="checkbox_all_select" type="checkbox"
-										onclick="all_select()">
-									<span>全选</span>
-								</label>
-							</th>
-						</tr>
-					</tbody>
-				</table>
+			<div class="panel-body"></div>
+			<div style="padding: 0 0 20px 20px">
+				<button class="btn btn-default" onclick="CreatTaskDefinition()">
+					<i class="fa fa-plus-square" aria-hidden="true"></i>
+					新增任务节点
+				</button>
 			</div>
 		</div>
 

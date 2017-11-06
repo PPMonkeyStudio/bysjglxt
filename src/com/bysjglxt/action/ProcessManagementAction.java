@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
+import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 import com.bysjglxt.service.ProcessManagementService;
 import com.google.gson.Gson;
@@ -31,6 +32,8 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 
 	private bysjglxt_process_definition newProcessDefinition;
 	private String processDefinitionId;
+
+	private bysjglxt_task_definition newTaskDefinition;
 
 	/*
 	 * 
@@ -60,7 +63,6 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		List<bysjglxt_process_definition> ListProcessDefinition = processManagementService.listProcessDefinition();
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(ListProcessDefinition));
-		System.out.println(gson.toJson(ListProcessDefinition));
 
 	}
 
@@ -74,11 +76,33 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		http_response.getWriter().write(gson.toJson(processDefinitionDetailDTO));
 	}
 
+	/**
+	 * 创建流程定义
+	 * 
+	 * @throws IOException
+	 */
 	public void CreatProcessDefinition() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(processManagementService.createSelectTopicProcessDefine(newProcessDefinition));
 	}
 
+	/**
+	 * 创建任务定义
+	 * 
+	 * @throws IOException
+	 */
+	public void CreatTaskDefinition() throws IOException {
+		System.out.println(newTaskDefinition);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(processManagementService.createSelectTopicTaskDefine(newTaskDefinition));
+
+	}
+
+	/**
+	 * 进入更新流程定义（即添加任务节点）的状态
+	 * 
+	 * @throws IOException
+	 */
 	public void UpdateProcessDefinition() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -144,6 +168,14 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 
 	public void setProcessDefinitionId(String processDefinitionId) {
 		this.processDefinitionId = processDefinitionId;
+	}
+
+	public bysjglxt_task_definition getNewTaskDefinition() {
+		return newTaskDefinition;
+	}
+
+	public void setNewTaskDefinition(bysjglxt_task_definition newTaskDefinition) {
+		this.newTaskDefinition = newTaskDefinition;
 	}
 
 }

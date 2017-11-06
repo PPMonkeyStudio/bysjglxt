@@ -16,8 +16,19 @@ function ProcessDefinitionDetail(ProcessDefinitionID) {
 	/*
 	 * 清空标题 清空内容
 	 */
-	document.querySelector('#maxDiv_ProcessDefinitionDetail div h3').innerHTML = "";
-	document.querySelector('#maxDiv_ProcessDefinitionDetail .panel-body').innerHTML = "";
+	document.querySelector('#maxDiv_ProcessDefinitionDetail div h3').innerHTML = '';
+	document.querySelector('#maxDiv_ProcessDefinitionDetail .panel-body').innerHTML = '<table id="" class="table table-hover "'
+			+ 'style="text-align: center; margin: 20px 0;">'
+			+ '<tbody>'
+			+ '<tr>'
+			+ '<th>序号</th>'
+			+ '<th>任务定义名称</th>'
+			+ '<th>任务类型</th>'
+			+ '<th>任务执行角色</th>'
+			+ '<th>返回的任务节点</th>'
+			+ '</tr>'
+			+ '</tbody>'
+			+ '</table>';
 	/*
 	 * 
 	 */
@@ -28,22 +39,59 @@ function ProcessDefinitionDetail(ProcessDefinitionID) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				alert(xhr.responseText);
 				json_ProcessDefinition = JSON.parse(xhr.responseText);
-
 				document
 						.querySelector("#maxDiv_ProcessDefinitionDetail div h3").innerHTML = json_ProcessDefinition.bysjglxtProcessDefinition.process_definition_name;
-				var new_div;
+				var new_tr;
+				var new_td;
 				for (var num = 0; num < json_ProcessDefinition.List_bysjglxtTaskDefinition.length; num++) {
-					new_div = document.getElementsByClassName("div");
-					new_div
-							.appendChild(document
-									.createTextNode(json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_name));
 
-					document.querySelector(
-							'#maxDiv_ProcessDefinitionDetail .panel-body')
-							.appendChild(new_div);
-					new_div.className = "new_div";
+					new_tr = document.createElement("tr");
+
+					new_tr.appendChild(document.createTextNode(''));
+					document
+							.querySelector(
+									'#maxDiv_ProcessDefinitionDetail .panel-body table tbody')
+							.appendChild(new_tr);
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_td.innerHTML = num + 1;
+					new_tr.appendChild(new_td);
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_td.innerHTML = json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_name;
+					new_tr.appendChild(new_td);
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_type == 1) {
+						new_td.innerHTML = '顺序结构';
+					} else {
+						new_td.innerHTML = '选择结构';
+					}
+					new_tr.appendChild(new_td);
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_role == 1) {
+						new_td.innerHTML = '指导老师';
+					} else if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_role == 2) {
+						new_td.innerHTML = '评阅老师';
+					} else if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_role == 3) {
+						new_td.innerHTML = '领导小组组长';
+					} else if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_role == 4) {
+						new_td.innerHTML = '教研室主任';
+					} else {
+						new_td.innerHTML = '学生';
+					}
+					new_tr.appendChild(new_td);
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_td.innerHTML = json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_return;
+					new_tr.appendChild(new_td);
 
 				}
 			} else {
