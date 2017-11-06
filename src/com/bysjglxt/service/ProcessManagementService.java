@@ -6,6 +6,7 @@ import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
+import com.bysjglxt.domain.VO.ProcessManagementVO;
 
 public interface ProcessManagementService {
 
@@ -36,7 +37,7 @@ public interface ProcessManagementService {
 	 * @param selectTopicProcessInstance
 	 * @return
 	 */
-	public int openSelectTopicInstance(String process_definition_id, String operation);
+	public int openSelectTopicInstance(String processInstanceName,String process_definition_id, String operation,int processNum);
 
 	/**
 	 * 遍历出所有的定义表
@@ -53,7 +54,12 @@ public interface ProcessManagementService {
 	 */
 	public int deleteProcessDefinition(String processDefinitionId);
 
-	
+	/**
+	 * 点击我的任务，将内容分页显示 
+	 * @param processManagementVo
+	 * @return
+	 */
+	public ProcessManagementVO getMyTaskByPage(ProcessManagementVO processManagementVo,String userID);
 	
 	
 }

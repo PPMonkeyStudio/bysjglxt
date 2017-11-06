@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-11-6 11:00:48 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-11-7 0:06:27 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_process_instance" table="BYSJGLXT_PROCESS_INSTANCE">
         <id name="process_instance_id" type="java.lang.String">
@@ -16,6 +16,9 @@
         </property>
         <property name="process_instance_man" type="java.lang.String">
             <column name="PROCESS_INSTANCE_MAN" />
+        </property>
+        <property name="process_instance_name" type="java.lang.String">
+            <column name="PROCESS_INSTANCE_NAME" />
         </property>
         <property name="process_instance_gmt_create" type="java.lang.String">
             <column name="PROCESS_INSTANCE_GMT_CREATE" />

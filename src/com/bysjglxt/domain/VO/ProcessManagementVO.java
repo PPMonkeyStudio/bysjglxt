@@ -2,7 +2,8 @@ package com.bysjglxt.domain.VO;
 
 import java.util.List;
 
-import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
+import com.bysjglxt.domain.DTO.ProcessDetailDTO;
 
 public class ProcessManagementVO {
 
@@ -24,11 +25,59 @@ public class ProcessManagementVO {
 	// 是否有下一页
 	private boolean HaveNextPage = false;
 
-	// 流程定义列表
-	private List<StudentInformationDTO> list_StudentInformationDTO;
+	// 列表
+	private List<ProcessDetailDTO> list_ProcessDetailDTO;
 
 	// 搜索
 	private String search;
+
+	// 状态
+	private int state;
+
+	// 流程实例ID
+	private String processInstance;
+	// 流程定义ID
+	private String processDefinition;
+
+	@Override
+	public String toString() {
+		return "ProcessManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords + ", pageSize="
+				+ pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage + ", HaveNextPage="
+				+ HaveNextPage + ", list_ProcessDetailDTO=" + list_ProcessDetailDTO + ", search=" + search + ", state="
+				+ state + ", processInstance=" + processInstance + ", processDefinition=" + processDefinition + "]";
+	}
+
+	public String getProcessDefinition() {
+		return processDefinition;
+	}
+
+	public void setProcessDefinition(String processDefinition) {
+		this.processDefinition = processDefinition;
+	}
+
+	public String getProcessInstance() {
+		return processInstance;
+	}
+
+	public void setProcessInstance(String processInstance) {
+		this.processInstance = processInstance;
+	}
+
+	public List<ProcessDetailDTO> getList_ProcessDetailDTO() {
+		return list_ProcessDetailDTO;
+	}
+
+	public void setList_ProcessDetailDTO(List<ProcessDetailDTO> list_ProcessDetailDTO) {
+		this.list_ProcessDetailDTO = list_ProcessDetailDTO;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
 
 	public int getPageIndex() {
 		return pageIndex;
@@ -76,14 +125,6 @@ public class ProcessManagementVO {
 
 	public void setHaveNextPage(boolean haveNextPage) {
 		HaveNextPage = haveNextPage;
-	}
-
-	public List<StudentInformationDTO> getList_StudentInformationDTO() {
-		return list_StudentInformationDTO;
-	}
-
-	public void setList_StudentInformationDTO(List<StudentInformationDTO> list_StudentInformationDTO) {
-		this.list_StudentInformationDTO = list_StudentInformationDTO;
 	}
 
 	public String getSearch() {
