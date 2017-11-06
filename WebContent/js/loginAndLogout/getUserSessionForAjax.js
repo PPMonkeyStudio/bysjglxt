@@ -15,7 +15,7 @@ function getUserSessionForAjax() {
 					var userJsonDTO = JSON.parse(xhr.responseText);
 				} catch (e) {
 					toastr.error("登录状态失效");
-					toastr.error(e);
+					window.location = "/bysjglxt/loginLogout/LoginLogoutManagement_logout";
 					return;
 				}
 				/*
@@ -44,6 +44,7 @@ function getUserSessionForAjax() {
 				/*
 				 * 
 				 */
+
 				try {
 					List_Student_By_PageAndSearch(1);
 				} catch (e) {
@@ -59,11 +60,7 @@ function getUserSessionForAjax() {
 								try {
 									List_MyTopic_By_PageAndSearch(1);
 								} catch (e) {
-									try {
-										List_ProcessDefinition(1);
-										List_Process_By_PageAndSearch(1);
-									} catch (e) {
-									}
+									List_ProcessDefinition(1);
 								}
 							}
 						}

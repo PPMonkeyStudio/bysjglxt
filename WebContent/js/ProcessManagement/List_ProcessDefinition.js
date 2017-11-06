@@ -53,9 +53,18 @@ function List_ProcessDefinition(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
+					if (processDefinition_json[num].process_definition_instance_role == 1) {
+						new_td.innerHTML = '领导小组组长';
+					} else {
+						new_td.innerHTML = '学生';
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i style="cursor: pointer;" id="'
 							+ processDefinition_json[num].process_definition_id
-							+ '" onclick="ProcessDefinition_Information_Display(this)" class="fa fa-edit "></i>';
+							+ '" onclick="UpdateProcessDefinition(this)" class="fa fa-edit "></i>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));

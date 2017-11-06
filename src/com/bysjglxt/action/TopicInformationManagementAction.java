@@ -101,7 +101,6 @@ public class TopicInformationManagementAction extends ActionSupport
 		} else {
 			http_response.setContentType("text/html;charset=utf-8");
 			http_response.getWriter().write("登录状态已失效");
-			System.err.println("登录状态已失效");
 			return;
 		}
 
@@ -121,14 +120,15 @@ public class TopicInformationManagementAction extends ActionSupport
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
+
 		if (ActionContext.getContext().getSession().get("userStudentDTO") == null) {
 			http_response.getWriter().write(gson.toJson(
 					topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 1)));
 		} else {
+
 			http_response.getWriter().write(gson.toJson(
 					topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 2)));
 		}
-
 	}
 
 	/**
@@ -147,6 +147,7 @@ public class TopicInformationManagementAction extends ActionSupport
 			StudentInformationDTO studentInformationDTO = (StudentInformationDTO) ActionContext.getContext()
 					.getSession().get("userStudentDTO");
 			//
+			System.out.println(studentInformationDTO.getBysjglxtStudentUser().getUser_student_id());
 			http_response.getWriter()
 					.write(gson.toJson(topicInformationManagementService.VO_TopicBelongStudent_By_PageAndSearch(
 							topicInformationManagementVO, studentInformationDTO.getBysjglxtStudentUser()

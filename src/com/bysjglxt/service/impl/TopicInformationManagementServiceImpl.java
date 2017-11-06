@@ -215,6 +215,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		} else {
 			topicManagementVO.setHaveNextPage(true);
 		}
+		System.out.println(topicManagementVO);
 		return topicManagementVO;
 	}
 
@@ -569,7 +570,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		// 获得符合条件的课题
 		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_StudentPageAndSearch(topicManagementVO,
 				studentUserId);
-		System.out.println(list_bysjglxt_topic.size());
+
 		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
 			topicInformationDTO = new TopicInformationManagementDTO();
 			// 在DTO里面设置TeacherInformationDTO
