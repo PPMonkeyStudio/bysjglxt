@@ -149,14 +149,12 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 
 	@Override
 	public ProcessDefinitionDetailDTO processDefinitionDetailDTO(String processDefinitionId) {
-		System.out.println(processDefinitionId);
 		ProcessDefinitionDetailDTO processDefinitionDetailDTO = new ProcessDefinitionDetailDTO();
 		bysjglxt_process_definition bysjglxtProcessDefinition = new bysjglxt_process_definition();
 		List<bysjglxt_task_definition> List_bysjglxtTaskDefinition = new ArrayList<bysjglxt_task_definition>();
 		// 根据流程定义ID获取流程定义对象
 		bysjglxtProcessDefinition = processManagementDao.getProcessDefinition(processDefinitionId);
 		if (bysjglxtProcessDefinition == null) {
-			System.out.println("ggggdddd");
 			return null;
 		}
 		List_bysjglxtTaskDefinition = processManagementDao.getListBelongProcess(processDefinitionId);

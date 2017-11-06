@@ -82,11 +82,15 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		boolean flag = false;
 		bysjglxt_topic bysjglxt_topic = null;
 		List<bysjglxt_topic_select> listTopicSelect = new ArrayList<bysjglxt_topic_select>();
-
 		for (String topicId : topic_id) {
 			bysjglxt_topic = new bysjglxt_topic();
 			// 根据课题ID获得课题对象
 			bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicId);
+
+			if ("已关闭".equals(bysjglxt_topic.getTopic_examine_state())) {
+				continue;
+			}
+
 			if (bysjglxt_topic != null) {
 				// 根据课题对象中被邀请老师ID删除被邀请老师信息(这里是否能进行删除)
 				flag = topicInformationManagementDao
@@ -142,6 +146,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	public boolean closeTopic(List<String> topicID) {
 		boolean flag = false;
 		for (String string : topicID) {
+
 			flag = topicInformationManagementDao.closeTopic(string, TeamUtil.getStringSecond());
 		}
 		return flag;
@@ -150,7 +155,13 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	@Override
 	public boolean notAdoptTopic(List<String> topicID) {
 		boolean flag = false;
+		bysjglxt_topic bysjglxt_topic = null;
 		for (String string : topicID) {
+			bysjglxt_topic = new bysjglxt_topic();
+			bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(string);
+			if ("已关闭".equals(bysjglxt_topic.getTopic_examine_state())) {
+				continue;
+			}
 			flag = topicInformationManagementDao.notAdoptTopic(string, TeamUtil.getStringSecond());
 		}
 		return flag;
@@ -614,5 +625,30 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		}
 		return topicManagementVO;
 	}
+
+	@Override
+	public int updateTopic(bysjglxt_topic topicBy) {
+
+		bysjglxt_topic topic = new bysjglxt_topic();
+		topic = topicInformationManagementDao.getBysjglxtTopicById(topicBy.getTopic_id());
+		if(topic==null){
+			return -1;  //系统繁忙
+		}
+		topic.setTopic_name_chinese(topicBy.getTopic_name_chinese());
+		topic.setTopic_name_english(topicBy.getTopic_name_english());
+		topic.setTopic_requirement(topicBy.getTopic_requirement());
+		topic.setTopic_source(topicBy.getTopic_source());
+		topic.setTopic_type(topicBy.getTopic_type());
+		topic.setTopic_student_max(topicBy.getTopic_student_max());
+		topic.setTopic_remark(topicBy.getTopic_remark());
+		topic.setTopic_teacher(topicBy.getTopic_teacher());
+		topic.setTopic_invite_teache_id(topicBy.getTopic_invite_teache_id());
+		topic.setTopic_examine_state(topicBy.getTopic_examine_state());
+		
+		return 1;
+	}
+	
+	
+	
 
 }

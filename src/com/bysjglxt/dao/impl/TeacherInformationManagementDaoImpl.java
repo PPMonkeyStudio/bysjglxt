@@ -150,7 +150,6 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			hql = hql + " and sex='" + teacherInformationManagementVO.getSex() + "'";
 		}
 		hql = hql + " order by job_number";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch = query.list();
 		session.clear();
@@ -328,7 +327,6 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 					+ teacherInformationManagementVO.getSection().trim() + "'";
 		}
 		hql = hql + " order by basic.job_number";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		List<bysjglxt_teacher_basic> listTeacherAllBasicInformationByAndSearch = query.list();
 		session.clear();

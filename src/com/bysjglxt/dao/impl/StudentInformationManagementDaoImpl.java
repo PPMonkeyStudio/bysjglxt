@@ -146,11 +146,11 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			hql = hql + " and basic.student_basic_major='"
 					+ studentInformationManagementVO.getStudent_basic_major().trim() + "'";
 		}
-		if ((studentInformationManagementVO.getStudent_basic_grade() != null
-				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0)
-				|| "".equals(studentInformationManagementVO.getStudent_basic_grade())) {
-			hql = hql + " and basic.student_basic_grade='"
-					+ studentInformationManagementVO.getStudent_basic_grade().trim() + "'";
+		if ((studentInformationManagementVO.getStudent_basic_level() != null
+				&& studentInformationManagementVO.getStudent_basic_level().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_level())) {
+			hql = hql + " and basic.student_basic_level='"
+					+ studentInformationManagementVO.getStudent_basic_level().trim() + "'";
 		}
 		if (studentInformationManagementVO.getUser_student_is_operate_premission() != -1) {
 			hql = hql + "and student_user.user_student_is_operate_premission='"
@@ -158,7 +158,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		}
 		if (studentInformationManagementVO.getUser_student_is_select_topic() != -1) {
 			hql = hql + " and student_user.user_student_is_select_topic = '"
-					+ studentInformationManagementVO.getUser_student_is_operate_premission() + "'";
+					+ studentInformationManagementVO.getUser_student_is_select_topic() + "'";
 		}
 		hql = hql + " order by basic.student_basic_num";
 		Query query = session.createQuery(hql);
@@ -313,11 +313,11 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			hql = hql + " and basic.student_basic_major='"
 					+ studentInformationManagementVO.getStudent_basic_major().trim() + "'";
 		}
-		if ((studentInformationManagementVO.getStudent_basic_grade() != null
-				&& studentInformationManagementVO.getStudent_basic_grade().trim().length() > 0)
-				|| "".equals(studentInformationManagementVO.getStudent_basic_grade())) {
-			hql = hql + " and basic.student_basic_grade='"
-					+ studentInformationManagementVO.getStudent_basic_grade().trim() + "'";
+		if ((studentInformationManagementVO.getStudent_basic_level() != null
+				&& studentInformationManagementVO.getStudent_basic_level().trim().length() > 0)
+				|| "".equals(studentInformationManagementVO.getStudent_basic_level())) {
+			hql = hql + " and basic.student_basic_level='"
+					+ studentInformationManagementVO.getStudent_basic_level().trim() + "'";
 		}
 		if (studentInformationManagementVO.getUser_student_is_operate_premission() != -1) {
 			hql = hql + " and student_user.user_student_is_operate_premission='"
@@ -325,7 +325,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		}
 		if (studentInformationManagementVO.getUser_student_is_select_topic() != -1) {
 			hql = hql + " and student_user.user_student_is_select_topic = '"
-					+ studentInformationManagementVO.getUser_student_is_operate_premission() + "'";
+					+ studentInformationManagementVO.getUser_student_is_select_topic() + "'";
 		}
 		hql = hql + " order by basic.student_basic_num";
 		Query query = session.createQuery(hql);

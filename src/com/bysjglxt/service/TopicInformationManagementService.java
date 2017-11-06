@@ -131,7 +131,7 @@ public interface TopicInformationManagementService {
 	 */
 	public TopicInformationManagementVO VO_TopicBelongStudent_By_PageAndSearch(
 			TopicInformationManagementVO topicManagementVO, String studentUserId);
-	
+
 	/**
 	 * 
 	 * 教师点击我的课题拿出历年所有的课题
@@ -156,5 +156,14 @@ public interface TopicInformationManagementService {
 	 * @return
 	 */
 	public int specialStudentSelectTopic(String studentUserId, String topicId);
+
+	/**
+	 * 
+	 * 更改课题信息
+	 * 
+	 * @param topicId
+	 * @return
+	 */
+	public int updateTopic(bysjglxt_topic topicId);
 
 }

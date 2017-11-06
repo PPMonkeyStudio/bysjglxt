@@ -126,7 +126,6 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 			Session session = getSession();
 			String hql = "update bysjglxt_teacher_user set user_teacher_section = '' where user_teacher_section = '"
 					+ string + "'";
-			System.out.println(hql);
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {

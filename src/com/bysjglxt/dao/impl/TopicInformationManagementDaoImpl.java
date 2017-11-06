@@ -595,7 +595,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		}
 		hql = hql + " and selecttopic.topic_select_student = '" + studentUserId + "'";
 		hql = hql + " order by topic.topic_gmt_create desc";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
 		query.setMaxResults(topicManagementVO.getPageSize());
