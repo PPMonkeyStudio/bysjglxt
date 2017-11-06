@@ -162,4 +162,12 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		processDefinitionDetailDTO.setList_bysjglxtTaskDefinition(List_bysjglxtTaskDefinition);
 		return processDefinitionDetailDTO;
 	}
+
+	@Override
+	public int deleteProcessDefinition(String processDefinitionId) {
+
+		
+		
+		return 0;
+	}
 }

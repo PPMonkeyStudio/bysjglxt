@@ -20,6 +20,16 @@ public interface GraduationProjectManagementService {
 	 * 
 	 */
 	public int startGraduationProjectProcess(String studentId);
+	
+	
+	/**
+	 * 
+	 * 	点击我的毕业设计
+	 * 
+	 */
+	
+	
+	
 
 	/**
 	 * @说明 更改任务书
@@ -98,8 +108,4 @@ public interface GraduationProjectManagementService {
 	 */
 	public int bysjglxt_defence(bysjglxt_defence updateDefence);
 
-	
-	
-	
-	
 }

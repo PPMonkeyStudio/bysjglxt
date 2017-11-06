@@ -45,8 +45,12 @@ public interface ProcessManagementService {
 	 */
 	public ProcessDefinitionDetailDTO processDefinitionDetailDTO(String processDefinitionId);
 
-	
-	
-	
-	
+	/**
+	 * 删除流程定义
+	 * 
+	 * @param processDefinitionId
+	 * @return
+	 */
+	public int deleteProcessDefinition(String processDefinitionId);
+
 }
