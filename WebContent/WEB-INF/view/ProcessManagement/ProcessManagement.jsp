@@ -16,8 +16,10 @@
 	src="<%=basePath%>js/ProcessManagement/List_ProcessDefinition.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/CreatProcessDefinition.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/ProcessDefinitionDetail.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/ProcessManagement/UpdateProcessDefinition.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>流程</title>
@@ -33,13 +35,32 @@
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
 		<div id="maxDiv_ProcessDefinitionDetail" class="panel"
-			style="width: 960px; margin: 20px auto;display: none;">
+			style="width: 960px; margin: 20px auto; display: none;">
 			<!--  -->
 			<div class="panel-heading">
-				<h3 class="panel-title"><span id="ProcessDefinitionTitle">123</span></h3>
+				<h3 class="panel-title"></h3>
 			</div>
-			<div class="panel-body"></div>
+			<div class="panel-body">
+				<table id="" class="table table-hover "
+					style="text-align: center; margin: 20px 0;">
+					<tbody>
+						<tr>
+							<th>任务定义名称</th>
+							<th>任务类型</th>
+							<th>操作</th>
+							<th class="">
+								<label class="fancy-checkbox">
+									<input id="checkbox_all_select" type="checkbox"
+										onclick="all_select()">
+									<span>全选</span>
+								</label>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
+
 		<div id="maxDiv_List_ProcessDefinition" class="panel"
 			style="width: 95%; margin: 20px auto;">
 			<!--  -->
@@ -61,17 +82,7 @@
 					<tbody>
 						<tr>
 							<th>流程定义名称</th>
-							<th>
-								<select class="form-control" style="width: auto;"
-									id="select_process_definition_instance_role"
-									onchange="List_processDefinition_By_PageAndSearch(1)">
-									<option value="-1">实例化角色</option>
-									<option value="1">指导老师</option>
-									<option value="2">领导小组主任</option>
-									<option value="3">教研室主任</option>
-									<option value="4">学生</option>
-								</select>
-							</th>
+							<th>实例化角色</th>
 							<th>操作</th>
 							<th class="">
 								<label class="fancy-checkbox">

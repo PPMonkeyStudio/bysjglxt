@@ -30,6 +30,7 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	 */
 
 	private bysjglxt_process_definition newProcessDefinition;
+	private String processDefinitionId;
 
 	/*
 	 * 
@@ -59,6 +60,7 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		List<bysjglxt_process_definition> ListProcessDefinition = processManagementService.listProcessDefinition();
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(ListProcessDefinition));
+		System.out.println(gson.toJson(ListProcessDefinition));
 
 	}
 
@@ -66,17 +68,26 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-		ProcessDefinitionDetailDTO processDefinitionDetailDTO = null;
+		ProcessDefinitionDetailDTO processDefinitionDetailDTO = processManagementService
+				.processDefinitionDetailDTO(processDefinitionId);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(processDefinitionDetailDTO));
 	}
 
 	public void CreatProcessDefinition() throws IOException {
-		processManagementService.createSelectTopicProcessDefine(newProcessDefinition);
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write("success");
+		http_response.getWriter().write(processManagementService.createSelectTopicProcessDefine(newProcessDefinition));
 	}
 
+	public void UpdateProcessDefinition() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		ProcessDefinitionDetailDTO processDefinitionDetailDTO = processManagementService
+				.processDefinitionDetailDTO(processDefinitionId);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(processDefinitionDetailDTO));
+	}
 	/*
 	 * 
 	 */
@@ -125,6 +136,14 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 
 	public void setNewProcessDefinition(bysjglxt_process_definition newProcessDefinition) {
 		this.newProcessDefinition = newProcessDefinition;
+	}
+
+	public String getProcessDefinitionId() {
+		return processDefinitionId;
+	}
+
+	public void setProcessDefinitionId(String processDefinitionId) {
+		this.processDefinitionId = processDefinitionId;
 	}
 
 }

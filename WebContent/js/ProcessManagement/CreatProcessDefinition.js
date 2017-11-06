@@ -21,7 +21,7 @@ function CreatProcessDefinition() {
 							var message;
 							if (xhr.readyState == 4) {
 								if (xhr.status == 200) {
-									ProcessDefinitionDetail();
+									ProcessDefinitionDetail(xhr.responseText);
 								} else {
 									toastr.error(xhr.status);
 								}
