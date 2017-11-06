@@ -171,6 +171,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		// 获得符合条件的10条课题
 		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO,
 				studentOrTeacher);
+		System.out.println(list_bysjglxt_topic.size());
 		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
 			topicInformationDTO = new TopicInformationManagementDTO();
 			// 在DTO里面设置TeacherInformationDTO
@@ -566,7 +567,9 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		bysjglxt_section bysjglxt_section = null;
 		// 获得符合条件的课题
-		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_StudentPageAndSearch(topicManagementVO, studentUserId);
+		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_StudentPageAndSearch(topicManagementVO,
+				studentUserId);
+		System.out.println(list_bysjglxt_topic.size());
 		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
 			topicInformationDTO = new TopicInformationManagementDTO();
 			// 在DTO里面设置TeacherInformationDTO
@@ -595,7 +598,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			list_TopicInformationDTO.add(topicInformationDTO);
 		}
 		topicManagementVO.setList_TopicInformationDTO(list_TopicInformationDTO);
-		int i = 1;
+		int i = list_bysjglxt_topic.size();
 		topicManagementVO.setTotalRecords(i);
 		topicManagementVO.setTotalPages(((i - 1) / topicManagementVO.getPageSize()) + 1);
 		if (topicManagementVO.getPageIndex() <= 1) {

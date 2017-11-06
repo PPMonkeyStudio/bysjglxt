@@ -164,7 +164,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		}
 
 		if (studentOrTeacher == 2) {
-			hql = hql + " and topic_examine_state = '已通过' ";
+			hql = hql + " and topic_examine_state = '审核已通过' ";
 		}
 
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
@@ -355,7 +355,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public List<bysjglxt_topic> getAllTopic() {
 		Session session = getSession();
 		List<bysjglxt_topic> listAllTopic = new ArrayList<bysjglxt_topic>();
-		String hql = "from bysjglxt_topic where topic_examine_state = '已通过'";
+		String hql = "from bysjglxt_topic where topic_examine_state = '审核已通过'";
 		Query query = session.createQuery(hql);
 		listAllTopic = query.list();
 		return listAllTopic;
@@ -380,7 +380,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
 		}
 		if (studentOrTeacher == 2) {
-			hql = hql + " and topic_examine_state = '已通过' ";
+			hql = hql + " and topic_examine_state = '审核已通过' ";
 		}
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic_teacher = '" + topicManagementVO.getTeacher() + "'";
@@ -577,7 +577,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public List<bysjglxt_topic> VO_Topic_By_StudentPageAndSearch(TopicInformationManagementVO topicManagementVO,
 			String studentUserId) {
 		Session session = getSession();
-		String hql = "select bysjglxt_topic from bysjglxt_topic topic,bysjglxt_topic_select select where select.topic_select_topic=topic.topic_id";
+		String hql = "select topic from bysjglxt_topic topic,bysjglxt_topic_select selecttopic where selecttopic.topic_select_topic=topic.topic_id";
 		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
 			hql = hql + " and topic.topic_source='" + topicManagementVO.getSource().trim() + "'";
 		}
@@ -593,8 +593,9 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
 			hql = hql + " and topic.topic_examine_state = '" + topicManagementVO.getState() + "'";
 		}
-		hql = hql + " and select.topic_select_student = '" + studentUserId + "'";
+		hql = hql + " and selecttopic.topic_select_student = '" + studentUserId + "'";
 		hql = hql + " order by topic.topic_gmt_create desc";
+		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
 		query.setMaxResults(topicManagementVO.getPageSize());
