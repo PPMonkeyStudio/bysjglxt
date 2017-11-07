@@ -20,23 +20,26 @@ public interface GraduationProjectManagementService {
 	 * 
 	 */
 	public int startGraduationProjectProcess(String studentId);
-	
-	
-	/**
-	 * 
-	 * 	点击我的毕业设计
-	 * 
-	 */
-	
-	
-	
 
 	/**
-	 * @说明 更改任务书
+	 * 
+	 * 点击我的毕业设计
+	 * 
+	 */
+
+	/**
+	 * @说明 学生更改任务书
 	 * @param bysjglxt_taskbook
 	 * @return 1.创建成功 2.创建失败
 	 */
-	public int updateTaskbook(bysjglxt_taskbook updateTaskbook);
+	public int updateStudentTaskbook(bysjglxt_taskbook updateTaskbook);
+
+	/**
+	 * @说明 教师更改任务书
+	 * @param bysjglxt_taskbook
+	 * @return 1.创建成功 2.创建失败
+	 */
+	public int updateTeacherTaskbook(bysjglxt_taskbook updateTaskbook);
 
 	/**
 	 * @说明 更改开题报告表
@@ -46,47 +49,94 @@ public interface GraduationProjectManagementService {
 	public int updateReportOpening(bysjglxt_report_opening updateReportOpening);
 
 	/**
-	 * @说明 更改前期进展情况记录
+	 * @说明 学生更改前期进展情况记录
 	 * @param updateRecordProgress
 	 * @return 1.成功 2.失败
 	 */
-	public int updateRecordProgressEarlystage(bysjglxt_record_progress updateRecordProgress);
+	public int updateStudentRecordProgressEarlystage(bysjglxt_record_progress updateRecordProgress);
 
 	/**
-	 * @说明 更改中期进展情况记录
+	 * @说明 教师更改前期进展情况记录
+	 * @param updateRecordProgress
+	 * @return 1.成功 2.失败
+	 */
+	public int updateTeacherRecordProcessEarlystage(bysjglxt_record_progress updateRecordProgress);
+
+	/**
+	 * @说明 学生更改中期进展情况记录
 	 * @param updateRecordProgress
 	 * @return
 	 */
-	public int updateRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress);
+	public int updateStudentRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress);
 
 	/**
-	 * @说明 更改后期进展情况记录
+	 * @说明 教师更改中期进展情况记录
 	 * @param updateRecordProgress
 	 * @return
 	 */
-	public int updateRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgress);
-
+	public int updateTeacherRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress);
+	
+	
 	/**
-	 * @说明 更改完善期进展情况记录
+	 * @说明 学生更改后期进展情况记录
 	 * @param updateRecordProgress
 	 * @return
 	 */
-	public int updateRecordProgressPerfect(bysjglxt_record_progress updateRecordProgress);
+	public int updateStudentRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgress);
 
 	/**
-	 * @说明 更改个人学习工作总结
+	 * @说明 教师更改后期进展情况记录
+	 * @param updateRecordProgress
+	 * @return
+	 */
+	public int updateTeacherRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgress);
+	
+	
+	/**
+	 * @说明 学生更改完善期进展情况记录
+	 * @param updateRecordProgress
+	 * @return
+	 */
+	public int updateStudentRecordProgressPerfect(bysjglxt_record_progress updateRecordProgress);
+
+	/**
+	 * @说明 教师更改完善期进展情况记录
+	 * @param updateRecordProgress
+	 * @return
+	 */
+	public int updateTeacherRecordProgressPerfect(bysjglxt_record_progress updateRecordProgress);
+	
+	
+	/**
+	 * @说明 学生更改个人学习工作总结
 	 * @param bysjglxt_summary
 	 * @return
 	 */
-	public int updateSummary(bysjglxt_summary bysjglxt_summary);
+	public int updateStudentSummary(bysjglxt_summary bysjglxt_summary);
+	
+	/**
+	 * @说明 教师更改个人学习工作总结
+	 * @param bysjglxt_summary
+	 * @return
+	 */
+	public int updateTeacherSummary(bysjglxt_summary bysjglxt_summary);
+	
 
 	/**
-	 * @说明 更改形式审查表 是 1 否 2 无 3
+	 * @说明 指导教师更改形式审查表 是 1 否 2 无 3
 	 * @param updateExaminationFormal
 	 * @return
 	 */
-	public int updateExaminationFormal(bysjglxt_examination_formal updateExaminationFormal);
+	public int updateTeacherExaminationFormal(bysjglxt_examination_formal updateExaminationFormal);
 
+	/**
+	 * @说明 领导小组长更改形式审查表 是 1 否 2 无 3
+	 * @param updateExaminationFormal
+	 * @return
+	 */
+	public int updateLeaderExaminationFormal(bysjglxt_examination_formal updateExaminationFormal);
+	
+	
 	/**
 	 * @说明 更改指导教师评价表
 	 * @param updateEvaluateTutor
