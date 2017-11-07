@@ -161,15 +161,15 @@
 						<div class="tab-pane" id="tab17">17</div>
 						<div class="tab-pane" id="tab18">18</div>
 						<ul class="pager wizard">
-							<li class="previous first">
+							<!-- <li class="previous first">
 								<a href="#">第一个任务</a>
-							</li>
+							</li> -->
 							<li class="previous">
 								<a href="#">上一个任务</a>
 							</li>
-							<li class="next last">
+							<!-- <li class="next last">
 								<a href="#">最后一个任务</a>
-							</li>
+							</li> -->
 							<li class="next">
 								<a href="#">下一个任务</a>
 							</li>
