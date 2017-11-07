@@ -140,8 +140,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	}
 
+	/**
+	 * 学生更改任务书
+	 */
 	@Override
-	public int updateTaskbook(bysjglxt_taskbook updateTaskbook) {
+	public int updateStudentTaskbook(bysjglxt_taskbook updateTaskbook) {
 		int flag = 2;
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
@@ -149,6 +152,21 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_taskbook.setTaskbook_acontent_required(updateTaskbook.getTaskbook_acontent_required());
 			bysjglxt_taskbook.setTaskbook_reference(updateTaskbook.getTaskbook_reference());
 			bysjglxt_taskbook.setTaskbook_plan(updateTaskbook.getTaskbook_plan());
+			bysjglxt_taskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyInTaskBook(bysjglxt_taskbook);
+		}
+		return flag;
+	}
+
+	/**
+	 * 教研室主任更改任务书
+	 */
+	@Override
+	public int updateTeacherTaskbook(bysjglxt_taskbook updateTaskbook) {
+		int flag = 2;
+		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
+		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
+		if (bysjglxt_taskbook != null) {
 			bysjglxt_taskbook.setTaskbook_opinion(updateTaskbook.getTaskbook_plan());
 			bysjglxt_taskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInTaskBook(bysjglxt_taskbook);
@@ -156,11 +174,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		return flag;
 	}
 
+	/**
+	 * 学生更改开题报告
+	 */
 	@Override
 	public int updateReportOpening(bysjglxt_report_opening updateReportOpening) {
 		int flag = 2;
 		bysjglxt_report_opening bysjglxt_report_opening = new bysjglxt_report_opening();
-		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
 		bysjglxt_report_opening = graduationProjectManagementDao
 				.getReportOpening(updateReportOpening.getReport_opening_id());
 		if (bysjglxt_report_opening != null) {
@@ -173,146 +193,179 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_report_opening
 					.setReport_opening_gmt_modified(updateReportOpening.getReport_opening_gmt_modified());
 			flag = graduationProjectManagementDao.fillEmptyInOpening(bysjglxt_report_opening);
-
-			if (flag != 2) {
-				// 根据阶段以及学生userId查找出进展情况记录表数据
-				bysjglxt_record_progress = graduationProjectManagementDao
-						.findRecordProgressByuserIdAndStage(bysjglxt_report_opening.getReport_opening_student(), "前期");
-				if (bysjglxt_record_progress != null) {
-					bysjglxt_record_progress.setRecord_progress_gmt_stop(TeamUtil.getStringSecond());
-					bysjglxt_record_progress.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
-					flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress);
-				}
-			}
-
 		}
 		return flag;
 	}
 
+	/**
+	 * 学生更改前期情况记录
+	 */
 	@Override
-	public int updateRecordProgressEarlystage(bysjglxt_record_progress updateRecordProgress) {
+	public int updateStudentRecordProgressEarlystage(bysjglxt_record_progress updateRecordProgress) {
 		int flag = 2;
 		bysjglxt_record_progress bysjglxt_record_progress_Earlystage = new bysjglxt_record_progress();
-		bysjglxt_record_progress bysjglxt_record_progress_Metaphase = new bysjglxt_record_progress();
 		bysjglxt_record_progress_Earlystage = graduationProjectManagementDao
 				.getRecordProgress(updateRecordProgress.getRecord_progress_id());
 		if (bysjglxt_record_progress_Earlystage != null) {
-			bysjglxt_record_progress_Earlystage.setRecord_progress_gmt_stop(TeamUtil.getStringSecond());
 			bysjglxt_record_progress_Earlystage
 					.setRecord_progress_record(updateRecordProgress.getRecord_progress_record());
+			bysjglxt_record_progress_Earlystage.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Earlystage);
+		}
+		return flag;
+	}
+
+	/**
+	 * 老师更改前期情况记录
+	 */
+	@Override
+	public int updateTeacherRecordProcessEarlystage(bysjglxt_record_progress updateRecordProgress) {
+		int flag = 2;
+		bysjglxt_record_progress bysjglxt_record_progress_Earlystage = new bysjglxt_record_progress();
+		bysjglxt_record_progress_Earlystage = graduationProjectManagementDao
+				.getRecordProgress(updateRecordProgress.getRecord_progress_id());
+		if (bysjglxt_record_progress_Earlystage != null) {
 			bysjglxt_record_progress_Earlystage
 					.setRecord_progress_opinion(updateRecordProgress.getRecord_progress_opinion());
 			bysjglxt_record_progress_Earlystage.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Earlystage);
-			if (flag != 2) {
-				bysjglxt_record_progress_Metaphase = graduationProjectManagementDao.findRecordProgressByuserIdAndStage(
-						bysjglxt_record_progress_Earlystage.getRecord_progress_student(), "中期");
-				if (bysjglxt_record_progress_Metaphase != null) {
-					bysjglxt_record_progress_Metaphase.setRecord_progress_gmt_start(TeamUtil.getStringSecond());
-					bysjglxt_record_progress_Metaphase.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
-					flag = graduationProjectManagementDao
-							.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Metaphase);
-				}
-
-			}
 		}
 		return flag;
 	}
 
+	/**
+	 * 学生更改中期记录
+	 */
 	@Override
-	public int updateRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress) {
+	public int updateStudentRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress) {
 		int flag = 2;
 		bysjglxt_record_progress bysjglxt_record_progress_Metaphase = new bysjglxt_record_progress();
-		bysjglxt_record_progress bysjglxt_record_progress_Laterstage = new bysjglxt_record_progress();
 		bysjglxt_record_progress_Metaphase = graduationProjectManagementDao
 				.getRecordProgress(updateRecordProgress.getRecord_progress_id());
 		if (bysjglxt_record_progress_Metaphase != null) {
-			bysjglxt_record_progress_Metaphase.setRecord_progress_gmt_stop(TeamUtil.getStringSecond());
 			bysjglxt_record_progress_Metaphase
 					.setRecord_progress_record(updateRecordProgress.getRecord_progress_record());
+			bysjglxt_record_progress_Metaphase.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Metaphase);
+		}
+		return flag;
+	}
+
+	/**
+	 * 教师更改中期记录
+	 */
+	@Override
+	public int updateTeacherRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress) {
+		int flag = 2;
+		bysjglxt_record_progress bysjglxt_record_progress_Metaphase = new bysjglxt_record_progress();
+		bysjglxt_record_progress_Metaphase = graduationProjectManagementDao
+				.getRecordProgress(updateRecordProgress.getRecord_progress_id());
+		if (bysjglxt_record_progress_Metaphase != null) {
 			bysjglxt_record_progress_Metaphase
 					.setRecord_progress_opinion(updateRecordProgress.getRecord_progress_opinion());
 			bysjglxt_record_progress_Metaphase.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Metaphase);
-			if (flag != 2) {
-				bysjglxt_record_progress_Laterstage = graduationProjectManagementDao.findRecordProgressByuserIdAndStage(
-						bysjglxt_record_progress_Metaphase.getRecord_progress_student(), "后期");
-				if (bysjglxt_record_progress_Laterstage != null) {
-					bysjglxt_record_progress_Laterstage.setRecord_progress_gmt_start(TeamUtil.getStringSecond());
-					bysjglxt_record_progress_Laterstage.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
-					flag = graduationProjectManagementDao
-							.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Laterstage);
-				}
-			}
 		}
 		return flag;
 	}
 
+	/**
+	 * 学生修改后期记录
+	 */
 	@Override
-	public int updateRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgress) {
+	public int updateStudentRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgress) {
 		int flag = 2;
 		bysjglxt_record_progress bysjglxt_record_progress_Laterstage = new bysjglxt_record_progress();
-		bysjglxt_record_progress bysjglxt_record_progress_Perfect = new bysjglxt_record_progress();
 		bysjglxt_record_progress_Laterstage = graduationProjectManagementDao
 				.getRecordProgress(updateRecordProgress.getRecord_progress_id());
 		if (bysjglxt_record_progress_Laterstage != null) {
-			bysjglxt_record_progress_Laterstage.setRecord_progress_gmt_stop(TeamUtil.getStringSecond());
 			bysjglxt_record_progress_Laterstage
 					.setRecord_progress_record(updateRecordProgress.getRecord_progress_record());
+			bysjglxt_record_progress_Laterstage.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Laterstage);
+		}
+		return flag;
+	}
+
+	/**
+	 * 教师修改后期记录
+	 */
+	@Override
+	public int updateTeacherRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgress) {
+		int flag = 2;
+		bysjglxt_record_progress bysjglxt_record_progress_Laterstage = new bysjglxt_record_progress();
+		bysjglxt_record_progress_Laterstage = graduationProjectManagementDao
+				.getRecordProgress(updateRecordProgress.getRecord_progress_id());
+		if (bysjglxt_record_progress_Laterstage != null) {
 			bysjglxt_record_progress_Laterstage
 					.setRecord_progress_opinion(updateRecordProgress.getRecord_progress_opinion());
 			bysjglxt_record_progress_Laterstage.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Laterstage);
-			if (flag != 2) {
-				bysjglxt_record_progress_Perfect = graduationProjectManagementDao.findRecordProgressByuserIdAndStage(
-						bysjglxt_record_progress_Laterstage.getRecord_progress_student(), "完善");
-				if (bysjglxt_record_progress_Perfect != null) {
-					bysjglxt_record_progress_Perfect.setRecord_progress_gmt_start(TeamUtil.getStringSecond());
-					bysjglxt_record_progress_Perfect.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
-					flag = graduationProjectManagementDao
-							.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Perfect);
-				}
-			}
-
 		}
 		return flag;
 	}
 
+	/**
+	 * 学生修改完善期信息
+	 */
 	@Override
-	public int updateRecordProgressPerfect(bysjglxt_record_progress updateRecordProgress) {
+	public int updateStudentRecordProgressPerfect(bysjglxt_record_progress updateRecordProgress) {
 		int flag = 2;
 		bysjglxt_record_progress bysjglxt_record_progress_Perfect = new bysjglxt_record_progress();
-		bysjglxt_summary bysjglxt_summary = new bysjglxt_summary();
 		bysjglxt_record_progress_Perfect = graduationProjectManagementDao
 				.getRecordProgress(updateRecordProgress.getRecord_progress_id());
 		if (bysjglxt_record_progress_Perfect != null) {
-			bysjglxt_record_progress_Perfect.setRecord_progress_gmt_stop(TeamUtil.getStringSecond());
 			bysjglxt_record_progress_Perfect
 					.setRecord_progress_record(updateRecordProgress.getRecord_progress_record());
+			bysjglxt_record_progress_Perfect.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Perfect);
+		}
+		return flag;
+	}
+
+	/**
+	 * 教师修改完善期信息
+	 */
+	@Override
+	public int updateTeacherRecordProgressPerfect(bysjglxt_record_progress updateRecordProgress) {
+		int flag = 2;
+		bysjglxt_record_progress bysjglxt_record_progress_Perfect = new bysjglxt_record_progress();
+		bysjglxt_record_progress_Perfect = graduationProjectManagementDao
+				.getRecordProgress(updateRecordProgress.getRecord_progress_id());
+		if (bysjglxt_record_progress_Perfect != null) {
 			bysjglxt_record_progress_Perfect
 					.setRecord_progress_opinion(updateRecordProgress.getRecord_progress_opinion());
 			bysjglxt_record_progress_Perfect.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Perfect);
-			if (flag != 2) {
-				bysjglxt_summary = graduationProjectManagementDao
-						.findSummaryByUserId(bysjglxt_record_progress_Perfect.getRecord_progress_id());
-				bysjglxt_summary.setSummary_gmt_start(TeamUtil.getStringSecond());
-				bysjglxt_summary.setSummary_gmt_modified(TeamUtil.getStringSecond());
-				flag = graduationProjectManagementDao.fillEmptyInSummary(bysjglxt_summary);
-			}
 		}
-
 		return flag;
 	}
 
+	/**
+	 * 学生修改个人学习工作总结
+	 */
 	@Override
-	public int updateSummary(bysjglxt_summary updateSummary) {
+	public int updateStudentSummary(bysjglxt_summary updateSummary) {
 		int flag = 2;
 		bysjglxt_summary bysjglxt_summary = new bysjglxt_summary();
 		bysjglxt_summary = graduationProjectManagementDao.findSummaryById(updateSummary.getSummary_id());
 		if (bysjglxt_summary != null) {
-			bysjglxt_summary.setSummary_gmt_stop(TeamUtil.getStringSecond());
 			bysjglxt_summary.setSummary_summary(updateSummary.getSummary_summary());
+			bysjglxt_summary.setSummary_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyInSummary(bysjglxt_summary);
+		}
+		return flag;
+	}
+
+	/**
+	 * 教师修改个人学习工作总结
+	 */
+	@Override
+	public int updateTeacherSummary(bysjglxt_summary updateSummary) {
+		int flag = 2;
+		bysjglxt_summary bysjglxt_summary = new bysjglxt_summary();
+		bysjglxt_summary = graduationProjectManagementDao.findSummaryById(updateSummary.getSummary_id());
+		if (bysjglxt_summary != null) {
 			bysjglxt_summary.setSummary_opinion(updateSummary.getSummary_opinion());
 			bysjglxt_summary.setSummary_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInSummary(bysjglxt_summary);
@@ -321,7 +374,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	}
 
 	@Override
-	public int updateExaminationFormal(bysjglxt_examination_formal updateExaminationFormal) {
+	public int updateTeacherExaminationFormal(bysjglxt_examination_formal updateExaminationFormal) {
 		int flag = 2;
 		bysjglxt_examination_formal bysjglxt_examination_formal = new bysjglxt_examination_formal();
 		bysjglxt_examination_formal = graduationProjectManagementDao
@@ -369,10 +422,26 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					.setExamination_formal_is_chart(updateExaminationFormal.getExamination_formal_is_chart());
 			bysjglxt_examination_formal
 					.setExamination_formal_is_enclosure(updateExaminationFormal.getExamination_formal_is_enclosure());
-			bysjglxt_examination_formal.setExamination_formal_is_leader_opinion(
-					updateExaminationFormal.getExamination_formal_is_leader_opinion());
 			bysjglxt_examination_formal.setExamination_formal_is_teacher_opinion(
 					updateExaminationFormal.getExamination_formal_is_teacher_opinion());
+			bysjglxt_examination_formal.setExamination_formal_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyInExaminationFormal(bysjglxt_examination_formal);
+		}
+		return flag;
+	}
+
+	/**
+	 * 领导小组更改形式审查表
+	 */
+	@Override
+	public int updateLeaderExaminationFormal(bysjglxt_examination_formal updateExaminationFormal) {
+		int flag = 2;
+		bysjglxt_examination_formal bysjglxt_examination_formal = new bysjglxt_examination_formal();
+		bysjglxt_examination_formal = graduationProjectManagementDao
+				.findExaminationFormalById(updateExaminationFormal.getExamination_formal_id());
+		if (bysjglxt_examination_formal != null) {
+			bysjglxt_examination_formal.setExamination_formal_is_leader_opinion(
+					updateExaminationFormal.getExamination_formal_is_leader_opinion());
 			bysjglxt_examination_formal.setExamination_formal_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInExaminationFormal(bysjglxt_examination_formal);
 		}
