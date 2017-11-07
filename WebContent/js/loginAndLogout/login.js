@@ -1,5 +1,9 @@
 function login() {
 
+	var button_login = document.getElementById("button_login");
+	button_login.disabled = "disabled";
+	button_login.innerHTML = '<i class="fa fa-refresh fa-spin"></i> 正在登录...';
+
 	var login_username = document.getElementById("login_username");
 	var login_password = document.getElementById("login_password");
 
