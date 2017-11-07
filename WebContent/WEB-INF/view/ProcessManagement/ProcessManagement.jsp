@@ -9,26 +9,29 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type"
+	content="text/html; charset=UTF-8">
 <!--页面公用-------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/List_ProcessDefinition.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/CreatProcessDefinition.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/CreatTaskDefinition.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/ProcessDefinitionDetail.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/UpdateProcessDefinition.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/ProcessManagement/Delete_Process.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>流程</title>
 </head>
 <body>
-	<s:action name="LoginLogoutManagement_navbar" namespace="/loginLogout"
-		executeResult="true" />
+	<s:action name="LoginLogoutManagement_navbar"
+		namespace="/loginLogout" executeResult="true" />
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
@@ -51,7 +54,8 @@
 			</div>
 			<div class="panel-body"></div>
 			<div style="padding: 0 0 20px 20px">
-				<button class="btn btn-default" onclick="CreatTaskDefinition()">
+				<button class="btn btn-default"
+					onclick="CreatTaskDefinition()">
 					<i class="fa fa-plus-square" aria-hidden="true"></i>
 					新增任务节点
 				</button>
@@ -74,7 +78,8 @@
 						</button>
 					</div>
 				</div>
-				<table id="table_processDefinition" class="table table-hover "
+				<table id="table_processDefinition"
+					class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
@@ -96,7 +101,7 @@
 				</div>
 				<div style="height: 34px; margin: 0 0 20px 0;">
 					<button class="leader_control btn btn-danger"
-						onclick="deleteProcessDefinitionList()"
+						onclick="Delete_Process()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-trash-o"></i>
 						删除所选

@@ -2,7 +2,6 @@ package com.bysjglxt.domain.VO;
 
 import java.util.List;
 
-import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 import com.bysjglxt.domain.DTO.ProcessDetailDTO;
 
 public class ProcessManagementVO {
@@ -31,12 +30,12 @@ public class ProcessManagementVO {
 	// 搜索
 	private String search;
 
-	// 状态
+	// 筛选状态
 	private int state;
 
-	// 流程实例ID
+	// 筛选搜索流程实例ID
 	private String processInstance;
-	// 流程定义ID
+	// 筛选流程定义ID
 	private String processDefinition;
 
 	@Override

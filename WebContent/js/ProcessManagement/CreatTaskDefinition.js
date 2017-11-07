@@ -1,7 +1,7 @@
 function CreatTaskDefinition() {
 	$
 			.confirm({
-				title : '创建新的流程定义',
+				title : '创建任务节点',
 				content : '<table  class="table table-hover" style="text-align: center;">'
 						+ '<tbody><br>'
 						+ '<tr>任务定义名称：'
@@ -9,6 +9,7 @@ function CreatTaskDefinition() {
 						+ '</tr><br>'
 						+ '<tr>选择任务的结构：'
 						+ '<select  id="select_task_definition_type" class="form-control" style="width: auto;margin:10px 0 10px;">'
+						+ '<option value="1">顺序结构</option>'
 						+ '<option value="2">选择结构</option>'
 						+ '</select>'
 						+ '</tr><br>'
@@ -22,7 +23,7 @@ function CreatTaskDefinition() {
 						+ '</select>'
 						+ '</tr><br>'
 						+ '<tr>选择任务返回的节点：'
-						+ '<select  id="" class="form-control" style="width: auto;margin:10px 0 10px;">'
+						+ '<select  id="select_task_definition_return" class="form-control" style="width: auto;margin:10px 0 10px;">'
 						+ '</select>' + '</tr>' + '</tbody>' + '</table>',
 				buttons : {
 					'确认创建' : function() {
@@ -39,63 +40,53 @@ function CreatTaskDefinition() {
 							}
 						}
 						var formData = new FormData();
-
-						/*
-						 * 
-						 */
 						formData
 								.append(
 										"newTaskDefinition.task_definition_name",
 										document
 												.getElementById("input_task_definition_name").value);
-						/*
-						 * 
-						 */
 						formData
 								.append(
 										"newTaskDefinition.task_definition_type",
 										document
 												.getElementById("select_task_definition_type").value);
-						/*
-						 * 
-						 */
 						formData
 								.append(
 										"newTaskDefinition.task_definition_process_definition",
 										json_ProcessDefinition.bysjglxtProcessDefinition.process_definition_id);
-						/*
-						 * 
-						 */
 						formData
 								.append(
 										"newTaskDefinition.task_definition_role",
 										document
 												.getElementById("select_task_definition_role").value);
-						/*
-						 * 
-						 */
-
-						/*
-						 * 
-						 */
-
-						/*
-						 * 
-						 */
-
-						/*
-						 * 
-						 */
+						formData
+								.append(
+										"newTaskDefinition.task_definition_return",
+										document
+												.getElementById("select_task_definition_return").value);
 						xhr
 								.open("POST",
 										"/bysjglxt/process/ProcessManagement_CreatTaskDefinition");
+						alert(formData.toString());
 						xhr.send(formData);
 
 					},
 					'取消' : function() {
 					}
 
+				},
+				// 模态框加载完成之后触发的方法
+				onContentReady : function() {
+					var select_task_definition_return = document
+							.getElementById("select_task_definition_return");
+					for (var num = 0; num < json_ProcessDefinition.List_bysjglxtTaskDefinition.length; num++) {
+						var option = document.createElement("option");
+						option
+								.appendChild(document
+										.createTextNode(json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_name));
+						option.value = json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_id;
+						select_task_definition_return.appendChild(option);
+					}
 				}
 			});
-
 }

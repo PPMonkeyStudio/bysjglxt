@@ -1,5 +1,4 @@
 var json_ProcessDefinition = null;
-
 /*
  * 流程定义详细信息
  */
@@ -90,7 +89,14 @@ function ProcessDefinitionDetail(ProcessDefinitionID) {
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
-					new_td.innerHTML = json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_return;
+
+					for (var num2 = 0; num2 < json_ProcessDefinition.List_bysjglxtTaskDefinition.length; num2++) {
+						if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_return == json_ProcessDefinition.List_bysjglxtTaskDefinition[num2].task_definition_id) {
+							new_td.innerHTML = json_ProcessDefinition.List_bysjglxtTaskDefinition[num2].task_definition_name;
+							break;
+						}
+					}
+
 					new_tr.appendChild(new_td);
 
 				}

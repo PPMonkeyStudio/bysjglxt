@@ -10,11 +10,16 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
+import com.bysjglxt.domain.VO.ProcessManagementVO;
 import com.bysjglxt.service.ProcessManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ProcessManagementAction extends ActionSupport implements ServletResponseAware, ServletRequestAware {
@@ -24,6 +29,7 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	private HttpServletResponse http_response;
 
 	private HttpServletRequest http_request;
+
 	/*
 	 * 
 	 * 
@@ -36,6 +42,20 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	private bysjglxt_task_definition newTaskDefinition;
 
 	/*
+	 * 删除所选
+	 */
+	private List<String> ListDeleteProcessID;
+
+	/*
+	 * 启动流程
+	 */
+	private bysjglxt_process_instance bootProcess;
+
+	/*
+	 * 我的任务
+	 */
+	private ProcessManagementVO processManagementVO;
+	/*
 	 * 
 	 * 
 	 * 
@@ -43,13 +63,15 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	 * 
 	 * 
 	 */
-	public String ProcessDefinitionDetailPage() {
-		return "ProcessDefinitionDetailPage";
-	}
 
 	public String ProcessDefinitionListPage() {
 
 		return "ProcessDefinitionListPage";
+	}
+
+	public String MyTask() {
+
+		return "MyTask";
 	}
 
 	/**
@@ -64,6 +86,39 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(ListProcessDefinition));
 
+	}
+
+	public void ListMyTask() throws IOException {
+		System.out.println("ListMyTask");
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+
+			System.out.println(
+					"teacher:" + ((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+							.getBysjglxtTeacherUser().getUser_teacher_id());
+
+			processManagementVO = processManagementService.getMyTaskByPage(processManagementVO,
+					((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+							.getBysjglxtTeacherUser().getUser_teacher_id());
+
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+
+			System.out.println("student:"
+					+ ((StudentInformationDTO) (ActionContext.getContext().getSession().get("userStudentDTO")))
+							.getBysjglxtStudentUser().getUser_student_id());
+
+			processManagementVO = processManagementService.getMyTaskByPage(processManagementVO,
+					((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+							.getBysjglxtStudentUser().getUser_student_id());
+
+		} else {
+			return;
+		}
+		System.out.println(gson.toJson(processManagementVO));
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(processManagementVO));
 	}
 
 	public void getProcessDefinitionDTO() throws IOException {
@@ -92,7 +147,6 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	 * @throws IOException
 	 */
 	public void CreatTaskDefinition() throws IOException {
-		System.out.println(newTaskDefinition);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(processManagementService.createSelectTopicTaskDefine(newTaskDefinition));
 
@@ -109,9 +163,25 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		Gson gson = gsonBuilder.create();
 		ProcessDefinitionDetailDTO processDefinitionDetailDTO = processManagementService
 				.processDefinitionDetailDTO(processDefinitionId);
+		System.out.println(gson.toJson(processDefinitionDetailDTO));
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(processDefinitionDetailDTO));
 	}
+
+	/**
+	 * 
+	 * @throws IOException
+	 */
+	public void DeleteProcess() throws IOException {
+		processManagementService.deleteProcessDefinition(ListDeleteProcessID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	public void BootProcess() {
+
+	}
+
 	/*
 	 * 
 	 */
@@ -176,6 +246,30 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 
 	public void setNewTaskDefinition(bysjglxt_task_definition newTaskDefinition) {
 		this.newTaskDefinition = newTaskDefinition;
+	}
+
+	public List<String> getListDeleteProcessID() {
+		return ListDeleteProcessID;
+	}
+
+	public void setListDeleteProcessID(List<String> listDeleteProcessID) {
+		ListDeleteProcessID = listDeleteProcessID;
+	}
+
+	public bysjglxt_process_instance getBootProcess() {
+		return bootProcess;
+	}
+
+	public void setBootProcess(bysjglxt_process_instance bootProcess) {
+		this.bootProcess = bootProcess;
+	}
+
+	public ProcessManagementVO getProcessManagementVO() {
+		return processManagementVO;
+	}
+
+	public void setProcessManagementVO(ProcessManagementVO processManagementVO) {
+		this.processManagementVO = processManagementVO;
 	}
 
 }

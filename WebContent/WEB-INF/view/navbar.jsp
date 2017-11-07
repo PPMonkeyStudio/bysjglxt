@@ -11,6 +11,7 @@
 <head>
 <meta http-equiv="Content-Type"
 	content="text/html; charset=UTF-8">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <!--------------------------------------------------------------------------------->
 <script src="<%=basePath%>js/jquery-3.1.1.min.js"></script>
 <%-- <script src="<%=basePath%>js/jquery-2.1.0.min.js"></script> --%>
@@ -115,7 +116,7 @@
 								href="<%=basePath%>process/ProcessManagement_ProcessDefinitionListPage">流程列表</a>
 						</li>
 						<li>
-							<a href="#">我的任务</a>
+							<a href="<%=basePath%>process/ProcessManagement_MyTask">我的任务</a>
 						</li>
 					</ul>
 				</li>

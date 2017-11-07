@@ -24,10 +24,58 @@ public class GraduationProjectManagementAction extends ActionSupport
 	public String MyGraduationProjectPage() {
 		return "MyGraduationProjectPage";
 	}
+
 	/*
 	 * 
 	 */
 
+	public void get_Taskbook() {
+
+	}
+
+	public void get_ReportOpening() {
+
+	}
+
+	public void get_RecordProgress_1() {
+
+	}
+
+	public void get_RecordProgress_2() {
+
+	}
+
+	public void get_RecordProgress_3() {
+
+	}
+
+	public void get_RecordProgress_4() {
+
+	}
+
+	public void get_Summary() {
+
+	}
+
+	public void get_ExaminationFormal() {
+
+	}
+
+	public void get_EvaluateTutor() {
+
+	}
+
+	public void get_EvaluateReview() {
+
+	}
+
+	public void get_Defence() {
+
+	}
+
+	/*
+	 * 
+	 */
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -35,7 +83,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * org.apache.struts2.interceptor.ServletRequestAware#setServletRequest(
 	 * javax.servlet.http.HttpServletRequest)
 	 */
-
 	@Override
 	public void setServletRequest(HttpServletRequest http_request) {
 		this.http_request = http_request;
