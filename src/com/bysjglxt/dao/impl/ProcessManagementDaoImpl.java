@@ -3,6 +3,7 @@ package com.bysjglxt.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,6 +16,9 @@ import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.VO.ProcessManagementVO;
 
 public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	private SessionFactory sessionFactory;
@@ -115,8 +119,8 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	public List<bysjglxt_task_definition> getListBelongProcess(String process_definition_id) {
 		Session session = getSession();
 		List<bysjglxt_task_definition> bysjglxt_task_definition = new ArrayList<bysjglxt_task_definition>();
-		String hql = "from bysjglxt_task_definition where task_definition_process_definition = '"
-				+ process_definition_id + "'";
+		String hql = "from bysjglxt_task_definition where task_definition_process_definition = ' "
+				+ process_definition_id + "' order by task_definition_gmt_create asc";
 		Query query = session.createQuery(hql);
 		bysjglxt_task_definition = query.list();
 		return bysjglxt_task_definition;
@@ -145,4 +149,245 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		}
 		return flag;
 	}
+
+	@Override
+	public List<bysjglxt_task_instance> getListTaskInstanceByPager(ProcessManagementVO processManagementVo,
+			String userID) {
+		Session session = getSession();
+		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
+		String hql = "select taskInstance from bysjglxt_task_instance taskInstance,bysjglxt_task_definition taskDefinition,bysjglxt_process_definition processDefinition where taskInstance.task_instance_task_definition=taskDefinition.task_definition_id,processDefinition.process_definition_id=taskDefinition.task_definition_process_definition";
+		// 筛选我的
+		hql = hql + " and task_instance_role='" + userID + "'";
+		// 搜索
+		if (processManagementVo.getSearch() != null && processManagementVo.getSearch().trim().length() > 0) {
+			String search = "%" + processManagementVo.getSearch().trim() + "%";
+			hql = hql + " and taskDefinition.task_definition_name like '" + search + "'";
+		}
+		// 状态
+		if (processManagementVo.getState() != 0) {
+			hql = hql + " and taskInstance.task_instance_state='" + processManagementVo.getState() + "'";
+		}
+		// 据流程实例ID筛选
+		if (processManagementVo.getProcessInstance() != null
+				&& processManagementVo.getProcessInstance().trim().length() > 0) {
+			hql = hql + " and taskInstance.task_instance_process_instance='"
+					+ processManagementVo.getProcessInstance().trim() + "'";
+		}
+		// 根据流程定义ID筛选
+		if (processManagementVo.getProcessDefinition() != null
+				&& processManagementVo.getProcessDefinition().trim().length() > 0) {
+			hql = hql + " and processDefinition.process_definition_id='"
+					+ processManagementVo.getProcessDefinition().trim() + "'";
+		}
+		hql = hql + " order by taskInstance.task_instance_state";
+		System.out.println(hql);
+		Query query = session.createQuery(hql);
+		query.setFirstResult((processManagementVo.getPageIndex() - 1) * processManagementVo.getPageSize());
+		query.setMaxResults(processManagementVo.getPageSize());
+		listTaskInstance = query.list();
+		session.clear();
+		return listTaskInstance;
+	}
+
+	// 根据任务定义Id获取任务定义
+	@Override
+	public bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition) {
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_definition where task_definition_id = '" + task_instance_task_definition + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
+		return bysjglxt_task_definition;
+	}
+
+	// 根据流程实例ID获取流程实例对象
+	@Override
+	public bysjglxt_process_instance getProcessInstanceById(String task_instance_process_instance) {
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_instance where process_instance_id = '" + task_instance_process_instance
+				+ "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		return bysjglxt_process_instance;
+	}
+
+	@Override
+	public List<bysjglxt_task_instance> getAllTaskList(ProcessManagementVO processManagementVo, String userID) {
+		Session session = getSession();
+		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
+		String hql = "select taskInstance from bysjglxt_task_instance taskInstance,bysjglxt_task_definition taskDefinition,bysjglxt_process_definition processDefinition where taskInstance.task_instance_task_definition=taskDefinition.task_definition_id,processDefinition.process_definition_id=taskDefinition.task_definition_process_definition";
+		// 筛选我的
+		hql = hql + " and task_instance_role='" + userID + "'";
+		// 搜索
+		if (processManagementVo.getSearch() != null && processManagementVo.getSearch().trim().length() > 0) {
+			String search = "%" + processManagementVo.getSearch().trim() + "%";
+			hql = hql + " and taskDefinition.task_definition_name like '" + search + "'";
+		}
+		// 状态
+		if (processManagementVo.getState() != 0) {
+			hql = hql + " and taskInstance.task_instance_state='" + processManagementVo.getState() + "'";
+		}
+		// 据流程实例ID筛选
+		if (processManagementVo.getProcessInstance() != null
+				&& processManagementVo.getProcessInstance().trim().length() > 0) {
+			hql = hql + " and taskInstance.task_instance_process_instance='"
+					+ processManagementVo.getProcessInstance().trim() + "'";
+		}
+		// 根据流程定义ID筛选
+		if (processManagementVo.getProcessDefinition() != null
+				&& processManagementVo.getProcessDefinition().trim().length() > 0) {
+			hql = hql + " and processDefinition.process_definition_id='"
+					+ processManagementVo.getProcessDefinition().trim() + "'";
+		}
+		hql = hql + " order by taskInstance.task_instance_state";
+		Query query = session.createQuery(hql);
+		listTaskInstance = query.list();
+		session.clear();
+		return listTaskInstance;
+	}
+
+	@Override
+	public bysjglxt_task_instance getTaskInstanceByProcessInstanceIdAndTaskDefinitionId(String process_instance_id,
+			String task_definition_father) {
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + process_instance_id
+				+ "' and task_instance_task_definition = '" + task_definition_father + "'";
+		System.out.println(hql);
+		Query query = session.createQuery(hql);
+		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
+		return bysjglxt_task_instance;
+	}
+
+	@Override
+	public bysjglxt_topic_select getStudentSelectTopicByStudentUserID(String operation) {
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_student = '" + operation + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		return bysjglxt_topic_select;
+	}
+
+	@Override
+	public bysjglxt_teacher_user getTeacherUserByNum(String topic_select_teacher_tutor) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_num = '" + topic_select_teacher_tutor + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		return bysjglxt_teacher_user;
+	}
+
+	@Override
+	public bysjglxt_section getSectionById(String user_section_id) {
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		Session session = getSession();
+		String hql = "from bysjglxt_section where section_id = '" + user_section_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		return bysjglxt_section;
+	}
+
+	@Override
+	public List<bysjglxt_leader> getListLeader() {
+		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
+		Session session = getSession();
+		String hql = "from bysjglxt_leader";
+		Query query = session.createQuery(hql);
+		listLeader = query.list();
+		return listLeader;
+	}
+
+	@Override
+	public List<bysjglxt_process_instance> getListProcessInstanceByDefinitionId(String processDefinitionId) {
+		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_instance where process_instance_process_definition = '"
+				+ processDefinitionId + "'";
+		Query query = session.createQuery(hql);
+		listProcessInstance = query.list();
+		return listProcessInstance;
+	}
+
+	// 根据流程实例ID获取任务实例 没必要
+	@Override
+	public List<bysjglxt_task_instance> getListTaskInstanceByProcessInstanceId(String process_instance_id) {
+		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + listTaskInstance + "'";
+		Query query = session.createQuery(hql);
+		listTaskInstance = query.list();
+		return listTaskInstance;
+	}
+
+	// 根据流程实例ID删除任务实例
+	@Override
+	public boolean deleteTaskInstanceByProcessInstance(String process_instance_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete bysjglxt_task_instance where task_instance_process_instance ='" + process_instance_id
+					+ "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	// 根据流程定义ID删除流程实例
+	@Override
+	public boolean deleteProcessInstanceByProcessDefinitionId(String processDefinitionId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete bysjglxt_process_instance where process_instance_process_definition ='"
+					+ processDefinitionId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	// 根据流程定义ID删除任务定义
+	@Override
+	public boolean deleteTaskDefinitionByProcessDefinitionId(String processDefinitionId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete bysjglxt_task_definition where task_definition_process_definition ='"
+					+ processDefinitionId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	// 根据流程定义ID删除流程定义
+	@Override
+	public boolean deleteProcessDefinitionByProcessDefinitionId(String processDefinitionId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete bysjglxt_process_definition where process_definition_id ='" + processDefinitionId
+					+ "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

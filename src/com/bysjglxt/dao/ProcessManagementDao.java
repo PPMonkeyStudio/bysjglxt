@@ -8,6 +8,8 @@ import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
+import com.bysjglxt.domain.DTO.ProcessDetailDTO;
+import com.bysjglxt.domain.VO.ProcessManagementVO;
 
 public interface ProcessManagementDao {
 
@@ -30,6 +32,38 @@ public interface ProcessManagementDao {
 	public bysjglxt_task_instance taskInstanceIsExistId(String operation, String task_definition_id);
 
 	public boolean instanceTask(bysjglxt_task_instance taskInstance);
-	
-	
+
+	public List<bysjglxt_task_instance> getListTaskInstanceByPager(ProcessManagementVO processManagementVo,
+			String userID);
+
+	public bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition);
+
+	public bysjglxt_process_instance getProcessInstanceById(String task_instance_process_instance);
+
+	public List<bysjglxt_task_instance> getAllTaskList(ProcessManagementVO processManagementVo, String userID);
+
+	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceByProcessInstanceIdAndTaskDefinitionId(
+			String process_instance_id, String task_definition_father);
+
+	public com.bysjglxt.domain.DO.bysjglxt_topic_select getStudentSelectTopicByStudentUserID(String operation);
+
+	public com.bysjglxt.domain.DO.bysjglxt_teacher_user getTeacherUserByNum(String topic_select_teacher_tutor);
+
+	public com.bysjglxt.domain.DO.bysjglxt_section getSectionById(String user_teacher_id);
+
+	public List<com.bysjglxt.domain.DO.bysjglxt_leader> getListLeader();
+
+	public List<com.bysjglxt.domain.DO.bysjglxt_process_instance> getListProcessInstanceByDefinitionId(
+			String processDefinitionId);
+
+	public List<bysjglxt_task_instance> getListTaskInstanceByProcessInstanceId(String process_instance_id);
+
+	public boolean deleteTaskInstanceByProcessInstance(String process_instance_id);
+
+	public boolean deleteProcessInstanceByProcessDefinitionId(String processDefinitionId);
+
+	public boolean deleteTaskDefinitionByProcessDefinitionId(String processDefinitionId);
+
+	public boolean deleteProcessDefinitionByProcessDefinitionId(String processDefinitionId);
+
 }
