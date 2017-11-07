@@ -147,7 +147,6 @@ public class TopicInformationManagementAction extends ActionSupport
 			StudentInformationDTO studentInformationDTO = (StudentInformationDTO) ActionContext.getContext()
 					.getSession().get("userStudentDTO");
 			//
-			System.out.println(studentInformationDTO.getBysjglxtStudentUser().getUser_student_id());
 			http_response.getWriter()
 					.write(gson.toJson(topicInformationManagementService.VO_TopicBelongStudent_By_PageAndSearch(
 							topicInformationManagementVO, studentInformationDTO.getBysjglxtStudentUser()
