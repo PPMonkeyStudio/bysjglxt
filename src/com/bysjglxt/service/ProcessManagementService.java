@@ -37,7 +37,8 @@ public interface ProcessManagementService {
 	 * @param selectTopicProcessInstance
 	 * @return
 	 */
-	public int openSelectTopicInstance(String processInstanceName,String process_definition_id, String operation,int processNum);
+	public int openSelectTopicInstance(String processInstanceName, String process_definition_id, String operation,
+			int processNum);
 
 	/**
 	 * 遍历出所有的定义表
@@ -50,16 +51,16 @@ public interface ProcessManagementService {
 	 * 删除流程定义
 	 * 
 	 * @param processDefinitionId
-	 * @return
+	 * @return 1:成功     -4系统繁忙，输入的参数有误 -3删除失败
 	 */
-	public int deleteProcessDefinition(String processDefinitionId);
+	public int deleteProcessDefinition(List<String> listProcessDefinitionId);
 
 	/**
-	 * 点击我的任务，将内容分页显示 
+	 * 点击我的任务，将内容分页显示
+	 * 
 	 * @param processManagementVo
 	 * @return
 	 */
-	public ProcessManagementVO getMyTaskByPage(ProcessManagementVO processManagementVo,String userID);
-	
-	
+	public ProcessManagementVO getMyTaskByPage(ProcessManagementVO processManagementVo, String userID);
+
 }

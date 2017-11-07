@@ -55,6 +55,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		listProcessDefinition = processManagementDao.getAllProcessDefinition();
 		return listProcessDefinition;
 	}
+
 	@Override
 	public int openSelectTopicInstance(String processInstanceName, String process_definition_id, String operation,
 			int processNum) {
@@ -509,10 +510,46 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		return processManagementVo;
 	}
 
+	// 删除流程定义
 	@Override
-	public int deleteProcessDefinition(String processDefinitionId) {
-
-		return 0;
+	public int deleteProcessDefinition(List<String> listProcessDefinitionId) {
+		boolean flag = true;
+		bysjglxt_process_definition bysjglxt_process_definition = null;
+		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
+		List<bysjglxt_task_definition> listProcessDefinition = new ArrayList<bysjglxt_task_definition>();
+		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
+		for (String processDefinitionId : listProcessDefinitionId) {
+			bysjglxt_process_definition = new bysjglxt_process_definition();
+			// 根据流程定义ID获取流程定义对象
+			bysjglxt_process_definition = processManagementDao.getProcessDefinition(processDefinitionId);
+			if (bysjglxt_process_definition == null) {
+				return -3;
+			}
+			// 根据流程定义获取任务定义
+			listProcessDefinition = processManagementDao.getListBelongProcess(processDefinitionId);
+			// 根据流程定义获取流程实例List
+			listProcessInstance = processManagementDao.getListProcessInstanceByDefinitionId(processDefinitionId);
+			for (bysjglxt_process_instance bysjglxt_process_instance : listProcessInstance) {
+				// 根据流程实例删除任务实例
+				flag = processManagementDao
+						.deleteTaskInstanceByProcessInstance(bysjglxt_process_instance.getProcess_instance_id());
+				if (!flag)
+					return -3;
+			}
+			// 根据流程定义ID删除流程实例
+			flag = processManagementDao.deleteProcessInstanceByProcessDefinitionId(processDefinitionId);
+			if (!flag)
+				return -3;
+			// 根据流程定义ID删除任务定义
+			flag = processManagementDao.deleteTaskDefinitionByProcessDefinitionId(processDefinitionId);
+			if (!flag)
+				return -3;
+			// 删除流程定义
+			flag = processManagementDao.deleteProcessDefinitionByProcessDefinitionId(processDefinitionId);
+			if (!flag)
+				return -3;
+		}
+		return 1;
 	}
 
 }

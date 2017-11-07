@@ -3,6 +3,7 @@ package com.bysjglxt.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -118,8 +119,8 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	public List<bysjglxt_task_definition> getListBelongProcess(String process_definition_id) {
 		Session session = getSession();
 		List<bysjglxt_task_definition> bysjglxt_task_definition = new ArrayList<bysjglxt_task_definition>();
-		String hql = "from bysjglxt_task_definition where task_definition_process_definition = '"
-				+ process_definition_id + "'";
+		String hql = "from bysjglxt_task_definition where task_definition_process_definition = ' "
+				+ process_definition_id + "' order by task_definition_gmt_create asc";
 		Query query = session.createQuery(hql);
 		bysjglxt_task_definition = query.list();
 		return bysjglxt_task_definition;
@@ -199,6 +200,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		return bysjglxt_task_definition;
 	}
 
+	// 根据流程实例ID获取流程实例对象
 	@Override
 	public bysjglxt_process_instance getProcessInstanceById(String task_instance_process_instance) {
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
@@ -296,6 +298,96 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Query query = session.createQuery(hql);
 		listLeader = query.list();
 		return listLeader;
+	}
+
+	@Override
+	public List<bysjglxt_process_instance> getListProcessInstanceByDefinitionId(String processDefinitionId) {
+		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_instance where process_instance_process_definition = '"
+				+ processDefinitionId + "'";
+		Query query = session.createQuery(hql);
+		listProcessInstance = query.list();
+		return listProcessInstance;
+	}
+
+	// 根据流程实例ID获取任务实例 没必要
+	@Override
+	public List<bysjglxt_task_instance> getListTaskInstanceByProcessInstanceId(String process_instance_id) {
+		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + listTaskInstance + "'";
+		Query query = session.createQuery(hql);
+		listTaskInstance = query.list();
+		return listTaskInstance;
+	}
+
+	// 根据流程实例ID删除任务实例
+	@Override
+	public boolean deleteTaskInstanceByProcessInstance(String process_instance_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete bysjglxt_task_instance where task_instance_process_instance ='" + process_instance_id
+					+ "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	// 根据流程定义ID删除流程实例
+	@Override
+	public boolean deleteProcessInstanceByProcessDefinitionId(String processDefinitionId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete bysjglxt_process_instance where process_instance_process_definition ='"
+					+ processDefinitionId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	// 根据流程定义ID删除任务定义
+	@Override
+	public boolean deleteTaskDefinitionByProcessDefinitionId(String processDefinitionId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete bysjglxt_task_definition where task_definition_process_definition ='"
+					+ processDefinitionId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	// 根据流程定义ID删除流程定义
+	@Override
+	public boolean deleteProcessDefinitionByProcessDefinitionId(String processDefinitionId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete bysjglxt_process_definition where process_definition_id ='" + processDefinitionId
+					+ "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

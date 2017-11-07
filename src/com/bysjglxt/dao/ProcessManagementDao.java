@@ -33,7 +33,8 @@ public interface ProcessManagementDao {
 
 	public boolean instanceTask(bysjglxt_task_instance taskInstance);
 
-	public List<bysjglxt_task_instance> getListTaskInstanceByPager(ProcessManagementVO processManagementVo,String userID);
+	public List<bysjglxt_task_instance> getListTaskInstanceByPager(ProcessManagementVO processManagementVo,
+			String userID);
 
 	public bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition);
 
@@ -52,5 +53,17 @@ public interface ProcessManagementDao {
 
 	public List<com.bysjglxt.domain.DO.bysjglxt_leader> getListLeader();
 
-	
+	public List<com.bysjglxt.domain.DO.bysjglxt_process_instance> getListProcessInstanceByDefinitionId(
+			String processDefinitionId);
+
+	public List<bysjglxt_task_instance> getListTaskInstanceByProcessInstanceId(String process_instance_id);
+
+	public boolean deleteTaskInstanceByProcessInstance(String process_instance_id);
+
+	public boolean deleteProcessInstanceByProcessDefinitionId(String processDefinitionId);
+
+	public boolean deleteTaskDefinitionByProcessDefinitionId(String processDefinitionId);
+
+	public boolean deleteProcessDefinitionByProcessDefinitionId(String processDefinitionId);
+
 }
