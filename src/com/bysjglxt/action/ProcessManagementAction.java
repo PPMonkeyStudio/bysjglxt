@@ -113,10 +113,7 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 					((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 							.getBysjglxtStudentUser().getUser_student_id());
 
-		} else {
-			return;
 		}
-		System.out.println(gson.toJson(processManagementVO));
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(processManagementVO));
 	}

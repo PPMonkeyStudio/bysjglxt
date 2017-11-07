@@ -61,8 +61,12 @@ function getUserSessionForAjax() {
 									List_MyTopic_By_PageAndSearch(1);
 								} catch (e) {
 									try {
-										List_MyTask(1);
+										List_ProcessDefinition(1);
 									} catch (e) {
+										try {
+											List_MyTask(1);
+										} catch (e) {
+										}
 									}
 								}
 							}
