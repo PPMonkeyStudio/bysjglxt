@@ -232,6 +232,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		// 获得符合条件的10条任务实例数据
 		list_bysjglxtTaskInstance = processManagementDao.getListTaskInstanceByPager(processManagementVo, userID);
 		// 遍历10条分别封装其他对象
+		System.out.println(list_bysjglxtTaskInstance.size());
 		for (bysjglxt_task_instance bysjglxt_task_instance : list_bysjglxtTaskInstance) {
 			bysjglxtTaskDefinition = new bysjglxt_task_definition();
 			bysjglxtProcessInstance = new bysjglxt_process_instance();
@@ -267,7 +268,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		processManagementVo.setList_ProcessDetailDTO(list_ProcessInstanceDetailDTO);
 		// 获得符合条件的总记录数
 		list_bysjglxtTaskInstance = processManagementDao.getAllTaskList(processManagementVo, userID);
-		System.out.println("总记录数:" + list_ProcessInstanceDetailDTO.size());
 		int i = list_bysjglxtTaskInstance.size();
 		processManagementVo.setTotalRecords(i);
 		processManagementVo.setTotalPages(((i - 1) / processManagementVo.getPageSize()) + 1);
@@ -404,6 +404,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		bysjglxt_defence = processManagementDao.getDefence(userId);
 		return bysjglxt_defence;
 	}
+
 	@Override
 	public TaskDTO taskDTO(String userId) {
 		TaskDTO taskDTO = new TaskDTO();

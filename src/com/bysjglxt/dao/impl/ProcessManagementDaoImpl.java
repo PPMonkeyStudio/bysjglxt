@@ -189,7 +189,6 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 					+ processManagementVo.getProcessDefinition().trim() + "'";
 		}
 		hql = hql + " order by taskInstance.task_instance_state";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		query.setFirstResult((processManagementVo.getPageIndex() - 1) * processManagementVo.getPageSize());
 		query.setMaxResults(processManagementVo.getPageSize());
@@ -225,7 +224,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	public List<bysjglxt_task_instance> getAllTaskList(ProcessManagementVO processManagementVo, String userID) {
 		Session session = getSession();
 		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
-		String hql = "select taskInstance from bysjglxt_task_instance taskInstance,bysjglxt_task_definition taskDefinition,bysjglxt_process_definition processDefinition where taskInstance.task_instance_task_definition=taskDefinition.task_definition_id,processDefinition.process_definition_id=taskDefinition.task_definition_process_definition";
+		String hql = "select taskInstance from bysjglxt_task_instance taskInstance,bysjglxt_task_definition taskDefinition,bysjglxt_process_definition processDefinition where taskInstance.task_instance_task_definition=taskDefinition.task_definition_id and processDefinition.process_definition_id=taskDefinition.task_definition_process_definition";
 		// 筛选我的
 		hql = hql + " and task_instance_role='" + userID + "'";
 		// 搜索
