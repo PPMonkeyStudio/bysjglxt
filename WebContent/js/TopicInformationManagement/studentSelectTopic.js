@@ -8,6 +8,8 @@ function studentSelectTopic() {
 				switch (xhr.responseText) {
 				case "1": {
 					toastr.success("选题成功");
+					window.location = "/bysjglxt/topic/TopicInformationManagement_MyTopicListPage";
+
 					break;
 				}
 				case "-1": {

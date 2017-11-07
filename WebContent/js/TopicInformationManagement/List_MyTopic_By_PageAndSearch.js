@@ -17,6 +17,7 @@ function List_MyTopic_By_PageAndSearch(pageIndex) {
 				for (var num = 0; num < long; num++) {
 					new_tr_list[0].parentNode.removeChild(new_tr_list[0]);
 				}
+
 				var table_topic = document.getElementById("table_my_topic");
 				var new_tr = null;
 				var new_td = null;

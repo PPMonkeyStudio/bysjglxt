@@ -119,9 +119,10 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	public List<bysjglxt_task_definition> getListBelongProcess(String process_definition_id) {
 		Session session = getSession();
 		List<bysjglxt_task_definition> bysjglxt_task_definition = new ArrayList<bysjglxt_task_definition>();
-		String hql = "from bysjglxt_task_definition where task_definition_process_definition = ' "
+		String hql = "from bysjglxt_task_definition where task_definition_process_definition = '"
 				+ process_definition_id + "' order by task_definition_gmt_create asc";
 		Query query = session.createQuery(hql);
+		System.out.println(hql);
 		bysjglxt_task_definition = query.list();
 		return bysjglxt_task_definition;
 	}
@@ -155,7 +156,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 			String userID) {
 		Session session = getSession();
 		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
-		String hql = "select taskInstance from bysjglxt_task_instance taskInstance,bysjglxt_task_definition taskDefinition,bysjglxt_process_definition processDefinition where taskInstance.task_instance_task_definition=taskDefinition.task_definition_id,processDefinition.process_definition_id=taskDefinition.task_definition_process_definition";
+		String hql = "select taskInstance from bysjglxt_task_instance taskInstance,bysjglxt_task_definition taskDefinition,bysjglxt_process_definition processDefinition where taskInstance.task_instance_task_definition=taskDefinition.task_definition_id and processDefinition.process_definition_id=taskDefinition.task_definition_process_definition";
 		// 筛选我的
 		hql = hql + " and task_instance_role='" + userID + "'";
 		// 搜索

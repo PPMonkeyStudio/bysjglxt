@@ -3,13 +3,12 @@
 	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<package name="ProcessManagement" namespace="/process"
-		extends="struts-default">
+	<package name="ProcessManagement" namespace="/process" extends="struts-default">
 		<action name="ProcessManagement_*" class="com.bysjglxt.action.ProcessManagementAction"
 			method="{1}">
 			<result name="ProcessDefinitionListPage">/WEB-INF/view/ProcessManagement/ProcessManagement.jsp
 			</result>
-			<result name="ProcessDefinitionDetailPage">/WEB-INF/view/ProcessManagement/ProcessDefinitionDetail.jsp
+			<result name="MyTask">/WEB-INF/view/ProcessManagement/MyTask.jsp
 			</result>
 		</action>
 	</package>

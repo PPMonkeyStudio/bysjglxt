@@ -13,6 +13,7 @@ function List_ProcessDefinition(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				alert(xhr.responseText);
 				processDefinition_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -62,9 +63,10 @@ function List_ProcessDefinition(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<i style="cursor: pointer;" id="'
+					new_td.innerHTML = '<button class="btn btn-default" id="'
 							+ processDefinition_json[num].process_definition_id
-							+ '" onclick="UpdateProcessDefinition(this)" class="fa fa-edit "></i>';
+							+ '" onclick="UpdateProcessDefinition(this)" >修改</button>'
+							+ '<button class="btn btn-default" onclick="" style="margin:0 0 0 10px;">开启流程</button>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
