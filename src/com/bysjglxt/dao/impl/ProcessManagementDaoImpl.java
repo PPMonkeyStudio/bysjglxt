@@ -11,9 +11,12 @@ import com.bysjglxt.dao.ProcessManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
 
 public class ProcessManagementDaoImpl implements ProcessManagementDao {
@@ -253,6 +256,46 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Query query = session.createQuery(hql);
 		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
 		return bysjglxt_task_instance;
+	}
+
+	@Override
+	public bysjglxt_topic_select getStudentSelectTopicByStudentUserID(String operation) {
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_student = '" + operation + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		return bysjglxt_topic_select;
+	}
+
+	@Override
+	public bysjglxt_teacher_user getTeacherUserByNum(String topic_select_teacher_tutor) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_num = '" + topic_select_teacher_tutor + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		return bysjglxt_teacher_user;
+	}
+
+	@Override
+	public bysjglxt_section getSectionById(String user_section_id) {
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		Session session = getSession();
+		String hql = "from bysjglxt_section where section_id = '" + user_section_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		return bysjglxt_section;
+	}
+
+	@Override
+	public List<bysjglxt_leader> getListLeader() {
+		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
+		Session session = getSession();
+		String hql = "from bysjglxt_leader";
+		Query query = session.createQuery(hql);
+		listLeader = query.list();
+		return listLeader;
 	}
 
 }

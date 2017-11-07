@@ -44,5 +44,13 @@ public interface ProcessManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceByProcessInstanceIdAndTaskDefinitionId(
 			String process_instance_id, String task_definition_father);
 
+	public com.bysjglxt.domain.DO.bysjglxt_topic_select getStudentSelectTopicByStudentUserID(String operation);
+
+	public com.bysjglxt.domain.DO.bysjglxt_teacher_user getTeacherUserByNum(String topic_select_teacher_tutor);
+
+	public com.bysjglxt.domain.DO.bysjglxt_section getSectionById(String user_teacher_id);
+
+	public List<com.bysjglxt.domain.DO.bysjglxt_leader> getListLeader();
+
 	
 }

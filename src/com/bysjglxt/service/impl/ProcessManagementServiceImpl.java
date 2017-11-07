@@ -7,8 +7,12 @@ import com.bysjglxt.dao.ProcessManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
+import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 import com.bysjglxt.domain.DTO.ProcessDetailDTO;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
@@ -51,7 +55,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		listProcessDefinition = processManagementDao.getAllProcessDefinition();
 		return listProcessDefinition;
 	}
-
 	@Override
 	public int openSelectTopicInstance(String processInstanceName, String process_definition_id, String operation,
 			int processNum) {
@@ -64,17 +67,290 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			i = bysjglxtProcess(processInstanceName, process_definition_id, operation);
 			break;
 		case 3:
+			i = defenceProcess(processInstanceName, process_definition_id, operation);
 			break;
 		}
-
 		return i;
 
 	}
+
+	// 如果点击的是答辩流程
+	public int defenceProcess(String processInstanceName, String process_definition_id, String operation) {
+		boolean flag = true;
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		bysjglxt_task_instance bysjglxt_task_instance = null;
+		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
+		bysjglxt_leader bysjglxt_leader = null;
+		bysjglxt_task_instance bysjglxt_task_instanceFather = null;
+		bysjglxt_task_instance bysjglxt_task_instanceReturn = null;
+		List<bysjglxt_task_definition> list_bysjglxt_task_definition = new ArrayList<bysjglxt_task_definition>();
+		// 判断那是否是学生点击开启流程
+		bysjglxt_student_user = processManagementDao.getStudentUser(operation);
+		if (bysjglxt_student_user == null) {
+			return -1;
+		}
+		// 创建流程实例
+		bysjglxt_process_instance.setProcess_instance_id(TeamUtil.getUuid());
+		bysjglxt_process_instance.setProcess_instance_name(processInstanceName);
+		bysjglxt_process_instance.setProcess_instance_process_definition(process_definition_id);
+		bysjglxt_process_instance.setProcess_instance_state("活动");
+		bysjglxt_process_instance.setProcess_instance_man(operation);
+		bysjglxt_process_instance.setProcess_instance_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_process_instance
+				.setProcess_instance_gmt_modified(bysjglxt_process_instance.getProcess_instance_gmt_create());
+		flag = processManagementDao.instanceProcess(bysjglxt_process_instance);
+		if (!flag)
+			return -3;
+		// 遍历任务表中属于这个流程的任务定义
+		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
+		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
+			bysjglxt_leader = new bysjglxt_leader();
+			bysjglxt_task_instance = new bysjglxt_task_instance();
+			bysjglxt_task_instanceFather = new bysjglxt_task_instance();
+			bysjglxt_task_instanceReturn = new bysjglxt_task_instance();
+			bysjglxt_task_instance.setTask_instance_id(TeamUtil.getUuid());
+			bysjglxt_task_instance
+					.setTask_instance_process_instance(bysjglxt_process_instance.getProcess_instance_id());
+			bysjglxt_task_instance.setTask_instance_task_definition(bysjglxt_task_definition.getTask_definition_id());
+			// 任务实例执行角色
+			listLeader = processManagementDao.getListLeader();
+			if (listLeader == null) {
+				return -3;
+			}
+			bysjglxt_leader = listLeader.get(0);
+			bysjglxt_task_instance.setTask_instance_role(bysjglxt_leader.getLeader_teacher_id());
+			// 父任务实例ID
+			// (1).先获得父任务定义ID
+			// bysjglxt_task_definition.getTask_definition_father()
+			// (2).根据任务实例所属流程实例ID以及任务实例所属任务定义ID得到父任务实例ID
+			if (bysjglxt_task_definition.getTask_definition_father() != null
+					&& bysjglxt_task_definition.getTask_definition_father().trim().length() > 0) {
+				bysjglxt_task_instanceFather = processManagementDao
+						.getTaskInstanceByProcessInstanceIdAndTaskDefinitionId(
+								bysjglxt_process_instance.getProcess_instance_id(),
+								bysjglxt_task_definition.getTask_definition_father());
+				bysjglxt_task_instance.setTask_instance_father(bysjglxt_task_instanceFather.getTask_instance_id());
+			}
+			// 返回的任务实例
+			// (1)获得返回任务定义ID
+			// bysjglxt_task_definition.getTask_definition_return()
+			// (2)根据任务实例所属流程实例ID以及任务实例所属任务定义ID得到返回任务实例ID
+			if (bysjglxt_task_definition.getTask_definition_return() != null
+					&& bysjglxt_task_definition.getTask_definition_return().trim().length() > 0) {
+				bysjglxt_task_instanceReturn = processManagementDao
+						.getTaskInstanceByProcessInstanceIdAndTaskDefinitionId(
+								bysjglxt_process_instance.getProcess_instance_id(),
+								bysjglxt_task_definition.getTask_definition_return());
+				bysjglxt_task_instance.setTask_instance_return(bysjglxt_task_instanceReturn.getTask_instance_id());
+			}
+			// 状态初始化 2：未开始
+			bysjglxt_task_instance.setTask_instance_state(2);
+			bysjglxt_task_instance.setTask_instance_gmt_create(TeamUtil.getStringSecond());
+			bysjglxt_task_instance.setTask_instance_gmt_modified(bysjglxt_task_instance.getTask_instance_gmt_create());
+			flag = processManagementDao.instanceTask(bysjglxt_task_instance);
+			if (!flag)
+				return -3;
+		}
+
+		return 1;
+
+	}
+
 	// 如果点击的是毕业设计流程调用下面的方法
 
 	public int bysjglxtProcess(String processInstanceName, String process_definition_id, String operation) {
+		boolean flag = true;
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		bysjglxt_task_instance bysjglxt_task_instance = null;
+		bysjglxt_topic_select bysjglxt_topic_select = null;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		bysjglxt_section bysjglxt_section = null;
+		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
+		bysjglxt_leader bysjglxt_leader = null;
+		bysjglxt_task_instance bysjglxt_task_instanceFather = null;
+		bysjglxt_task_instance bysjglxt_task_instanceReturn = null;
+		List<bysjglxt_task_definition> list_bysjglxt_task_definition = new ArrayList<bysjglxt_task_definition>();
+		// 判断那是否是学生点击开启流程
+		bysjglxt_student_user = processManagementDao.getStudentUser(operation);
+		if (bysjglxt_student_user == null) {
+			return -1;
+		}
+		// 创建流程实例
+		bysjglxt_process_instance.setProcess_instance_id(TeamUtil.getUuid());
+		bysjglxt_process_instance.setProcess_instance_name(processInstanceName);
+		bysjglxt_process_instance.setProcess_instance_process_definition(process_definition_id);
+		bysjglxt_process_instance.setProcess_instance_state("活动");
+		bysjglxt_process_instance.setProcess_instance_man(operation);
+		bysjglxt_process_instance.setProcess_instance_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_process_instance
+				.setProcess_instance_gmt_modified(bysjglxt_process_instance.getProcess_instance_gmt_create());
+		flag = processManagementDao.instanceProcess(bysjglxt_process_instance);
+		if (!flag)
+			return -3;
+		// 遍历任务表中属于这个流程的任务定义
+		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
+		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
+			bysjglxt_leader = new bysjglxt_leader();
+			bysjglxt_task_instance = new bysjglxt_task_instance();
+			bysjglxt_topic_select = new bysjglxt_topic_select();
+			bysjglxt_task_instanceFather = new bysjglxt_task_instance();
+			bysjglxt_section = new bysjglxt_section();
+			bysjglxt_task_instanceReturn = new bysjglxt_task_instance();
+			bysjglxt_task_instance.setTask_instance_id(TeamUtil.getUuid());
+			bysjglxt_task_instance
+					.setTask_instance_process_instance(bysjglxt_process_instance.getProcess_instance_id());
+			bysjglxt_task_instance.setTask_instance_task_definition(bysjglxt_task_definition.getTask_definition_id());
+			// 任务实例执行角色
+			switch (bysjglxt_task_definition.getTask_definition_name()) {
+			case "指导老师完成任务书":
+				// 根据学生user ID获取学生选题表信息
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				break;
+			case "教研室主任填写任务书审核意见":
+				// 根据学生user ID获取学生选题表信息
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				// 根据指导老师ID获得教师所属教研室
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_teacher_user = processManagementDao
+						.getTeacherUserByNum(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				if (bysjglxt_teacher_user == null) {
+					return -3;
+				}
+				// 根据老师所属教研室获得教研室主任
+				bysjglxt_section = processManagementDao.getSectionById(bysjglxt_teacher_user.getUser_teacher_section());
+				if (bysjglxt_section == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_section.getSection_leader());
+				break;
+			case "学生完成开题报告":
+				// 根据学生user ID获取学生选题表信息
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				break;
+			case "学生完成前期进展情况记录":
+				bysjglxt_task_instance.setTask_instance_role(operation);
+				break;
+			case "指导老师填写前期进展情况意见":
+				// 根据学生user ID获取学生选题表信息
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				break;
+			case "学生完成中期进展情况记录":
+				bysjglxt_task_instance.setTask_instance_role(operation);
+				break;
+			case "指导老师填写中期进展情况意见":
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				break;
+			case "学生完成后期进展情况记录":
+				bysjglxt_task_instance.setTask_instance_role(operation);
+				break;
+			case "指导老师填写后期进展情况意见":
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				break;
+			case "学生完成完善期进展情况记录":
+				bysjglxt_task_instance.setTask_instance_role(operation);
+				break;
+			case "指导老师填写完善期进展情况意见":
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				break;
+			case "学生完成个人学习总结":
+				bysjglxt_task_instance.setTask_instance_role(operation);
+				break;
+			case "指导老师填写个人学习总结意见":
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				break;
+			case "学生提交答辩论文":
+				bysjglxt_task_instance.setTask_instance_role(operation);
+				break;
+			case "指导老师填写形式审查表":
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				break;
+			case "领导小组长填写形式审查表(核查)":
+				listLeader = processManagementDao.getListLeader();
+				if (listLeader == null) {
+					return -3;
+				}
+				bysjglxt_leader = listLeader.get(0);
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_leader.getLeader_teacher_id());
+				break;
+			case "指导老师填写评价审阅表":
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				break;
+			case "评阅老师填写评阅审查表":
+				break;
+			}
+			// 父任务实例ID
+			// (1).先获得父任务定义ID
+			// bysjglxt_task_definition.getTask_definition_father()
+			// (2).根据任务实例所属流程实例ID以及任务实例所属任务定义ID得到父任务实例ID
+			if (bysjglxt_task_definition.getTask_definition_father() != null
+					&& bysjglxt_task_definition.getTask_definition_father().trim().length() > 0) {
+				bysjglxt_task_instanceFather = processManagementDao
+						.getTaskInstanceByProcessInstanceIdAndTaskDefinitionId(
+								bysjglxt_process_instance.getProcess_instance_id(),
+								bysjglxt_task_definition.getTask_definition_father());
+				bysjglxt_task_instance.setTask_instance_father(bysjglxt_task_instanceFather.getTask_instance_id());
+			}
+			// 返回的任务实例
+			// (1)获得返回任务定义ID
+			// bysjglxt_task_definition.getTask_definition_return()
+			// (2)根据任务实例所属流程实例ID以及任务实例所属任务定义ID得到返回任务实例ID
+			if (bysjglxt_task_definition.getTask_definition_return() != null
+					&& bysjglxt_task_definition.getTask_definition_return().trim().length() > 0) {
+				bysjglxt_task_instanceReturn = processManagementDao
+						.getTaskInstanceByProcessInstanceIdAndTaskDefinitionId(
+								bysjglxt_process_instance.getProcess_instance_id(),
+								bysjglxt_task_definition.getTask_definition_return());
+				bysjglxt_task_instance.setTask_instance_return(bysjglxt_task_instanceReturn.getTask_instance_id());
+			}
+			// 状态初始化 2：未开始
+			bysjglxt_task_instance.setTask_instance_state(2);
 
-		
+			bysjglxt_task_instance.setTask_instance_gmt_create(TeamUtil.getStringSecond());
+			bysjglxt_task_instance.setTask_instance_gmt_modified(bysjglxt_task_instance.getTask_instance_gmt_create());
+			flag = processManagementDao.instanceTask(bysjglxt_task_instance);
+			if (!flag)
+				return -3;
+		}
 		return 1;
 	}
 
