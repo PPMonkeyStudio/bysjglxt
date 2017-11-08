@@ -631,8 +631,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 
 		bysjglxt_topic topic = new bysjglxt_topic();
 		topic = topicInformationManagementDao.getBysjglxtTopicById(topicBy.getTopic_id());
-		if(topic==null){
-			return -1;  //系统繁忙
+		if (topic == null) {
+			return -1; // 系统繁忙
 		}
 		topic.setTopic_name_chinese(topicBy.getTopic_name_chinese());
 		topic.setTopic_name_english(topicBy.getTopic_name_english());
@@ -644,11 +644,37 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		topic.setTopic_teacher(topicBy.getTopic_teacher());
 		topic.setTopic_invite_teache_id(topicBy.getTopic_invite_teache_id());
 		topic.setTopic_examine_state(topicBy.getTopic_examine_state());
-		
+
 		return 1;
 	}
-	
-	
-	
+
+	/**
+	 * 退选
+	 */
+	@Override
+	public int dropTopic(String studentUserId) {
+		boolean flag = true;
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		// 1.根据学生userID获取学生选题表
+		bysjglxt_topic_select = topicInformationManagementDao.getStudentTopicSelectByUserId(studentUserId);
+		// 2.根据学生user Id获取学生user表
+		bysjglxt_student_user = topicInformationManagementDao.studentIsSelectTopic(studentUserId);
+		if (bysjglxt_student_user == null) {
+			return -3;
+		}
+		if (bysjglxt_topic_select == null) {
+			return -3;
+		}
+		// 3.将学生user表中的学生选题状态改为未选题
+		flag = topicInformationManagementDao.updateStudentUserNotSelect(bysjglxt_student_user.getUser_student_id());
+		if (!flag)
+			return -1;
+		// 4.删除学生选题记录
+		flag = topicInformationManagementDao.deleteTopicSelect(bysjglxt_topic_select.getTopic_select_id());
+		if (!flag)
+			return -1;
+		return 1;
+	}
 
 }

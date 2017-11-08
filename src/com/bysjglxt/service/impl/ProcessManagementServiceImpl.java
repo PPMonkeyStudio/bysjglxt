@@ -96,7 +96,10 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -3;
 		// 遍历任务表中属于这个流程的任务定义
 		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
+		// 判断第一个任务实例为正在进行
+		int x = 0;
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
+			x++;
 			bysjglxt_student_user = new bysjglxt_student_user();
 			bysjglxt_leader = new bysjglxt_leader();
 			bysjglxt_task_instance = new bysjglxt_task_instance();
@@ -195,7 +198,11 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				bysjglxt_task_instance.setTask_instance_return(bysjglxt_task_instanceReturn.getTask_instance_id());
 			}
 			// 状态初始化 2：未开始
-			bysjglxt_task_instance.setTask_instance_state(2);
+			if (x == 1) {
+				bysjglxt_task_instance.setTask_instance_state(1);
+			} else {
+				bysjglxt_task_instance.setTask_instance_state(2);
+			}
 			bysjglxt_task_instance.setTask_instance_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_task_instance.setTask_instance_gmt_modified(bysjglxt_task_instance.getTask_instance_gmt_create());
 			flag = processManagementDao.instanceTask(bysjglxt_task_instance);
