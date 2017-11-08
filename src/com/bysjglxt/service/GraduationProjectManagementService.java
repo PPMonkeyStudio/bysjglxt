@@ -1,5 +1,7 @@
 package com.bysjglxt.service;
 
+import java.util.Map;
+
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
@@ -8,6 +10,7 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+
 public interface GraduationProjectManagementService {
 
 	/**
@@ -74,8 +77,7 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public int updateTeacherRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress);
-	
-	
+
 	/**
 	 * @说明 学生更改后期进展情况记录
 	 * @param updateRecordProgress
@@ -89,8 +91,7 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public int updateTeacherRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgress);
-	
-	
+
 	/**
 	 * @说明 学生更改完善期进展情况记录
 	 * @param updateRecordProgress
@@ -104,22 +105,20 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public int updateTeacherRecordProgressPerfect(bysjglxt_record_progress updateRecordProgress);
-	
-	
+
 	/**
 	 * @说明 学生更改个人学习工作总结
 	 * @param bysjglxt_summary
 	 * @return
 	 */
 	public int updateStudentSummary(bysjglxt_summary bysjglxt_summary);
-	
+
 	/**
 	 * @说明 教师更改个人学习工作总结
 	 * @param bysjglxt_summary
 	 * @return
 	 */
 	public int updateTeacherSummary(bysjglxt_summary bysjglxt_summary);
-	
 
 	/**
 	 * @说明 指导教师更改形式审查表 是 1 否 2 无 3
@@ -134,8 +133,7 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public int updateLeaderExaminationFormal(bysjglxt_examination_formal updateExaminationFormal);
-	
-	
+
 	/**
 	 * @说明 更改指导教师评价表
 	 * @param updateEvaluateTutor
@@ -157,7 +155,6 @@ public interface GraduationProjectManagementService {
 	 */
 	public int bysjglxt_defence(bysjglxt_defence updateDefence);
 
-	
 	/**********************************
 	 * 下面是我的毕业设计里面需要的对象,此处需要一个一个的给
 	 **********************************/
@@ -195,7 +192,58 @@ public interface GraduationProjectManagementService {
 	// 10.获取答辩评分及成绩评定表
 	public bysjglxt_defence get_Defence(String userId);
 
+	/************************************ 下面是导出word的实现 ****************************************************/
+	// 导出所有
+	public void exportAll();
+
+	/**
+	 * 1.导出封面
+	 * 
+	 * @D 1.${coverStudentNum} 学号
+	 * @D 2.${coverStudentName}姓名
+	 * @D 3.${coverSessional} 届别
+	 * @D 4.${coverMajor} 专业班级
+	 * @D 5.${coverTutorName} ${coverTutorTitle}指导老师姓名及职称
+	 * @D 6. ${coverEvaluateName} ${coverEvaluateTitle}评阅教师姓名及职称
+	 * 
+	 * @D 条件:学生userId 需要取到的对象
+	 * @D bysjglxt_student_user
+	 * @D bysjglxt_student_basic
+	 * @D bysjglxt_topic_select
+	 * @D bysjglxt_teacher_user
+	 * @D bysjglxt_teacher_basic
+	 */
+
+	public Map<String, Object> exportCover(String studentUserId);
+
+	/**
+	 * 导出任务书
+	 * 
+	 * @D ${taskNum} 学号
+	 * @D ${taskNam} 姓名
+	 * @D ${taskMajor} 专业班级
+	 * @D ${taskChineseName} 课题中文题目
+	 * @D ${taskEnglishName} 课题英文题目
+	 * @D ${taskRequired} 研究主要内容以及基本要求
+	 * @D ${taskReference} 主要参考资料
+	 * @D ${taskPlan} 进程计划
+	 * @D ${taskOpinion} 教研室主任审核意见
+	 * @D 条件:学生userId 需要取到的对象
+	 * 
+	 * @D bysjglxt_student_user
+	 * @D bysjglxt_student_basic
+	 * @D bysjglxt_taskbook
+	 * 
+	 */
+	public Map<String, Object> exportTask(String studentUserId);
+
 	
+	/**
+	 * 导出开题报告
+	 * 
+	 * @D 
+	 * 
+	 */
 	
 	
 	

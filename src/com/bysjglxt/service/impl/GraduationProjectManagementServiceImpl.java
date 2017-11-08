@@ -1,5 +1,15 @@
 package com.bysjglxt.service.impl;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+
 import com.bysjglxt.dao.GraduationProjectManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
@@ -7,14 +17,18 @@ import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
-import com.bysjglxt.domain.DO.bysjglxt_task_definition;
-import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
-import com.bysjglxt.domain.DTO.TaskDTO;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.service.GraduationProjectManagementService;
 
 import util.TeamUtil;
+import util.XwpfTUtil;
 
 public class GraduationProjectManagementServiceImpl implements GraduationProjectManagementService {
 
@@ -605,7 +619,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			/**
 			 * 成绩总评还没有写
 			 */
-			
+
 			bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 		}
@@ -690,4 +704,142 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_defence = graduationProjectManagementDao.getDefence(userId);
 		return bysjglxt_defence;
 	}
+
+	@Override
+	public void exportAll() {
+
+	}
+
+	// 导出封面
+	@Override
+	public Map<String, Object> exportCover(String studentUserId) {
+		// 1.根据学生user Id获取学生登录表信息
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		bysjglxt_teacher_user bysjglxt_teacher_user_tutor = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user bysjglxt_teacher_user_evaluate = new bysjglxt_teacher_user();
+		bysjglxt_teacher_basic bysjglxt_teacher_basic_tutor = new bysjglxt_teacher_basic();
+		bysjglxt_teacher_basic bysjglxt_teacher_basic_evaluate = new bysjglxt_teacher_basic();
+		Map<String, Object> params = new HashMap<String, Object>();
+		// 根据userId获取user表
+		bysjglxt_student_user = graduationProjectManagementDao.getStudentUserByUserId(studentUserId);
+		if (bysjglxt_student_user != null) {
+			// 根据basicId获取basic表
+			bysjglxt_student_basic = graduationProjectManagementDao
+					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
+			if (bysjglxt_student_basic != null) {
+				int sessional = Integer.parseInt(bysjglxt_student_basic.getStudent_basic_level());
+				sessional = sessional + 4;
+				params.put("${coverStudentNum}", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("${coverStudentName}", bysjglxt_student_basic.getStudent_basic_name());
+				// 届别
+				params.put("${coverSessional}", sessional + "");
+				params.put("${coverMajor}", bysjglxt_student_basic.getStudent_basic_major());
+			} else {
+				params.put("${coverStudentNum}", "");
+				params.put("${coverStudentName}", "");
+				params.put("${coverSessional}", "");
+				params.put("${coverMajor}", "");
+
+			}
+			// 根据userid获取学生选题信息
+			bysjglxt_topic_select = graduationProjectManagementDao
+					.getStudentSelectTopic(bysjglxt_student_user.getUser_student_id());
+			if (bysjglxt_topic_select != null) {
+				// 根据老师userId获得指导老师user表
+				bysjglxt_teacher_user_tutor = graduationProjectManagementDao
+						.getTeacherUserByUserId(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+				// 根据老师basicId获得指导老师basic表
+				bysjglxt_teacher_basic_tutor = graduationProjectManagementDao
+						.getTeacherBasicByBasicId(bysjglxt_teacher_user_tutor.getUser_teacher_basic());
+				params.put("${coverTutorName}", bysjglxt_teacher_basic_tutor.getName());
+				params.put("${coverTutorTitle}", bysjglxt_teacher_basic_tutor.getProfessional_title());
+				if (bysjglxt_topic_select.getTopic_select_teacher_review() != null
+						&& bysjglxt_topic_select.getTopic_select_teacher_review().trim().length() > 0) {
+					// 根据老师userId获得评阅老师user表
+					bysjglxt_teacher_user_evaluate = graduationProjectManagementDao
+							.getTeacherUserByUserId(bysjglxt_topic_select.getTopic_select_teacher_review());
+					// 根据老师basicid获得评阅老师basic表
+					bysjglxt_teacher_basic_evaluate = graduationProjectManagementDao
+							.getTeacherBasicByBasicId(bysjglxt_teacher_user_evaluate.getUser_teacher_id());
+					params.put("${coverEvaluateName}", bysjglxt_teacher_basic_evaluate.getName());
+					params.put("${coverEvaluateTitle}", bysjglxt_teacher_basic_evaluate.getProfessional_title());
+				} else {
+					params.put("${coverEvaluateName}", "");
+					params.put("${coverEvaluateTitle}", "");
+				}
+			} else {
+				params.put("${coverTutorName}", "");
+				params.put("${coverTutorTitle}", "");
+				params.put("${coverEvaluateName}", "");
+				params.put("${coverEvaluateTitle}", "");
+			}
+		}
+		return params;
+	}
+
+	// 导出任务书
+	@Override
+	public Map<String, Object> exportTask(String studentUserId) {
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Map<String, Object> params = new HashMap<String, Object>();
+		// 根据userId获取user表
+		bysjglxt_student_user = graduationProjectManagementDao.getStudentUserByUserId(studentUserId);
+		if (bysjglxt_student_user != null) {
+			// 根据basicId获取basic表
+			bysjglxt_student_basic = graduationProjectManagementDao
+					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
+			if (bysjglxt_student_basic != null) {
+				params.put("${taskNum}", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("${taskNam}", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("${taskMajor}", bysjglxt_student_basic.getStudent_basic_major());
+			} else {
+				params.put("${taskNum}", "");
+				params.put("${taskNam}", "");
+				params.put("${taskMajor}", "");
+			}
+			// 根据userid获取学生选题信息
+			bysjglxt_topic_select = graduationProjectManagementDao
+					.getStudentSelectTopic(bysjglxt_student_user.getUser_student_id());
+			if (bysjglxt_topic_select != null) {
+				// 根据课题ID获取课题表信息
+				bysjglxt_topic = graduationProjectManagementDao
+						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
+				if (bysjglxt_topic != null) {
+					params.put("${taskChineseName}", bysjglxt_topic.getTopic_name_chinese());
+					params.put("${taskEnglishName}", bysjglxt_topic.getTopic_name_english());
+				} else {
+					params.put("${taskChineseName}", "");
+					params.put("${taskEnglishName}", "");
+				}
+			}
+			// 根据user Id获取任务书表
+			bysjglxt_taskbook = graduationProjectManagementDao
+					.getTaskBookByUserId(bysjglxt_student_user.getUser_student_id());
+			if (bysjglxt_taskbook != null) {
+				params.put("${taskRequired}", bysjglxt_taskbook.getTaskbook_acontent_required());
+				params.put("${taskReference}", bysjglxt_taskbook.getTaskbook_reference());
+				params.put("${taskPlan}", bysjglxt_taskbook.getTaskbook_plan());
+				params.put("${taskOpinion}", bysjglxt_taskbook.getTaskbook_opinion());
+			} else {
+				params.put("${taskRequired}", "");
+				params.put("${taskReference}", "");
+				params.put("${taskPlan}", "");
+				params.put("${taskOpinion}", "");
+			}
+		}
+
+		return params;
+	}
+	
+	
+	
+	
+	
+
 }
