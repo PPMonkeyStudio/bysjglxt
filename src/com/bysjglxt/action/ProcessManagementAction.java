@@ -89,25 +89,16 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	}
 
 	public void ListMyTask() throws IOException {
-		System.out.println("ListMyTask");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-
-			System.out.println(
-					"teacher:" + ((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-							.getBysjglxtTeacherUser().getUser_teacher_id());
 
 			processManagementVO = processManagementService.getMyTaskByPage(processManagementVO,
 					((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
 							.getBysjglxtTeacherUser().getUser_teacher_id());
 
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
-
-			System.out.println("student:"
-					+ ((StudentInformationDTO) (ActionContext.getContext().getSession().get("userStudentDTO")))
-							.getBysjglxtStudentUser().getUser_student_id());
 
 			processManagementVO = processManagementService.getMyTaskByPage(processManagementVO,
 					((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
@@ -160,7 +151,6 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		Gson gson = gsonBuilder.create();
 		ProcessDefinitionDetailDTO processDefinitionDetailDTO = processManagementService
 				.processDefinitionDetailDTO(processDefinitionId);
-		System.out.println(gson.toJson(processDefinitionDetailDTO));
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(processDefinitionDetailDTO));
 	}
@@ -184,10 +174,6 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-		System.out.println(gson.toJson(bootProcess));
-		System.out.println(
-				"用户ID：" + ((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
-						.getBysjglxtStudentUser().getUser_student_id());
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
 			http_response
