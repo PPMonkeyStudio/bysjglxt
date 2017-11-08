@@ -8,7 +8,10 @@ import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.service.GraduationProjectManagementService;
 
 import util.TeamUtil;
@@ -603,6 +606,100 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 		}
 		return flag;
+	}
+
+	/******************************** 下面是我的毕业设计需要 ***************************************/
+
+	@Override
+	public bysjglxt_taskbook get_TaskBook(String userId) {
+		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
+		bysjglxt_taskbook = graduationProjectManagementDao.getTaskBookByUserId(userId);
+		return bysjglxt_taskbook;
+	}
+
+	@Override
+	public bysjglxt_report_opening get_ReportOpening(String userId) {
+		bysjglxt_report_opening bysjglxt_report_opening = new bysjglxt_report_opening();
+		bysjglxt_report_opening = graduationProjectManagementDao.getReportOpeningUser(userId);
+		return bysjglxt_report_opening;
+	}
+
+	@Override
+	public bysjglxt_record_progress get_RecordProgress_1(String userId) {
+		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
+		bysjglxt_record_progress = graduationProjectManagementDao.getRecordProgress(userId, "前期");
+		return bysjglxt_record_progress;
+	}
+
+	@Override
+	public bysjglxt_record_progress get_RecordProgress_2(String userId) {
+		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
+		bysjglxt_record_progress = graduationProjectManagementDao.getRecordProgress(userId, "中期");
+		return bysjglxt_record_progress;
+	}
+
+	@Override
+	public bysjglxt_record_progress get_RecordProgress_3(String userId) {
+		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
+		bysjglxt_record_progress = graduationProjectManagementDao.getRecordProgress(userId, "后期");
+		return bysjglxt_record_progress;
+	}
+
+	@Override
+	public bysjglxt_record_progress get_RecordProgress_4(String userId) {
+		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
+		bysjglxt_record_progress = graduationProjectManagementDao.getRecordProgress(userId, "完善期");
+		return bysjglxt_record_progress;
+	}
+
+	@Override
+	public bysjglxt_summary get_Summary(String userId) {
+		bysjglxt_summary bysjglxt_summary = new bysjglxt_summary();
+		bysjglxt_summary = graduationProjectManagementDao.getSummary(userId);
+		return bysjglxt_summary;
+	}
+
+	@Override
+	public bysjglxt_examination_formal get_ExaminationFormal(String userId) {
+		bysjglxt_examination_formal bysjglxt_examination_formal = new bysjglxt_examination_formal();
+		bysjglxt_examination_formal = graduationProjectManagementDao.getExaminationFormal(userId);
+		return bysjglxt_examination_formal;
+	}
+
+	@Override
+	public bysjglxt_evaluate_tutor get_EvaluateTutor(String userId) {
+		bysjglxt_evaluate_tutor bysjglxt_evaluate_tutor = new bysjglxt_evaluate_tutor();
+		bysjglxt_evaluate_tutor = graduationProjectManagementDao.getEvaluateTutor(userId);
+		return bysjglxt_evaluate_tutor;
+	}
+
+	@Override
+	public bysjglxt_evaluate_review get_EvaluateReview(String userId) {
+		bysjglxt_evaluate_review bysjglxt_evaluate_review = new bysjglxt_evaluate_review();
+		bysjglxt_evaluate_review = graduationProjectManagementDao.getEvaluateReview(userId);
+		return bysjglxt_evaluate_review;
+	}
+
+	@Override
+	public bysjglxt_defence get_Defence(String userId) {
+		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
+		bysjglxt_defence = graduationProjectManagementDao.getDefence(userId);
+		return bysjglxt_defence;
+	}
+
+	@Override
+	public TaskDTO taskDTO(String userId) {
+		TaskDTO taskDTO = new TaskDTO();
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		// 获取用户正在进行的任务实例
+		bysjglxt_task_instance = graduationProjectManagementDao.getTaskInstanceing(userId);
+		// 根据任务实例的任务定义ID获取任务定义表
+		bysjglxt_task_definition = graduationProjectManagementDao
+				.getTaskDefinition(bysjglxt_task_instance.getTask_instance_task_definition());
+		taskDTO.setTaskDefinition(bysjglxt_task_definition);
+		taskDTO.setTaskInstance(bysjglxt_task_instance);
+		return taskDTO;
 	}
 
 }

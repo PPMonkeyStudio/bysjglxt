@@ -44,11 +44,12 @@ public interface ProcessManagementService {
 	 *            流程实例名称 process_definition_id 流程定义ID operation 操作者ID processNum
 	 *            流程编号 1 选题流程 2毕业设计流程 3答辩流程
 	 * 
-	 * @说明 创建流程和任务实例 参数：流程定义ID 1.成功 -4 系统繁忙，所输入的参数有问题 -1 无权限开启流程 -3实例化流程失败
+	 * @说明 创建流程和任务实例 参数：流程定义ID 1.成功 -4 系统繁忙，所输入的参数有问题 -1 无权限开启流程-2已经开启流程
+	 *     -3实例化流程失败
 	 * 
 	 * @return
 	 */
-	public int openSelectTopicInstance(String processInstanceName, String process_definition_id, String operation);
+	public int openProcess(String processInstanceName, String process_definition_id, String operation);
 
 	/**
 	 * 遍历出所有的定义表
@@ -73,44 +74,21 @@ public interface ProcessManagementService {
 	 */
 	public ProcessManagementVO getMyTaskByPage(ProcessManagementVO processManagementVo, String userID);
 
-	/**********************************
-	 * 下面是我的毕业设计里面需要的对象,此处需要一个一个的给
-	 **********************************/
+	/**************************** 在点击通过或者是打回以及 ***************************************************/
 
-	// 1.获取任务书
-	public bysjglxt_taskbook get_TaskBook(String userId);
-
-	// 2.获取开题报告
-	public bysjglxt_report_opening get_ReportOpening(String userId);
-
-	// 3.获取前期情况记录
-	public bysjglxt_record_progress get_RecordProgress_1(String userId);
-
-	// 4.获取中期情况记录
-	public bysjglxt_record_progress get_RecordProgress_2(String userId);
-
-	// 5.获取后期情况记录
-	public bysjglxt_record_progress get_RecordProgress_3(String userId);
-
-	// 6.获取完善期情况记录
-	public bysjglxt_record_progress get_RecordProgress_4(String userId);
-
-	// 7.获取个人学习工作总结
-	public bysjglxt_summary get_Summary(String userId);
-
-	// 8.获取形式审查表
-	public bysjglxt_examination_formal get_ExaminationFormal(String userId);
-
-	// 8.获取指导教师评价表
-	public bysjglxt_evaluate_tutor get_EvaluateTutor(String userId);
-
-	// 9.获取评阅老师评价表
-	public bysjglxt_evaluate_review get_EvaluateReview(String userId);
-
-	// 10.获取答辩评分及成绩评定表
-	public bysjglxt_defence get_Defence(String userId);
-
-	// 当前正在进行的实例
-	public TaskDTO taskDTO(String userId);
+	/**
+	 * 通过: 实现思路: 1.根据任务实例ID获取任务实例对象 2.直接根据对象更改当前任务实例状态
+	 * 3.根据a该对象的任务实例ID当作父任务实例ID来寻找下一个任务实例 4.根据next任务实例对象ID获得实例对象 5.更改任务实例状态 
+	 * 打回：
+	 * 		实现思路:
+	 * 		1.根据任务实例ID获取任务实例实例对象
+	 * 		2.将当前实例对象更改未未开始
+	 * 		3.先获得返回任务实例的ID
+	 * 		4.再往上遍历得到父任务结点,当父任务结点为返回任务结点的时候将该父任务结点的状态进行变化
+	 */
+	// 1.通过
+	public int pass(String taskInstanceId);
+	// 2.打回
+	public int repulse(String taskInstanceId);
 
 }

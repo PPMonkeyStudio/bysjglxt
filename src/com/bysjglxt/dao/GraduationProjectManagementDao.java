@@ -50,5 +50,25 @@ public interface GraduationProjectManagementDao {
 
 	public bysjglxt_defence findDefenceByUserId(String evaluate_tutor_student);
 
+	public com.bysjglxt.domain.DO.bysjglxt_taskbook getTaskBookByUserId(String userId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_record_progress getRecordProgress(String userId, String string);
+
+	public com.bysjglxt.domain.DO.bysjglxt_summary getSummary(String userId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_examination_formal getExaminationFormal(String userId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor getEvaluateTutor(String userId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_evaluate_review getEvaluateReview(String userId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_defence getDefence(String userId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceing(String userId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition);
+
+	public com.bysjglxt.domain.DO.bysjglxt_report_opening getReportOpeningUser(String userId);
+
 
 }

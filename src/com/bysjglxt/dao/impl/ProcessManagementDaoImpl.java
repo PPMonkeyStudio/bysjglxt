@@ -135,6 +135,9 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		return bysjglxt_task_definition;
 	}
 
+	/**
+	 * 弃用
+	 */
 	@Override
 	public bysjglxt_task_instance taskInstanceIsExistId(String operation, String task_definition_id) {
 		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
@@ -398,98 +401,39 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		return flag;
 	}
 
-	/****************************** 下面是我的毕业设计需要 ********************************/
-
-	// 获得任务书
 	@Override
-	public bysjglxt_taskbook getTaskBookByUserId(String userId) {
-		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
+	public bysjglxt_process_instance getProcessInstanceByDefinitionAndMan(String process_definition_id,
+			String operation) {
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		Session session = getSession();
-		String hql = "from bysjglxt_taskbook where bysjglxt_taskbook_student = '" + userId + "'";
+		String hql = "from bysjglxt_process_instance where process_instance_process_definition='"
+				+ process_definition_id + "' and process_instance_man='" + operation
+				+ "' and process_instance_state='活动' ";
 		Query query = session.createQuery(hql);
-		bysjglxt_taskbook = (bysjglxt_taskbook) query.uniqueResult();
-		return bysjglxt_taskbook;
+		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		return bysjglxt_process_instance;
 	}
 
-	// 获得开题报告
+	/**
+	 * 根据任务实例ID获得任务实例
+	 */
 	@Override
-	public bysjglxt_report_opening getReportOpening(String userId) {
-		bysjglxt_report_opening bysjglxt_report_opening = new bysjglxt_report_opening();
-		Session session = getSession();
-		String hql = "from bysjglxt_report_opening where report_opening_student = '" + userId + "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_report_opening = (bysjglxt_report_opening) query.uniqueResult();
-		return bysjglxt_report_opening;
-	}
-
-	@Override
-	public bysjglxt_record_progress getRecordProgress(String userId, String string) {
-		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
-		Session session = getSession();
-		String hql = "from bysjglxt_record_progress where record_progress_student = '" + userId
-				+ "' and record_progress _stage = '" + string + "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_record_progress = (bysjglxt_record_progress) query.uniqueResult();
-		return bysjglxt_record_progress;
-	}
-
-	@Override
-	public bysjglxt_summary getSummary(String userId) {
-		bysjglxt_summary bysjglxt_summary = new bysjglxt_summary();
-		Session session = getSession();
-		String hql = "from bysjglxt_summary where summary_student = '" + userId + "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_summary = (bysjglxt_summary) query.uniqueResult();
-		return bysjglxt_summary;
-	}
-
-	@Override
-	public bysjglxt_examination_formal getExaminationFormal(String userId) {
-		bysjglxt_examination_formal bysjglxt_examination_formal = new bysjglxt_examination_formal();
-		Session session = getSession();
-		String hql = "from bysjglxt_examination_formal where examination_formal_student = '" + userId + "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_examination_formal = (bysjglxt_examination_formal) query.uniqueResult();
-		return bysjglxt_examination_formal;
-	}
-
-	@Override
-	public bysjglxt_evaluate_tutor getEvaluateTutor(String userId) {
-		bysjglxt_evaluate_tutor bysjglxt_evaluate_tutor = new bysjglxt_evaluate_tutor();
-		Session session = getSession();
-		String hql = "from bysjglxt_evaluate_tutor where evaluate_tutor_student = '" + userId + "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_evaluate_tutor = (bysjglxt_evaluate_tutor) query.uniqueResult();
-		return bysjglxt_evaluate_tutor;
-	}
-
-	@Override
-	public bysjglxt_evaluate_review getEvaluateReview(String userId) {
-		bysjglxt_evaluate_review bysjglxt_evaluate_review = new bysjglxt_evaluate_review();
-		Session session = getSession();
-		String hql = "from bysjglxt_evaluate_review where evaluate_review_student = '" + userId + "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_evaluate_review = (bysjglxt_evaluate_review) query.uniqueResult();
-		return bysjglxt_evaluate_review;
-	}
-
-	@Override
-	public bysjglxt_defence getDefence(String userId) {
-		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
-		Session session = getSession();
-		String hql = "from bysjglxt_defence where defence_student = '" + userId + "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_defence = (bysjglxt_defence) query.uniqueResult();
-		return bysjglxt_defence;
-	}
-
-	@Override
-	public bysjglxt_task_instance getTaskInstanceing(String userId) {
+	public bysjglxt_task_instance getTaskInstanceingById(String taskInstanceId) {
 		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
 		Session session = getSession();
-		String hql = "from bysjglxt_task_instance where task_instance_role='" + userId + "' and task_instance_state=1 ";
+		String hql = "from bysjglxt_task_instance where task_instance_id='" + taskInstanceId + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_task_instance = (com.bysjglxt.domain.DO.bysjglxt_task_instance) query.uniqueResult();
+		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
+		return bysjglxt_task_instance;
+	}
+
+	@Override
+	public bysjglxt_task_instance getTaskInstanceByFatherTaskId(String task_instance_id) {
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_father='" + task_instance_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
 		return bysjglxt_task_instance;
 	}
 

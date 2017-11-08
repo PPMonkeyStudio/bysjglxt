@@ -66,7 +66,15 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	}
 
 	@Override
-	public int openSelectTopicInstance(String processInstanceName, String process_definition_id, String operation) {
+	public int openProcess(String processInstanceName, String process_definition_id, String operation) {
+		// 判断用户是否已经开启该流程
+		bysjglxt_process_instance processInstanceIsOpen = new bysjglxt_process_instance();
+		// 根据流程定义ID以及流程实例化者ID判断是否已经开启流程
+		processInstanceIsOpen = processManagementDao.getProcessInstanceByDefinitionAndMan(process_definition_id,
+				operation);
+		if (processInstanceIsOpen != null) {
+			return -2;
+		}
 		int i = 0;
 		boolean flag = true;
 		bysjglxt_student_user bysjglxt_student_user = null;
@@ -326,97 +334,52 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		return 1;
 	}
 
-	/******************************** 下面是我的毕业设计需要 ***************************************/
+	/********************************************** 下面是点击通过或打回 ***************************/
 
+	// 通过
 	@Override
-	public bysjglxt_taskbook get_TaskBook(String userId) {
-		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
-		bysjglxt_taskbook = processManagementDao.getTaskBookByUserId(userId);
-		return bysjglxt_taskbook;
+	public int pass(String taskInstanceId) {
+		boolean flag = true;
+		bysjglxt_task_instance currentTaskInstance = new bysjglxt_task_instance();
+		bysjglxt_task_instance nextTaskInstance = new bysjglxt_task_instance();
+		currentTaskInstance = processManagementDao.getTaskInstanceingById(taskInstanceId);
+		if (currentTaskInstance == null) {
+			return -3;
+			// 无该任务实例
+		}
+		// 只有正在进行的才能点击通过
+		if (currentTaskInstance.getTask_instance_state() != 1) {
+			return -2;
+			// 任务实例不是正在进行状态不能点击通过
+		}
+		// 更改任务实例状态,将之改为已结束
+		currentTaskInstance.setTask_instance_state(3);
+		currentTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
+		// 存储任务实例
+		flag = processManagementDao.instanceTask(currentTaskInstance);
+		if (!flag)
+			return -1;// 更改任务实例失败
+		// 将当前任务ID作为父任务实例ID可以获得下一个任务实例
+		nextTaskInstance = processManagementDao
+				.getTaskInstanceByFatherTaskId(currentTaskInstance.getTask_instance_id());
+		if (nextTaskInstance == null) {
+			return -3;// 无该任务实例
+		}
+		// 更改任务实例状态,将之改为已结束
+		nextTaskInstance.setTask_instance_state(1);
+		nextTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
+		// 存储任务实例
+		flag = processManagementDao.instanceTask(nextTaskInstance);
+		if (!flag)
+			return -1;// 更改任务实例失败
+		return 1;// 成功
 	}
 
+	// 打回
 	@Override
-	public bysjglxt_report_opening get_ReportOpening(String userId) {
-		bysjglxt_report_opening bysjglxt_report_opening = new bysjglxt_report_opening();
-		bysjglxt_report_opening = processManagementDao.getReportOpening(userId);
-		return bysjglxt_report_opening;
+	public int repulse(String taskInstanceId) {
+		
+		return 1;
 	}
 
-	@Override
-	public bysjglxt_record_progress get_RecordProgress_1(String userId) {
-		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
-		bysjglxt_record_progress = processManagementDao.getRecordProgress(userId, "前期");
-		return bysjglxt_record_progress;
-	}
-
-	@Override
-	public bysjglxt_record_progress get_RecordProgress_2(String userId) {
-		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
-		bysjglxt_record_progress = processManagementDao.getRecordProgress(userId, "中期");
-		return bysjglxt_record_progress;
-	}
-
-	@Override
-	public bysjglxt_record_progress get_RecordProgress_3(String userId) {
-		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
-		bysjglxt_record_progress = processManagementDao.getRecordProgress(userId, "后期");
-		return bysjglxt_record_progress;
-	}
-
-	@Override
-	public bysjglxt_record_progress get_RecordProgress_4(String userId) {
-		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
-		bysjglxt_record_progress = processManagementDao.getRecordProgress(userId, "完善期");
-		return bysjglxt_record_progress;
-	}
-
-	@Override
-	public bysjglxt_summary get_Summary(String userId) {
-		bysjglxt_summary bysjglxt_summary = new bysjglxt_summary();
-		bysjglxt_summary = processManagementDao.getSummary(userId);
-		return bysjglxt_summary;
-	}
-
-	@Override
-	public bysjglxt_examination_formal get_ExaminationFormal(String userId) {
-		bysjglxt_examination_formal bysjglxt_examination_formal = new bysjglxt_examination_formal();
-		bysjglxt_examination_formal = processManagementDao.getExaminationFormal(userId);
-		return bysjglxt_examination_formal;
-	}
-
-	@Override
-	public bysjglxt_evaluate_tutor get_EvaluateTutor(String userId) {
-		bysjglxt_evaluate_tutor bysjglxt_evaluate_tutor = new bysjglxt_evaluate_tutor();
-		bysjglxt_evaluate_tutor = processManagementDao.getEvaluateTutor(userId);
-		return bysjglxt_evaluate_tutor;
-	}
-
-	@Override
-	public bysjglxt_evaluate_review get_EvaluateReview(String userId) {
-		bysjglxt_evaluate_review bysjglxt_evaluate_review = new bysjglxt_evaluate_review();
-		bysjglxt_evaluate_review = processManagementDao.getEvaluateReview(userId);
-		return bysjglxt_evaluate_review;
-	}
-
-	@Override
-	public bysjglxt_defence get_Defence(String userId) {
-		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
-		bysjglxt_defence = processManagementDao.getDefence(userId);
-		return bysjglxt_defence;
-	}
-
-	@Override
-	public TaskDTO taskDTO(String userId) {
-		TaskDTO taskDTO = new TaskDTO();
-		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
-		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
-		// 获取用户正在进行的任务实例
-		bysjglxt_task_instance = processManagementDao.getTaskInstanceing(userId);
-		// 根据任务实例的任务定义ID获取任务定义表
-		bysjglxt_task_definition = processManagementDao
-				.getTaskDefinition(bysjglxt_task_instance.getTask_instance_task_definition());
-		taskDTO.setTaskDefinition(bysjglxt_task_definition);
-		taskDTO.setTaskInstance(bysjglxt_task_instance);
-		return taskDTO;
-	}
 }
