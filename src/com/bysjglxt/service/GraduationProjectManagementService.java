@@ -8,6 +8,7 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DTO.TaskDTO;
 
 public interface GraduationProjectManagementService {
 
@@ -158,4 +159,50 @@ public interface GraduationProjectManagementService {
 	 */
 	public int bysjglxt_defence(bysjglxt_defence updateDefence);
 
+	
+	/**********************************
+	 * 下面是我的毕业设计里面需要的对象,此处需要一个一个的给
+	 **********************************/
+
+	// 1.获取任务书
+	public bysjglxt_taskbook get_TaskBook(String userId);
+
+	// 2.获取开题报告
+	public bysjglxt_report_opening get_ReportOpening(String userId);
+
+	// 3.获取前期情况记录
+	public bysjglxt_record_progress get_RecordProgress_1(String userId);
+
+	// 4.获取中期情况记录
+	public bysjglxt_record_progress get_RecordProgress_2(String userId);
+
+	// 5.获取后期情况记录
+	public bysjglxt_record_progress get_RecordProgress_3(String userId);
+
+	// 6.获取完善期情况记录
+	public bysjglxt_record_progress get_RecordProgress_4(String userId);
+
+	// 7.获取个人学习工作总结
+	public bysjglxt_summary get_Summary(String userId);
+
+	// 8.获取形式审查表
+	public bysjglxt_examination_formal get_ExaminationFormal(String userId);
+
+	// 8.获取指导教师评价表
+	public bysjglxt_evaluate_tutor get_EvaluateTutor(String userId);
+
+	// 9.获取评阅老师评价表
+	public bysjglxt_evaluate_review get_EvaluateReview(String userId);
+
+	// 10.获取答辩评分及成绩评定表
+	public bysjglxt_defence get_Defence(String userId);
+
+	// 当前正在进行的实例
+	public TaskDTO taskDTO(String userId);
+	
+	
+	
+	
+	
+	
 }

@@ -65,26 +65,15 @@ public interface ProcessManagementDao {
 	public boolean deleteTaskDefinitionByProcessDefinitionId(String processDefinitionId);
 
 	public boolean deleteProcessDefinitionByProcessDefinitionId(String processDefinitionId);
-
 	
-	/************************下面是我的毕业设计需要****************************/
+	public bysjglxt_process_instance getProcessInstanceByDefinitionAndMan(String process_definition_id,
+			String operation);
+
+	public bysjglxt_task_instance getTaskInstanceingById(String taskInstanceId);
+
+	public bysjglxt_task_instance getTaskInstanceByFatherTaskId(String task_instance_id);
+
+	/****/
 	
-	public bysjglxt_taskbook getTaskBookByUserId(String userId);
-
-	public com.bysjglxt.domain.DO.bysjglxt_report_opening getReportOpening(String userId);
-
-	public com.bysjglxt.domain.DO.bysjglxt_record_progress getRecordProgress(String userId, String string);
-
-	public com.bysjglxt.domain.DO.bysjglxt_summary getSummary(String userId);
-
-	public com.bysjglxt.domain.DO.bysjglxt_examination_formal getExaminationFormal(String userId);
-
-	public com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor getEvaluateTutor(String userId);
-
-	public com.bysjglxt.domain.DO.bysjglxt_evaluate_review getEvaluateReview(String userId);
-
-	public com.bysjglxt.domain.DO.bysjglxt_defence getDefence(String userId);
-
-	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceing(String userId);
-
+	
 }
