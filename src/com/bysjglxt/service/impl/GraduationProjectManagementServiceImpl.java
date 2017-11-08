@@ -602,6 +602,10 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					.setDefence_total((int) (Math.round((bysjglxt_defence.getDefence_grade_evaluate_tutor() * 0.4
 							+ bysjglxt_defence.getDefence_grade_evaluate_review()
 							+ bysjglxt_defence.getDefence_grade_evaluate_tutor()) + 0.5)));
+			/**
+			 * 成绩总评还没有写
+			 */
+			
 			bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 		}
@@ -686,20 +690,4 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_defence = graduationProjectManagementDao.getDefence(userId);
 		return bysjglxt_defence;
 	}
-
-	@Override
-	public TaskDTO taskDTO(String userId) {
-		TaskDTO taskDTO = new TaskDTO();
-		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
-		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
-		// 获取用户正在进行的任务实例
-		bysjglxt_task_instance = graduationProjectManagementDao.getTaskInstanceing(userId);
-		// 根据任务实例的任务定义ID获取任务定义表
-		bysjglxt_task_definition = graduationProjectManagementDao
-				.getTaskDefinition(bysjglxt_task_instance.getTask_instance_task_definition());
-		taskDTO.setTaskDefinition(bysjglxt_task_definition);
-		taskDTO.setTaskInstance(bysjglxt_task_instance);
-		return taskDTO;
-	}
-
 }

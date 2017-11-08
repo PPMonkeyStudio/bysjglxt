@@ -285,7 +285,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	public bysjglxt_teacher_user getTeacherUserByNum(String topic_select_teacher_tutor) {
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		Session session = getSession();
-		String hql = "from bysjglxt_teacher_user where user_teacher_num = '" + topic_select_teacher_tutor + "'";
+		String hql = "from bysjglxt_teacher_user where user_teacher_id = '" + topic_select_teacher_tutor + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
 		return bysjglxt_teacher_user;
@@ -412,6 +412,17 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Query query = session.createQuery(hql);
 		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
 		return bysjglxt_process_instance;
+	}
+
+	// 根据角色以及状态得到个人正在进行的任务实例
+	@Override
+	public bysjglxt_task_instance getTaskInstanceing(String userId) {
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_role='" + userId + "' and task_instance_state=1 ";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_instance = (com.bysjglxt.domain.DO.bysjglxt_task_instance) query.uniqueResult();
+		return bysjglxt_task_instance;
 	}
 
 	/**

@@ -8,8 +8,6 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
-import com.bysjglxt.domain.DTO.TaskDTO;
-
 public interface GraduationProjectManagementService {
 
 	/**
@@ -197,9 +195,6 @@ public interface GraduationProjectManagementService {
 	// 10.获取答辩评分及成绩评定表
 	public bysjglxt_defence get_Defence(String userId);
 
-	// 当前正在进行的实例
-	public TaskDTO taskDTO(String userId);
-	
 	
 	
 	

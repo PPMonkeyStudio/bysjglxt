@@ -1,17 +1,8 @@
 package com.bysjglxt.service;
 
 import java.util.List;
-
-import com.bysjglxt.domain.DO.bysjglxt_defence;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
-import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
-import com.bysjglxt.domain.DO.bysjglxt_record_progress;
-import com.bysjglxt.domain.DO.bysjglxt_report_opening;
-import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
-import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
@@ -74,20 +65,22 @@ public interface ProcessManagementService {
 	 */
 	public ProcessManagementVO getMyTaskByPage(ProcessManagementVO processManagementVo, String userID);
 
+	/**
+	 * 获得正在进行的任务实例
+	 */
+	public TaskDTO taskDTO(String userId);
+
 	/**************************** 在点击通过或者是打回以及 ***************************************************/
 
 	/**
 	 * 通过: 实现思路: 1.根据任务实例ID获取任务实例对象 2.直接根据对象更改当前任务实例状态
-	 * 3.根据a该对象的任务实例ID当作父任务实例ID来寻找下一个任务实例 4.根据next任务实例对象ID获得实例对象 5.更改任务实例状态 
-	 * 打回：
-	 * 		实现思路:
-	 * 		1.根据任务实例ID获取任务实例实例对象
-	 * 		2.将当前实例对象更改未未开始
-	 * 		3.先获得返回任务实例的ID
-	 * 		4.再往上遍历得到父任务结点,当父任务结点为返回任务结点的时候将该父任务结点的状态进行变化
+	 * 3.根据a该对象的任务实例ID当作父任务实例ID来寻找下一个任务实例 4.根据next任务实例对象ID获得实例对象 5.更改任务实例状态 打回：
+	 * 实现思路: 1.根据任务实例ID获取任务实例实例对象 2.将当前实例对象更改未未开始 3.先获得返回任务实例的ID
+	 * 4.再往上遍历得到父任务结点,当父任务结点为返回任务结点的时候将该父任务结点的状态进行变化
 	 */
 	// 1.通过
 	public int pass(String taskInstanceId);
+
 	// 2.打回
 	public int repulse(String taskInstanceId);
 

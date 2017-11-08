@@ -325,25 +325,4 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_defence = (bysjglxt_defence) query.uniqueResult();
 		return bysjglxt_defence;
 	}
-
-	@Override
-	public bysjglxt_task_instance getTaskInstanceing(String userId) {
-		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
-		Session session = getSession();
-		String hql = "from bysjglxt_task_instance where task_instance_role='" + userId + "' and task_instance_state=1 ";
-		Query query = session.createQuery(hql);
-		bysjglxt_task_instance = (com.bysjglxt.domain.DO.bysjglxt_task_instance) query.uniqueResult();
-		return bysjglxt_task_instance;
-	}
-	// 根据任务定义Id获取任务定义
-	@Override
-	public bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition) {
-		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
-		Session session = getSession();
-		String hql = "from bysjglxt_task_definition where task_definition_id = '" + task_instance_task_definition + "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
-		return bysjglxt_task_definition;
-	}
-
 }

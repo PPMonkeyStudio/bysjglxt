@@ -38,7 +38,7 @@ public class test {
 		bysjglxt_topic_invite_teacher.setTopic_invite_teacher_name("2");
 		TeacherInformationDTO teacherInformationDTO = new TeacherInformationDTO();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
-		bysjglxt_teacher_user.setUser_teacher_id("02cf3c5a-a3c0-49e1-8e60-3219a782c9cd");
+		bysjglxt_teacher_user.setUser_teacher_id("4b41aea1-87c9-4a9c-9f1f-c0b92be463e5");
 		teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
 		topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
 		topicInformationDTO.setBysjglxtTopic(bysjglxt_topic);
@@ -89,6 +89,15 @@ public class test {
 		TopicInformationManagementVO VO_Topic_By_PageAndSearch = new TopicInformationManagementVO();
 		VO_Topic_By_PageAndSearch = topicManagementService.VO_Topic_By_PageAndSearch(VO_Topic_By_PageAndSearch, 1);
 		System.out.println(VO_Topic_By_PageAndSearch);
+	}
+
+	// 测试选题
+	@Test
+	public void testSelectTopic() {
+		int i = 0;
+		i = topicManagementService.selectTopic("00171b55-b96b-4f2b-97f0-58f11a22ae74",
+				"bdd6f2e9-b9e8-405e-a9e9-032b5fe9c4b3");
+		System.out.println(i);
 	}
 
 }
