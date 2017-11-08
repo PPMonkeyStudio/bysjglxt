@@ -1,6 +1,7 @@
 package com.bysjglxt.service;
 
 import java.util.List;
+
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
@@ -31,14 +32,17 @@ public interface ProcessManagementService {
 	public List<bysjglxt_process_definition> listProcessDefinition();
 
 	/**
-	 * @param processInstanceName
-	 *            流程实例名称 process_definition_id 流程定义ID operation 操作者ID processNum
-	 *            流程编号 1 选题流程 2毕业设计流程 3答辩流程
+	 * @param1 processInstanceName 流程实例名称
+	 * @param2 process_definition_id 流程定义ID
+	 * @param3 operation 操作者ID
 	 * 
-	 * @说明 创建流程和任务实例 参数：流程定义ID 1.成功 -4 系统繁忙，所输入的参数有问题 -1 无权限开启流程-2已经开启流程
-	 *     -3实例化流程失败
+	 * @说明 创建流程和任务实例
 	 * 
-	 * @return
+	 * @return 1 成功
+	 * @return -1 无权限开启流程
+	 * @return -2已经开启流程
+	 * @return -3实例化流程失败
+	 * @return -4 系统繁忙，所输入的参数有问题
 	 */
 	public int openProcess(String processInstanceName, String process_definition_id, String operation);
 

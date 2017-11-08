@@ -9,21 +9,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.ProcessManagementDao;
-import com.bysjglxt.domain.DO.bysjglxt_defence;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
-import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
-import com.bysjglxt.domain.DO.bysjglxt_record_progress;
-import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
-import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
-import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
@@ -130,7 +122,6 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		String hql = "from bysjglxt_task_definition where task_definition_process_definition = '"
 				+ process_definition_id + "' order by task_definition_gmt_create asc";
 		Query query = session.createQuery(hql);
-		System.out.println(hql);
 		bysjglxt_task_definition = query.list();
 		return bysjglxt_task_definition;
 	}
@@ -265,7 +256,6 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Session session = getSession();
 		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + process_instance_id
 				+ "' and task_instance_task_definition = '" + task_definition_father + "'";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
 		return bysjglxt_task_instance;
