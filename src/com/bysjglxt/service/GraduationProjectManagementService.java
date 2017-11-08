@@ -8,8 +8,6 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
-import com.bysjglxt.domain.DTO.TaskDTO;
-
 public interface GraduationProjectManagementService {
 
 	/**

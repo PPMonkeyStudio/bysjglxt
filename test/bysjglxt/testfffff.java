@@ -94,7 +94,7 @@ public class testfffff {
 	public void testttttt() {
 		TopicInformationManagementDTO TopicInformationManagementDTO = new TopicInformationManagementDTO();
 		TopicInformationManagementDTO = topicManagementService
-				.studentTopicInformationManagementDTO("00171b55-b96b-4f2b-97f0-58f11a22ae74");
+				.studentTopicInformationManagementDTO("71816f63-f35b-4ef7-98e7-39d8f78ff3e6");
 		System.out.println(TopicInformationManagementDTO);
 	}
 

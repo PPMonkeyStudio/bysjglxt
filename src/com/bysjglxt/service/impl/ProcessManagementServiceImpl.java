@@ -45,6 +45,9 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		selectTopicProcessDefinition
 				.setProcess_definition_gmt_modified(selectTopicProcessDefinition.getProcess_definition_gmt_create());
 		flag = processManagementDao.createProcessDefine(selectTopicProcessDefinition);
+		if (flag == -1) {
+			return "创建失败";
+		}
 		return selectTopicProcessDefinition.getProcess_definition_id();
 	}
 
@@ -110,6 +113,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			bysjglxt_task_instanceFather = new bysjglxt_task_instance();
 			bysjglxt_section = new bysjglxt_section();
 			bysjglxt_task_instanceReturn = new bysjglxt_task_instance();
+			bysjglxt_task_instance.setTask_instance_id(TeamUtil.getUuid());
 			bysjglxt_task_instance
 					.setTask_instance_process_instance(bysjglxt_process_instance.getProcess_instance_id());
 			bysjglxt_task_instance.setTask_instance_task_definition(bysjglxt_task_definition.getTask_definition_id());
@@ -207,7 +211,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				return -3;
 
 		}
-		return i;
+		return 1;
 
 	}
 

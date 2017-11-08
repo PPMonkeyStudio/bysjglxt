@@ -1,17 +1,8 @@
 package com.bysjglxt.service;
 
 import java.util.List;
-
-import com.bysjglxt.domain.DO.bysjglxt_defence;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
-import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
-import com.bysjglxt.domain.DO.bysjglxt_record_progress;
-import com.bysjglxt.domain.DO.bysjglxt_report_opening;
-import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
-import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
@@ -78,9 +69,7 @@ public interface ProcessManagementService {
 	 * 获得正在进行的任务实例
 	 */
 	public TaskDTO taskDTO(String userId);
-	
-	
-	
+
 	/**************************** 在点击通过或者是打回以及 ***************************************************/
 
 	/**
