@@ -49,20 +49,23 @@
 						<tr>
 							<th>任务名</th>
 							<th>
-								<select class="form-control" id="select_title"
-									style="width: auto;" data-live-search="true" onchange="">
+								<select class="form-control"
+									id="select_processDefinition" style="width: auto;"
+									data-live-search="true" onchange="List_MyTask(1)">
 									<option value="-1">流程定义</option>
 								</select>
 							</th>
 							<th>
-								<select class="form-control" id="select_title"
-									style="width: auto;" data-live-search="true" onchange="">
+								<select class="form-control" id="select_processInstance"
+									style="width: auto;" data-live-search="true"
+									onchange="List_MyTask(1)">
 									<option value="-1">流程实例</option>
 								</select>
 							</th>
 							<th>
-								<select class="form-control" id="select_title"
-									style="width: auto;" data-live-search="true" onchange="">
+								<select class="form-control" id="select_state"
+									style="width: auto;" data-live-search="true"
+									onchange="List_MyTask(1)">
 									<option value="-1">状态</option>
 									<option value="1">正在进项</option>
 									<option value="2">未开始</option>

@@ -7,7 +7,7 @@ function InitializationMyGraduationProject() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 
-				console.log(xhr.responseText);
+				alert(xhr.responseText);
 
 			} else {
 				toastr.error(xhr.status);

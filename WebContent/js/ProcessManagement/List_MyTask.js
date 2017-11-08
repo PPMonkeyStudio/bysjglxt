@@ -1,6 +1,7 @@
 var myTask_json = null;
 function List_MyTask(pageIndex) {
 	var xhr = false;
+	var formData = new FormData();
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		var message;
@@ -74,7 +75,14 @@ function List_MyTask(pageIndex) {
 
 	xhr.open("POST", "/bysjglxt/process/ProcessManagement_ListMyTask");
 
-	var formData = new FormData();
+	// formData.append("processManagementVO.processInstance", document
+	// .getElementById("select_processInstance").value);
+	//
+	// formData.append("processManagementVO.processDefinition", document
+	// .getElementById("select_processDefinition").value);
+
+	formData.append("processManagementVO.state", document
+			.getElementById("select_state").value);
 
 	formData.append("processManagementVO.pageIndex", pageIndex);
 
