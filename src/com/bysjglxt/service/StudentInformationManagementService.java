@@ -71,7 +71,6 @@ public interface StudentInformationManagementService {
 	 */
 	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
 			StudentInformationManagementVO studentInformationManagementVO);
-
 	/**
 	 * 
 	 * @DATE 2017-10-27

@@ -64,9 +64,9 @@
 								<select class="form-control" id="select_title"
 									style="width: auto;" data-live-search="true" onchange="">
 									<option value="-1">状态</option>
-									<option value="">正在进项</option>
-									<option value="">未开始</option>
-									<option value="">已结束</option>
+									<option value="1">正在进项</option>
+									<option value="2">未开始</option>
+									<option value="3">已结束</option>
 								</select>
 							</th>
 							<th>操作</th>

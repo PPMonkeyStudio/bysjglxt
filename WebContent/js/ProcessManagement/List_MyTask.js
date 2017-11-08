@@ -83,27 +83,27 @@ function List_MyTask(pageIndex) {
 function flip(flipPage) {
 	switch (flipPage) {
 	case 1: {
-		List_ProcessDefinition_By_PageAndSearch(1)
+		List_MyTask(1)
 		break;
 	}
 	case 2: {
-		if (processDefinition_json.pageIndex - 1 == 0) {
+		if (myTask_json.pageIndex - 1 == 0) {
 			toastr.warning("已经是第一页了");
 		} else {
-			List_ProcessDefinition_By_PageAndSearch(processDefinition_json.pageIndex - 1);
+			List_MyTask(myTask_json.pageIndex - 1);
 		}
 		break;
 	}
 	case 3: {
-		if (processDefinition_json.pageIndex == processDefinition_json.totalPages) {
+		if (myTask_json.pageIndex == myTask_json.totalPages) {
 			toastr.warning("已经是最后一页了");
 		} else {
-			List_ProcessDefinition_By_PageAndSearch(processDefinition_json.pageIndex + 1);
+			List_MyTask(myTask_json.pageIndex + 1);
 		}
 		break;
 	}
 	case 4: {
-		List_ProcessDefinition_By_PageAndSearch(processDefinition_json.totalPages);
+		List_MyTask(myTask_json.totalPages);
 
 		break;
 	}
