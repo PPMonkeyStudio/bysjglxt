@@ -7,7 +7,7 @@ function InitializationMyGraduationProject() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 
-				alert(xhr.responseText);
+				console.log(xhr.responseText);
 
 			} else {
 				toastr.error(xhr.status);
@@ -57,7 +57,7 @@ function Taskbook_Teacher() {
 			.open("POST",
 					"/bysjglxt/graduationProject/GraduationProjectManagement_get_Taskbook");
 
-	xhr.send(formData);
+	// xhr.send(formData);
 }
 
 function Taskbook_Section() {

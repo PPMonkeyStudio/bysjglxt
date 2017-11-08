@@ -72,7 +72,7 @@ public interface ProcessManagementService {
 	/**
 	 * 获得正在进行的任务实例
 	 */
-	public TaskDTO taskDTO(String userId);
+	public TaskDTO getCurrentTaskDTO(String userId);
 
 	/**************************** 在点击通过或者是打回以及 ***************************************************/
 

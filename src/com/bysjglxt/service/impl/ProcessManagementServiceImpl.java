@@ -332,7 +332,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 * 获得正在进行的任务实例
 	 */
 	@Override
-	public TaskDTO taskDTO(String userId) {
+	public TaskDTO getCurrentTaskDTO(String userId) {
 		TaskDTO taskDTO = new TaskDTO();
 		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
