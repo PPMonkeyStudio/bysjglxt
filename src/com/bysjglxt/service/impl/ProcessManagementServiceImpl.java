@@ -62,9 +62,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 
 	@Override
 	public int openProcess(String processInstanceName, String process_definition_id, String operation) {
-		System.out.println(processInstanceName);
-		System.out.println(process_definition_id);
-		System.out.println(operation);
 		// 判断用户是否已经开启该流程
 		bysjglxt_process_instance processInstanceIsOpen = new bysjglxt_process_instance();
 		// 根据流程定义ID以及流程实例化者ID判断是否已经开启流程
@@ -99,9 +96,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -3;
 		// 遍历任务表中属于这个流程的任务定义
 		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
-		System.out.println(list_bysjglxt_task_definition.size());
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
-			System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
 			bysjglxt_student_user = new bysjglxt_student_user();
 			bysjglxt_leader = new bysjglxt_leader();
 			bysjglxt_task_instance = new bysjglxt_task_instance();
@@ -206,7 +201,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			flag = processManagementDao.instanceTask(bysjglxt_task_instance);
 			if (!flag)
 				return -3;
-
 		}
 		return 1;
 
@@ -223,7 +217,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return null;
 		}
 		List_bysjglxtTaskDefinition = processManagementDao.getListBelongProcess(processDefinitionId);
-		System.out.println(List_bysjglxtTaskDefinition.size());
 		processDefinitionDetailDTO.setBysjglxtProcessDefinition(bysjglxtProcessDefinition);
 		processDefinitionDetailDTO.setList_bysjglxtTaskDefinition(List_bysjglxtTaskDefinition);
 		return processDefinitionDetailDTO;
@@ -241,7 +234,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		// 获得符合条件的10条任务实例数据
 		list_bysjglxtTaskInstance = processManagementDao.getListTaskInstanceByPager(processManagementVo, userID);
 		// 遍历10条分别封装其他对象
-		System.out.println(list_bysjglxtTaskInstance.size());
 		for (bysjglxt_task_instance bysjglxt_task_instance : list_bysjglxtTaskInstance) {
 			bysjglxtTaskDefinition = new bysjglxt_task_definition();
 			bysjglxtProcessInstance = new bysjglxt_process_instance();

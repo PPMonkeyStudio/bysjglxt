@@ -185,8 +185,8 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 													.get("userTeacherDTO")).getBysjglxtTeacherUser()
 															.getUser_teacher_id()));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
-			http_response
-					.getWriter().write(
+			System.out
+					.println(
 							processManagementService
 									.openProcess(bootProcess.getProcess_instance_name(),
 											bootProcess.getProcess_instance_process_definition(),
@@ -194,9 +194,7 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 													.get("userStudentDTO")).getBysjglxtStudentUser()
 															.getUser_student_id()));
 		}
-
 	}
-
 	public void getCurrentProcess() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
