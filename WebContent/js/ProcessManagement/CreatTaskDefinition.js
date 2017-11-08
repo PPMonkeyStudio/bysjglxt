@@ -70,9 +70,7 @@ function CreatTaskDefinition() {
 						 */
 						if (document
 								.getElementById("select_task_definition_type").value == "1") {
-							formData.append(
-									"newTaskDefinition.task_definition_return",
-									null);
+							// 不给，如果给null会给字符串
 						} else {
 							formData
 									.append(

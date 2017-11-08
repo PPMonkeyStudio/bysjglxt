@@ -57,7 +57,7 @@ function Taskbook_Teacher() {
 			.open("POST",
 					"/bysjglxt/graduationProject/GraduationProjectManagement_get_Taskbook");
 
-	xhr.send(formData);
+	// xhr.send(formData);
 }
 
 function Taskbook_Section() {

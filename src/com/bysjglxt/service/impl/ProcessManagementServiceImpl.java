@@ -191,10 +191,13 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			// (2)根据任务实例所属流程实例ID以及任务实例所属任务定义ID得到返回任务实例ID
 			if (bysjglxt_task_definition.getTask_definition_return() != null
 					&& bysjglxt_task_definition.getTask_definition_return().trim().length() > 0) {
+
 				bysjglxt_task_instanceReturn = processManagementDao
 						.getTaskInstanceByProcessInstanceIdAndTaskDefinitionId(
 								bysjglxt_process_instance.getProcess_instance_id(),
 								bysjglxt_task_definition.getTask_definition_return());
+				if (bysjglxt_task_instanceReturn == null) {
+				}
 				bysjglxt_task_instance.setTask_instance_return(bysjglxt_task_instanceReturn.getTask_instance_id());
 			}
 			// 状态初始化 2：未开始
@@ -250,21 +253,18 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			bysjglxtTaskDefinition = processManagementDao
 					.getTaskDefinition(bysjglxt_task_instance.getTask_instance_task_definition());
 			if (bysjglxtTaskDefinition == null) {
-				System.out.println("任务定义记录为空");
 				return null;
 			}
 			// 根据流程实例ID获取流程实例表
 			bysjglxtProcessInstance = processManagementDao
 					.getProcessInstanceById(bysjglxt_task_instance.getTask_instance_process_instance());
 			if (bysjglxtProcessInstance == null) {
-				System.out.println("流程实例记录为空");
 				return null;
 			}
 			// 根据流程定义ID获取流程定义表
 			bysjglxtProcessDefinition = processManagementDao
 					.getProcessDefinition(bysjglxtProcessInstance.getProcess_instance_process_definition());
 			if (bysjglxtProcessDefinition == null) {
-				System.out.println("流程定义记录为空");
 				return null;
 			}
 			processDetailDTO.setBysjglxtProcessDefinition(bysjglxtProcessDefinition);
@@ -338,7 +338,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 * 获得正在进行的任务实例
 	 */
 	@Override
-	public TaskDTO taskDTO(String userId) {
+	public TaskDTO getCurrentTaskDTO(String userId) {
 		TaskDTO taskDTO = new TaskDTO();
 		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();

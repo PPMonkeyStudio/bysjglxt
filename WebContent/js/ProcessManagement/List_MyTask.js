@@ -1,6 +1,7 @@
 var myTask_json = null;
 function List_MyTask(pageIndex) {
 	var xhr = false;
+	var formData = new FormData();
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		var message;
@@ -28,7 +29,29 @@ function List_MyTask(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = myTask_json.list_ProcessDetailDTO[num].bysjglxt_task_definition.task_definition_name;
+					new_td.innerHTML = myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskDefinition.task_definition_name;
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = myTask_json.list_ProcessDetailDTO[num].bysjglxtProcessDefinition.process_definition_name;
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = myTask_json.list_ProcessDetailDTO[num].bysjglxtProcessInstance.process_instance_name;
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 1) {
+						new_td.innerHTML = '<span class="label label-success">正在进行</span>';
+					} else if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 2) {
+						new_td.innerHTML = '<span class="label label-primary">未开始</span>';
+					} else {
+						new_td.innerHTML = '<span class="label label-default">已结束</span>';
+					}
+
 				}
 				/*
 				 * 设置页数
@@ -52,9 +75,46 @@ function List_MyTask(pageIndex) {
 
 	xhr.open("POST", "/bysjglxt/process/ProcessManagement_ListMyTask");
 
-	var formData = new FormData();
+	// formData.append("processManagementVO.processInstance", document
+	// .getElementById("select_processInstance").value);
+	//
+	// formData.append("processManagementVO.processDefinition", document
+	// .getElementById("select_processDefinition").value);
+
+	formData.append("processManagementVO.state", document
+			.getElementById("select_state").value);
 
 	formData.append("processManagementVO.pageIndex", pageIndex);
 
 	xhr.send(formData);
+}
+function flip(flipPage) {
+	switch (flipPage) {
+	case 1: {
+		List_MyTask(1)
+		break;
+	}
+	case 2: {
+		if (myTask_json.pageIndex - 1 == 0) {
+			toastr.warning("已经是第一页了");
+		} else {
+			List_MyTask(myTask_json.pageIndex - 1);
+		}
+		break;
+	}
+	case 3: {
+		if (myTask_json.pageIndex == myTask_json.totalPages) {
+			toastr.warning("已经是最后一页了");
+		} else {
+			List_MyTask(myTask_json.pageIndex + 1);
+		}
+		break;
+	}
+	case 4: {
+		List_MyTask(myTask_json.totalPages);
+
+		break;
+	}
+
+	}
 }
