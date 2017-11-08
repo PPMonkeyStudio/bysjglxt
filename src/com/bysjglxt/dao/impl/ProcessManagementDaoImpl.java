@@ -285,7 +285,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	public bysjglxt_teacher_user getTeacherUserByNum(String topic_select_teacher_tutor) {
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		Session session = getSession();
-		String hql = "from bysjglxt_teacher_user where user_teacher_num = '" + topic_select_teacher_tutor + "'";
+		String hql = "from bysjglxt_teacher_user where user_teacher_id = '" + topic_select_teacher_tutor + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
 		return bysjglxt_teacher_user;

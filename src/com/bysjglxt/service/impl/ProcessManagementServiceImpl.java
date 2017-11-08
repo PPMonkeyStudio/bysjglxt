@@ -78,7 +78,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		if (processInstanceIsOpen != null) {
 			return -2;
 		}
-		int i = 0;
 		boolean flag = true;
 		bysjglxt_student_user bysjglxt_student_user = null;
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
@@ -105,6 +104,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -3;
 		// 遍历任务表中属于这个流程的任务定义
 		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
+		System.out.println(list_bysjglxt_task_definition.size());
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
 			bysjglxt_student_user = new bysjglxt_student_user();
 			bysjglxt_leader = new bysjglxt_leader();
@@ -155,6 +155,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				if (bysjglxt_topic_select == null) {
 					return -3;
 				}
+				// 根据教师UserID获得教师信息user对象
 				bysjglxt_teacher_user = processManagementDao
 						.getTeacherUserByNum(bysjglxt_topic_select.getTopic_select_teacher_tutor());
 				if (bysjglxt_teacher_user == null) {
@@ -168,6 +169,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				bysjglxt_task_instance.setTask_instance_role(bysjglxt_section.getSection_leader());
 				break;
 			case 5:
+				System.out.println(5);
 				// 判断学生账号是否错误
 				// 判断那是否是学生点击开启流程
 				bysjglxt_student_user = processManagementDao.getStudentUser(operation);

@@ -12,6 +12,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DTO.TaskDTO;
+import com.bysjglxt.domain.VO.ProcessManagementVO;
 import com.bysjglxt.service.ProcessManagementService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,14 +37,14 @@ public class testProcess {
 		System.out.println(msg);
 	}
 
-	// 测试创建任务定义
+	// 测试创建任务定义4b41aea1-87c9-4a9c-9f1f-c0b92be463e5
 	@Test
 	public void testCreateTaskDefinition() {
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
-		bysjglxt_task_definition.setTask_definition_name("指导老师完成任务书");
+		bysjglxt_task_definition.setTask_definition_name("领导小组长填写形式审查表(核查)");
 		bysjglxt_task_definition.setTask_definition_process_definition("cb339fb5-b0d6-49aa-b389-ffa8dc3d690a");
 		bysjglxt_task_definition.setTask_definition_type(1);
-		bysjglxt_task_definition.setTask_definition_role(1);
+		bysjglxt_task_definition.setTask_definition_role(3);
 		int i = 0;
 		i = processManagementService.createSelectTopicTaskDefine(bysjglxt_task_definition);
 		System.out.println(i);
@@ -65,6 +67,15 @@ public class testProcess {
 		i = processManagementService.openProcess("TheOne", "cb339fb5-b0d6-49aa-b389-ffa8dc3d690a",
 				"00171b55-b96b-4f2b-97f0-58f11a22ae74");
 		System.out.println(i);
+	}
+
+	// 测试我的任务
+	@Test
+	public void testMyTask() {
+		ProcessManagementVO processManagementVo = new ProcessManagementVO();
+		processManagementVo = processManagementService.getMyTaskByPage(processManagementVo,
+				"166c2390-a79a-4ab1-b2ff-73d283e3aa65");
+		System.out.println(processManagementVo);
 	}
 
 }
