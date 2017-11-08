@@ -414,6 +414,17 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		return bysjglxt_process_instance;
 	}
 
+	// 根据角色以及状态得到个人正在进行的任务实例
+	@Override
+	public bysjglxt_task_instance getTaskInstanceing(String userId) {
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_role='" + userId + "' and task_instance_state=1 ";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_instance = (com.bysjglxt.domain.DO.bysjglxt_task_instance) query.uniqueResult();
+		return bysjglxt_task_instance;
+	}
+
 	/**
 	 * 根据任务实例ID获得任务实例
 	 */

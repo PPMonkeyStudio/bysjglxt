@@ -64,10 +64,6 @@ public interface GraduationProjectManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_defence getDefence(String userId);
 
-	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceing(String userId);
-
-	public com.bysjglxt.domain.DO.bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition);
-
 	public com.bysjglxt.domain.DO.bysjglxt_report_opening getReportOpeningUser(String userId);
 
 

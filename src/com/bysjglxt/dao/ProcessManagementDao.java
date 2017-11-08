@@ -73,6 +73,8 @@ public interface ProcessManagementDao {
 
 	public bysjglxt_task_instance getTaskInstanceByFatherTaskId(String task_instance_id);
 
+	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceing(String userId);
+
 	/****/
 	
 	

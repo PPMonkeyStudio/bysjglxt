@@ -334,6 +334,24 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		return 1;
 	}
 
+	/**
+	 * 获得正在进行的任务实例
+	 */
+	@Override
+	public TaskDTO taskDTO(String userId) {
+		TaskDTO taskDTO = new TaskDTO();
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		// 获取用户正在进行的任务实例
+		bysjglxt_task_instance = processManagementDao.getTaskInstanceing(userId);
+		// 根据任务实例的任务定义ID获取任务定义表
+		bysjglxt_task_definition = processManagementDao
+				.getTaskDefinition(bysjglxt_task_instance.getTask_instance_task_definition());
+		taskDTO.setTaskDefinition(bysjglxt_task_definition);
+		taskDTO.setTaskInstance(bysjglxt_task_instance);
+		return taskDTO;
+	}
+
 	/********************************************** 下面是点击通过或打回 ***************************/
 
 	// 通过
@@ -378,7 +396,51 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	// 打回
 	@Override
 	public int repulse(String taskInstanceId) {
-		
+		boolean flag = true;
+		// 1.根据任务实例ID获取任务实例实例对象
+		bysjglxt_task_instance currentTaskInstance = new bysjglxt_task_instance();
+		bysjglxt_task_instance currentTaskInstanceFather = new bysjglxt_task_instance();
+		bysjglxt_task_instance currentTaskInstanceReturn = new bysjglxt_task_instance();
+		currentTaskInstance = processManagementDao.getTaskInstanceingById(taskInstanceId);
+		if (currentTaskInstance == null) {
+			return -3;
+			// 无该任务实例
+		}
+		// 2.将当前实例对象更改未未开始
+		// 更改任务实例状态,将之改为已结束
+		currentTaskInstance.setTask_instance_state(2);
+		currentTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
+		// 存储任务实例
+		flag = processManagementDao.instanceTask(currentTaskInstance);
+		if (!flag)
+			return -1;// 更改任务实例失败
+		// 3.先获得返回任务实例的ID currentTaskInstance.getTask_instance_return()
+		// id 是父任务实例ID
+		String id = currentTaskInstance.getTask_instance_father();
+		while (true) {
+			// 父任务实例
+			currentTaskInstanceFather = processManagementDao.getTaskInstanceingById(id);
+			// 如果属于返回的任务实例
+			if ((currentTaskInstance.getTask_instance_return())
+					.equals(currentTaskInstanceFather.getTask_instance_id())) {
+				// 将返回的任务实例状态更改为正在进行
+				currentTaskInstanceFather.setTask_instance_state(1);
+				currentTaskInstanceFather.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
+				// 存储任务实例
+				flag = processManagementDao.instanceTask(currentTaskInstanceFather);
+				if (!flag)
+					return -1;
+				break;
+			}
+			// 如果不是返回的任务实例,将状态更改为未开始
+			currentTaskInstanceFather.setTask_instance_state(2);
+			currentTaskInstanceFather.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
+			// 存储任务实例
+			flag = processManagementDao.instanceTask(currentTaskInstanceFather);
+			if (!flag)
+				return -1;
+			id = currentTaskInstanceFather.getTask_instance_father();
+		}
 		return 1;
 	}
 
