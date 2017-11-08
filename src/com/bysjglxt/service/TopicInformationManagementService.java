@@ -166,4 +166,17 @@ public interface TopicInformationManagementService {
 	 */
 	public int updateTopic(bysjglxt_topic topicId);
 
+	/**
+	 * @D 学生点击退选:
+	 * @D 1.根据学生userId获取学生选题表
+	 * @D 2.根据学生userId更改学生登陆表是否选题字段
+	 * @D 3.删除学生选题表记录
+	 * @param studentUserId
+	 *            学生userID
+	 * @return -3 参数错误,系统繁忙
+	 * @return -1退选失败
+	 * @return 1 成功
+	 */
+	public int dropTopic(String studentUserId);
+
 }
