@@ -70,43 +70,56 @@
 												id="banner_RecordProgress_1_Teacher">5.指导老师填写前期进展情况意见</a>
 										</li>
 										<li>
-											<a href="#tab6" data-toggle="tab" id="">6.学生完成中期进展情况记录</a>
+											<a href="#tab6" data-toggle="tab"
+												id="banner_RecordProgress_2_Student">6.学生完成中期进展情况记录</a>
 										</li>
 										<li>
-											<a href="#tab7" data-toggle="tab" id="">7.指导老师填写中期进展情况意见</a>
+											<a href="#tab7" data-toggle="tab"
+												id="banner_RecordProgress_2_Teacher">7.指导老师填写中期进展情况意见</a>
 										</li>
 										<li>
-											<a href="#tab8" data-toggle="tab" id="">8.学生完成后期进展情况记录</a>
+											<a href="#tab8" data-toggle="tab"
+												id="banner_RecordProgress_3_Student">8.学生完成后期进展情况记录</a>
 										</li>
 										<li>
-											<a href="#tab9" data-toggle="tab" id="">9.指导老师填写后期进展情况意见</a>
+											<a href="#tab9" data-toggle="tab"
+												id="banner_RecordProgress_3_Teacher">9.指导老师填写后期进展情况意见</a>
 										</li>
 										<li>
-											<a href="#tab10" data-toggle="tab" id="">10.学生完成完善期进展情况记录</a>
+											<a href="#tab10" data-toggle="tab"
+												id="banner_RecordProgress_4_Student">10.学生完成完善期进展情况记录</a>
 										</li>
 										<li>
-											<a href="#tab11" data-toggle="tab" id="">11.指导老师填写完善期进展情况意见</a>
+											<a href="#tab11" data-toggle="tab"
+												id="banner_RecordProgress_4_Teacher">11.指导老师填写完善期进展情况意见</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab" id="">12.学生完成个人学习总结</a>
+											<a href="#tab12" data-toggle="tab"
+												id="banner_summary_student">12.学生完成个人学习总结</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab" id="">13.指导老师填写个人学习总结意见</a>
+											<a href="#tab12" data-toggle="tab"
+												id="banner_summary_teacher">13.指导老师填写个人学习总结意见</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab" id="">14.学生提交答辩论文</a>
+											<a href="#tab12" data-toggle="tab"
+												id="banner_dissertation">14.学生提交答辩论文</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab" id="">15.指导老师填写形式审查表</a>
+											<a href="#tab12" data-toggle="tab"
+												id="banner_examination_formal_teacher">15.指导老师填写形式审查表</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab" id="">16.领导小组长填写形式审查表(核查)</a>
+											<a href="#tab12" data-toggle="tab"
+												id="banner_examination_formal_leader">16.领导小组长填写形式审查表(核查)</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab" id="">17.指导老师填写评价审阅表</a>
+											<a href="#tab12" data-toggle="tab"
+												id="banner_evaluate_tutor">17.指导老师填写评价审阅表</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab" id="">18.评阅老师填写评阅审查表</a>
+											<a href="#tab12" data-toggle="tab"
+												id="banner_evaluate_review">18.评阅老师填写评阅审查表</a>
 										</li>
 									</ul>
 									<!--  -->
@@ -216,6 +229,67 @@
 					break;
 				}
 				case 2: {
+					report_opening();
+					break;
+				}
+				case 3: {
+					RecordProgress_1_Student();
+					break;
+				}
+				case 4: {
+					RecordProgress_1_Teacher();
+					break;
+				}
+				case 5: {
+					RecordProgress_2_Student();
+					break;
+				}
+				case 6: {
+					RecordProgress_2_Teacher();
+					break;
+				}
+				case 7: {
+					RecordProgress_3_Student();
+					break;
+				}
+				case 8: {
+					RecordProgress_3_Teacher();
+					break;
+				}
+				case 9: {
+					RecordProgress_4_Student();
+					break;
+				}
+				case 10: {
+					RecordProgress_4_Teacher();
+					break;
+				}
+				case 11: {
+					summary_student();
+					break;
+				}
+				case 12: {
+					summary_teacher();
+					break;
+				}
+				case 13: {
+					dissertation();
+					break;
+				}
+				case 14: {
+					examination_formal_teacher();
+					break;
+				}
+				case 15: {
+					examination_formal_leader();
+					break;
+				}
+				case 16: {
+					evaluate_tutor();
+					break;
+				}
+				case 17: {
+					evaluate_review();
 					break;
 				}
 
@@ -238,7 +312,7 @@
 	var myClientHeight = (document.documentElement.clientHeight - 280) + 'px';
 	$('#panel-scrolling-demo .panel-body').slimScroll({
 		height : myClientHeight,
-		wheelStep : 3,
+		wheelStep : 1,
 	});
 </script>
 <script type="text/javascript">

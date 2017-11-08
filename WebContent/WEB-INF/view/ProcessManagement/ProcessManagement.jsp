@@ -25,6 +25,8 @@
 	src="<%=basePath%>js/ProcessManagement/UpdateProcessDefinition.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/Delete_Process.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/ProcessManagement/BootProcess.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>流程</title>

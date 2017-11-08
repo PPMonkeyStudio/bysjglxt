@@ -4,21 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bysjglxt.dao.ProcessManagementDao;
-import com.bysjglxt.domain.DO.bysjglxt_defence;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
-import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
-import com.bysjglxt.domain.DO.bysjglxt_record_progress;
-import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
-import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
-import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
@@ -70,6 +62,9 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 
 	@Override
 	public int openProcess(String processInstanceName, String process_definition_id, String operation) {
+		System.out.println(processInstanceName);
+		System.out.println(process_definition_id);
+		System.out.println(operation);
 		// 判断用户是否已经开启该流程
 		bysjglxt_process_instance processInstanceIsOpen = new bysjglxt_process_instance();
 		// 根据流程定义ID以及流程实例化者ID判断是否已经开启流程
@@ -106,6 +101,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
 		System.out.println(list_bysjglxt_task_definition.size());
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
+			System.out.println("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
 			bysjglxt_student_user = new bysjglxt_student_user();
 			bysjglxt_leader = new bysjglxt_leader();
 			bysjglxt_task_instance = new bysjglxt_task_instance();
@@ -169,7 +165,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				bysjglxt_task_instance.setTask_instance_role(bysjglxt_section.getSection_leader());
 				break;
 			case 5:
-				System.out.println(5);
 				// 判断学生账号是否错误
 				// 判断那是否是学生点击开启流程
 				bysjglxt_student_user = processManagementDao.getStudentUser(operation);

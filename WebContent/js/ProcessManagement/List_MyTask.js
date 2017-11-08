@@ -6,7 +6,6 @@ function List_MyTask(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				alert(xhr.responseText);
 				myTask_json = JSON.parse(xhr.responseText);
 				/*
 				 * 清空原表数据

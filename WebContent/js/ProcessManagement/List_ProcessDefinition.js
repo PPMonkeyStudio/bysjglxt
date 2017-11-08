@@ -13,7 +13,6 @@ function List_ProcessDefinition(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				alert(xhr.responseText);
 				processDefinition_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -34,6 +33,11 @@ function List_ProcessDefinition(pageIndex) {
 				var new_tr = null;
 				var new_td = null;
 				for (var num = 0; num < processDefinition_json.length; num++) {
+
+					if (processDefinition_json[num].process_definition_instance_role == 1
+							&& userStudentDTO != null) {
+						continue;
+					}
 
 					new_tr = document.createElement("tr");
 
@@ -65,8 +69,14 @@ function List_ProcessDefinition(pageIndex) {
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<button class="btn btn-default" id="'
 							+ processDefinition_json[num].process_definition_id
-							+ '" onclick="UpdateProcessDefinition(this)" >修改</button>'
-							+ '<button class="btn btn-default" onclick="" style="margin:0 0 0 10px;">开启流程</button>';
+							+ '" onclick="UpdateProcessDefinition(this)" >详细</button>'
+							+ '<a id="'
+							+ processDefinition_json[num].process_definition_name
+							+ '">' + '<button class="btn btn-default" id="'
+							+ processDefinition_json[num].process_definition_id
+							+ '"' + ' onclick="BootProcess(this)" '
+							+ 'style="margin:0 0 0 10px;">' + '开启流程'
+							+ '</button>' + '</a>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));

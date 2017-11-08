@@ -175,7 +175,46 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		http_response.getWriter().write("success");
 	}
 
-	public void BootProcess() {
+	/**
+	 * 启动流程
+	 * 
+	 * @throws IOException
+	 */
+	public void BootProcess() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		System.out.println(gson.toJson(bootProcess));
+		System.out.println(
+				"用户ID：" + ((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+						.getBysjglxtStudentUser().getUser_student_id());
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response
+					.getWriter().write(
+							processManagementService
+									.openProcess(bootProcess.getProcess_instance_name(),
+											bootProcess.getProcess_instance_process_definition(),
+											((TeacherInformationDTO) ActionContext.getContext().getSession()
+													.get("userTeacherDTO")).getBysjglxtTeacherUser()
+															.getUser_teacher_id()));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response
+					.getWriter().write(
+							processManagementService
+									.openProcess(bootProcess.getProcess_instance_name(),
+											bootProcess.getProcess_instance_process_definition(),
+											((StudentInformationDTO) ActionContext.getContext().getSession()
+													.get("userStudentDTO")).getBysjglxtStudentUser()
+															.getUser_student_id()));
+		}
+
+	}
+
+	public void getCurrentProcess() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
 
 	}
 

@@ -1,4 +1,10 @@
 function CreatTaskDefinition() {
+
+	if (userStudentDTO != null) {
+		toastr.error("无权限");
+		return;
+	}
+
 	$
 			.confirm({
 				title : '创建任务节点',
@@ -59,15 +65,25 @@ function CreatTaskDefinition() {
 										"newTaskDefinition.task_definition_role",
 										document
 												.getElementById("select_task_definition_role").value);
-						formData
-								.append(
-										"newTaskDefinition.task_definition_return",
-										document
-												.getElementById("select_task_definition_return").value);
+						/*
+						 * 如果是顺序结构则不传return的节点
+						 */
+						if (document
+								.getElementById("select_task_definition_type").value == "1") {
+							formData.append(
+									"newTaskDefinition.task_definition_return",
+									null);
+						} else {
+							formData
+									.append(
+											"newTaskDefinition.task_definition_return",
+											document
+													.getElementById("select_task_definition_return").value);
+						}
+
 						xhr
 								.open("POST",
 										"/bysjglxt/process/ProcessManagement_CreatTaskDefinition");
-						alert(formData.toString());
 						xhr.send(formData);
 
 					},

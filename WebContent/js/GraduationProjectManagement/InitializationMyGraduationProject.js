@@ -1,5 +1,23 @@
 function InitializationMyGraduationProject() {
+	var xhr = false;
+	var formData = new FormData();
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		var message;
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
 
+				alert(xhr.responseText);
+
+			} else {
+				toastr.error(xhr.status);
+			}
+		}
+	}
+
+	xhr.open("POST", "/bysjglxt/process/ProcessManagement_getCurrentProcess");
+
+	xhr.send(formData);
 }
 
 function Taskbook_Teacher() {
@@ -48,4 +66,52 @@ function Taskbook_Section() {
 	banner_Taskbook_Section.click();
 	banner_Taskbook_Section.style.color = 'white';
 	banner_Taskbook_Section.parentNode.style.backgroundColor = '#428bca';
+}
+function report_opening() {
+
+}
+function RecordProgress_1_Student() {
+
+}
+function RecordProgress_1_Teacher() {
+
+}
+function RecordProgress_2_Student() {
+
+}
+function RecordProgress_2_Teacher() {
+
+}
+function RecordProgress_3_Student() {
+
+}
+function RecordProgress_3_Teacher() {
+
+}
+function RecordProgress_4_Student() {
+
+}
+function RecordProgress_4_Teacher() {
+
+}
+function summary_student() {
+
+}
+function summary_teacher() {
+
+}
+function dissertation() {
+
+}
+function examination_formal_teacher() {
+
+}
+function examination_formal_leader() {
+
+}
+function evaluate_tutor() {
+
+}
+function evaluate_review() {
+
 }

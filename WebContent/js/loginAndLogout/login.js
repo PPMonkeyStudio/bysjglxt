@@ -21,10 +21,14 @@ function login() {
 				switch (xhr.responseText) {
 				case "账号不存在": {
 					toastr.error("账号不存在");
+					button_login.disabled = "";
+					button_login.innerHTML = '登录';
 					break;
 				}
 				case "密码不正确": {
 					toastr.error("密码不正确");
+					button_login.disabled = "";
+					button_login.innerHTML = '登录';
 					break;
 				}
 				case "教师登录成功": {
