@@ -77,6 +77,9 @@ public interface ProcessManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_process_instance getProcessInstanceByUserAndState(String userId);
 
+	public List<bysjglxt_task_definition> getTaskDefinitionByProcessDefinitionId(
+			String task_definition_process_definition);
+
 	/****/
 	
 	

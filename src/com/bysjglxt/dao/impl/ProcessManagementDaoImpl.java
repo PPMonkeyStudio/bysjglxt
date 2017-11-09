@@ -450,4 +450,17 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		return bysjglxt_process_instance;
 	}
 
+	@Override
+	public List<bysjglxt_task_definition> getTaskDefinitionByProcessDefinitionId(
+			String task_definition_process_definition) {
+		List<bysjglxt_task_definition> list_bysjglxt_task_definition = new ArrayList<bysjglxt_task_definition>();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_definition where task_definition_process_definition='"
+				+ task_definition_process_definition + "' order by task_definition_gmt_create desc";
+		System.out.println("ffddd");
+		Query query = session.createQuery(hql);
+		list_bysjglxt_task_definition = query.list();
+		return list_bysjglxt_task_definition;
+	}
+
 }
