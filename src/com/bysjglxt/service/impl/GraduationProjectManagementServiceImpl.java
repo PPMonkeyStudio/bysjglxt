@@ -10,6 +10,8 @@ import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_process_definition;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
@@ -43,7 +45,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public int startGraduationProjectProcess(String studentId) {
-		System.out.println("ffff");
 		if (studentId == null || studentId.trim().length() <= 0) {
 			return 0;
 		}
@@ -67,7 +68,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		if (flag == 2) {
 			return flag;
 		}
-		System.out.println("ffflplplp1");
 		bysjglxt_report_opening.setReport_opening_id(TeamUtil.getUuid());
 		bysjglxt_report_opening.setReport_opening_student(studentId);
 		bysjglxt_report_opening.setReport_opening_gmt_create(TeamUtil.getStringSecond());
@@ -838,7 +838,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 		return params;
 	}
-
 	@Override
 	public TeacherTutorStudentVO teacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId) {
@@ -851,18 +850,39 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_student_user bysjglxtStudentUser = new bysjglxt_student_user();
 		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
 		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
-		// bysjglxt_topic_select bysjglxt_topic_select = new
-		// bysjglxt_topic_select();
+		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
+		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
+		bysjglxt_process_instance processInstance = new bysjglxt_process_instance();
 		List<bysjglxt_topic_select> list_bysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
+		List<bysjglxt_topic_select> list_Allbysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
+		// 获得总记录数
+		list_Allbysjglxt_topic_select = graduationProjectManagementDao
+				.getTeacherTutorStudentAllSelectTopic(teacherTutorStudentVO, teacherUserId);
+		int i = list_Allbysjglxt_topic_select.size();
+		teacherTutorStudentVO.setTotalRecords(i);
+		teacherTutorStudentVO.setTotalPages(((i - 1) / teacherTutorStudentVO.getPageSize()) + 1);
+		if (teacherTutorStudentVO.getPageIndex() <= 1) {
+			teacherTutorStudentVO.setHavePrePage(false);
+		} else {
+			teacherTutorStudentVO.setHavePrePage(true);
+		}
+		if (teacherTutorStudentVO.getPageIndex() >= teacherTutorStudentVO.getTotalPages()) {
+			teacherTutorStudentVO.setHaveNextPage(false);
+		} else {
+			teacherTutorStudentVO.setHaveNextPage(true);
+		}
 		// 1.根据教师ID筛选出符合条件的最多10条选题数据
 		list_bysjglxt_topic_select = graduationProjectManagementDao
 				.getTeacherTutorStudentSelectTopicByPage(teacherTutorStudentVO, teacherUserId);
 		System.out.println(list_bysjglxt_topic_select.size());
 		// 2.遍历选题拿到学生userId信息
 		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
+			taskDefinition = new bysjglxt_task_definition();
 			bysjglxtStudentUser = new bysjglxt_student_user();
 			bysjglxtStudentBasic = new bysjglxt_student_basic();
+			taskInstance = new bysjglxt_task_instance();
 			teacherTutorStudentDTO = new TeacherTutorStudentDTO();
+			processInstance = new bysjglxt_process_instance();
 			bysjglxtTopic = new bysjglxt_topic();
 			// 3.根据选题所属学生拿到学生user表
 			bysjglxtStudentUser = graduationProjectManagementDao
@@ -875,22 +895,51 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					studentInformationDTO.setBysjglxtStudentBasic(bysjglxtStudentBasic);
 					studentInformationDTO.setBysjglxtStudentUser(bysjglxtStudentUser);
 				}
-				// 根据学生userId获取学生正在进行的任务实例
-				// 一个流程实例下面的任务实例只有可能有一个正在进行的任务实例
+				// 根据学生userId获取该学生所有的流程实例记录
+				listProcessInstance = graduationProjectManagementDao
+						.getProcessInstanceByMan(bysjglxt_topic_select.getTopic_select_student());
+				// 遍历
+				for (bysjglxt_process_instance bysjglxt_process_instance : listProcessInstance) {
+					bysjglxt_process_definition = new bysjglxt_process_definition();
+					// 根据流程定义ID获取流程定义表
+					bysjglxt_process_definition = graduationProjectManagementDao.getProcessDefinitionByID(
+							bysjglxt_process_instance.getProcess_instance_process_definition());
+					if (bysjglxt_process_definition != null) {
+						if ("毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
+							processInstance = bysjglxt_process_instance;
+							break;
+						}
+					}
+				}
+				if (processInstance != null) {
+					// 一个流程实例中只有一个任务实例是处于正在进行的状态
+					// 根据流程实例ID以及任务实例状态即可判断得到流程进度
+					taskInstance = graduationProjectManagementDao
+							.getTaskInstanceByProcessInstanceId(processInstance.getProcess_instance_id());
+					if (taskInstance != null) {
+						// 根据任务实例所属任务定义ID获取任务定义
+						taskDefinition = graduationProjectManagementDao
+								.getTaskDefinition(taskInstance.getTask_instance_task_definition());
+						taskDTO.setTaskDefinition(taskDefinition);
+						taskDTO.setTaskInstance(taskInstance);
+					}
+				}
 
 			} else {
 				System.out.println("学生user表为空");
 			}
 			teacherTutorStudentDTO.setStudentInformationDTO(studentInformationDTO);
+			teacherTutorStudentDTO.setTaskDTO(taskDTO);
 			// 根据选题所属课题拿到课题表信息
 			bysjglxtTopic = graduationProjectManagementDao
 					.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 			if (bysjglxtTopic != null) {
 				teacherTutorStudentDTO.setBysjglxtTopic(bysjglxtTopic);
 			}
-
+			list_TeacherTutorStudentDTO.add(teacherTutorStudentDTO);
 		}
-		return null;
+		teacherTutorStudentVO.setList_TeacherTutorStudentDTO(list_TeacherTutorStudentDTO);
+		return teacherTutorStudentVO;
 	}
 
 }

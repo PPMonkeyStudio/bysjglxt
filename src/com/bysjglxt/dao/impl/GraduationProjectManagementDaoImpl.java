@@ -12,11 +12,15 @@ import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_process_definition;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
@@ -414,6 +418,65 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Query query = session.createQuery(hql);
 		query.setFirstResult((teacherTutorStudentVO.getPageIndex() - 1) * teacherTutorStudentVO.getPageSize());
 		query.setMaxResults(teacherTutorStudentVO.getPageSize());
+		listBysjglxtTopicSelect = query.list();
+		return listBysjglxtTopicSelect;
+	}
+
+	// 根据Man获取这个用户的所有实例化者流程实例
+	@Override
+	public List<bysjglxt_process_instance> getProcessInstanceByMan(String topic_select_student) {
+		List<bysjglxt_process_instance> list_bysjglxt_process_instance = new ArrayList<bysjglxt_process_instance>();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_instance where process_instance_man = '" + topic_select_student + "'";
+		Query query = session.createQuery(hql);
+		list_bysjglxt_process_instance = query.list();
+		return list_bysjglxt_process_instance;
+	}
+
+	// 根据流程定义ID获取流程记录
+	@Override
+	public bysjglxt_process_definition getProcessDefinitionByID(String process_instance_process_definition) {
+		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_definition where process_definition_id = '"
+				+ process_instance_process_definition + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_definition = (bysjglxt_process_definition) query.uniqueResult();
+		return bysjglxt_process_definition;
+	}
+
+	// 根据流程实例ID以及任务实例状态获取任务实例
+	@Override
+	public bysjglxt_task_instance getTaskInstanceByProcessInstanceId(String process_instance_id) {
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + process_instance_id
+				+ "' and task_instance_state=1";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
+		return bysjglxt_task_instance;
+	}
+
+	// 根据任务定义Id获取任务定义记录
+	@Override
+	public bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition) {
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_definition where task_definition_id = '" + task_instance_task_definition + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
+		return bysjglxt_task_definition;
+	}
+
+	// 获取总记录数
+	@Override
+	public List<bysjglxt_topic_select> getTeacherTutorStudentAllSelectTopic(TeacherTutorStudentVO teacherTutorStudentVO,
+			String teacherUserId) {
+		Session session = getSession();
+		List<bysjglxt_topic_select> listBysjglxtTopicSelect = new ArrayList<bysjglxt_topic_select>();
+		String hql = "from bysjglxt_topic_select where topic_select_teacher_tutor='" + teacherUserId
+				+ "' order by topic_select_gmt_create";
+		Query query = session.createQuery(hql);
 		listBysjglxtTopicSelect = query.list();
 		return listBysjglxtTopicSelect;
 	}

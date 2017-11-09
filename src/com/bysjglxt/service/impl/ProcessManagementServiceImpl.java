@@ -85,9 +85,10 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -3;
 		}
 		if ("毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
-			System.out.println("创建相关内容");
 			int i = graduationProjectManagementService.startGraduationProjectProcess(operation);
-			System.out.println("ddd\t"+i);
+			if (i != 1) {
+				return -3;
+			}
 		}
 		boolean flag = true;
 		bysjglxt_student_user bysjglxt_student_user = null;
