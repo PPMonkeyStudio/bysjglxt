@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DTO.ProcessDTO;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
-import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
 
 public interface ProcessManagementService {
@@ -72,7 +72,7 @@ public interface ProcessManagementService {
 	/**
 	 * 获得正在进行的任务实例
 	 */
-	public TaskDTO getCurrentTaskDTO(String userId);
+	public ProcessDTO getCurrentTaskDTO(String userId);
 
 	/**************************** 在点击通过或者是打回以及 ***************************************************/
 

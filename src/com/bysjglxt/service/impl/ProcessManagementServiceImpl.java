@@ -13,6 +13,7 @@ import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.ProcessDTO;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 import com.bysjglxt.domain.DTO.ProcessDetailDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
@@ -339,18 +340,41 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 * 获得正在进行的任务实例
 	 */
 	@Override
-	public TaskDTO getCurrentTaskDTO(String userId) {
+	public ProcessDTO getCurrentTaskDTO(String userId) {
 		TaskDTO taskDTO = new TaskDTO();
-		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		List<TaskDTO> listTaskDTO = new ArrayList<TaskDTO>();
+		ProcessDTO processDTO = new ProcessDTO();
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
-		// 获取用户正在进行的任务实例
-		bysjglxt_task_instance = processManagementDao.getTaskInstanceing(userId);
-		// 根据任务实例的任务定义ID获取任务定义表
-		bysjglxt_task_definition = processManagementDao
-				.getTaskDefinition(bysjglxt_task_instance.getTask_instance_task_definition());
-		taskDTO.setTaskDefinition(bysjglxt_task_definition);
-		taskDTO.setTaskInstance(bysjglxt_task_instance);
-		return taskDTO;
+		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		List<bysjglxt_task_instance> list_bysjglxt_task_instance = new ArrayList<bysjglxt_task_instance>();
+		// 1.根据用户Id及流程实例状态获取用户正在进行的流程实例
+		bysjglxt_process_instance = processManagementDao.getProcessInstanceByUserAndState(userId);
+		// 2.根据流程定义ID获取流程定义
+		if (bysjglxt_process_instance != null) {
+			bysjglxt_process_definition = processManagementDao
+					.getProcessDefinition(bysjglxt_process_instance.getProcess_instance_process_definition());
+			// 3.根据流程实例ID获取任务实例
+			list_bysjglxt_task_instance = processManagementDao
+					.getListTaskInstanceByProcessInstanceId(bysjglxt_process_instance.getProcess_instance_id());
+			// 4.根据任务实例获得任务定义
+			for (bysjglxt_task_instance task_instance : list_bysjglxt_task_instance) {
+				bysjglxt_task_definition = new bysjglxt_task_definition();
+				taskDTO = new TaskDTO();
+				// 5.根据任务定义ID获取任务定义表
+				bysjglxt_task_definition = processManagementDao
+						.getTaskDefinition(task_instance.getTask_instance_task_definition());
+				taskDTO.setTaskDefinition(bysjglxt_task_definition);
+				taskDTO.setTaskInstance(task_instance);
+				listTaskDTO.add(taskDTO);
+			}
+			processDTO.setProcessDefinition(bysjglxt_process_definition);
+			processDTO.setProcessInstance(bysjglxt_process_instance);
+
+		} else {
+			System.out.println("没有流程实例处于活动状态");
+		}
+		return processDTO;
 	}
 
 	/********************************************** 下面是点击通过或打回 ***************************/
