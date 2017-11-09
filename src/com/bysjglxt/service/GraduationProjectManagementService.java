@@ -10,6 +10,7 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementService {
 
@@ -155,6 +156,10 @@ public interface GraduationProjectManagementService {
 	 */
 	public int bysjglxt_defence(bysjglxt_defence updateDefence);
 
+	/*********************************************** 教师点击我指导的毕业设计 ************************/
+	public TeacherTutorStudentVO teacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
+			String teacherUserId);
+
 	/**********************************
 	 * 下面是我的毕业设计里面需要的对象,此处需要一个一个的给
 	 **********************************/
@@ -237,15 +242,11 @@ public interface GraduationProjectManagementService {
 	 */
 	public Map<String, Object> exportTask(String studentUserId);
 
-	
 	/**
 	 * 导出开题报告
 	 * 
-	 * @D 
+	 * @D
 	 * 
 	 */
-	
-	
-	
-	
+
 }

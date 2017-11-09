@@ -18,12 +18,19 @@ import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 import com.bysjglxt.domain.DTO.ProcessDetailDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
+import com.bysjglxt.service.GraduationProjectManagementService;
 import com.bysjglxt.service.ProcessManagementService;
 
 import util.TeamUtil;
 
 public class ProcessManagementServiceImpl implements ProcessManagementService {
 	private ProcessManagementDao processManagementDao;
+	private GraduationProjectManagementService graduationProjectManagementService;
+
+	public void setGraduationProjectManagementService(
+			GraduationProjectManagementService graduationProjectManagementService) {
+		this.graduationProjectManagementService = graduationProjectManagementService;
+	}
 
 	public void setProcessManagementDao(ProcessManagementDao processManagementDao) {
 		this.processManagementDao = processManagementDao;
@@ -70,6 +77,18 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				operation);
 		if (processInstanceIsOpen != null) {
 			return -2;
+		}
+		// 根据流程定义Id获取流程流程定义
+		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
+		bysjglxt_process_definition = processManagementDao.getProcessDefinition(process_definition_id);
+		if (bysjglxt_process_definition == null) {
+			return -3;
+		}
+		if ("毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
+			int i = graduationProjectManagementService.startGraduationProjectProcess(operation);
+			if (i != 1) {
+				return -3;
+			}
 		}
 		boolean flag = true;
 		bysjglxt_student_user bysjglxt_student_user = null;
@@ -358,7 +377,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			list_bysjglxt_task_instance = processManagementDao
 					.getListTaskInstanceByProcessInstanceId(bysjglxt_process_instance.getProcess_instance_id());
 			// 4.根据任务实例获得任务定义
-			
+
 			for (bysjglxt_task_instance task_instance : list_bysjglxt_task_instance) {
 				bysjglxt_task_definition = new bysjglxt_task_definition();
 				taskDTO = new TaskDTO();

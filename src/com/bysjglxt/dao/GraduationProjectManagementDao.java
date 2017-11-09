@@ -1,15 +1,22 @@
 package com.bysjglxt.dao;
 
+import java.util.List;
+
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementDao {
 
@@ -82,6 +89,21 @@ public interface GraduationProjectManagementDao {
 	public bysjglxt_teacher_basic getTeacherBasicByBasicId(String user_teacher_basic);
 
 	public com.bysjglxt.domain.DO.bysjglxt_topic getStudentTopicByTopicId(String topic_select_topic);
+
+	public List<bysjglxt_topic_select> getTeacherTutorStudentSelectTopicByPage(
+			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId);
+
+	public List<bysjglxt_process_instance> getProcessInstanceByMan(String topic_select_student);
+
+	public com.bysjglxt.domain.DO.bysjglxt_process_definition getProcessDefinitionByID(
+			String process_instance_process_definition);
+
+	public bysjglxt_task_instance getTaskInstanceByProcessInstanceId(String process_instance_id);
+
+	public bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition);
+
+	public List<bysjglxt_topic_select> getTeacherTutorStudentAllSelectTopic(TeacherTutorStudentVO teacherTutorStudentVO,
+			String teacherUserId);
 
 
 }
