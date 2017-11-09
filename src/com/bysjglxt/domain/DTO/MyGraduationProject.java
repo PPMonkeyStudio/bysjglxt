@@ -1,6 +1,5 @@
 package com.bysjglxt.domain.DTO;
 
-import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 
