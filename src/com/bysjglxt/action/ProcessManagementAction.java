@@ -55,6 +55,12 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	 * 我的任务
 	 */
 	private ProcessManagementVO processManagementVO;
+
+	/*
+	 * 
+	 */
+	private String passTaskID;
+	private String repulseTaskID;
 	/*
 	 * 
 	 * 
@@ -209,7 +215,18 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 									.getBysjglxtStudentUser().getUser_student_id())));
 		}
+	}
 
+	public void passTask() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		processManagementService.pass(passTaskID);
+		http_response.getWriter().write("success");
+	}
+
+	public void dropTask() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		processManagementService.repulse(repulseTaskID);
+		http_response.getWriter().write("success");
 	}
 
 	/*
@@ -300,6 +317,22 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 
 	public void setProcessManagementVO(ProcessManagementVO processManagementVO) {
 		this.processManagementVO = processManagementVO;
+	}
+
+	public String getPassTaskID() {
+		return passTaskID;
+	}
+
+	public void setPassTaskID(String passTaskID) {
+		this.passTaskID = passTaskID;
+	}
+
+	public String getRepulseTaskID() {
+		return repulseTaskID;
+	}
+
+	public void setRepulseTaskID(String repulseTaskID) {
+		this.repulseTaskID = repulseTaskID;
 	}
 
 }

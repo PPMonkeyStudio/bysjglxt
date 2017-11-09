@@ -24,7 +24,6 @@ function BootProcess(button_Process) {
 								var message;
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
-										alert(xhr.responseText);
 										window.location = '/bysjglxt/process/ProcessManagement_MyTask';
 									} else {
 										toastr.error(xhr.status);

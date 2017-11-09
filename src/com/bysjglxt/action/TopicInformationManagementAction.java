@@ -110,6 +110,13 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	}
 
+	public void UpdateTopic() throws IOException {
+		topicInformationManagementService.updateTopic(topicInformationManagementDTO.getBysjglxtTopic());
+
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
 	/**
 	 * 
 	 * @throws IOException

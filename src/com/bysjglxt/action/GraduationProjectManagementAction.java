@@ -1,12 +1,19 @@
 package com.bysjglxt.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.service.GraduationProjectManagementService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class GraduationProjectManagementAction extends ActionSupport
@@ -25,11 +32,30 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return "MyGraduationProjectPage";
 	}
 
+	public String MyTutorGraduationProjectPage() {
+		return "MyTutorGraduationProjectPage";
+	}
+
 	/*
 	 * 
 	 */
 
-	public void get_Taskbook() {
+	public void get_Taskbook() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_TaskBook(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_TaskBook(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 
 	}
 

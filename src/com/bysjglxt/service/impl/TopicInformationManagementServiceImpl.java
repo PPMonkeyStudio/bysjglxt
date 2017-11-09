@@ -641,9 +641,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		topic.setTopic_type(topicBy.getTopic_type());
 		topic.setTopic_student_max(topicBy.getTopic_student_max());
 		topic.setTopic_remark(topicBy.getTopic_remark());
-		topic.setTopic_teacher(topicBy.getTopic_teacher());
-		topic.setTopic_invite_teache_id(topicBy.getTopic_invite_teache_id());
-		topic.setTopic_examine_state(topicBy.getTopic_examine_state());
 
 		return 1;
 	}

@@ -15,6 +15,42 @@
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/InitializationMyGraduationProject.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Section.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/report_opening.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_2_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_2_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_3_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_3_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_4_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_4_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/summary_student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/summary_teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/dissertation.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/examination_formal_teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/examination_formal_leader.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/evaluate_tutor.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/evaluate_review.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>我的毕业设计</title>
 </head>
@@ -30,6 +66,19 @@
 		<section id="wizard" style="width: 100%;">
 		<div id="rootwizard">
 			<div class="panel"
+				style="width: calc(100% - 40px); margin: 20px 20px 0 0; float: right;">
+				<div class="panel-body">
+					<h3 class="panel-title">进度</h3>
+					<br>
+					<div id="bar" class="progress">
+						<div class="progress-bar" role="progressbar"
+							id="my_progress-bar" aria-valuenow="60" aria-valuemin="0"
+							aria-valuemax="100" style="width: 0%;"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel"
 				style="width: 20%; margin: 20px 20px 0 20px; float: left;">
 				<div class="panel-heading">
 					<h3 class="panel-title">流程</h3>
@@ -37,12 +86,8 @@
 				<!--------------------------------------------------------------------->
 				<!--------------------------------------------------------------------->
 				<!--------------------------------------------------------------------->
-
 				<div class="navbar">
 					<div class="navbar-inner">
-						<!--  -->
-						<!--  -->
-						<!--  -->
 						<div class="container" style="width: 100%;">
 							<!--  -->
 							<div id="panel-scrolling-demo" class="panel">
@@ -133,8 +178,6 @@
 					</div>
 				</div>
 				<!--  -->
-
-
 				<!--------------------------------------------------------------------->
 				<!--------------------------------------------------------------------->
 				<!--------------------------------------------------------------------->
@@ -145,40 +188,38 @@
 			<div class="panel"
 				style="width: calc(100% - 20% - 60px); margin: 20px 20px 0 0; float: right;">
 				<div class="panel-heading">
-					<h3 class="panel-title">我的毕业设计</h3>
+					<h3 class="panel-title" id="GraduationProjectTitle"></h3>
 				</div>
 				<div class="panel-body">
-					<div id="bar" class="progress">
-						<div class="progress-bar" role="progressbar"
-							id="my_progress-bar" aria-valuenow="60" aria-valuemin="0"
-							aria-valuemax="100" style="width: 0%;"></div>
-					</div>
-					<!--  -->
 					<div class="tab-content">
 						<div class="tab-pane" id="tab1"></div>
-						<div class="tab-pane" id="tab2">2</div>
-						<div class="tab-pane" id="tab3">3</div>
-						<div class="tab-pane" id="tab4">4</div>
-						<div class="tab-pane" id="tab5">5</div>
-						<div class="tab-pane" id="tab6">6</div>
-						<div class="tab-pane" id="tab7">7</div>
-						<div class="tab-pane" id="tab8">8</div>
-						<div class="tab-pane" id="tab9">9</div>
-						<div class="tab-pane" id="tab10">10</div>
-						<div class="tab-pane" id="tab11">11</div>
-						<div class="tab-pane" id="tab12">12</div>
-						<div class="tab-pane" id="tab13">13</div>
-						<div class="tab-pane" id="tab14">14</div>
-						<div class="tab-pane" id="tab15">15</div>
-						<div class="tab-pane" id="tab16">16</div>
-						<div class="tab-pane" id="tab17">17</div>
-						<div class="tab-pane" id="tab18">18</div>
+						<div class="tab-pane" id="tab2"></div>
+						<div class="tab-pane" id="tab3"></div>
+						<div class="tab-pane" id="tab4"></div>
+						<div class="tab-pane" id="tab5"></div>
+						<div class="tab-pane" id="tab6"></div>
+						<div class="tab-pane" id="tab7"></div>
+						<div class="tab-pane" id="tab8"></div>
+						<div class="tab-pane" id="tab9"></div>
+						<div class="tab-pane" id="tab10"></div>
+						<div class="tab-pane" id="tab11"></div>
+						<div class="tab-pane" id="tab12"></div>
+						<div class="tab-pane" id="tab13"></div>
+						<div class="tab-pane" id="tab14"></div>
+						<div class="tab-pane" id="tab15"></div>
+						<div class="tab-pane" id="tab16"></div>
+						<div class="tab-pane" id="tab17"></div>
+						<div class="tab-pane" id="tab18"></div>
 						<ul class="pager wizard">
 							<!-- <li class="previous first">
 								<a href="#">第一个任务</a>
 							</li> -->
 							<li class="previous">
 								<a href="#">上一个任务</a>
+							</li>
+
+							<li class="" id="button_SaveGraduationProject">
+								<a href="#" onclick='toastr.success()'>保存</a>
 							</li>
 							<!-- <li class="next last">
 								<a href="#">最后一个任务</a>
@@ -309,13 +350,10 @@
 		InitializationMyGraduationProject();
 	});
 
-	var myClientHeight = (document.documentElement.clientHeight - 280) + 'px';
+	var myClientHeight = (document.documentElement.clientHeight - 380) + 'px';
 	$('#panel-scrolling-demo .panel-body').slimScroll({
 		height : myClientHeight,
 		wheelStep : 1,
 	});
-</script>
-<script type="text/javascript">
-	
 </script>
 </html>

@@ -1,17 +1,17 @@
-function Get_Student_Grade(select) {
+function Get_Student_Level(select) {
 	var xhr = false;
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				var GradeList = JSON.parse(xhr.responseText);
+				var LevelList = JSON.parse(xhr.responseText);
 
-				for (var num = 0; num < GradeList.length; num++) {
+				for (var num = 0; num < LevelList.length; num++) {
 					var option = document.createElement("option");
-					option.appendChild(document.createTextNode(GradeList[num]));
+					option.appendChild(document.createTextNode(LevelList[num]));
 					select.appendChild(option);
-					option.value = GradeList[num];
+					option.value = LevelList[num];
 				}
 				$('#' + select.id).selectpicker('refresh');
 			} else {
@@ -19,9 +19,8 @@ function Get_Student_Grade(select) {
 			}
 		}
 	}
-
 	xhr.open("POST",
-			"/bysjglxt/student/StudentInformationManagement_GetStudentGrade");
+			"/bysjglxt/student/StudentInformationManagement_GetStudentLevel");
 
 	xhr.send(null);
 }

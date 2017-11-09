@@ -52,6 +52,24 @@ function List_MyTask(pageIndex) {
 						new_td.innerHTML = '<span class="label label-default">已结束</span>';
 					}
 
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 1) {
+						if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskDefinition.task_definition_type == 1) {
+							new_td.innerHTML = '<button id="'
+									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
+									+ '" onclick="passTask(this)" class="btn btn-default">通过</button>';
+						} else {
+							new_td.innerHTML = '<button id="'
+									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
+									+ '" class="btn btn-default" onclick="passTask(this)">通过</button>'
+									+ '<button class="btn btn-default" onclick="repulseTask(this)" style="marin:0 0 0 10px;">拒绝</button>';
+						}
+					} else {
+						new_td.innerHTML = '';
+					}
+
 				}
 				/*
 				 * 设置页数
