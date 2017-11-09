@@ -12,6 +12,7 @@ public class bysjglxt_examination_formal {
 	private int examination_formal_is_abstract_foreign;
 	private int examination_formal_is_headline;
 	private int examination_formal_is_punctuation;
+	private int examination_formal_is_chinese_keyword;
 	private int examination_formal_is_typo;
 	private int examination_formal_is_reference_ten;
 	private int examination_formal_is_reference_foreign;
@@ -29,6 +30,14 @@ public class bysjglxt_examination_formal {
 	private int examination_formal_is_leader_opinion;
 	private String examination_formal_gmt_create;
 	private String examination_formal_gmt_modified;
+
+	public int getExamination_formal_is_chinese_keyword() {
+		return examination_formal_is_chinese_keyword;
+	}
+
+	public void setExamination_formal_is_chinese_keyword(int examination_formal_is_chinese_keyword) {
+		this.examination_formal_is_chinese_keyword = examination_formal_is_chinese_keyword;
+	}
 
 	public String getExamination_formal_id() {
 		return examination_formal_id;
@@ -257,6 +266,7 @@ public class bysjglxt_examination_formal {
 				+ ", examination_formal_is_abstract_foreign=" + examination_formal_is_abstract_foreign
 				+ ", examination_formal_is_headline=" + examination_formal_is_headline
 				+ ", examination_formal_is_punctuation=" + examination_formal_is_punctuation
+				+ ", examination_formal_is_chinese_keyword=" + examination_formal_is_chinese_keyword
 				+ ", examination_formal_is_typo=" + examination_formal_is_typo
 				+ ", examination_formal_is_reference_ten=" + examination_formal_is_reference_ten
 				+ ", examination_formal_is_reference_foreign=" + examination_formal_is_reference_foreign
@@ -275,4 +285,5 @@ public class bysjglxt_examination_formal {
 				+ examination_formal_gmt_create + ", examination_formal_gmt_modified=" + examination_formal_gmt_modified
 				+ "]";
 	}
+
 }

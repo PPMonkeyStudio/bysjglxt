@@ -13,6 +13,25 @@ public class TeamUtil {
 
 	static SimpleDateFormat formatter;
 
+	// 一段yyyy-MM-dd HH:mm:ss字符串分成年月日三段
+	// 2017-11-09 15:08:50
+	//
+	public static String timeToYear(String time) {
+		String year = time.substring(0, 4);
+		return year;
+	}
+
+	public static String timeToMonth(String time) {
+		String month = time.substring(5, 7);
+		return month;
+	}
+
+	//
+	public static String timeToDay(String time) {
+		String day = time.substring(8, 10);
+		return day;
+	}
+
 	public static String getStringSecond() {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date secondDate = new Date();
@@ -118,7 +137,7 @@ public class TeamUtil {
 
 	// 判断一个字符串是否都为数字
 	public static boolean isDigit(String strNum) {
-		if(strNum == null)
+		if (strNum == null)
 			return false;
 		Pattern pattern = Pattern.compile("[0-9]{1,}");
 		Matcher matcher = pattern.matcher((CharSequence) strNum);

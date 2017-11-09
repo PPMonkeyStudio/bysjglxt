@@ -22,6 +22,15 @@ public class testGraduation {
 		this.graduationProjectManagementService = graduationProjectManagementService;
 	}
 
+	// 测试分页显示指导的任务
+	@Test
+	public void testTutor() {
+		TeacherTutorStudentVO teacherTutorStudentVO = new TeacherTutorStudentVO();
+		teacherTutorStudentVO = graduationProjectManagementService.teacherTutorStudentVO(teacherTutorStudentVO,
+				"4aad7d8e-a549-46b0-9596-06599fe27f55");
+		System.out.println(teacherTutorStudentVO);
+	}
+
 	// 测试导出封面
 	@Test
 	public void testCover() {
@@ -42,13 +51,84 @@ public class testGraduation {
 		}
 	}
 
-	// 测试分页显示指导的任务
+	// 测试导出开题报告
 	@Test
-	public void testTutor() {
-		TeacherTutorStudentVO teacherTutorStudentVO = new TeacherTutorStudentVO();
-		teacherTutorStudentVO = graduationProjectManagementService.teacherTutorStudentVO(teacherTutorStudentVO,
-				"4aad7d8e-a549-46b0-9596-06599fe27f55");
-		System.out.println(teacherTutorStudentVO);
+	public void testReport() {
+		try {
+			graduationProjectManagementService.exportOpeningReport("860f9cbb-1557-4702-96eb-eaa4e310e88c");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 测试导出情况记录
+	@Test
+	public void testRecord() {
+		try {
+			graduationProjectManagementService.exportPerfect("860f9cbb-1557-4702-96eb-eaa4e310e88c");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 测试个人学习工作总结
+	@Test
+	public void testSummary() {
+		try {
+			graduationProjectManagementService.exportSummary("860f9cbb-1557-4702-96eb-eaa4e310e88c");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 测试导出形式审查表
+	@Test
+	public void testExportFormal() {
+		try {
+			graduationProjectManagementService.exportFormal("860f9cbb-1557-4702-96eb-eaa4e310e88c");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 测试导出指导老师评价表
+	@Test
+	public void testTeacherOpin() {
+		try {
+			graduationProjectManagementService.exportTeacherOpin("860f9cbb-1557-4702-96eb-eaa4e310e88c");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 测试导出评阅老师评价表
+	@Test
+	public void testReview() {
+		try {
+			graduationProjectManagementService.exportReviewOpin("860f9cbb-1557-4702-96eb-eaa4e310e88c");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 测试答辩
+	@Test
+	public void testDefence() {
+		try {
+			graduationProjectManagementService.exportDefence("860f9cbb-1557-4702-96eb-eaa4e310e88c");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	// 测试到处毕业设计书
+	@Test
+	public void testAll() {
+		try {
+			graduationProjectManagementService.exportAll("860f9cbb-1557-4702-96eb-eaa4e310e88c");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

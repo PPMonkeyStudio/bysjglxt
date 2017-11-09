@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-11-8 23:35:27 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-11-9 21:24:05 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_teacher_user" table="BYSJGLXT_TEACHER_USER">
         <id name="user_teacher_id" type="java.lang.String">

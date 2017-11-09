@@ -282,7 +282,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
 		Session session = getSession();
 		String hql = "from bysjglxt_record_progress where record_progress_student = '" + userId
-				+ "' and record_progress _stage = '" + string + "'";
+				+ "' and record_progress_stage = '" + string + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_record_progress = (bysjglxt_record_progress) query.uniqueResult();
 		return bysjglxt_record_progress;
