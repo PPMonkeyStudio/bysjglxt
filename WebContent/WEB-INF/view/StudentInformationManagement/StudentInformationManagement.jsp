@@ -30,6 +30,8 @@
 	src="<%=basePath%>js/StudentInformationManagement/Student_Give_Operate_Premission.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Student_Take_Operate_Premission.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/specialStudentSelectTopic.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
