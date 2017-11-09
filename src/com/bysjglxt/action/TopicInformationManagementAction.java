@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
@@ -51,6 +52,9 @@ public class TopicInformationManagementAction extends ActionSupport
 	 */
 	private String studentSelectTopic;
 
+	private String studentUserId;
+	private String topicId;
+
 	/*
 	 * 
 	 */
@@ -81,6 +85,16 @@ public class TopicInformationManagementAction extends ActionSupport
 	 */
 	public String CreateTopicPage() {
 		return "CreateTopicPage";
+	}
+
+	public void listSelectBysjglxtTopic() throws IOException {
+
+		http_response.setContentType("text/html;charset=utf-8");
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		List<bysjglxt_topic> list_topic = topicInformationManagementService.listSelectBysjglxtTopic();
+		http_response.getWriter().write(gson.toJson(list_topic));
 	}
 
 	/**
@@ -229,6 +243,10 @@ public class TopicInformationManagementAction extends ActionSupport
 		}
 	}
 
+	public void specialStudentSelectTopic() {
+		System.out.println(topicInformationManagementService.specialStudentSelectTopic(studentUserId, topicId));
+	}
+
 	/*
 	 * 
 	 */
@@ -333,6 +351,22 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	public void setStudentSelectTopic(String studentSelectTopic) {
 		this.studentSelectTopic = studentSelectTopic;
+	}
+
+	public String getStudentUserId() {
+		return studentUserId;
+	}
+
+	public void setStudentUserId(String studentUserId) {
+		this.studentUserId = studentUserId;
+	}
+
+	public String getTopicId() {
+		return topicId;
+	}
+
+	public void setTopicId(String topicId) {
+		this.topicId = topicId;
 	}
 
 }

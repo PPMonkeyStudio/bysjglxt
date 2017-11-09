@@ -109,7 +109,7 @@ public interface TopicInformationManagementService {
 	 * 
 	 * @return 1成功 0失败
 	 */
-	public boolean topicSelectStudent(String topicID, List<String> studentIDList);
+	public boolean distributionTopicStudent(String topicID, List<String> studentIDList);
 
 	/**
 	 * @说明 遍历出所有可以选择的课题用于分配最后剩余的学生
@@ -150,7 +150,7 @@ public interface TopicInformationManagementService {
 	public List<StudentInformationDTO> listStudentSelectTopic(String topicId);
 
 	/**
-	 * 指定学生选题
+	 * 分配
 	 * 
 	 * @param studentUserId
 	 * @return

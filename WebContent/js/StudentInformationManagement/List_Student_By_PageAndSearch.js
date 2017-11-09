@@ -123,14 +123,14 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 0
+					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 2
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission == 1) {
 						new_td.innerHTML = '<button class="btn btn-default" id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
 								+ '" onclick="Student_Information_Display(this)" >详细</button>'
 								+ '<button class="btn btn-default" id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-								+ '" onclick="Student_Information_Display(this)" >分配选题</button>';
+								+ '" onclick="specialStudentSelectTopic(this)" style="margin:0 0 0 10px;">分配选题</button>';
 					} else {
 						new_td.innerHTML = '<button class="btn btn-default" id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id

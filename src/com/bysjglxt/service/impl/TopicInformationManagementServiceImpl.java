@@ -319,7 +319,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	}
 
 	@Override
-	public boolean topicSelectStudent(String topicID, List<String> studentIDList) {
+	public boolean distributionTopicStudent(String topicID, List<String> studentIDList) {
 		boolean flag = false;
 		String studentIdList = "";
 		for (String string : studentIDList) {
