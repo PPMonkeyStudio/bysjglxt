@@ -15,6 +15,42 @@
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/InitializationMyGraduationProject.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Section.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/report_opening.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_2_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_2_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_3_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_3_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_4_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_4_Teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/summary_student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/summary_teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/dissertation.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/examination_formal_teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/examination_formal_leader.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/evaluate_tutor.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/evaluate_review.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>我的毕业设计</title>
 </head>
@@ -50,7 +86,6 @@
 				<!--------------------------------------------------------------------->
 				<!--------------------------------------------------------------------->
 				<!--------------------------------------------------------------------->
-
 				<div class="navbar">
 					<div class="navbar-inner">
 						<div class="container" style="width: 100%;">
@@ -143,8 +178,6 @@
 					</div>
 				</div>
 				<!--  -->
-
-
 				<!--------------------------------------------------------------------->
 				<!--------------------------------------------------------------------->
 				<!--------------------------------------------------------------------->
@@ -159,24 +192,24 @@
 				</div>
 				<div class="panel-body">
 					<div class="tab-content">
-						<div class="" id="tab1"></div>
-						<div class="tab-pane" id="tab2">2</div>
-						<div class="tab-pane" id="tab3">3</div>
-						<div class="tab-pane" id="tab4">4</div>
-						<div class="tab-pane" id="tab5">5</div>
-						<div class="tab-pane" id="tab6">6</div>
-						<div class="tab-pane" id="tab7">7</div>
-						<div class="tab-pane" id="tab8">8</div>
-						<div class="tab-pane" id="tab9">9</div>
-						<div class="tab-pane" id="tab10">10</div>
-						<div class="tab-pane" id="tab11">11</div>
-						<div class="tab-pane" id="tab12">12</div>
-						<div class="tab-pane" id="tab13">13</div>
-						<div class="tab-pane" id="tab14">14</div>
-						<div class="tab-pane" id="tab15">15</div>
-						<div class="tab-pane" id="tab16">16</div>
-						<div class="tab-pane" id="tab17">17</div>
-						<div class="tab-pane" id="tab18">18</div>
+						<div class="tab-pane" id="tab1"></div>
+						<div class="tab-pane" id="tab2"></div>
+						<div class="tab-pane" id="tab3"></div>
+						<div class="tab-pane" id="tab4"></div>
+						<div class="tab-pane" id="tab5"></div>
+						<div class="tab-pane" id="tab6"></div>
+						<div class="tab-pane" id="tab7"></div>
+						<div class="tab-pane" id="tab8"></div>
+						<div class="tab-pane" id="tab9"></div>
+						<div class="tab-pane" id="tab10"></div>
+						<div class="tab-pane" id="tab11"></div>
+						<div class="tab-pane" id="tab12"></div>
+						<div class="tab-pane" id="tab13"></div>
+						<div class="tab-pane" id="tab14"></div>
+						<div class="tab-pane" id="tab15"></div>
+						<div class="tab-pane" id="tab16"></div>
+						<div class="tab-pane" id="tab17"></div>
+						<div class="tab-pane" id="tab18"></div>
 						<ul class="pager wizard">
 							<!-- <li class="previous first">
 								<a href="#">第一个任务</a>
@@ -322,8 +355,5 @@
 		height : myClientHeight,
 		wheelStep : 1,
 	});
-</script>
-<script type="text/javascript">
-	
 </script>
 </html>

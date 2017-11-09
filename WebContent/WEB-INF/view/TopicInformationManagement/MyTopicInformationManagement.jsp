@@ -174,8 +174,8 @@
 
 				</div>
 				<div class="modal-footer">
-					<button class="teacher_control btn btn-default"
-						id="button_updateTopic" onclick="Update_Topic()"
+					<button class="btn btn-default" id="button_updateTopic"
+						onclick="Update_Topic()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-check"></i>
 						保存

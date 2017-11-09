@@ -128,11 +128,16 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li class="teacher_control">
-							<a href="<%=basePath%>graduationProject/GraduationProjectManagement_MyTutorGraduationProjectPage">我指导的毕业设计</a>
+							<a
+								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyTutorGraduationProjectPage">我指导的毕业设计</a>
 						</li>
 						<li class="student_control">
 							<a
 								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyGraduationProjectPage">我的毕业设计</a>
+						</li>
+						<li class="student_control">
+							<a
+								href="#">导出我的毕业设计</a>
 						</li>
 					</ul>
 				</li>

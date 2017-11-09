@@ -194,7 +194,7 @@ public class StudentInformationManagementAction extends ActionSupport
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		List<String> list_Student_Level = null;
+		List<String> list_Student_Level = studentInformationManagementService.listStudentLevel();
 
 		http_response.getWriter().write(gson.toJson(list_Student_Level));
 	}

@@ -13,7 +13,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				alert(xhr.responseText);
 				student_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -124,9 +123,19 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<i style="cursor: pointer;" id="'
-							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-							+ '" onclick="Student_Information_Display(this)" class="fa fa-edit "></i>';
+					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 0
+							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission == 1) {
+						new_td.innerHTML = '<button class="btn btn-default" id="'
+								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
+								+ '" onclick="Student_Information_Display(this)" >详细</button>'
+								+ '<button class="btn btn-default" id="'
+								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
+								+ '" onclick="Student_Information_Display(this)" >分配选题</button>';
+					} else {
+						new_td.innerHTML = '<button class="btn btn-default" id="'
+								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
+								+ '" onclick="Student_Information_Display(this)" >详细</button>';
+					}
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
@@ -205,7 +214,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 		formData.append(
 				"studentInformationManagementVO.user_student_is_select_topic",
 				document.getElementById("select_is_select_topic").value);
-	} else if (document.getElementById("select_is_select_topic").value == "0") {
+	} else if (document.getElementById("select_is_select_topic").value == "2") {
 		formData.append(
 				"studentInformationManagementVO.user_student_is_select_topic",
 				document.getElementById("select_is_select_topic").value);
@@ -216,11 +225,11 @@ function List_Student_By_PageAndSearch(pageIndex) {
 		formData.append("studentInformationManagementVO.student_basic_major",
 				document.getElementById("select_major").value);
 	}
-	// 年级
-	if (document.getElementById("select_grade").value == "-1") {
+	// 级别
+	if (document.getElementById("select_level").value == "-1") {
 	} else {
-		formData.append("studentInformationManagementVO.student_basic_grade",
-				document.getElementById("select_grade").value);
+		formData.append("studentInformationManagementVO.student_basic_level",
+				document.getElementById("select_level").value);
 	}
 	/*
 	 * 

@@ -117,7 +117,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user.setUser_student_num(student_basic.getStudent_basic_num());
 		bysjglxt_student_user.setUser_student_password(md5.GetMD5Code(student_basic.getStudent_basic_num()));
 		bysjglxt_student_user.setUser_student_basic(student_basic.getStudent_basic_id());
-		bysjglxt_student_user.setUser_student_is_select_topic(0);
+		bysjglxt_student_user.setUser_student_is_select_topic(2);
 		bysjglxt_student_user.setUser_student_is_operate_premission(1);
 		bysjglxt_student_user.setUser_student_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_student_user.setUser_student_gmt_modified(bysjglxt_student_user.getUser_student_gmt_create());
@@ -182,8 +182,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	public List<String> listStudentLevel() {
 		return studentInformationManagementDao.listStudent_Level();
 	}
-	
-	
+
 	@Override
 	public List<String> list_Student_Grade() throws Exception {
 		return studentInformationManagementDao.listStudent_Grade();
@@ -217,7 +216,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 				return false;
 			}
 			// 对于没有权限的重新开启，会将所有的对应的学生的所有数据进行删除
-			if (bysjglxt_student_user.getUser_student_is_operate_premission() == 0) {
+			if (bysjglxt_student_user.getUser_student_is_operate_premission() == 2) {
 
 				// 1.删除该学生的选题
 				bysjglxt_topic_select = studentInformationManagementDao
@@ -350,7 +349,5 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 				TeamUtil.getStringSecond());
 		return flag;
 	}
-
-	
 
 }
