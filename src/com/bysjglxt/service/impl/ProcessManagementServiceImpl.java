@@ -53,8 +53,17 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 
 	@Override
 	public int createSelectTopicTaskDefine(bysjglxt_task_definition selectTopicTaskDefine) {
+		System.out.println("fff");
+		System.out.println(selectTopicTaskDefine.getTask_definition_process_definition());
 		int flag = -1;
+		List<bysjglxt_task_definition> list_bysjglxt_task_definition = new ArrayList<>();
+		list_bysjglxt_task_definition = processManagementDao
+				.getTaskDefinitionByProcessDefinitionId(selectTopicTaskDefine.getTask_definition_process_definition());
 		selectTopicTaskDefine.setTask_definition_id(TeamUtil.getUuid());
+		if (list_bysjglxt_task_definition.size() != 0) {
+			selectTopicTaskDefine
+					.setTask_definition_father(list_bysjglxt_task_definition.get(0).getTask_definition_id());
+		}
 		selectTopicTaskDefine.setTask_definition_gmt_create(TeamUtil.getStringSecond());
 		selectTopicTaskDefine.setTask_definition_gmt_modified(selectTopicTaskDefine.getTask_definition_gmt_create());
 		flag = processManagementDao.createTaskDefine(selectTopicTaskDefine);
