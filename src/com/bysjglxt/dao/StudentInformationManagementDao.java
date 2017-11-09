@@ -87,4 +87,6 @@ public interface StudentInformationManagementDao {
 
 	boolean deleteDefence(String defence_id);
 
+	List<String> listStudent_Level();
+
 }

@@ -226,6 +226,16 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
+	public List<String> listStudent_Level() {
+		Session session = getSession();
+		List<String> listStudent_Level = new ArrayList<String>();
+		String hql = "select distinct(student_basic_level) from bysjglxt_student_basic";
+		Query query = session.createQuery(hql);
+		listStudent_Level = query.list();
+		return listStudent_Level;
+	}
+
+	@Override
 	public List<String> listStudent_Grade() throws Exception {
 		Session session = getSession();
 		List<String> listStudent_Grade = new ArrayList<String>();

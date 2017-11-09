@@ -179,6 +179,12 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	}
 
 	@Override
+	public List<String> listStudentLevel() {
+		return studentInformationManagementDao.listStudent_Level();
+	}
+	
+	
+	@Override
 	public List<String> list_Student_Grade() throws Exception {
 		return studentInformationManagementDao.listStudent_Grade();
 	}
@@ -344,5 +350,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 				TeamUtil.getStringSecond());
 		return flag;
 	}
+
+	
 
 }

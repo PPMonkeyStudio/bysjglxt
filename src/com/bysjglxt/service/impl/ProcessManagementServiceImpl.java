@@ -370,6 +370,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			}
 			processDTO.setProcessDefinition(bysjglxt_process_definition);
 			processDTO.setProcessInstance(bysjglxt_process_instance);
+			processDTO.setListTaskBelongProcess(listTaskDTO);
 
 		} else {
 			System.out.println("没有流程实例处于活动状态");

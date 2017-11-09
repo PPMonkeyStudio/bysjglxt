@@ -71,6 +71,7 @@ public interface StudentInformationManagementService {
 	 */
 	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
 			StudentInformationManagementVO studentInformationManagementVO);
+
 	/**
 	 * 
 	 * @DATE 2017-10-27
@@ -80,6 +81,13 @@ public interface StudentInformationManagementService {
 	 * @throws Exception
 	 */
 	public List<String> list_Student_Major() throws Exception;
+
+	/**
+	 * 遍历出所有年级
+	 * 
+	 * @return
+	 */
+	public List<String> listStudentLevel();
 
 	/**
 	 * 
