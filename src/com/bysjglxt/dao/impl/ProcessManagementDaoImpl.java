@@ -167,7 +167,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 			hql = hql + " and taskDefinition.task_definition_name like '" + search + "'";
 		}
 		// 状态
-		if (processManagementVo.getState() != 0) {
+		if (processManagementVo.getState() != -1) {
 			hql = hql + " and taskInstance.task_instance_state='" + processManagementVo.getState() + "'";
 		}
 		// 据流程实例ID筛选
@@ -227,7 +227,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 			hql = hql + " and taskDefinition.task_definition_name like '" + search + "'";
 		}
 		// 状态
-		if (processManagementVo.getState() != 0) {
+		if (processManagementVo.getState() != -1) {
 			hql = hql + " and taskInstance.task_instance_state='" + processManagementVo.getState() + "'";
 		}
 		// 据流程实例ID筛选

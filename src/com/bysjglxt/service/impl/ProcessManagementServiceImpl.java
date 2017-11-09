@@ -98,6 +98,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
 		// 判断第一个任务实例为正在进行
 		int x = 0;
+		System.out.println(list_bysjglxt_task_definition.size());
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
 			x++;
 			bysjglxt_student_user = new bysjglxt_student_user();

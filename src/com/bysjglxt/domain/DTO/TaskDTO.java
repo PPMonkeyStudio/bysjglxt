@@ -4,6 +4,7 @@ import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 
 public class TaskDTO {
+
 	private bysjglxt_task_definition taskDefinition;
 	private bysjglxt_task_instance taskInstance;
 
