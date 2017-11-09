@@ -59,44 +59,184 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	}
 
-	public void get_ReportOpening() {
-
+	public void get_ReportOpening() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_ReportOpening(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_ReportOpening(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
-	public void get_RecordProgress_1() {
-
+	public void get_RecordProgress_1() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_1(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_1(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
-	public void get_RecordProgress_2() {
-
+	public void get_RecordProgress_2() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_2(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_2(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
-	public void get_RecordProgress_3() {
-
+	public void get_RecordProgress_3() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_3(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_3(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
-	public void get_RecordProgress_4() {
-
+	public void get_RecordProgress_4() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_4(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_4(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
-	public void get_Summary() {
-
+	public void get_Summary() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_Summary(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_Summary(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
-	public void get_ExaminationFormal() {
-
+	public void get_ExaminationFormal() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_ExaminationFormal(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_ExaminationFormal(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
-	public void get_EvaluateTutor() {
-
+	public void get_EvaluateTutor() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_EvaluateTutor(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_EvaluateTutor(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
-	public void get_EvaluateReview() {
-
+	public void get_EvaluateReview() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_EvaluateReview(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_EvaluateReview(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
-	public void get_Defence() {
-
+	public void get_Defence() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_Defence(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_Defence(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
 	}
 
 	/*
