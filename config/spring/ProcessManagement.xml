@@ -2,20 +2,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-
 	<bean id="processManagementAction" class="com.bysjglxt.action.ProcessManagementAction"
 		scope="prototype">
 		<property name="processManagementService" ref="processManagementService"></property>
 	</bean>
-
 	<bean id="processManagementService" class="com.bysjglxt.service.impl.ProcessManagementServiceImpl">
 		<property name="processManagementDao" ref="processManagementDao"></property>
+		<property name="graduationProjectManagementService" ref="graduationProjectManagementService"></property>
 	</bean>
-
+	<bean id="graduationProjectManagementService"
+		class="com.bysjglxt.service.impl.GraduationProjectManagementServiceImpl">
+		<property name="graduationProjectManagementDao" ref="graduationProjectManagementDao"></property>
+	</bean>
+	<bean id="graduationProjectManagementDao"
+		class="com.bysjglxt.dao.impl.GraduationProjectManagementDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 	<bean id="processManagementDao" class="com.bysjglxt.dao.impl.ProcessManagementDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
-
 
 </beans>

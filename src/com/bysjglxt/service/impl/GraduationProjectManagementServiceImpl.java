@@ -1,14 +1,9 @@
 package com.bysjglxt.service.impl;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
@@ -20,15 +15,20 @@ import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TaskDTO;
+import com.bysjglxt.domain.DTO.TeacherTutorStudentDTO;
+import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
 
 import util.TeamUtil;
-import util.XwpfTUtil;
 
 public class GraduationProjectManagementServiceImpl implements GraduationProjectManagementService {
 
@@ -43,6 +43,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public int startGraduationProjectProcess(String studentId) {
+		System.out.println("ffff");
 		if (studentId == null || studentId.trim().length() <= 0) {
 			return 0;
 		}
@@ -66,6 +67,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		if (flag == 2) {
 			return flag;
 		}
+		System.out.println("ffflplplp1");
 		bysjglxt_report_opening.setReport_opening_id(TeamUtil.getUuid());
 		bysjglxt_report_opening.setReport_opening_student(studentId);
 		bysjglxt_report_opening.setReport_opening_gmt_create(TeamUtil.getStringSecond());
@@ -836,10 +838,59 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 		return params;
 	}
-	
-	
-	
-	
-	
+
+	@Override
+	public TeacherTutorStudentVO teacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
+			String teacherUserId) {
+		List<TeacherTutorStudentDTO> list_TeacherTutorStudentDTO = new ArrayList<TeacherTutorStudentDTO>();
+		TeacherTutorStudentDTO teacherTutorStudentDTO = new TeacherTutorStudentDTO();
+		TaskDTO taskDTO = new TaskDTO();
+		bysjglxt_task_definition taskDefinition = new bysjglxt_task_definition();
+		bysjglxt_task_instance taskInstance = new bysjglxt_task_instance();
+		bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
+		bysjglxt_student_user bysjglxtStudentUser = new bysjglxt_student_user();
+		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
+		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
+		// bysjglxt_topic_select bysjglxt_topic_select = new
+		// bysjglxt_topic_select();
+		List<bysjglxt_topic_select> list_bysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
+		// 1.根据教师ID筛选出符合条件的最多10条选题数据
+		list_bysjglxt_topic_select = graduationProjectManagementDao
+				.getTeacherTutorStudentSelectTopicByPage(teacherTutorStudentVO, teacherUserId);
+		System.out.println(list_bysjglxt_topic_select.size());
+		// 2.遍历选题拿到学生userId信息
+		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
+			bysjglxtStudentUser = new bysjglxt_student_user();
+			bysjglxtStudentBasic = new bysjglxt_student_basic();
+			teacherTutorStudentDTO = new TeacherTutorStudentDTO();
+			bysjglxtTopic = new bysjglxt_topic();
+			// 3.根据选题所属学生拿到学生user表
+			bysjglxtStudentUser = graduationProjectManagementDao
+					.getStudentUserByUserId(bysjglxt_topic_select.getTopic_select_student());
+			if (bysjglxtStudentUser != null) {
+				// 根据学生basicId获取学生basic表
+				bysjglxtStudentBasic = graduationProjectManagementDao
+						.getStudentBasicByBasicId(bysjglxtStudentUser.getUser_student_basic());
+				if (bysjglxtStudentBasic != null) {
+					studentInformationDTO.setBysjglxtStudentBasic(bysjglxtStudentBasic);
+					studentInformationDTO.setBysjglxtStudentUser(bysjglxtStudentUser);
+				}
+				// 根据学生userId获取学生正在进行的任务实例
+				// 一个流程实例下面的任务实例只有可能有一个正在进行的任务实例
+
+			} else {
+				System.out.println("学生user表为空");
+			}
+			teacherTutorStudentDTO.setStudentInformationDTO(studentInformationDTO);
+			// 根据选题所属课题拿到课题表信息
+			bysjglxtTopic = graduationProjectManagementDao
+					.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
+			if (bysjglxtTopic != null) {
+				teacherTutorStudentDTO.setBysjglxtTopic(bysjglxtTopic);
+			}
+
+		}
+		return null;
+	}
 
 }

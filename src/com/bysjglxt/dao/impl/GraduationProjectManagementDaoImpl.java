@@ -1,5 +1,8 @@
 package com.bysjglxt.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,13 +17,12 @@ import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
-import com.bysjglxt.domain.DO.bysjglxt_task_definition;
-import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public class GraduationProjectManagementDaoImpl implements GraduationProjectManagementDao {
 	private SessionFactory sessionFactory;
@@ -367,7 +369,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return bysjglxt_topic_select;
 	}
 
-	//根据教师userId获取教师user表信息
+	// 根据教师userId获取教师user表信息
 	@Override
 	public bysjglxt_teacher_user getTeacherUserByUserId(String topic_select_teacher_tutor) {
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
@@ -377,8 +379,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
 		return bysjglxt_teacher_user;
 	}
-	
-	//根据教师basicId获取教师basic表信息
+
+	// 根据教师basicId获取教师basic表信息
 	@Override
 	public bysjglxt_teacher_basic getTeacherBasicByBasicId(String user_teacher_basic) {
 		bysjglxt_teacher_basic bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
@@ -389,7 +391,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return bysjglxt_teacher_basic;
 	}
 
-	//根据课题ID获取课题信息
+	// 根据课题ID获取课题信息
 	@Override
 	public bysjglxt_topic getStudentTopicByTopicId(String topic_select_topic) {
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
@@ -398,5 +400,21 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Query query = session.createQuery(hql);
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
 		return bysjglxt_topic;
+	}
+
+	// 根据指导老师ID获得分页显示的学生选题
+	@Override
+	public List<bysjglxt_topic_select> getTeacherTutorStudentSelectTopicByPage(
+			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId) {
+		Session session = getSession();
+		List<bysjglxt_topic_select> listBysjglxtTopicSelect = new ArrayList<bysjglxt_topic_select>();
+		String hql = "from bysjglxt_topic_select where topic_select_teacher_tutor='" + teacherUserId
+				+ "' order by topic_select_gmt_create";
+		boolean flag = false;
+		Query query = session.createQuery(hql);
+		query.setFirstResult((teacherTutorStudentVO.getPageIndex() - 1) * teacherTutorStudentVO.getPageSize());
+		query.setMaxResults(teacherTutorStudentVO.getPageSize());
+		listBysjglxtTopicSelect = query.list();
+		return listBysjglxtTopicSelect;
 	}
 }

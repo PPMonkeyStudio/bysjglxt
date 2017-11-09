@@ -1,5 +1,7 @@
 package com.bysjglxt.dao;
 
+import java.util.List;
+
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
@@ -10,6 +12,8 @@ import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementDao {
 
@@ -82,6 +86,9 @@ public interface GraduationProjectManagementDao {
 	public bysjglxt_teacher_basic getTeacherBasicByBasicId(String user_teacher_basic);
 
 	public com.bysjglxt.domain.DO.bysjglxt_topic getStudentTopicByTopicId(String topic_select_topic);
+
+	public List<bysjglxt_topic_select> getTeacherTutorStudentSelectTopicByPage(
+			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId);
 
 
 }
