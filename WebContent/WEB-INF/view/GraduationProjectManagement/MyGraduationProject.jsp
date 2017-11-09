@@ -30,6 +30,19 @@
 		<section id="wizard" style="width: 100%;">
 		<div id="rootwizard">
 			<div class="panel"
+				style="width: calc(100% - 40px); margin: 20px 20px 0 0; float: right;">
+				<div class="panel-body">
+					<h3 class="panel-title">进度</h3>
+					<br>
+					<div id="bar" class="progress">
+						<div class="progress-bar" role="progressbar"
+							id="my_progress-bar" aria-valuenow="60" aria-valuemin="0"
+							aria-valuemax="100" style="width: 0%;"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel"
 				style="width: 20%; margin: 20px 20px 0 20px; float: left;">
 				<div class="panel-heading">
 					<h3 class="panel-title">流程</h3>
@@ -40,9 +53,6 @@
 
 				<div class="navbar">
 					<div class="navbar-inner">
-						<!--  -->
-						<!--  -->
-						<!--  -->
 						<div class="container" style="width: 100%;">
 							<!--  -->
 							<div id="panel-scrolling-demo" class="panel">
@@ -145,17 +155,11 @@
 			<div class="panel"
 				style="width: calc(100% - 20% - 60px); margin: 20px 20px 0 0; float: right;">
 				<div class="panel-heading">
-					<h3 class="panel-title">我的毕业设计</h3>
+					<h3 class="panel-title" id="GraduationProjectTitle"></h3>
 				</div>
 				<div class="panel-body">
-					<div id="bar" class="progress">
-						<div class="progress-bar" role="progressbar"
-							id="my_progress-bar" aria-valuenow="60" aria-valuemin="0"
-							aria-valuemax="100" style="width: 0%;"></div>
-					</div>
-					<!--  -->
 					<div class="tab-content">
-						<div class="tab-pane" id="tab1"></div>
+						<div class="" id="tab1"></div>
 						<div class="tab-pane" id="tab2">2</div>
 						<div class="tab-pane" id="tab3">3</div>
 						<div class="tab-pane" id="tab4">4</div>
@@ -179,6 +183,10 @@
 							</li> -->
 							<li class="previous">
 								<a href="#">上一个任务</a>
+							</li>
+
+							<li class="" id="button_SaveGraduationProject">
+								<a href="#" onclick='toastr.success()'>保存</a>
 							</li>
 							<!-- <li class="next last">
 								<a href="#">最后一个任务</a>
@@ -309,7 +317,7 @@
 		InitializationMyGraduationProject();
 	});
 
-	var myClientHeight = (document.documentElement.clientHeight - 280) + 'px';
+	var myClientHeight = (document.documentElement.clientHeight - 380) + 'px';
 	$('#panel-scrolling-demo .panel-body').slimScroll({
 		height : myClientHeight,
 		wheelStep : 1,

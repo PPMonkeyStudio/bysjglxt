@@ -22,7 +22,7 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Grade.js"></script>
+	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Level.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Update_Student.js"></script>
 <script type="text/javascript"
@@ -86,10 +86,10 @@
 									<option value="-1">专业名称</option>
 									<option value="">未填写专业名称</option>
 							</select></th>
-							<th><select class="form-control" id="select_grade"
+							<th><select class="form-control" id="select_level"
 								data-live-search="true" style="width: auto;"
 								onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">年级</option>
+									<option value="-1">级别</option>
 									<option value="">未填写年级</option>
 							</select></th>
 							<th><select class="form-control" id="select_premission"
@@ -261,8 +261,8 @@
 </script>
 <script>
 	var select_major = document.getElementById("select_major");
-	var select_grade = document.getElementById("select_grade");
+	var select_level = document.getElementById("select_level");
 	Get_Student_Major(select_major);
-	Get_Student_Grade(select_grade);
+	//Get_Student_Level(select_level);
 </script>
 </html>

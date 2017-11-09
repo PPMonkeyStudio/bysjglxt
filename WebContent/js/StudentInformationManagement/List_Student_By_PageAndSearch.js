@@ -13,6 +13,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				alert(xhr.responseText);
 				student_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -84,8 +85,8 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
-							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_grade != "") {
-						new_td.innerHTML = student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_grade;
+							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_level != "") {
+						new_td.innerHTML = student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_level;
 					} else {
 						new_td.innerHTML = '无';
 					}

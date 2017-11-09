@@ -188,15 +188,15 @@ public class StudentInformationManagementAction extends ActionSupport
 	 * @throws Exception
 	 * @说明 获取学生年级
 	 */
-	public void GetStudentGrade() throws Exception {
+	public void GetStudentLevel() throws Exception {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		List<String> list_Student_Grade = studentInformationManagementService.list_Student_Grade();
+		List<String> list_Student_Level = null;
 
-		http_response.getWriter().write(gson.toJson(list_Student_Grade));
+		http_response.getWriter().write(gson.toJson(list_Student_Level));
 	}
 
 	/**

@@ -161,10 +161,10 @@ public interface TopicInformationManagementService {
 	 * 
 	 * 更改课题信息
 	 * 
-	 * @param topicId
+	 * @param topic
 	 * @return
 	 */
-	public int updateTopic(bysjglxt_topic topicId);
+	public int updateTopic(bysjglxt_topic topic);
 
 	/**
 	 * @D 学生点击退选:

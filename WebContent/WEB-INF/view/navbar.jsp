@@ -127,10 +127,10 @@
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
 					</a>
 					<ul class="dropdown-menu">
-						<li>
-							<a href="#">毕业设计列表</a>
+						<li class="teacher_control">
+							<a href="<%=basePath%>graduationProject/GraduationProjectManagement_MyTutorGraduationProjectPage">我指导的毕业设计</a>
 						</li>
-						<li>
+						<li class="student_control">
 							<a
 								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyGraduationProjectPage">我的毕业设计</a>
 						</li>

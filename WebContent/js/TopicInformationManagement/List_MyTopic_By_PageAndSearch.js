@@ -131,7 +131,7 @@ function List_MyTopic_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i style="cursor: pointer;" id="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" onclick="Topic_Information_Display(this)" class="fa fa-book  "></i>';
+							+ '" onclick="MyTopic_Information_Display(this)" class="fa fa-book  "></i>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));

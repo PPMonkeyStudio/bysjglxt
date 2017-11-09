@@ -6,9 +6,10 @@
 	<package name="GraduationProjectManagement" namespace="/graduationProject"
 		extends="struts-default">
 		<action name="GraduationProjectManagement_*"
-			class="com.bysjglxt.action.GraduationProjectManagementAction"
-			method="{1}">
+			class="com.bysjglxt.action.GraduationProjectManagementAction" method="{1}">
 			<result name="MyGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyGraduationProject.jsp
+			</result>
+			<result name="MyTutorGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyTutorGraduationProject.jsp
 			</result>
 		</action>
 	</package>

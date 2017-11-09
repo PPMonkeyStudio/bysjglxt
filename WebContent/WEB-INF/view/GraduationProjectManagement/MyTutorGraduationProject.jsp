@@ -17,9 +17,7 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/List_MyTopic_By_PageAndSearch.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/MyTopic_Information_Display.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/Update_Topic.js"></script>
+	src="<%=basePath%>js/TopicInformationManagement/Topic_Information_Display.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>课题管理页</title>
@@ -40,7 +38,7 @@
 		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
-				<h3 class="panel-title">我的课题</h3>
+				<h3 class="panel-title">我指导的毕业设计</h3>
 			</div>
 			<div class="panel-body">
 				<div style="height: 34px;">
@@ -53,45 +51,19 @@
 						</span>
 					</div>
 				</div>
-				<table id="table_my_topic" class="table table-hover "
+				<table id="" class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
-							<th>中文名称</th>
-							<th>
-								<select class="form-control" style="width: auto;"
-									id="select_source"
-									onchange="List_MyTopic_By_PageAndSearch(1)">
-									<option value="-1">课题来源</option>
-									<option value="各类课题项目">各类课题项目</option>
-									<option value="导师指定">导师指定</option>
-									<option value="题目指南">题目指南</option>
-									<option value="自选">自选</option>
-									<option value="其它">其它</option>
-								</select>
-							</th>
-							<th>
-								<select class="form-control" style="width: auto;"
-									id="select_type"
-									onchange="List_MyTopic_By_PageAndSearch(1)">
-									<option value="-1">课题性质</option>
-									<option value="理论研究">理论研究</option>
-									<option value="应用基础研究">应用基础研究</option>
-									<option value="应用与理论结合研究">应用与理论结合研究</option>
-									<option value="实际应用">实际应用</option>
-								</select>
-							</th>
-							<th>已选学生数</th>
-							<th>指导教师</th>
-							<th>协助教师</th>
+							<th>毕业设计名称</th>
+							<th>学生</th>
 							<th class="teacher_control">
 								<select class="form-control" style="width: auto;"
-									id="select_state"
-									onchange="List_MyTopic_By_PageAndSearch(1)">
+									id="select_state" onchange="(1)">
 									<option value="-1">状态</option>
-									<option value="已关闭">已关闭</option>
-									<option value="审核已通过">审核已通过</option>
-									<option value="未审核">未审核</option>
+									<option value="1">正在进行</option>
+									<option value="2">未开始</option>
+									<option value="3">已结束</option>
 								</select>
 							</th>
 							<th>操作</th>
@@ -171,15 +143,6 @@
 						style="text-align: center;">
 						<tbody></tbody>
 					</table>
-
-				</div>
-				<div class="modal-footer">
-					<button class="teacher_control btn btn-default"
-						id="button_updateTopic" onclick="Update_Topic()"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-check"></i>
-						保存
-					</button>
 				</div>
 			</div>
 		</div>

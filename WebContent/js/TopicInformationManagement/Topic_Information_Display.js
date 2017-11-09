@@ -1,4 +1,5 @@
 ﻿function Topic_Information_Display(this_button) {
+
 	$("#modal_Topic_Information").modal("show");
 	var new_tr_1 = null;
 	var table_topic_detail = null;
