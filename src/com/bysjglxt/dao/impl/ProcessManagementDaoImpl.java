@@ -312,12 +312,12 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		return listProcessInstance;
 	}
 
-	// 根据流程实例ID获取任务实例 没必要
+	// 根据流程实例ID获取任务实例
 	@Override
 	public List<bysjglxt_task_instance> getListTaskInstanceByProcessInstanceId(String process_instance_id) {
 		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
 		Session session = getSession();
-		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + listTaskInstance + "'";
+		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + process_instance_id + "'";
 		Query query = session.createQuery(hql);
 		listTaskInstance = query.list();
 		return listTaskInstance;

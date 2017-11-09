@@ -358,6 +358,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			list_bysjglxt_task_instance = processManagementDao
 					.getListTaskInstanceByProcessInstanceId(bysjglxt_process_instance.getProcess_instance_id());
 			// 4.根据任务实例获得任务定义
+			
 			for (bysjglxt_task_instance task_instance : list_bysjglxt_task_instance) {
 				bysjglxt_task_definition = new bysjglxt_task_definition();
 				taskDTO = new TaskDTO();
