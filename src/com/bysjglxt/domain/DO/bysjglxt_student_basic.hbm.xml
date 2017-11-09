@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-11-7 0:06:27 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-11-8 23:35:27 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_student_basic" table="BYSJGLXT_STUDENT_BASIC">
         <id name="student_basic_id" type="java.lang.String">
@@ -85,6 +85,9 @@
         </property>
         <property name="student_basic_reasonsfordroppingoutofschool" type="java.lang.String">
             <column name="STUDENT_BASIC_REASONSFORDROPPINGOUTOFSCHOOL" />
+        </property>
+        <property name="student_basic_level" type="java.lang.String">
+            <column name="STUDENT_BASIC_LEVEL" />
         </property>
     </class>
 </hibernate-mapping>

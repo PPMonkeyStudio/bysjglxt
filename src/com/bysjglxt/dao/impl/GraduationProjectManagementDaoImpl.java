@@ -11,10 +11,16 @@ import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 
 public class GraduationProjectManagementDaoImpl implements GraduationProjectManagementDao {
 	private SessionFactory sessionFactory;
@@ -324,5 +330,73 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Query query = session.createQuery(hql);
 		bysjglxt_defence = (bysjglxt_defence) query.uniqueResult();
 		return bysjglxt_defence;
+	}
+
+	/************************************ 导出 ******************************************/
+
+	// 根据userid获取user表中信息
+	@Override
+	public bysjglxt_student_user getStudentUserByUserId(String studentUserId) {
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_student_user where user_student_id = '" + studentUserId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
+		return bysjglxt_student_user;
+	}
+
+	// 根据basicId获取学生basic表中信息
+	@Override
+	public bysjglxt_student_basic getStudentBasicByBasicId(String user_student_basic) {
+		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
+		Session session = getSession();
+		String hql = "from bysjglxt_student_basic where student_basic_id = '" + user_student_basic + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_student_basic = (bysjglxt_student_basic) query.uniqueResult();
+		return bysjglxt_student_basic;
+	}
+
+	// 根据userId获取选题表中的信息
+	@Override
+	public bysjglxt_topic_select getStudentSelectTopic(String user_student_id) {
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_student = '" + user_student_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		return bysjglxt_topic_select;
+	}
+
+	//根据教师userId获取教师user表信息
+	@Override
+	public bysjglxt_teacher_user getTeacherUserByUserId(String topic_select_teacher_tutor) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_id = '" + topic_select_teacher_tutor + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		return bysjglxt_teacher_user;
+	}
+	
+	//根据教师basicId获取教师basic表信息
+	@Override
+	public bysjglxt_teacher_basic getTeacherBasicByBasicId(String user_teacher_basic) {
+		bysjglxt_teacher_basic bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_basic where teacher_basic_id = '" + user_teacher_basic + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_basic = (bysjglxt_teacher_basic) query.uniqueResult();
+		return bysjglxt_teacher_basic;
+	}
+
+	//根据课题ID获取课题信息
+	@Override
+	public bysjglxt_topic getStudentTopicByTopicId(String topic_select_topic) {
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic where topic_id = '" + topic_select_topic + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		return bysjglxt_topic;
 	}
 }

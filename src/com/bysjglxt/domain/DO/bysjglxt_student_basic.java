@@ -29,6 +29,15 @@ public class bysjglxt_student_basic {
 	private String student_basic_entranceeducation;
 	private String student_basic_enrollmentmode;
 	private String student_basic_reasonsfordroppingoutofschool;
+	private String student_basic_level;
+
+	public String getStudent_basic_level() {
+		return student_basic_level;
+	}
+
+	public void setStudent_basic_level(String student_basic_level) {
+		this.student_basic_level = student_basic_level;
+	}
 
 	public String getStudent_basic_id() {
 		return student_basic_id;
@@ -265,7 +274,8 @@ public class bysjglxt_student_basic {
 				+ student_basic_householdregistrationtype + ", student_basic_transactiontypes="
 				+ student_basic_transactiontypes + ", student_basic_entranceeducation="
 				+ student_basic_entranceeducation + ", student_basic_enrollmentmode=" + student_basic_enrollmentmode
-				+ ", student_basic_reasonsfordroppingoutofschool=" + student_basic_reasonsfordroppingoutofschool + "]";
+				+ ", student_basic_reasonsfordroppingoutofschool=" + student_basic_reasonsfordroppingoutofschool
+				+ ", student_basic_level=" + student_basic_level + "]";
 	}
 
 }

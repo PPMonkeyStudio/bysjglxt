@@ -8,6 +8,8 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 
 public interface GraduationProjectManagementDao {
 
@@ -65,6 +67,21 @@ public interface GraduationProjectManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_defence getDefence(String userId);
 
 	public com.bysjglxt.domain.DO.bysjglxt_report_opening getReportOpeningUser(String userId);
+
+	
+	/***************************************导出*******************************************/
+	
+	public com.bysjglxt.domain.DO.bysjglxt_student_user getStudentUserByUserId(String studentUserId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_student_basic getStudentBasicByBasicId(String user_student_basic);
+
+	public com.bysjglxt.domain.DO.bysjglxt_topic_select getStudentSelectTopic(String user_student_id);
+
+	public bysjglxt_teacher_user getTeacherUserByUserId(String topic_select_teacher_tutor);
+
+	public bysjglxt_teacher_basic getTeacherBasicByBasicId(String user_teacher_basic);
+
+	public com.bysjglxt.domain.DO.bysjglxt_topic getStudentTopicByTopicId(String topic_select_topic);
 
 
 }

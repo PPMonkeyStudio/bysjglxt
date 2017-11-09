@@ -31,7 +31,7 @@ public class ProcessManagementVO {
 	private String search;
 
 	// 筛选状态
-	private int state;
+	private int state=-1;
 
 	// 筛选搜索流程实例ID
 	private String processInstance;
