@@ -45,7 +45,6 @@ public class XwpfTUtil {
 			for (int i = 0; i < runs.size(); i++) {
 				XWPFRun run = runs.get(i);
 				String runText = run.toString();
-				System.out.println("------>>>>>>>>>" + runText);
 				if ('$' == runText.charAt(0) && '{' == runText.charAt(1)) {
 					start = i;
 				}
@@ -59,16 +58,11 @@ public class XwpfTUtil {
 					}
 				}
 			}
-			System.out.println("start--->" + start);
-			System.out.println("end--->" + end);
-
-			System.out.println("str---->>>" + str);
 
 			for (int i = start; i <= end; i++) {
 				para.removeRun(i);
 				i--;
 				end--;
-				System.out.println("remove i=" + i);
 			}
 
 			for (String key : params.keySet()) {

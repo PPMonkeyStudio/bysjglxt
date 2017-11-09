@@ -1,5 +1,6 @@
 package com.bysjglxt.service;
 
+import java.io.File;
 import java.util.Map;
 
 import com.bysjglxt.domain.DO.bysjglxt_defence;
@@ -199,7 +200,7 @@ public interface GraduationProjectManagementService {
 
 	/************************************ 下面是导出word的实现 ****************************************************/
 	// 导出所有
-	public void exportAll();
+	public File exportAll(String userId) throws Exception;
 
 	/**
 	 * 1.导出封面
@@ -245,8 +246,56 @@ public interface GraduationProjectManagementService {
 	/**
 	 * 导出开题报告
 	 * 
-	 * @D
+	 */
+	public Map<String, Object> exportOpeningReport(String studentUserId);
+
+	/**
+	 * 导出进展前期情况记录
+	 */
+	public Map<String, Object> exportEarlystage(String studentUserId);
+
+	/**
+	 * 导出中期情况记录
 	 * 
 	 */
+	public Map<String, Object> exportMetaphase(String studentUserId);
+
+	/**
+	 * 导出后期情况记录
+	 * 
+	 */
+	public Map<String, Object> exportLaterstage(String studentUserId);
+
+	/**
+	 * 导出完善期情况记录
+	 */
+
+	public Map<String, Object> exportPerfect(String studentUserId);
+
+	/**
+	 * 导出个人学习工作总结
+	 */
+	public Map<String, Object> exportSummary(String studentUserId);
+
+	/**
+	 * 导出形式审查表
+	 */
+	public Map<String, Object> exportFormal(String studentUserId);
+
+	/**
+	 * 导出指导老师评价表
+	 */
+	public Map<String, Object> exportTeacherOpin(String studentUserId);
+
+	/**
+	 * 导出评阅老师评价表
+	 */
+
+	public Map<String, Object> exportReviewOpin(String studentUserId);
+
+	/**
+	 * 导出答辩评分表
+	 */
+	public Map<String, Object> exportDefence(String studentUserId);
 
 }
