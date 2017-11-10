@@ -97,11 +97,7 @@ public interface TopicInformationManagementService {
 	public boolean teacherIsPermissionAddStudentInTopic(String teacherId, String topicId);
 
 	/**
-	 * 分配学生选题
-	 * 1.创建选题记录
-	 * 2.将学生选题状态更改为已选题 1
-	 * 3.教师选题人数+1
-	 * 4.课题选择人数+1
+	 * 分配学生选题 1.创建选题记录 2.将学生选题状态更改为已选题 1 3.教师选题人数+1 4.课题选择人数+1
 	 */
 	public int assignmentStudentTopic(String userId, String topic);
 
@@ -159,7 +155,7 @@ public interface TopicInformationManagementService {
 	public List<StudentInformationDTO> listStudentSelectTopic(String topicId);
 
 	/**
-	 * 分配
+	 * 指定 弃用
 	 * 
 	 * @param studentUserId
 	 * @return
@@ -179,7 +175,9 @@ public interface TopicInformationManagementService {
 	 * @D 学生点击退选:
 	 * @D 1.根据学生userId获取学生选题表
 	 * @D 2.根据学生userId更改学生登陆表是否选题字段
-	 * @D 3.删除学生选题表记录
+	 * @D 3.将教师的选题人数-1
+	 * @D 4.将课题的选题人数-1
+	 * @D 4.删除学生选题表记录
 	 * @param studentUserId
 	 *            学生userID
 	 * @return -3 参数错误,系统繁忙

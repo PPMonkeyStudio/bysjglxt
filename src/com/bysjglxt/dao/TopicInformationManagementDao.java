@@ -93,4 +93,8 @@ public interface TopicInformationManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_student_user getStudentUserByUserId(String userId);
 
+	public boolean updateTeacherSelectNum(String topic_select_teacher_tutor);
+
+	public boolean updateTopicNum(String topic_select_topic);
+
 }
