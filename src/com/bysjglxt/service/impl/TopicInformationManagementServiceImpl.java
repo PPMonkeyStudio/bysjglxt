@@ -318,6 +318,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		return flag;
 	}
 
+	// 添加指定学生选题
 	@Override
 	public boolean distributionTopicStudent(String topicID, List<String> studentIDList) {
 		boolean flag = false;
@@ -496,6 +497,9 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		return listStudentInfoDTO;
 	}
 
+	/**
+	 * 指定学生选题 弃用
+	 */
 	@Override
 	public int specialStudentSelectTopic(String studentID, String topicID) {
 
@@ -669,6 +673,47 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			return -1;
 		// 4.删除学生选题记录
 		flag = topicInformationManagementDao.deleteTopicSelect(bysjglxt_topic_select.getTopic_select_id());
+		if (!flag)
+			return -1;
+		return 1;
+	}
+
+	/**
+	 * 分配学生选题 -1选题失败
+	 */
+	@Override
+	public int assignmentStudentTopic(String userId, String topic) {
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		boolean flag = false;
+		// 1.根据学生ID获取user表信息
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		bysjglxt_student_user = topicInformationManagementDao.getStudentUserByUserId(userId);
+		if (bysjglxt_student_user != null) {
+			// 更改user表的状态
+			bysjglxt_student_user.setUser_student_is_select_topic(1);
+			bysjglxt_student_user.setUser_student_gmt_modified(TeamUtil.getStringSecond());
+			flag = topicInformationManagementDao.updateStudentUserRecord(bysjglxt_student_user.getUser_student_id());
+			if (!flag)
+				return -1;
+		}
+		// 2.获取课题记录
+		bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topic);
+		if (bysjglxt_topic != null) {
+			bysjglxt_topic.setTopic_student_num(bysjglxt_topic.getTopic_student_num() + 1);
+			bysjglxt_topic.setTopic_gmt_modified(TeamUtil.getStringSecond());
+			flag = topicInformationManagementDao.addTopicStudentNum(topic);
+			if (!flag)
+				return -1;
+		}
+		// 3.添加选题记录
+		bysjglxt_topic_select.setTopic_select_id(TeamUtil.getUuid());
+		bysjglxt_topic_select.setTopic_select_student(userId);
+		bysjglxt_topic_select.setTopic_select_teacher_tutor(bysjglxt_topic.getTopic_teacher());
+		bysjglxt_topic_select.setTopic_select_topic(topic);
+		bysjglxt_topic_select.setTopic_select_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_topic_select.setTopic_select_gmt_modified(bysjglxt_topic_select.getTopic_select_gmt_create());
+		flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
 		if (!flag)
 			return -1;
 		return 1;

@@ -780,7 +780,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	@Override
 	public bysjglxt_record_progress get_RecordProgress_4(String userId) {
 		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
-		bysjglxt_record_progress = graduationProjectManagementDao.getRecordProgress(userId, "完善期");
+		bysjglxt_record_progress = graduationProjectManagementDao.getRecordProgress(userId, "完善");
 		return bysjglxt_record_progress;
 	}
 
