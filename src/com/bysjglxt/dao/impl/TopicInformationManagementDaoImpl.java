@@ -13,12 +13,16 @@ import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_process_definition;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
@@ -651,6 +655,49 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	@Override
+	public bysjglxt_process_definition getProcessDefinitionByName(String string) {
+		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_definition where process_definition_name = '" + string + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_definition = (bysjglxt_process_definition) query.uniqueResult();
+		return bysjglxt_process_definition;
+	}
+
+	@Override
+	public bysjglxt_process_instance getProcessInstanceByStateAndDefinitionId(String process_definition_id,
+			String string) {
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_instance where process_instance_process_definition = '"
+				+ process_definition_id + "' and process_instance_state = '" + string + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		return bysjglxt_process_instance;
+	}
+
+	@Override
+	public bysjglxt_task_instance getTaskInstanceByProcessInstanceIdAndState(String process_instance_id, int i) {
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + process_instance_id
+				+ "' and task_instance_state = '" + i + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
+		return bysjglxt_task_instance;
+	}
+
+	@Override
+	public bysjglxt_task_definition getTaskDefinitionById(String task_instance_task_definition) {
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_definition where task_definition_id = '" + task_instance_task_definition + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
+		return bysjglxt_task_definition;
 	}
 
 }
