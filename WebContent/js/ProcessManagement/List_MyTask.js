@@ -64,7 +64,9 @@ function List_MyTask(pageIndex) {
 							new_td.innerHTML = '<button id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
 									+ '" class="btn btn-default" onclick="passTask(this)">通过</button>'
-									+ '<button class="btn btn-default" onclick="repulseTask(this)" style="marin:0 0 0 10px;">拒绝</button>';
+									+ '<button id="'
+									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
+									+ '" class="btn btn-default" onclick="repulseTask(this)" style="margin:0 0 0 10px;">驳回</button>';
 						}
 					} else {
 						new_td.innerHTML = '';

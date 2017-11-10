@@ -67,16 +67,27 @@ function List_ProcessDefinition(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<button class="btn btn-default" id="'
-							+ processDefinition_json[num].process_definition_id
-							+ '" onclick="UpdateProcessDefinition(this)" >详细</button>'
-							+ '<a id="'
-							+ processDefinition_json[num].process_definition_name
-							+ '">' + '<button class="btn btn-default" id="'
-							+ processDefinition_json[num].process_definition_id
-							+ '"' + ' onclick="BootProcess(this)" '
-							+ 'style="margin:0 0 0 10px;">' + '开启流程'
-							+ '</button>' + '</a>';
+					if (processDefinition_json[num].process_definition_instance_role == 2
+							&& userTeacherDTO != null
+							&& userTeacherDTO.bysjglxtLeader != null) {
+						new_td.innerHTML = '<button class="btn btn-default" id="'
+								+ processDefinition_json[num].process_definition_id
+								+ '" onclick="UpdateProcessDefinition(this)" >详细</button>';
+					} else {
+						new_td.innerHTML = '<button class="btn btn-default" id="'
+								+ processDefinition_json[num].process_definition_id
+								+ '" onclick="UpdateProcessDefinition(this)" >详细</button>'
+								+ '<a id="'
+								+ processDefinition_json[num].process_definition_name
+								+ '">'
+								+ '<button class="btn btn-default" id="'
+								+ processDefinition_json[num].process_definition_id
+								+ '"'
+								+ ' onclick="BootProcess(this)" '
+								+ 'style="margin:0 0 0 10px;">'
+								+ '开启流程'
+								+ '</button>' + '</a>';
+					}
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));

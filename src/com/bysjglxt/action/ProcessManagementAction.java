@@ -225,7 +225,8 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 
 	public void dropTask() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		processManagementService.repulse(repulseTaskID);
+		System.out.println(repulseTaskID);
+		System.out.println(processManagementService.repulse(repulseTaskID));
 		http_response.getWriter().write("success");
 	}
 

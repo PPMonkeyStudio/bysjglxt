@@ -10,6 +10,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
+import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,6 +25,10 @@ public class GraduationProjectManagementAction extends ActionSupport
 	private GraduationProjectManagementService graduationProjectManagementService;
 	private HttpServletResponse http_response;
 	private HttpServletRequest http_request;
+	/*
+	 * 
+	 */
+	private TeacherTutorStudentVO teacherTutorStudentVO;
 
 	/*
 	 * 
@@ -36,6 +41,20 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return "MyTutorGraduationProjectPage";
 	}
 
+	/*
+	 * 所有此教师指导的学生
+	 */
+	public void ListMyTutorGraduationProjectByPageAndSearch() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+
+		teacherTutorStudentVO = graduationProjectManagementService.teacherTutorStudentVO(teacherTutorStudentVO,
+				((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+						.getBysjglxtTeacherUser().getUser_teacher_id());
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(teacherTutorStudentVO));
+	}
 	/*
 	 * 
 	 */
@@ -283,5 +302,13 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public GraduationProjectManagementService getGraduationProjectManagementService() {
 		return graduationProjectManagementService;
+	}
+
+	public TeacherTutorStudentVO getTeacherTutorStudentVO() {
+		return teacherTutorStudentVO;
+	}
+
+	public void setTeacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO) {
+		this.teacherTutorStudentVO = teacherTutorStudentVO;
 	}
 }

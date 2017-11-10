@@ -5,7 +5,7 @@ function repulseTask(button) {
 				content : '操作不可撤回，是否驳回?',
 				type : 'red',
 				buttons : {
-					'通过' : {
+					'驳回' : {
 						btnClass : 'btn-red',
 						action : function() {
 							var xhr = false;
@@ -23,18 +23,15 @@ function repulseTask(button) {
 							}
 							xhr
 									.open("POST",
-											"/bysjglxt/process/ProcessManagement_repulseTask");
-
+											"/bysjglxt/process/ProcessManagement_dropTask");
 							formData.append("repulseTaskID", button.id);
 
 							xhr.send(formData);
 						}
 					},
-					'取消' : function() {
+					'放弃' : function() {
 					}
-				},
-				// 模态框加载完成之后触发的方法
-				onContentReady : function() {
 				}
+
 			});
 }

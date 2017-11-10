@@ -17,6 +17,8 @@
 	src="<%=basePath%>js/ProcessManagement/List_MyTask.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/passTask.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/ProcessManagement/repulseTask.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>我的任务</title>
