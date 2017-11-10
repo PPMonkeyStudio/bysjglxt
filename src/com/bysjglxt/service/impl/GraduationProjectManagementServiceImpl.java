@@ -94,6 +94,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			teacherTutorStudentDTO = new TeacherTutorStudentDTO();
 			processInstance = new bysjglxt_process_instance();
 			bysjglxtTopic = new bysjglxt_topic();
+			studentInformationDTO = new StudentInformationDTO();
 			// 3.根据选题所属学生拿到学生user表
 			bysjglxtStudentUser = graduationProjectManagementDao
 					.getStudentUserByUserId(bysjglxt_topic_select.getTopic_select_student());
