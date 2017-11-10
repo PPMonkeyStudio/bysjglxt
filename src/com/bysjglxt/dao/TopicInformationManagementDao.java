@@ -97,4 +97,14 @@ public interface TopicInformationManagementDao {
 
 	public boolean updateTopicNum(String topic_select_topic);
 
+	public com.bysjglxt.domain.DO.bysjglxt_process_definition getProcessDefinitionByName(String string);
+
+	public com.bysjglxt.domain.DO.bysjglxt_process_instance getProcessInstanceByStateAndDefinitionId(
+			String process_definition_id, String string);
+
+	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceByProcessInstanceIdAndState(
+			String process_instance_id, int i);
+
+	public com.bysjglxt.domain.DO.bysjglxt_task_definition getTaskDefinitionById(String task_instance_task_definition);
+
 }
