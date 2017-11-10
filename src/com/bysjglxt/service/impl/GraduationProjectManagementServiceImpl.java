@@ -122,6 +122,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 						}
 					}
 				}
+
 				if (processInstance != null) {
 					// 一个流程实例中只有一个任务实例是处于正在进行的状态
 					// 根据流程实例ID以及任务实例状态即可判断得到流程进度
@@ -704,7 +705,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 				flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 			}
-
 		}
 		return flag;
 	}
@@ -1098,12 +1098,26 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_record_progress = graduationProjectManagementDao
 					.getRecordProgress(bysjglxt_student_user.getUser_student_id(), "前期");
 			if (bysjglxt_record_progress != null) {
-				params.put("${a}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${b}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${c}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${d}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				params.put("${f}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				params.put("${e}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+				if (bysjglxt_record_progress.getRecord_progress_gmt_start() != null
+						&& bysjglxt_record_progress.getRecord_progress_gmt_start().trim().length() > 0) {
+					params.put("${a}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+					params.put("${b}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+					params.put("${c}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+				} else {
+					params.put("${a}", "");
+					params.put("${b}", "");
+					params.put("${c}", "");
+				}
+				if (bysjglxt_record_progress.getRecord_progress_gmt_stop() != null
+						&& bysjglxt_record_progress.getRecord_progress_gmt_stop().trim().length() > 0) {
+					params.put("${d}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+					params.put("${f}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+					params.put("${e}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+				} else {
+					params.put("${d}", "");
+					params.put("${f}", "");
+					params.put("${e}", "");
+				}
 				params.put("${earlyProcessRecord}", bysjglxt_record_progress.getRecord_progress_record());
 				params.put("${earlyProcessOpinion}", bysjglxt_record_progress.getRecord_progress_opinion());
 			} else {
@@ -1163,12 +1177,26 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_record_progress = graduationProjectManagementDao
 					.getRecordProgress(bysjglxt_student_user.getUser_student_id(), "中期");
 			if (bysjglxt_record_progress != null) {
-				params.put("${zy}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${zm}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${zd}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${zyz}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				params.put("${zmz}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				params.put("${zdz}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+				if (bysjglxt_record_progress.getRecord_progress_gmt_start() != null
+						&& bysjglxt_record_progress.getRecord_progress_gmt_start().trim().length() > 0) {
+					params.put("${zy}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+					params.put("${zm}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+					params.put("${zd}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+				} else {
+					params.put("${zy}", "");
+					params.put("${zm}", "");
+					params.put("${zd}", "");
+				}
+				if (bysjglxt_record_progress.getRecord_progress_gmt_stop() != null
+						&& bysjglxt_record_progress.getRecord_progress_gmt_stop().trim().length() > 0) {
+					params.put("${zyz}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+					params.put("${zmz}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+					params.put("${zdz}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+				} else {
+					params.put("${zyz}", "");
+					params.put("${zmz}", "");
+					params.put("${zdz}", "");
+				}
 				params.put("${zhongRecord}", bysjglxt_record_progress.getRecord_progress_record());
 				params.put("${zhongOpinion}", bysjglxt_record_progress.getRecord_progress_opinion());
 			} else {
@@ -1228,12 +1256,26 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_record_progress = graduationProjectManagementDao
 					.getRecordProgress(bysjglxt_student_user.getUser_student_id(), "后期");
 			if (bysjglxt_record_progress != null) {
-				params.put("${hy}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${hm}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${hd}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${hyh}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				params.put("${hmy}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				params.put("${hdh}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+				if (bysjglxt_record_progress.getRecord_progress_gmt_start() != null
+						&& bysjglxt_record_progress.getRecord_progress_gmt_start().trim().length() > 0) {
+					params.put("${hy}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+					params.put("${hm}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+					params.put("${hd}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+				} else {
+					params.put("${hy}", "");
+					params.put("${hm}", "");
+					params.put("${hd}", "");
+				}
+				if (bysjglxt_record_progress.getRecord_progress_gmt_stop() != null
+						&& bysjglxt_record_progress.getRecord_progress_gmt_stop().trim().length() > 0) {
+					params.put("${hyh}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+					params.put("${hmy}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+					params.put("${hdh}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+				} else {
+					params.put("${hyh}", "");
+					params.put("${hmy}", "");
+					params.put("${hdh}", "");
+				}
 				params.put("${houRecord}", bysjglxt_record_progress.getRecord_progress_record());
 				params.put("${houOpinion}", bysjglxt_record_progress.getRecord_progress_opinion());
 			} else {
@@ -1292,12 +1334,26 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_record_progress = graduationProjectManagementDao
 					.getRecordProgress(bysjglxt_student_user.getUser_student_id(), "完善");
 			if (bysjglxt_record_progress != null) {
-				params.put("${wy}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${wm}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${wd}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				params.put("${wyw}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				params.put("${wmw}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				params.put("${wdw}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+				if (bysjglxt_record_progress.getRecord_progress_gmt_start() != null
+						&& bysjglxt_record_progress.getRecord_progress_gmt_start().trim().length() > 0) {
+					params.put("${wy}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+					params.put("${wm}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+					params.put("${wd}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
+				} else {
+					params.put("${wy}", "");
+					params.put("${wm}", "");
+					params.put("${wd}", "");
+				}
+				if (bysjglxt_record_progress.getRecord_progress_gmt_stop() != null
+						&& bysjglxt_record_progress.getRecord_progress_gmt_stop().trim().length() > 0) {
+					params.put("${wyw}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+					params.put("${wmw}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+					params.put("${wdw}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
+				} else {
+					params.put("${wyw}", "");
+					params.put("${wmw}", "");
+					params.put("${wdw}", "");
+				}
 				params.put("${wanRecord}", bysjglxt_record_progress.getRecord_progress_record());
 				params.put("${wanOpinion}", bysjglxt_record_progress.getRecord_progress_opinion());
 			} else {
@@ -1355,12 +1411,26 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			// 根据user Id获取个人学习工作总结
 			bysjglxt_summary = graduationProjectManagementDao.getSummary(bysjglxt_student_user.getUser_student_id());
 			if (bysjglxt_summary != null) {
-				params.put("${sy}", TeamUtil.timeToYear(bysjglxt_summary.getSummary_gmt_start()));
-				params.put("${sm}", TeamUtil.timeToMonth(bysjglxt_summary.getSummary_gmt_start()));
-				params.put("${sd}", TeamUtil.timeToDay(bysjglxt_summary.getSummary_gmt_start()));
-				params.put("${sys}", TeamUtil.timeToYear(bysjglxt_summary.getSummary_gmt_stop()));
-				params.put("${sms}", TeamUtil.timeToMonth(bysjglxt_summary.getSummary_gmt_stop()));
-				params.put("${sds}", TeamUtil.timeToDay(bysjglxt_summary.getSummary_gmt_stop()));
+				if (bysjglxt_summary.getSummary_gmt_start() != null
+						&& bysjglxt_summary.getSummary_gmt_start().trim().length() > 0) {
+					params.put("${sy}", TeamUtil.timeToYear(bysjglxt_summary.getSummary_gmt_start()));
+					params.put("${sm}", TeamUtil.timeToMonth(bysjglxt_summary.getSummary_gmt_start()));
+					params.put("${sd}", TeamUtil.timeToDay(bysjglxt_summary.getSummary_gmt_start()));
+				} else {
+					params.put("${sy}", "");
+					params.put("${sm}", "");
+					params.put("${sd}", "");
+				}
+				if (bysjglxt_summary.getSummary_gmt_stop() != null
+						&& bysjglxt_summary.getSummary_gmt_stop().trim().length() > 0) {
+					params.put("${sys}", TeamUtil.timeToYear(bysjglxt_summary.getSummary_gmt_stop()));
+					params.put("${sms}", TeamUtil.timeToMonth(bysjglxt_summary.getSummary_gmt_stop()));
+					params.put("${sds}", TeamUtil.timeToDay(bysjglxt_summary.getSummary_gmt_stop()));
+				} else {
+					params.put("${sys}", "");
+					params.put("${sms}", "");
+					params.put("${sds}", "");
+				}
 				params.put("${sumSummary}", bysjglxt_summary.getSummary_summary());
 				params.put("${sumOpinion}", bysjglxt_summary.getSummary_opinion());
 			} else {

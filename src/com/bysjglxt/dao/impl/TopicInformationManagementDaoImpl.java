@@ -620,4 +620,37 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		return bysjglxt_student_user;
 	}
 
+	@Override
+	public boolean updateTeacherSelectNum(String topic_select_teacher_tutor) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_teacher_user set user_teacher_guidance_num = user_teacher_guidance_num-1 where user_teacher_id = '"
+					+ topic_select_teacher_tutor + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updateTopicNum(String topic_select_topic) {
+
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_topic set topic_student_num = topic_student_num-1 where topic_id = '"
+					+ topic_select_topic + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

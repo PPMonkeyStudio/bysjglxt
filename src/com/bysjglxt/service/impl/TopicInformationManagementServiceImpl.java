@@ -671,6 +671,15 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		flag = topicInformationManagementDao.updateStudentUserNotSelect(bysjglxt_student_user.getUser_student_id());
 		if (!flag)
 			return -1;
+		// 4.将教师的选题人数-1
+		flag = topicInformationManagementDao
+				.updateTeacherSelectNum(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+		if (!flag)
+			return -1;
+		// 5.将课题的选择人数减1
+		flag = topicInformationManagementDao.updateTopicNum(bysjglxt_topic_select.getTopic_select_topic());
+		if (!flag)
+			return -1;
 		// 4.删除学生选题记录
 		flag = topicInformationManagementDao.deleteTopicSelect(bysjglxt_topic_select.getTopic_select_id());
 		if (!flag)
@@ -685,28 +694,32 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	public int assignmentStudentTopic(String userId, String topic) {
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		boolean flag = false;
 		// 1.根据学生ID获取user表信息
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
 		bysjglxt_student_user = topicInformationManagementDao.getStudentUserByUserId(userId);
 		if (bysjglxt_student_user != null) {
 			// 更改user表的状态
-			bysjglxt_student_user.setUser_student_is_select_topic(1);
-			bysjglxt_student_user.setUser_student_gmt_modified(TeamUtil.getStringSecond());
 			flag = topicInformationManagementDao.updateStudentUserRecord(bysjglxt_student_user.getUser_student_id());
 			if (!flag)
 				return -1;
 		}
-		// 2.获取课题记录
+		// 2.获取课题记录 课题选择人数+1
 		bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topic);
 		if (bysjglxt_topic != null) {
-			bysjglxt_topic.setTopic_student_num(bysjglxt_topic.getTopic_student_num() + 1);
-			bysjglxt_topic.setTopic_gmt_modified(TeamUtil.getStringSecond());
 			flag = topicInformationManagementDao.addTopicStudentNum(topic);
 			if (!flag)
 				return -1;
+			// 3.获取教师记录
+			bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUser(bysjglxt_topic.getTopic_teacher());
+			if (bysjglxt_teacher_user == null) {
+				return -1;
+			}
+			flag = topicInformationManagementDao.addTeacherUserSrtudentNum(bysjglxt_teacher_user.getUser_teacher_id());
 		}
-		// 3.添加选题记录
+
+		// 4.添加选题记录
 		bysjglxt_topic_select.setTopic_select_id(TeamUtil.getUuid());
 		bysjglxt_topic_select.setTopic_select_student(userId);
 		bysjglxt_topic_select.setTopic_select_teacher_tutor(bysjglxt_topic.getTopic_teacher());
