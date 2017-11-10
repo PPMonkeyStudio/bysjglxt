@@ -610,4 +610,14 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		return listbysjglxt_topicByPageAndSearch;
 	}
 
+	@Override
+	public bysjglxt_student_user getStudentUserByUserId(String userId) {
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_student_user where user_student_id = '" + userId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
+		return bysjglxt_student_user;
+	}
+
 }

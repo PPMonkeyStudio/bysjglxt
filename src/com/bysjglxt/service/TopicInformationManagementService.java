@@ -97,6 +97,15 @@ public interface TopicInformationManagementService {
 	public boolean teacherIsPermissionAddStudentInTopic(String teacherId, String topicId);
 
 	/**
+	 * 分配学生选题
+	 * 1.创建选题记录
+	 * 2.将学生选题状态更改为已选题 1
+	 * 3.教师选题人数+1
+	 * 4.课题选择人数+1
+	 */
+	public int assignmentStudentTopic(String userId, String topic);
+
+	/**
 	 * 
 	 * @DOTO
 	 * 

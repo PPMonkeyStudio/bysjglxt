@@ -91,4 +91,6 @@ public interface TopicInformationManagementDao {
 	public List<bysjglxt_topic> VO_Topic_By_StudentPageAndSearch(TopicInformationManagementVO topicManagementVO,
 			String studentUserId);
 
+	public com.bysjglxt.domain.DO.bysjglxt_student_user getStudentUserByUserId(String userId);
+
 }
