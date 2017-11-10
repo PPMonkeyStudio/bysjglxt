@@ -244,7 +244,7 @@ public class TopicInformationManagementAction extends ActionSupport
 	}
 
 	public void specialStudentSelectTopic() {
-		System.out.println(topicInformationManagementService.specialStudentSelectTopic(studentUserId, topicId));
+
 	}
 
 	/*

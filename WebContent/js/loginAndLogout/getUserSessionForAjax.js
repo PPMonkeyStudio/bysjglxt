@@ -66,6 +66,10 @@ function getUserSessionForAjax() {
 										try {
 											List_MyTask(1);
 										} catch (e) {
+											try {
+												List_MyTutorGraduationProject_By_PageAndSearch(1);
+											} catch (e) {
+											}
 										}
 									}
 								}

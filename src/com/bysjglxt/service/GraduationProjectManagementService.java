@@ -157,7 +157,13 @@ public interface GraduationProjectManagementService {
 	 */
 	public int bysjglxt_defence(bysjglxt_defence updateDefence);
 
-	/*********************************************** 教师点击我指导的毕业设计 ************************/
+	/**
+	 * 教师点击指导的毕业设计列表
+	 * 
+	 * @param teacherTutorStudentVO
+	 * @param teacherUserId
+	 * @return
+	 */
 	public TeacherTutorStudentVO teacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId);
 

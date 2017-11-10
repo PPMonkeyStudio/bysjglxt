@@ -86,10 +86,8 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			System.out.println("教师");
 			http_response.getWriter().write(gson.toJson(ActionContext.getContext().getSession().get("userTeacherDTO")));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
-			System.out.println("学生");
 			http_response.getWriter().write(gson.toJson(ActionContext.getContext().getSession().get("userStudentDTO")));
 		}
 	}

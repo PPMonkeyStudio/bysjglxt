@@ -15,9 +15,7 @@
 
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/List_MyTopic_By_PageAndSearch.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/Topic_Information_Display.js"></script>
+	src="<%=basePath%>js/GraduationProjectManagement/List_MyTutorGraduationProject_By_PageAndSearch.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>课题管理页</title>
@@ -51,7 +49,8 @@
 						</span>
 					</div>
 				</div>
-				<table id="" class="table table-hover "
+				<table id="table_myTutorGraduationProject"
+					class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
