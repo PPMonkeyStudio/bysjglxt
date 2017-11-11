@@ -89,11 +89,13 @@
 				</li>
 				<!--  -->
 				<li class="dropdown" style="float: left;">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					<a
+						href="<%=basePath%>topic/TopicInformationManagement_TopicListPage"
+						class="dropdown-toggle">
 						<span>课题</span>
-						<i class="icon-submenu lnr lnr-chevron-down"></i>
+						<!-- <i class="icon-submenu lnr lnr-chevron-down"></i> -->
 					</a>
-					<ul class="dropdown-menu">
+					<%-- <ul class="dropdown-menu">
 						<li>
 							<a
 								href="<%=basePath%>topic/TopicInformationManagement_TopicListPage">课题</a>
@@ -102,7 +104,7 @@
 							<a
 								href="<%=basePath%>topic/TopicInformationManagement_MyTopicListPage">我的课题</a>
 						</li>
-					</ul>
+					</ul> --%>
 				</li>
 				<!--  -->
 				<li class="dropdown" style="float: left;">
@@ -211,7 +213,15 @@ td {
 	line-height: 33px !important;
 }
 
-.label {
+td i {
+	line-height: 33px !important;
+}
+
+td button i {
+	line-height: 20px !important;
+}
+
+td .label {
 	line-height: 33px !important;
 }
 </style>

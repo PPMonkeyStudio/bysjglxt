@@ -84,16 +84,6 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopicInviteTeacher != undefined
-							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopicInviteTeacher.topic_invite_teacher_name != "") {
-						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopicInviteTeacher.topic_invite_teacher_name;
-					} else {
-						new_td.innerHTML = '无';
-					}
-
-					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
-					new_tr.appendChild(new_td);
 					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != undefined
 							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state != "") {
 						switch (topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state) {

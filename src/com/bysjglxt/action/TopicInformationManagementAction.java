@@ -52,8 +52,11 @@ public class TopicInformationManagementAction extends ActionSupport
 	 */
 	private String studentSelectTopic;
 
-	private String studentUserId;
-	private String topicId;
+	/*
+	 * 分配选题
+	 */
+	private String assignmentStudentUserId;
+	private String assignmentTopicId;
 
 	/*
 	 * 
@@ -107,16 +110,10 @@ public class TopicInformationManagementAction extends ActionSupport
 		topicInformationManagementDTO.setTeacherInformationDTO(new TeacherInformationDTO());
 		topicInformationManagementDTO.getTeacherInformationDTO().setBysjglxtTeacherUser(new bysjglxt_teacher_user());
 
-		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
-					.get("userTeacherDTO");
-			topicInformationManagementDTO.getTeacherInformationDTO().getBysjglxtTeacherUser()
-					.setUser_teacher_id(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
-		} else {
-			http_response.setContentType("text/html;charset=utf-8");
-			http_response.getWriter().write("登录状态已失效");
-			return;
-		}
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		topicInformationManagementDTO.getTeacherInformationDTO().getBysjglxtTeacherUser()
+				.setUser_teacher_id(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 
 		topicInformationManagementService.CreateTopic(topicInformationManagementDTO);
 		http_response.setContentType("text/html;charset=utf-8");
@@ -243,8 +240,17 @@ public class TopicInformationManagementAction extends ActionSupport
 		}
 	}
 
-	public void specialStudentSelectTopic() {
+	/**
+	 * 分配课题
+	 */
+	public void assignmentStudentTopic() {
+		topicInformationManagementService.assignmentStudentTopic(assignmentStudentUserId, assignmentTopicId);
+	}
 
+	public void dropTopic() {
+		topicInformationManagementService
+				.dropTopic(((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+						.getBysjglxtStudentUser().getUser_student_id());
 	}
 
 	/*
@@ -353,20 +359,20 @@ public class TopicInformationManagementAction extends ActionSupport
 		this.studentSelectTopic = studentSelectTopic;
 	}
 
-	public String getStudentUserId() {
-		return studentUserId;
+	public String getAssignmentStudentUserId() {
+		return assignmentStudentUserId;
 	}
 
-	public void setStudentUserId(String studentUserId) {
-		this.studentUserId = studentUserId;
+	public void setAssignmentStudentUserId(String assignmentStudentUserId) {
+		this.assignmentStudentUserId = assignmentStudentUserId;
 	}
 
-	public String getTopicId() {
-		return topicId;
+	public String getAssignmentTopicId() {
+		return assignmentTopicId;
 	}
 
-	public void setTopicId(String topicId) {
-		this.topicId = topicId;
+	public void setAssignmentTopicId(String assignmentTopicId) {
+		this.assignmentTopicId = assignmentTopicId;
 	}
 
 }
