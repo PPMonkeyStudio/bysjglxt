@@ -3,19 +3,23 @@ package com.bysjglxt.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
@@ -409,12 +413,30 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	// 根据指导老师ID获得分页显示的学生选题
 	@Override
 	public List<bysjglxt_topic_select> getTeacherTutorStudentSelectTopicByPage(
-			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId) {
+			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId, String actor, String section) {
 		Session session = getSession();
 		List<bysjglxt_topic_select> listBysjglxtTopicSelect = new ArrayList<bysjglxt_topic_select>();
-		String hql = "from bysjglxt_topic_select where topic_select_teacher_tutor='" + teacherUserId
-				+ "' order by topic_select_gmt_create";
-		boolean flag = false;
+		String hql = "";
+		switch (actor) {
+		case "领导小组长":
+			hql = "from bysjglxt_topic_select order by topic_select_gmt_create";
+			break;
+		case "教研室主任":
+			hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id";
+			switch (section) {
+			case "软件工程教研室":
+				hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
+				break;
+			case "数媒教研室":
+				hql = hql + " and (studentBasic.student_basic_major = '数媒')";
+				break;
+			}
+			break;
+		case "指导老师":
+			hql = "from bysjglxt_topic_select where topic_select_teacher_tutor='" + teacherUserId
+					+ "' order by topic_select_gmt_create";
+			break;
+		}
 		Query query = session.createQuery(hql);
 		query.setFirstResult((teacherTutorStudentVO.getPageIndex() - 1) * teacherTutorStudentVO.getPageSize());
 		query.setMaxResults(teacherTutorStudentVO.getPageSize());
@@ -471,13 +493,92 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	// 获取总记录数
 	@Override
 	public List<bysjglxt_topic_select> getTeacherTutorStudentAllSelectTopic(TeacherTutorStudentVO teacherTutorStudentVO,
-			String teacherUserId) {
+			String teacherUserId, String actor, String section) {
 		Session session = getSession();
 		List<bysjglxt_topic_select> listBysjglxtTopicSelect = new ArrayList<bysjglxt_topic_select>();
-		String hql = "from bysjglxt_topic_select where topic_select_teacher_tutor='" + teacherUserId
-				+ "' order by topic_select_gmt_create";
+		String hql = "";
+		switch (actor) {
+		case "领导小组长":
+			hql = "from bysjglxt_topic_select order by topic_select_gmt_create";
+			break;
+		case "教研室主任":
+			hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id";
+			switch (section) {
+			case "软件工程教研室":
+				hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
+				break;
+			case "数媒教研室":
+				hql = hql + " and (studentBasic.student_basic_major = '数媒')";
+				break;
+			}
+			break;
+		case "指导老师":
+			hql = "from bysjglxt_topic_select where topic_select_teacher_tutor='" + teacherUserId
+					+ "' order by topic_select_gmt_create";
+			break;
+		}
 		Query query = session.createQuery(hql);
 		listBysjglxtTopicSelect = query.list();
 		return listBysjglxtTopicSelect;
+	}
+
+	@Override
+	public bysjglxt_leader getLeader(String teacherUserId) {
+		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
+		Session session = getSession();
+		String hql = "from bysjglxt_leader where leader_teacher_id = '" + teacherUserId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_leader = (bysjglxt_leader) query.uniqueResult();
+		return bysjglxt_leader;
+	}
+
+	@Override
+	public bysjglxt_section getSectionByUserId(String teacherUserId) {
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		Session session = getSession();
+		String hql = "from bysjglxt_section where section_leader = '" + teacherUserId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		return bysjglxt_section;
+	}
+
+	// 查找学生是否已经上传毕业论文
+	@Override
+	public bysjglxt_dissertation getThesisByStudent(String userId) {
+		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		Session session = getSession();
+		String hql = "from bysjglxt_dissertation where dissertation_student = '" + userId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_dissertation = (bysjglxt_dissertation) query.uniqueResult();
+		return bysjglxt_dissertation;
+	}
+
+	// 根据学生Id删除学生论文上传记录
+	@Override
+	public boolean deleteThesisByUserId(String userId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_dissertation where dissertation_student='" + userId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean fillEmptyThesisRecord(bysjglxt_dissertation bysjglxt_dissertation) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_dissertation);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 }

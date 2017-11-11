@@ -3,6 +3,7 @@ package com.bysjglxt.service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -10,17 +11,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
@@ -48,6 +53,56 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
 
+	// 上传毕业论文
+	@Override
+	public int uploadGraduationThesis(String userId, File file, String thesisName) throws IOException {
+		// 查找学生是否已经上传毕业论文
+		boolean flag = false;
+		String path = "F:/graduagtionThesi/";
+		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
+		if (bysjglxt_dissertation != null) {
+			// 说明学生已经进行过上传了
+			// 删除学生上传的文件
+			path = path + bysjglxt_dissertation.getDissertation_file();
+			File deleteFile = new File(path);
+			deleteFile.delete();
+			// 删除学生毕业论文记录
+			flag = graduationProjectManagementDao.deleteThesisByUserId(userId);
+			if (!flag) {
+				return -1;
+			}
+		}
+		path = path + thesisName;
+		File newFile = new File(path);
+		FileUtils.copyFile(file, newFile);
+		// 将上传的毕业论文的文件名存储到数据库中
+		bysjglxt_dissertation.setDissertation_id(TeamUtil.getStringSecond());
+		bysjglxt_dissertation.setDissertation_student(userId);
+		bysjglxt_dissertation.setDissertation_file(thesisName);
+		bysjglxt_dissertation.setDissertation_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_dissertation.setDissertation_gmt_modified(TeamUtil.getStringSecond());
+		flag = graduationProjectManagementDao.fillEmptyThesisRecord(bysjglxt_dissertation);
+		if (!flag)
+			return -2;
+		return 1;
+	}
+
+	// 下载毕业论文
+	@Override
+	public File downloadGraduationThesis(String userId) {
+		// 1.根据user Id获得学生毕业论文表中的记录
+		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		String path = "F:/graduagtionThesi/";
+		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
+		if (bysjglxt_dissertation == null) {
+			return null;
+		}
+		path = path + bysjglxt_dissertation.getDissertation_file();
+		File file = new File(path);
+		return file;
+	}
+
 	@Override
 	public TeacherTutorStudentVO teacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId) {
@@ -57,6 +112,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_task_definition taskDefinition = new bysjglxt_task_definition();
 		bysjglxt_task_instance taskInstance = new bysjglxt_task_instance();
 		bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
 		bysjglxt_student_user bysjglxtStudentUser = new bysjglxt_student_user();
 		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
 		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
@@ -65,9 +122,25 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_process_instance processInstance = new bysjglxt_process_instance();
 		List<bysjglxt_topic_select> list_bysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
 		List<bysjglxt_topic_select> list_Allbysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
+		// 判断老师的身份
+		String actor = "";
+		String section = "";
+		// 1.判断老师是不是领导小组角色
+		bysjglxt_leader = graduationProjectManagementDao.getLeader(teacherUserId);
+		if (bysjglxt_leader != null) {
+			actor = "领导小组长";
+		} else {
+			bysjglxt_section = graduationProjectManagementDao.getSectionByUserId(teacherUserId);
+			if (bysjglxt_section != null) {
+				actor = "教研室主任";
+				section = bysjglxt_section.getSection_name();
+			} else {
+				actor = "指导教师";
+			}
+		}
 		// 获得总记录数
 		list_Allbysjglxt_topic_select = graduationProjectManagementDao
-				.getTeacherTutorStudentAllSelectTopic(teacherTutorStudentVO, teacherUserId);
+				.getTeacherTutorStudentAllSelectTopic(teacherTutorStudentVO, teacherUserId, actor, section);
 		int i = list_Allbysjglxt_topic_select.size();
 		teacherTutorStudentVO.setTotalRecords(i);
 		teacherTutorStudentVO.setTotalPages(((i - 1) / teacherTutorStudentVO.getPageSize()) + 1);
@@ -83,7 +156,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		// 1.根据教师ID筛选出符合条件的最多10条选题数据
 		list_bysjglxt_topic_select = graduationProjectManagementDao
-				.getTeacherTutorStudentSelectTopicByPage(teacherTutorStudentVO, teacherUserId);
+				.getTeacherTutorStudentSelectTopicByPage(teacherTutorStudentVO, teacherUserId, actor, section);
 		System.out.println(list_bysjglxt_topic_select.size());
 		// 2.遍历选题拿到学生userId信息
 		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
@@ -2272,5 +2345,4 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return params;
 	}
-
 }
