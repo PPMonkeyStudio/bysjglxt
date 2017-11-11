@@ -75,9 +75,8 @@ public interface GraduationProjectManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_report_opening getReportOpeningUser(String userId);
 
-	
-	/***************************************导出*******************************************/
-	
+	/*************************************** 导出 *******************************************/
+
 	public com.bysjglxt.domain.DO.bysjglxt_student_user getStudentUserByUserId(String studentUserId);
 
 	public com.bysjglxt.domain.DO.bysjglxt_student_basic getStudentBasicByBasicId(String user_student_basic);
@@ -91,7 +90,7 @@ public interface GraduationProjectManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_topic getStudentTopicByTopicId(String topic_select_topic);
 
 	public List<bysjglxt_topic_select> getTeacherTutorStudentSelectTopicByPage(
-			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId);
+			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId, String actor, String section);
 
 	public List<bysjglxt_process_instance> getProcessInstanceByMan(String topic_select_student);
 
@@ -103,7 +102,10 @@ public interface GraduationProjectManagementDao {
 	public bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition);
 
 	public List<bysjglxt_topic_select> getTeacherTutorStudentAllSelectTopic(TeacherTutorStudentVO teacherTutorStudentVO,
-			String teacherUserId);
+			String teacherUserId, String actor, String section);
 
+	public com.bysjglxt.domain.DO.bysjglxt_leader getLeader(String teacherUserId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByUserId(String teacherUserId);
 
 }
