@@ -115,4 +115,6 @@ public interface GraduationProjectManagementDao {
 
 	public boolean fillEmptyThesisRecord(bysjglxt_dissertation bysjglxt_dissertation);
 
+	public List<bysjglxt_topic_select> getSelectTopicByTutorId(String teacherUserId);
+
 }

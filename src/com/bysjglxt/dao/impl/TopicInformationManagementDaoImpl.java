@@ -138,7 +138,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic_teacher = '" + topicManagementVO.getTeacher() + "'";
 		}
-		hql = hql + " order by topic_gmt_create desc";
+		hql = hql + " order by topic_examine_state desc,topic_gmt_create desc";
 		Query query = session.createQuery(hql);
 		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
 		query.setMaxResults(topicManagementVO.getPageSize());
@@ -452,12 +452,11 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			String search = "%" + topicManagementVO.getSearch().trim() + "%";
 			hql = hql + " and topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "' ";
 		}
-
 		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
 			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
 		}
 		hql = hql + " and topic_teacher = '" + teacherUserId + "'";
-		hql = hql + " order by topic_gmt_create desc";
+		hql = hql + " order by topic_examine_state desc,topic_gmt_create desc";
 		Query query = session.createQuery(hql);
 		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
 		query.setMaxResults(topicManagementVO.getPageSize());
