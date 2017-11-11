@@ -365,7 +365,9 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	}
 
 	/**
-	 * 获得正在进行的任务实例
+	 * 
+	 * 获得正在进行的流程
+	 *
 	 */
 	@Override
 	public ProcessDTO getCurrentTaskDTO(String userId) {
@@ -386,7 +388,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			list_bysjglxt_task_instance = processManagementDao
 					.getListTaskInstanceByProcessInstanceId(bysjglxt_process_instance.getProcess_instance_id());
 			// 4.根据任务实例获得任务定义
-
 			for (bysjglxt_task_instance task_instance : list_bysjglxt_task_instance) {
 				bysjglxt_task_definition = new bysjglxt_task_definition();
 				taskDTO = new TaskDTO();
@@ -415,6 +416,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		boolean flag = true;
 		bysjglxt_task_instance currentTaskInstance = new bysjglxt_task_instance();
 		bysjglxt_task_instance nextTaskInstance = new bysjglxt_task_instance();
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		currentTaskInstance = processManagementDao.getTaskInstanceingById(taskInstanceId);
 		if (currentTaskInstance == null) {
 			return -3;
@@ -430,13 +432,23 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		currentTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
 		// 存储任务实例
 		flag = processManagementDao.instanceTask(currentTaskInstance);
+		bysjglxt_process_instance = processManagementDao
+				.getProcessInstanceById(currentTaskInstance.getTask_instance_process_instance());
 		if (!flag)
 			return -1;// 更改任务实例失败
 		// 将当前任务ID作为父任务实例ID可以获得下一个任务实例
 		nextTaskInstance = processManagementDao
 				.getTaskInstanceByFatherTaskId(currentTaskInstance.getTask_instance_id());
 		if (nextTaskInstance == null) {
-			return -3;// 无该任务实例
+			// 这里是以当前任务实例ID作为下一个任务实例ID查找后没有找到
+			// 也就是说这个任务实例已经是最后一个实例了
+			// 将该任务所属流程实例状态更改为结束
+			bysjglxt_process_instance.setProcess_instance_state("结束");
+			bysjglxt_process_instance.setProcess_instance_gmt_modified(TeamUtil.getStringSecond());
+			flag = processManagementDao.instanceProcess(bysjglxt_process_instance);
+			if (!flag)
+				return -1;
+			return 1;
 		}
 		// 更改任务实例状态,将之改为已结束
 		nextTaskInstance.setTask_instance_state(1);
@@ -499,4 +511,30 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		return 1;
 	}
 
+	// 获取某个流程正在进行的任务实例
+	//
+	@Override
+	public ProcessDetailDTO getTasking(String userId) {
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		bysjglxt_task_instance taskInstanceing = new bysjglxt_task_instance();
+		ProcessDetailDTO processDetailDTO = new ProcessDetailDTO();
+		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
+		// 根据1.在一个操作者中只有一个流程实例处于正在活动的状态获取流程实例
+		bysjglxt_process_instance = processManagementDao.getProcessInstanceByUserAndState(userId);
+		if (bysjglxt_process_instance == null)
+			return null;
+		// 根据流程实例获取所有属于改流程的任务实例
+		listTaskInstance = processManagementDao
+				.getListTaskInstanceByProcessInstanceId(bysjglxt_process_instance.getProcess_instance_id());
+		for (bysjglxt_task_instance bysjglxt_task_instance : listTaskInstance) {
+			// 根据任务实例也只会有一个处于正在进行的状态遍历属于该流程实例的任务实例
+			if (bysjglxt_task_instance.getTask_instance_state() == 1) {
+				taskInstanceing = bysjglxt_task_instance;
+				break;
+			}
+		}
+		processDetailDTO.setBysjglxtTaskInstance(taskInstanceing);
+		processDetailDTO.setBysjglxtProcessInstance(bysjglxt_process_instance);
+		return processDetailDTO;
+	}
 }

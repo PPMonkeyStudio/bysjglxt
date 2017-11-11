@@ -6,6 +6,7 @@ import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DTO.ProcessDTO;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
+import com.bysjglxt.domain.DTO.ProcessDetailDTO;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
 
 public interface ProcessManagementService {
@@ -70,7 +71,7 @@ public interface ProcessManagementService {
 	public ProcessManagementVO getMyTaskByPage(ProcessManagementVO processManagementVo, String userID);
 
 	/**
-	 * 获得正在进行的任务实例
+	 * 获得正在进行的流程
 	 */
 	public ProcessDTO getCurrentTaskDTO(String userId);
 
@@ -87,5 +88,14 @@ public interface ProcessManagementService {
 
 	// 2.打回
 	public int repulse(String taskInstanceId);
+
+	/**
+	 * 获得属于某个人正在进行的任务实例以及以及所属流程实例定义
+	 * 
+	 * @param userId
+	 * @return 没有处于活动状态的流程实例 null
+	 * @return 
+	 */
+	public ProcessDetailDTO getTasking(String userId);
 
 }
