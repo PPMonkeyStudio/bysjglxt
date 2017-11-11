@@ -11,6 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
+import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_record_progress;
+import com.bysjglxt.domain.DO.bysjglxt_report_opening;
+import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
@@ -43,6 +49,15 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * 更新
 	 */
 	private bysjglxt_taskbook updateTaskbook;
+	private bysjglxt_report_opening updateReportOpening;
+	private bysjglxt_record_progress updateRecordProgressEarlystage;
+	private bysjglxt_record_progress updateRecordProgressMetaphase;
+	private bysjglxt_record_progress updateRecordProgressLaterstage;
+	private bysjglxt_record_progress updateRecordProgressPerfect;
+	private bysjglxt_summary updateSummary;
+	private bysjglxt_examination_formal updateExaminationFormal;
+	private bysjglxt_evaluate_tutor updateEvaluateTutor;
+	private bysjglxt_evaluate_review updateEvaluateReview;
 
 	/*
 	 * 
@@ -94,17 +109,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 									.getBysjglxtStudentUser().getUser_student_id())));
 		}
-
-	}
-
-	public void updateTeacherTaskbook() throws IOException {
-		http_response.setContentType("text/html;charset=utf-8");
-		if (graduationProjectManagementService.updateTeacherTaskbook(updateTaskbook) == 1) {
-			http_response.getWriter().write("保存成功");
-		} else {
-			http_response.getWriter().write("系统繁忙");
-		}
-
 	}
 
 	public void get_ReportOpening() throws IOException {
@@ -271,7 +275,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 		File exportFile = graduationProjectManagementService
 				.exportAll(((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 						.getBysjglxtStudentUser().getUser_student_id());
-
 		fileName = new String(
 				(((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 						.getBysjglxtStudentBasic().getStudent_basic_name() + "的毕业设计.docx").getBytes("GBK"),
@@ -279,6 +282,175 @@ public class GraduationProjectManagementAction extends ActionSupport
 		inputStream = new FileInputStream(exportFile);
 		exportFile.delete();
 		return "exportAll";
+	}
+
+	/**
+	 * 保存老师完成的任务书
+	 * 
+	 * @throws IOException
+	 */
+	public void updateTeacherTaskbook() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateTeacherTaskbook(updateTaskbook) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	/**
+	 * 教研室主任填写任务审核意见
+	 * 
+	 * @throws IOException
+	 */
+	public void updateSectionTaskbook() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateSectionTaskbook(updateTaskbook) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateReportOpening() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateReportOpening(updateReportOpening) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateStudentRecordProgressEarlystage() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService
+				.updateStudentRecordProgressEarlystage(updateRecordProgressEarlystage) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateTeacherRecordProcessEarlystage() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService
+				.updateTeacherRecordProcessEarlystage(updateRecordProgressEarlystage) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateStudentRecordProgressMetaphase() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService
+				.updateStudentRecordProgressMetaphase(updateRecordProgressMetaphase) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateTeacherRecordProgressMetaphase() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService
+				.updateTeacherRecordProgressMetaphase(updateRecordProgressMetaphase) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateStudentRecordProgressLaterstage() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService
+				.updateStudentRecordProgressLaterstage(updateRecordProgressLaterstage) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateTeacherRecordProgressLaterstage() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService
+				.updateTeacherRecordProgressLaterstage(updateRecordProgressLaterstage) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateStudentRecordProgressPerfect() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateStudentRecordProgressPerfect(updateRecordProgressPerfect) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateTeacherRecordProgressPerfect() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateTeacherRecordProgressPerfect(updateRecordProgressPerfect) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateStudentSummary() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateStudentSummary(updateSummary) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateTeacherSummary() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateTeacherSummary(updateSummary) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateTeacherExaminationFormal() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateTeacherExaminationFormal(updateExaminationFormal) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateLeaderExaminationFormal() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateLeaderExaminationFormal(updateExaminationFormal) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateEvaluateTutor() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateEvaluateTutor(updateEvaluateTutor) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateEvaluateReview() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateEvaluateReview(updateEvaluateReview) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
 	}
 
 	/*
@@ -365,5 +537,77 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setUpdateTaskbook(bysjglxt_taskbook updateTaskbook) {
 		this.updateTaskbook = updateTaskbook;
+	}
+
+	public bysjglxt_report_opening getUpdateReportOpening() {
+		return updateReportOpening;
+	}
+
+	public void setUpdateReportOpening(bysjglxt_report_opening updateReportOpening) {
+		this.updateReportOpening = updateReportOpening;
+	}
+
+	public bysjglxt_summary getUpdateSummary() {
+		return updateSummary;
+	}
+
+	public void setUpdateSummary(bysjglxt_summary updateSummary) {
+		this.updateSummary = updateSummary;
+	}
+
+	public bysjglxt_examination_formal getUpdateExaminationFormal() {
+		return updateExaminationFormal;
+	}
+
+	public void setUpdateExaminationFormal(bysjglxt_examination_formal updateExaminationFormal) {
+		this.updateExaminationFormal = updateExaminationFormal;
+	}
+
+	public bysjglxt_evaluate_tutor getUpdateEvaluateTutor() {
+		return updateEvaluateTutor;
+	}
+
+	public void setUpdateEvaluateTutor(bysjglxt_evaluate_tutor updateEvaluateTutor) {
+		this.updateEvaluateTutor = updateEvaluateTutor;
+	}
+
+	public bysjglxt_evaluate_review getUpdateEvaluateReview() {
+		return updateEvaluateReview;
+	}
+
+	public void setUpdateEvaluateReview(bysjglxt_evaluate_review updateEvaluateReview) {
+		this.updateEvaluateReview = updateEvaluateReview;
+	}
+
+	public bysjglxt_record_progress getUpdateRecordProgressEarlystage() {
+		return updateRecordProgressEarlystage;
+	}
+
+	public void setUpdateRecordProgressEarlystage(bysjglxt_record_progress updateRecordProgressEarlystage) {
+		this.updateRecordProgressEarlystage = updateRecordProgressEarlystage;
+	}
+
+	public bysjglxt_record_progress getUpdateRecordProgressMetaphase() {
+		return updateRecordProgressMetaphase;
+	}
+
+	public void setUpdateRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgressMetaphase) {
+		this.updateRecordProgressMetaphase = updateRecordProgressMetaphase;
+	}
+
+	public bysjglxt_record_progress getUpdateRecordProgressLaterstage() {
+		return updateRecordProgressLaterstage;
+	}
+
+	public void setUpdateRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgressLaterstage) {
+		this.updateRecordProgressLaterstage = updateRecordProgressLaterstage;
+	}
+
+	public bysjglxt_record_progress getUpdateRecordProgressPerfect() {
+		return updateRecordProgressPerfect;
+	}
+
+	public void setUpdateRecordProgressPerfect(bysjglxt_record_progress updateRecordProgressPerfect) {
+		this.updateRecordProgressPerfect = updateRecordProgressPerfect;
 	}
 }

@@ -643,7 +643,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	}
 
 	@Override
-	public int bysjglxt_evaluate_review(bysjglxt_evaluate_review updateEvaluateReview) {
+	public int updateEvaluateReview(bysjglxt_evaluate_review updateEvaluateReview) {
 		int flag = 2;
 		bysjglxt_evaluate_review bysjglxt_evaluate_review = new bysjglxt_evaluate_review();
 		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
@@ -711,7 +711,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	}
 
 	@Override
-	public int bysjglxt_defence(bysjglxt_defence updateDefence) {
+	public int updateDefence(bysjglxt_defence updateDefence) {
 		int flag = 2;
 		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
 		bysjglxt_defence = graduationProjectManagementDao.findDefenceById(updateDefence.getDefence_id());

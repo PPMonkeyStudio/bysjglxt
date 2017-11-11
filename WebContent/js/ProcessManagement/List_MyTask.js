@@ -57,20 +57,21 @@ function List_MyTask(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 1) {
 						if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskDefinition.task_definition_type == 1) {
-							new_td.innerHTML = '<i class="fa fa-legal" style="cursor: pointer;" id="'
+							new_td.innerHTML = '<button  id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-									+ '" onclick="passTask(this)" >通过</i>';
+									+ '" onclick="passTask(this)" class="btn btn-default"><i class="fa fa-legal"></i> 通过</button>';
 						} else {
-							new_td.innerHTML = '<i class="fa fa-legal" style="cursor: pointer;" id="'
+							new_td.innerHTML = '<button  id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-									+ '" class="btn btn-default" onclick="passTask(this)">通过</i>'
-									+ '<i class="fa fa-recycle" style="cursor: pointer;margin:0 0 0 10px;" id="'
+									+ '" class="btn btn-default" onclick="passTask(this)"><i class="fa fa-legal"></i> 通过</button>'
+									+ '<button style="margin:0 0 0 10px;" id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-									+ '"  onclick="repulseTask(this)" >驳回</i>';
+									+ '" class="btn btn-default" onclick="repulseTask(this)" ><i class="fa fa-recycle"></i> 驳回</button>';
 						}
 					} else {
 						new_td.innerHTML = '';
 					}
+
 				}
 				/*
 				 * 设置页数

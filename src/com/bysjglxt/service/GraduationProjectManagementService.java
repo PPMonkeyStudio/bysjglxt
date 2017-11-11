@@ -148,14 +148,14 @@ public interface GraduationProjectManagementService {
 	 * @param updateEvaluateReview
 	 * @return
 	 */
-	public int bysjglxt_evaluate_review(bysjglxt_evaluate_review updateEvaluateReview);
+	public int updateEvaluateReview(bysjglxt_evaluate_review updateEvaluateReview);
 
 	/**
 	 * @说明 更改答辩评分以及成绩评定表
 	 * @param updateDefence
 	 * @return
 	 */
-	public int bysjglxt_defence(bysjglxt_defence updateDefence);
+	public int updateDefence(bysjglxt_defence updateDefence);
 
 	/**
 	 * 教师点击指导的毕业设计列表
