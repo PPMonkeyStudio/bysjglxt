@@ -3,6 +3,7 @@ package com.bysjglxt.dao;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
@@ -107,5 +108,11 @@ public interface GraduationProjectManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_leader getLeader(String teacherUserId);
 
 	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByUserId(String teacherUserId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_dissertation getThesisByStudent(String userId);
+
+	public boolean deleteThesisByUserId(String userId);
+
+	public boolean fillEmptyThesisRecord(bysjglxt_dissertation bysjglxt_dissertation);
 
 }

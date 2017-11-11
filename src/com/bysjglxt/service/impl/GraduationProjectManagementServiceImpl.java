@@ -3,6 +3,7 @@ package com.bysjglxt.service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -10,10 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
@@ -48,6 +51,56 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
+	}
+
+	// 上传毕业论文
+	@Override
+	public int uploadGraduationThesis(String userId, File file, String thesisName) throws IOException {
+		// 查找学生是否已经上传毕业论文
+		boolean flag = false;
+		String path = "F:/graduagtionThesi/";
+		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
+		if (bysjglxt_dissertation != null) {
+			// 说明学生已经进行过上传了
+			// 删除学生上传的文件
+			path = path + bysjglxt_dissertation.getDissertation_file();
+			File deleteFile = new File(path);
+			deleteFile.delete();
+			// 删除学生毕业论文记录
+			flag = graduationProjectManagementDao.deleteThesisByUserId(userId);
+			if (!flag) {
+				return -1;
+			}
+		}
+		path = path + thesisName;
+		File newFile = new File(path);
+		FileUtils.copyFile(file, newFile);
+		// 将上传的毕业论文的文件名存储到数据库中
+		bysjglxt_dissertation.setDissertation_id(TeamUtil.getStringSecond());
+		bysjglxt_dissertation.setDissertation_student(userId);
+		bysjglxt_dissertation.setDissertation_file(thesisName);
+		bysjglxt_dissertation.setDissertation_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_dissertation.setDissertation_gmt_modified(TeamUtil.getStringSecond());
+		flag = graduationProjectManagementDao.fillEmptyThesisRecord(bysjglxt_dissertation);
+		if (!flag)
+			return -2;
+		return 1;
+	}
+
+	// 下载毕业论文
+	@Override
+	public File downloadGraduationThesis(String userId) {
+		// 1.根据user Id获得学生毕业论文表中的记录
+		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		String path = "F:/graduagtionThesi/";
+		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
+		if (bysjglxt_dissertation == null) {
+			return null;
+		}
+		path = path + bysjglxt_dissertation.getDissertation_file();
+		File file = new File(path);
+		return file;
 	}
 
 	@Override
@@ -2291,5 +2344,4 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return params;
 	}
-
 }

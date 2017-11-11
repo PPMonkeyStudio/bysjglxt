@@ -3,12 +3,14 @@ package com.bysjglxt.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
@@ -538,5 +540,45 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Query query = session.createQuery(hql);
 		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
 		return bysjglxt_section;
+	}
+
+	// 查找学生是否已经上传毕业论文
+	@Override
+	public bysjglxt_dissertation getThesisByStudent(String userId) {
+		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		Session session = getSession();
+		String hql = "from bysjglxt_dissertation where dissertation_student = '" + userId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_dissertation = (bysjglxt_dissertation) query.uniqueResult();
+		return bysjglxt_dissertation;
+	}
+
+	// 根据学生Id删除学生论文上传记录
+	@Override
+	public boolean deleteThesisByUserId(String userId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_dissertation where dissertation_student='" + userId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean fillEmptyThesisRecord(bysjglxt_dissertation bysjglxt_dissertation) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_dissertation);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 }
