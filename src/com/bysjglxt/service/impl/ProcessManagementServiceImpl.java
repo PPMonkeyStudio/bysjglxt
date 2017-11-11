@@ -7,6 +7,7 @@ import com.bysjglxt.dao.ProcessManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
@@ -104,6 +105,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		bysjglxt_task_instance bysjglxt_task_instance = null;
 		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
+		bysjglxt_section bysjglxt_section = null;
 		bysjglxt_leader bysjglxt_leader = null;
 		bysjglxt_student_basic bysjglxt_student_basic = null;
 		bysjglxt_topic_select bysjglxt_topic_select = null;
@@ -126,9 +128,12 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
 		// 判断第一个任务实例为正在进行
 		int x = 0;
+		String section = null;
 		System.out.println(list_bysjglxt_task_definition.size());
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
 			x++;
+			section = null;
+			bysjglxt_section = new bysjglxt_section();
 			bysjglxt_student_user = new bysjglxt_student_user();
 			bysjglxt_student_basic = new bysjglxt_student_basic();
 			bysjglxt_leader = new bysjglxt_leader();
@@ -181,11 +186,16 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				}
 				switch (bysjglxt_student_basic.getStudent_basic_major()) {
 				// 这里对教研室的扩展性极差
-				
-				
-				
+				case "软件工程":
+					section = "软件工程教研室";
+					break;
+				case "数媒":
+					section = "数媒教研室";
+					break;
 				}
-
+				// 根据教研室的名字去获得教研室表记录
+				bysjglxt_section = processManagementDao.getSectionByName(section);
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_section.getSection_leader());
 				break;
 			case 5:
 				// 判断学生账号是否错误

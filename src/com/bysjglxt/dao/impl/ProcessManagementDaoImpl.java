@@ -474,4 +474,14 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		return bysjglxt_student_basic;
 	}
 
+	@Override
+	public bysjglxt_section getSectionByName(String section) {
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		Session session = getSession();
+		String hql = "from bysjglxt_section where section_name='" + section + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		return bysjglxt_section;
+	}
+
 }

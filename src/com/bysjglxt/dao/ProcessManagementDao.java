@@ -82,6 +82,8 @@ public interface ProcessManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_student_basic getStudentBasicById(String user_student_basic);
 
+	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByName(String section);
+
 	/****/
 	
 	
