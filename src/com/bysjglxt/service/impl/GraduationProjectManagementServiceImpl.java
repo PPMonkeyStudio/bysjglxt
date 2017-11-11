@@ -106,6 +106,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	@Override
 	public TeacherTutorStudentVO teacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId) {
+		System.out.println("ggg");
 		List<TeacherTutorStudentDTO> list_TeacherTutorStudentDTO = new ArrayList<TeacherTutorStudentDTO>();
 		TeacherTutorStudentDTO teacherTutorStudentDTO = new TeacherTutorStudentDTO();
 		TaskDTO taskDTO = new TaskDTO();
@@ -116,6 +117,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
 		bysjglxt_student_user bysjglxtStudentUser = new bysjglxt_student_user();
 		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
+		List<bysjglxt_topic_select> listTopicSelect = new ArrayList<bysjglxt_topic_select>();
 		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
 		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
 		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
@@ -135,7 +137,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				actor = "教研室主任";
 				section = bysjglxt_section.getSection_name();
 			} else {
-				actor = "指导教师";
+				// 判断user Id是否是指导老师
+				listTopicSelect = graduationProjectManagementDao.getSelectTopicByTutorId(teacherUserId);
+				if (listTopicSelect.size() > 0) {
+					actor = "指导教师";
+				} else {
+					actor = "无";
+				}
 			}
 		}
 		// 获得总记录数

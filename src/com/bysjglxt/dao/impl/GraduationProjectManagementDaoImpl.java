@@ -418,6 +418,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		List<bysjglxt_topic_select> listBysjglxtTopicSelect = new ArrayList<bysjglxt_topic_select>();
 		String hql = "";
 		switch (actor) {
+		case "无":
+			return listBysjglxtTopicSelect;
 		case "领导小组长":
 			hql = "from bysjglxt_topic_select order by topic_select_gmt_create";
 			break;
@@ -498,6 +500,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		List<bysjglxt_topic_select> listBysjglxtTopicSelect = new ArrayList<bysjglxt_topic_select>();
 		String hql = "";
 		switch (actor) {
+		case "无":
+			return listBysjglxtTopicSelect;
 		case "领导小组长":
 			hql = "from bysjglxt_topic_select order by topic_select_gmt_create";
 			break;
@@ -580,5 +584,15 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	@Override
+	public List<bysjglxt_topic_select> getSelectTopicByTutorId(String teacherUserId) {
+		List<bysjglxt_topic_select> list_bysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_teacher_tutor = '" + teacherUserId + "'";
+		Query query = session.createQuery(hql);
+		list_bysjglxt_topic_select = query.list();
+		return list_bysjglxt_topic_select;
 	}
 }
