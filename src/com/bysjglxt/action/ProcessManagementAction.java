@@ -199,16 +199,21 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		}
 	}
 
+	/**
+	 * 毕业设计管理中，获得当前的任务实例 若是教师，则获得session存储的学生ID，然后去查询任务实例
+	 * 
+	 * @throws IOException
+	 */
 	public void getCurrentProcess() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(processManagementService.getCurrentTaskDTO(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(processManagementService.getCurrentTaskDTO(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
+			System.out.println("老师查看的学生的ID："
+					+ (String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(processManagementService.getCurrentTaskDTO(

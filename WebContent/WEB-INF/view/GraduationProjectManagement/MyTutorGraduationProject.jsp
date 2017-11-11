@@ -65,27 +65,13 @@
 									<option value="3">已结束</option>
 								</select>
 							</th>
+							<th>进程</th>
 							<th>操作</th>
-							<th>
-								<label class="fancy-checkbox">
-									<input id="checkbox_all_select" type="checkbox"
-										onclick="all_select()">
-									<span>全选</span>
-								</label>
-							</th>
 						</tr>
 					</tbody>
 				</table>
 				<div id="i_pulse" style="text-align: center;">
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
-				</div>
-				<div style="height: 34px; margin: 0 0 20px 0;">
-					<button class="leader_control btn btn-danger"
-						onclick="deleteTopicList()"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-trash-o"></i>
-						删除所选
-					</button>
 				</div>
 				<div
 					style="margin: 0 auto; width: 400px; text-align: center;">

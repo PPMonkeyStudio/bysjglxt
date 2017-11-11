@@ -16,7 +16,7 @@
 					+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
 					+ '"></input>';
 
-			if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state == "未审核") {
+			if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_examine_state == "审核未通过") {
 
 				/*
 				 * 可修改
