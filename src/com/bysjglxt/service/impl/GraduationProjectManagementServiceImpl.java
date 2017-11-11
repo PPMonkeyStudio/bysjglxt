@@ -350,10 +350,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 * 学生更改任务书
 	 */
 	@Override
-	public int updateStudentTaskbook(bysjglxt_taskbook updateTaskbook) {
+	public int updateTeacherTaskbook(bysjglxt_taskbook updateTaskbook) {
 		int flag = 2;
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
+		System.out.println(bysjglxt_taskbook);
 		if (bysjglxt_taskbook != null) {
 			bysjglxt_taskbook.setTaskbook_acontent_required(updateTaskbook.getTaskbook_acontent_required());
 			bysjglxt_taskbook.setTaskbook_reference(updateTaskbook.getTaskbook_reference());
@@ -368,7 +369,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 * 教研室主任更改任务书
 	 */
 	@Override
-	public int updateTeacherTaskbook(bysjglxt_taskbook updateTaskbook) {
+	public int updateSectionTaskbook(bysjglxt_taskbook updateTaskbook) {
 		int flag = 2;
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
@@ -715,7 +716,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	}
 
 	@Override
-	public int bysjglxt_evaluate_review(bysjglxt_evaluate_review updateEvaluateReview) {
+	public int updateEvaluateReview(bysjglxt_evaluate_review updateEvaluateReview) {
 		int flag = 2;
 		bysjglxt_evaluate_review bysjglxt_evaluate_review = new bysjglxt_evaluate_review();
 		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
@@ -783,7 +784,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	}
 
 	@Override
-	public int bysjglxt_defence(bysjglxt_defence updateDefence) {
+	public int updateDefence(bysjglxt_defence updateDefence) {
 		int flag = 2;
 		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
 		bysjglxt_defence = graduationProjectManagementDao.findDefenceById(updateDefence.getDefence_id());
