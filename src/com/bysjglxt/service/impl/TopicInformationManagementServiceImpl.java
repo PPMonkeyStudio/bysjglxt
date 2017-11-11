@@ -44,7 +44,13 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		if (!flag) {
 			return flag;
 		}
+		/**
+		 * 
+		 * 这里的判断是否有存在的必要
+		 * 
+		 */
 		bysjglxt_topic newTopic = new bysjglxt_topic();
+		// 这里的创建课题是BUG 这里应该修改为与修改可以通用的方法
 		newTopic = topicInformationDTO.getBysjglxtTopic();
 		if (newTopic != null) {
 			newTopic.setTopic_id(TeamUtil.getUuid());
@@ -75,8 +81,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			if (bysjglxt_topic != null) {
 				// 删除选题的话需要将学生选题表里面的关于该课题记录删除
 				// 1.先获得学生选题表关于该选题集合
-				listTopicSelect = topicInformationManagementDao.getTopicSelectList(topicId);
-				if (listTopicSelect != null) {
+				listTopicSelect = topicInformationManagementDao.getTopicSelectList(bysjglxt_topic.getTopic_id());
+				if (listTopicSelect.size() > 0) {
 					for (bysjglxt_topic_select bysjglxt_topic_select : listTopicSelect) {
 						// 根据选题表中学生字段将学生登录表中的选题字段变化
 						flag = topicInformationManagementDao
@@ -90,8 +96,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 							break;
 					}
 				}
-				if (!flag)
-					break;
 				flag = topicInformationManagementDao.DeleteTopic(topicId);
 			}
 		}
@@ -121,7 +125,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	public boolean closeTopic(List<String> topicID) {
 		boolean flag = false;
 		for (String string : topicID) {
-
 			flag = topicInformationManagementDao.closeTopic(string, TeamUtil.getStringSecond());
 		}
 		return flag;
@@ -197,7 +200,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		} else {
 			topicManagementVO.setHaveNextPage(true);
 		}
-		System.out.println(topicManagementVO);
 		return topicManagementVO;
 	}
 

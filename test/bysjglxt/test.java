@@ -35,7 +35,7 @@ public class test {
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
 		TeacherInformationDTO teacherInformationDTO = new TeacherInformationDTO();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
-		bysjglxt_teacher_user.setUser_teacher_id("4b41aea1-87c9-4a9c-9f1f-c0b92be463e5");
+		bysjglxt_teacher_user.setUser_teacher_id("ee5ee741-7677-4541-8a85-dc2f670f6316");
 		teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
 		topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
 		topicInformationDTO.setBysjglxtTopic(bysjglxt_topic);
@@ -47,7 +47,7 @@ public class test {
 	@Test
 	public void testt() {
 		List<String> topic_id = new ArrayList<String>();
-		topic_id.add("1a107c81-da1c-4a0f-b15c-7ccdbdd2c208");
+		topic_id.add("ffcc3ffb-9578-4ee0-bd5f-30ac73c224f3");
 		boolean flag = topicManagementService.DeleteTopic(topic_id);
 		System.out.println(flag);
 	}
@@ -56,7 +56,7 @@ public class test {
 	@Test
 	public void testtt() {
 		List<String> topic_id = new ArrayList<String>();
-		topic_id.add("700f37d6-7b90-4b6a-a4c9-d2d7d6c5f7da");
+		topic_id.add("ffcc3ffb-9578-4ee0-bd5f-30ac73c224f3");
 		boolean flag = topicManagementService.adoptTopic(topic_id);
 		System.out.println(flag);
 	}
@@ -65,7 +65,7 @@ public class test {
 	@Test
 	public void testttt() {
 		List<String> topic_id = new ArrayList<String>();
-		topic_id.add("700f37d6-7b90-4b6a-a4c9-d2d7d6c5f7da");
+		topic_id.add("ffcc3ffb-9578-4ee0-bd5f-30ac73c224f3");
 		boolean flag = topicManagementService.closeTopic(topic_id);
 		System.out.println(flag);
 	}
@@ -74,7 +74,7 @@ public class test {
 	@Test
 	public void testtttt() {
 		List<String> topic_id = new ArrayList<String>();
-		topic_id.add("700f37d6-7b90-4b6a-a4c9-d2d7d6c5f7da");
+		topic_id.add("ffcc3ffb-9578-4ee0-bd5f-30ac73c224f3");
 		boolean flag = topicManagementService.notAdoptTopic(topic_id);
 		System.out.println(flag);
 	}
@@ -91,8 +91,8 @@ public class test {
 	@Test
 	public void testSelectTopic() {
 		int i = 0;
-		i = topicManagementService.selectTopic("00171b55-b96b-4f2b-97f0-58f11a22ae74",
-				"bdd6f2e9-b9e8-405e-a9e9-032b5fe9c4b3");
+		i = topicManagementService.selectTopic("0e81a1be-a41e-44c0-9781-a60b87bb2e89",
+				"ffcc3ffb-9578-4ee0-bd5f-30ac73c224f3");
 		System.out.println(i);
 	}
 
