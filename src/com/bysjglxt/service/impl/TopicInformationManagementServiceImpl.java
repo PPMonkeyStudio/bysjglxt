@@ -62,6 +62,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			newTopic.setTopic_student_num(0);
 			newTopic.setTopic_student_max(-1);
 			flag = topicInformationManagementDao.CreateTopic(newTopic);
+		} else {
+			return false;
 		}
 		return flag;
 	}
@@ -596,9 +598,9 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		topic.setTopic_requirement(topicBy.getTopic_requirement());
 		topic.setTopic_source(topicBy.getTopic_source());
 		topic.setTopic_type(topicBy.getTopic_type());
+		topic.setTopic_examine_state("未审核");
 		topic.setTopic_student_max(topicBy.getTopic_student_max());
 		topic.setTopic_remark(topicBy.getTopic_remark());
-
 		return 1;
 	}
 
