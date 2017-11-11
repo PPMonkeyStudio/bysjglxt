@@ -8,10 +8,10 @@ import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
-import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ProcessDTO;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
@@ -94,6 +94,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -3;
 		}
 		if ("毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
+			// 创建毕业设计流程内容
 			int i = graduationProjectManagementService.startGraduationProjectProcess(operation);
 			if (i != 1) {
 				return -3;
@@ -104,10 +105,10 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		bysjglxt_task_instance bysjglxt_task_instance = null;
 		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
-		bysjglxt_leader bysjglxt_leader = null;
-		bysjglxt_topic_select bysjglxt_topic_select = null;
-		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		bysjglxt_section bysjglxt_section = null;
+		bysjglxt_leader bysjglxt_leader = null;
+		bysjglxt_student_basic bysjglxt_student_basic = null;
+		bysjglxt_topic_select bysjglxt_topic_select = null;
 		bysjglxt_task_instance bysjglxt_task_instanceFather = null;
 		bysjglxt_task_instance bysjglxt_task_instanceReturn = null;
 		List<bysjglxt_task_definition> list_bysjglxt_task_definition = new ArrayList<bysjglxt_task_definition>();
@@ -127,15 +128,18 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
 		// 判断第一个任务实例为正在进行
 		int x = 0;
+		String section = null;
 		System.out.println(list_bysjglxt_task_definition.size());
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
 			x++;
+			section = null;
+			bysjglxt_section = new bysjglxt_section();
 			bysjglxt_student_user = new bysjglxt_student_user();
+			bysjglxt_student_basic = new bysjglxt_student_basic();
 			bysjglxt_leader = new bysjglxt_leader();
 			bysjglxt_task_instance = new bysjglxt_task_instance();
 			bysjglxt_topic_select = new bysjglxt_topic_select();
 			bysjglxt_task_instanceFather = new bysjglxt_task_instance();
-			bysjglxt_section = new bysjglxt_section();
 			bysjglxt_task_instanceReturn = new bysjglxt_task_instance();
 			bysjglxt_task_instance.setTask_instance_id(TeamUtil.getUuid());
 			bysjglxt_task_instance
@@ -167,29 +171,30 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				bysjglxt_task_instance.setTask_instance_role(bysjglxt_leader.getLeader_teacher_id());
 				break;
 			case 4:
+				// 教研室主任
 				// 判断学生账号是否错误
 				// 判断那是否是学生点击开启流程
 				bysjglxt_student_user = processManagementDao.getStudentUser(operation);
 				if (bysjglxt_student_user == null) {
 					return -1;
 				}
-				// 根据学生user ID获取学生选题表信息
-				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
-				// 根据指导老师ID获得教师所属教研室
-				if (bysjglxt_topic_select == null) {
-					return -3;
+				// 根据学生userid获得basic表信息
+				bysjglxt_student_basic = processManagementDao
+						.getStudentBasicById(bysjglxt_student_user.getUser_student_basic());
+				if (bysjglxt_student_basic == null) {
+					return -1;
 				}
-				// 根据教师UserID获得教师信息user对象
-				bysjglxt_teacher_user = processManagementDao
-						.getTeacherUserByNum(bysjglxt_topic_select.getTopic_select_teacher_tutor());
-				if (bysjglxt_teacher_user == null) {
-					return -3;
+				switch (bysjglxt_student_basic.getStudent_basic_major()) {
+				// 这里对教研室的扩展性极差
+				case "软件工程":
+					section = "软件工程教研室";
+					break;
+				case "数媒":
+					section = "数媒教研室";
+					break;
 				}
-				// 根据老师所属教研室获得教研室主任
-				bysjglxt_section = processManagementDao.getSectionById(bysjglxt_teacher_user.getUser_teacher_section());
-				if (bysjglxt_section == null) {
-					return -3;
-				}
+				// 根据教研室的名字去获得教研室表记录
+				bysjglxt_section = processManagementDao.getSectionByName(section);
 				bysjglxt_task_instance.setTask_instance_role(bysjglxt_section.getSection_leader());
 				break;
 			case 5:

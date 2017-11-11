@@ -80,6 +80,10 @@ public interface ProcessManagementDao {
 	public List<bysjglxt_task_definition> getTaskDefinitionByProcessDefinitionId(
 			String task_definition_process_definition);
 
+	public com.bysjglxt.domain.DO.bysjglxt_student_basic getStudentBasicById(String user_student_basic);
+
+	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByName(String section);
+
 	/****/
 	
 	
