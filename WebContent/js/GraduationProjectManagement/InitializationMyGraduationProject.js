@@ -34,6 +34,13 @@ function InitializationMyGraduationProject() {
 					banner_Taskbook_Teacher.style.color = 'white';
 					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
 					Taskbook_Teacher();
+					/*
+					 * 
+					 */
+					var $current = 0;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "教研室主任填写任务书审核意见": {
@@ -42,6 +49,13 @@ function InitializationMyGraduationProject() {
 					banner_Taskbook_Section.style.color = 'white';
 					banner_Taskbook_Section.parentNode.style.backgroundColor = '#428bca';
 					Taskbook_Section();
+					/*
+					 * 
+					 */
+					var $current = 1;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "学生完成开题报告": {
@@ -50,6 +64,13 @@ function InitializationMyGraduationProject() {
 					banner_report_opening.style.color = 'white';
 					banner_report_opening.parentNode.style.backgroundColor = '#428bca';
 					report_opening();
+					/*
+					 * 
+					 */
+					var $current = 2;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "学生完成进展情况记录（前期准备阶段）": {
@@ -58,6 +79,13 @@ function InitializationMyGraduationProject() {
 					banner_RecordProgress_1_Student.style.color = 'white';
 					banner_RecordProgress_1_Student.parentNode.style.backgroundColor = '#428bca';
 					RecordProgress_1_Student();
+					/*
+					 * 
+					 */
+					var $current = 3;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "指导老师填写进展情况意见（前期准备阶段）": {
@@ -66,6 +94,13 @@ function InitializationMyGraduationProject() {
 					banner_RecordProgress_1_Teacher.style.color = 'white';
 					banner_RecordProgress_1_Teacher.parentNode.style.backgroundColor = '#428bca';
 					RecordProgress_1_Teacher();
+					/*
+					 * 
+					 */
+					var $current = 4;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "学生完成进展情况记录（撰写阶段）": {
@@ -74,6 +109,13 @@ function InitializationMyGraduationProject() {
 					banner_RecordProgress_2_Student.style.color = 'white';
 					banner_RecordProgress_2_Student.parentNode.style.backgroundColor = '#428bca';
 					RecordProgress_2_Student();
+					/*
+					 * 
+					 */
+					var $current = 5;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "指导老师填写进展情况意见（撰写阶段）": {
@@ -82,6 +124,13 @@ function InitializationMyGraduationProject() {
 					banner_RecordProgress_2_Teacher.style.color = 'white';
 					banner_RecordProgress_2_Teacher.parentNode.style.backgroundColor = '#428bca';
 					RecordProgress_2_Teacher();
+					/*
+					 * 
+					 */
+					var $current = 6;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "学生完成进展情况记录（中期自查阶段）": {
@@ -90,6 +139,13 @@ function InitializationMyGraduationProject() {
 					banner_RecordProgress_3_Student.style.color = 'white';
 					banner_RecordProgress_3_Student.parentNode.style.backgroundColor = '#428bca';
 					RecordProgress_3_Student();
+					/*
+					 * 
+					 */
+					var $current = 7;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "指导老师填写进展情况意见（中期自查阶段）": {
@@ -98,6 +154,13 @@ function InitializationMyGraduationProject() {
 					banner_RecordProgress_3_Teacher.style.color = 'white';
 					banner_RecordProgress_3_Teacher.parentNode.style.backgroundColor = '#428bca';
 					RecordProgress_3_Teacher();
+					/*
+					 * 
+					 */
+					var $current = 8;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "学生完成进展情况记录（完善阶段）": {
@@ -106,6 +169,13 @@ function InitializationMyGraduationProject() {
 					banner_RecordProgress_4_Student.style.color = 'white';
 					banner_RecordProgress_4_Student.parentNode.style.backgroundColor = '#428bca';
 					RecordProgress_4_Student();
+					/*
+					 * 
+					 */
+					var $current = 9;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "指导老师填写进展情况意见（完善阶段）": {
@@ -114,6 +184,13 @@ function InitializationMyGraduationProject() {
 					banner_RecordProgress_4_Teacher.style.color = 'white';
 					banner_RecordProgress_4_Teacher.parentNode.style.backgroundColor = '#428bca';
 					RecordProgress_4_Teacher();
+					/*
+					 * 
+					 */
+					var $current = 10;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "学生完成个人学习总结": {
@@ -122,6 +199,13 @@ function InitializationMyGraduationProject() {
 					banner_summary_student.style.color = 'white';
 					banner_summary_student.parentNode.style.backgroundColor = '#428bca';
 					summary_student();
+					/*
+					 * 
+					 */
+					var $current = 11;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "指导老师填写个人学习总结意见": {
@@ -130,6 +214,13 @@ function InitializationMyGraduationProject() {
 					banner_summary_teacher.style.color = 'white';
 					banner_summary_teacher.parentNode.style.backgroundColor = '#428bca';
 					summary_teacher();
+					/*
+					 * 
+					 */
+					var $current = 12;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "学生提交答辩论文": {
@@ -138,6 +229,13 @@ function InitializationMyGraduationProject() {
 					banner_dissertation.style.color = 'white';
 					banner_dissertation.parentNode.style.backgroundColor = '#428bca';
 					dissertation();
+					/*
+					 * 
+					 */
+					var $current = 13;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "指导老师填写形式审查表": {
@@ -146,6 +244,13 @@ function InitializationMyGraduationProject() {
 					banner_examination_formal_teacher.style.color = 'white';
 					banner_examination_formal_teacher.parentNode.style.backgroundColor = '#428bca';
 					examination_formal_teacher();
+					/*
+					 * 
+					 */
+					var $current = 14;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "领导小组长填写形式审查表(核查)": {
@@ -154,6 +259,13 @@ function InitializationMyGraduationProject() {
 					banner_examination_formal_leader.style.color = 'white';
 					banner_examination_formal_leader.parentNode.style.backgroundColor = '#428bca';
 					examination_formal_leader();
+					/*
+					 * 
+					 */
+					var $current = 15;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "指导老师填写评价审阅表": {
@@ -162,6 +274,13 @@ function InitializationMyGraduationProject() {
 					banner_evaluate_tutor.style.color = 'white';
 					banner_evaluate_tutor.parentNode.style.backgroundColor = '#428bca';
 					evaluate_tutor();
+					/*
+					 * 
+					 */
+					var $current = 16;
+					/*
+					 * 
+					 */
 					break;
 				}
 				case "评阅老师填写评阅审查表": {
@@ -170,10 +289,24 @@ function InitializationMyGraduationProject() {
 					banner_evaluate_review.style.color = 'white';
 					banner_evaluate_review.parentNode.style.backgroundColor = '#428bca';
 					evaluate_review();
+					/*
+					 * 
+					 */
+					var $current = 17;
+					/*
+					 * 
+					 */
 					break;
 				}
 
 				}
+				var $total = 18;
+				var $percent = ($current / $total) * 100;
+				$('#my_progress-bar').innerHTML = $percent + '%';
+				$('#rootwizard .progress-bar').css({
+					width : $percent + '%',
+				});
+				$('#my_progress-bar').html($percent.toFixed(1) + '%');
 
 			} else {
 				toastr.error(xhr.status);

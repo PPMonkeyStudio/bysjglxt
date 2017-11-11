@@ -149,7 +149,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_taskbook where taskbook_id = '" + taskbook_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_taskbook = (bysjglxt_taskbook) query.list();
+		bysjglxt_taskbook = (bysjglxt_taskbook) query.uniqueResult();
 		return bysjglxt_taskbook;
 	}
 
@@ -159,7 +159,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_report_opening where report_opening_id = '" + report_opening_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_report_opening = (bysjglxt_report_opening) query.list();
+		bysjglxt_report_opening = (bysjglxt_report_opening) query.uniqueResult();
 		return bysjglxt_report_opening;
 	}
 
@@ -169,7 +169,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_record_progress where report_opening_id = '" + record_progress_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_record_progress = (bysjglxt_record_progress) query.list();
+		bysjglxt_record_progress = (bysjglxt_record_progress) query.uniqueResult();
 		return bysjglxt_record_progress;
 	}
 
@@ -180,7 +180,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		String hql = "from bysjglxt_record_progress where record_progress _student='" + report_opening_student
 				+ "' and record_progress _stage='" + string + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_record_progress = (bysjglxt_record_progress) query.list();
+		bysjglxt_record_progress = (bysjglxt_record_progress) query.uniqueResult();
 		return bysjglxt_record_progress;
 	}
 
@@ -190,7 +190,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_summary where summary_student = '" + record_progress_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_summary = (bysjglxt_summary) query.list();
+		bysjglxt_summary = (bysjglxt_summary) query.uniqueResult();
 		return bysjglxt_summary;
 	}
 
@@ -200,7 +200,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_summary where summary_id = '" + summary_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_summary = (bysjglxt_summary) query.list();
+		bysjglxt_summary = (bysjglxt_summary) query.uniqueResult();
 		return bysjglxt_summary;
 	}
 
@@ -210,7 +210,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_examination_formal where summary_id = '" + examination_formal_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_examination_formal = (bysjglxt_examination_formal) query.list();
+		bysjglxt_examination_formal = (bysjglxt_examination_formal) query.uniqueResult();
 		return bysjglxt_examination_formal;
 	}
 
@@ -220,7 +220,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_evaluate_tutor where evaluate_tutor_id = '" + evaluate_tutor_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_evaluate_tutor = (bysjglxt_evaluate_tutor) query.list();
+		bysjglxt_evaluate_tutor = (bysjglxt_evaluate_tutor) query.uniqueResult();
 		return bysjglxt_evaluate_tutor;
 	}
 
@@ -230,7 +230,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_evaluate_review where evaluate_review_id = '" + evaluate_review_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_evaluate_review = (bysjglxt_evaluate_review) query.list();
+		bysjglxt_evaluate_review = (bysjglxt_evaluate_review) query.uniqueResult();
 		return bysjglxt_evaluate_review;
 	}
 
@@ -240,7 +240,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_defence where defence_id = '" + defence_id + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_defence = (bysjglxt_defence) query.list();
+		bysjglxt_defence = (bysjglxt_defence) query.uniqueResult();
 		return bysjglxt_defence;
 	}
 
@@ -250,7 +250,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		String hql = "from bysjglxt_defence where defence_student = '" + evaluate_tutor_student + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_defence = (bysjglxt_defence) query.list();
+		bysjglxt_defence = (bysjglxt_defence) query.uniqueResult();
 		return bysjglxt_defence;
 	}
 

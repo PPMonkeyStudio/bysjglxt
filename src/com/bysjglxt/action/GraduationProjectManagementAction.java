@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
@@ -38,6 +39,10 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 */
 	private InputStream inputStream;
 	private String fileName;
+	/*
+	 * 更新
+	 */
+	private bysjglxt_taskbook updateTaskbook;
 
 	/*
 	 * 
@@ -88,6 +93,16 @@ public class GraduationProjectManagementAction extends ActionSupport
 					.write(gson.toJson(graduationProjectManagementService.get_TaskBook(
 							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 									.getBysjglxtStudentUser().getUser_student_id())));
+		}
+
+	}
+
+	public void updateTeacherTaskbook() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateTeacherTaskbook(updateTaskbook) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
 		}
 
 	}
@@ -342,5 +357,13 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+
+	public bysjglxt_taskbook getUpdateTaskbook() {
+		return updateTaskbook;
+	}
+
+	public void setUpdateTaskbook(bysjglxt_taskbook updateTaskbook) {
+		this.updateTaskbook = updateTaskbook;
 	}
 }

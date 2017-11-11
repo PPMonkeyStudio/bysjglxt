@@ -57,21 +57,20 @@ function List_MyTask(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 1) {
 						if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskDefinition.task_definition_type == 1) {
-							new_td.innerHTML = '<button id="'
+							new_td.innerHTML = '<i class="fa fa-legal" style="cursor: pointer;" id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-									+ '" onclick="passTask(this)" class="btn btn-default">通过</button>';
+									+ '" onclick="passTask(this)" >通过</i>';
 						} else {
-							new_td.innerHTML = '<button id="'
+							new_td.innerHTML = '<i class="fa fa-legal" style="cursor: pointer;" id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-									+ '" class="btn btn-default" onclick="passTask(this)">通过</button>'
-									+ '<button id="'
+									+ '" class="btn btn-default" onclick="passTask(this)">通过</i>'
+									+ '<i class="fa fa-recycle" style="cursor: pointer;margin:0 0 0 10px;" id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-									+ '" class="btn btn-default" onclick="repulseTask(this)" style="margin:0 0 0 10px;">驳回</button>';
+									+ '"  onclick="repulseTask(this)" >驳回</i>';
 						}
 					} else {
 						new_td.innerHTML = '';
 					}
-
 				}
 				/*
 				 * 设置页数

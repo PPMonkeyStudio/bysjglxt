@@ -32,18 +32,18 @@ public interface GraduationProjectManagementService {
 	 */
 
 	/**
-	 * @说明 学生更改任务书
-	 * @param bysjglxt_taskbook
-	 * @return 1.创建成功 2.创建失败
-	 */
-	public int updateStudentTaskbook(bysjglxt_taskbook updateTaskbook);
-
-	/**
 	 * @说明 教师更改任务书
 	 * @param bysjglxt_taskbook
 	 * @return 1.创建成功 2.创建失败
 	 */
 	public int updateTeacherTaskbook(bysjglxt_taskbook updateTaskbook);
+
+	/**
+	 * @说明 教研室更改任务书
+	 * @param bysjglxt_taskbook
+	 * @return 1.创建成功 2.创建失败
+	 */
+	public int updateSectionTaskbook(bysjglxt_taskbook updateTaskbook);
 
 	/**
 	 * @说明 更改开题报告表
