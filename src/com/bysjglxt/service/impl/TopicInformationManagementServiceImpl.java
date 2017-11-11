@@ -658,38 +658,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	 */
 	@Override
 	public int dropTopic(String studentUserId) {
-		// 通过用户Id获取流程实例
-		// 根据流程定义名称获取流程定义表 注意：流程定义名称 不可重复
-		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
-		bysjglxt_process_definition = topicInformationManagementDao.getProcessDefinitionByName("选题");
-		List<bysjglxt_task_instance> list_bysjglxt_task_instance = new ArrayList<bysjglxt_task_instance>();
-		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
-		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
-		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
-		if (bysjglxt_process_definition != null) {
-			// 获取流程实例
-			bysjglxt_process_instance = topicInformationManagementDao.getProcessInstanceByStateAndDefinitionId(
-					bysjglxt_process_definition.getProcess_definition_id(), "活动");
-			if (bysjglxt_process_instance != null) {
-				// 根据流程实例Id以及任务实例状态获得正在进行的任务实例
-				bysjglxt_task_instance = topicInformationManagementDao.getTaskInstanceByProcessInstanceIdAndState(
-						bysjglxt_process_instance.getProcess_instance_id(), 1);
-				if (bysjglxt_task_instance != null) {
-					// 根据任务实例Id获取任务定义表
-					bysjglxt_task_definition = topicInformationManagementDao
-							.getTaskDefinitionById(bysjglxt_task_instance.getTask_instance_task_definition());
-					//根据任务定义名称来判断
-					/*if(bysjglxt_task_definition.getTask_definition_name()){
-						
-					}*/
-					
-					
-				}
-
-			}
-
-		}
-
 		boolean flag = true;
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();

@@ -7,8 +7,11 @@ import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 
 public class ProcessDTO {
 
+	// 流程定义
 	private bysjglxt_process_definition processDefinition;
+	// 流程实例
 	private bysjglxt_process_instance processInstance;
+	// 属于这个流程的任务
 	private List<TaskDTO> listTaskBelongProcess;
 
 	public bysjglxt_process_definition getProcessDefinition() {
