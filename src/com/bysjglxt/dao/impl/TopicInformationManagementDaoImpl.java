@@ -9,25 +9,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
-import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
-import com.bysjglxt.domain.DO.bysjglxt_record_progress;
-import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
-import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
-import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
-import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
@@ -53,19 +45,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			e.printStackTrace();
 		}
 
-		return flag;
-	}
-
-	@Override
-	public boolean createTopicInviteTeacher(bysjglxt_topic_invite_teacher invite_teacher) {
-		boolean flag = true;
-		try {
-			Session session = getSession();
-			session.saveOrUpdate(invite_teacher);
-		} catch (Exception e) {
-			flag = false;
-			e.printStackTrace();
-		}
 		return flag;
 	}
 
@@ -133,21 +112,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	}
 
 	@Override
-	public boolean deleteTopicInviteTeacher(String topicId) {
-		boolean flag = true;
-		try {
-			Session session = getSession();
-			String hql = "delete from bysjglxt_topic_invite_teacher where topic_invite_teacher_id='" + topicId + "'";
-			Query query = session.createQuery(hql);
-			query.executeUpdate();
-		} catch (HibernateException e) {
-			flag = false;
-			e.printStackTrace();
-		}
-		return flag;
-	}
-
-	@Override
 	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
 			int studentOrTeacher) {
 		Session session = getSession();
@@ -198,17 +162,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		Query query = session.createQuery(hql);
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
 		return bysjglxt_topic;
-	}
-
-	@Override
-	public bysjglxt_topic_invite_teacher getBysjglxtTopicInviteTeacher(String topic_invite_teache_id) {
-		Session session = getSession();
-		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = new bysjglxt_topic_invite_teacher();
-		String hql = "from bysjglxt_topic_invite_teacher where topic_invite_teacher_id ='" + topic_invite_teache_id
-				+ "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_topic_invite_teacher = (bysjglxt_topic_invite_teacher) query.uniqueResult();
-		return bysjglxt_topic_invite_teacher;
 	}
 
 	@Override

@@ -1,11 +1,9 @@
 package com.bysjglxt.domain.DTO;
 
 import com.bysjglxt.domain.DO.bysjglxt_topic;
-import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 
 public class TopicInformationManagementDTO {
 	private bysjglxt_topic bysjglxtTopic;
-	private bysjglxt_topic_invite_teacher bysjglxtTopicInviteTeacher;
 	private TeacherInformationDTO teacherInformationDTO;
 
 	public TeacherInformationDTO getTeacherInformationDTO() {
@@ -24,18 +22,10 @@ public class TopicInformationManagementDTO {
 		this.bysjglxtTopic = bysjglxtTopic;
 	}
 
-	public bysjglxt_topic_invite_teacher getBysjglxtTopicInviteTeacher() {
-		return bysjglxtTopicInviteTeacher;
-	}
-
-	public void setBysjglxtTopicInviteTeacher(bysjglxt_topic_invite_teacher bysjglxtTopicInviteTeacher) {
-		this.bysjglxtTopicInviteTeacher = bysjglxtTopicInviteTeacher;
-	}
-
 	@Override
 	public String toString() {
-		return "TopicInformationDTO [bysjglxtTopic=" + bysjglxtTopic + ", bysjglxtTopicInviteTeacher="
-				+ bysjglxtTopicInviteTeacher + ", teacherInformationDTO=" + teacherInformationDTO + "]";
+		return "TopicInformationManagementDTO [bysjglxtTopic=" + bysjglxtTopic + ", teacherInformationDTO="
+				+ teacherInformationDTO + "]";
 	}
 
 }

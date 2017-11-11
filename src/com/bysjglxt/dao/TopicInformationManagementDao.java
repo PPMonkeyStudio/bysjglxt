@@ -10,7 +10,6 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
-import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
@@ -26,16 +25,10 @@ public interface TopicInformationManagementDao {
 
 	public boolean notAdoptTopic(String string, String moTime);
 
-	public boolean createTopicInviteTeacher(bysjglxt_topic_invite_teacher invite_teacher);
-
-	public boolean deleteTopicInviteTeacher(String topicId);
-
 	public List<com.bysjglxt.domain.DO.bysjglxt_topic> VO_Topic_By_PageAndSearch(
 			TopicInformationManagementVO topicManagementVO, int studentOrTeacher);
 
 	public bysjglxt_topic getBysjglxtTopicById(String topic_id);
-
-	public bysjglxt_topic_invite_teacher getBysjglxtTopicInviteTeacher(String topic_invite_teache_id);
 
 	public boolean teacherIsSelect(String topic_teacher);
 

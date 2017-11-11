@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
-import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
@@ -34,15 +33,12 @@ public class test {
 	public void test() {
 		TopicInformationManagementDTO topicInformationDTO = new TopicInformationManagementDTO();
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
-		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = new bysjglxt_topic_invite_teacher();
-		bysjglxt_topic_invite_teacher.setTopic_invite_teacher_name("2");
 		TeacherInformationDTO teacherInformationDTO = new TeacherInformationDTO();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		bysjglxt_teacher_user.setUser_teacher_id("4b41aea1-87c9-4a9c-9f1f-c0b92be463e5");
 		teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
 		topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
 		topicInformationDTO.setBysjglxtTopic(bysjglxt_topic);
-		topicInformationDTO.setBysjglxtTopicInviteTeacher(bysjglxt_topic_invite_teacher);
 		boolean flag = topicManagementService.CreateTopic(topicInformationDTO);
 		System.out.println(flag);
 	}
