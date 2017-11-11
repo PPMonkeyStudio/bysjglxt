@@ -862,8 +862,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		xwpfTUtil.close(is);
 		os.flush();
 		os.close();
-		File file = new File("F:\\kokokoko.docx");
-		return file;
+		return new File("F:\\kokokoko.docx");
 	}
 
 	// 导出封面

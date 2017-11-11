@@ -1,6 +1,9 @@
 package com.bysjglxt.action;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,11 +32,24 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * 
 	 */
 	private TeacherTutorStudentVO teacherTutorStudentVO;
+	private String MyTutorGraduationProjectStudentID;
+	/*
+	 * 
+	 */
+	private InputStream inputStream;
+	private String fileName;
 
 	/*
 	 * 
 	 */
 	public String MyGraduationProjectPage() {
+		System.out.println(MyTutorGraduationProjectStudentID);
+		if (MyTutorGraduationProjectStudentID != null) {
+			ActionContext.getContext().getSession().put("MyTutorGraduationProjectStudentID",
+					MyTutorGraduationProjectStudentID);
+		} else {
+			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
+		}
 		return "MyGraduationProjectPage";
 	}
 
@@ -65,10 +81,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_TaskBook(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_TaskBook(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_TaskBook(
@@ -84,10 +98,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_ReportOpening(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_ReportOpening(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_ReportOpening(
@@ -102,10 +114,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_1(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_RecordProgress_1(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_1(
@@ -120,10 +130,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_2(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_RecordProgress_2(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_2(
@@ -138,10 +146,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_3(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_RecordProgress_3(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_3(
@@ -156,10 +162,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_4(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_RecordProgress_4(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_RecordProgress_4(
@@ -174,10 +178,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_Summary(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_Summary(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_Summary(
@@ -192,10 +194,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_ExaminationFormal(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_ExaminationFormal(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_ExaminationFormal(
@@ -210,10 +210,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_EvaluateTutor(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_EvaluateTutor(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_EvaluateTutor(
@@ -228,10 +226,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_EvaluateReview(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_EvaluateReview(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_EvaluateReview(
@@ -246,16 +242,28 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_Defence(
-							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-									.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_Defence(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_Defence(
 							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 									.getBysjglxtStudentUser().getUser_student_id())));
 		}
+	}
+
+	public String exportAll() throws Exception {
+		File exportFile = graduationProjectManagementService
+				.exportAll(((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+						.getBysjglxtStudentUser().getUser_student_id());
+
+		fileName = new String(
+				(((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+						.getBysjglxtStudentBasic().getStudent_basic_name() + "的毕业设计.docx").getBytes("GBK"),
+				"ISO-8859-1");
+		inputStream = new FileInputStream(exportFile);
+		exportFile.delete();
+		return "exportAll";
 	}
 
 	/*
@@ -310,5 +318,29 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setTeacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO) {
 		this.teacherTutorStudentVO = teacherTutorStudentVO;
+	}
+
+	public String getMyTutorGraduationProjectStudentID() {
+		return MyTutorGraduationProjectStudentID;
+	}
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	public void setMyTutorGraduationProjectStudentID(String myTutorGraduationProjectStudentID) {
+		MyTutorGraduationProjectStudentID = myTutorGraduationProjectStudentID;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 }

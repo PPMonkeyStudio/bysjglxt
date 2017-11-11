@@ -17,10 +17,16 @@ function InitializationMyGraduationProject() {
 					if (currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
 						current_processDefinitionName = currentProcessDto.listTaskBelongProcess[num].taskDefinition.task_definition_name;
 						current_processInstanceUserID = currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_role;
+						console.debug("正在进行的流程定义名："
+								+ current_processDefinitionName);
+						console.debug("正在进行的流程实例所属用户ID："
+								+ current_processInstanceUserID);
 						break;
 					}
 				}
-
+				/*
+				 * 
+				 */
 				switch (current_processDefinitionName) {
 				case "指导老师完成任务书": {
 					var banner_Taskbook_Teacher = document
@@ -46,7 +52,7 @@ function InitializationMyGraduationProject() {
 					report_opening();
 					break;
 				}
-				case "学生完成前期进展情况记录": {
+				case "学生完成进展情况记录（前期准备阶段）": {
 					var banner_RecordProgress_1_Student = document
 							.getElementById("banner_RecordProgress_1_Student");
 					banner_RecordProgress_1_Student.style.color = 'white';
@@ -54,7 +60,7 @@ function InitializationMyGraduationProject() {
 					RecordProgress_1_Student();
 					break;
 				}
-				case "指导老师填写前期进展情况意见": {
+				case "指导老师填写进展情况意见（前期准备阶段）": {
 					var banner_RecordProgress_1_Teacher = document
 							.getElementById("banner_RecordProgress_1_Teacher");
 					banner_RecordProgress_1_Teacher.style.color = 'white';
@@ -62,7 +68,7 @@ function InitializationMyGraduationProject() {
 					RecordProgress_1_Teacher();
 					break;
 				}
-				case "学生完成中期进展情况记录": {
+				case "学生完成进展情况记录（撰写阶段）": {
 					var banner_RecordProgress_2_Student = document
 							.getElementById("banner_RecordProgress_2_Student");
 					banner_RecordProgress_2_Student.style.color = 'white';
@@ -70,7 +76,7 @@ function InitializationMyGraduationProject() {
 					RecordProgress_2_Student();
 					break;
 				}
-				case "指导老师填写中期进展情况意见": {
+				case "指导老师填写进展情况意见（撰写阶段）": {
 					var banner_RecordProgress_2_Teacher = document
 							.getElementById("banner_RecordProgress_2_Teacher");
 					banner_RecordProgress_2_Teacher.style.color = 'white';
@@ -78,7 +84,7 @@ function InitializationMyGraduationProject() {
 					RecordProgress_2_Teacher();
 					break;
 				}
-				case "学生完成后期进展情况记录": {
+				case "学生完成进展情况记录（中期自查阶段）": {
 					var banner_RecordProgress_3_Student = document
 							.getElementById("banner_RecordProgress_3_Student");
 					banner_RecordProgress_3_Student.style.color = 'white';
@@ -86,7 +92,7 @@ function InitializationMyGraduationProject() {
 					RecordProgress_3_Student();
 					break;
 				}
-				case "指导老师填写后期进展情况意见": {
+				case "指导老师填写进展情况意见（中期自查阶段）": {
 					var banner_RecordProgress_3_Teacher = document
 							.getElementById("banner_RecordProgress_3_Teacher");
 					banner_RecordProgress_3_Teacher.style.color = 'white';
@@ -94,7 +100,7 @@ function InitializationMyGraduationProject() {
 					RecordProgress_3_Teacher();
 					break;
 				}
-				case "学生完成完善期进展情况记录": {
+				case "学生完成进展情况记录（完善阶段）": {
 					var banner_RecordProgress_4_Student = document
 							.getElementById("banner_RecordProgress_4_Student");
 					banner_RecordProgress_4_Student.style.color = 'white';
@@ -102,7 +108,7 @@ function InitializationMyGraduationProject() {
 					RecordProgress_4_Student();
 					break;
 				}
-				case "指导老师填写完善期进展情况意见": {
+				case "指导老师填写进展情况意见（完善阶段）": {
 					var banner_RecordProgress_4_Teacher = document
 							.getElementById("banner_RecordProgress_4_Teacher");
 					banner_RecordProgress_4_Teacher.style.color = 'white';

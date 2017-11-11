@@ -136,8 +136,7 @@
 								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyGraduationProjectPage">我的毕业设计</a>
 						</li>
 						<li class="student_control">
-							<a
-								href="#">导出我的毕业设计</a>
+							<a href="<%=basePath%>graduationProject/GraduationProjectManagement_exportAll">导出我的毕业设计</a>
 						</li>
 					</ul>
 				</li>

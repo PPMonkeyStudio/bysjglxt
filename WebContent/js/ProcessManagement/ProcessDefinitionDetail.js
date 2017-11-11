@@ -66,24 +66,24 @@ function ProcessDefinitionDetail(ProcessDefinitionID) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_type == 1) {
-						new_td.innerHTML = '顺序结构';
+						new_td.innerHTML = '<span class="label label-success">顺序结构</span>';
 					} else {
-						new_td.innerHTML = '选择结构';
+						new_td.innerHTML = '<span class="label label-primary">选择结构</span>';
 					}
 					new_tr.appendChild(new_td);
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_role == 1) {
-						new_td.innerHTML = '指导老师';
+						new_td.innerHTML = '<span class="label label-primary">指导老师</span>';
 					} else if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_role == 2) {
-						new_td.innerHTML = '评阅老师';
+						new_td.innerHTML = '<span class="label label-info">评阅老师</span>';
 					} else if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_role == 3) {
-						new_td.innerHTML = '领导小组组长';
+						new_td.innerHTML = '<span class="label label-danger">领导小组组长</span>';
 					} else if (json_ProcessDefinition.List_bysjglxtTaskDefinition[num].task_definition_role == 4) {
-						new_td.innerHTML = '教研室主任';
+						new_td.innerHTML = '<span class="label label-warning">教研室主任</span>';
 					} else {
-						new_td.innerHTML = '学生';
+						new_td.innerHTML = '<span class="label label-success">学生</span>';
 					}
 					new_tr.appendChild(new_td);
 

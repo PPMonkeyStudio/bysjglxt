@@ -25,7 +25,8 @@ function Taskbook_Teacher() {
 				var textarea_1 = document.createElement("textarea");
 				textarea_1.className = 'form-control';
 				textarea_1.style = "margin:10px 0 50px 0;resize: vertical;"
-				if (taskbook.taskbook_acontent_required != null) {
+				if (taskbook != null
+						&& taskbook.taskbook_acontent_required != null) {
 					textarea_1.innerHTML = taskbook.taskbook_acontent_required;
 				} else {
 					textarea_1.innerHTML = '';
@@ -64,15 +65,36 @@ function Taskbook_Teacher() {
 				/*
 				 * 让不是现在进行的流程的不可编辑
 				 */
+				var button_SaveGraduationProject = document
+						.getElementById("button_SaveGraduationProject");
 				if ("指导老师完成任务书" != current_processDefinitionName) {
 					textarea_1.disabled = "disabled";
 					textarea_2.disabled = "disabled";
 					textarea_3.disabled = "disabled";
-					var button_SaveGraduationProject = document
-							.getElementById("button_SaveGraduationProject");
 					button_SaveGraduationProject.style.display = "none";
+				} else if (userStudentDTO != null) {
+					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+						button_SaveGraduationProject.style.display = "block";
+					} else {
+						textarea_1.disabled = "disabled";
+						textarea_2.disabled = "disabled";
+						textarea_3.disabled = "disabled";
+						button_SaveGraduationProject.style.display = "none";
+					}
+				} else if (userTeacherDTO != null) {
+					if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+						button_SaveGraduationProject.style.display = "block";
+					} else {
+						textarea_1.disabled = "disabled";
+						textarea_2.disabled = "disabled";
+						textarea_3.disabled = "disabled";
+						button_SaveGraduationProject.style.display = "none";
+					}
 				} else {
-					button_SaveGraduationProject.style.display = "block";
+					textarea_1.disabled = "disabled";
+					textarea_2.disabled = "disabled";
+					textarea_3.disabled = "disabled";
+					button_SaveGraduationProject.style.display = "none";
 				}
 
 			} else {

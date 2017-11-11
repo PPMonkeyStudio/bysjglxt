@@ -51,6 +51,8 @@
 	src="<%=basePath%>js/GraduationProjectManagement/evaluate_tutor.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/evaluate_review.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/saveGraduationProject.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>我的毕业设计</title>
 </head>
@@ -108,35 +110,35 @@
 										</li>
 										<li>
 											<a href="#tab4" data-toggle="tab"
-												id="banner_RecordProgress_1_Student">4.学生完成前期进展情况记录</a>
+												id="banner_RecordProgress_1_Student">4.学生完成进展情况记录（前期准备阶段）</a>
 										</li>
 										<li>
 											<a href="#tab5" data-toggle="tab"
-												id="banner_RecordProgress_1_Teacher">5.指导老师填写前期进展情况意见</a>
+												id="banner_RecordProgress_1_Teacher">5.指导老师填写进展情况意见（前期准备阶段）</a>
 										</li>
 										<li>
 											<a href="#tab6" data-toggle="tab"
-												id="banner_RecordProgress_2_Student">6.学生完成中期进展情况记录</a>
+												id="banner_RecordProgress_2_Student">6.学生完成进展情况记录（撰写阶段）</a>
 										</li>
 										<li>
 											<a href="#tab7" data-toggle="tab"
-												id="banner_RecordProgress_2_Teacher">7.指导老师填写中期进展情况意见</a>
+												id="banner_RecordProgress_2_Teacher">7.指导老师填写进展情况意见（撰写阶段）</a>
 										</li>
 										<li>
 											<a href="#tab8" data-toggle="tab"
-												id="banner_RecordProgress_3_Student">8.学生完成后期进展情况记录</a>
+												id="banner_RecordProgress_3_Student">8.学生完成进展情况记录（中期自查阶段）</a>
 										</li>
 										<li>
 											<a href="#tab9" data-toggle="tab"
-												id="banner_RecordProgress_3_Teacher">9.指导老师填写后期进展情况意见</a>
+												id="banner_RecordProgress_3_Teacher">9.指导老师填写进展情况意见（中期自查阶段）</a>
 										</li>
 										<li>
 											<a href="#tab10" data-toggle="tab"
-												id="banner_RecordProgress_4_Student">10.学生完成完善期进展情况记录</a>
+												id="banner_RecordProgress_4_Student">10.学生完成进展情况记录（完善阶段）</a>
 										</li>
 										<li>
 											<a href="#tab11" data-toggle="tab"
-												id="banner_RecordProgress_4_Teacher">11.指导老师填写完善期进展情况意见</a>
+												id="banner_RecordProgress_4_Teacher">11.指导老师填写进展情况意见（完善阶段）</a>
 										</li>
 										<li>
 											<a href="#tab12" data-toggle="tab"
@@ -219,7 +221,7 @@
 							</li>
 
 							<li class="" id="button_SaveGraduationProject">
-								<a href="#" onclick='toastr.success()'>保存</a>
+								<a href="#" onclick='saveGraduationProject()'>保存</a>
 							</li>
 							<!-- <li class="next last">
 								<a href="#">最后一个任务</a>
@@ -243,7 +245,6 @@
 <script>
 	$('select').selectpicker('refresh');
 </script>
-
 <script>
 	$(document).ready(function() {
 		$('#rootwizard').bootstrapWizard({
@@ -336,7 +337,8 @@
 
 				}
 				var $total = navigation.find('li').length;
-				var $current = index + 1;
+				//var $current = index + 1;
+				var $current = index;
 				var $percent = ($current / $total) * 100;
 				$('#my_progress-bar').innerHTML = $percent + '%';
 				$('#rootwizard .progress-bar').css({

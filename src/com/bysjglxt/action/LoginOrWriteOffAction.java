@@ -51,6 +51,7 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) loginOrWriteOffService.loginInformation(1,
 					username);
 			ActionContext.getContext().getSession().put("userTeacherDTO", userTeacherDTO);
+			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
 			http_response.getWriter().write("教师登录成功");
 			break;
 		}
@@ -59,6 +60,7 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 			StudentInformationDTO userStudentDTO = (StudentInformationDTO) loginOrWriteOffService.loginInformation(2,
 					username);
 			ActionContext.getContext().getSession().put("userStudentDTO", userStudentDTO);
+			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
 			http_response.getWriter().write("学生登录成功");
 			break;
 		}
