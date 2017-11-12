@@ -1,11 +1,11 @@
-function report_opening() {
+function Initialization_report_opening() {
 	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成开题报告';
 	var banner_report_opening = document
 			.getElementById("banner_report_opening");
 	banner_report_opening.click();
-	/*
-	 * 
-	 */
+}
+
+function report_opening() {
 	var xhr = false;
 	var formData = new FormData();
 	xhr = new XMLHttpRequest();
@@ -14,9 +14,16 @@ function report_opening() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var report_opening = JSON.parse(xhr.responseText);
-
 				var tab = document.getElementById("tab3");
 				tab.innerHTML = '';
+				/*
+				 * 
+				 */
+				var textarea_0 = document.createElement("textarea");
+				textarea_0.id = 'report_opening_id';
+				textarea_0.style = "display:none;"
+				textarea_0.innerHTML = report_opening.report_opening_id;
+				tab.appendChild(textarea_0);
 				/*
 				 * 
 				 */
@@ -24,8 +31,9 @@ function report_opening() {
 				h4.innerHTML = '文献综述：';
 				tab.appendChild(h4);
 				var textarea_1 = document.createElement("textarea");
+				textarea_1.id = 'report_opening_documentary_survey';
 				textarea_1.className = 'form-control';
-				textarea_1.style = "margin:10px 0 50px 0;resize: vertical;"
+				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:200px;"
 				if (report_opening.report_opening_documentary_survey != null) {
 					textarea_1.innerHTML = report_opening.report_opening_documentary_survey;
 				} else {
@@ -39,8 +47,9 @@ function report_opening() {
 				h4.innerHTML = '主要内容：';
 				tab.appendChild(h4);
 				var textarea_2 = document.createElement("textarea");
+				textarea_2.id = 'report_opening_main';
 				textarea_2.className = 'form-control';
-				textarea_2.style = "margin:10px 0 50px 0;resize: vertical;"
+				textarea_2.style = "margin:10px 0 50px 0;resize: none;height:200px;"
 				if (report_opening.report_opening_main != null) {
 					textarea_2.innerHTML = report_opening.report_opening_main;
 				} else {
@@ -54,8 +63,9 @@ function report_opening() {
 				h4.innerHTML = '详细提纲：';
 				tab.appendChild(h4);
 				var textarea_3 = document.createElement("textarea");
+				textarea_3.id = 'report_opening_detail';
 				textarea_3.className = 'form-control';
-				textarea_3.style = "margin:10px 0 50px 0;resize: vertical;"
+				textarea_3.style = "margin:10px 0 50px 0;resize: none;height:200px;"
 				if (report_opening.report_opening_detail != null) {
 					textarea_3.innerHTML = report_opening.report_opening_detail;
 				} else {
@@ -69,8 +79,9 @@ function report_opening() {
 				h4.innerHTML = '参考文献：';
 				tab.appendChild(h4);
 				var textarea_4 = document.createElement("textarea");
+				textarea_4.id = 'report_opening_reference';
 				textarea_4.className = 'form-control';
-				textarea_4.style = "margin:10px 0 50px 0;resize: vertical;"
+				textarea_4.style = "margin:10px 0 50px 0;resize: none;height:200px;"
 				if (report_opening.report_opening_reference != null) {
 					textarea_4.innerHTML = report_opening.report_opening_reference;
 				} else {
@@ -84,8 +95,9 @@ function report_opening() {
 				h4.innerHTML = '进程计划：';
 				tab.appendChild(h4);
 				var textarea_5 = document.createElement("textarea");
+				textarea_5.id = 'report_opening_plan';
 				textarea_5.className = 'form-control';
-				textarea_5.style = "margin:10px 0 50px 0;resize: vertical;"
+				textarea_5.style = "margin:10px 0 50px 0;resize: none;height:200px;"
 				if (report_opening.report_opening_plan != null) {
 					textarea_5.innerHTML = report_opening.report_opening_plan;
 				} else {
@@ -105,11 +117,6 @@ function report_opening() {
 					textarea_5.disabled = "disabled";
 					button_SaveGraduationProject.style.display = "none";
 				} else if (userStudentDTO != null) {
-					console.log("current_processInstanceUserID:"
-							+ current_processInstanceUserID);
-					console
-							.log("sessionUser:"
-									+ userStudentDTO.bysjglxtStudentUser.user_student_id);
 					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
 						button_SaveGraduationProject.style.display = "block";
 					} else {

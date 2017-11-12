@@ -58,6 +58,12 @@ public class GraduationProjectManagementAction extends ActionSupport
 	private bysjglxt_examination_formal updateExaminationFormal;
 	private bysjglxt_evaluate_tutor updateEvaluateTutor;
 	private bysjglxt_evaluate_review updateEvaluateReview;
+	//
+	private File dissertation;
+	private String dissertationFileName;
+	private String dissertationContentType;
+
+	private String oldDissertation;
 
 	/*
 	 * 
@@ -91,10 +97,10 @@ public class GraduationProjectManagementAction extends ActionSupport
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(teacherTutorStudentVO));
 	}
+
 	/*
 	 * 
 	 */
-
 	public void get_Taskbook() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -304,6 +310,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void updateSectionTaskbook() throws IOException {
+		System.out.println(updateTaskbook);
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateSectionTaskbook(updateTaskbook) == 1) {
 			http_response.getWriter().write("保存成功");
@@ -451,6 +458,43 @@ public class GraduationProjectManagementAction extends ActionSupport
 		} else {
 			http_response.getWriter().write("系统繁忙");
 		}
+	}
+
+	/*
+	 * 
+	 */
+	public void get_Dissertation() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_Dissertation(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.get_Dissertation(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
+		}
+	}
+
+	public void downloadDissertation() {
+
+	}
+
+	public void updateDissertation() throws IOException {
+		System.out.println("oldDissertation:'" + oldDissertation + "'");
+		System.out.println("newDissertation:'" + dissertationFileName + "'");
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response
+				.getWriter().write(
+						graduationProjectManagementService
+								.uploadDissertation(
+										((StudentInformationDTO) ActionContext.getContext().getSession()
+												.get("userStudentDTO")).getBysjglxtStudentUser().getUser_student_id(),
+										dissertation, dissertationFileName));
+
 	}
 
 	/*
@@ -609,5 +653,37 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setUpdateRecordProgressPerfect(bysjglxt_record_progress updateRecordProgressPerfect) {
 		this.updateRecordProgressPerfect = updateRecordProgressPerfect;
+	}
+
+	public File getDissertation() {
+		return dissertation;
+	}
+
+	public void setDissertation(File dissertation) {
+		this.dissertation = dissertation;
+	}
+
+	public String getDissertationFileName() {
+		return dissertationFileName;
+	}
+
+	public void setDissertationFileName(String dissertationFileName) {
+		this.dissertationFileName = dissertationFileName;
+	}
+
+	public String getDissertationContentType() {
+		return dissertationContentType;
+	}
+
+	public void setDissertationContentType(String dissertationContentType) {
+		this.dissertationContentType = dissertationContentType;
+	}
+
+	public String getOldDissertation() {
+		return oldDissertation;
+	}
+
+	public void setOldDissertation(String oldDissertation) {
+		this.oldDissertation = oldDissertation;
 	}
 }

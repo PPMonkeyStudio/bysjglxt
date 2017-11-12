@@ -34,8 +34,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 				for (var num = 0; num < student_json.list_StudentInformationDTO.length; num++) {
 
 					new_tr = document.createElement("tr");
-
-					new_tr.appendChild(document.createTextNode(''));
 					table_student.firstElementChild.appendChild(new_tr);
 					new_tr.className = "new_tr";
 

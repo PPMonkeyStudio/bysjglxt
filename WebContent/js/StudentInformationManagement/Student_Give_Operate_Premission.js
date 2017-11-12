@@ -3,6 +3,7 @@ function Student_Give_Operate_Premission() {
 	$
 			.confirm({
 				title : '赋予操作权限',
+				content : '启动所选学生的操作权限',
 				type : 'blue',
 				buttons : {
 					'分配' : {

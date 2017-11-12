@@ -48,6 +48,7 @@
 <script src="<%=basePath%>js/jquery.slimscroll.min.js"></script>
 <script src="<%=basePath%>js/klorofil-common.js"></script>
 <!--------------------------------------------------------------------------------->
+
 <!--------------------------------------------------------------------------------->
 <title>Insert title here</title>
 </head>
@@ -225,4 +226,7 @@ td .label {
 	line-height: 33px !important;
 }
 </style>
+<script>
+	
+</script>
 </html>

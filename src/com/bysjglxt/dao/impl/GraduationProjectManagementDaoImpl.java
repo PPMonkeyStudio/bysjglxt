@@ -212,7 +212,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	public bysjglxt_examination_formal findExaminationFormalById(String examination_formal_id) {
 		bysjglxt_examination_formal bysjglxt_examination_formal = new bysjglxt_examination_formal();
 		Session session = getSession();
-		String hql = "from bysjglxt_examination_formal where summary_id = '" + examination_formal_id + "'";
+		String hql = "from bysjglxt_examination_formal where examination_formal_id = '" + examination_formal_id + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_examination_formal = (bysjglxt_examination_formal) query.uniqueResult();
 		return bysjglxt_examination_formal;

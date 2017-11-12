@@ -12,15 +12,16 @@
 <meta http-equiv="Content-Type"
 	content="text/html; charset=UTF-8">
 <!--页面公用-------------------------------------------------------------------------------------------------->
+
 <!---------------------------------------------------------------------------------------------------->
-<script type="text/javascript"
+<script type="text/javascript" 
 	src="<%=basePath%>js/GraduationProjectManagement/InitializationMyGraduationProject.js"></script>
 <!-------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Teacher.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Section.js"></script>
-<script type="text/javascript"
+<script type="text/javascript" 
 	src="<%=basePath%>js/GraduationProjectManagement/report_opening.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Student.js"></script>
@@ -92,7 +93,10 @@
 <!-------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/saveGraduationProject.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadDissertation.js"></script>
 <!---------------------------------------------------------------------------------------------------->
+
 <title>我的毕业设计</title>
 </head>
 <body>
@@ -184,27 +188,27 @@
 												id="banner_summary_student">12.学生完成个人学习总结</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab"
+											<a href="#tab13" data-toggle="tab"
 												id="banner_summary_teacher">13.指导老师填写个人学习总结意见</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab"
+											<a href="#tab14" data-toggle="tab"
 												id="banner_dissertation">14.学生提交答辩论文</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab"
+											<a href="#tab15" data-toggle="tab"
 												id="banner_examination_formal_teacher">15.指导老师填写形式审查表</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab"
+											<a href="#tab16" data-toggle="tab"
 												id="banner_examination_formal_leader">16.领导小组长填写形式审查表(核查)</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab"
+											<a href="#tab17" data-toggle="tab"
 												id="banner_evaluate_tutor">17.指导老师填写评价审阅表</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab"
+											<a href="#tab18" data-toggle="tab"
 												id="banner_evaluate_review">18.评阅老师填写评阅审查表</a>
 										</li>
 									</ul>
@@ -227,7 +231,7 @@
 			<!--------------------------------------------------------------------->
 			<!--------------------------------------------------------------------->
 			<div class="panel"
-				style="width: calc(100% - 20% - 60px); margin: 20px 20px 0 0; float: right;">
+				style="width: calc(100% - 20% - 60px); margin: 20px 20px 50px 0; float: right;">
 				<div class="panel-heading">
 					<h3 class="panel-title" id="GraduationProjectTitle"></h3>
 				</div>
@@ -258,17 +262,17 @@
 							<li class="" id="button_SaveGraduationProject">
 								<a href="####" onclick='saveGraduationProject()'>保存</a>
 							</li>
-							<li class="previous">
+							<!-- <li class="previous">
 								<a href="#">上一个任务</a>
-							</li>
+							</li> -->
 
 
 							<!-- <li class="next last">
 								<a href="#">最后一个任务</a>
 							</li> -->
-							<li class="next">
+							<!-- <li class="next">
 								<a href="#">下一个任务</a>
-							</li>
+							</li> -->
 						</ul>
 					</div>
 					<!--  -->
@@ -376,7 +380,6 @@
 				}
 
 				}
-				
 
 			}
 		});
@@ -389,4 +392,6 @@
 		wheelStep : 1,
 	});
 </script>
+<link rel="stylesheet" href="<%=basePath%>css/square/blue.css" />
+<script type="text/javascript" src="<%=basePath%>js/icheck.js"></script> 
 </html>

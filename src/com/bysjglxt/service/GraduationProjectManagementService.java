@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
@@ -26,7 +27,7 @@ public interface GraduationProjectManagementService {
 	 * @return 1 成功
 	 * @throws IOException
 	 */
-	public int uploadGraduationThesis(String userId, File file, String thesisName) throws IOException;
+	public int uploadDissertation(String userId, File file, String thesisName) throws IOException;
 
 	/**
 	 * 下载毕业论文
@@ -34,7 +35,15 @@ public interface GraduationProjectManagementService {
 	 * @param userId
 	 * @return
 	 */
-	public File downloadGraduationThesis(String userId);
+	public File downloadDissertation(String userId);
+
+	/**
+	 * @说明 获取毕业论文表的对象，
+	 * @author ZB
+	 * @param userId
+	 * @return
+	 */
+	public bysjglxt_dissertation get_Dissertation(String userId);
 
 	/**
 	 * @说明 学生点击开启开始毕业设计流程 1、创建个人毕业设计过程管理手册中所有信息记录

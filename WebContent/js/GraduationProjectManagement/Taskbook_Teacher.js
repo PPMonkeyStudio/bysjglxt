@@ -1,8 +1,12 @@
-function Taskbook_Teacher() {
+function Initialization_Taskbook_Teacher() {
 	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师完成任务书';
 	var banner_Taskbook_Teacher = document
 			.getElementById("banner_Taskbook_Teacher");
 	banner_Taskbook_Teacher.click();
+}
+
+function Taskbook_Teacher() {
+
 	/*
 	 * 
 	 */
@@ -33,7 +37,7 @@ function Taskbook_Teacher() {
 				var textarea_1 = document.createElement("textarea");
 				textarea_1.id = 'taskbook_acontent_required';
 				textarea_1.className = 'form-control';
-				textarea_1.style = "margin:10px 0 50px 0;resize: vertical;"
+				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:200px;"
 				if (taskbook != null
 						&& taskbook.taskbook_acontent_required != null) {
 					textarea_1.innerHTML = taskbook.taskbook_acontent_required;
@@ -50,7 +54,7 @@ function Taskbook_Teacher() {
 				var textarea_2 = document.createElement("textarea");
 				textarea_2.id = 'taskbook_reference';
 				textarea_2.className = 'form-control';
-				textarea_2.style = "margin:10px 0 50px 0;resize: vertical;"
+				textarea_2.style = "margin:10px 0 50px 0;resize: none;height:200px;"
 				if (taskbook.taskbook_reference != null) {
 					textarea_2.innerHTML = taskbook.taskbook_reference;
 				} else {
@@ -66,7 +70,7 @@ function Taskbook_Teacher() {
 				var textarea_3 = document.createElement("textarea");
 				textarea_3.id = 'taskbook_plan';
 				textarea_3.className = 'form-control';
-				textarea_3.style = "margin:10px 0 50px 0;resize: vertical;"
+				textarea_3.style = "margin:10px 0 50px 0;resize: none;height:200px;"
 				if (taskbook.taskbook_plan != null) {
 					textarea_3.innerHTML = taskbook.taskbook_plan;
 				} else {
