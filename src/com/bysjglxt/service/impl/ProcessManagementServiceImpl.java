@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.bysjglxt.dao.ProcessManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_section;
@@ -421,6 +422,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		boolean flag = true;
 		bysjglxt_task_instance currentTaskInstance = new bysjglxt_task_instance();
 		bysjglxt_task_instance nextTaskInstance = new bysjglxt_task_instance();
+		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		currentTaskInstance = processManagementDao.getTaskInstanceingById(taskInstanceId);
 		if (currentTaskInstance == null) {
@@ -455,13 +457,31 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				return -1;
 			return 1;
 		}
-		// 更改任务实例状态,将之改为已结束
+		// 更改任务实例状态,将之改为正在进行
 		nextTaskInstance.setTask_instance_state(1);
 		nextTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
 		// 存储任务实例
 		flag = processManagementDao.instanceTask(nextTaskInstance);
 		if (!flag)
 			return -1;// 更改任务实例失败
+		// 将记录插入到通知表中
+		bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
+
+		if (currentTaskInstance.getTask_instance_role() == null || nextTaskInstance.getTask_instance_role() == null) {
+			return 1;
+		}
+		// 通知执行者
+		bysjglxt_notice.setNotice_launch(currentTaskInstance.getTask_instance_role());
+		// 通知拥有者
+		bysjglxt_notice.setNotice_belong(nextTaskInstance.getTask_instance_role());
+		bysjglxt_notice.setNotice_content("上一步操作已完成");
+		bysjglxt_notice.setNotice_state(2);
+		bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
+		if (!(bysjglxt_notice.getNotice_belong().equals(bysjglxt_notice.getNotice_launch()))) {
+			// 存储记录
+			processManagementDao.fillNoticeRecord(bysjglxt_notice);
+		}
 		return 1;// 成功
 	}
 
@@ -471,13 +491,20 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		boolean flag = true;
 		// 1.根据任务实例ID获取任务实例实例对象
 		bysjglxt_task_instance currentTaskInstance = new bysjglxt_task_instance();
+		bysjglxt_task_instance neCurrentTaskInstanceFather = new bysjglxt_task_instance();
 		bysjglxt_task_instance currentTaskInstanceFather = new bysjglxt_task_instance();
-		bysjglxt_task_instance currentTaskInstanceReturn = new bysjglxt_task_instance();
+		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
+		// bysjglxt_task_instance currentTaskInstanceReturn = new
+		// bysjglxt_task_instance();
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		currentTaskInstance = processManagementDao.getTaskInstanceingById(taskInstanceId);
 		if (currentTaskInstance == null) {
 			return -3;
 			// 无该任务实例
 		}
+		bysjglxt_process_instance = processManagementDao
+				.getProcessInstanceById(currentTaskInstance.getTask_instance_process_instance());
+
 		// 2.将当前实例对象更改未未开始
 		// 更改任务实例状态,将之改为已结束
 		currentTaskInstance.setTask_instance_state(2);
@@ -488,6 +515,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -1;// 更改任务实例失败
 		// 3.先获得返回任务实例的ID currentTaskInstance.getTask_instance_return()
 		// id 是父任务实例ID
+		neCurrentTaskInstanceFather = processManagementDao
+				.getTaskInstanceingById(currentTaskInstance.getTask_instance_return());
 		String id = currentTaskInstance.getTask_instance_father();
 		while (true) {
 			// 父任务实例
@@ -512,6 +541,19 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			if (!flag)
 				return -1;
 			id = currentTaskInstanceFather.getTask_instance_father();
+		}
+
+		// 将记录插入到通知表中
+		bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
+		bysjglxt_notice.setNotice_launch(currentTaskInstance.getTask_instance_role());
+		bysjglxt_notice.setNotice_belong(neCurrentTaskInstanceFather.getTask_instance_role());
+		bysjglxt_notice.setNotice_content("已驳回任务");
+		bysjglxt_notice.setNotice_state(2);
+		bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
+		if (!(bysjglxt_notice.getNotice_belong().equals(bysjglxt_notice.getNotice_launch()))) {
+			// 存储记录
+			processManagementDao.fillNoticeRecord(bysjglxt_notice);
 		}
 		return 1;
 	}
