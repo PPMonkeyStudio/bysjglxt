@@ -1,6 +1,7 @@
 package com.bysjglxt.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 import com.bysjglxt.domain.DO.bysjglxt_defence;
@@ -14,6 +15,26 @@ import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementService {
+
+	/**
+	 * 上传毕业论文
+	 * 
+	 * @param file
+	 * @param thesisName
+	 * @return -1 上传过后删除失败
+	 * @return -2存储失败
+	 * @return 1 成功
+	 * @throws IOException
+	 */
+	public int uploadGraduationThesis(String userId, File file, String thesisName) throws IOException;
+
+	/**
+	 * 下载毕业论文
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public File downloadGraduationThesis(String userId);
 
 	/**
 	 * @说明 学生点击开启开始毕业设计流程 1、创建个人毕业设计过程管理手册中所有信息记录
@@ -32,18 +53,18 @@ public interface GraduationProjectManagementService {
 	 */
 
 	/**
-	 * @说明 学生更改任务书
-	 * @param bysjglxt_taskbook
-	 * @return 1.创建成功 2.创建失败
-	 */
-	public int updateStudentTaskbook(bysjglxt_taskbook updateTaskbook);
-
-	/**
 	 * @说明 教师更改任务书
 	 * @param bysjglxt_taskbook
 	 * @return 1.创建成功 2.创建失败
 	 */
 	public int updateTeacherTaskbook(bysjglxt_taskbook updateTaskbook);
+
+	/**
+	 * @说明 教研室更改任务书
+	 * @param bysjglxt_taskbook
+	 * @return 1.创建成功 2.创建失败
+	 */
+	public int updateSectionTaskbook(bysjglxt_taskbook updateTaskbook);
 
 	/**
 	 * @说明 更改开题报告表
@@ -148,14 +169,14 @@ public interface GraduationProjectManagementService {
 	 * @param updateEvaluateReview
 	 * @return
 	 */
-	public int bysjglxt_evaluate_review(bysjglxt_evaluate_review updateEvaluateReview);
+	public int updateEvaluateReview(bysjglxt_evaluate_review updateEvaluateReview);
 
 	/**
 	 * @说明 更改答辩评分以及成绩评定表
 	 * @param updateDefence
 	 * @return
 	 */
-	public int bysjglxt_defence(bysjglxt_defence updateDefence);
+	public int updateDefence(bysjglxt_defence updateDefence);
 
 	/**
 	 * 教师点击指导的毕业设计列表

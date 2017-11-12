@@ -6,11 +6,11 @@ import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
-import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
@@ -26,16 +26,10 @@ public interface TopicInformationManagementDao {
 
 	public boolean notAdoptTopic(String string, String moTime);
 
-	public boolean createTopicInviteTeacher(bysjglxt_topic_invite_teacher invite_teacher);
-
-	public boolean deleteTopicInviteTeacher(String topicId);
-
 	public List<com.bysjglxt.domain.DO.bysjglxt_topic> VO_Topic_By_PageAndSearch(
 			TopicInformationManagementVO topicManagementVO, int studentOrTeacher);
 
 	public bysjglxt_topic getBysjglxtTopicById(String topic_id);
-
-	public bysjglxt_topic_invite_teacher getBysjglxtTopicInviteTeacher(String topic_invite_teache_id);
 
 	public boolean teacherIsSelect(String topic_teacher);
 
@@ -96,5 +90,19 @@ public interface TopicInformationManagementDao {
 	public boolean updateTeacherSelectNum(String topic_select_teacher_tutor);
 
 	public boolean updateTopicNum(String topic_select_topic);
+
+	public com.bysjglxt.domain.DO.bysjglxt_process_definition getProcessDefinitionByName(String string);
+
+	public com.bysjglxt.domain.DO.bysjglxt_process_instance getProcessInstanceByStateAndDefinitionId(
+			String process_definition_id, String string);
+
+	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceByProcessInstanceIdAndState(
+			String process_instance_id, int i);
+
+	public com.bysjglxt.domain.DO.bysjglxt_task_definition getTaskDefinitionById(String task_instance_task_definition);
+
+	public List<bysjglxt_leader> getAllLeader();
+
+	public boolean createNoti1ceRecord(bysjglxt_notice bysjglxt_notice);
 
 }

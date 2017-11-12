@@ -9,7 +9,6 @@ public class bysjglxt_student_basic {
 	private String student_basic_grade;
 	private String student_basic_idtype;
 	private String student_basic_idcaard;
-	private String student_basic_age;
 	private String student_basic_sex;
 	private String student_basic_nation;
 	private String student_basic_politicalvisage;
@@ -93,14 +92,6 @@ public class bysjglxt_student_basic {
 
 	public void setStudent_basic_idcaard(String student_basic_idcaard) {
 		this.student_basic_idcaard = student_basic_idcaard;
-	}
-
-	public String getStudent_basic_age() {
-		return student_basic_age;
-	}
-
-	public void setStudent_basic_age(String student_basic_age) {
-		this.student_basic_age = student_basic_age;
 	}
 
 	public String getStudent_basic_sex() {
@@ -260,20 +251,20 @@ public class bysjglxt_student_basic {
 		return "bysjglxt_student_basic [student_basic_id=" + student_basic_id + ", student_basic_num="
 				+ student_basic_num + ", student_basic_name=" + student_basic_name + ", student_basic_year="
 				+ student_basic_year + ", student_basic_grade=" + student_basic_grade + ", student_basic_idtype="
-				+ student_basic_idtype + ", student_basic_idcaard=" + student_basic_idcaard + ", student_basic_age="
-				+ student_basic_age + ", student_basic_sex=" + student_basic_sex + ", student_basic_nation="
-				+ student_basic_nation + ", student_basic_politicalvisage=" + student_basic_politicalvisage
-				+ ", student_basic_native_place=" + student_basic_native_place + ", student_basic_studenttype="
-				+ student_basic_studenttype + ", student_basic_enrollmenttype=" + student_basic_enrollmenttype
-				+ ", student_basic_teachingmethods=" + student_basic_teachingmethods
-				+ ", student_basic_professionalcode=" + student_basic_professionalcode + ", student_basic_major="
-				+ student_basic_major + ", student_basic_college=" + student_basic_college + ", student_basic_phone="
-				+ student_basic_phone + ", student_basic_independentmajorname=" + student_basic_independentmajorname
-				+ ", student_basic_is_normalmajor=" + student_basic_is_normalmajor + ", student_basic_is_disability="
-				+ student_basic_is_disability + ", student_basic_householdregistrationtype="
-				+ student_basic_householdregistrationtype + ", student_basic_transactiontypes="
-				+ student_basic_transactiontypes + ", student_basic_entranceeducation="
-				+ student_basic_entranceeducation + ", student_basic_enrollmentmode=" + student_basic_enrollmentmode
+				+ student_basic_idtype + ", student_basic_idcaard=" + student_basic_idcaard + ", student_basic_sex="
+				+ student_basic_sex + ", student_basic_nation=" + student_basic_nation
+				+ ", student_basic_politicalvisage=" + student_basic_politicalvisage + ", student_basic_native_place="
+				+ student_basic_native_place + ", student_basic_studenttype=" + student_basic_studenttype
+				+ ", student_basic_enrollmenttype=" + student_basic_enrollmenttype + ", student_basic_teachingmethods="
+				+ student_basic_teachingmethods + ", student_basic_professionalcode=" + student_basic_professionalcode
+				+ ", student_basic_major=" + student_basic_major + ", student_basic_college=" + student_basic_college
+				+ ", student_basic_phone=" + student_basic_phone + ", student_basic_independentmajorname="
+				+ student_basic_independentmajorname + ", student_basic_is_normalmajor=" + student_basic_is_normalmajor
+				+ ", student_basic_is_disability=" + student_basic_is_disability
+				+ ", student_basic_householdregistrationtype=" + student_basic_householdregistrationtype
+				+ ", student_basic_transactiontypes=" + student_basic_transactiontypes
+				+ ", student_basic_entranceeducation=" + student_basic_entranceeducation
+				+ ", student_basic_enrollmentmode=" + student_basic_enrollmentmode
 				+ ", student_basic_reasonsfordroppingoutofschool=" + student_basic_reasonsfordroppingoutofschool
 				+ ", student_basic_level=" + student_basic_level + "]";
 	}

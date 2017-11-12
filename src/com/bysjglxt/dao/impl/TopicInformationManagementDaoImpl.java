@@ -9,21 +9,18 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
-import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
-import com.bysjglxt.domain.DO.bysjglxt_record_progress;
-import com.bysjglxt.domain.DO.bysjglxt_report_opening;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
+import com.bysjglxt.domain.DO.bysjglxt_process_definition;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
-import com.bysjglxt.domain.DO.bysjglxt_summary;
-import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
-import com.bysjglxt.domain.DO.bysjglxt_topic_invite_teacher;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
@@ -49,19 +46,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			e.printStackTrace();
 		}
 
-		return flag;
-	}
-
-	@Override
-	public boolean createTopicInviteTeacher(bysjglxt_topic_invite_teacher invite_teacher) {
-		boolean flag = true;
-		try {
-			Session session = getSession();
-			session.saveOrUpdate(invite_teacher);
-		} catch (Exception e) {
-			flag = false;
-			e.printStackTrace();
-		}
 		return flag;
 	}
 
@@ -129,21 +113,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	}
 
 	@Override
-	public boolean deleteTopicInviteTeacher(String topicId) {
-		boolean flag = true;
-		try {
-			Session session = getSession();
-			String hql = "delete from bysjglxt_topic_invite_teacher where topic_invite_teacher_id='" + topicId + "'";
-			Query query = session.createQuery(hql);
-			query.executeUpdate();
-		} catch (HibernateException e) {
-			flag = false;
-			e.printStackTrace();
-		}
-		return flag;
-	}
-
-	@Override
 	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
 			int studentOrTeacher) {
 		Session session = getSession();
@@ -170,7 +139,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic_teacher = '" + topicManagementVO.getTeacher() + "'";
 		}
-		hql = hql + " order by topic_gmt_create desc";
+		hql = hql + " order by topic_examine_state desc,topic_gmt_create desc";
 		Query query = session.createQuery(hql);
 		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
 		query.setMaxResults(topicManagementVO.getPageSize());
@@ -194,17 +163,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		Query query = session.createQuery(hql);
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
 		return bysjglxt_topic;
-	}
-
-	@Override
-	public bysjglxt_topic_invite_teacher getBysjglxtTopicInviteTeacher(String topic_invite_teache_id) {
-		Session session = getSession();
-		bysjglxt_topic_invite_teacher bysjglxt_topic_invite_teacher = new bysjglxt_topic_invite_teacher();
-		String hql = "from bysjglxt_topic_invite_teacher where topic_invite_teacher_id ='" + topic_invite_teache_id
-				+ "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_topic_invite_teacher = (bysjglxt_topic_invite_teacher) query.uniqueResult();
-		return bysjglxt_topic_invite_teacher;
 	}
 
 	@Override
@@ -495,12 +453,11 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			String search = "%" + topicManagementVO.getSearch().trim() + "%";
 			hql = hql + " and topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "' ";
 		}
-
 		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
 			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
 		}
 		hql = hql + " and topic_teacher = '" + teacherUserId + "'";
-		hql = hql + " order by topic_gmt_create desc";
+		hql = hql + " order by topic_examine_state desc,topic_gmt_create desc";
 		Query query = session.createQuery(hql);
 		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
 		query.setMaxResults(topicManagementVO.getPageSize());
@@ -647,6 +604,72 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_process_definition getProcessDefinitionByName(String string) {
+		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_definition where process_definition_name = '" + string + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_definition = (bysjglxt_process_definition) query.uniqueResult();
+		return bysjglxt_process_definition;
+	}
+
+	@Override
+	public bysjglxt_process_instance getProcessInstanceByStateAndDefinitionId(String process_definition_id,
+			String string) {
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_instance where process_instance_process_definition = '"
+				+ process_definition_id + "' and process_instance_state = '" + string + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		return bysjglxt_process_instance;
+	}
+
+	@Override
+	public bysjglxt_task_instance getTaskInstanceByProcessInstanceIdAndState(String process_instance_id, int i) {
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + process_instance_id
+				+ "' and task_instance_state = '" + i + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
+		return bysjglxt_task_instance;
+	}
+
+	@Override
+	public bysjglxt_task_definition getTaskDefinitionById(String task_instance_task_definition) {
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_definition where task_definition_id = '" + task_instance_task_definition + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
+		return bysjglxt_task_definition;
+	}
+
+	@Override
+	public List<bysjglxt_leader> getAllLeader() {
+		Session session = getSession();
+		List<bysjglxt_leader> bysjglxt_leader = new ArrayList<bysjglxt_leader>();
+		String hql = "from bysjglxt_leader";
+		Query query = session.createQuery(hql);
+		bysjglxt_leader = query.list();
+		return bysjglxt_leader;
+	}
+
+	@Override
+	public boolean createNoti1ceRecord(bysjglxt_notice bysjglxt_notice) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_notice);
+		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
 		}

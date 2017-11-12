@@ -10,9 +10,11 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.ProcessManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
@@ -461,6 +463,36 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Query query = session.createQuery(hql);
 		list_bysjglxt_task_definition = query.list();
 		return list_bysjglxt_task_definition;
+	}
+
+	@Override
+	public bysjglxt_student_basic getStudentBasicById(String user_student_basic) {
+		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
+		Session session = getSession();
+		String hql = "from bysjglxt_student_basic where student_basic_id='" + user_student_basic + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_student_basic = (bysjglxt_student_basic) query.uniqueResult();
+		return bysjglxt_student_basic;
+	}
+
+	@Override
+	public bysjglxt_section getSectionByName(String section) {
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		Session session = getSession();
+		String hql = "from bysjglxt_section where section_name='" + section + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		return bysjglxt_section;
+	}
+
+	@Override
+	public void fillNoticeRecord(bysjglxt_notice bysjglxt_notice) {
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_notice);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

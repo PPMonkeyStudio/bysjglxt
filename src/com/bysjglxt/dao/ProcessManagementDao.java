@@ -3,6 +3,7 @@ package com.bysjglxt.dao;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
@@ -80,7 +81,12 @@ public interface ProcessManagementDao {
 	public List<bysjglxt_task_definition> getTaskDefinitionByProcessDefinitionId(
 			String task_definition_process_definition);
 
-	/****/
+	public com.bysjglxt.domain.DO.bysjglxt_student_basic getStudentBasicById(String user_student_basic);
+
+	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByName(String section);
+
+	public void fillNoticeRecord(bysjglxt_notice bysjglxt_notice);
+
 	
 	
 }

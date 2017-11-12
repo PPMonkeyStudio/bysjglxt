@@ -6,17 +6,6 @@ function Create_Topic() {
 	var topic_type = document.getElementById("topic_type");
 	var topic_remark = document.getElementById("topic_remark");
 
-	var topic_invite_teacher_name = document
-			.getElementById("topic_invite_teacher_name");
-	var topic_invite_teacher_sex = document
-			.getElementById("topic_invite_teacher_sex");
-	var topic_invite_teacher_unitname = document
-			.getElementById("topic_invite_teacher_unitname");
-	var topic_invite_teacher_technicalitle = document
-			.getElementById("topic_invite_teacher_technicalitle");
-	var topic_invite_teacher_duties = document
-			.getElementById("topic_invite_teacher_duties");
-
 	if (topic_name_chinese.value.length == 0) {
 		toastr.error("课题中文名称不能为空");
 		return;
@@ -69,36 +58,6 @@ function Create_Topic() {
 	/*
 	 * 
 	 */
-	if (!topic_invite_teacher_name.value == "") {
-		formData
-				.append(
-						"topicInformationManagementDTO.bysjglxtTopicInviteTeacher.topic_invite_teacher_name",
-						topic_invite_teacher_name.value);
-	}
-	if (!topic_invite_teacher_sex.value == "") {
-		formData
-				.append(
-						"topicInformationManagementDTO.bysjglxtTopicInviteTeacher.topic_invite_teacher_sex",
-						topic_invite_teacher_sex.value);
-	}
-	if (!topic_invite_teacher_unitname.value == "") {
-		formData
-				.append(
-						"topicInformationManagementDTO.bysjglxtTopicInviteTeacher.topic_invite_teacher_unitname",
-						topic_invite_teacher_unitname.value);
-	}
-	if (!topic_invite_teacher_technicalitle.value == "") {
-		formData
-				.append(
-						"topicInformationManagementDTO.bysjglxtTopicInviteTeacher.topic_invite_teacher_technicalitle",
-						topic_invite_teacher_technicalitle.value);
-	}
-	if (!topic_invite_teacher_duties.value == "") {
-		formData
-				.append(
-						"topicInformationManagementDTO.bysjglxtTopicInviteTeacher.topic_invite_teacher_duties",
-						topic_invite_teacher_duties.value);
-	}
 
 	xhr.send(formData);
 }

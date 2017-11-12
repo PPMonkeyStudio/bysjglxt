@@ -95,13 +95,49 @@ function report_opening() {
 				/*
 				 * 让不是现在进行的流程的不可编辑
 				 */
+				var button_SaveGraduationProject = document
+						.getElementById("button_SaveGraduationProject");
 				if ("学生完成开题报告" != current_processDefinitionName) {
+					textarea_1.disabled = "disabled";
+					textarea_2.disabled = "disabled";
+					textarea_3.disabled = "disabled";
+					textarea_4.disabled = "disabled";
 					textarea_5.disabled = "disabled";
-					var button_SaveGraduationProject = document
-							.getElementById("button_SaveGraduationProject");
 					button_SaveGraduationProject.style.display = "none";
+				} else if (userStudentDTO != null) {
+					console.log("current_processInstanceUserID:"
+							+ current_processInstanceUserID);
+					console
+							.log("sessionUser:"
+									+ userStudentDTO.bysjglxtStudentUser.user_student_id);
+					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+						button_SaveGraduationProject.style.display = "block";
+					} else {
+						textarea_1.disabled = "disabled";
+						textarea_2.disabled = "disabled";
+						textarea_3.disabled = "disabled";
+						textarea_4.disabled = "disabled";
+						textarea_5.disabled = "disabled";
+						button_SaveGraduationProject.style.display = "none";
+					}
+				} else if (userTeacherDTO != null) {
+					if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+						button_SaveGraduationProject.style.display = "block";
+					} else {
+						textarea_1.disabled = "disabled";
+						textarea_2.disabled = "disabled";
+						textarea_3.disabled = "disabled";
+						textarea_4.disabled = "disabled";
+						textarea_5.disabled = "disabled";
+						button_SaveGraduationProject.style.display = "none";
+					}
 				} else {
-					button_SaveGraduationProject.style.display = "block";
+					textarea_1.disabled = "disabled";
+					textarea_2.disabled = "disabled";
+					textarea_3.disabled = "disabled";
+					textarea_4.disabled = "disabled";
+					textarea_5.disabled = "disabled";
+					button_SaveGraduationProject.style.display = "none";
 				}
 
 			} else {

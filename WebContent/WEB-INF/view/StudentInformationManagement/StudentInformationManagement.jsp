@@ -31,7 +31,7 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Student_Take_Operate_Premission.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/specialStudentSelectTopic.js"></script>
+	src="<%=basePath%>js/StudentInformationManagement/assignmentStudentTopic.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>学生信息管理</title>
 </head>
@@ -82,7 +82,7 @@
 							<th>学号</th>
 							<th>姓名</th>
 							<th>
-								<select class="form-control" id="select_sex"
+								<select class="selectpicker" id="select_sex"
 									style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
@@ -95,28 +95,26 @@
 									data-live-search="true" style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">专业名称</option>
-									<option value="">未填写专业名称</option>
 								</select>
 							</th>
 							<th>
-								<select class="form-control" id="select_level"
+								<select class="selectpicker" id="select_level"
 									data-live-search="true" style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">级别</option>
-									<option value="">未填写年级</option>
 								</select>
 							</th>
 							<th>
-								<select class="form-control" id="select_premission"
+								<select class="selectpicker" id="select_premission"
 									style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">操作权限</option>
-									<option value="1">有操作权限</option>
-									<option value="0">无操作权限</option>
+									<option value="-1">状态</option>
+									<option value="1">活动</option>
+									<option value="0">已关闭</option>
 								</select>
 							</th>
 							<th>
-								<select class="form-control" id="select_is_select_topic"
+								<select class="selectpicker" id="select_is_select_topic"
 									style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">是否选题</option>

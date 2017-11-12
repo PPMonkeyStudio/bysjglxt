@@ -78,9 +78,9 @@ public class bysjglxt_taskbook {
 	public String toString() {
 		return "bysjglxt_taskbook [taskbook_id=" + taskbook_id + ", bysjglxt_taskbook_student="
 				+ bysjglxt_taskbook_student + ", taskbook_acontent_required=" + taskbook_acontent_required
-				+ ", taskbook_plan=" + taskbook_plan + ", taskbook_opinion=" + taskbook_opinion
-				+ ", taskbook_gmt_create=" + taskbook_gmt_create + ", taskbook_gmt_modified=" + taskbook_gmt_modified
-				+ "]";
+				+ ", taskbook_reference=" + taskbook_reference + ", taskbook_plan=" + taskbook_plan
+				+ ", taskbook_opinion=" + taskbook_opinion + ", taskbook_gmt_create=" + taskbook_gmt_create
+				+ ", taskbook_gmt_modified=" + taskbook_gmt_modified + "]";
 	}
 
 }
