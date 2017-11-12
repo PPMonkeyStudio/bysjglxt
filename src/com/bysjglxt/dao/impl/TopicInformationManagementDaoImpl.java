@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_section;
@@ -650,6 +651,29 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		Query query = session.createQuery(hql);
 		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
 		return bysjglxt_task_definition;
+	}
+
+	@Override
+	public List<bysjglxt_leader> getAllLeader() {
+		Session session = getSession();
+		List<bysjglxt_leader> bysjglxt_leader = new ArrayList<bysjglxt_leader>();
+		String hql = "from bysjglxt_leader";
+		Query query = session.createQuery(hql);
+		bysjglxt_leader = query.list();
+		return bysjglxt_leader;
+	}
+
+	@Override
+	public boolean createNoti1ceRecord(bysjglxt_notice bysjglxt_notice) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_notice);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

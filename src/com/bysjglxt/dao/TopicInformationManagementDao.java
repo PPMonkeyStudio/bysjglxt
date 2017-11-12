@@ -6,6 +6,7 @@ import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
@@ -99,5 +100,9 @@ public interface TopicInformationManagementDao {
 			String process_instance_id, int i);
 
 	public com.bysjglxt.domain.DO.bysjglxt_task_definition getTaskDefinitionById(String task_instance_task_definition);
+
+	public List<bysjglxt_leader> getAllLeader();
+
+	public boolean createNoti1ceRecord(bysjglxt_notice bysjglxt_notice);
 
 }

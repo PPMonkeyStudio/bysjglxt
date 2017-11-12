@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.ProcessManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_section;
@@ -482,6 +483,16 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Query query = session.createQuery(hql);
 		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
 		return bysjglxt_section;
+	}
+
+	@Override
+	public void fillNoticeRecord(bysjglxt_notice bysjglxt_notice) {
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_notice);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

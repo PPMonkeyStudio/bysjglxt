@@ -11,9 +11,10 @@ public interface TopicInformationManagementService {
 
 	/**
 	 * @DATE 2017-10-28
-	 * @说明 教师创建课题，存储到bysjglxt_topic表中
+	 * @说明 教师创建课题，存储到bysjglxt_topic表中 这里需要通知管理员
 	 * @param newTopic
 	 * @return 1成功 0失败
+	 * 
 	 */
 	public boolean CreateTopic(TopicInformationManagementDTO topicInformationDTO);
 
