@@ -27,16 +27,20 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 			return -1;
 		}
 		if (password == null || password.trim().length() <= 0) {
-			return -2;
+			return -3;
 		}
 		int flag = 0;
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		// 1.在student_user表中查询
 		bysjglxt_student_user = loginOrWriteOffDao.getBysjglxtStudentUserByNum(username);
+		// 如果在学生user表中查询得到
 		if (bysjglxt_student_user == null) {
 			flag = -1;
 		} else {
+			if (bysjglxt_student_user.getUser_student_is_operate_premission() == 0) {
+				return -2;
+			}
 			if (bysjglxt_student_user.getUser_student_password().equals(md5.GetMD5Code(password))) {
 				flag = 2;
 				return flag;
@@ -90,6 +94,7 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 			teacherInformationDTO.setBysjglxtTeacherUser(bysjglxtTeacherUser);
 			return teacherInformationDTO;
 		} else {
+			// 则说明是学生登录
 			StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
 			bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
 			bysjglxt_student_user bysjglxtStudentUser = new bysjglxt_student_user();
