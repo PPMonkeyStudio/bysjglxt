@@ -23,7 +23,7 @@ function Save_Taskbook_Teacher() {
 	/*
 	 * 
 	 */
-	formData.append("updateTaskbook.taskbook_id", taskbook_id.innerHTML);
+	formData.append("updateTaskbook.taskbook_id", taskbook_id.value);
 	formData.append("updateTaskbook.taskbook_acontent_required",
 			taskbook_acontent_required.value);
 	formData.append("updateTaskbook.taskbook_reference",

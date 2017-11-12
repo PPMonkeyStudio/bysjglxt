@@ -9,7 +9,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type"
+	content="text/html; charset=UTF-8">
 <!--页面公用-------------------------------------------------------------------------------------------------->
 
 <!---------------------------------------------------------------------------------------------------->
@@ -28,8 +29,8 @@
 <title>课题管理页</title>
 </head>
 <body>
-	<s:action name="LoginLogoutManagement_navbar" namespace="/loginLogout"
-		executeResult="true" />
+	<s:action name="LoginLogoutManagement_navbar"
+		namespace="/loginLogout" executeResult="true" />
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
@@ -50,6 +51,11 @@
 							<i class="fa fa-plus-square"></i>
 							创建课题
 						</button>
+						<button class="btn btn-default"
+							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_MyTopicListPage'">
+							<i class="fa fa-anchor"></i>
+							我的课题
+						</button>
 					</div>
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
@@ -67,7 +73,8 @@
 							<th>中文名称</th>
 							<th>
 								<select class="form-control" style="width: auto;"
-									id="select_source" onchange="List_Topic_By_PageAndSearch(1)">
+									id="select_source"
+									onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">课题来源</option>
 									<option value="各类课题项目">各类课题项目</option>
 									<option value="导师指定">导师指定</option>
@@ -78,7 +85,8 @@
 							</th>
 							<th>
 								<select class="form-control" style="width: auto;"
-									id="select_type" onchange="List_Topic_By_PageAndSearch(1)">
+									id="select_type"
+									onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">课题性质</option>
 									<option value="理论研究">理论研究</option>
 									<option value="应用基础研究">应用基础研究</option>
@@ -94,10 +102,10 @@
 									<option value="-1">指导教师</option>
 								</select>
 							</th>
-							<th>协助教师</th>
 							<th>
 								<select class="form-control" style="width: auto;"
-									id="select_state" onchange="List_Topic_By_PageAndSearch(1)">
+									id="select_state"
+									onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
 									<option value="已关闭">已关闭</option>
 									<option value="审核已通过">审核已通过</option>
@@ -121,27 +129,32 @@
 				</div>
 				<div style="height: 34px; margin: 0 0 20px 0;">
 					<button class="leader_control btn btn-danger"
-						onclick="deleteTopicList()" style="float: right; margin: 0 10px;">
+						onclick="deleteTopicList()"
+						style="float: right; margin: 0 10px;">
 						<i class="fa fa-trash-o"></i>
 						删除所选
 					</button>
 					<button class="leader_control btn btn-default"
-						onclick="agreeTopicList()" style="float: right; margin: 0 10px;">
+						onclick="agreeTopicList()"
+						style="float: right; margin: 0 10px;">
 						<i class="fa fa-legal"></i>
 						通过
 					</button>
 					<button class="leader_control btn btn-default"
-						onclick="refuseTopicList()" style="float: right; margin: 0 10px;">
+						onclick="refuseTopicList()"
+						style="float: right; margin: 0 10px;">
 						<i class="fa fa-recycle"></i>
 						拒绝
 					</button>
 					<button class="leader_control btn btn-default"
-						onclick="closeTopicList()" style="float: right; margin: 0 10px;">
+						onclick="closeTopicList()"
+						style="float: right; margin: 0 10px;">
 						<i class="fa fa-lock"></i>
 						关闭
 					</button>
 				</div>
-				<div style="margin: 0 auto; width: 400px; text-align: center;">
+				<div
+					style="margin: 0 auto; width: 400px; text-align: center;">
 					<button id="button_HomePage" class="btn btn-default"
 						onclick="flip(1)">首页</button>
 					<button id="button_PrePage" class="btn btn-default"
@@ -155,9 +168,13 @@
 					style="margin: 20px auto 20px; width: 200px; text-align: center;">
 					第
 					<span id="span_pageIndex">1</span>
-					页<br>共
+					页
+					<br>
+					共
 					<span id="span_totalPages">1</span>
-					页<br>共
+					页
+					<br>
+					共
 					<span id="span_totalRecords">0</span>
 					条记录
 				</div>

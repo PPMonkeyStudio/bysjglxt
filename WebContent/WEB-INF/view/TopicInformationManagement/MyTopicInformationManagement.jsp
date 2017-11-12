@@ -20,6 +20,8 @@
 	src="<%=basePath%>js/TopicInformationManagement/MyTopic_Information_Display.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/Update_Topic.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/drop_Topic.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>课题管理页</title>
@@ -44,6 +46,13 @@
 			</div>
 			<div class="panel-body">
 				<div style="height: 34px;">
+					<div style="width: 500px; float: left;">
+						<button class="btn btn-default"
+							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_TopicListPage'">
+							<i class="fa fa-reply"></i>
+							返回
+						</button>
+					</div>
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
 						<input id="input_search" class="form-control"
@@ -83,15 +92,15 @@
 							</th>
 							<th>已选学生数</th>
 							<th>指导教师</th>
-							<th>协助教师</th>
 							<th class="teacher_control">
 								<select class="form-control" style="width: auto;"
 									id="select_state"
 									onchange="List_MyTopic_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
-									<option value="已关闭">已关闭</option>
-									<option value="审核已通过">审核已通过</option>
 									<option value="未审核">未审核</option>
+									<option value="审核已通过">审核已通过</option>
+									<option value="审核未通过">审核未通过</option>
+									<option value="已关闭">已关闭</option>
 								</select>
 							</th>
 							<th>操作</th>
@@ -179,6 +188,12 @@
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-check"></i>
 						保存
+					</button>
+					<button class="student_control btn btn-default"
+						onclick="drop_Topic()"
+						style="float: right; margin: 0 10px;">
+						<i class="fa fa-exclamation-triangle"></i>
+						退选
 					</button>
 				</div>
 			</div>

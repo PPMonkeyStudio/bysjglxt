@@ -18,7 +18,6 @@ function start_Update_Student() {
 
 	var input_StudentInformation = document
 			.getElementsByClassName("input_StudentInformation");
-	toastr.success("可以开始修改");
 	for (var num = 0; num < input_StudentInformation.length; num++) {
 		input_StudentInformation[num].disabled = "";
 	}

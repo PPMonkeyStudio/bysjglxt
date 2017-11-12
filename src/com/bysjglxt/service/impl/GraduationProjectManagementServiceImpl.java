@@ -55,11 +55,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	// 上传毕业论文
 	@Override
-	public int uploadGraduationThesis(String userId, File file, String thesisName) throws IOException {
+	public int uploadDissertation(String userId, File file, String thesisName) throws IOException {
 		// 查找学生是否已经上传毕业论文
 		boolean flag = false;
 		String path = "F:/graduagtionThesi/";
-		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		bysjglxt_dissertation bysjglxt_dissertation = null;
 		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
 		if (bysjglxt_dissertation != null) {
 			// 说明学生已经进行过上传了
@@ -72,25 +72,39 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			if (!flag) {
 				return -1;
 			}
+
+		} else {
+			// 帮江鑫鑫改了一个逻辑Bug
+			bysjglxt_dissertation = new bysjglxt_dissertation();
+
 		}
-		path = path + thesisName;
-		File newFile = new File(path);
-		FileUtils.copyFile(file, newFile);
-		// 将上传的毕业论文的文件名存储到数据库中
-		bysjglxt_dissertation.setDissertation_id(TeamUtil.getStringSecond());
-		bysjglxt_dissertation.setDissertation_student(userId);
-		bysjglxt_dissertation.setDissertation_file(thesisName);
-		bysjglxt_dissertation.setDissertation_gmt_create(TeamUtil.getStringSecond());
-		bysjglxt_dissertation.setDissertation_gmt_modified(TeamUtil.getStringSecond());
-		flag = graduationProjectManagementDao.fillEmptyThesisRecord(bysjglxt_dissertation);
-		if (!flag)
-			return -2;
+		if (file != null) {
+			path = path + thesisName;
+			File newFile = new File(path);
+			FileUtils.copyFile(file, newFile);
+			// 将上传的毕业论文的文件名存储到数据库中
+			bysjglxt_dissertation.setDissertation_id(TeamUtil.getStringSecond());
+			bysjglxt_dissertation.setDissertation_student(userId);
+			bysjglxt_dissertation.setDissertation_file(thesisName);
+			bysjglxt_dissertation.setDissertation_gmt_create(TeamUtil.getStringSecond());
+			bysjglxt_dissertation.setDissertation_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyThesisRecord(bysjglxt_dissertation);
+			if (!flag)
+				return -2;
+		} else {
+			bysjglxt_dissertation.setDissertation_id(TeamUtil.getStringSecond());
+			bysjglxt_dissertation.setDissertation_student(userId);
+			bysjglxt_dissertation.setDissertation_gmt_create(TeamUtil.getStringSecond());
+			bysjglxt_dissertation.setDissertation_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyThesisRecord(bysjglxt_dissertation);
+		}
+
 		return 1;
 	}
 
 	// 下载毕业论文
 	@Override
-	public File downloadGraduationThesis(String userId) {
+	public File downloadDissertation(String userId) {
 		// 1.根据user Id获得学生毕业论文表中的记录
 		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
 		String path = "F:/graduagtionThesi/";
@@ -382,7 +396,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
 		if (bysjglxt_taskbook != null) {
-			bysjglxt_taskbook.setTaskbook_opinion(updateTaskbook.getTaskbook_plan());
+			bysjglxt_taskbook.setTaskbook_opinion(updateTaskbook.getTaskbook_opinion());
 			bysjglxt_taskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInTaskBook(bysjglxt_taskbook);
 		}
@@ -830,6 +844,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskBookByUserId(userId);
 		return bysjglxt_taskbook;
+	}
+
+	@Override
+	public bysjglxt_dissertation get_Dissertation(String userId) {
+		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
+		return bysjglxt_dissertation;
 	}
 
 	@Override

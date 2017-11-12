@@ -12,6 +12,10 @@ function InitializationMyGraduationProject() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				/*
+				 * console.debug("InitializationMyGraduationProject:" +
+				 * xhr.responseText);
+				 */
 				currentProcessDto = JSON.parse(xhr.responseText);
 				for (var num = 0; currentProcessDto.listTaskBelongProcess.length; num++) {
 					if (currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
@@ -33,7 +37,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_Taskbook_Teacher");
 					banner_Taskbook_Teacher.style.color = 'white';
 					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
-					Taskbook_Teacher();
+					Initialization_Taskbook_Teacher();
 					/*
 					 * 
 					 */
@@ -48,7 +52,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_Taskbook_Section");
 					banner_Taskbook_Section.style.color = 'white';
 					banner_Taskbook_Section.parentNode.style.backgroundColor = '#428bca';
-					Taskbook_Section();
+					Initialization_Taskbook_Section();
 					/*
 					 * 
 					 */
@@ -63,7 +67,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_report_opening");
 					banner_report_opening.style.color = 'white';
 					banner_report_opening.parentNode.style.backgroundColor = '#428bca';
-					report_opening();
+					Initialization_report_opening();
 					/*
 					 * 
 					 */
@@ -78,7 +82,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_RecordProgress_1_Student");
 					banner_RecordProgress_1_Student.style.color = 'white';
 					banner_RecordProgress_1_Student.parentNode.style.backgroundColor = '#428bca';
-					RecordProgress_1_Student();
+					Initialization_RecordProgress_1_Student();
 					/*
 					 * 
 					 */
@@ -93,7 +97,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_RecordProgress_1_Teacher");
 					banner_RecordProgress_1_Teacher.style.color = 'white';
 					banner_RecordProgress_1_Teacher.parentNode.style.backgroundColor = '#428bca';
-					RecordProgress_1_Teacher();
+					Initialization_RecordProgress_1_Teacher();
 					/*
 					 * 
 					 */
@@ -108,7 +112,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_RecordProgress_2_Student");
 					banner_RecordProgress_2_Student.style.color = 'white';
 					banner_RecordProgress_2_Student.parentNode.style.backgroundColor = '#428bca';
-					RecordProgress_2_Student();
+					Initialization_RecordProgress_2_Student();
 					/*
 					 * 
 					 */
@@ -123,7 +127,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_RecordProgress_2_Teacher");
 					banner_RecordProgress_2_Teacher.style.color = 'white';
 					banner_RecordProgress_2_Teacher.parentNode.style.backgroundColor = '#428bca';
-					RecordProgress_2_Teacher();
+					Initialization_RecordProgress_2_Teacher();
 					/*
 					 * 
 					 */
@@ -138,7 +142,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_RecordProgress_3_Student");
 					banner_RecordProgress_3_Student.style.color = 'white';
 					banner_RecordProgress_3_Student.parentNode.style.backgroundColor = '#428bca';
-					RecordProgress_3_Student();
+					Initialization_RecordProgress_3_Student();
 					/*
 					 * 
 					 */
@@ -153,7 +157,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_RecordProgress_3_Teacher");
 					banner_RecordProgress_3_Teacher.style.color = 'white';
 					banner_RecordProgress_3_Teacher.parentNode.style.backgroundColor = '#428bca';
-					RecordProgress_3_Teacher();
+					Initialization_RecordProgress_3_Teacher();
 					/*
 					 * 
 					 */
@@ -168,7 +172,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_RecordProgress_4_Student");
 					banner_RecordProgress_4_Student.style.color = 'white';
 					banner_RecordProgress_4_Student.parentNode.style.backgroundColor = '#428bca';
-					RecordProgress_4_Student();
+					Initialization_RecordProgress_4_Student();
 					/*
 					 * 
 					 */
@@ -183,7 +187,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_RecordProgress_4_Teacher");
 					banner_RecordProgress_4_Teacher.style.color = 'white';
 					banner_RecordProgress_4_Teacher.parentNode.style.backgroundColor = '#428bca';
-					RecordProgress_4_Teacher();
+					Initialization_RecordProgress_4_Teacher();
 					/*
 					 * 
 					 */
@@ -198,7 +202,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_summary_student");
 					banner_summary_student.style.color = 'white';
 					banner_summary_student.parentNode.style.backgroundColor = '#428bca';
-					summary_student();
+					Initialization_summary_student();
 					/*
 					 * 
 					 */
@@ -213,7 +217,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_summary_teacher");
 					banner_summary_teacher.style.color = 'white';
 					banner_summary_teacher.parentNode.style.backgroundColor = '#428bca';
-					summary_teacher();
+					Initialization_summary_teacher();
 					/*
 					 * 
 					 */
@@ -228,7 +232,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_dissertation");
 					banner_dissertation.style.color = 'white';
 					banner_dissertation.parentNode.style.backgroundColor = '#428bca';
-					dissertation();
+					Initialization_dissertation();
 					/*
 					 * 
 					 */
@@ -243,7 +247,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_examination_formal_teacher");
 					banner_examination_formal_teacher.style.color = 'white';
 					banner_examination_formal_teacher.parentNode.style.backgroundColor = '#428bca';
-					examination_formal_teacher();
+					Initialization_examination_formal_teacher();
 					/*
 					 * 
 					 */
@@ -258,7 +262,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_examination_formal_leader");
 					banner_examination_formal_leader.style.color = 'white';
 					banner_examination_formal_leader.parentNode.style.backgroundColor = '#428bca';
-					examination_formal_leader();
+					Initialization_examination_formal_teacher();
 					/*
 					 * 
 					 */
@@ -273,7 +277,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_evaluate_tutor");
 					banner_evaluate_tutor.style.color = 'white';
 					banner_evaluate_tutor.parentNode.style.backgroundColor = '#428bca';
-					evaluate_tutor();
+					Initialization_evaluate_tutor();
 					/*
 					 * 
 					 */
@@ -288,7 +292,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_evaluate_review");
 					banner_evaluate_review.style.color = 'white';
 					banner_evaluate_review.parentNode.style.backgroundColor = '#428bca';
-					evaluate_review();
+					Initialization_evaluate_review();
 					/*
 					 * 
 					 */

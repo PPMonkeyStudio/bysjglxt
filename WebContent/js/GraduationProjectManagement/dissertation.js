@@ -1,7 +1,11 @@
-function dissertation() {
+function Initialization_dissertation() {
 	document.getElementById("GraduationProjectTitle").innerHTML = '学生提交答辩论文';
 	var banner_dissertation = document.getElementById("banner_dissertation");
 	banner_dissertation.click();
+}
+
+function dissertation() {
+
 	/*
 	 * 
 	 */
@@ -12,51 +16,75 @@ function dissertation() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				var recordprocess_1 = JSON.parse(xhr.responseText);
-
+				console.debug("毕业论文：" + xhr.responseText);
+				var dissertation = JSON.parse(xhr.responseText);
 				var tab = document.getElementById("tab14");
 				tab.innerHTML = '';
-
+				/*
+				 * 
+				 */
+				var textarea_0 = document.createElement("textarea");
+				textarea_0.id = 'dissertation_id';
+				textarea_0.style = "display:none;"
+				textarea_0.innerHTML = dissertation.dissertation_id;
+				tab.appendChild(textarea_0);
+				/*
+				 * 
+				 */
 				var h4 = document.createElement("h4");
 				h4.innerHTML = '提交答辩论文：';
 				tab.appendChild(h4);
-
-				var textarea_1 = document.createElement("input");
-				textarea_1.className = 'form-control';
-				textarea_1.style = "margin:10px 0 50px 0;resize: vertical;"
-				if (recordprocess_1.record_progress_record != null) {
-					textarea_1.innerHTML = recordprocess_1.record_progress_record;
+				/*
+				 * 
+				 */
+				var div = document.createElement("div");
+				div.id = "div_dissertation_box";
+				tab.appendChild(div);
+				if (dissertation.dissertation_file != null) {
+					var div_2 = document.createElement("div");
+					div_2.innerHTML = '<button class="btn btn-default" '
+							+ 'onclick="addDissertation()">上传</button>';
+					tab.appendChild(div_2);
+					dissertationChange(dissertation.dissertation_file);
 				} else {
-					textarea_1.innerHTML = '';
+					var div_2 = document.createElement("div");
+					div_2.innerHTML = '<button class="btn btn-default" '
+							+ 'onclick="addDissertation()">上传</button>';
+					tab.appendChild(div_2);
 				}
-
-				tab.appendChild(textarea_1);
-				var h4 = document.createElement("h4");
-				h4.innerHTML = '指导老师填写前期进展情况意见：';
-				tab.appendChild(h4);
-				var textarea_2 = document.createElement("textarea");
-				textarea_2.className = 'form-control';
-				textarea_2.style = "margin:10px 0 50px 0;resize: vertical;"
-				if (recordprocess_1.record_progress_opinion != null) {
-					textarea_2.innerHTML = recordprocess_1.record_progress_opinion;
-				} else {
-					textarea_2.innerHTML = '';
-				}
-				tab.appendChild(textarea_2);
+				/*
+				 * 
+				 */
 
 				/*
 				 * 让不是现在进行的流程的不可编辑
 				 */
-				if ("指导老师填写前期进展情况意见" != current_processDefinitionName) {
-					textarea_1.disabled = "disabled";
-					textarea_2.disabled = "disabled";
-					var button_SaveGraduationProject = document
-							.getElementById("button_SaveGraduationProject");
+				var button_SaveGraduationProject = document
+						.getElementById("button_SaveGraduationProject");
+				if ("学生提交答辩论文" != current_processDefinitionName) {
+					div_2.parentNode.removeChild(div_2);
 					button_SaveGraduationProject.style.display = "none";
+				} else if (userStudentDTO != null) {
+					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+						button_SaveGraduationProject.style.display = "block";
+					} else {
+						div_2.parentNode.removeChild(div_2);
+						button_SaveGraduationProject.style.display = "none";
+					}
+				} else if (userTeacherDTO != null) {
+					if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+						button_SaveGraduationProject.style.display = "block";
+					} else {
+						div_2.parentNode.removeChild(div_2);
+						button_SaveGraduationProject.style.display = "none";
+					}
 				} else {
-					button_SaveGraduationProject.style.display = "block";
+					div_2.parentNode.removeChild(div_2);
+					button_SaveGraduationProject.style.display = "none";
 				}
-
+				/*
+				 * 
+				 */
 			} else {
 				toastr.error(xhr.status);
 			}
@@ -65,7 +93,7 @@ function dissertation() {
 
 	xhr
 			.open("POST",
-					"/bysjglxt/graduationProject/GraduationProjectManagement_get_RecordProgress_1");
+					"/bysjglxt/graduationProject/GraduationProjectManagement_get_Dissertation");
 
 	xhr.send(formData);
 

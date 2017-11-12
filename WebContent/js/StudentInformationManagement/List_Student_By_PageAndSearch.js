@@ -34,8 +34,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 				for (var num = 0; num < student_json.list_StudentInformationDTO.length; num++) {
 
 					new_tr = document.createElement("tr");
-
-					new_tr.appendChild(document.createTextNode(''));
 					table_student.firstElementChild.appendChild(new_tr);
 					new_tr.className = "new_tr";
 
@@ -95,10 +93,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser != undefined) {
 						if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission == 1) {
-							new_td.innerHTML = '活动';
+							new_td.innerHTML = '<span class="label label-danger">活动</span>';
 						} else {
-							new_td.innerHTML = '已关闭';
-							new_td.style.color = "#ff5063";
+							new_td.innerHTML = '<span class="label label-default">已关闭</span>';
 						}
 
 					} else {
@@ -130,7 +127,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 								+ '" onclick="Student_Information_Display(this)" >详细</button>'
 								+ '<button class="btn btn-default" id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-								+ '" onclick="specialStudentSelectTopic(this)" style="margin:0 0 0 10px;">分配选题</button>';
+								+ '" onclick="assignmentStudentTopic(this)" style="margin:0 0 0 10px;">分配选题</button>';
 					} else {
 						new_td.innerHTML = '<button class="btn btn-default" id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id

@@ -188,8 +188,8 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 													.get("userTeacherDTO")).getBysjglxtTeacherUser()
 															.getUser_teacher_id()));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
-			System.out
-					.println(
+			http_response
+					.getWriter().write(
 							processManagementService
 									.openProcess(bootProcess.getProcess_instance_name(),
 											bootProcess.getProcess_instance_process_definition(),
@@ -212,8 +212,6 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
 			http_response.getWriter().write(gson.toJson(processManagementService.getCurrentTaskDTO(
 					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
-			System.out.println("老师查看的学生的ID："
-					+ (String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(processManagementService.getCurrentTaskDTO(
@@ -222,6 +220,11 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		}
 	}
 
+	/**
+	 * 通过任务
+	 * 
+	 * @throws IOException
+	 */
 	public void passTask() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		processManagementService.pass(passTaskID);
@@ -230,8 +233,7 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 
 	public void dropTask() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		System.out.println(repulseTaskID);
-		System.out.println(processManagementService.repulse(repulseTaskID));
+		processManagementService.repulse(repulseTaskID);
 		http_response.getWriter().write("success");
 	}
 
