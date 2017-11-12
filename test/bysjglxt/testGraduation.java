@@ -1,5 +1,8 @@
 package bysjglxt;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -20,6 +23,20 @@ public class testGraduation {
 	public void setGraduationProjectManagementService(
 			GraduationProjectManagementService graduationProjectManagementService) {
 		this.graduationProjectManagementService = graduationProjectManagementService;
+	}
+
+	// 测试保存毕业论文
+	@Test
+	public void saveGrad() {
+		File file = null;
+		int i = 0;
+		try {
+			i = graduationProjectManagementService.saveDissertation(file, "", "860f9cbb-1557-4702-96eb-eaa4e310e88c",
+					"");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(i);
 	}
 
 	// 测试分页显示指导的任务

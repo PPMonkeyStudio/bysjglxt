@@ -271,6 +271,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	// 点击我的任务
 	@Override
 	public ProcessManagementVO getMyTaskByPage(ProcessManagementVO processManagementVo, String userID) {
+		System.out.println(userID);
 		List<ProcessDetailDTO> list_ProcessInstanceDetailDTO = new ArrayList<ProcessDetailDTO>();
 		List<bysjglxt_task_instance> list_bysjglxtTaskInstance = new ArrayList<bysjglxt_task_instance>();
 		ProcessDetailDTO processDetailDTO = null;

@@ -18,7 +18,7 @@ import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 public interface GraduationProjectManagementService {
 
 	/**
-	 * 上传毕业论文
+	 * 上传毕业论文 弃用
 	 * 
 	 * @param file
 	 * @param thesisName
@@ -36,6 +36,41 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public File downloadDissertation(String userId);
+
+	/**
+	 * @D 保存毕业论文
+	 * @D 1.新：空 file
+	 * @D 2.旧：空 fileName
+	 * @D 3.userId
+	 * @D 4.判断新文件是否存在
+	 * @QD 5.存在
+	 * @QP 6.判断是否存在旧文件
+	 * @QWD 7.存在
+	 * @QWD 8.进行删除
+	 * @QWD.9.不存在
+	 * @QP 10直接上传新文件
+	 * @QD 11.不存在
+	 * @ED 12.判断旧文件名字是否为空
+	 * @RD 13.为空
+	 * @RD 14.根据用户名查找是否有毕业论文已经存在
+	 * @RD 15.存在
+	 * @RD 16.删除旧文件
+	 * @RD 17.不存在
+	 * @RD 18.不进行操作
+	 * @RD 19.不为空
+	 * @RD 20.不进行操作
+	 * @param file
+	 *            新文件
+	 * @param oldFileName
+	 *            旧文件名
+	 * @param userId
+	 *            学生userId
+	 * @param newFileName
+	 *            新文件名
+	 * @return
+	 * @throws IOException
+	 */
+	public int saveDissertation(File file, String oldFileName, String userId, String newFileName) throws IOException;
 
 	/**
 	 * @说明 获取毕业论文表的对象，
