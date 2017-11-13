@@ -441,7 +441,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		if (nextTaskInstance != null) {
 			// 判断这一步角色是否已经分配
 			if (nextTaskInstance.getTask_instance_role() == null
-					|| nextTaskInstance.getTask_instance_role().trim().length() > 0) {
+					|| nextTaskInstance.getTask_instance_role().trim().length() < 0) {
 				return -5;
 			}
 		}

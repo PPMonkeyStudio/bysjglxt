@@ -503,7 +503,21 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		case "无":
 			return listBysjglxtTopicSelect;
 		case "领导小组长":
-			hql = "from bysjglxt_topic_select order by topic_select_gmt_create";
+			hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance "
+					+ "where topicSelect.topic_select_topic=topic.topic_id ";
+			hql = hql + " and topicSelect.topic_select_student=processInstance.process_instance_man";
+			// 根据选题名称筛选
+			if (teacherTutorStudentVO.getSearch() != null && teacherTutorStudentVO.getSearch().trim().length() > 0) {
+				String search = "%" + teacherTutorStudentVO.getSearch().trim() + "%";
+				hql = hql + " and topic.topic_name_chinese = '" + search + "'";
+			}
+			//根据流程实例状态来进行筛选
+			//如果传过来的是空是无任何影响的
+			//如果传过来的是 "未开始" ：
+			//如果传过来的是 "活动"无影响
+			//如果传过来的是 "结束"无影响
+			hql = hql + " order by topicSelect.topic_select_gmt_create";
+			System.out.println(hql);
 			break;
 		case "教研室主任":
 			hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id";
