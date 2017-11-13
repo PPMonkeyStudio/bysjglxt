@@ -1,12 +1,12 @@
 function Initialization_examination_formal_teacher() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写形式审查表';
+
 	var banner_examination_formal_teacher = document
 			.getElementById("banner_examination_formal_teacher");
 	banner_examination_formal_teacher.click();
 }
 
 function examination_formal_teacher() {
-
+	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写形式审查表';
 	/*
 	 * 
 	 */

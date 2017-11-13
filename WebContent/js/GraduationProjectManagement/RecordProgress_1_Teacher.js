@@ -1,8 +1,12 @@
-function RecordProgress_1_Teacher() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写进展情况意见（前期准备阶段）';
-	var RecordProgress_1_Teacher = document
+function Initialization_RecordProgress_1_Teacher() {
+	var banner_RecordProgress_1_Teacher = document
 			.getElementById("banner_RecordProgress_1_Teacher");
 	banner_RecordProgress_1_Teacher.click();
+}
+
+function RecordProgress_1_Teacher() {
+	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写进展情况意见（前期准备阶段）';
+
 	/*
 	 * 
 	 */

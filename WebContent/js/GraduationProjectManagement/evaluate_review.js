@@ -1,11 +1,12 @@
 function Initialization_evaluate_review() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '评阅老师填写评阅审查表';
-	var banner_examination_formal_teacher = document
-			.getElementById("banner_examination_formal_teacher");
+
+	var banner_evaluate_review = document
+			.getElementById("banner_evaluate_review");
 	banner_evaluate_review.click();
 }
 
 function evaluate_review() {
+	document.getElementById("GraduationProjectTitle").innerHTML = '评阅老师填写评阅审查表';
 	var xhr = false;
 	var formData = new FormData();
 	xhr = new XMLHttpRequest();

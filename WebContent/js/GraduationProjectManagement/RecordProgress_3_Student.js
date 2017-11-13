@@ -1,11 +1,11 @@
 function Initialization_RecordProgress_3_Student() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成进展情况记录（中期自查阶段）';
 	var banner_RecordProgress_3_Student = document
 			.getElementById("banner_RecordProgress_3_Student");
 	banner_RecordProgress_3_Student.click();
 }
 
 function RecordProgress_3_Student() {
+	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成进展情况记录（中期自查阶段）';
 
 	/*
 	 * 

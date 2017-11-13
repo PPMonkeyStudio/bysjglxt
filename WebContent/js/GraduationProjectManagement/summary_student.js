@@ -1,11 +1,11 @@
 function Initialization_summary_student() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成个人学习工作总结';
 	var banner_summary_student = document
 			.getElementById("banner_summary_student");
 	banner_summary_student.click();
 }
 
 function summary_student() {
+	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成个人学习工作总结';
 
 	/*
 	 * 

@@ -52,19 +52,8 @@
 					<tbody>
 						<tr>
 							<th>任务名</th>
-							<th>
-								<select class="form-control"
-									id="select_processDefinition" style="width: auto;"
-									data-live-search="true" onchange="List_MyTask(1)">
-									<option value="-1">流程定义</option>
-								</select>
-							</th>
-							<th>
-								<select class="form-control" id="select_processInstance"
-									style="width: auto;" data-live-search="true"
-									onchange="List_MyTask(1)">
-									<option value="-1">流程实例</option>
-								</select>
+							<th>流程定义</th>
+							<th>流程实例
 							</th>
 							<th>
 								<select class="form-control" id="select_state"

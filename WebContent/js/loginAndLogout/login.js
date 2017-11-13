@@ -31,6 +31,12 @@ function login() {
 					button_login.innerHTML = '登录';
 					break;
 				}
+				case "无权限": {
+					toastr.error("无权限");
+					button_login.disabled = "";
+					button_login.innerHTML = '登录';
+					break;
+				}
 				case "教师登录成功": {
 					window.location = "/bysjglxt/loginLogout/LoginLogoutManagement_index";
 					break;
@@ -41,6 +47,8 @@ function login() {
 				}
 				}
 			} else {
+				button_login.disabled = "";
+				button_login.innerHTML = '登录';
 				toastr.error(xhr.status);
 			}
 		}

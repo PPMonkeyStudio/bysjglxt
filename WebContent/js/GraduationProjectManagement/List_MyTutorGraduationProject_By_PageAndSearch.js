@@ -144,7 +144,8 @@ function List_MyTutorGraduationProject_By_PageAndSearch(pageIndex) {
 	/*
 	 * 
 	 */
-
+	formData.append("processManagementVO.state", document
+			.getElementById("select_state").value);
 	/*
 	 * 
 	 */

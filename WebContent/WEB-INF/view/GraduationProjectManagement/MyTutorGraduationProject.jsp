@@ -58,7 +58,7 @@
 							<th>学生</th>
 							<th class="teacher_control">
 								<select class="form-control" style="width: auto;"
-									id="select_state" onchange="(1)">
+									id="select_state" onchange="List_MyTutorGraduationProject_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
 									<option value="1">正在进行</option>
 									<option value="2">未开始</option>
