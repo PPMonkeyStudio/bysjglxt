@@ -82,7 +82,9 @@ public interface ProcessManagementService {
 	 * 3.根据a该对象的任务实例ID当作父任务实例ID来寻找下一个任务实例 4.根据next任务实例对象ID获得实例对象 5.更改任务实例状态 打回：
 	 * 实现思路: 1.根据任务实例ID获取任务实例实例对象 2.将当前实例对象更改未未开始 3.先获得返回任务实例的ID
 	 * 4.再往上遍历得到父任务结点,当父任务结点为返回任务结点的时候将该父任务结点的状态进行变化
+	 * @return -5下一步角色暂未分配
 	 */
+	
 	// 1.通过
 	public int pass(String taskInstanceId);
 

@@ -258,6 +258,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		System.out.println(list_bysjglxt_topic_select.size());
 		// 2.遍历选题拿到学生userId信息
 		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
+			taskDTO = new TaskDTO();
 			taskDefinition = new bysjglxt_task_definition();
 			bysjglxtStudentUser = new bysjglxt_student_user();
 			bysjglxtStudentBasic = new bysjglxt_student_basic();
