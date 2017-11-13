@@ -435,6 +435,16 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -2;
 			// 任务实例不是正在进行状态不能点击通过
 		}
+		// 判断下一步角色是否存在
+		// 以当前实例ID为父任务实例ID去查找下一个任务
+		nextTaskInstance = processManagementDao.getTaskInstanceByFatherTaskId(taskInstanceId);
+		if (nextTaskInstance != null) {
+			// 判断这一步角色是否已经分配
+			if (nextTaskInstance.getTask_instance_role() == null
+					|| nextTaskInstance.getTask_instance_role().trim().length() > 0) {
+				return -5;
+			}
+		}
 		// 更改任务实例状态,将之改为已结束
 		currentTaskInstance.setTask_instance_state(3);
 		currentTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
