@@ -132,7 +132,7 @@
 					<ul class="dropdown-menu">
 						<li class="teacher_control">
 							<a
-								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyTutorGraduationProjectPage">我指导的毕业设计</a>
+								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyTutorGraduationProjectPage">我指导的学生</a>
 						</li>
 						<li class="student_control">
 							<a
@@ -169,6 +169,11 @@
 								指导老师填写评价审阅表——李文凯
 							</a>
 						</li>
+						<li>
+							<a
+								href="<%=basePath%>notice/NoticeManagement_NoticeManagementPage"
+								class="notification-item" style="text-align: center;">查看更多</a>
+						</li>
 					</ul>
 				</li>
 
@@ -180,12 +185,12 @@
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
 					</a>
 					<ul class="dropdown-menu">
-						<li>
+						<%-- <li>
 							<a href="#">
 								<i class="lnr lnr-user"></i>
 								<span>我的信息</span>
 							</a>
-						</li>
+						</li> --%>
 						<li>
 							<a href="#">
 								<i class="lnr lnr-lock"></i>

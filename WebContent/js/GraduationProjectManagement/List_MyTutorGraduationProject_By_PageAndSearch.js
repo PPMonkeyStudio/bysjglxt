@@ -13,7 +13,7 @@ function List_MyTutorGraduationProject_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("我指导的：" + xhr.responseText);
+				console.debug("我指导的毕业设计：" + xhr.responseText);
 				myTutorGraduationProject_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -75,7 +75,9 @@ function List_MyTutorGraduationProject_By_PageAndSearch(pageIndex) {
 							|| myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition == null) {
 						new_td.innerHTML = '<span class="label label-primary">未开始</span>';
 					} else {
-						new_td.innerHTML = myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition.task_definition_name;
+						new_td.innerHTML = '<span class="label label-success">'
+								+ myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition.task_definition_name
+								+ '</span>';
 					}
 					/*
 					 * 

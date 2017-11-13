@@ -14,14 +14,14 @@
 <!--页面公用-------------------------------------------------------------------------------------------------->
 
 <!---------------------------------------------------------------------------------------------------->
-<script type="text/javascript" 
+<script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/InitializationMyGraduationProject.js"></script>
 <!-------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Teacher.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Section.js"></script>
-<script type="text/javascript" 
+<script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/report_opening.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Student.js"></script>
@@ -393,5 +393,7 @@
 	});
 </script>
 <link rel="stylesheet" href="<%=basePath%>css/square/blue.css" />
-<script type="text/javascript" src="<%=basePath%>js/icheck.js"></script> 
+<script type="text/javascript" src="<%=basePath%>js/icheck.js"></script>
+<style>
+</style>
 </html>
