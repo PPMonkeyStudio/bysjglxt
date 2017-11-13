@@ -56,7 +56,8 @@
 					placeholder="密码">
 			</div>
 			<br>
-			<button id="button_login" class="btn btn-primary  btn-block" onclick="login()">登录</button>
+			<button id="button_login" class="btn btn-primary  btn-block"
+				onclick="login()">登录</button>
 		</div>
 	</div>
 </body>
