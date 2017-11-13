@@ -17,7 +17,7 @@ function examination_formal_teacher() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("形式审查：" + xhr.responseText);
+
 				var examination_formal = JSON.parse(xhr.responseText);
 				var tab = document.getElementById("tab15");
 				tab.innerHTML = '';

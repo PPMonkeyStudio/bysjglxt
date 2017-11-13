@@ -13,6 +13,7 @@ function List_MyTutorGraduationProject_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				console.debug("我指导的：" + xhr.responseText);
 				myTutorGraduationProject_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -83,6 +84,7 @@ function List_MyTutorGraduationProject_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
 							|| myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance == null) {
+
 						new_td.innerHTML = '<button id="'
 								+ myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 								+ '" onclick="(this)" class="btn btn-default" style="margin:0 0 0 10px;">答辩</button>';
