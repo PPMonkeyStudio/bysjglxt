@@ -26,11 +26,34 @@ public class TeacherTutorStudentVO {
 	// 列表
 	private List<TeacherTutorStudentDTO> list_TeacherTutorStudentDTO;
 
+	// 搜索
+	private String search;
+
+	// 状态
+	private String state;
+
 	@Override
 	public String toString() {
 		return "TeacherTutorStudentVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords + ", pageSize="
 				+ pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage + ", HaveNextPage="
-				+ HaveNextPage + ", list_TeacherTutorStudentDTO=" + list_TeacherTutorStudentDTO + "]";
+				+ HaveNextPage + ", list_TeacherTutorStudentDTO=" + list_TeacherTutorStudentDTO + ", search=" + search
+				+ ", state=" + state + "]";
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 	public int getPageIndex() {
