@@ -443,7 +443,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
-						+ " where topicSelect.topic_select_topic = topic.topic_id,topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
+						+ " where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -493,7 +493,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
-						+ " where topicSelect.topic_select_topic = topic.topic_id,topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
+						+ " where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -598,7 +598,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
-						+ " where topicSelect.topic_select_topic = topic.topic_id,topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
+						+ " where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -794,7 +794,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
-						+ " where topicSelect.topic_select_topic = topic.topic_id,topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
+						+ " where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -844,7 +844,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
-						+ " where topicSelect.topic_select_topic = topic.topic_id,topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
+						+ " where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -949,7 +949,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
-						+ " where topicSelect.topic_select_topic = topic.topic_id,topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
+						+ " where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
