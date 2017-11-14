@@ -214,6 +214,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
 		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
 		bysjglxt_process_instance processInstance = new bysjglxt_process_instance();
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		List<bysjglxt_topic_select> list_bysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
 		List<bysjglxt_topic_select> list_Allbysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
 		// 判断老师的身份
@@ -230,8 +231,17 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				section = bysjglxt_section.getSection_name();
 			} else {
 				// 1.判断老师是不是记录员或答辩小组长
-				actor = "无";
-
+				// 根据userId获取teacherUser表信息
+				bysjglxt_teacher_user = graduationProjectManagementDao.getTeacherUserByUserId(teacherUserId);
+				if (bysjglxt_teacher_user.getUser_teacher_is_recorder() == 1) {
+					actor = "记录员";
+				} else {
+					if (bysjglxt_teacher_user.getUser_teacher_is_defence_leader() == 1) {
+						actor = "答辩小组长";
+					} else {
+						actor = "无";
+					}
+				}
 			}
 		}
 		// 获得总记录数
