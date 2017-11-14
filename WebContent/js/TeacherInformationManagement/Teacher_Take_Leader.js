@@ -1,14 +1,12 @@
-function Student_Give_Operate_Premission() {
+function Teacher_Take_Leader() {
 
 	$
 			.confirm({
-				title : '警告！打开所选学生',
-				content : '此操作将打开所选学生账号，学生的数据将被重置，且此操作无法撤回，确定要继续吗？',
-				type : 'red',
-				autoClose : '取消|5000',// 自动关闭
+				title : '关闭答辩小组组长权限',
+				type : 'blue',
 				buttons : {
-					'确认打开' : {
-						btnClass : 'btn-red',
+					'关闭' : {
+						btnClass : 'btn-blue',
 						action : function() {
 							var xhr = false;
 							xhr = new XMLHttpRequest();
@@ -16,10 +14,8 @@ function Student_Give_Operate_Premission() {
 								var message;
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
-										if (xhr.responseText == "success") {
-											toastr.success("已打开所选学生");
-											List_Student_By_PageAndSearch(1);
-										}
+										toastr.success("已关闭所选教师的答辩小组组长权限");
+										List_Teacher_By_PageAndSearch(1);
 									} else {
 										toastr.error(xhr.status);
 									}
@@ -33,15 +29,13 @@ function Student_Give_Operate_Premission() {
 
 							for (var num = 0; num < checkbox_select.length; num++) {
 								if (checkbox_select[num].checked) {
-									formData
-											.append(
-													"ListGiveOperatePremissionStudentID",
-													checkbox_select[num].id);
+									formData.append("ListTeacherID",
+											checkbox_select[num].id);
 								}
 							}
 							xhr
 									.open("POST",
-											"/bysjglxt/student/StudentInformationManagement_GiveStudentOperatePremission");
+											"/bysjglxt/teacher/TeacherInformationManagement_TakeTeacherLeader");
 							xhr.send(formData);
 						}
 					},

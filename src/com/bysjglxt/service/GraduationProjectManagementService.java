@@ -238,7 +238,7 @@ public interface GraduationProjectManagementService {
 	 * 这里是我管理的毕业设计
 	 * 
 	 */
-	public TeacherTutorStudentVO teacherManagermentStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
+	public TeacherTutorStudentVO teacherManagementStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId);
 
 	/**********************************

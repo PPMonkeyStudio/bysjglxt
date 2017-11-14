@@ -44,13 +44,20 @@ function List_MyTutorGraduationProject_By_PageAndSearch(pageIndex) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].bysjglxtTopic.topic_name_chinese;
+					new_td.innerHTML = myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentBasic.student_basic_num;
 					/*
 					 * 
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentBasic.student_basic_name;
+					/*
+					 * 
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].bysjglxtTopic.topic_name_chinese;
+
 					/*
 					 * 
 					 */
@@ -86,18 +93,11 @@ function List_MyTutorGraduationProject_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
 							|| myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance == null) {
-
-						new_td.innerHTML = '<button id="'
-								+ myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
-								+ '" onclick="(this)" class="btn btn-default" style="margin:0 0 0 10px;">答辩</button>';
-
+						new_td.innerHTML = '';
 					} else {
 						new_td.innerHTML = '<button  onclick="window.location = \'\/bysjglxt\/graduationProject\/GraduationProjectManagement_MyGraduationProjectPage?MyTutorGraduationProjectStudentID='
 								+ myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
-								+ '\'" class="btn btn-default">毕业设计</button>'
-								+ '<button id="'
-								+ myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
-								+ '" onclick="(this)" class="btn btn-default" style="margin:0 0 0 10px;">答辩</button>';
+								+ '\'" class="btn btn-default">毕业设计</button>';
 
 					}
 

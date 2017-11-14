@@ -152,14 +152,14 @@
 					<button class="btn btn-default"
 						onclick="Student_Take_Operate_Premission()"
 						style="float: right; margin: 0 10px;">
-						<i class="fa fa-reply-all"></i>
-						收回操作权限
+						<i class="fa fa-exclamation-triangle"></i>
+						关闭学生
 					</button>
 					<button class="btn btn-default"
 						onclick="Student_Give_Operate_Premission()"
 						style="float: right; margin: 0 10px;">
-						<i class="fa fa-handshake-o"></i>
-						赋予操作权限
+						<i class="fa fa-exclamation-triangle"></i>
+						打开学生
 					</button>
 				</div>
 				<div

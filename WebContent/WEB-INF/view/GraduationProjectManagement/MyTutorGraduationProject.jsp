@@ -54,11 +54,13 @@
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
-							<th>毕业设计名称</th>
+							<th>学号</th>
 							<th>学生</th>
+							<th>毕业设计名称</th>
 							<th class="teacher_control">
 								<select class="form-control" style="width: auto;"
-									id="select_state" onchange="List_MyTutorGraduationProject_By_PageAndSearch(1)">
+									id="select_state"
+									onchange="List_MyTutorGraduationProject_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
 									<option value="1">正在进行</option>
 									<option value="2">未开始</option>

@@ -2,7 +2,7 @@ function Delete_Student() {
 
 	$
 			.confirm({
-				title : '删除确认',
+				title : '警告！删除学生',
 				content : '此操作将删除所有所选的学生账号，并且将学生对应的数据一并删除',
 				type : 'red',
 				autoClose : '取消|5000',// 自动关闭

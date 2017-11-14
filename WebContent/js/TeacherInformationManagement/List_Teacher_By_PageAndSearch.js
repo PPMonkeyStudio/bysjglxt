@@ -97,6 +97,26 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					} else {
 						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num;
 					}
+					//
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_recorder == 1) {
+						new_td.innerHTML = '✔';
+					} else {
+						new_td.innerHTML = '✘';
+						new_td.style.color = "#ff5063";
+					}
+					//
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
+						new_td.innerHTML = '✔';
+					} else {
+						new_td.innerHTML = '✘';
+						new_td.style.color = "#ff5063";
+					}
 
 					//
 					new_td = document.createElement("td");
@@ -183,6 +203,20 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 	if (document.getElementById("select_title").value != "-1") {
 		formData.append("teacherInformationManagementVO.professional_title",
 				document.getElementById("select_title").value);
+	}
+	/*
+	 * 记录员
+	 */
+	if (document.getElementById("select_recorder").value != "-1") {
+		formData.append("teacherInformationManagementVO.recorder", document
+				.getElementById("select_recorder").value);
+	}
+	/*
+	 * 答辩小组组长
+	 */
+	if (document.getElementById("select_defenceLeader").value != "-1") {
+		formData.append("teacherInformationManagementVO.defenceLeader",
+				document.getElementById("select_defenceLeader").value);
 	}
 	/*
 	 * 

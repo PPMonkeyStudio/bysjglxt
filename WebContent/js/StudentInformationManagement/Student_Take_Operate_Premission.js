@@ -1,11 +1,12 @@
 function Student_Take_Operate_Premission() {
 	$
 			.confirm({
-				title : '关闭操作权限',
-				content : '关闭所选学生的操作权限',
+				title : '警告！关闭所选学生',
+				content : '此操作将关闭所选学生账号，学生数据将被固化且将无法操作系统，若重新打开则学生数据将被清空，且此操作无法撤回，确定要继续吗？',
 				type : 'red',
+				autoClose : '取消|5000',// 自动关闭
 				buttons : {
-					'分配' : {
+					'确认关闭' : {
 						btnClass : 'btn-red',
 						action : function() {
 							var xhr = false;
@@ -15,7 +16,7 @@ function Student_Take_Operate_Premission() {
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
 										if (xhr.responseText == "success") {
-											toastr.success("已收回所选学生权限");
+											toastr.success("已关闭所选学生");
 											List_Student_By_PageAndSearch(1);
 										}
 									} else {

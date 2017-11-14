@@ -34,7 +34,7 @@ public class TeacherInformationManagementAction extends ActionSupport
 	/*
 	 * 删除所选学生列表
 	 */
-	private List<String> ListDeleteTeacherID;
+	private List<String> ListTeacherID;
 	/*
 	 * 学生excel
 	 */
@@ -69,6 +69,30 @@ public class TeacherInformationManagementAction extends ActionSupport
 	public String CreateTeacherPage() {
 
 		return "CreateTeacherPage";
+	}
+
+	public void GiveTeacherRecorder() throws IOException {
+		teacherInformationManagementService.addRecorder(ListTeacherID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	public void TakeTeacherRecorder() throws IOException {
+		teacherInformationManagementService.removeRecoder(ListTeacherID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	public void GiveTeacherLeader() throws IOException {
+		teacherInformationManagementService.addLeader(ListTeacherID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
+	}
+
+	public void TakeTeacherLeader() throws IOException {
+		teacherInformationManagementService.removeLeader(ListTeacherID);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
 	}
 
 	/**
@@ -110,7 +134,7 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void DeleteTeacher() throws IOException {
-		teacherInformationManagementService.remove_TeacherList(ListDeleteTeacherID);
+		teacherInformationManagementService.remove_TeacherList(ListTeacherID);
 
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
@@ -284,12 +308,12 @@ public class TeacherInformationManagementAction extends ActionSupport
 		this.teacherInformationManagementVO = teacherInformationManagementVO;
 	}
 
-	public List<String> getListDeleteTeacherID() {
-		return ListDeleteTeacherID;
+	public List<String> getListTeacherID() {
+		return ListTeacherID;
 	}
 
-	public void setListDeleteTeacherID(List<String> listDeleteTeacherID) {
-		ListDeleteTeacherID = listDeleteTeacherID;
+	public void setListTeacherID(List<String> listTeacherID) {
+		ListTeacherID = listTeacherID;
 	}
 
 	public bysjglxt_teacher_basic getNewTeacher() {
