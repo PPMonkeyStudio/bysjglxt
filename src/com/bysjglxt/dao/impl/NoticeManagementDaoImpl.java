@@ -31,10 +31,10 @@ public class NoticeManagementDaoImpl implements NoticeManagementDao {
 	public List<bysjglxt_notice> getListNoticeByBelongAndState(String userId, int i) {
 		List<bysjglxt_notice> list_bysjglxt_notice = new ArrayList<bysjglxt_notice>();
 		Session session = getSession();
-		String hql = "from list_bysjglxt_notice where notice_belong = '" + userId + "' and notice_state = '" + 2
+		String hql = "from bysjglxt_notice where notice_belong = '" + userId + "' and notice_state = '" + i
 				+ "' order by notice_gmt_create desc";
 		Query query = session.createQuery(hql);
-		query.setFirstResult(1);
+		query.setFirstResult(0);
 		query.setMaxResults(5);
 		list_bysjglxt_notice = query.list();
 		return list_bysjglxt_notice;
