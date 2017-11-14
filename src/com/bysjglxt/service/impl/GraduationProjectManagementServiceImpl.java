@@ -67,15 +67,12 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		// 如果新文件为空
 		if (file == null) {
 			path = "F:/graduagtionThesi/";
-			System.out.println("222333");
 			// 判断旧文件是否处于空的状态
 			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
 				// 如果是空
-				System.out.println("111");
 				// 判断：在数据库中属于这个学生的毕业论文是否存在
 				bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
 				if (bysjglxt_dissertation != null) {
-					System.out.println("22");
 					// 如果存在,则将原有毕业论文删除
 					// 先进行删除
 					// 删除学生上传的文件
@@ -201,7 +198,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	@Override
 	public TeacherTutorStudentVO teacherManagementStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId) {
-		System.out.println("ggg");
 		List<TeacherTutorStudentDTO> list_TeacherTutorStudentDTO = new ArrayList<TeacherTutorStudentDTO>();
 		TeacherTutorStudentDTO teacherTutorStudentDTO = new TeacherTutorStudentDTO();
 		TaskDTO taskDTO = new TaskDTO();
@@ -240,7 +236,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		list_Allbysjglxt_topic_select = graduationProjectManagementDao
 				.getTeacherTutorStudentAllSelectTopic(teacherTutorStudentVO, teacherUserId, actor, section);
 		int i = list_Allbysjglxt_topic_select.size();
-		System.out.println(i);
 		teacherTutorStudentVO.setTotalRecords(i);
 		teacherTutorStudentVO.setTotalPages(((i - 1) / teacherTutorStudentVO.getPageSize()) + 1);
 		if (teacherTutorStudentVO.getPageIndex() <= 1) {
@@ -256,7 +251,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		// 1.根据教师ID筛选出符合条件的最多10条选题数据
 		list_bysjglxt_topic_select = graduationProjectManagementDao
 				.getTeacherTutorStudentSelectTopicByPage(teacherTutorStudentVO, teacherUserId, actor, section);
-		System.out.println(list_bysjglxt_topic_select.size());
 		// 2.遍历选题拿到学生userId信息
 		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
 			processBelongDTO = new ProcessBelongDTO();
@@ -341,7 +335,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	@Override
 	public TeacherTutorStudentVO teacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId) {
-		System.out.println("ggg");
 		List<TeacherTutorStudentDTO> list_TeacherTutorStudentDTO = new ArrayList<TeacherTutorStudentDTO>();
 		TeacherTutorStudentDTO teacherTutorStudentDTO = new TeacherTutorStudentDTO();
 		TaskDTO taskDTO = new TaskDTO();
@@ -374,7 +367,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		list_Allbysjglxt_topic_select = graduationProjectManagementDao
 				.getTeacherTutorStudentAllSelectTopic(teacherTutorStudentVO, teacherUserId, actor, section);
 		int i = list_Allbysjglxt_topic_select.size();
-		System.out.println(i);
 		teacherTutorStudentVO.setTotalRecords(i);
 		teacherTutorStudentVO.setTotalPages(((i - 1) / teacherTutorStudentVO.getPageSize()) + 1);
 		if (teacherTutorStudentVO.getPageIndex() <= 1) {
@@ -390,7 +382,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		// 1.根据教师ID筛选出符合条件的最多10条选题数据
 		list_bysjglxt_topic_select = graduationProjectManagementDao
 				.getTeacherTutorStudentSelectTopicByPage(teacherTutorStudentVO, teacherUserId, actor, section);
-		System.out.println(list_bysjglxt_topic_select.size());
 		// 2.遍历选题拿到学生userId信息
 		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
 			processBelongDTO = new ProcessBelongDTO();
@@ -596,7 +587,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		int flag = 2;
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
-		System.out.println(bysjglxt_taskbook);
 		if (bysjglxt_taskbook != null) {
 			bysjglxt_taskbook.setTaskbook_acontent_required(updateTaskbook.getTaskbook_acontent_required());
 			bysjglxt_taskbook.setTaskbook_reference(updateTaskbook.getTaskbook_reference());
@@ -949,7 +939,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 						.findDefenceByUserId(bysjglxt_evaluate_tutor.getEvaluate_tutor_student());
 				bysjglxt_defence
 						.setDefence_grade_evaluate_tutor(bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_total() * 0.3);
-				System.out.println(bysjglxt_defence.getDefence_grade_evaluate_tutor());
 				bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 				flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 			}
@@ -1017,7 +1006,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 						.findDefenceByUserId(bysjglxt_evaluate_review.getEvaluate_review_student());
 				bysjglxt_defence.setDefence_grade_evaluate_tutor(
 						bysjglxt_evaluate_review.getEvaluate_review_grade_total() * 0.3);
-				System.out.println(bysjglxt_defence.getDefence_grade_evaluate_review());
 				bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 				flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 			}
