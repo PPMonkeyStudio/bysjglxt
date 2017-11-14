@@ -39,6 +39,9 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * 
 	 */
 	private TeacherTutorStudentVO teacherTutorStudentVO;
+
+	private TeacherTutorStudentVO teacherManagementStudentVO;
+
 	private String MyTutorGraduationProjectStudentID;
 	/*
 	 * 
@@ -69,7 +72,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * 
 	 */
 	public String MyGraduationProjectPage() {
-		System.out.println(MyTutorGraduationProjectStudentID);
 		if (MyTutorGraduationProjectStudentID != null) {
 			ActionContext.getContext().getSession().put("MyTutorGraduationProjectStudentID",
 					MyTutorGraduationProjectStudentID);
@@ -79,6 +81,21 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return "MyGraduationProjectPage";
 	}
 
+	/**
+	 * 我管理的毕业设计
+	 * 
+	 * @return
+	 */
+	public String MyManagementGraduationProjectPage() {
+
+		return "MyManagementGraduationProjectPage";
+	}
+
+	/**
+	 * 我指导的毕业设计
+	 * 
+	 * @return
+	 */
 	public String MyTutorGraduationProjectPage() {
 		return "MyTutorGraduationProjectPage";
 	}
@@ -98,16 +115,17 @@ public class GraduationProjectManagementAction extends ActionSupport
 		http_response.getWriter().write(gson.toJson(teacherTutorStudentVO));
 	}
 
-	public void ListMyManagermentGraduationProjectByPageAndSearch() throws IOException {
+	public void ListMyManagementGraduationProjectByPageAndSearch() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 
-		teacherTutorStudentVO = graduationProjectManagementService.teacherManagementStudentVO(teacherTutorStudentVO,
+		teacherManagementStudentVO = graduationProjectManagementService.teacherManagementStudentVO(
+				teacherTutorStudentVO,
 				((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
 						.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(gson.toJson(teacherTutorStudentVO));
+		http_response.getWriter().write(gson.toJson(teacherManagementStudentVO));
 	}
 
 	/*
@@ -290,13 +308,15 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	public String exportAll() throws Exception {
+
 		File exportFile = graduationProjectManagementService
 				.exportAll(((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 						.getBysjglxtStudentUser().getUser_student_id());
-		fileName = new String(
-				(((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
-						.getBysjglxtStudentBasic().getStudent_basic_name() + "的毕业设计.docx").getBytes("GBK"),
-				"ISO-8859-1");
+		fileName = new String((((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+				.getBysjglxtStudentBasic().getStudent_basic_num()
+				+ ((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+						.getBysjglxtStudentBasic().getStudent_basic_name()
+				+ "的毕业设计过程管理手册.docx").getBytes("GBK"), "ISO-8859-1");
 		inputStream = new FileInputStream(exportFile);
 		exportFile.delete();
 		return "exportAll";
@@ -697,5 +717,13 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setOldDissertation(String oldDissertation) {
 		this.oldDissertation = oldDissertation;
+	}
+
+	public TeacherTutorStudentVO getTeacherManagementStudentVO() {
+		return teacherManagementStudentVO;
+	}
+
+	public void setTeacherManagementStudentVO(TeacherTutorStudentVO teacherManagementStudentVO) {
+		this.teacherManagementStudentVO = teacherManagementStudentVO;
 	}
 }

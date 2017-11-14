@@ -11,6 +11,8 @@
 			</result>
 			<result name="MyTutorGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyTutorGraduationProject.jsp
 			</result>
+			<result name="MyManagementGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyManagementGraduationProject.jsp
+			</result>
 			<result name="exportAll" type="stream">
 				<!-- 指定下载文件的类型 -->
 				<param name="contentType">application/octet-stream</param>

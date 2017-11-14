@@ -96,16 +96,6 @@
 						<span>课题</span>
 						<!-- <i class="icon-submenu lnr lnr-chevron-down"></i> -->
 					</a>
-					<%-- <ul class="dropdown-menu">
-						<li>
-							<a
-								href="<%=basePath%>topic/TopicInformationManagement_TopicListPage">课题</a>
-						</li>
-						<li>
-							<a
-								href="<%=basePath%>topic/TopicInformationManagement_MyTopicListPage">我的课题</a>
-						</li>
-					</ul> --%>
 				</li>
 				<!--  -->
 				<li class="dropdown" style="float: left;">
@@ -130,6 +120,10 @@
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
 					</a>
 					<ul class="dropdown-menu">
+						<li class="teacher_control">
+							<a
+								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyManagementGraduationProjectPage">毕业设计管理</a>
+						</li>
 						<li class="teacher_control">
 							<a
 								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyTutorGraduationProjectPage">我指导的学生</a>
