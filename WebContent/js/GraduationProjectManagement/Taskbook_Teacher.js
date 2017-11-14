@@ -1,11 +1,11 @@
 function Initialization_Taskbook_Teacher() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师完成任务书';
 	var banner_Taskbook_Teacher = document
 			.getElementById("banner_Taskbook_Teacher");
 	banner_Taskbook_Teacher.click();
 }
 
 function Taskbook_Teacher() {
+	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师完成任务书';
 
 	/*
 	 * 

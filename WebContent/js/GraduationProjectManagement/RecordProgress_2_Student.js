@@ -1,11 +1,11 @@
 function Initialization_RecordProgress_2_Student() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成进展情况记录（撰写阶段）';
 	var banner_RecordProgress_2_Student = document
 			.getElementById("banner_RecordProgress_2_Student");
 	banner_RecordProgress_2_Student.click();
 }
 
 function RecordProgress_2_Student() {
+	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成进展情况记录（撰写阶段）';
 
 	/*
 	 * 

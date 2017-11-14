@@ -1,11 +1,11 @@
 function Initialization_RecordProgress_4_Teacher() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写进展情况意见（完善阶段）';
-	var RecordProgress_4_Teacher = document
+	var banner_RecordProgress_4_Teacher = document
 			.getElementById("banner_RecordProgress_4_Teacher");
 	banner_RecordProgress_4_Teacher.click();
 }
 function RecordProgress_4_Teacher() {
 
+	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写进展情况意见（完善阶段）';
 	/*
 	 * 
 	 */

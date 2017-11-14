@@ -46,6 +46,11 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 			http_response.getWriter().write("密码不正确");
 			break;
 		}
+		//
+		case -3: {
+			http_response.getWriter().write("无权限");
+			break;
+		}
 		// 教师登录
 		case 1: {
 			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) loginOrWriteOffService.loginInformation(1,

@@ -199,7 +199,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 * 
 	 */
 	@Override
-	public TeacherTutorStudentVO teacherManagermentStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
+	public TeacherTutorStudentVO teacherManagementStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId) {
 		System.out.println("ggg");
 		List<TeacherTutorStudentDTO> list_TeacherTutorStudentDTO = new ArrayList<TeacherTutorStudentDTO>();

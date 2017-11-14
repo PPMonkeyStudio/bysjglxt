@@ -1,12 +1,12 @@
 function Initialization_examination_formal_teacher() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写形式审查表';
+
 	var banner_examination_formal_teacher = document
 			.getElementById("banner_examination_formal_teacher");
 	banner_examination_formal_teacher.click();
 }
 
 function examination_formal_teacher() {
-
+	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写形式审查表';
 	/*
 	 * 
 	 */
@@ -17,7 +17,7 @@ function examination_formal_teacher() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("形式审查：" + xhr.responseText);
+
 				var examination_formal = JSON.parse(xhr.responseText);
 				var tab = document.getElementById("tab15");
 				tab.innerHTML = '';

@@ -1,11 +1,12 @@
 function Initialization_report_opening() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成开题报告';
+
 	var banner_report_opening = document
 			.getElementById("banner_report_opening");
 	banner_report_opening.click();
 }
 
 function report_opening() {
+	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成开题报告';
 	var xhr = false;
 	var formData = new FormData();
 	xhr = new XMLHttpRequest();

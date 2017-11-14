@@ -1,11 +1,11 @@
 function Initialization_dissertation() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '学生提交答辩论文';
+
 	var banner_dissertation = document.getElementById("banner_dissertation");
 	banner_dissertation.click();
 }
 
 function dissertation() {
-
+	document.getElementById("GraduationProjectTitle").innerHTML = '学生提交答辩论文';
 	/*
 	 * 
 	 */

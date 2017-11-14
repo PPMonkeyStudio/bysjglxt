@@ -107,18 +107,6 @@
 			new_tr_1.appendChild(document.createTextNode(''));
 			table_topic_detail.firstElementChild.appendChild(new_tr_1);
 			if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != null
-					&& topic_json.list_TopicInformationDTO[num].bysjglxtTopicInviteTeacher.topic_invite_teacher_name != null) {
-				new_tr_1.innerHTML = '<th>协作老师</th><td>'
-						+ topic_json.list_TopicInformationDTO[num].bysjglxtTopicInviteTeacher.topic_invite_teacher_name
-						+ '</td>';
-			} else {
-				new_tr_1.innerHTML = '<th>协作老师</th><td>无</td>';
-			}
-
-			new_tr_1 = document.createElement("tr");
-			new_tr_1.appendChild(document.createTextNode(''));
-			table_topic_detail.firstElementChild.appendChild(new_tr_1);
-			if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != null
 					&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student_num != null) {
 				new_tr_1.innerHTML = '<th>已选学生数</th><td>'
 						+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student_num

@@ -1,11 +1,11 @@
 function Initialization_summary_teacher() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写个人学习工作总结意见';
 	var banner_summary_teacher = document
 			.getElementById("banner_summary_teacher");
 	banner_summary_teacher.click();
 }
 
 function summary_teacher() {
+	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师填写个人学习工作总结意见';
 
 	/*
 	 * 

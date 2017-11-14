@@ -12,16 +12,14 @@
 <meta http-equiv="Content-Type"
 	content="text/html; charset=UTF-8">
 <!--页面公用-------------------------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/NoticeManagement/List_Notice_By_PageAndSearch.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/NoticeManagement/readNotice.js"></script>
 <!---------------------------------------------------------------------------------------------------->
-<script type="text/javascript"
-	src="<%=basePath%>js/ProcessManagement/List_MyTask.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/ProcessManagement/passTask.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/ProcessManagement/repulseTask.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
-<title>我的任务</title>
+<title>通知</title>
 </head>
 <body>
 	<s:action name="LoginLogoutManagement_navbar"
@@ -30,41 +28,23 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<div style="margin: 80px 0 0 0; float: left; width: 100%;">
+		<!---------------------------------------------------------------------------------------------------->
+		<!---------------------------------------------------------------------------------------------------->
 		<div class="panel" style="width: 95%; margin: 20px auto;">
-
 			<div class="panel-heading">
-				<h3 class="panel-title">我的任务</h3>
+				<h3 class="panel-title">通知</h3>
 			</div>
-			<!--  -->
+			<!---------------------------------------------------------------------------------------------------->
+			<!---------------------------------------------------------------------------------------------------->
 			<div class="panel-body">
-				<div style="height: 34px;">
-					<!-- 检索 -->
-					<div class="input-group" style="width: 300px; float: right;">
-						<input id="input_search" class="form-control"
-							oninput="List_Teacher_By_PageAndSearch(1)" type="text">
-						<span class="input-group-addon">
-							<i class="fa fa-search"></i>
-						</span>
-					</div>
-				</div>
-				<table id="table_myTask" class="table table-hover "
+				<table id="table_notice" class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
-							<th>任务名</th>
-							<th>流程定义</th>
-							<th>流程实例
-							</th>
-							<th>
-								<select class="form-control" id="select_state"
-									style="width: auto;" data-live-search="true"
-									onchange="List_MyTask(1)">
-									<option value="-1">状态</option>
-									<option value="1">正在进项</option>
-									<option value="2">未开始</option>
-									<option value="3">已结束</option>
-								</select>
-							</th>
+							<th>通知内容</th>
+							<th>发起者</th>
+							<th>状态</th>
+							<th>时间</th>
 							<th>操作</th>
 						</tr>
 					</tbody>
@@ -98,12 +78,13 @@
 					条记录
 				</div>
 			</div>
-			<!--  -->
+			<!---------------------------------------------------------------------------------------------------->
+			<!---------------------------------------------------------------------------------------------------->
 		</div>
-		<!--  -->
-		<!--  -->
-		<!--  -->
+		<!---------------------------------------------------------------------------------------------------->
+		<!---------------------------------------------------------------------------------------------------->
 	</div>
+	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
@@ -111,8 +92,4 @@
 <script>
 	$('select').selectpicker('refresh');
 </script>
-<script>
-	
-</script>
-
 </html>

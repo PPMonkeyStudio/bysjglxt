@@ -55,7 +55,7 @@
 				<h3 class="panel-title"></h3>
 			</div>
 			<div class="panel-body"></div>
-			<div style="padding: 0 0 20px 20px">
+			<div style="padding: 0 0 20px 20px;">
 				<button class="btn btn-default"
 					onclick="CreatTaskDefinition()">
 					<i class="fa fa-plus-square" aria-hidden="true"></i>

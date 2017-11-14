@@ -1,11 +1,11 @@
 function Initialization_Taskbook_Section() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '教研室主任填写任务书审核意见';
 	var banner_Taskbook_Section = document
 			.getElementById("banner_Taskbook_Section");
 	banner_Taskbook_Section.click();
 }
 
 function Taskbook_Section() {
+	document.getElementById("GraduationProjectTitle").innerHTML = '教研室主任填写任务书审核意见';
 	/*
 	 * 
 	 */
