@@ -30,7 +30,7 @@ public class TeacherTutorStudentVO {
 	private String search;
 
 	// 状态
-	private String state;
+	private int state = -1;
 
 	@Override
 	public String toString() {
@@ -40,11 +40,11 @@ public class TeacherTutorStudentVO {
 				+ ", state=" + state + "]";
 	}
 
-	public String getState() {
+	public int getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(int state) {
 		this.state = state;
 	}
 

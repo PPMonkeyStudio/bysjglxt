@@ -223,7 +223,8 @@ public interface GraduationProjectManagementService {
 	public int updateDefence(bysjglxt_defence updateDefence);
 
 	/**
-	 * 教师点击指导的毕业设计列表
+	 * 这里是教师指导的毕业设计
+	 * 
 	 * 
 	 * @param teacherTutorStudentVO
 	 * @param teacherUserId
@@ -232,7 +233,16 @@ public interface GraduationProjectManagementService {
 	public TeacherTutorStudentVO teacherTutorStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId);
 
+	/**
+	 * 
+	 * 这里是我管理的毕业设计
+	 * 
+	 */
+	public TeacherTutorStudentVO teacherManagermentStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
+			String teacherUserId);
+
 	/**********************************
+	 * 
 	 * 下面是我的毕业设计里面需要的对象,此处需要一个一个的给
 	 **********************************/
 

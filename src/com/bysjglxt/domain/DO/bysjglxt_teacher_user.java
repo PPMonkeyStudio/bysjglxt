@@ -11,6 +11,24 @@ public class bysjglxt_teacher_user {
 	private int user_teacher_guidance_num;
 	private String user_teacher_gmt_create;
 	private String user_teacher_gmt_modified;
+	private int user_teacher_is_recorder;
+	private int user_teacher_is_defence_leader;
+
+	public int getUser_teacher_is_recorder() {
+		return user_teacher_is_recorder;
+	}
+
+	public void setUser_teacher_is_recorder(int user_teacher_is_recorder) {
+		this.user_teacher_is_recorder = user_teacher_is_recorder;
+	}
+
+	public int getUser_teacher_is_defence_leader() {
+		return user_teacher_is_defence_leader;
+	}
+
+	public void setUser_teacher_is_defence_leader(int user_teacher_is_defence_leader) {
+		this.user_teacher_is_defence_leader = user_teacher_is_defence_leader;
+	}
 
 	public int getUser_teacher_guidance_num() {
 		return user_teacher_guidance_num;
@@ -91,7 +109,8 @@ public class bysjglxt_teacher_user {
 				+ ", user_teacher_section=" + user_teacher_section + ", user_teacher_max_guidance="
 				+ user_teacher_max_guidance + ", user_teacher_guidance_num=" + user_teacher_guidance_num
 				+ ", user_teacher_gmt_create=" + user_teacher_gmt_create + ", user_teacher_gmt_modified="
-				+ user_teacher_gmt_modified + "]";
+				+ user_teacher_gmt_modified + ", user_teacher_is_recorder=" + user_teacher_is_recorder
+				+ ", user_teacher_is_defence_leader=" + user_teacher_is_defence_leader + "]";
 	}
 
 }

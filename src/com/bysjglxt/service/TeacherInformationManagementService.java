@@ -103,19 +103,19 @@ public interface TeacherInformationManagementService {
 
 	/**
 	 * 修改教师登陆信息
+	 * 
 	 * @param bysjglxt_teacher_user
 	 * @return
 	 */
 	public boolean updateTeacherUser(bysjglxt_teacher_user bysjglxt_teacher_user);
-	
-	
+
 	/**
 	 * 遍历获得所有职称
 	 * 
 	 * @return
 	 */
 	public List<String> list_Teacher_Title();
-	
+
 	/**
 	 * 重置密码 将密码设置为工号
 	 * 
@@ -123,14 +123,50 @@ public interface TeacherInformationManagementService {
 	 * @return
 	 */
 	public boolean resetPassword(String user_teacher_id);
-	
-	
-	public boolean updatePassword(String user_teacher_id,String password);
-	
-	
-	
-	
-	
-	
+
+	/**
+	 * 更改密码
+	 * 
+	 * @param user_teacher_id
+	 * @param password
+	 * @return
+	 */
+	public boolean updatePassword(String user_teacher_id, String password);
+
+	/**
+	 * 批量增加记录员
+	 * 
+	 * @param listTeacherUserId
+	 * @return 1 成功
+	 * @return -1失败
+	 */
+	public int addRecorder(List<String> listTeacherUserId);
+
+	/**
+	 * 批量增加答辩小组长
+	 * 
+	 * @param listTeacherUserId
+	 * @return 1成功
+	 * @return -1失败
+	 */
+	public int addLeader(List<String> listTeacherUserId);
+
+	/**
+	 * 批量驳回记录员权限
+	 * 
+	 * @param listTeacherUserId
+	 * @return   1成功
+	 * @return  -1失败
+	 */
+	public int removeRecoder(List<String> listTeacherUserId);
+
+	/**
+	 * 批量驳回答辩小组身份
+	 * 
+	 * @param listTeacherUserId
+	 * @return  1 成功
+	 * @return  -1失败
+	 */
+	public int removeLeader(List<String> listTeacherUserId);
 
 }

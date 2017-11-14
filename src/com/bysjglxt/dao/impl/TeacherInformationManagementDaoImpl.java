@@ -187,6 +187,17 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			hql = hql + " and basic.job_number like '" + search + "'";
 		}
 
+		// 记录员筛选
+		if (teacherInformationManagementVO.getRecorder() != 0) {
+			hql = hql + " and teacher_user.user_teacher_is_recorder='" + teacherInformationManagementVO.getRecorder()
+					+ "'";
+		}
+		// 答辩小组长筛选
+		if (teacherInformationManagementVO.getDefenceLeader() != 0) {
+			hql = hql + " and teacher_user.user_teacher_is_defence_leader='"
+					+ teacherInformationManagementVO.getDefenceLeader() + "'";
+		}
+
 		if ((teacherInformationManagementVO.getProfessional_title() != null
 				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)
 				|| "".equals(teacherInformationManagementVO.getProfessional_title())) {
@@ -307,7 +318,16 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 			String search = "%" + teacherInformationManagementVO.getSearch() + "%";
 			hql = hql + " and basic.job_number like '" + search + "'";
 		}
-
+		// 记录员筛选
+		if (teacherInformationManagementVO.getRecorder() != 0) {
+			hql = hql + " and teacher_user.user_teacher_is_recorder='" + teacherInformationManagementVO.getRecorder()
+					+ "'";
+		}
+		// 答辩小组长筛选
+		if (teacherInformationManagementVO.getDefenceLeader() != 0) {
+			hql = hql + " and teacher_user.user_teacher_is_defence_leader='"
+					+ teacherInformationManagementVO.getDefenceLeader() + "'";
+		}
 		if ((teacherInformationManagementVO.getProfessional_title() != null
 				&& teacherInformationManagementVO.getProfessional_title().trim().length() > 0)
 				|| "".equals(teacherInformationManagementVO.getProfessional_title())) {

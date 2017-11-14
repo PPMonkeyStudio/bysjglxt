@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-11-11 19:02:16 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2017-11-13 22:55:15 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_summary" table="BYSJGLXT_SUMMARY">
         <id name="summary_id" type="java.lang.String">
