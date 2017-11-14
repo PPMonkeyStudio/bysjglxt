@@ -48,7 +48,6 @@ public class testGraduation {
 				"ee5ee741-7677-4541-8a85-dc2f670f6316");
 		System.out.println(teacherTutorStudentVO);
 	}
-
 	// 测试导出封面
 	@Test
 	public void testCover() {
