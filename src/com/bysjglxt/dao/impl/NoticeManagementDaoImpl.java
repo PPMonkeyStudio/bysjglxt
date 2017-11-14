@@ -31,7 +31,8 @@ public class NoticeManagementDaoImpl implements NoticeManagementDao {
 	public List<bysjglxt_notice> getListNoticeByBelongAndState(String userId, int i) {
 		List<bysjglxt_notice> list_bysjglxt_notice = new ArrayList<bysjglxt_notice>();
 		Session session = getSession();
-		String hql = "from list_bysjglxt_notice where notice_belong = '" + userId + "' and notice_state = '" + 2 + "' order by notice_gmt_create desc";
+		String hql = "from list_bysjglxt_notice where notice_belong = '" + userId + "' and notice_state = '" + 2
+				+ "' order by notice_gmt_create desc";
 		Query query = session.createQuery(hql);
 		query.setFirstResult(1);
 		query.setMaxResults(5);
@@ -129,5 +130,15 @@ public class NoticeManagementDaoImpl implements NoticeManagementDao {
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	@Override
+	public List<bysjglxt_notice> getListNoticeCount(String userId, int i) {
+		List<bysjglxt_notice> list_bysjglxt_notice = new ArrayList<bysjglxt_notice>();
+		Session session = getSession();
+		String hql = "from list_bysjglxt_notice where notice_belong = '" + userId + "' and notice_state = '" + i + "'";
+		Query query = session.createQuery(hql);
+		list_bysjglxt_notice = query.list();
+		return list_bysjglxt_notice;
 	}
 }
