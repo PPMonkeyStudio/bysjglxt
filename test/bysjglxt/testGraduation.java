@@ -44,8 +44,8 @@ public class testGraduation {
 	public void testTutor() {
 		TeacherTutorStudentVO teacherTutorStudentVO = new TeacherTutorStudentVO();
 		teacherTutorStudentVO.setState(-1);
-		teacherTutorStudentVO = graduationProjectManagementService.teacherTutorStudentVO(teacherTutorStudentVO,
-				"ee5ee741-7677-4541-8a85-dc2f670f6316");
+		teacherTutorStudentVO = graduationProjectManagementService.teacherManagementStudentVO(teacherTutorStudentVO,
+				"6184cd0c-5d58-437c-84b6-65d48692da83");
 		System.out.println(teacherTutorStudentVO);
 	}
 
