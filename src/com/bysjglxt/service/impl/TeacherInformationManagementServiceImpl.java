@@ -81,6 +81,8 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			bysjglxt_teacher_user.setUser_teacher_max_guidance(-1);
 			bysjglxt_teacher_user.setUser_teacher_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_teacher_user.setUser_teacher_gmt_modified(bysjglxt_teacher_user.getUser_teacher_gmt_create());
+			bysjglxt_teacher_user.setUser_teacher_is_recorder(2);
+			bysjglxt_teacher_user.setUser_teacher_is_defence_leader(2);
 			flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
 			if (!flag)
 				break;
@@ -131,10 +133,12 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		// 密码
 		bysjglxt_teacher_user.setUser_teacher_password(md5.GetMD5Code(bysjglxt_teacher_user.getUser_teacher_num()));
 		bysjglxt_teacher_user.setUser_teacher_basic(teacher_basic.getTeacher_basic_id());
-		// 教研室
+		// 教研室未给予
 		bysjglxt_teacher_user.setUser_teacher_max_guidance(-1);
 		bysjglxt_teacher_user.setUser_teacher_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_teacher_user.setUser_teacher_gmt_modified(bysjglxt_teacher_user.getUser_teacher_gmt_create());
+		bysjglxt_teacher_user.setUser_teacher_is_recorder(2);
+		bysjglxt_teacher_user.setUser_teacher_is_defence_leader(2);
 		flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
 		return flag;
 	}
@@ -273,6 +277,92 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		flag = teacherInformationManagementDao.updatePassword(user_teacher_id, md5.GetMD5Code(password),
 				TeamUtil.getStringSecond());
 		return flag;
+	}
+
+	// 批量增加记录员
+	@Override
+	public int addRecorder(List<String> listTeacherUserId) {
+		boolean flag = false;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		for (String string : listTeacherUserId) {
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			// 先根据userId获取teacher_user对象
+			bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(string);
+			if (bysjglxt_teacher_user != null) {
+				bysjglxt_teacher_user.setUser_teacher_is_recorder(1);
+				bysjglxt_teacher_user.setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
+				flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
+				if (!flag)
+					return -1;
+			}
+		}
+		return 1;
+	}
+
+	/**
+	 * 批量增加领导者信息
+	 */
+	@Override
+	public int addLeader(List<String> listTeacherUserId) {
+		boolean flag = false;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		for (String string : listTeacherUserId) {
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			// 先根据userId获取teacher_user对象
+			bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(string);
+			if (bysjglxt_teacher_user != null) {
+				bysjglxt_teacher_user.setUser_teacher_is_defence_leader(1);
+				bysjglxt_teacher_user.setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
+				flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
+				if (!flag)
+					return -1;
+			}
+		}
+		return 1;
+	}
+
+	/**
+	 * 批量驳回记录员身份
+	 */
+	@Override
+	public int removeRecoder(List<String> listTeacherUserId) {
+		boolean flag = false;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		for (String string : listTeacherUserId) {
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			// 先根据userId获取teacher_user对象
+			bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(string);
+			if (bysjglxt_teacher_user != null) {
+				bysjglxt_teacher_user.setUser_teacher_is_recorder(2);
+				bysjglxt_teacher_user.setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
+				flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
+				if (!flag)
+					return -1;
+			}
+		}
+		return 1;
+	}
+
+	/**
+	 * 批量驳回答辩小组长
+	 */
+	@Override
+	public int removeLeader(List<String> listTeacherUserId) {
+		boolean flag = false;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		for (String string : listTeacherUserId) {
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			// 先根据userId获取teacher_user对象
+			bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(string);
+			if (bysjglxt_teacher_user != null) {
+				bysjglxt_teacher_user.setUser_teacher_is_defence_leader(2);
+				bysjglxt_teacher_user.setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
+				flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
+				if (!flag)
+					return -1;
+			}
+		}
+		return 1;
 	}
 
 }

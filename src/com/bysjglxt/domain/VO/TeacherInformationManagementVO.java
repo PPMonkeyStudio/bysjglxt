@@ -38,13 +38,35 @@ public class TeacherInformationManagementVO {
 	// 专业技术职称筛选
 	private String professional_title;
 
+	// 记录员筛选
+	private int recorder;
+
+	// 答辩小组长筛选
+	private int defenceLeader;
+
 	@Override
 	public String toString() {
 		return "TeacherInformationManagementVO [pageIndex=" + pageIndex + ", totalRecords=" + totalRecords
 				+ ", pageSize=" + pageSize + ", totalPages=" + totalPages + ", HavePrePage=" + HavePrePage
 				+ ", HaveNextPage=" + HaveNextPage + ", list_TeacherInformationDTO=" + list_TeacherInformationDTO
 				+ ", search=" + search + ", sex=" + sex + ", section=" + section + ", professional_title="
-				+ professional_title + "]";
+				+ professional_title + ", recorder=" + recorder + ", defenceLeader=" + defenceLeader + "]";
+	}
+
+	public int getRecorder() {
+		return recorder;
+	}
+
+	public void setRecorder(int recorder) {
+		this.recorder = recorder;
+	}
+
+	public int getDefenceLeader() {
+		return defenceLeader;
+	}
+
+	public void setDefenceLeader(int defenceLeader) {
+		this.defenceLeader = defenceLeader;
 	}
 
 	public String getProfessional_title() {
