@@ -36,6 +36,10 @@
 <link rel="stylesheet" href="<%=basePath%>css/jquery-confirm.css" />
 <script src="<%=basePath%>js/jquery-confirm.js"></script>
 <!--------------------------------------------------------------------------------->
+<script src="<%=basePath%>js/jquery.bootstrap.wizard.js"></script>
+<script src="<%=basePath%>js/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>js/klorofil-common.js"></script>
+<!--------------------------------------------------------------------------------->
 <!---页面公用------------------------------------------------------------------------------>
 <script type="text/javascript"
 	src="<%=basePath%>js/loginAndLogout/Input_Select.js"></script>
@@ -43,12 +47,9 @@
 	src="<%=basePath%>js/loginAndLogout/getUserSessionForAjax.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/loginAndLogout/roleControl.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/NoticeManagement/List_Navbar_Notice.js"></script>
 <!--------------------------------------------------------------------------------->
-<script src="<%=basePath%>js/jquery.bootstrap.wizard.js"></script>
-<script src="<%=basePath%>js/jquery.slimscroll.min.js"></script>
-<script src="<%=basePath%>js/klorofil-common.js"></script>
-<!--------------------------------------------------------------------------------->
-
 <!--------------------------------------------------------------------------------->
 <title>Insert title here</title>
 </head>
@@ -148,25 +149,14 @@
 					<a href="#" class="dropdown-toggle icon-menu"
 						data-toggle="dropdown">
 						<i class="lnr lnr-alarm"></i>
-						<span class="badge bg-danger">2</span>
-					</a>
-					<ul class="dropdown-menu notifications">
-						<li>
-							<a href="#" class="notification-item">
-								<span class="dot bg-success"></span>
-								指导老师审核开题报告——江鑫鑫
-							</a>
-						</li>
-						<li>
-							<a href="#" class="notification-item">
-								<span class="dot bg-success"></span>
-								指导老师填写评价审阅表——李文凯
-							</a>
-						</li>
+						<span class="badge bg-danger" id="num_Navbar_Notice"></span>
+					</a> 
+					<ul class="dropdown-menu notifications" id="ul_Navbar_Notice">
+						
 						<li>
 							<a
 								href="<%=basePath%>notice/NoticeManagement_NoticeManagementPage"
-								class="notification-item" style="text-align: center;">查看更多</a>
+								class="notification-item" style="text-align: center;">查看</a>
 						</li>
 					</ul>
 				</li>

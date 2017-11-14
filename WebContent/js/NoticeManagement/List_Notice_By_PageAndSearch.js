@@ -41,21 +41,18 @@ function List_Notice_By_PageAndSearch(pageIndex) {
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = notice_json.listNoticeDTO[num].bysjglxt_notice.notice_content;
 					/*
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = notice_json.listNoticeDTO[num].launchName;
 					/*
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (notice_json.listNoticeDTO[num].bysjglxt_notice.notice_state == 2) {
 						new_td.innerHTML = '<span class="label label-danger">未读</span>';
@@ -66,14 +63,12 @@ function List_Notice_By_PageAndSearch(pageIndex) {
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = notice_json.listNoticeDTO[num].bysjglxt_notice.notice_gmt_create;
 					/*
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i class="fa fa-bell-slash" id="'
 							+ notice_json.listNoticeDTO[num].bysjglxt_notice.notice_id

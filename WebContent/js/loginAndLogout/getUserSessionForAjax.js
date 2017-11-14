@@ -44,7 +44,7 @@ function getUserSessionForAjax() {
 				/*
 				 * 
 				 */
-
+				List_Navbar_Notice();
 				try {
 					List_Student_By_PageAndSearch(1);
 				} catch (e) {
