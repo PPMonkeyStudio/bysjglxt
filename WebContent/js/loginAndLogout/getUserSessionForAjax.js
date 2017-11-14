@@ -72,7 +72,11 @@ function getUserSessionForAjax() {
 												try {
 													List_Notice_By_PageAndSearch(1);
 												} catch (e) {
+													try {
+														List_MyManagementGraduationProject_By_PageAndSearch(1);
+													} catch (e) {
 
+													}
 												}
 
 											}
