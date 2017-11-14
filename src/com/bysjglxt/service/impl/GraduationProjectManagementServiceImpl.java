@@ -229,7 +229,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				actor = "教研室主任";
 				section = bysjglxt_section.getSection_name();
 			} else {
+				// 1.判断老师是不是记录员或答辩小组长
 				actor = "无";
+
 			}
 		}
 		// 获得总记录数

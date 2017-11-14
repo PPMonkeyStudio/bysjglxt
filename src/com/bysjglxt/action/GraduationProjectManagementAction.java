@@ -87,7 +87,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * @return
 	 */
 	public String MyManagementGraduationProjectPage() {
-
 		return "MyManagementGraduationProjectPage";
 	}
 
@@ -121,7 +120,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 
 		teacherManagementStudentVO = graduationProjectManagementService.teacherManagementStudentVO(
-				teacherTutorStudentVO,
+				teacherManagementStudentVO,
 				((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
 						.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.setContentType("text/html;charset=utf-8");

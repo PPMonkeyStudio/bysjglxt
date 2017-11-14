@@ -409,7 +409,6 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
 		return bysjglxt_topic;
 	}
-
 	// 根据指导老师ID获得分页显示的学生选题
 	@Override
 	public List<bysjglxt_topic_select> getTeacherTutorStudentSelectTopicByPage(
@@ -418,13 +417,66 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		List<bysjglxt_topic_select> listBysjglxtTopicSelect = new ArrayList<bysjglxt_topic_select>();
 		String hql = "";
 		switch (actor) {
+		case "指导教师":
+			switch (teacherTutorStudentVO.getState()) {
+			case -1:
+				// 不进行状态筛选
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
+				if (teacherTutorStudentVO.getSearch() != null
+						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
+					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
+				}
+				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
+				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				break;
+			case 1:
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser,bysjglxt_process_instance processInstance ";
+				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
+						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
+						+ " and process_instance_state='活动' and topicSelect.topic_select_student=studentUser.user_student_id  and studentUser.user_student_is_operate_premission=1";
+				if (teacherTutorStudentVO.getSearch() != null
+						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
+					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
+				}
+				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
+				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				break;
+			case 2:
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser"
+						+ " where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and and studentUser.user_student_is_operate_premission=1";
+				if (teacherTutorStudentVO.getSearch() != null
+						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
+					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
+				}
+				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
+				hql = hql + " and topicSelect.topic_select_id not in(select topicSelect.topic_select_id from "
+						+ "bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance";
+				hql = hql
+						+ " where topicSelect.topic_select_topic = topic.topic_id and processInstance.process_instance_man = topicSelect.topic_select_student)";
+				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				break;
+			case 3:
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser ";
+				hql = hql
+						+ "where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and"
+						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
+						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1";
+				if (teacherTutorStudentVO.getSearch() != null
+						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
+					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
+				}
+				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
+				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				break;
+			}
+			break;
 		case "无":
 			return listBysjglxtTopicSelect;
 		case "领导小组长":
 			switch (teacherTutorStudentVO.getState()) {
 			case -1:
 				// 不进行状态筛选
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect where 1=1 ";
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -432,10 +484,11 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
-				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser  ";
+				hql = hql
+						+ "where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and "
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='活动' ";
+						+ " and process_instance_state='活动' and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -443,8 +496,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			case 2:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
-						+ " where topicSelect.topic_select_topic = topic.topic_id ";
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
+						+ " where topicSelect.topic_select_topic = topic.topic_id,topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -456,10 +509,11 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			case 3:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
-				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser ";
+				hql = hql
+						+ "where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='结束' ";
+						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -473,7 +527,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			case -1:
 				// 不进行状态筛选
 				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic "
-						+ "where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id ";
+						+ "where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -494,7 +548,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
 						+ " and process_instance_state='活动' ";
 				hql = hql
-						+ " and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id";
+						+ " and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1 ";
 				switch (section) {
 				case "软件工程教研室":
 					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
@@ -511,7 +565,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
-						+ " where topicSelect.topic_select_topic = topic.topic_id  and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id";
+						+ " where topicSelect.topic_select_topic = topic.topic_id  and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1";
 				switch (section) {
 				case "软件工程教研室":
 					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
@@ -534,7 +588,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
 				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='结束' ";
+						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1";
 				switch (section) {
 				case "软件工程教研室":
 					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
@@ -547,58 +601,6 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
-				break;
-			}
-			break;
-		case "指导教师":
-			switch (teacherTutorStudentVO.getState()) {
-			case -1:
-				// 不进行状态筛选
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect where 1=1 ";
-				if (teacherTutorStudentVO.getSearch() != null
-						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
-					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
-				}
-				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
-				break;
-			case 1:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
-				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
-						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='活动' ";
-				if (teacherTutorStudentVO.getSearch() != null
-						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
-					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
-				}
-				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
-				break;
-			case 2:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
-						+ " where topicSelect.topic_select_topic = topic.topic_id ";
-				if (teacherTutorStudentVO.getSearch() != null
-						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
-					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
-				}
-				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
-				hql = hql + " and topicSelect.topic_select_id not in(select topicSelect.topic_select_id from "
-						+ "bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance";
-				hql = hql
-						+ " where topicSelect.topic_select_topic = topic.topic_id and processInstance.process_instance_man = topicSelect.topic_select_student)";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
-				break;
-			case 3:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
-				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
-						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='结束' ";
-				if (teacherTutorStudentVO.getSearch() != null
-						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
-					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
-				}
-				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			}
@@ -670,7 +672,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			switch (teacherTutorStudentVO.getState()) {
 			case -1:
 				// 不进行状态筛选
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect where 1=1 ";
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -679,10 +681,10 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser,bysjglxt_process_instance processInstance ";
 				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='活动' ";
+						+ " and process_instance_state='活动' and topicSelect.topic_select_student=studentUser.user_student_id  and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -691,8 +693,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			case 2:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
-						+ " where topicSelect.topic_select_topic = topic.topic_id ";
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser"
+						+ " where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -705,10 +707,11 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			case 3:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
-				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser ";
+				hql = hql
+						+ "where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='结束' ";
+						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -724,7 +727,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			switch (teacherTutorStudentVO.getState()) {
 			case -1:
 				// 不进行状态筛选
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect where 1=1 ";
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -732,10 +735,11 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
-				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser  ";
+				hql = hql
+						+ "where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and "
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='活动' ";
+						+ " and process_instance_state='活动' and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -743,8 +747,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			case 2:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
-						+ " where topicSelect.topic_select_topic = topic.topic_id ";
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
+						+ " where topicSelect.topic_select_topic = topic.topic_id,topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -756,10 +760,11 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
 			case 3:
-				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
-				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
+				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser ";
+				hql = hql
+						+ "where topicSelect.topic_select_topic = topic.topic_id and topicSelect.topic_select_student=studentUser.user_student_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='结束' ";
+						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -773,7 +778,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			case -1:
 				// 不进行状态筛选
 				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic "
-						+ "where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id ";
+						+ "where topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and topic.topic_name_chinese like %'" + teacherTutorStudentVO.getSearch() + "'%";
@@ -794,7 +799,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
 						+ " and process_instance_state='活动' ";
 				hql = hql
-						+ " and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id";
+						+ " and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1 ";
 				switch (section) {
 				case "软件工程教研室":
 					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
@@ -811,7 +816,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
-						+ " where topicSelect.topic_select_topic = topic.topic_id  and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id";
+						+ " where topicSelect.topic_select_topic = topic.topic_id  and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1";
 				switch (section) {
 				case "软件工程教研室":
 					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
@@ -834,7 +839,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
 				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
-						+ " and process_instance_state='结束' ";
+						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1";
 				switch (section) {
 				case "软件工程教研室":
 					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
