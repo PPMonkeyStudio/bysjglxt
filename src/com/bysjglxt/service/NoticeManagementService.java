@@ -22,4 +22,8 @@ public interface NoticeManagementService {
 	 */
 	public int updateNoticeState(String noticeId);
 
+	//获取所有某状态的数量
+	public int getNoticeStateCount(String userId);
+	
+	
 }

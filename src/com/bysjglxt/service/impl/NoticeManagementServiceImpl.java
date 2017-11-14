@@ -41,6 +41,13 @@ public class NoticeManagementServiceImpl implements NoticeManagementService {
 		return listNoticeDTO;
 	}
 
+	@Override
+	public int getNoticeStateCount(String userId) {
+		List<bysjglxt_notice> listNotice = new ArrayList<bysjglxt_notice>();
+		listNotice = noticeManagementDao.getListNoticeCount(userId, 2);
+		return listNotice.size();
+	}
+
 	// 获取VO
 	@Override
 	public NoticeVO noticeVO(NoticeVO noticeVO, String userId) {

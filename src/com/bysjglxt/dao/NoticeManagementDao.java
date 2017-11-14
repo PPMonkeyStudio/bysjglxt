@@ -25,4 +25,6 @@ public interface NoticeManagementDao {
 
 	public int saveNotice(bysjglxt_notice bysjglxt_notice);
 
+	public List<bysjglxt_notice> getListNoticeCount(String userId, int i);
+
 }

@@ -131,4 +131,14 @@ public class NoticeManagementDaoImpl implements NoticeManagementDao {
 		}
 		return flag;
 	}
+
+	@Override
+	public List<bysjglxt_notice> getListNoticeCount(String userId, int i) {
+		List<bysjglxt_notice> list_bysjglxt_notice = new ArrayList<bysjglxt_notice>();
+		Session session = getSession();
+		String hql = "from list_bysjglxt_notice where notice_belong = '" + userId + "' and notice_state = '" + i + "'";
+		Query query = session.createQuery(hql);
+		list_bysjglxt_notice = query.list();
+		return list_bysjglxt_notice;
+	}
 }

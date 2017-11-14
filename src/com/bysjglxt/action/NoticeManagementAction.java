@@ -41,7 +41,6 @@ public class NoticeManagementAction extends ActionSupport implements ServletResp
 	 * 
 	 */
 	public String NoticeManagementPage() {
-
 		return "NoticeManagementPage";
 	}
 
