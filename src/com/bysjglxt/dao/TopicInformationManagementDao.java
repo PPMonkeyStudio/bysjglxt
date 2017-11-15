@@ -105,4 +105,14 @@ public interface TopicInformationManagementDao {
 
 	public boolean createNoti1ceRecord(bysjglxt_notice bysjglxt_notice);
 
+	public com.bysjglxt.domain.DO.bysjglxt_topic_select getSelectTopicById(String selectId);
+
+	public com.bysjglxt.domain.DO.bysjglxt_process_instance getProcessInstanceByManStateAndName(
+			String topic_select_student);
+
+	public com.bysjglxt.domain.DO.bysjglxt_task_definition getTaskDefinitionByName(String string);
+
+	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceByNameAndProcessInstanceId(
+			String task_definition_id, String process_instance_id);
+
 }

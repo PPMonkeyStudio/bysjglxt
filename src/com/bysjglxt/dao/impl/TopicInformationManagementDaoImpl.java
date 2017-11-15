@@ -676,4 +676,49 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		return flag;
 	}
 
+	@Override
+	public bysjglxt_topic_select getSelectTopicById(String selectId) {
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_id = '" + selectId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		return bysjglxt_topic_select;
+	}
+
+	// 根据流程实例化者、状态以及流程定义名获取流程实例
+	@Override
+	public bysjglxt_process_instance getProcessInstanceByManStateAndName(String topic_select_student) {
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		Session session = getSession();
+		String hql = "select processInstance from bysjglxt_process_instance processInstance,bysjglxt_process_definition processDefinition where processInstance.process_instance_process_definition=processDefinition.process_definition_id ";
+		hql = hql + " and processInstance.process_instance_man='" + topic_select_student
+				+ "' and processInstance.process_instance_state='活动' and processDefinition.process_definition_name='选题流程' ";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		return bysjglxt_process_instance;
+	}
+
+	@Override
+	public bysjglxt_task_definition getTaskDefinitionByName(String string) {
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_definition where task_definition_name = '" + string + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
+		return bysjglxt_task_definition;
+	}
+
+	@Override
+	public bysjglxt_task_instance getTaskInstanceByNameAndProcessInstanceId(String task_definition_id,
+			String process_instance_id) {
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + process_instance_id
+				+ "' and task_instance_task_definition = '" + task_definition_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
+		return bysjglxt_task_instance;
+	}
+
 }

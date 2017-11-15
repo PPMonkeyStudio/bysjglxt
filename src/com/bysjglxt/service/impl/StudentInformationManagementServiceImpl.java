@@ -350,4 +350,25 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		return flag;
 	}
 
+	@Override
+	public List<StudentInformationDTO> listStudentNoClose() {
+		List<StudentInformationDTO> listStudentNoClose = new ArrayList<StudentInformationDTO>();
+		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
+		bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
+		List<bysjglxt_student_user> listBysjglxtStudentUser = new ArrayList<bysjglxt_student_user>();
+		// 查找出所有没有关闭的学生
+		listBysjglxtStudentUser = studentInformationManagementDao.getListStudentByNotClose();
+		for (bysjglxt_student_user bysjglxt_student_user : listBysjglxtStudentUser) {
+			studentInformationDTO = new StudentInformationDTO();
+			bysjglxtStudentBasic = new bysjglxt_student_basic();
+			// 获取学生basic信息
+			bysjglxtStudentBasic = studentInformationManagementDao
+					.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_user.getUser_student_basic());
+			studentInformationDTO.setBysjglxtStudentBasic(bysjglxtStudentBasic);
+			studentInformationDTO.setBysjglxtStudentUser(bysjglxt_student_user);
+			listStudentNoClose.add(studentInformationDTO);
+		}
+		return listStudentNoClose;
+	}
+
 }

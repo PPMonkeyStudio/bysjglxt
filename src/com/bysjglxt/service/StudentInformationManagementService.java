@@ -9,6 +9,11 @@ import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
 public interface StudentInformationManagementService {
 
+	
+	public List<StudentInformationDTO> listStudentNoClose();
+	
+	
+	
 	/**
 	 * @说明 学生信息的Excel文件流转化为bysjglxt_student_basic的List
 	 *
