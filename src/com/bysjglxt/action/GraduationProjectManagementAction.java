@@ -491,8 +491,17 @@ public class GraduationProjectManagementAction extends ActionSupport
 		}
 	}
 
+	public void updateDefenceRecorder() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateDefenceRecorder(updateDefence) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
 	public void updateDefence() throws IOException {
-		System.out.println("updateDefence:" + updateDefence);
+		System.out.println(updateDefence);
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateDefence(updateDefence) == 1) {
 			http_response.getWriter().write("保存成功");

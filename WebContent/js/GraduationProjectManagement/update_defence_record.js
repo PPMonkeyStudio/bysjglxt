@@ -22,24 +22,18 @@ function update_defence_record(button) {
 										toastr.error(xhr.status);
 									}
 								}
-
 							}
-
 							xhr
 									.open("POST",
-											"/bysjglxt/graduationProject/GraduationProjectManagement_updateDefence");
+											"/bysjglxt/graduationProject/GraduationProjectManagement_updateDefenceRecorder");
 							var formData = new FormData();
 							var textarea_defence_record = document
 									.getElementById("textarea_defence_record");
-
 							formData.append("updateDefence.defence_student",
 									button.id);
-
 							formData.append("updateDefence.defence_record",
 									textarea_defence_record.value);
-
 							xhr.send(formData);
-
 						}
 					},
 					取消 : function() {
@@ -62,20 +56,16 @@ function update_defence_record(button) {
 								} else {
 									textarea_defence_record.innerHTML = '';
 								}
-
 							} else {
 								toastr.error(xhr.status);
 							}
 						}
-
 					}
-
 					xhr
 							.open("POST",
 									"/bysjglxt/graduationProject/GraduationProjectManagement_get_Defence");
 					var formData = new FormData();
 					formData.append("updateDefence.defence_student", button.id);
-
 					xhr.send(formData);
 				}
 			});
