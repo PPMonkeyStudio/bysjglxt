@@ -82,7 +82,7 @@
 							<th>学号</th>
 							<th>姓名</th>
 							<th>
-								<select class="selectpicker" id="select_sex"
+								<select class="form-control" id="select_sex"
 									style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
@@ -98,14 +98,14 @@
 								</select>
 							</th>
 							<th>
-								<select class="selectpicker" id="select_level"
+								<select class="form-control" id="select_level"
 									data-live-search="true" style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">级别</option>
 								</select>
 							</th>
 							<th>
-								<select class="selectpicker" id="select_premission"
+								<select class="form-control" id="select_premission"
 									style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
@@ -114,7 +114,7 @@
 								</select>
 							</th>
 							<th>
-								<select class="selectpicker" id="select_is_select_topic"
+								<select class="form-control" id="select_is_select_topic"
 									style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">是否选题</option>
