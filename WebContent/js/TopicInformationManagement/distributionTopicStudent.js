@@ -14,6 +14,7 @@ function distributionTopicStudent(button) {
 							if (xhr.status == 200) {
 
 								var student_json = JSON.parse(xhr.responseText);
+
 								var select_distributionTopicStudent = document
 										.getElementById("select_distributionTopicStudent");
 								for (var num = 0; num < student_json.length; num++) {
@@ -21,7 +22,7 @@ function distributionTopicStudent(button) {
 											.createElement("option");
 									option
 											.appendChild(document
-													.createTextNode(student_json[num].asdasdasdasdsaasdasdasdasdfasdfasdfasdfsda));
+													.createTextNode(student_json[num].bysjglxtStudentBasic.student_basic_name));
 									option.value = student_json[num].topic_id;
 									select_distributionTopicStudent
 											.appendChild(option);
@@ -35,7 +36,7 @@ function distributionTopicStudent(button) {
 					}
 					xhr
 							.open("POST",
-									"/bysjglxt/student/StudentInformationManagement_DeleteStudent");
+									"/bysjglxt/student/StudentInformationManagement_listStudentNoClose");
 					xhr.send(formData);
 
 				},

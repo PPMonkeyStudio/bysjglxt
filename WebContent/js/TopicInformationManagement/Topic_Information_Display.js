@@ -15,20 +15,21 @@
 			 */
 			var button_selectTopic_early = document
 					.getElementById("button_selectTopic_early");
-			button_selectTopic_early.style.display = 'none';
-			if (userStudentDTO != null) {
-				var studentList = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student
-						.split("#&#");
-				for (var num = 0; num < studentList.length; num++) {
-					if (studentList[num] == userStudentDTO.bysjglxtStudentUser.user_student_id) {
-						var button_selectTopic_early = document
-								.getElementById("button_selectTopic_early");
-						button_selectTopic_early.style.display = 'block';
-						break;
+			if (button_selectTopic_early != null) {
+				button_selectTopic_early.style.display = 'none';
+				if (userStudentDTO != null) {
+					var studentList = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student
+							.split("#&#");
+					for (var num = 0; num < studentList.length; num++) {
+						if (studentList[num] == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+							var button_selectTopic_early = document
+									.getElementById("button_selectTopic_early");
+							button_selectTopic_early.style.display = 'block';
+							break;
+						}
 					}
 				}
 			}
-
 			/*
 			 * 
 			 */
