@@ -220,6 +220,17 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		}
 	}
 
+	/*
+	 * 获取当前选题流程状态
+	 */
+	public void getTopicCurrentProcess() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(processManagementService.getCurrentTaskDTO()));
+	}
+
 	/**
 	 * 通过任务
 	 * 
