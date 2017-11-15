@@ -96,7 +96,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 							|| myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance == null) {
 						new_td.innerHTML = '';
 					} else {
-						new_td.innerHTML = '<button  onclick="window.location = \'\/bysjglxt\/graduationProject\/GraduationProjectManagement_MyGraduationProjectPage?MyManagementGraduationProjectStudentID='
+						new_td.innerHTML = '<button  onclick="window.location = \'\/bysjglxt\/graduationProject\/GraduationProjectManagement_MyGraduationProjectPage?MyTutorGraduationProjectStudentID='
 								+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 								+ '\'" class="btn btn-default">毕业设计</button>';
 					}

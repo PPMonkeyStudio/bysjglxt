@@ -175,7 +175,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	public bysjglxt_record_progress getRecordProgress(String record_progress_id) {
 		bysjglxt_record_progress bysjglxt_record_progress = new bysjglxt_record_progress();
 		Session session = getSession();
-		String hql = "from bysjglxt_record_progress where report_opening_id = '" + record_progress_id + "'";
+		String hql = "from bysjglxt_record_progress where record_progress_id = '" + record_progress_id + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_record_progress = (bysjglxt_record_progress) query.uniqueResult();
 		session.clear();
@@ -1137,7 +1137,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "delete from bysjglxt_dissertation where dissertation_student='" + userId + "'";
+			String hql = "update bysjglxt_dissertation set dissertation_file='' where dissertation_student='" + userId
+					+ "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
@@ -1169,5 +1170,29 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		list_bysjglxt_topic_select = query.list();
 		session.clear();
 		return list_bysjglxt_topic_select;
+	}
+
+	@Override
+	public int fillEmptyInDissertation(bysjglxt_dissertation bysjglxt_dissertation) {
+		int flag = 1;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(bysjglxt_dissertation);
+		} catch (Exception e) {
+			flag = 2;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public bysjglxt_dissertation getThesisByStudentId(String userId) {
+		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		Session session = getSession();
+		String hql = "from bysjglxt_dissertation where dissertation_student = '" + userId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_dissertation = (bysjglxt_dissertation) query.uniqueResult();
+		session.clear();
+		return bysjglxt_dissertation;
 	}
 }

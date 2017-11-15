@@ -72,6 +72,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * 
 	 */
 	public String MyGraduationProjectPage() {
+		System.out.println("MyTutorGraduationProjectStudentID:" + MyTutorGraduationProjectStudentID);
 		if (MyTutorGraduationProjectStudentID != null) {
 			ActionContext.getContext().getSession().put("MyTutorGraduationProjectStudentID",
 					MyTutorGraduationProjectStudentID);
@@ -439,6 +440,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void updateStudentSummary() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
+		System.out.println("ffff");
 		if (graduationProjectManagementService.updateStudentSummary(updateSummary) == 1) {
 			http_response.getWriter().write("保存成功");
 		} else {
@@ -521,10 +523,10 @@ public class GraduationProjectManagementAction extends ActionSupport
 		http_response
 				.getWriter().write(
 						graduationProjectManagementService
-								.uploadDissertation(
+								.saveDissertation(dissertation, oldDissertation,
 										((StudentInformationDTO) ActionContext.getContext().getSession()
 												.get("userStudentDTO")).getBysjglxtStudentUser().getUser_student_id(),
-										dissertation, dissertationFileName));
+										dissertationFileName));
 
 	}
 

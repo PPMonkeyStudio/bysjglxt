@@ -44,11 +44,11 @@ function saveGraduationProject() {
 		Save_RecordProgress_4_Teacher();
 		break;
 	}
-	case "学生完成个人学习总结": {
+	case "学生完成个人学习工作总结": {
 		Save_summary_student();
 		break;
 	}
-	case "指导老师填写个人学习总结意见": {
+	case "指导老师填写个人学习工作总结意见": {
 		Save_summary_teacher();
 		break;
 	}

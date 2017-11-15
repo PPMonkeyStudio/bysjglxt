@@ -82,7 +82,7 @@ function RecordProgress_2_Student() {
 
 	xhr
 			.open("POST",
-					"/bysjglxt/graduationProject/GraduationProjectManagement_get_RecordProgress_1");
+					"/bysjglxt/graduationProject/GraduationProjectManagement_get_RecordProgress_2");
 
 	xhr.send(formData);
 

@@ -14,14 +14,14 @@ function Save_summary_teacher() {
 	}
 	xhr
 			.open("POST",
-					"/bysjglxt/graduationProject/GraduationProjectManagement_updateTeachrSummary");
+					"/bysjglxt/graduationProject/GraduationProjectManagement_updateTeacherSummary");
 	var summary_id = document.getElementById("summary_id");
 	var summary_opinion = document.getElementById("summary_opinion");
 	/*
 	 * 
 	 */
-	formData.append("updateTaskbook.summary_id", summary_id.value);
-	formData.append("updateTaskbook.summary_opinion", summary_opinion.value);
+	formData.append("updateSummary.summary_id", summary_id.value);
+	formData.append("updateSummary.summary_opinion", summary_opinion.value);
 	/*
 	 * 
 	 */

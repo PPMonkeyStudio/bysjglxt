@@ -16,6 +16,7 @@ function InitializationMyGraduationProject() {
 				 * console.debug("InitializationMyGraduationProject:" +
 				 * xhr.responseText);
 				 */
+				console.debug("ffff:"+xhr.responseText);
 				currentProcessDto = JSON.parse(xhr.responseText);
 				for (var num = 0; currentProcessDto.listTaskBelongProcess.length; num++) {
 					if (currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
@@ -32,12 +33,14 @@ function InitializationMyGraduationProject() {
 				 * 
 				 */
 				switch (current_processDefinitionName) {
+
 				case "指导老师完成任务书": {
 					var banner_Taskbook_Teacher = document
 							.getElementById("banner_Taskbook_Teacher");
 					banner_Taskbook_Teacher.style.color = 'white';
 					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
 					Initialization_Taskbook_Teacher();
+					console.debug("in:"+current_processDefinitionName);
 					/*
 					 * 
 					 */
@@ -197,7 +200,7 @@ function InitializationMyGraduationProject() {
 					 */
 					break;
 				}
-				case "学生完成个人学习总结": {
+				case "学生完成个人学习工作总结": {
 					var banner_summary_student = document
 							.getElementById("banner_summary_student");
 					banner_summary_student.style.color = 'white';
@@ -212,7 +215,7 @@ function InitializationMyGraduationProject() {
 					 */
 					break;
 				}
-				case "指导老师填写个人学习总结意见": {
+				case "指导老师填写个人学习工作总结意见": {
 					var banner_summary_teacher = document
 							.getElementById("banner_summary_teacher");
 					banner_summary_teacher.style.color = 'white';
