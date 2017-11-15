@@ -100,6 +100,38 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 								+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 								+ '\'" class="btn btn-default">毕业设计</button>';
 					}
+					/*
+					 * 
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
+					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
+							|| myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance == null) {
+						new_td.innerHTML = '';
+					} else {
+						if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 1
+								&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
+							new_td.innerHTML = '<button id="'
+									+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+									+ '" onclick="update_defence_record(this)" class="btn btn-default">答辩记录</button>'
+									+ '<button id="'
+									+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+									+ '" onclick="update_defence_leader(this)" class="btn btn-default">答辩评分</button>';
+						} else if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 1
+								&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 2) {
+							new_td.innerHTML = '<button id="'
+									+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+									+ '" onclick="update_defence_record(this)" class="btn btn-default">答辩记录</button>';
+						} else if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 2
+								&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
+							new_td.innerHTML = '<button id="'
+									+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+									+ '" onclick="update_defence_leader(this)" class="btn btn-default">答辩评分</button>';
+						} else {
+							new_td.innerHTML = '';
+						}
+					}
+
 				}
 				/*
 				 * 设置页数
