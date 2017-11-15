@@ -12,6 +12,13 @@ import com.bysjglxt.domain.VO.ProcessManagementVO;
 public interface ProcessManagementService {
 
 	/**
+	 * 获得当前正在进行的选题流程实例
+	 * 
+	 * @return
+	 */
+	public ProcessDTO getCurrentTaskIng();
+
+	/**
 	 * @说明 点击创建流程 1. 创建流程定义记录 1 成功 -1失败
 	 * @param SelectTopicProcessDefinition
 	 * @return

@@ -495,4 +495,16 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		}
 	}
 
+	@Override
+	public bysjglxt_process_instance getSelectProcessInstance() {
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		Session session = getSession();
+		String hql = "select processInstance from bysjglxt_process_instance processInstance,bysjglxt_process_definition processDefinition where processInstance.process_instance_process_definition=processDefinition.process_definition_id ";
+		hql = hql
+				+ " and processDefinition.process_definition_name='选题流程' and processInstance.process_instance_state='活动'";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		return bysjglxt_process_instance;
+	}
+
 }

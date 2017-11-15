@@ -87,6 +87,8 @@ public interface ProcessManagementDao {
 
 	public void fillNoticeRecord(bysjglxt_notice bysjglxt_notice);
 
+	public com.bysjglxt.domain.DO.bysjglxt_process_instance getSelectProcessInstance();
+
 	
 	
 }
