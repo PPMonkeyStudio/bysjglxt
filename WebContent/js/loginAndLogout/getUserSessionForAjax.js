@@ -12,6 +12,7 @@ function getUserSessionForAjax() {
 				 * 
 				 */
 				try {
+					console.debug(xhr.responseText);
 					var userJsonDTO = JSON.parse(xhr.responseText);
 				} catch (e) {
 					toastr.error("登录状态失效");
