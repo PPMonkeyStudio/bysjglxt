@@ -37,6 +37,47 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		this.processManagementDao = processManagementDao;
 	}
 
+	/**
+	 * 获得正在进行的选题流程实例
+	 */
+	@Override
+	public ProcessDTO getCurrentTaskIng() {
+		ProcessDTO processDTO = new ProcessDTO();
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		List<TaskDTO> listTaskBelongProcess = new ArrayList<TaskDTO>();
+		TaskDTO taskDTO = new TaskDTO();
+		bysjglxt_task_definition taskDefinition = new bysjglxt_task_definition();
+		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
+		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
+		// 1.根据流程实例状态获得
+		bysjglxt_process_instance = processManagementDao.getSelectProcessInstance();
+		if (bysjglxt_process_instance != null) {
+			// 根据流程实例中流程定义Id获取流程定义
+			bysjglxt_process_definition = processManagementDao
+					.getProcessDefinition(bysjglxt_process_instance.getProcess_instance_process_definition());
+			processDTO.setProcessDefinition(bysjglxt_process_definition);
+			processDTO.setProcessInstance(bysjglxt_process_instance);
+			// 根据流程实例ID获取流程实例
+			listTaskInstance = processManagementDao
+					.getListTaskInstanceByProcessInstanceId(bysjglxt_process_instance.getProcess_instance_id());
+			for (bysjglxt_task_instance bysjglxt_task_instance : listTaskInstance) {
+				taskDTO = new TaskDTO();
+				taskDefinition = new bysjglxt_task_definition();
+				taskDTO.setTaskInstance(bysjglxt_task_instance);
+				// 根据任务实例获取任务定义
+				taskDefinition = processManagementDao
+						.getTaskDefinition(bysjglxt_task_instance.getTask_instance_task_definition());
+				if (taskDefinition != null) {
+					taskDTO.setTaskDefinition(taskDefinition);
+				}
+				listTaskBelongProcess.add(taskDTO);
+			}
+			processDTO.setListTaskBelongProcess(listTaskBelongProcess);
+		}
+
+		return processDTO;
+	}
+
 	// 创建选题流程定义表
 	@Override
 	public String createSelectTopicProcessDefine(bysjglxt_process_definition selectTopicProcessDefinition) {
@@ -605,4 +646,5 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		processDetailDTO.setBysjglxtProcessInstance(bysjglxt_process_instance);
 		return processDetailDTO;
 	}
+
 }

@@ -112,6 +112,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					return -1;
 				}
 			}
+			path = "F:/graduagtionThesi/";
 			// 保存毕业论文
 			// 1.上传毕业论文
 			bysjglxt_dissertation = new bysjglxt_dissertation();
@@ -1119,7 +1120,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	@Override
 	public bysjglxt_dissertation get_Dissertation(String userId) {
-		System.out.println("userId:" + userId);
 		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
 		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
 		return bysjglxt_dissertation;
