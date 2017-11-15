@@ -155,7 +155,18 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	@Override
 	public boolean closeTopic(List<String> topicID) {
 		boolean flag = false;
+		bysjglxt_topic bysjglxt_topic = null;
 		for (String string : topicID) {
+			// 只有已通过的课题可以进行关闭
+			bysjglxt_topic = new bysjglxt_topic();
+			// 根据课题Id获取课题对象
+			bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(string);
+			if (bysjglxt_topic == null) {
+				return false;
+			}
+			if (!("审核已通过".equals(bysjglxt_topic.getTopic_examine_state()))) {
+				continue;
+			}
 			flag = topicInformationManagementDao.closeTopic(string, TeamUtil.getStringSecond());
 		}
 		return flag;
