@@ -263,6 +263,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		// 1.根据教师ID筛选出符合条件的最多10条选题数据
 		list_bysjglxt_topic_select = graduationProjectManagementDao
 				.getTeacherTutorStudentSelectTopicByPage(teacherTutorStudentVO, teacherUserId, actor, section);
+		System.out.println(list_bysjglxt_topic_select.size());
 		// 2.遍历选题拿到学生userId信息
 		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
 			processBelongDTO = new ProcessBelongDTO();
@@ -279,6 +280,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxtStudentUser = graduationProjectManagementDao
 					.getStudentUserByUserId(bysjglxt_topic_select.getTopic_select_student());
 			if (bysjglxtStudentUser != null) {
+				// 变颜色
+				if (teacherTutorStudentVO.getSearch() != null
+						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
+					bysjglxtStudentUser.setUser_student_num(bysjglxtStudentUser.getUser_student_num().replaceAll(
+							teacherTutorStudentVO.getSearch(),
+							"<span style='color: #ff5063;'>" + teacherTutorStudentVO.getSearch().trim() + "</span>"));
+				}
 				// 根据学生basicId获取学生basic表
 				bysjglxtStudentBasic = graduationProjectManagementDao
 						.getStudentBasicByBasicId(bysjglxtStudentUser.getUser_student_basic());
@@ -326,11 +334,15 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			// 根据选题所属课题拿到课题表信息
 			bysjglxtTopic = graduationProjectManagementDao
 					.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
-			if (teacherTutorStudentVO.getSearch() != null && teacherTutorStudentVO.getSearch().trim().length() > 0) {
-				bysjglxtTopic.setTopic_name_chinese(bysjglxtTopic.getTopic_name_chinese().replaceAll(
-						teacherTutorStudentVO.getSearch(),
-						"<span style='color: #ff5063;'>" + teacherTutorStudentVO.getSearch().trim() + "</span>"));
-			}
+			/*
+			 * if (teacherTutorStudentVO.getSearch() != null &&
+			 * teacherTutorStudentVO.getSearch().trim().length() > 0) {
+			 * bysjglxtTopic.setTopic_name_chinese(bysjglxtTopic.
+			 * getTopic_name_chinese().replaceAll(
+			 * teacherTutorStudentVO.getSearch(),
+			 * "<span style='color: #ff5063;'>" +
+			 * teacherTutorStudentVO.getSearch().trim() + "</span>")); }
+			 */
 			if (bysjglxtTopic != null) {
 				teacherTutorStudentDTO.setBysjglxtTopic(bysjglxtTopic);
 			}
@@ -338,6 +350,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			list_TeacherTutorStudentDTO.add(teacherTutorStudentDTO);
 		}
 		teacherTutorStudentVO.setList_TeacherTutorStudentDTO(list_TeacherTutorStudentDTO);
+		System.out.println(teacherTutorStudentVO);
 		return teacherTutorStudentVO;
 	}
 
@@ -354,8 +367,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_task_definition taskDefinition = new bysjglxt_task_definition();
 		bysjglxt_task_instance taskInstance = new bysjglxt_task_instance();
 		bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
-		bysjglxt_section bysjglxt_section = new bysjglxt_section();
-		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
 		bysjglxt_student_user bysjglxtStudentUser = new bysjglxt_student_user();
 		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
 		List<bysjglxt_topic_select> listTopicSelect = new ArrayList<bysjglxt_topic_select>();
@@ -409,7 +420,15 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			// 3.根据选题所属学生拿到学生user表
 			bysjglxtStudentUser = graduationProjectManagementDao
 					.getStudentUserByUserId(bysjglxt_topic_select.getTopic_select_student());
+
 			if (bysjglxtStudentUser != null) {
+				// 变颜色
+				if (teacherTutorStudentVO.getSearch() != null
+						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
+					bysjglxtStudentUser.setUser_student_num(bysjglxtStudentUser.getUser_student_num().replaceAll(
+							teacherTutorStudentVO.getSearch(),
+							"<span style='color: #ff5063;'>" + teacherTutorStudentVO.getSearch().trim() + "</span>"));
+				}
 				// 根据学生basicId获取学生basic表
 				bysjglxtStudentBasic = graduationProjectManagementDao
 						.getStudentBasicByBasicId(bysjglxtStudentUser.getUser_student_basic());
@@ -457,11 +476,15 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			// 根据选题所属课题拿到课题表信息
 			bysjglxtTopic = graduationProjectManagementDao
 					.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
-			if (teacherTutorStudentVO.getSearch() != null && teacherTutorStudentVO.getSearch().trim().length() > 0) {
-				bysjglxtTopic.setTopic_name_chinese(bysjglxtTopic.getTopic_name_chinese().replaceAll(
-						teacherTutorStudentVO.getSearch(),
-						"<span style='color: #ff5063;'>" + teacherTutorStudentVO.getSearch().trim() + "</span>"));
-			}
+			/*
+			 * if (teacherTutorStudentVO.getSearch() != null &&
+			 * teacherTutorStudentVO.getSearch().trim().length() > 0) {
+			 * bysjglxtTopic.setTopic_name_chinese(bysjglxtTopic.
+			 * getTopic_name_chinese().replaceAll(
+			 * teacherTutorStudentVO.getSearch(),
+			 * "<span style='color: #ff5063;'>" +
+			 * teacherTutorStudentVO.getSearch().trim() + "</span>")); }
+			 */
 			if (bysjglxtTopic != null) {
 				teacherTutorStudentDTO.setBysjglxtTopic(bysjglxtTopic);
 			}
