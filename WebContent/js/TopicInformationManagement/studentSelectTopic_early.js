@@ -1,4 +1,4 @@
-function studentSelectTopic() {
+function studentSelectTopic_early() {
 	var xhr = false;
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -15,14 +15,13 @@ function studentSelectTopic() {
 							console
 									.debug("正在进行的选题任务："
 											+ topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name);
-							if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "正式选题") {
-								toastr.error("还未到选题的时间");
+							if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "提前选题") {
+								toastr.error("还未到提前选题的时间");
 								return;
 							}
 							break;
 						}
 					}
-
 					var xhr = false;
 					xhr = new XMLHttpRequest();
 					xhr.onreadystatechange = function() {

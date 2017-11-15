@@ -28,7 +28,7 @@ function dissertationChange(dissertation) {
 	var div_dissertation_box = document.getElementById("div_dissertation_box");
 	var div_dissertation_father = document.createElement("div");
 	var div_dissertation_img = document.createElement("img");
-	var div_dissertation_name = document.createElement("div");
+	var div_dissertation_name = document.createElement("a");
 	var div_dissertation_del = document.createElement("div");
 
 	div_dissertation_box.appendChild(div_dissertation_father);
@@ -46,6 +46,8 @@ function dissertationChange(dissertation) {
 		var input_annex_type = dissertation.target.files[0].name
 				.substring(dissertation.target.files[0].name.lastIndexOf(".") + 1);
 	} else {
+		div_dissertation_name.href = '/bysjglxt/graduationProject/GraduationProjectManagement_downloadDissertation?DissertationUserID='
+				+ currentProcessDto.processInstance.process_instance_man;
 		var input_annex_type = dissertation.substring(dissertation
 				.lastIndexOf(".") + 1);
 	}

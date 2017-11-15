@@ -41,13 +41,62 @@ function assignmentStudentTopic(button) {
 					'分配' : {
 						btnClass : 'btn-blue',
 						action : function() {
+
 							var xhr = false;
 							xhr = new XMLHttpRequest();
 							xhr.onreadystatechange = function() {
 								var message;
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
-										List_Student_By_PageAndSearch(1);
+										var topicCurrentProcessDTO = JSON
+												.parse(xhr.responseText);
+										if (topicCurrentProcessDTO == null) {
+											toastr.error("管理员未开启选题的流程");
+											return;
+										} else {
+											for (var num = 0; topicCurrentProcessDTO.listTaskBelongProcess.length; num++) {
+												if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
+													console
+															.debug("正在进行的选题任务："
+																	+ topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name);
+													if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "提前选题") {
+														toastr
+																.error("还未到提前选题的时间");
+														return;
+													}
+													break;
+												}
+											}
+
+											var xhr = false;
+											xhr = new XMLHttpRequest();
+											xhr.onreadystatechange = function() {
+												var message;
+												if (xhr.readyState == 4) {
+													if (xhr.status == 200) {
+														List_Student_By_PageAndSearch(1);
+													} else {
+														toastr
+																.error(xhr.status);
+													}
+												}
+											}
+											xhr
+													.open("POST",
+															"/bysjglxt/topic/TopicInformationManagement_assignmentStudentTopic");
+											var formData = new FormData();
+											formData
+													.append(
+															"assignmentTopicId",
+															document
+																	.getElementById("select_distributionTopicStudent").value);
+											formData.append(
+													"assignmentStudentUserId",
+													button.id);
+
+											xhr.send(formData);
+
+										}
 									} else {
 										toastr.error(xhr.status);
 									}
@@ -55,17 +104,9 @@ function assignmentStudentTopic(button) {
 							}
 							xhr
 									.open("POST",
-											"/bysjglxt/topic/TopicInformationManagement_assignmentStudentTopic");
-							var formData = new FormData();
-							formData
-									.append(
-											"assignmentTopicId",
-											document
-													.getElementById("select_distributionTopicStudent").value);
-							formData.append("assignmentStudentUserId",
-									button.id);
+											"/bysjglxt/topic/TopicInformationManagement_getTopicCurrentProcess");
+							xhr.send(null);
 
-							xhr.send(formData);
 						}
 					},
 					'取消' : function() {

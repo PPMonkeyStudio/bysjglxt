@@ -23,6 +23,8 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/studentSelectTopic.js"></script>
 <script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/studentSelectTopic_early.js"></script>
+<script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/Get_Teacher.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
@@ -113,7 +115,7 @@
 									<option value="审核未通过">审核未通过</option>
 								</select>
 							</th>
-							<th>操作</th>
+							<th>查看</th>
 							<th class="">
 								<label class="fancy-checkbox">
 									<input id="checkbox_all_select" type="checkbox"
@@ -217,6 +219,13 @@
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-check"></i>
 						选题
+					</button>
+					<button class="student_control btn btn-default"
+						id="button_selectTopic_early"
+						onclick="studentSelectTopic_early()"
+						style="float: right; margin: 0 10px;">
+						<i class="fa fa-check"></i>
+						提前选题
 					</button>
 				</div>
 			</div>
