@@ -6,9 +6,12 @@ import java.util.List;
 import com.bysjglxt.dao.TopicInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.DO.bysjglxt_task_definition;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
@@ -32,6 +35,44 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 
 	public void setTopicInformationManagementDao(TopicInformationManagementDao topicInformationManagementDao) {
 		this.topicInformationManagementDao = topicInformationManagementDao;
+	}
+
+	// 添加评阅老师
+	@Override
+	public int assignment(String selectId, String reviewId) {
+		boolean flag = false;
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		// 根据选题Id获取选题表信息
+		bysjglxt_topic_select = topicInformationManagementDao.getSelectTopicById(selectId);
+		if (bysjglxt_topic_select == null)
+			return -1;
+		bysjglxt_topic_select.setTopic_select_teacher_review(reviewId);
+		bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
+		flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
+		if (!flag)
+			return -1;
+		// 判断该学生是否开启毕业设计流程
+		// 用man.state.bysjglxt_process_definitionName得到该学生流程实例表
+		bysjglxt_process_instance = topicInformationManagementDao
+				.getProcessInstanceByManStateAndName(bysjglxt_topic_select.getTopic_select_student());
+		if (bysjglxt_process_instance != null) {
+			// 根据任务定义名获取任务定义表
+			bysjglxt_task_definition = topicInformationManagementDao.getTaskDefinitionByName("评阅老师填写评阅审查表");
+			if (bysjglxt_task_definition != null) {
+				// 根据流程实例Id以及任务定义ID可以获取任务实例表
+				bysjglxt_task_instance = topicInformationManagementDao.getTaskInstanceByNameAndProcessInstanceId(
+						bysjglxt_task_definition.getTask_definition_id(),
+						bysjglxt_process_instance.getProcess_instance_id());
+				if (bysjglxt_task_instance != null) {
+					bysjglxt_task_instance
+							.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_review());
+				}
+			}
+		}
+		return 1;
 	}
 
 	@Override

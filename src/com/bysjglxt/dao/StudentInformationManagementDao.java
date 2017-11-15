@@ -89,4 +89,6 @@ public interface StudentInformationManagementDao {
 
 	List<String> listStudent_Level();
 
+	List<bysjglxt_student_user> getListStudentByNotClose();
+
 }

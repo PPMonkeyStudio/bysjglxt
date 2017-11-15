@@ -10,6 +10,12 @@ import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 public interface TopicInformationManagementService {
 
 	/**
+	 * 分配评阅教师
+	 * 
+	 */
+	public int assignment(String selectId,String reviewId);
+
+	/**
 	 * @DATE 2017-10-28
 	 * @说明 教师创建课题，存储到bysjglxt_topic表中 这里需要通知管理员
 	 * @param newTopic
@@ -187,5 +193,4 @@ public interface TopicInformationManagementService {
 	 */
 	public int dropTopic(String studentUserId);
 
-	
 }

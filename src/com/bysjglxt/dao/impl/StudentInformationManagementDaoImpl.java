@@ -456,7 +456,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	public List<bysjglxt_record_progress> getProgress(String topic_select_student) {
 		List<bysjglxt_record_progress> listProgress = new ArrayList<bysjglxt_record_progress>();
 		Session session = getSession();
-		String hql = "from bysjglxt_record_progress where record_progress _student ='" + topic_select_student + "'";
+		String hql = "from bysjglxt_record_progress where record_progress_student ='" + topic_select_student + "'";
 		Query query = session.createQuery(hql);
 		listProgress = query.list();
 		return listProgress;
@@ -602,6 +602,16 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	@Override
+	public List<bysjglxt_student_user> getListStudentByNotClose() {
+		List<bysjglxt_student_user> listStudentByNotClose = new ArrayList<bysjglxt_student_user>();
+		Session session = getSession();
+		String hql = "from bysjglxt_student_user where user_student_is_operate_premission ='1'";
+		Query query = session.createQuery(hql);
+		listStudentByNotClose = query.list();
+		return listStudentByNotClose;
 	}
 
 }
