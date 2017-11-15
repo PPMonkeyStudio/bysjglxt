@@ -95,6 +95,25 @@ public class NoticeManagementAction extends ActionSupport implements ServletResp
 		}
 	}
 
+	public void numNavbarNotice() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(noticeManagementService.getNoticeStateCount(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id())));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			int num = noticeManagementService.getNoticeStateCount(
+					((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+							.getBysjglxtStudentUser().getUser_student_id());
+			http_response.getWriter().write(gson.toJson(num));
+
+		}
+	}
+
 	public void readNotice() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		noticeManagementService.updateNoticeState(readNoticeID);

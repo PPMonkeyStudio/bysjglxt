@@ -152,11 +152,10 @@
 						<span class="badge bg-danger" id="num_Navbar_Notice"></span>
 					</a> 
 					<ul class="dropdown-menu notifications" id="ul_Navbar_Notice">
-						
 						<li>
 							<a
 								href="<%=basePath%>notice/NoticeManagement_NoticeManagementPage"
-								class="notification-item" style="text-align: center;">查看</a>
+								class="notification-item" style="text-align: center;">查看历史消息</a>
 						</li>
 					</ul>
 				</li>
