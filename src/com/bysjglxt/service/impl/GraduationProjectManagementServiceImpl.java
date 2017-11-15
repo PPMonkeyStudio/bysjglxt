@@ -1052,10 +1052,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	public int updateDefence(bysjglxt_defence updateDefence) {
 		int flag = 2;
 		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
-		bysjglxt_defence = graduationProjectManagementDao.findDefenceById(updateDefence.getDefence_id());
+		bysjglxt_defence = graduationProjectManagementDao.findDefenceByUserId(updateDefence.getDefence_student());
 		String grade = "";
 		if (bysjglxt_defence != null) {
-			bysjglxt_defence.setDefence_record(updateDefence.getDefence_record());
 			bysjglxt_defence.setDefence_leader_comment(updateDefence.getDefence_leader_comment());
 			bysjglxt_defence.setDefence_grade_writing(updateDefence.getDefence_grade_writing());
 			bysjglxt_defence.setDefence_grade_normalization(updateDefence.getDefence_grade_normalization());
@@ -1075,6 +1074,22 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			 * 五级评分制 优：90 中：80 良：70 及格：60 不及格：<60
 			 */
 			bysjglxt_defence.setDefence_finally(TeamUtil.grade(bysjglxt_defence.getDefence_total()));
+			bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
+		}
+		return flag;
+	}
+
+	/**
+	 * 记录员更改答辩表
+	 */
+	@Override
+	public int updateDefenceRecorder(bysjglxt_defence updateDefence) {
+		int flag = 2;
+		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
+		bysjglxt_defence = graduationProjectManagementDao.findDefenceByUserId(updateDefence.getDefence_student());
+		if (bysjglxt_defence != null) {
+			bysjglxt_defence.setDefence_record(updateDefence.getDefence_record());
 			bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 		}
