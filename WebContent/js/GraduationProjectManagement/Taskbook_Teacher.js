@@ -1,11 +1,11 @@
 function Initialization_Taskbook_Teacher() {
 	var banner_Taskbook_Teacher = document
 			.getElementById("banner_Taskbook_Teacher");
-	banner_Taskbook_Teacher.click();
+	Taskbook_Teacher();
 }
 
 function Taskbook_Teacher() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师完成任务书';
+  	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师完成任务书';
 
 	/*
 	 * 
@@ -82,6 +82,7 @@ function Taskbook_Teacher() {
 				/*
 				 * 让不是现在进行的流程的不可编辑
 				 */
+				console.debug("bukebian:"+current_processDefinitionName);
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
 				if ("指导老师完成任务书" != current_processDefinitionName) {

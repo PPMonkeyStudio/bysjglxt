@@ -117,5 +117,9 @@ public interface GraduationProjectManagementDao {
 
 	public List<bysjglxt_topic_select> getSelectTopicByTutorId(String teacherUserId);
 
+	public int fillEmptyInDissertation(bysjglxt_dissertation bysjglxt_dissertation);
+
+	public com.bysjglxt.domain.DO.bysjglxt_dissertation getThesisByStudentId(String userId);
+
 
 }

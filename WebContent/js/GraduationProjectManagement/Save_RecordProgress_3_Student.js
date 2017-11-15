@@ -25,10 +25,10 @@ function Save_RecordProgress_3_Student() {
 	/*
 	 * 
 	 */
-	formData.append("updateRecordProgressEarlystage.record_progress_id",
+	formData.append("updateRecordProgressLaterstage.record_progress_id",
 			record_progress_id.value);
 	//
-	formData.append("updateRecordProgressEarlystage.record_progress_record",
+	formData.append("updateRecordProgressLaterstage.record_progress_record",
 			record_progress_record_3.value);
 	//
 	/*

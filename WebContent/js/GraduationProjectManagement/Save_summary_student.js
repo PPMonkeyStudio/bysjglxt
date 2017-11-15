@@ -20,8 +20,8 @@ function Save_summary_student() {
 	/*
 	 * 
 	 */
-	formData.append("updateTaskbook.summary_id", summary_id.value);
-	formData.append("updateTaskbook.summary_summary", summary_summary.value);
+	formData.append("updateSummary.summary_id", summary_id.value);
+	formData.append("updateSummary.summary_summary", summary_summary.value);
 	/*
 	 * 
 	 */

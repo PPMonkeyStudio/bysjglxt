@@ -108,7 +108,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			if (i != 1) {
 				return -3;
 			}
-
 		}
 		boolean flag = true;
 		bysjglxt_student_user bysjglxt_student_user = null;
@@ -141,6 +140,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		String section = null;
 		System.out.println(list_bysjglxt_task_definition.size());
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
+			System.err.println(x);
 			x++;
 			section = null;
 			bysjglxt_section = new bysjglxt_section();
@@ -257,6 +257,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			if (!flag)
 				return -3;
 		}
+		System.out.println("oooooooooooooooooooooooooooooooo");
 		return 1;
 
 	}

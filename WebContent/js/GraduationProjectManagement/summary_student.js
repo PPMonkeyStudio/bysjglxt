@@ -17,6 +17,7 @@ function summary_student() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				
 				var summary = JSON.parse(xhr.responseText);
 				var tab = document.getElementById("tab12");
 				tab.innerHTML = '';
@@ -81,7 +82,7 @@ function summary_student() {
 
 	xhr
 			.open("POST",
-					"/bysjglxt/graduationProject/GraduationProjectManagement_get_RecordProgress_1");
+					"/bysjglxt/graduationProject/GraduationProjectManagement_get_Summary");
 
 	xhr.send(formData);
 

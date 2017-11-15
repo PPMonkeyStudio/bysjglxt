@@ -90,7 +90,6 @@ function dissertation() {
 			}
 		}
 	}
-
 	xhr
 			.open("POST",
 					"/bysjglxt/graduationProject/GraduationProjectManagement_get_Dissertation");

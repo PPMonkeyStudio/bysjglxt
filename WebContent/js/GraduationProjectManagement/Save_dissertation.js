@@ -11,9 +11,7 @@ function Save_dissertation() {
 			}
 		}
 	}
-
 	var formData = new FormData();
-
 	xhr
 			.open("POST",
 					"/bysjglxt/graduationProject/GraduationProjectManagement_updateDissertation");
