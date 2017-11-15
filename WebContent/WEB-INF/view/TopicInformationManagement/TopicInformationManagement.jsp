@@ -115,7 +115,7 @@
 									<option value="审核未通过">审核未通过</option>
 								</select>
 							</th>
-							<th>操作</th>
+							<th>查看</th>
 							<th class="">
 								<label class="fancy-checkbox">
 									<input id="checkbox_all_select" type="checkbox"

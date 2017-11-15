@@ -22,6 +22,8 @@
 	src="<%=basePath%>js/TopicInformationManagement/Update_Topic.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/drop_Topic.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/distributionTopicStudent.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>课题管理页</title>

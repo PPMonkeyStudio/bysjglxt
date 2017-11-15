@@ -2,8 +2,10 @@ package com.bysjglxt.action;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,6 +75,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	/*
 	 * 
 	 */
+	private String DissertationUserID;
 
 	/*
 	 * 
@@ -503,7 +506,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	public void updateDefence() throws IOException {
-		System.out.println(updateDefence);
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateDefence(updateDefence) == 1) {
 			http_response.getWriter().write("保存成功");
@@ -531,8 +533,17 @@ public class GraduationProjectManagementAction extends ActionSupport
 		}
 	}
 
-	public void downloadDissertation() {
+	public String downloadDissertation() throws UnsupportedEncodingException, FileNotFoundException {
 
+		System.out.println("DissertationUserID:" + DissertationUserID);
+
+		File downloadDissertation = graduationProjectManagementService.downloadDissertation(DissertationUserID);
+
+		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
+
+		inputStream = new FileInputStream(downloadDissertation);
+
+		return "downloadDissertation";
 	}
 
 	public void updateDissertation() throws IOException {
@@ -753,6 +764,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setTeacherManagementStudentVO(TeacherTutorStudentVO teacherManagementStudentVO) {
 		this.teacherManagementStudentVO = teacherManagementStudentVO;
+	}
+
+	public String getDissertationUserID() {
+		return DissertationUserID;
+	}
+
+	public void setDissertationUserID(String dissertationUserID) {
+		DissertationUserID = dissertationUserID;
 	}
 
 }
