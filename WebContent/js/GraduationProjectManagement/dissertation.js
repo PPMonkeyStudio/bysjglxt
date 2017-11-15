@@ -45,7 +45,10 @@ function dissertation() {
 					div_2.innerHTML = '<button class="btn btn-default" '
 							+ 'onclick="addDissertation()">上传</button>';
 					tab.appendChild(div_2);
-					dissertationChange(dissertation.dissertation_file);
+					if (dissertation.dissertation_file != '') {
+						dissertationChange(dissertation.dissertation_file);
+					}
+
 				} else {
 					var div_2 = document.createElement("div");
 					div_2.innerHTML = '<button class="btn btn-default" '
