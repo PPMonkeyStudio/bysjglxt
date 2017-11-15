@@ -223,6 +223,12 @@ public interface GraduationProjectManagementService {
 	public int updateDefence(bysjglxt_defence updateDefence);
 
 	/**
+	 * 记录员填写的部分
+	 */
+	public int updateDefenceRecorder(bysjglxt_defence updateDefence);
+	
+	
+	/**
 	 * 这里是教师指导的毕业设计
 	 * 
 	 * 

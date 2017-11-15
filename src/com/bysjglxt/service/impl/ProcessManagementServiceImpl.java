@@ -95,11 +95,20 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -3;
 		}
 		if ("毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
+			// 判断学生是否已经选题
+			bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+			// 根据学生User Id获取学生user表
+			bysjglxt_student_user = processManagementDao.getStudentUser(operation);
+			if (bysjglxt_student_user.getUser_student_is_select_topic() == 2) {
+				// 如果学生处于未选题的状态,则返回
+				return -5;
+			}
 			// 创建毕业设计流程内容
 			int i = graduationProjectManagementService.startGraduationProjectProcess(operation);
 			if (i != 1) {
 				return -3;
 			}
+
 		}
 		boolean flag = true;
 		bysjglxt_student_user bysjglxt_student_user = null;
