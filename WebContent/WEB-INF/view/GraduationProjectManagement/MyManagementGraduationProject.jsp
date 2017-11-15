@@ -16,6 +16,10 @@
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/List_MyManagementGraduationProject_By_PageAndSearch.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/update_defence_record.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/update_defence_leader.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>毕业设计管理</title>
@@ -68,7 +72,8 @@
 								</select>
 							</th>
 							<th>进程</th>
-							<th>操作</th>
+							<th>毕业设计</th>
+							<th>答辩</th>
 						</tr>
 					</tbody>
 				</table>

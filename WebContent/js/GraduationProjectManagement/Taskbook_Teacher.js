@@ -17,6 +17,7 @@ function Taskbook_Teacher() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				console.debug("taskbook:::" + xhr.responseText);
 				var taskbook = JSON.parse(xhr.responseText);
 				var tab = document.getElementById("tab1");
 				tab.innerHTML = '';

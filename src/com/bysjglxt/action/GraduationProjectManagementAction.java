@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
@@ -61,12 +62,17 @@ public class GraduationProjectManagementAction extends ActionSupport
 	private bysjglxt_examination_formal updateExaminationFormal;
 	private bysjglxt_evaluate_tutor updateEvaluateTutor;
 	private bysjglxt_evaluate_review updateEvaluateReview;
+	private bysjglxt_defence updateDefence;
 	//
 	private File dissertation;
 	private String dissertationFileName;
 	private String dissertationContentType;
 
 	private String oldDissertation;
+
+	/*
+	 * 
+	 */
 
 	/*
 	 * 
@@ -295,15 +301,9 @@ public class GraduationProjectManagementAction extends ActionSupport
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_Defence(
-					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
-		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(graduationProjectManagementService.get_Defence(
-							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
-									.getBysjglxtStudentUser().getUser_student_id())));
-		}
+		http_response.getWriter()
+				.write(gson.toJson(graduationProjectManagementService.get_Defence(updateDefence.getDefence_student())));
+
 	}
 
 	public String exportAll() throws Exception {
@@ -485,6 +485,16 @@ public class GraduationProjectManagementAction extends ActionSupport
 	public void updateEvaluateReview() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateEvaluateReview(updateEvaluateReview) == 1) {
+			http_response.getWriter().write("保存成功");
+		} else {
+			http_response.getWriter().write("系统繁忙");
+		}
+	}
+
+	public void updateDefence() throws IOException {
+		System.out.println("updateDefence:" + updateDefence);
+		http_response.setContentType("text/html;charset=utf-8");
+		if (graduationProjectManagementService.updateDefence(updateDefence) == 1) {
 			http_response.getWriter().write("保存成功");
 		} else {
 			http_response.getWriter().write("系统繁忙");
@@ -722,7 +732,16 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return teacherManagementStudentVO;
 	}
 
+	public bysjglxt_defence getUpdateDefence() {
+		return updateDefence;
+	}
+
+	public void setUpdateDefence(bysjglxt_defence updateDefence) {
+		this.updateDefence = updateDefence;
+	}
+
 	public void setTeacherManagementStudentVO(TeacherTutorStudentVO teacherManagementStudentVO) {
 		this.teacherManagementStudentVO = teacherManagementStudentVO;
 	}
+
 }
