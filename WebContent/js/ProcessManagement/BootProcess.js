@@ -24,7 +24,15 @@ function BootProcess(button_Process) {
 								var message;
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
-										window.location = '/bysjglxt/process/ProcessManagement_MyTask';
+										if (xhr.responseText == "-2") {
+											toastr.error("不可重复开启流程");
+										} else if (xhr.responseText == "-5") {
+											toastr.error("未选题");
+										} else {
+											window.location = '/bysjglxt/process/ProcessManagement_MyTask';
+
+										}
+
 									} else {
 										toastr.error(xhr.status);
 									}

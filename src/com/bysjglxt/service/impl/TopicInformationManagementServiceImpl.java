@@ -127,6 +127,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_notice bysjglxt_notice = null;
 		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
 		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
+		listLeader = topicInformationManagementDao.getAllLeader();
 		bysjglxt_leader = listLeader.get(0);
 		for (String string : topicID) {
 			bysjglxt_notice = new bysjglxt_notice();
@@ -178,6 +179,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_topic bysjglxt_topic = null;
 		bysjglxt_notice bysjglxt_notice = null;
 		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
+		listLeader = topicInformationManagementDao.getAllLeader();
 		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
 		bysjglxt_leader = listLeader.get(0);
 		for (String string : topicID) {
@@ -191,7 +193,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
 			bysjglxt_notice.setNotice_launch(bysjglxt_leader.getLeader_teacher_id());
 			bysjglxt_notice.setNotice_belong(bysjglxt_topic.getTopic_teacher());
-			bysjglxt_notice.setNotice_content("您的课题未通过审核");
+			bysjglxt_notice.setNotice_content("课题未通过审核");
 			bysjglxt_notice.setNotice_state(2);
 			bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
@@ -334,7 +336,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
 		bysjglxt_notice.setNotice_launch(studentID);
 		bysjglxt_notice.setNotice_belong(bysjglxt_teacher_user.getUser_teacher_id());
-		bysjglxt_notice.setNotice_content("有学生选了您的选题");
+		bysjglxt_notice.setNotice_content("选了您的课题");
 		bysjglxt_notice.setNotice_state(2);
 		bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
