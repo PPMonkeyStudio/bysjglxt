@@ -212,6 +212,24 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				}
 				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
 				break;
+			case 2:
+				// 评阅老师
+				// 判断学生账号是否错误
+				// 判断那是否是学生点击开启流程
+				bysjglxt_student_user = processManagementDao.getStudentUser(operation);
+				if (bysjglxt_student_user == null) {
+					return -1;
+				}
+				// 根据学生user ID获取学生选题表信息
+				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
+				if (bysjglxt_topic_select == null) {
+					return -3;
+				}
+				if (bysjglxt_topic_select.getTopic_select_teacher_review() != null) {
+					bysjglxt_task_instance
+							.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_review());
+				}
+				break;
 			case 3:
 				// 领导小组长
 				listLeader = processManagementDao.getListLeader();
