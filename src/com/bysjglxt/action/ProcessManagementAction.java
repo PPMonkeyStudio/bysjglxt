@@ -228,7 +228,7 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(gson.toJson(processManagementService.getCurrentTaskDTO()));
+		http_response.getWriter().write(gson.toJson(processManagementService.getCurrentTaskIng()));
 	}
 
 	/**
