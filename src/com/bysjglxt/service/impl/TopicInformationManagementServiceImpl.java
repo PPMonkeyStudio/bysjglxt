@@ -408,8 +408,11 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		String studentIdList = "";
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
 		bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicID);
+		System.out.println(studentIDList.size());
 		for (String string : studentIDList) {
+			System.out.println("2222");
 			studentIdList = studentIdList + string + "#&#";
+			System.out.println("studentIdList:" + studentIdList);
 			// 通知学生
 			bysjglxt_notice = new bysjglxt_notice();
 			bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
@@ -421,7 +424,9 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
 			flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
 		}
+		System.out.println("studentIdList:----" + studentIdList);
 		flag = topicInformationManagementDao.updateStudentList(topicID, studentIdList);
+		System.out.println("gg");
 		return flag;
 	}
 
