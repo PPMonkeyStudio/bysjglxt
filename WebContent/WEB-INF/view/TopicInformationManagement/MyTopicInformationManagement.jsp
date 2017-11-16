@@ -176,7 +176,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<div class="modal fade" id="modal_distributionTopicStudent"
 		data-keyboard="true" tabindex="-1">
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<!-- 模态弹出窗内容 -->
 				<!--弹出框头部，一般使用“modal-header”表示，主要包括标题和关闭按钮-->

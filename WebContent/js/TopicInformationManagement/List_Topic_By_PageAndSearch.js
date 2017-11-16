@@ -120,9 +120,19 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<i style="cursor: pointer;" id="'
-							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" onclick="Topic_Information_Display(this)" class="fa fa-book  "></i>';
+					if (userTeacherDTO != null
+							&& userTeacherDTO.bysjglxtLeader != null) {
+						new_td.innerHTML = '<button style="" id="'
+								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
+								+ '" onclick="Topic_Information_Display(this)" class="btn btn-default">详细</button>'
+								+ '<button style="" id="'
+								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
+								+ '" onclick="(this)" class="btn btn-default">分配评阅教师</button>';
+					} else {
+						new_td.innerHTML = '<button style="" id="'
+								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
+								+ '" onclick="Topic_Information_Display(this)" class="btn btn-default">详细</button>';
+					}
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
