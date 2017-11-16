@@ -1,5 +1,11 @@
 ﻿var topic_json = null;
 
+var distributionTopicStudent_ID = null;
+
+function show_distributionTopicStudent(button) {
+	distributionTopicStudent_ID = button.id;
+	$("#modal_distributionTopicStudent").modal("show");
+}
 function List_MyTopic_By_PageAndSearch(pageIndex) {
 	document.getElementById("i_pulse").style.display = "block";
 	var xhr = false;
@@ -122,9 +128,9 @@ function List_MyTopic_By_PageAndSearch(pageIndex) {
 					new_td.innerHTML = '<button style="cursor: pointer;" id="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
 							+ '" onclick="MyTopic_Information_Display(this)" class="btn btn-default">详情</button>'
-							+ '<button style="cursor: pointer;" id="'
+							+ '<button  style="cursor: pointer;" id="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" onclick="distributionTopicStudent(this)" class="teacher_control btn btn-default">指定学生</button>';
+							+ '" onclick="show_distributionTopicStudent(this)" class="teacher_control btn btn-default">指定学生</button>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));

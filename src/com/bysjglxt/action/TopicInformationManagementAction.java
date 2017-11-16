@@ -48,6 +48,10 @@ public class TopicInformationManagementAction extends ActionSupport
 	private List<String> listCloseTopicID;
 	private List<String> listDeleteTopicID;
 	/*
+	 * 
+	 */
+	private List<String> studentIDList;
+	/*
 	 * 学生选题
 	 */
 	private String studentSelectTopic;
@@ -147,6 +151,17 @@ public class TopicInformationManagementAction extends ActionSupport
 			http_response.getWriter().write(gson.toJson(
 					topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 2)));
 		}
+	}
+
+	public void distributionTopicStudent() {
+
+		// for (int num = 0; num < studentIDList.size(); num++) {
+		// studentIDList.get(num).replaceAll(",", ";");
+		// }
+
+		System.out.println(studentIDList);
+
+		topicInformationManagementService.distributionTopicStudent(studentSelectTopic, studentIDList);
 	}
 
 	/**
@@ -373,6 +388,14 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	public void setAssignmentTopicId(String assignmentTopicId) {
 		this.assignmentTopicId = assignmentTopicId;
+	}
+
+	public List<String> getStudentIDList() {
+		return studentIDList;
+	}
+
+	public void setStudentIDList(List<String> studentIDList) {
+		this.studentIDList = studentIDList;
 	}
 
 }

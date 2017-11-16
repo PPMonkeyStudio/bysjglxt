@@ -204,6 +204,34 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
+	<div class="modal fade" id="modal_distributionTopicStudent"
+		data-keyboard="true" tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<!-- 模态弹出窗内容 -->
+				<!--弹出框头部，一般使用“modal-header”表示，主要包括标题和关闭按钮-->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">指定学生选题</h4>
+				</div>
+				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
+				<div class="modal-body">
+					<select style="float: left;" multiple
+						data-done-button="true" data-live-search="true"
+						id="select_distributionTopicStudent" class="form-control"
+						style="margin:20px 0; "></select>
+				</div>
+				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
+				<div class="modal-footer">
+					<button class="btn btn-default"
+						onclick="distributionTopicStudent()">指定</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
@@ -212,6 +240,34 @@
 	$('select').selectpicker('refresh');
 </script>
 <script>
-	
+	var xhr = false;
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		var message;
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				var student_json = JSON.parse(xhr.responseText);
+
+				var select_distributionTopicStudent = document
+						.getElementById("select_distributionTopicStudent");
+				for (var num = 0; num < student_json.length; num++) {
+					var option = document.createElement("option");
+					option
+							.appendChild(document
+									.createTextNode(student_json[num].bysjglxtStudentBasic.student_basic_name));
+					option.value = student_json[num].bysjglxtStudentUser.user_student_id;
+					select_distributionTopicStudent.appendChild(option);
+				}
+				$('#select_distributionTopicStudent').selectpicker('refresh');
+			} else {
+
+				toastr.error(xhr.status);
+			}
+		}
+	}
+	xhr
+			.open("POST",
+					"/bysjglxt/student/StudentInformationManagement_listStudentNoClose");
+	xhr.send(null);
 </script>
 </html>
