@@ -1,6 +1,7 @@
 package com.bysjglxt.action;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +51,7 @@ public class TopicInformationManagementAction extends ActionSupport
 	/*
 	 * 
 	 */
-	private List<String> studentIDList;
+	private String studentIDList;
 	/*
 	 * 学生选题
 	 */
@@ -154,14 +155,12 @@ public class TopicInformationManagementAction extends ActionSupport
 	}
 
 	public void distributionTopicStudent() {
+		String[] array = null;
+		array = studentIDList.split(",");
 
-		// for (int num = 0; num < studentIDList.size(); num++) {
-		// studentIDList.get(num).replaceAll(",", ";");
-		// }
+		List<String> list = Arrays.asList(array);
 
-		System.out.println(studentIDList);
-
-		topicInformationManagementService.distributionTopicStudent(studentSelectTopic, studentIDList);
+		topicInformationManagementService.distributionTopicStudent(studentSelectTopic, list);
 	}
 
 	/**
@@ -390,11 +389,11 @@ public class TopicInformationManagementAction extends ActionSupport
 		this.assignmentTopicId = assignmentTopicId;
 	}
 
-	public List<String> getStudentIDList() {
+	public String getStudentIDList() {
 		return studentIDList;
 	}
 
-	public void setStudentIDList(List<String> studentIDList) {
+	public void setStudentIDList(String studentIDList) {
 		this.studentIDList = studentIDList;
 	}
 

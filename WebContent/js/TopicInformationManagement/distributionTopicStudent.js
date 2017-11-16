@@ -17,6 +17,7 @@ function distributionTopicStudent(button) {
 	formData.append("studentSelectTopic", distributionTopicStudent_ID);
 	formData.append("studentIDList", $('#select_distributionTopicStudent')
 			.val());
+	alert($('#select_distributionTopicStudent').val());
 	xhr
 			.open("POST",
 					"/bysjglxt/topic/TopicInformationManagement_distributionTopicStudent");
