@@ -58,7 +58,12 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].bysjglxtTopic.topic_name_chinese;
-
+					/*
+					 * 
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = '无';
 					/*
 					 * 
 					 */
@@ -98,7 +103,10 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					} else {
 						new_td.innerHTML = '<button  onclick="window.location = \'\/bysjglxt\/graduationProject\/GraduationProjectManagement_MyGraduationProjectPage?MyTutorGraduationProjectStudentID='
 								+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
-								+ '\'" class="btn btn-default">毕业设计</button>';
+								+ '\'" class="btn btn-default">毕业设计</button>'
+								+ '<button style="" id="'
+								+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].bysjglxtTopic.topic_id
+								+ '" onclick="topicReview(this)" class="btn btn-default">分配评阅教师</button>';
 					}
 					/*
 					 * 

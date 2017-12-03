@@ -260,7 +260,7 @@
 								<a href="#">第一个任务</a>
 							</li> -->
 							<li class="" id="button_SaveGraduationProject">
-								<a href="####" onclick='saveGraduationProject()'>保存</a>
+								<a href="####" onclick='saveGraduationProject()'>提交更新</a>
 							</li>
 							<!-- <li class="previous">
 								<a href="#">上一个任务</a>
@@ -394,6 +394,4 @@
 </script>
 <link rel="stylesheet" href="<%=basePath%>css/square/blue.css" />
 <script type="text/javascript" src="<%=basePath%>js/icheck.js"></script>
-<style>
-</style>
 </html>

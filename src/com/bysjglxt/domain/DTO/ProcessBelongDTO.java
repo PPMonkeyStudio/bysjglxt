@@ -4,6 +4,7 @@ import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 
 public class ProcessBelongDTO {
+
 	private bysjglxt_process_definition bysjglxt_process_definition;
 	private bysjglxt_process_instance bysjglxt_process_instance;
 

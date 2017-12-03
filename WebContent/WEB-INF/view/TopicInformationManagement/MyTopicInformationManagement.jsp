@@ -14,6 +14,7 @@
 <!--页面公用-------------------------------------------------------------------------------------------------->
 
 <!---------------------------------------------------------------------------------------------------->
+
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/List_MyTopic_By_PageAndSearch.js"></script>
 <script type="text/javascript"
@@ -24,6 +25,9 @@
 	src="<%=basePath%>js/TopicInformationManagement/drop_Topic.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/distributionTopicStudent.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/TopicDistributionStudentDisplay.js"></script>
+
 <!---------------------------------------------------------------------------------------------------->
 
 <title>课题管理页</title>
@@ -52,7 +56,7 @@
 						<button class="btn btn-default"
 							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_TopicListPage'">
 							<i class="fa fa-reply"></i>
-							返回
+							课题列表
 						</button>
 					</div>
 					<!-- 检索 -->
@@ -203,8 +207,9 @@
 	</div>
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
+
 	<!---------------------------------------------------------------------------------------------------->
-	<div class="modal fade" id="modal_distributionTopicStudent"
+	<%-- <div class="modal fade" id="modal_distributionTopicStudent"
 		data-keyboard="true" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -218,11 +223,13 @@
 					<h4 class="modal-title">指定学生选题</h4>
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
-				<div class="modal-body">
+				<div class="modal-body"
+					style="text-align: center; padding: 20px 114px;">
 					<select style="float: left;" multiple
 						data-done-button="true" data-live-search="true"
 						id="select_distributionTopicStudent" class="form-control"
 						style="margin:20px 0; "></select>
+
 				</div>
 				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
 				<div class="modal-footer">
@@ -231,43 +238,23 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 </body>
+<link href="<%=basePath%>css/multi-select.css" media="screen"
+	rel="stylesheet" type="text/css">
+<script src="<%=basePath%>js/jquery.multi-select.js"
+	type="text/javascript"></script>
 <script>
-	$('select').selectpicker('refresh');
+	$('#select_source').selectpicker('refresh');
+	$('#select_type').selectpicker('refresh');
+	$('#select_state').selectpicker('refresh');
 </script>
-<script>
-	var xhr = false;
-	xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		var message;
-		if (xhr.readyState == 4) {
-			if (xhr.status == 200) {
-				var student_json = JSON.parse(xhr.responseText);
-
-				var select_distributionTopicStudent = document
-						.getElementById("select_distributionTopicStudent");
-				for (var num = 0; num < student_json.length; num++) {
-					var option = document.createElement("option");
-					option
-							.appendChild(document
-									.createTextNode(student_json[num].bysjglxtStudentBasic.student_basic_name));
-					option.value = student_json[num].bysjglxtStudentUser.user_student_id;
-					select_distributionTopicStudent.appendChild(option);
-				}
-				$('#select_distributionTopicStudent').selectpicker('refresh');
-			} else {
-
-				toastr.error(xhr.status);
-			}
-		}
-	}
-	xhr
-			.open("POST",
-					"/bysjglxt/student/StudentInformationManagement_listStudentNoClose");
-	xhr.send(null);
-</script>
+<style>
+.class_distributionTopicStudent {
+	color: #330033;
+}
+</style>
 </html>

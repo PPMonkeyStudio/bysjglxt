@@ -22,7 +22,6 @@ import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
 public class TopicInformationManagementAction extends ActionSupport
 		implements ServletResponseAware, ServletRequestAware {
 	/*
@@ -62,6 +61,10 @@ public class TopicInformationManagementAction extends ActionSupport
 	 */
 	private String assignmentStudentUserId;
 	private String assignmentTopicId;
+	private String assignmentReviewTeacherId;
+	/*
+	 * 
+	 */
 
 	/*
 	 * 
@@ -72,7 +75,15 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * @return
 	 */
 	public String TopicListPage() {
-
+		// 如果学生已选题，则直接跳转到我的课题页面
+		// if (ActionContext.getContext().getSession().get("userStudentDTO") !=
+		// null) {
+		// if (((StudentInformationDTO)
+		// ActionContext.getContext().getSession().get("userStudentDTO"))
+		// .getBysjglxtStudentUser().getUser_student_is_select_topic() == 1) {
+		// return "MyTopicListPage";
+		// }
+		// }
 		return "TopicListPage";
 	}
 
@@ -105,13 +116,24 @@ public class TopicInformationManagementAction extends ActionSupport
 		http_response.getWriter().write(gson.toJson(list_topic));
 	}
 
+	/*
+	 * 分配评阅教师
+	 * 
+	 */
+	public void AssignmentReviewTeacher() throws IOException {
+		System.out.println("assignmentReviewTeacherId:" + assignmentReviewTeacherId);
+		System.out.println("assignmentTopicId:" + assignmentTopicId);
+		http_response.setContentType("text/html;charset=utf-8");
+		topicInformationManagementService.assignment(assignmentTopicId, assignmentReviewTeacherId);
+		http_response.getWriter().write("success");
+	}
+
 	/**
 	 * 创建新的课题
 	 * 
 	 * @throws IOException
 	 */
 	public void CreateTopic() throws IOException {
-
 		topicInformationManagementDTO.setTeacherInformationDTO(new TeacherInformationDTO());
 		topicInformationManagementDTO.getTeacherInformationDTO().setBysjglxtTeacherUser(new bysjglxt_teacher_user());
 
@@ -395,6 +417,14 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	public void setStudentIDList(String studentIDList) {
 		this.studentIDList = studentIDList;
+	}
+
+	public String getAssignmentReviewTeacherId() {
+		return assignmentReviewTeacherId;
+	}
+
+	public void setAssignmentReviewTeacherId(String assignmentReviewTeacherId) {
+		this.assignmentReviewTeacherId = assignmentReviewTeacherId;
 	}
 
 }
