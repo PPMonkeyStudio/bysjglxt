@@ -38,6 +38,20 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	}
 
 	/**
+	 * 获取所有需要进行选题的学生id
+	 * 
+	 * @D 可以选题的学生应该满足下面的一些情况：
+	 * @D 1.学生已经进行了选题
+	 * @D 2.没有开启毕业设计流程
+	 */
+	@Override
+	public List<String> listOpenGraduationProjectProcessStudentId(String process_definition_id) {
+		List<String> listSelectStudent = new ArrayList<String>();
+		listSelectStudent = processManagementDao.getListStudentSelect(process_definition_id);
+		return listSelectStudent;
+	}
+
+	/**
 	 * 获得正在进行的选题流程实例
 	 */
 	@Override
@@ -122,14 +136,16 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	@Override
 	public int openProcess(String processInstanceName, String process_definition_id, String operation) {
 		// 判断用户是否已经开启该流程
-		bysjglxt_process_instance processInstanceIsOpen = new bysjglxt_process_instance();
+		// bysjglxt_process_instance processInstanceIsOpen = new
+		// bysjglxt_process_instance();
 		// 根据流程定义ID以及流程实例化者ID判断是否已经开启流程
-		processInstanceIsOpen = processManagementDao.getProcessInstanceByDefinitionAndMan(process_definition_id,
-				operation);
-		if (processInstanceIsOpen != null) {
-			return -2;
-		}
-		// 根据流程定义Id获取流程流程定义
+		// processInstanceIsOpen =
+		// processManagementDao.getProcessInstanceByDefinitionAndMan(process_definition_id,
+		// operation);
+		// if (processInstanceIsOpen != null) {
+		// return -2;
+		// }
+		// 根据流程定义Id获取流程定义
 		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
 		bysjglxt_process_definition = processManagementDao.getProcessDefinition(process_definition_id);
 		if (bysjglxt_process_definition == null) {
@@ -137,13 +153,16 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		}
 		if ("毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
 			// 判断学生是否已经选题
-			bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+			// bysjglxt_student_user bysjglxt_student_user = new
+			// bysjglxt_student_user();
 			// 根据学生User Id获取学生user表
-			bysjglxt_student_user = processManagementDao.getStudentUser(operation);
-			if (bysjglxt_student_user.getUser_student_is_select_topic() == 2) {
-				// 如果学生处于未选题的状态,则返回
-				return -5;
-			}
+			// bysjglxt_student_user =
+			// processManagementDao.getStudentUser(operation);
+			// if (bysjglxt_student_user.getUser_student_is_select_topic() == 2)
+			// {
+			// 如果学生处于未选题的状态,则返回
+			// return -5;
+			// }
 			// 创建毕业设计流程内容
 			int i = graduationProjectManagementService.startGraduationProjectProcess(operation);
 			if (i != 1) {

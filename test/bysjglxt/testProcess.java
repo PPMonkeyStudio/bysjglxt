@@ -68,6 +68,7 @@ public class testProcess {
 				"00171b55-b96b-4f2b-97f0-58f11a22ae74");
 		System.out.println(i);
 	}
+
 	// 测试我的任务
 	@Test
 	public void testMyTask() {
@@ -75,6 +76,16 @@ public class testProcess {
 		processManagementVo = processManagementService.getMyTaskByPage(processManagementVo,
 				"166c2390-a79a-4ab1-b2ff-73d283e3aa65");
 		System.out.println(processManagementVo);
+	}
+
+	// 测试获取所有可以进行选题的学生
+	@Test
+	public void testGetAllStudentSelect() {
+		List<String> ll = new ArrayList<>();
+		ll = processManagementService.listOpenGraduationProjectProcessStudentId("d2bdf308-de04-4809-a75a-462bc7202bbf");
+		for (String string : ll) {
+			System.out.println("string:" + string);
+		}
 	}
 
 }

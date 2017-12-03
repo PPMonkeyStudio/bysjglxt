@@ -11,7 +11,7 @@ public class ProcessDetailDTO {
 	private bysjglxt_process_definition bysjglxtProcessDefinition;
 	private bysjglxt_task_definition bysjglxtTaskDefinition;
 	private bysjglxt_task_instance bysjglxtTaskInstance;
-
+	
 	@Override
 	public String toString() {
 		return "ProcessDetailDTO [bysjglxtProcessInstance=" + bysjglxtProcessInstance + ", bysjglxtProcessDefinition="

@@ -7,7 +7,7 @@ public class TaskDTO {
 
 	private bysjglxt_task_definition taskDefinition;
 	private bysjglxt_task_instance taskInstance;
-
+	
 	@Override
 	public String toString() {
 		return "TaskDTO [taskDefinition=" + taskDefinition + ", taskInstance=" + taskInstance + "]";

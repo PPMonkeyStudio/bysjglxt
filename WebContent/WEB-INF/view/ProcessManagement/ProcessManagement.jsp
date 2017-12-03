@@ -9,8 +9,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type"
-	content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--页面公用-------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
@@ -32,13 +31,13 @@
 <title>流程</title>
 </head>
 <body>
-	<s:action name="LoginLogoutManagement_navbar"
-		namespace="/loginLogout" executeResult="true" />
+	<s:action name="LoginLogoutManagement_navbar" namespace="/loginLogout"
+		executeResult="true" />
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<div style="margin: 80px 0 0 0; float: left; width: 100%;">
-		<!--  -->
+		<!---->
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
 		<div id="maxDiv_ProcessDefinitionDetail" class="panel"
@@ -47,8 +46,7 @@
 			<div style="padding: 20px 0 0 20px">
 				<button class="btn btn-default"
 					onclick="window.location='<%=basePath%>process/ProcessManagement_ProcessDefinitionListPage'">
-					<i class="fa fa-reply" aria-hidden="true"></i>
-					返回
+					<i class="fa fa-reply" aria-hidden="true"></i> 返回
 				</button>
 			</div>
 			<div class="panel-heading">
@@ -56,10 +54,8 @@
 			</div>
 			<div class="panel-body"></div>
 			<div style="padding: 0 0 20px 20px;">
-				<button class="btn btn-default"
-					onclick="CreatTaskDefinition()">
-					<i class="fa fa-plus-square" aria-hidden="true"></i>
-					新增任务节点
+				<button class="btn btn-default" onclick="CreatTaskDefinition()">
+					<i class="fa fa-plus-square" aria-hidden="true"></i> 新增任务节点
 				</button>
 			</div>
 		</div>
@@ -75,26 +71,21 @@
 					<div style="width: 500px; float: left;">
 						<button class="leader_control btn btn-default"
 							onclick="CreatProcessDefinition()">
-							<i class="fa fa-plus-square"></i>
-							创建流程
+							<i class="fa fa-plus-square"></i> 创建流程
 						</button>
 					</div>
 				</div>
-				<table id="table_processDefinition"
-					class="table table-hover "
+				<table id="table_processDefinition" class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
 							<th>流程定义名称</th>
 							<th>实例化角色</th>
 							<th>操作</th>
-							<th class="">
-								<label class="fancy-checkbox">
-									<input id="checkbox_all_select" type="checkbox"
-										onclick="all_select()">
+							<th class=""><label class="fancy-checkbox"> <input
+									id="checkbox_all_select" type="checkbox" onclick="all_select()">
 									<span>全选</span>
-								</label>
-							</th>
+							</label></th>
 						</tr>
 					</tbody>
 				</table>
@@ -103,10 +94,8 @@
 				</div>
 				<div style="height: 34px; margin: 0 0 20px 0;">
 					<button class="leader_control btn btn-danger"
-						onclick="Delete_Process()"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-trash-o"></i>
-						删除所选
+						onclick="Delete_Process()" style="float: right; margin: 0 10px;">
+						<i class="fa fa-trash-o"></i> 删除所选
 					</button>
 				</div>
 
