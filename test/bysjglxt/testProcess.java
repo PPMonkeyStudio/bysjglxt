@@ -88,4 +88,12 @@ public class testProcess {
 		}
 	}
 
+	// 开启毕业设计流程
+	@Test
+	public void testOpenGr() {
+
+		System.out.println(processManagementService.openGraduProcess());
+
+	}
+
 }

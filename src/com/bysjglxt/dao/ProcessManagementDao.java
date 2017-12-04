@@ -92,6 +92,10 @@ public interface ProcessManagementDao {
 	//
 	public List<String> getListStudentSelect(String process_definition_id);
 
+	public bysjglxt_process_definition getProcessDefinitionByName(String string);
+
+	public String getStudentNameByUserId(String stringId);
+
 	
 	
 }

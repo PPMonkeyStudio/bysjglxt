@@ -91,7 +91,7 @@ public class test {
 	@Test
 	public void testSelectTopic() {
 		int i = 0;
-		i = topicManagementService.selectTopic("0a072d3e-2b41-45e5-9283-efc62a9f52f5",
+		i = topicManagementService.selectTopic("0e81a1be-a41e-44c0-9781-a60b87bb2e89",
 				"0e18661e-9fb2-43b8-bce3-bd5a80768dc3");
 		System.out.println(i);
 	}

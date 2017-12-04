@@ -109,8 +109,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 
 	@Override
 	public int createSelectTopicTaskDefine(bysjglxt_task_definition selectTopicTaskDefine) {
-		System.out.println("fff");
-		System.out.println(selectTopicTaskDefine.getTask_definition_process_definition());
 		int flag = -1;
 		List<bysjglxt_task_definition> list_bysjglxt_task_definition = new ArrayList<>();
 		list_bysjglxt_task_definition = processManagementDao
@@ -133,41 +131,66 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		return listProcessDefinition;
 	}
 
+	/**
+	 * 开启毕业设计流程
+	 * 
+	 */
+	@Override
+	public int openGraduProcess() {
+		// 根据学生userId获取学生姓名
+		List<String> listGraduProcess = new ArrayList<>();
+		String studentName;
+		// 根据流程定义名获取流程定义ID
+		bysjglxt_process_definition processDefinition = new bysjglxt_process_definition();
+		// 根据流程定义
+		processDefinition = processManagementDao.getProcessDefinitionByName("毕业设计流程");
+		if (processDefinition == null)
+			return 2;
+		// 获取需要开启流程的学生列表
+		listGraduProcess = listOpenGraduationProjectProcessStudentId(processDefinition.getProcess_definition_id());
+		// 遍历学生依次开启毕业设计流程
+		for (String stringId : listGraduProcess) {
+			studentName = null;
+			int i = graduationProjectManagementService.startGraduationProjectProcess(stringId);
+			if (i != 1) {
+				return -3;
+			}
+			studentName = processManagementDao.getStudentNameByUserId(stringId);
+			if (studentName == null || studentName.trim().length() <= 0) {
+				continue;
+			}
+			openProcess(processDefinition.getProcess_definition_name() + "——" + studentName,
+					processDefinition.getProcess_definition_id(), stringId);
+			if (i != 1) {
+				return -3;
+			}
+		}
+		return 1;
+	}
+
+	/**
+	 * 这个方法用于开启选题流程以及毕业设计流程的调用
+	 * 
+	 * @param processInstanceName
+	 * @param process_definition_id
+	 * @param operation
+	 * @return
+	 */
 	@Override
 	public int openProcess(String processInstanceName, String process_definition_id, String operation) {
 		// 判断用户是否已经开启该流程
-		// bysjglxt_process_instance processInstanceIsOpen = new
-		// bysjglxt_process_instance();
+		bysjglxt_process_instance processInstanceIsOpen = new bysjglxt_process_instance();
 		// 根据流程定义ID以及流程实例化者ID判断是否已经开启流程
-		// processInstanceIsOpen =
-		// processManagementDao.getProcessInstanceByDefinitionAndMan(process_definition_id,
-		// operation);
-		// if (processInstanceIsOpen != null) {
-		// return -2;
-		// }
+		processInstanceIsOpen = processManagementDao.getProcessInstanceByDefinitionAndMan(process_definition_id,
+				operation);
+		if (processInstanceIsOpen != null) {
+			return -2;
+		}
 		// 根据流程定义Id获取流程定义
 		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
 		bysjglxt_process_definition = processManagementDao.getProcessDefinition(process_definition_id);
 		if (bysjglxt_process_definition == null) {
 			return -3;
-		}
-		if ("毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
-			// 判断学生是否已经选题
-			// bysjglxt_student_user bysjglxt_student_user = new
-			// bysjglxt_student_user();
-			// 根据学生User Id获取学生user表
-			// bysjglxt_student_user =
-			// processManagementDao.getStudentUser(operation);
-			// if (bysjglxt_student_user.getUser_student_is_select_topic() == 2)
-			// {
-			// 如果学生处于未选题的状态,则返回
-			// return -5;
-			// }
-			// 创建毕业设计流程内容
-			int i = graduationProjectManagementService.startGraduationProjectProcess(operation);
-			if (i != 1) {
-				return -3;
-			}
 		}
 		boolean flag = true;
 		bysjglxt_student_user bysjglxt_student_user = null;
@@ -198,9 +221,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		// 判断第一个任务实例为正在进行
 		int x = 0;
 		String section = null;
-		System.out.println(list_bysjglxt_task_definition.size());
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
-			System.err.println(x);
 			x++;
 			section = null;
 			bysjglxt_section = new bysjglxt_section();
@@ -335,7 +356,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			if (!flag)
 				return -3;
 		}
-		System.out.println("oooooooooooooooooooooooooooooooo");
 		return 1;
 
 	}
@@ -359,7 +379,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	// 点击我的任务
 	@Override
 	public ProcessManagementVO getMyTaskByPage(ProcessManagementVO processManagementVo, String userID) {
-		System.out.println(userID);
 		List<ProcessDetailDTO> list_ProcessInstanceDetailDTO = new ArrayList<ProcessDetailDTO>();
 		List<bysjglxt_task_instance> list_bysjglxtTaskInstance = new ArrayList<bysjglxt_task_instance>();
 		ProcessDetailDTO processDetailDTO = null;

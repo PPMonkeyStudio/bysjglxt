@@ -1090,7 +1090,6 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			}
 			break;
 		}
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		listBysjglxtTopicSelect = query.list();
 		session.clear();
