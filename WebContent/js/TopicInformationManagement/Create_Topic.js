@@ -6,8 +6,9 @@ function Create_Topic() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				console.debug("获取当前选题流程:" + xhr.responseText);
 				var topicCurrentProcessDTO = JSON.parse(xhr.responseText);
-				if (topicCurrentProcessDTO == null) {
+				if (xhr.responseText == '{}') {
 					toastr.error("管理员未开启选题的流程");
 					return;
 				} else {
@@ -38,20 +39,20 @@ function Create_Topic() {
 						toastr.error("课题中文名称不能为空");
 						return;
 					}
-					var xhr = false;
-					xhr = new XMLHttpRequest();
-					xhr.onreadystatechange = function() {
+					var xhr_2 = false;
+					xhr_2 = new XMLHttpRequest();
+					xhr_2.onreadystatechange = function() {
 						var message;
-						if (xhr.readyState == 4) {
-							if (xhr.status == 200) {
+						if (xhr_2.readyState == 4) {
+							if (xhr_2.status == 200) {
 								window.location = "/bysjglxt/topic/TopicInformationManagement_TopicListPage";
 							} else {
-								toastr.error(xhr.status);
+								toastr.error(xhr_2.status);
 							}
 						}
 					}
 					var formData = new FormData();
-					xhr
+					xhr_2
 							.open("POST",
 									"/bysjglxt/topic/TopicInformationManagement_CreateTopic");
 					if (!topic_name_chinese.value == "") {
@@ -90,17 +91,16 @@ function Create_Topic() {
 					 * 
 					 */
 
-					xhr.send(formData);
+					xhr_2.send(formData);
 
 				}
 			} else {
-				toastr.error(xhr.status);
+				toastr.error(xhr_2.status);
 			}
 		}
 	}
-	xhr
-			.open("POST",
-					"/bysjglxt/topic/TopicInformationManagement_getTopicCurrentProcess");
+	xhr.open("POST",
+			"/bysjglxt/process/ProcessManagement_getTopicCurrentProcess");
 	xhr.send(null);
 	/*
 	 * 

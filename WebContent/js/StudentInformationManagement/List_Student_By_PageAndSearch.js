@@ -38,7 +38,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					new_tr.className = "new_tr";
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
@@ -49,7 +48,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_name != "") {
@@ -109,8 +107,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 						if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 1) {
 							new_td.innerHTML = '✔';
 						} else {
-							new_td.innerHTML = '✘';
-							new_td.style.color = "#ff5063";
+							new_td.innerHTML = '';
 						}
 
 					} else {

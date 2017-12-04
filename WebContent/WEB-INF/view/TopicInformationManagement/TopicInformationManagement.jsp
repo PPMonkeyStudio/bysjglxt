@@ -26,6 +26,7 @@
 	src="<%=basePath%>js/TopicInformationManagement/studentSelectTopic_early.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/Get_Teacher.js"></script>
+
 <!---------------------------------------------------------------------------------------------------->
 
 <title>课题管理页</title>
@@ -40,12 +41,24 @@
 		<!--  -->
 		<!---------------------------------------------------------------------------------------------------->
 		<!---------------------------------------------------------------------------------------------------->
+
 		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
+				<div style="width: 500px; margin: 0 auto;">
+					<p style="text-align: center;" id="text_TopicCurrentProcess"></p>
+					<div class="progress progress-xs">
+						<div id="bar_TopicCurrentProcess"
+							class="progress-bar progress-bar-success"
+							role="progressbar"></div>
+					</div>
+				</div>
+				<hr>
 				<h3 class="panel-title">课题列表</h3>
 			</div>
 			<div class="panel-body">
+
+
 				<div style="height: 34px;">
 					<div style="width: 500px; float: left;">
 						<button class="teacher_control btn btn-default"
@@ -77,7 +90,7 @@
 								<select class="form-control" style="width: auto;"
 									id="select_source"
 									onchange="List_Topic_By_PageAndSearch(1)">
-									<option value="-1">课题来源</option>
+									<option value="-1">课题来源（全部）</option>
 									<option value="各类课题项目">各类课题项目</option>
 									<option value="导师指定">导师指定</option>
 									<option value="题目指南">题目指南</option>
@@ -89,7 +102,7 @@
 								<select class="form-control" style="width: auto;"
 									id="select_type"
 									onchange="List_Topic_By_PageAndSearch(1)">
-									<option value="-1">课题性质</option>
+									<option value="-1">课题性质（全部）</option>
 									<option value="理论研究">理论研究</option>
 									<option value="应用基础研究">应用基础研究</option>
 									<option value="应用与理论结合研究">应用与理论结合研究</option>
@@ -101,14 +114,14 @@
 								<select class="form-control" style="width: auto;"
 									data-live-search="true" id="select_teacher"
 									onchange="List_Topic_By_PageAndSearch(1)">
-									<option value="-1">指导教师</option>
+									<option value="-1">指导教师（全部）</option>
 								</select>
 							</th>
 							<th>
 								<select class="form-control" style="width: auto;"
 									id="select_state"
 									onchange="List_Topic_By_PageAndSearch(1)">
-									<option value="-1">状态</option>
+									<option value="-1">状态（全部）</option>
 									<option value="已关闭">已关闭</option>
 									<option value="审核已通过">审核已通过</option>
 									<option value="未审核">未审核</option>

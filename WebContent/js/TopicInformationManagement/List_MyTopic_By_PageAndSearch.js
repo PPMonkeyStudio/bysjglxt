@@ -130,7 +130,7 @@ function List_MyTopic_By_PageAndSearch(pageIndex) {
 							+ '" onclick="MyTopic_Information_Display(this)" class="btn btn-default">详情</button>'
 							+ '<button  style="cursor: pointer;" id="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" onclick="show_distributionTopicStudent(this)" class="teacher_control btn btn-default">指定学生</button>';
+							+ '" onclick="TopicDistributionStudentDisplay(this)" class="teacher_control btn btn-default">指定学生</button>';
 
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));

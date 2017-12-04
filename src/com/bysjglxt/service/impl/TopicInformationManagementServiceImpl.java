@@ -45,17 +45,20 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		System.out.println("huhu");
 		// 根据选题Id获取选题表信息
 		bysjglxt_topic_select = topicInformationManagementDao.getSelectTopicById(selectId);
 		if (bysjglxt_topic_select == null)
 			return -1;
 		bysjglxt_topic_select.setTopic_select_teacher_review(reviewId);
 		bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
+		System.out.println("huhu");
 		flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
+		System.out.println("huhu");
 		if (!flag)
 			return -1;
 		// 判断该学生是否开启毕业设计流程
-		// 用man.state.bysjglxt_process_definitionName得到该学生流程实例表
+		// 用man.state.bysjglxt_process_definitionName 得到该学生流程实例表
 		bysjglxt_process_instance = topicInformationManagementDao
 				.getProcessInstanceByManStateAndName(bysjglxt_topic_select.getTopic_select_student());
 		if (bysjglxt_process_instance != null) {

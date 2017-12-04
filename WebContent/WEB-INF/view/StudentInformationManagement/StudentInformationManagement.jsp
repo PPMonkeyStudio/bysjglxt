@@ -117,7 +117,7 @@
 								<select class="form-control" id="select_is_select_topic"
 									style="width: auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">是否选题</option>
+									<option value="-1">选题状态</option>
 									<option value="1">已选题</option>
 									<option value="2">未选题</option>
 								</select>
@@ -148,7 +148,6 @@
 						<i class="fa fa-trash-o"></i>
 						删除所选
 					</button>
-
 					<button class="btn btn-default"
 						onclick="Student_Take_Operate_Premission()"
 						style="float: right; margin: 0 10px;">
@@ -158,7 +157,7 @@
 					<button class="btn btn-default"
 						onclick="Student_Give_Operate_Premission()"
 						style="float: right; margin: 0 10px;">
-						<i class="fa fa-exclamation-triangle"></i>
+						<i class="fa fa-key"></i>
 						打开学生
 					</button>
 				</div>
@@ -298,7 +297,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
-	
+
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->

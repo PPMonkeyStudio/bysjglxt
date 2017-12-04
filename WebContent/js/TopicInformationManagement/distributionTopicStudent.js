@@ -6,6 +6,9 @@ function distributionTopicStudent(button) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+
+				toastr.success("保存成功");
+
 			} else {
 
 				toastr.error(xhr.status);
@@ -17,7 +20,6 @@ function distributionTopicStudent(button) {
 	formData.append("studentSelectTopic", distributionTopicStudent_ID);
 	formData.append("studentIDList", $('#select_distributionTopicStudent')
 			.val());
-	alert($('#select_distributionTopicStudent').val());
 	xhr
 			.open("POST",
 					"/bysjglxt/topic/TopicInformationManagement_distributionTopicStudent");

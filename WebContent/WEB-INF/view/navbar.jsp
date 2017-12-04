@@ -150,8 +150,9 @@
 						data-toggle="dropdown">
 						<i class="lnr lnr-alarm"></i>
 						<span class="badge bg-danger" id="num_Navbar_Notice"></span>
-					</a> 
-					<ul class="dropdown-menu notifications" id="ul_Navbar_Notice">
+					</a>
+					<ul class="dropdown-menu notifications"
+						id="ul_Navbar_Notice">
 						<li>
 							<a
 								href="<%=basePath%>notice/NoticeManagement_NoticeManagementPage"
@@ -198,8 +199,13 @@
 	getUserSessionForAjax();
 </script>
 <style>
+th {
+	vertical-align: middle !important;
+}
+
 td {
 	line-height: 33px !important;
+	vertical-align: middle !important;
 }
 
 td i {
