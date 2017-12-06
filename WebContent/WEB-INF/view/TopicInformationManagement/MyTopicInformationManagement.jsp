@@ -13,6 +13,7 @@
 <!--页面公用-------------------------------------------------------------------------------------------------->
 
 <!---------------------------------------------------------------------------------------------------->
+
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/List_MyTopic_By_PageAndSearch.js"></script>
 <script type="text/javascript"
@@ -23,6 +24,9 @@
 	src="<%=basePath%>js/TopicInformationManagement/drop_Topic.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/distributionTopicStudent.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/TopicDistributionStudentDisplay.js"></script>
+
 <!---------------------------------------------------------------------------------------------------->
 
 <title>课题管理页</title>
@@ -50,7 +54,12 @@
 					<div style="width: 500px; float: left;">
 						<button class="btn btn-default"
 							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_TopicListPage'">
+<<<<<<< HEAD
 							<i class="fa fa-reply"></i> 返回
+=======
+							<i class="fa fa-reply"></i>
+							课题列表
+>>>>>>> ZB
 						</button>
 					</div>
 					<!-- 检索 -->
@@ -173,8 +182,9 @@
 	</div>
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
+
 	<!---------------------------------------------------------------------------------------------------->
-	<div class="modal fade" id="modal_distributionTopicStudent"
+	<%-- <div class="modal fade" id="modal_distributionTopicStudent"
 		data-keyboard="true" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -187,10 +197,20 @@
 					<h4 class="modal-title">指定学生选题</h4>
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
+<<<<<<< HEAD
 				<div class="modal-body">
 					<select style="float: left;" multiple data-done-button="true"
 						data-live-search="true" id="select_distributionTopicStudent"
 						class="form-control" style="margin:20px 0; "></select>
+=======
+				<div class="modal-body"
+					style="text-align: center; padding: 20px 114px;">
+					<select style="float: left;" multiple
+						data-done-button="true" data-live-search="true"
+						id="select_distributionTopicStudent" class="form-control"
+						style="margin:20px 0; "></select>
+
+>>>>>>> ZB
 				</div>
 				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
 				<div class="modal-footer">
@@ -199,12 +219,17 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 </body>
+<link href="<%=basePath%>css/multi-select.css" media="screen"
+	rel="stylesheet" type="text/css">
+<script src="<%=basePath%>js/jquery.multi-select.js"
+	type="text/javascript"></script>
 <script>
+<<<<<<< HEAD
 	$('select').selectpicker('refresh');
 </script>
 <script>
@@ -236,5 +261,15 @@
 			.open("POST",
 					"/bysjglxt/student/StudentInformationManagement_listStudentNoClose");
 	xhr.send(null);
+=======
+	$('#select_source').selectpicker('refresh');
+	$('#select_type').selectpicker('refresh');
+	$('#select_state').selectpicker('refresh');
+>>>>>>> ZB
 </script>
+<style>
+.class_distributionTopicStudent {
+	color: #330033;
+}
+</style>
 </html>

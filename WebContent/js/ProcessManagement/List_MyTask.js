@@ -45,11 +45,11 @@ function List_MyTask(pageIndex) {
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 1) {
-						new_td.innerHTML = '<span class="label label-success">正在进行</span>';
+						new_td.innerHTML = '<span class="label label-primary">正在进行</span>';
 					} else if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 2) {
-						new_td.innerHTML = '<span class="label label-primary">未开始</span>';
+						new_td.innerHTML = '<span class="label label-default">未开始</span>';
 					} else {
-						new_td.innerHTML = '<span class="label label-default">已结束</span>';
+						new_td.innerHTML = '<span class="label label-success">已结束</span>';
 					}
 
 					new_td = document.createElement("td");
@@ -59,15 +59,25 @@ function List_MyTask(pageIndex) {
 						if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskDefinition.task_definition_type == 1) {
 							new_td.innerHTML = '<button  id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-									+ '" onclick="passTask(this)" class="btn btn-default"><i class="fa fa-legal"></i> 通过</button>';
+									+ '" onclick="passTask(this)" class="btn btn-default"><i class="fa fa-legal"></i> 同意通过</button>';
 						} else {
 							new_td.innerHTML = '<button  id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-									+ '" class="btn btn-default" onclick="passTask(this)"><i class="fa fa-legal"></i> 通过</button>'
+									+ '" class="btn btn-default" onclick="passTask(this)"><i class="fa fa-legal"></i> 同意通过</button>'
 									+ '<button style="margin:0 0 0 10px;" id="'
 									+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-									+ '" class="btn btn-default" onclick="repulseTask(this)" ><i class="fa fa-recycle"></i> 驳回</button>';
+									+ '" class="btn btn-default" onclick="repulseTask(this)" ><i class="fa fa-recycle"></i> 驳回请求</button>';
 						}
+					} else {
+						new_td.innerHTML = '';
+					}
+
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state != 1
+							&& myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state != 2) {
+						new_td.innerHTML = myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_gmt_modified;
 					} else {
 						new_td.innerHTML = '';
 					}
