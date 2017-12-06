@@ -6,12 +6,10 @@ public class TopicInformationManagementDTO {
 	private bysjglxt_topic bysjglxtTopic;
 	private TeacherInformationDTO teacherInformationDTO;
 
-	public TeacherInformationDTO getTeacherInformationDTO() {
-		return teacherInformationDTO;
-	}
-
-	public void setTeacherInformationDTO(TeacherInformationDTO teacherInformationDTO) {
-		this.teacherInformationDTO = teacherInformationDTO;
+	@Override
+	public String toString() {
+		return "TopicInformationManagementDTO [bysjglxtTopic=" + bysjglxtTopic + ", teacherInformationDTO="
+				+ teacherInformationDTO + "]";
 	}
 
 	public bysjglxt_topic getBysjglxtTopic() {
@@ -22,10 +20,12 @@ public class TopicInformationManagementDTO {
 		this.bysjglxtTopic = bysjglxtTopic;
 	}
 
-	@Override
-	public String toString() {
-		return "TopicInformationManagementDTO [bysjglxtTopic=" + bysjglxtTopic + ", teacherInformationDTO="
-				+ teacherInformationDTO + "]";
+	public TeacherInformationDTO getTeacherInformationDTO() {
+		return teacherInformationDTO;
+	}
+
+	public void setTeacherInformationDTO(TeacherInformationDTO teacherInformationDTO) {
+		this.teacherInformationDTO = teacherInformationDTO;
 	}
 
 }

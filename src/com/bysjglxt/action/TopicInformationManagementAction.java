@@ -160,7 +160,11 @@ public class TopicInformationManagementAction extends ActionSupport
 
 		List<String> list = Arrays.asList(array);
 
-		topicInformationManagementService.distributionTopicStudent(studentSelectTopic, list);
+		/**
+		 * 更改后
+		 */
+		// topicInformationManagementService.distributionTopicStudent(studentSelectTopic,
+		// list);
 	}
 
 	/**

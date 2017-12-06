@@ -47,10 +47,8 @@ public class testfffff {
 	// 测试添加指定学生
 	@Test
 	public void testC() {
-		List<String> studentIDList = new ArrayList<String>();
-		studentIDList.add("035978e1-be36-4202-83f2-6ca275bd04ba");
-		studentIDList.add("03b0b3c1-04a9-4c43-ba29-785e660fa6ac");
-		boolean flag = topicManagementService.distributionTopicStudent("3ac6eefb-7ff8-4173-bf89-c6425d024636", studentIDList);
+		System.out.println(topicManagementService.distributionTopicStudent("4176296d-d8fc-435c-b2c5-ce30a4105c0d",
+				"42e95437-25f2-44c9-a64e-6038e13cd4b8"));
 	}
 
 	// 遍历出所有可以进行选择的课题

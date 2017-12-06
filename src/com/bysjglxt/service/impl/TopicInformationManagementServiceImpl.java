@@ -16,6 +16,7 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.DesignationStudentInformationDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
@@ -397,36 +398,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				flag = false;
 			}
 		}
-		return flag;
-	}
-
-	// 添加指定学生选题
-	@Override
-	public boolean distributionTopicStudent(String topicID, List<String> studentIDList) {
-		boolean flag = false;
-		bysjglxt_notice bysjglxt_notice = null;
-		String studentIdList = "";
-		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
-		bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicID);
-		System.out.println(studentIDList.size());
-		for (String string : studentIDList) {
-			System.out.println("2222");
-			studentIdList = studentIdList + string + "#&#";
-			System.out.println("studentIdList:" + studentIdList);
-			// 通知学生
-			bysjglxt_notice = new bysjglxt_notice();
-			bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
-			bysjglxt_notice.setNotice_launch(bysjglxt_topic.getTopic_teacher());
-			bysjglxt_notice.setNotice_belong(string);
-			bysjglxt_notice.setNotice_content("老师添加你进如指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
-			bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
-			bysjglxt_notice.setNotice_state(2);
-			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
-			flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
-		}
-		System.out.println("studentIdList:----" + studentIdList);
-		flag = topicInformationManagementDao.updateStudentList(topicID, studentIdList);
-		System.out.println("gg");
 		return flag;
 	}
 
@@ -847,4 +818,87 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		return 1;
 	}
 
+	/**
+	 * 显示所有有权限的学生并且可以进行指定
+	 * 
+	 * @param topicId
+	 * @param studentMajor
+	 * @param studentGrade
+	 * @return
+	 */
+	@Override
+	public List<DesignationStudentInformationDTO> listDesignationStudentInformation(String topicId, String studentMajor,
+			String studentGrade) {
+		List<bysjglxt_student_user> listStudentUser = new ArrayList<bysjglxt_student_user>();
+		DesignationStudentInformationDTO designationStudentInformationDTO = null;
+		List<DesignationStudentInformationDTO> listDesignation = new ArrayList<DesignationStudentInformationDTO>();
+		bysjglxt_topic bysjglxt_topic = null;
+		bysjglxt_student_basic student_basic = null;
+		// bysjglxt_student_user
+		// 获取所有拥有操作权限的学生,以及可以进行筛选
+		listStudentUser = topicInformationManagementDao.getListStudentUserByDesignation(studentMajor, studentGrade);
+		for (bysjglxt_student_user student_user : listStudentUser) {
+			designationStudentInformationDTO = new DesignationStudentInformationDTO();
+			bysjglxt_topic = new bysjglxt_topic();
+			student_basic = new bysjglxt_student_basic();
+			designationStudentInformationDTO.setBysjglxtStudentUser(student_user);
+			if (student_user.getUser_student_basic() != null
+					&& student_user.getUser_student_basic().trim().length() > 0) {
+				// 根据basic_id获取baisc对象
+				student_basic = topicInformationManagementDao
+						.getStudentBasic(student_user.getUser_student_basic().trim());
+				if (student_basic != null) {
+					designationStudentInformationDTO.setBysjglxtStudentBasic(student_basic);
+				}
+			}
+			// 判断学生是否已经被指定到当前课题
+			// 根据课题ID,模糊查询学生是否被指定到当前课题
+			bysjglxt_topic = topicInformationManagementDao.getTopicByIdAndStudent(student_user.getUser_student_id(),
+					topicId);
+			// 存在这个学生的指定
+			if (bysjglxt_topic != null)
+				designationStudentInformationDTO.setDesignation(2);
+			listDesignation.add(designationStudentInformationDTO);
+		}
+		return listDesignation;
+	}
+
+	// 指定学生选题
+	@Override
+	public boolean distributionTopicStudent(String topicID, String studentID) {
+		boolean flag = false;
+		bysjglxt_notice bysjglxt_notice = null;
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		bysjglxt_notice = new bysjglxt_notice();
+		bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicID);
+		if (bysjglxt_topic == null)
+			return false;
+		// 判断指定学生中是否存在某学生
+		if (bysjglxt_topic.getTopic_student() != null && bysjglxt_topic.getTopic_student().trim().length() > 0) {
+			if ((bysjglxt_topic.getTopic_student().trim()).indexOf(studentID) != -1) {
+				// 如果包含 的话，也就是说是调用了取消指定的方法
+				bysjglxt_topic.setTopic_student(bysjglxt_topic.getTopic_student().replaceAll(studentID + "#&#", ""));
+				bysjglxt_notice.setNotice_content("老师取消你进入指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
+			} else {
+				// 如果不包含,则是调用的指定的方法
+				bysjglxt_topic.setTopic_student(bysjglxt_topic.getTopic_student() + studentID + "#&#");
+				bysjglxt_notice.setNotice_content("老师添加你进入指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
+			}
+		} else {
+			bysjglxt_topic.setTopic_student(studentID + "#&#");
+			bysjglxt_notice.setNotice_content("老师添加你进入指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
+		}
+		// 通知学生
+		bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
+		bysjglxt_notice.setNotice_launch(bysjglxt_topic.getTopic_teacher());
+		bysjglxt_notice.setNotice_belong(studentID);
+		bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_notice.setNotice_state(2);
+		bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
+		flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
+		// 课题表
+		bysjglxt_topic.setTopic_gmt_modified(TeamUtil.getStringSecond());
+		flag = topicInformationManagementDao.CreateTopic(bysjglxt_topic);
+		return flag;
+	}
 }
