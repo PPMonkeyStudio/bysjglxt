@@ -57,7 +57,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_sex != "") {
@@ -67,7 +66,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_major != "") {
@@ -77,7 +75,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_level != "") {
@@ -87,7 +84,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser != undefined) {
 						if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission == 1) {
@@ -101,7 +97,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser != undefined) {
 						if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 1) {
@@ -115,7 +110,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 2
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission == 1) {
@@ -132,7 +126,6 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<label class="fancy-checkbox">'
 							+ '<input id="'
