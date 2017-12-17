@@ -1,7 +1,6 @@
 package com.bysjglxt.service.impl;
 
 import com.bysjglxt.dao.TestDao;
-import com.bysjglxt.domain.DO.test;
 import com.bysjglxt.service.TestService;
 
 public class TestServiceImpl implements TestService {
@@ -11,8 +10,4 @@ public class TestServiceImpl implements TestService {
 		this.testDao = testDao;
 	}
 
-	@Override
-	public void addTest(test t) {
-		testDao.addTest(t);
-	}
 }

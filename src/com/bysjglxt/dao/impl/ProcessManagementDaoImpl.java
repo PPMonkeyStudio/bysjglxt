@@ -34,6 +34,19 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	}
 
 	@Override
+	public List<String> getListStudentSelect(String process_definition_id) {
+		List<String> listStudentSelect = new ArrayList<>();
+		String hql = "SELECT selectTopic.topic_select_student FROM bysjglxt_topic_select selectTopic, bysjglxt_student_user studentUser WHERE selectTopic.topic_select_student = studentUser.user_student_id AND studentUser.user_student_is_operate_premission=1";
+		hql = hql
+				+ " AND selectTopic.topic_select_student NOT IN (SELECT processInstance.process_instance_man FROM bysjglxt_process_instance processInstance WHERE processInstance.process_instance_state = '活动' AND processInstance.process_instance_process_definition = '"
+				+ process_definition_id + "')";
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		listStudentSelect = query.list();
+		return listStudentSelect;
+	}
+
+	@Override
 	public int createProcessDefine(bysjglxt_process_definition selectTopicProcessDefinition) {
 		int flag = 1;
 		try {
@@ -459,7 +472,6 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Session session = getSession();
 		String hql = "from bysjglxt_task_definition where task_definition_process_definition='"
 				+ task_definition_process_definition + "' order by task_definition_gmt_create desc";
-		System.out.println("ffddd");
 		Query query = session.createQuery(hql);
 		list_bysjglxt_task_definition = query.list();
 		return list_bysjglxt_task_definition;
@@ -504,7 +516,30 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 				+ " and processDefinition.process_definition_name='选题流程' and processInstance.process_instance_state='活动'";
 		Query query = session.createQuery(hql);
 		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		session.clear();
 		return bysjglxt_process_instance;
+	}
+
+	// 根据流程定义的名称获得流程定义对象
+	@Override
+	public bysjglxt_process_definition getProcessDefinitionByName(String string) {
+		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
+		String hql = "from bysjglxt_process_definition where process_definition_name='" + string + "'";
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		bysjglxt_process_definition = (bysjglxt_process_definition) query.uniqueResult();
+		session.clear();
+		return bysjglxt_process_definition;
+	}
+
+	// 根据学生userID获取学生姓名
+	@Override
+	public String getStudentNameByUserId(String stringId) {
+		String hql = "select basic.student_basic_name from bysjglxt_student_basic basic,bysjglxt_student_user user where user.user_student_basic=basic.student_basic_id and user.user_student_id='"
+				+ stringId + "'";
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		return query.uniqueResult().toString();
 	}
 
 }

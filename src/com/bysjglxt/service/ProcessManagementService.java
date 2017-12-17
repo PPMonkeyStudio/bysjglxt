@@ -12,6 +12,16 @@ import com.bysjglxt.domain.VO.ProcessManagementVO;
 public interface ProcessManagementService {
 
 	/**
+	 * 开启毕业设计流程
+	 */
+	public int openGraduProcess();
+
+	/**
+	 * 获取所有需要进行选题的学生id
+	 */
+	public List<String> listOpenGraduationProjectProcessStudentId(String process_definition_id);
+
+	/**
 	 * 获得当前正在进行的选题流程实例
 	 * 
 	 * @return
@@ -43,7 +53,6 @@ public interface ProcessManagementService {
 	 * @param1 processInstanceName 流程实例名称
 	 * @param2 process_definition_id 流程定义ID
 	 * @param3 operation 操作者ID
-	 * 
 	 * @说明 创建流程和任务实例
 	 * 
 	 * @return 1 成功

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DTO.DesignationStudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
@@ -92,8 +93,18 @@ public class test {
 	public void testSelectTopic() {
 		int i = 0;
 		i = topicManagementService.selectTopic("0e81a1be-a41e-44c0-9781-a60b87bb2e89",
-				"ffcc3ffb-9578-4ee0-bd5f-30ac73c224f3");
+				"0e18661e-9fb2-43b8-bce3-bd5a80768dc3");
 		System.out.println(i);
+	}
+
+	// 测试显示
+	@Test
+	public void testListDesignationStudentInformation() {
+		List<DesignationStudentInformationDTO> ll = new ArrayList<>();
+		ll = topicManagementService.listDesignationStudentInformation("4176296d-d8fc-435c-b2c5-ce30a4105c0d", "", "");
+		for (DesignationStudentInformationDTO designationStudentInformationDTO : ll) {
+			System.out.println("designationStudentInformationDTO:" + designationStudentInformationDTO);
+		}
 	}
 
 }

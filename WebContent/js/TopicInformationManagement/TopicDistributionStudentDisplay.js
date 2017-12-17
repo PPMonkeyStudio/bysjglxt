@@ -1,3 +1,4 @@
+
 ﻿function TopicDistributionStudentDisplay() {
 	var jc = $
 			.confirm({
@@ -135,4 +136,5 @@ function DistributionStudent() {
 			.open("POST",
 					"/bysjglxt/student/StudentInformationManagement_listStudentNoClose");
 	xhr.send(null);
+
 }

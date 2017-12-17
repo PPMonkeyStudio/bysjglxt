@@ -249,6 +249,9 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		return flag;
 	}
 
+	/**
+	 * 弃用
+	 */
 	@Override
 	public boolean updateStudentList(String topicId, String studentIdList) {
 		boolean flag = true;
@@ -719,6 +722,39 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		Query query = session.createQuery(hql);
 		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
 		return bysjglxt_task_instance;
+	}
+
+	/**
+	 * 获取筛选后可以进行被指定的学生
+	 */
+	@Override
+	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade) {
+		List<bysjglxt_student_user> listUser = new ArrayList<bysjglxt_student_user>();
+		String hql = "select studentUser from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where studentUser.user_student_basic=studentBasic.student_basic_id ";
+		hql = hql + " and studentUser.user_student_is_operate_premission=1 ";
+		if (studentMajor != null && studentMajor.trim().length() > 0) {
+			hql = hql + " and studentBasic.student_basic_major='" + studentMajor + "'";
+		}
+		if (studentGrade != null && studentGrade.trim().length() > 0) {
+			hql = hql + " and studentBasic.student_basic_grade='" + studentGrade + "'";
+		}
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		listUser = query.list();
+		session.clear();
+		return listUser;
+	}
+
+	// 根据课题ID,模糊查询学生是否被指定到当前课题
+	@Override
+	public bysjglxt_topic getTopicByIdAndStudent(String student_user, String topicId) {
+		String student = "%" + student_user + "%";
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		String hql = "from bysjglxt_topic where topic_id='" + topicId + "' and topic_student like '" + student + "'";
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		return bysjglxt_topic;
 	}
 
 }

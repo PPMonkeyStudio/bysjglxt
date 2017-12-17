@@ -3,6 +3,7 @@ package com.bysjglxt.service;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_topic;
+import com.bysjglxt.domain.DTO.DesignationStudentInformationDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
@@ -10,10 +11,31 @@ import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 public interface TopicInformationManagementService {
 
 	/**
+	 * 获取关于某课题学生是否已经被指定的List<DTO>
+	 */
+	public List<DesignationStudentInformationDTO> listDesignationStudentInformation(String topicId, String studentMajor,
+			String studentGrade);
+
+	/**
+	 * 
+	 * @DOTO
+	 * 
+	 * @说明 某教师提前开放某题给某些学生： 2、将这个学生列表设为改课题的指定学生（此后该列表中学生就可以提前选该题）
+	 * @D 或取消指定
+	 * @param topicID
+	 *            课题ID
+	 * @param studentIDList
+	 *            学生ID列表
+	 * 
+	 * @return 1成功 0失败
+	 */
+	public boolean distributionTopicStudent(String topicID, String studentID);
+
+	/**
 	 * 分配评阅教师
 	 * 
 	 */
-	public int assignment(String selectId,String reviewId);
+	public int assignment(String selectId, String reviewId);
 
 	/**
 	 * @DATE 2017-10-28
@@ -109,21 +131,6 @@ public interface TopicInformationManagementService {
 	public int assignmentStudentTopic(String userId, String topic);
 
 	/**
-	 * 
-	 * @DOTO
-	 * 
-	 * @说明 某教师提前开放某题给某些学生： 2、将这个学生列表设为改课题的指定学生（此后该列表中学生就可以提前选该题）
-	 * 
-	 * @param topicID
-	 *            课题ID
-	 * @param studentIDList
-	 *            学生ID列表
-	 * 
-	 * @return 1成功 0失败
-	 */
-	public boolean distributionTopicStudent(String topicID, List<String> studentIDList);
-
-	/**
 	 * @说明 遍历出所有可以选择的课题用于分配最后剩余的学生
 	 * @return
 	 */
@@ -162,7 +169,7 @@ public interface TopicInformationManagementService {
 	public List<StudentInformationDTO> listStudentSelectTopic(String topicId);
 
 	/**
-	 * 指定 弃用
+	 * (指定) 弃用
 	 * 
 	 * @param studentUserId
 	 * @return

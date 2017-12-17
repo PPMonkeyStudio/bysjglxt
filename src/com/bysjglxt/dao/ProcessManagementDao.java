@@ -89,6 +89,13 @@ public interface ProcessManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_process_instance getSelectProcessInstance();
 
+	//
+	public List<String> getListStudentSelect(String process_definition_id);
+
+	public bysjglxt_process_definition getProcessDefinitionByName(String string);
+
+	public String getStudentNameByUserId(String stringId);
+
 	
 	
 }

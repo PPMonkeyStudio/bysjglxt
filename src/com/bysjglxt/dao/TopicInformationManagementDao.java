@@ -9,6 +9,7 @@ import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
@@ -114,5 +115,9 @@ public interface TopicInformationManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceByNameAndProcessInstanceId(
 			String task_definition_id, String process_instance_id);
+
+	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade);
+
+	public com.bysjglxt.domain.DO.bysjglxt_topic getTopicByIdAndStudent(String student_user, String topicId);
 
 }
