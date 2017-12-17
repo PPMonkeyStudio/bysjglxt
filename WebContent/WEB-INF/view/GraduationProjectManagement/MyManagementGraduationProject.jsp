@@ -20,7 +20,7 @@
 	src="<%=basePath%>js/GraduationProjectManagement/update_defence_record.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/update_defence_leader.js"></script>
-<script type="text/javascript"  
+<script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/topicReview.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
@@ -45,6 +45,12 @@
 				<h3 class="panel-title">毕业设计管理</h3>
 			</div>
 			<div class="panel-body">
+				<div style="width: 500px; float: left;">
+					<button class="btn btn-default" onclick="">
+						<i class="fa fa-bug"></i>
+						开启所有符合条件的毕业设计流程
+					</button>
+				</div>
 				<div style="height: 34px;">
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
@@ -66,10 +72,10 @@
 							<th>毕业设计名称</th>
 							<th>评阅教师</th>
 							<th class="teacher_control">
-								<select class="form-control" style="width: auto;"
-									id="select_state"
+								<select class="form-control"
+									style="width: auto; margin: auto;" id="select_state"
 									onchange="List_MyManagementGraduationProject_By_PageAndSearch(1)">
-									<option value="-1">状态</option>
+									<option value="-1">毕业设计状态（全部)</option>
 									<option value="1">正在进行</option>
 									<option value="2">未开始</option>
 									<option value="3">已结束</option>
@@ -151,7 +157,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 </body>
 <script>
-	$('select').selectpicker('refresh');
+	
 </script>
 <script>
 	

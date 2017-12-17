@@ -646,7 +646,7 @@ function examination_formal_leader() {
 							+ '是'
 							+ '</label> '
 							+ ' <label style="margin:0 10px;" >'
-							+ '<input type="radio" name="examination_formal_is_reference_foreign" checked="checked"value="0">'
+							+ '<input type="radio" name="examination_formal_is_reference_foreign" checked="checked" value="0">'
 							+ '否'
 							+ '</label> '
 							+ ' <label style="margin:0 10px;" >'
