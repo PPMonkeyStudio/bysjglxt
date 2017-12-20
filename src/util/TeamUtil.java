@@ -13,6 +13,14 @@ public class TeamUtil {
 
 	static SimpleDateFormat formatter;
 
+	// 添加数字中文化的方法
+	public static String format(String text) {
+		for (int i = 0; i < 10; i++) {
+			text = text.replace((char) ('0' + i), "零一二三四五六七八九".charAt(i));
+		}
+		return text;
+	}
+
 	// 5级评分制评分
 	public static String grade(int ggg) {
 
