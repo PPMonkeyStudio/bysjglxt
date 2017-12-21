@@ -217,7 +217,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			}
 			// 对于没有权限的重新开启，会将所有的对应的学生的所有数据进行删除
 			if (bysjglxt_student_user.getUser_student_is_operate_premission() == 2) {
-
 				// 1.删除该学生的选题
 				bysjglxt_topic_select = studentInformationManagementDao
 						.getTopicSelect(bysjglxt_student_user.getUser_student_id());

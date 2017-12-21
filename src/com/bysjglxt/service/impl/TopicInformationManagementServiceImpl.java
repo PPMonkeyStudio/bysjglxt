@@ -827,6 +827,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	 * @param topicId
 	 * @param studentMajor
 	 * @param studentGrade
+	 * 
 	 * @return
 	 */
 	@Override

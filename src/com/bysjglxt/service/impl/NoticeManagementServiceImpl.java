@@ -90,7 +90,6 @@ public class NoticeManagementServiceImpl implements NoticeManagementService {
 		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		bysjglxt_teacher_basic bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
-
 		// 1.在学生user表中查找对应信息
 		bysjglxt_student_user = noticeManagementDao.getStudentUserById(userId);
 		if (bysjglxt_student_user != null) {
