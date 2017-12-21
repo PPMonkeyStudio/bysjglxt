@@ -1,7 +1,6 @@
 package com.bysjglxt.action;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +49,7 @@ public class TopicInformationManagementAction extends ActionSupport
 	/*
 	 * 
 	 */
-	private String studentIDList;
+	private String studentID;
 	/*
 	 * 学生选题
 	 */
@@ -62,6 +61,7 @@ public class TopicInformationManagementAction extends ActionSupport
 	private String assignmentStudentUserId;
 	private String assignmentTopicId;
 	private String assignmentReviewTeacherId;
+
 	/*
 	 * 
 	 */
@@ -75,15 +75,6 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * @return
 	 */
 	public String TopicListPage() {
-		// 如果学生已选题，则直接跳转到我的课题页面
-		// if (ActionContext.getContext().getSession().get("userStudentDTO") !=
-		// null) {
-		// if (((StudentInformationDTO)
-		// ActionContext.getContext().getSession().get("userStudentDTO"))
-		// .getBysjglxtStudentUser().getUser_student_is_select_topic() == 1) {
-		// return "MyTopicListPage";
-		// }
-		// }
 		return "TopicListPage";
 	}
 
@@ -156,6 +147,7 @@ public class TopicInformationManagementAction extends ActionSupport
 	}
 
 	/**
+	 * VO 课题列表
 	 * 
 	 * @throws IOException
 	 */
@@ -176,20 +168,30 @@ public class TopicInformationManagementAction extends ActionSupport
 		}
 	}
 
-	public void distributionTopicStudent() {
-		String[] array = null;
-		array = studentIDList.split(",");
-
-		List<String> list = Arrays.asList(array);
-
-		/**
-		 * 更改后
-		 */
-		// topicInformationManagementService.distributionTopicStudent(studentSelectTopic,
-		// list);
+	/*
+	 * 指定或取消学生选题
+	 */
+	public void distributionTopicStudent() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		topicInformationManagementService.distributionTopicStudent(studentID, studentSelectTopic);
+		http_response.getWriter().write("success");
 	}
 
 	/**
+	 * @throws IOException
+	 * 
+	 */
+	public void listDesignationStudentInformation() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(
+				topicInformationManagementService.listDesignationStudentInformation(studentSelectTopic, "-1", "-1")));
+	}
+
+	/**
+	 * VO 我的课题
 	 * 
 	 * @throws IOException
 	 */
@@ -415,12 +417,12 @@ public class TopicInformationManagementAction extends ActionSupport
 		this.assignmentTopicId = assignmentTopicId;
 	}
 
-	public String getStudentIDList() {
-		return studentIDList;
+	public String getStudentID() {
+		return studentID;
 	}
 
-	public void setStudentIDList(String studentIDList) {
-		this.studentIDList = studentIDList;
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
 	}
 
 	public String getAssignmentReviewTeacherId() {

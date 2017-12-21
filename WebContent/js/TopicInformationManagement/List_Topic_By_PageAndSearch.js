@@ -178,41 +178,41 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 		pageIndex = 1;
 	}
 	/*
-	 * * /
-	 */var search = document.getElementById("input_search").value;
+	 * 
+	 */
+	var search = document.getElementById("input_search").value;
 	if (search == undefined || search == null || search == "") {
 	} else {
 		formData.append("topicInformationManagementVO.search", search);
 	}
 	/*
-	 * * 课题来源 /
+	 * 课题来源
 	 */if (document.getElementById("select_source").value != "-1") {
 		formData.append("topicInformationManagementVO.source", document
 				.getElementById("select_source").value);
 	}
 	/*
-	 * * 课题类型 /
+	 * 课题类型
 	 */if (document.getElementById("select_type").value != "-1") {
 		formData.append("topicInformationManagementVO.type", document
 				.getElementById("select_type").value);
 	}
 	/*
-	 * * 课题状态 /
-	 */if (document.getElementById("select_state").value != "-1") {
+	 * 课题状态
+	 */
+	if (document.getElementById("select_state").value != "-1") {
 		formData.append("topicInformationManagementVO.state", document
 				.getElementById("select_state").value);
 	}
 	/*
-	 * * 课题状态 /
-	 */if (document.getElementById("select_teacher").value != "-1") {
+	 * 课题状态
+	 */
+	if (document.getElementById("select_teacher").value != "-1") {
 		formData.append("topicInformationManagementVO.teacher", document
 				.getElementById("select_teacher").value);
 	}
 	/*
-	 * * /
-	 */
-	/*
-	 * * /
+	 * 
 	 */formData.append("topicInformationManagementVO.pageIndex", pageIndex);
 
 	xhr.send(formData);

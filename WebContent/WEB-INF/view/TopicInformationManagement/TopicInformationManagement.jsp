@@ -63,10 +63,6 @@
 							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_CreateTopicPage'">
 							<i class="fa fa-plus-square"></i> 创建课题
 						</button>
-						<button class="btn btn-default"
-							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_MyTopicListPage'">
-							<i class="fa fa-anchor"></i> 我的课题
-						</button>
 					</div>
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
