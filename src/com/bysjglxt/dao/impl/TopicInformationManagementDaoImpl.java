@@ -732,10 +732,10 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		List<bysjglxt_student_user> listUser = new ArrayList<bysjglxt_student_user>();
 		String hql = "select studentUser from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where studentUser.user_student_basic=studentBasic.student_basic_id ";
 		hql = hql + " and studentUser.user_student_is_operate_premission=1 ";
-		if (studentMajor != null && studentMajor.trim().length() > 0) {
+		if (studentMajor != null && studentMajor.trim().length() > 0 && !("-1".equals(studentMajor))) {
 			hql = hql + " and studentBasic.student_basic_major='" + studentMajor + "'";
 		}
-		if (studentGrade != null && studentGrade.trim().length() > 0) {
+		if (studentGrade != null && studentGrade.trim().length() > 0 && !("-1".equals(studentGrade))) {
 			hql = hql + " and studentBasic.student_basic_grade='" + studentGrade + "'";
 		}
 		Session session = getSession();
