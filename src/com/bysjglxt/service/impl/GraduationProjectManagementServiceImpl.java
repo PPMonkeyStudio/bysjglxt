@@ -231,6 +231,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		if (bysjglxt_leader != null) {
 			actor = "领导小组长";
 		} else {
+			// 根据教研室主任userId获取教研室
 			bysjglxt_section = graduationProjectManagementDao.getSectionByUserId(teacherUserId);
 			if (bysjglxt_section != null) {
 				actor = "教研室主任";

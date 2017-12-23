@@ -442,6 +442,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	@Override
 	public List<bysjglxt_topic_select> getTeacherTutorStudentSelectTopicByPage(
 			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId, String actor, String section) {
+		bysjglxt_section ses;
 		Session session = getSession();
 		List<bysjglxt_topic_select> listBysjglxtTopicSelect = new ArrayList<bysjglxt_topic_select>();
 		String hql = "";
@@ -661,16 +662,16 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				switch (section) {
-				case "软件工程教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
-					break;
-				case "数媒教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '数媒')";
-					break;
+				ses = getSectionByName(section);
+				if (ses.getSection_major() != null && ses.getSection_major().trim().length() > 0) {
+					String[] ma = (ses.getSection_major().trim()).split("#&#");
+					for (String string : ma) {
+						hql = hql + " and (studentBasic.student_basic_major = '" + string + "')";
+					}
 				}
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
+
 			case 1:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
 				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
@@ -678,13 +679,12 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ " and process_instance_state='活动' ";
 				hql = hql
 						+ " and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1 ";
-				switch (section) {
-				case "软件工程教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
-					break;
-				case "数媒教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '数媒')";
-					break;
+				ses = getSectionByName(section);
+				if (ses.getSection_major() != null && ses.getSection_major().trim().length() > 0) {
+					String[] ma = (ses.getSection_major().trim()).split("#&#");
+					for (String string : ma) {
+						hql = hql + " and (studentBasic.student_basic_major = '" + string + "')";
+					}
 				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
@@ -695,13 +695,12 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			case 2:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
 						+ " where topicSelect.topic_select_topic = topic.topic_id  and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1";
-				switch (section) {
-				case "软件工程教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
-					break;
-				case "数媒教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '数媒')";
-					break;
+				ses = getSectionByName(section);
+				if (ses.getSection_major() != null && ses.getSection_major().trim().length() > 0) {
+					String[] ma = (ses.getSection_major().trim()).split("#&#");
+					for (String string : ma) {
+						hql = hql + " and (studentBasic.student_basic_major = '" + string + "')";
+					}
 				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
@@ -718,13 +717,12 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
 						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1";
-				switch (section) {
-				case "软件工程教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
-					break;
-				case "数媒教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '数媒')";
-					break;
+				ses = getSectionByName(section);
+				if (ses.getSection_major() != null && ses.getSection_major().trim().length() > 0) {
+					String[] ma = (ses.getSection_major().trim()).split("#&#");
+					for (String string : ma) {
+						hql = hql + " and (studentBasic.student_basic_major = '" + string + "')";
+					}
 				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
@@ -797,6 +795,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	@Override
 	public List<bysjglxt_topic_select> getTeacherTutorStudentAllSelectTopic(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId, String actor, String section) {
+		bysjglxt_section ses;
 		Session session = getSession();
 		List<bysjglxt_topic_select> listBysjglxtTopicSelect = new ArrayList<bysjglxt_topic_select>();
 		String hql = "";
@@ -1016,13 +1015,12 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				switch (section) {
-				case "软件工程教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
-					break;
-				case "数媒教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '数媒')";
-					break;
+				ses = getSectionByName(section);
+				if (ses.getSection_major() != null && ses.getSection_major().trim().length() > 0) {
+					String[] ma = (ses.getSection_major().trim()).split("#&#");
+					for (String string : ma) {
+						hql = hql + " and (studentBasic.student_basic_major = '" + string + "')";
+					}
 				}
 				hql = hql + "order by topicSelect.topic_select_gmt_create";
 				break;
@@ -1033,13 +1031,12 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ " and process_instance_state='活动' ";
 				hql = hql
 						+ " and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1 ";
-				switch (section) {
-				case "软件工程教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
-					break;
-				case "数媒教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '数媒')";
-					break;
+				ses = getSectionByName(section);
+				if (ses.getSection_major() != null && ses.getSection_major().trim().length() > 0) {
+					String[] ma = (ses.getSection_major().trim()).split("#&#");
+					for (String string : ma) {
+						hql = hql + " and (studentBasic.student_basic_major = '" + string + "')";
+					}
 				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
@@ -1050,13 +1047,12 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			case 2:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
 						+ " where topicSelect.topic_select_topic = topic.topic_id  and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1";
-				switch (section) {
-				case "软件工程教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
-					break;
-				case "数媒教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '数媒')";
-					break;
+				ses = getSectionByName(section);
+				if (ses.getSection_major() != null && ses.getSection_major().trim().length() > 0) {
+					String[] ma = (ses.getSection_major().trim()).split("#&#");
+					for (String string : ma) {
+						hql = hql + " and (studentBasic.student_basic_major = '" + string + "')";
+					}
 				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
@@ -1073,13 +1069,12 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = hql + "where topicSelect.topic_select_topic = topic.topic_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
 						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1";
-				switch (section) {
-				case "软件工程教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '软件工程')";
-					break;
-				case "数媒教研室":
-					hql = hql + " and (studentBasic.student_basic_major = '数媒')";
-					break;
+				ses = getSectionByName(section);
+				if (ses.getSection_major() != null && ses.getSection_major().trim().length() > 0) {
+					String[] ma = (ses.getSection_major().trim()).split("#&#");
+					for (String string : ma) {
+						hql = hql + " and (studentBasic.student_basic_major = '" + string + "')";
+					}
 				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
@@ -1112,6 +1107,17 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_section bysjglxt_section = new bysjglxt_section();
 		Session session = getSession();
 		String hql = "from bysjglxt_section where section_leader = '" + teacherUserId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		session.clear();
+		return bysjglxt_section;
+	}
+
+	// 根据教研室名字获取教研室
+	public bysjglxt_section getSectionByName(String name) {
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		Session session = getSession();
+		String hql = "from bysjglxt_section where section_name = '" + name + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
 		session.clear();

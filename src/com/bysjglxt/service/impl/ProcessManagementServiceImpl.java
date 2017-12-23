@@ -293,19 +293,15 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				if (bysjglxt_student_basic == null) {
 					return -1;
 				}
-				switch (bysjglxt_student_basic.getStudent_basic_major()) {
-				// 这里对教研室的扩展性极差
-				case "软件工程":
-					section = "软件工程教研室";
-					break;
-				case "数媒":
-					section = "数媒教研室";
-					break;
+				// 根据专业名称加获取教研室对象
+				bysjglxt_section = processManagementDao
+						.getSectionByName(bysjglxt_student_basic.getStudent_basic_major());
+				if (bysjglxt_section == null) {
+					return -1;
 				}
-				// 根据教研室的名字去获得教研室表记录
-				bysjglxt_section = processManagementDao.getSectionByName(section);
 				bysjglxt_task_instance.setTask_instance_role(bysjglxt_section.getSection_leader());
 				break;
+
 			case 5:
 				// 判断学生账号是否错误
 				// 判断那是否是学生点击开启流程
