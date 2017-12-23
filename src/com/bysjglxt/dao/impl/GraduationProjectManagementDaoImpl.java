@@ -1136,7 +1136,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return bysjglxt_dissertation;
 	}
 
-	// 根据学生Id删除学生论文上传记录
+	// 根据学生Id删除学生论文上传记录,将文件置空
 	@Override
 	public boolean deleteThesisByUserId(String userId) {
 		boolean flag = true;

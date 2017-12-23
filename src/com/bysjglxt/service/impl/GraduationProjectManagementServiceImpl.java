@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.struts2.ServletActionContext;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
@@ -61,12 +63,24 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public int saveDissertation(File file, String oldFileName, String userId, String newFileName) throws IOException {
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			System.out.println("获取初始路径失败");
+			e.printStackTrace();
+		}
 		boolean flag = false;
 		String path = "";
 		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
 		// 如果新文件为空
 		if (file == null) {
-			path = "F:/graduagtionThesi/";
+			path = lj + "graduagtionThesi/";
 			// 判断旧文件是否处于空的状态
 			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
 				// 如果是空
@@ -93,7 +107,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return 1;
 			}
 		} else {
-			path = "F:/graduagtionThesi/";
+			path = lj + "graduagtionThesi/";
 			// 如果新文件存在
 			bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
 			// 1.判断是否有属于这个学生的毕业论文存在
@@ -112,7 +126,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					return -1;
 				}
 			}
-			path = "F:/graduagtionThesi/";
+			path = lj + "graduagtionThesi/";
 			// 保存毕业论文
 			// 1.上传毕业论文
 			bysjglxt_dissertation = new bysjglxt_dissertation();
@@ -134,12 +148,24 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		return 1;
 	}
 
-	// 上传毕业论文
+	// 上传毕业论文 弃用
 	@Override
 	public int uploadDissertation(String userId, File file, String thesisName) throws IOException {
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			System.out.println("获取初始路径失败");
+			e.printStackTrace();
+		}
 		// 查找学生是否已经上传毕业论文
 		boolean flag = false;
-		String path = "F:/graduagtionThesi/";
+		String path = lj + "graduagtionThesi/";
 		bysjglxt_dissertation bysjglxt_dissertation = null;
 		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
 		if (bysjglxt_dissertation != null && bysjglxt_dissertation.getDissertation_student() != null
@@ -185,14 +211,26 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	// 下载毕业论文
 	@Override
 	public File downloadDissertation(String userId) {
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			System.out.println("获取初始路径失败");
+			e.printStackTrace();
+		}
 		// 1.根据user Id获得学生毕业论文表中的记录
 		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
-		String path = "F:/graduagtionThesi/";
+		String path = lj + "graduagtionThesi/";
 		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
 		if (bysjglxt_dissertation == null) {
 			return null;
 		}
-		path = path + bysjglxt_dissertation.getDissertation_file();
+		path = path + bysjglxt_dissertation.getDissertation_id() + "_" + bysjglxt_dissertation.getDissertation_file();
 		File file = new File(path);
 		return file;
 	}
@@ -581,7 +619,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_dissertation.setDissertation_id(TeamUtil.getUuid());
 		bysjglxt_dissertation.setDissertation_student(studentId);
 		bysjglxt_dissertation.setDissertation_gmt_create(TeamUtil.getStringSecond());
-		bysjglxt_dissertation.setDissertation_gmt_modified(TeamUtil.getStringSecond());
+		bysjglxt_dissertation.setDissertation_gmt_modified(bysjglxt_dissertation.getDissertation_gmt_create());
 		flag = graduationProjectManagementDao.fillEmptyInDissertation(bysjglxt_dissertation);
 		if (flag == 2) {
 			return flag;
@@ -1198,7 +1236,18 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	@Override
 	public File exportAll(String userId) throws Exception {
-
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			System.out.println("获取初始路径失败");
+			e.printStackTrace();
+		}
 		Map<String, Object> params = new HashMap<String, Object>();
 		// 封面
 		params.putAll(exportCover(userId));
@@ -1226,19 +1275,19 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		params.putAll(exportDefence(userId));
 		XwpfTUtil xwpfTUtil = new XwpfTUtil();
 		XWPFDocument doc;
-		String fileNameInResource = "F:\\ttt.docx";
+		String fileNameInResource = ServletActionContext.getServletContext().getRealPath("/DocTmp/ttt.docx");
 		InputStream is;
 		is = new FileInputStream(fileNameInResource);
 		doc = new XWPFDocument(is);
 		xwpfTUtil.replaceInPara(doc, params);
 		xwpfTUtil.replaceInTable(doc, params);
-		OutputStream os = new FileOutputStream("F:\\kokokoko.docx");
+		OutputStream os = new FileOutputStream(lj + "kokokoko.docx");
 		doc.write(os);
 		xwpfTUtil.close(os);
 		xwpfTUtil.close(is);
 		os.flush();
 		os.close();
-		return new File("F:\\kokokoko.docx");
+		return new File(lj + "kokokoko.docx");
 	}
 
 	// 导出封面
