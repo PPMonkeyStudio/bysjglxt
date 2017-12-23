@@ -23,6 +23,9 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 		return this.sessionFactory.getCurrentSession();
 	}
 
+	
+	
+	
 	/**
 	 * 根据学号得到学生登录表信息
 	 */

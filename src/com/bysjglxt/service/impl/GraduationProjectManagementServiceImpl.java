@@ -56,6 +56,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
 
+	
+	
 	/**
 	 * 保存毕业论文
 	 * 

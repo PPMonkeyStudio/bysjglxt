@@ -21,6 +21,8 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 		this.loginOrWriteOffDao = loginOrWriteOffDao;
 	}
 
+	
+	
 	@Override
 	public int login(String username, String password) {
 		if (username == null || username.trim().length() <= 0) {
