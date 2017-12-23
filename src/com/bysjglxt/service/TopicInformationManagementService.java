@@ -14,7 +14,7 @@ public interface TopicInformationManagementService {
 	 * 获取关于某课题学生是否已经被指定的List<DTO>
 	 */
 	public List<DesignationStudentInformationDTO> listDesignationStudentInformation(String topicId, String studentMajor,
-			String studentGrade);
+			String studentGrade, String search);
 
 	/**
 	 * 

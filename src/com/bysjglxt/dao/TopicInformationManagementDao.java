@@ -118,7 +118,7 @@ public interface TopicInformationManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceByNameAndProcessInstanceId(
 			String task_definition_id, String process_instance_id);
 
-	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade);
+	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade,String search);
 
 	public com.bysjglxt.domain.DO.bysjglxt_topic getTopicByIdAndStudent(String student_user, String topicId);
 

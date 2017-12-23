@@ -828,7 +828,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	 */
 	@Override
 	public List<DesignationStudentInformationDTO> listDesignationStudentInformation(String topicId, String studentMajor,
-			String studentGrade) {
+			String studentGrade, String search) {
 		List<bysjglxt_student_user> listStudentUser = new ArrayList<bysjglxt_student_user>();
 		DesignationStudentInformationDTO designationStudentInformationDTO = null;
 		List<DesignationStudentInformationDTO> listDesignation = new ArrayList<DesignationStudentInformationDTO>();
@@ -836,7 +836,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_student_basic student_basic = null;
 		// bysjglxt_student_user
 		// 获取所有拥有操作权限的学生,以及可以进行筛选
-		listStudentUser = topicInformationManagementDao.getListStudentUserByDesignation(studentMajor, studentGrade);
+		listStudentUser = topicInformationManagementDao.getListStudentUserByDesignation(studentMajor, studentGrade,
+				search);
 		for (bysjglxt_student_user student_user : listStudentUser) {
 			designationStudentInformationDTO = new DesignationStudentInformationDTO();
 			bysjglxt_topic = new bysjglxt_topic();
@@ -848,6 +849,11 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				student_basic = topicInformationManagementDao
 						.getStudentBasic(student_user.getUser_student_basic().trim());
 				if (student_basic != null) {
+					if (student_basic.getStudent_basic_num() != null
+							&& student_basic.getStudent_basic_num().trim().length() > 0) {
+						student_basic.setStudent_basic_num(student_basic.getStudent_basic_num().replaceAll(search,
+								"<span style='color: #ff5063;'>" + search + "</span>"));
+					}
 					designationStudentInformationDTO.setBysjglxtStudentBasic(student_basic);
 				}
 			}
