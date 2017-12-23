@@ -255,6 +255,7 @@ function getTopicCurrentProcess() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				console.log("xhr.responseText:" + xhr.responseText);
 				json_topicCurrentProcessDTO = xhr.responseText;
 				topicCurrentProcessDTO = JSON.parse(xhr.responseText);
 				var text_TopicCurrentProcess = document

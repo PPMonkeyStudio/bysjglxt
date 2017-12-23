@@ -36,11 +36,27 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	}
 
 	@Override
+	public boolean addObject(Object obj) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(obj);
+			session.flush();
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+
+		return flag;
+	}
+
+	@Override
 	public boolean CreateTopic(bysjglxt_topic newTopic) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(newTopic);
+			session.flush();
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
@@ -728,15 +744,14 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	 * 获取筛选后可以进行被指定的学生
 	 */
 	@Override
-	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade) {
+	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade,
+			String search) {
 		List<bysjglxt_student_user> listUser = new ArrayList<bysjglxt_student_user>();
 		String hql = "select studentUser from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where studentUser.user_student_basic=studentBasic.student_basic_id ";
 		hql = hql + " and studentUser.user_student_is_operate_premission=1 ";
-		if (studentMajor != null && studentMajor.trim().length() > 0) {
-			hql = hql + " and studentBasic.student_basic_major='" + studentMajor + "'";
-		}
-		if (studentGrade != null && studentGrade.trim().length() > 0) {
-			hql = hql + " and studentBasic.student_basic_grade='" + studentGrade + "'";
+		if (search != null && search.trim().length() > 0) {
+			String sss = "%" + search.trim() + "%";
+			hql = hql + " and studentBasic.student_basic_num like '" + sss + "'";
 		}
 		Session session = getSession();
 		Query query = session.createQuery(hql);

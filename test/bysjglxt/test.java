@@ -101,7 +101,9 @@ public class test {
 	@Test
 	public void testListDesignationStudentInformation() {
 		List<DesignationStudentInformationDTO> ll = new ArrayList<>();
-		ll = topicManagementService.listDesignationStudentInformation("1f65fbda-90ef-4d19-962a-58ce08090567", "", "");
+
+		ll = topicManagementService.listDesignationStudentInformation("4176296d-d8fc-435c-b2c5-ce30a4105c0d", "-1", "-1","");
+
 		for (DesignationStudentInformationDTO designationStudentInformationDTO : ll) {
 			System.out.println("designationStudentInformationDTO:" + designationStudentInformationDTO);
 		}

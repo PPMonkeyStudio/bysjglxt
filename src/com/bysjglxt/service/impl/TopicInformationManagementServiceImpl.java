@@ -46,16 +46,13 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
-		System.out.println("huhu");
 		// 根据选题Id获取选题表信息
 		bysjglxt_topic_select = topicInformationManagementDao.getSelectTopicById(selectId);
 		if (bysjglxt_topic_select == null)
 			return -1;
 		bysjglxt_topic_select.setTopic_select_teacher_review(reviewId);
 		bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
-		System.out.println("huhu");
 		flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
-		System.out.println("huhu");
 		if (!flag)
 			return -1;
 		// 判断该学生是否开启毕业设计流程
@@ -106,7 +103,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 					topicInformationDTO.getTeacherInformationDTO().getBysjglxtTeacherUser().getUser_teacher_id());
 			newTopic.setTopic_student_num(0);
 			newTopic.setTopic_student_max(-1);
-			flag = topicInformationManagementDao.CreateTopic(newTopic);
+			flag = topicInformationManagementDao.addObject(newTopic);
 		} else {
 			return false;
 		}
@@ -125,7 +122,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_notice.setNotice_state(2);
 		bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
-		flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
+		flag = topicInformationManagementDao.addObject(bysjglxt_notice);
 		return flag;
 	}
 
@@ -261,7 +258,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		// 获得符合条件的10条课题
 		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO,
 				studentOrTeacher);
-		System.out.println(list_bysjglxt_topic.size());
 		for (bysjglxt_topic tbysjglxt_topic : list_bysjglxt_topic) {
 			topicInformationDTO = new TopicInformationManagementDTO();
 			// 在DTO里面设置TeacherInformationDTO
@@ -827,11 +823,12 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	 * @param topicId
 	 * @param studentMajor
 	 * @param studentGrade
+	 * 
 	 * @return
 	 */
 	@Override
 	public List<DesignationStudentInformationDTO> listDesignationStudentInformation(String topicId, String studentMajor,
-			String studentGrade) {
+			String studentGrade, String search) {
 		List<bysjglxt_student_user> listStudentUser = new ArrayList<bysjglxt_student_user>();
 		DesignationStudentInformationDTO designationStudentInformationDTO = null;
 		List<DesignationStudentInformationDTO> listDesignation = new ArrayList<DesignationStudentInformationDTO>();
@@ -839,7 +836,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_student_basic student_basic = null;
 		// bysjglxt_student_user
 		// 获取所有拥有操作权限的学生,以及可以进行筛选
-		listStudentUser = topicInformationManagementDao.getListStudentUserByDesignation(studentMajor, studentGrade);
+		listStudentUser = topicInformationManagementDao.getListStudentUserByDesignation(studentMajor, studentGrade,
+				search);
 		for (bysjglxt_student_user student_user : listStudentUser) {
 			designationStudentInformationDTO = new DesignationStudentInformationDTO();
 			bysjglxt_topic = new bysjglxt_topic();
@@ -851,6 +849,11 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				student_basic = topicInformationManagementDao
 						.getStudentBasic(student_user.getUser_student_basic().trim());
 				if (student_basic != null) {
+					if (student_basic.getStudent_basic_num() != null
+							&& student_basic.getStudent_basic_num().trim().length() > 0) {
+						student_basic.setStudent_basic_num(student_basic.getStudent_basic_num().replaceAll(search,
+								"<span style='color: #ff5063;'>" + search + "</span>"));
+					}
 					designationStudentInformationDTO.setBysjglxtStudentBasic(student_basic);
 				}
 			}
