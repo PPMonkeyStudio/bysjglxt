@@ -200,6 +200,16 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	}
 
 	/**
+	 * 开启所有符合条件的毕业设计
+	 * 
+	 * @throws IOException
+	 */
+	public void openGraduProcess() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(processManagementService.openGraduProcess());
+	}
+
+	/**
 	 * 毕业设计管理中，获得当前的任务实例 若是教师，则获得session存储的学生ID，然后去查询任务实例
 	 * 
 	 * @throws IOException

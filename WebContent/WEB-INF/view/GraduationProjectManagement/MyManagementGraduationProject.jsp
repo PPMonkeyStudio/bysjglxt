@@ -13,16 +13,7 @@
 	content="text/html; charset=UTF-8">
 <!--页面公用-------------------------------------------------------------------------------------------------->
 
-<!---------------------------------------------------------------------------------------------------->
-<script type="text/javascript"
-	src="<%=basePath%>js/GraduationProjectManagement/List_MyManagementGraduationProject_By_PageAndSearch.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/GraduationProjectManagement/update_defence_record.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/GraduationProjectManagement/update_defence_leader.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/GraduationProjectManagement/topicReview.js"></script>
-<!---------------------------------------------------------------------------------------------------->
+
 
 <title>毕业设计管理</title>
 </head>
@@ -46,7 +37,8 @@
 			</div>
 			<div class="panel-body">
 				<div style="width: 500px; float: left;">
-					<button class="btn btn-default" onclick="">
+					<button class="btn btn-default"
+						onclick="Start_GraduationProject_All()">
 						<i class="fa fa-bug"></i>
 						开启所有符合条件的毕业设计流程
 					</button>
@@ -156,10 +148,16 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 </body>
-<script>
-	
-</script>
-<script>
-	
-</script>
+<!---------------------------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/List_MyManagementGraduationProject_By_PageAndSearch.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/update_defence_record.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/update_defence_leader.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/topicReview.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Start_GraduationProject_All.js"></script>
+<!---------------------------------------------------------------------------------------------------->
 </html>
