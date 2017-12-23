@@ -36,11 +36,27 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	}
 
 	@Override
+	public boolean addObject(Object obj) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(obj);
+			session.flush();
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+
+		return flag;
+	}
+
+	@Override
 	public boolean CreateTopic(bysjglxt_topic newTopic) {
 		boolean flag = true;
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(newTopic);
+			session.flush();
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();

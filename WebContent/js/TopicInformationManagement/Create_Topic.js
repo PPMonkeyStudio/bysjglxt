@@ -6,6 +6,7 @@ function Create_Topic() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				alert("ioio");
 				console.debug("获取当前选题流程:" + xhr.responseText);
 				var topicCurrentProcessDTO = JSON.parse(xhr.responseText);
 				if (xhr.responseText == '{}') {
@@ -52,9 +53,7 @@ function Create_Topic() {
 						}
 					}
 					var formData = new FormData();
-					xhr_2
-							.open("POST",
-									"/bysjglxt/topic/TopicInformationManagement_CreateTopic");
+					xhr_2.open("POST","/bysjglxt/topic/TopicInformationManagement_CreateTopic");
 					if (!topic_name_chinese.value == "") {
 						formData
 								.append(
@@ -90,7 +89,7 @@ function Create_Topic() {
 					/*
 					 * 
 					 */
-
+					alert("d:"+formData.get("topicInformationManagementDTO.bysjglxtTopic.topic_remark"));
 					xhr_2.send(formData);
 
 				}

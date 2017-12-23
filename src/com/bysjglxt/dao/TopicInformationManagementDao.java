@@ -41,6 +41,8 @@ public interface TopicInformationManagementDao {
 	public boolean createStudentSclectInformation(bysjglxt_topic_select bysjglxt_topic_select);
 
 	public boolean addTopicStudentNum(String topicID);
+	
+	public boolean addObject(Object obj);
 
 	public boolean addTeacherUserSrtudentNum(String user_teacher_id);
 

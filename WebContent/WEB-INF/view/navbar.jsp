@@ -90,7 +90,7 @@
 					</ul>
 				</li>
 				<!--  -->
-				<li class="leader_control dropdown" style="float: left;">
+				<li class="dropdown" style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>课题</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>

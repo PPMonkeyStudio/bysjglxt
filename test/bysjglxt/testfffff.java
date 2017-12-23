@@ -47,8 +47,8 @@ public class testfffff {
 	// 测试添加指定学生
 	@Test
 	public void testC() {
-		System.out.println(topicManagementService.distributionTopicStudent("4176296d-d8fc-435c-b2c5-ce30a4105c0d",
-				"42e95437-25f2-44c9-a64e-6038e13cd4b8"));
+		System.out.println(topicManagementService.distributionTopicStudent("aca555ad-6b07-4301-823f-d03d74b705da",
+				"3b3c4c65-0e6f-4386-bba7-17ac0ed166ff"));
 	}
 
 	// 遍历出所有可以进行选择的课题
