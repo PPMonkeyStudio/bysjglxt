@@ -220,7 +220,6 @@ public class TopicInformationManagementAction extends ActionSupport
 					.write(gson.toJson(topicInformationManagementService.VO_TopicBelongTeacher_By_PageAndSearch(
 							topicInformationManagementVO, teacherInformationDTO.getBysjglxtTeacherUser()
 									.getUser_teacher_id())));
-
 		}
 
 	}

@@ -4,8 +4,17 @@ public class bysjglxt_section {
 	private String section_id;
 	private String section_name;
 	private String section_leader;
+	private String section_major;
 	private String section_gmt_create;
 	private String section_gmt_modified;
+
+	public String getSection_major() {
+		return section_major;
+	}
+
+	public void setSection_major(String section_major) {
+		this.section_major = section_major;
+	}
 
 	public String getSection_id() {
 		return section_id;
@@ -50,8 +59,8 @@ public class bysjglxt_section {
 	@Override
 	public String toString() {
 		return "bysjglxt_section [section_id=" + section_id + ", section_name=" + section_name + ", section_leader="
-				+ section_leader + ", section_gmt_create=" + section_gmt_create + ", section_gmt_modified="
-				+ section_gmt_modified + "]";
+				+ section_leader + ", section_major=" + section_major + ", section_gmt_create=" + section_gmt_create
+				+ ", section_gmt_modified=" + section_gmt_modified + "]";
 	}
 
 }
