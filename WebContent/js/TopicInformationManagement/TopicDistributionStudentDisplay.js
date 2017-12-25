@@ -140,7 +140,7 @@ function DistributionStudent(student_topic) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				if (xhr.responseText == 'success') {
-					toastr.success(xhr.responseText);
+					toastr.success("操作成功");
 					list_DistributionStudent(str_student_topic[1])
 				}
 			}
