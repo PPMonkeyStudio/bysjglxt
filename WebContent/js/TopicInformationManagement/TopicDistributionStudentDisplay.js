@@ -151,8 +151,6 @@ function DistributionStudent(student_topic) {
 
 	formData.append("studentID", str_student_topic[0]);
 	formData.append("studentSelectTopic", str_student_topic[1]);
-	console.debug(str_student_topic[0]);
-	console.debug(str_student_topic[1]);
 	xhr
 			.open("POST",
 					"/bysjglxt/topic/TopicInformationManagement_distributionTopicStudent");
