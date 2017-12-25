@@ -6,7 +6,9 @@ function TopicDistributionStudentDisplay(obj) {
 				theme : 'modern',
 				title : '指定学生提前选题',
 				content : '<div class="input-group" style="width: 300px; float: right;margin:0 20px 20px 0;">'
-						+ '<input id="input_search_TopicDistributionStudent" class="form-control" oninput="list_DistributionStudent()" type="text">'
+						+ '<input id="'
+						+ obj.id
+						+ '" class="form-control input_search_TopicDistributionStudent" oninput="list_DistributionStudent(this.id)" type="text">'
 						+ '<span class="input-group-addon">'
 						+ '<i class="fa fa-search"></i>'
 						+ '</span>'
@@ -114,10 +116,10 @@ function list_DistributionStudent(topic) {
 	}
 	var formData = new FormData();
 	var search = document
-			.getElementById("input_search_TopicDistributionStudent").value;
+			.getElementsByClassName("input_search_TopicDistributionStudent")[0].value;
 	if (search == undefined || search == null || search == "") {
 	} else {
-		// formData.append("topicInformationManagementVO.search", search);
+		formData.append("search", search);
 	}
 	formData.append("studentSelectTopic", topic);
 
