@@ -54,7 +54,10 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * 学生选题
 	 */
 	private String studentSelectTopic;
-
+	/*
+	 * 搜索
+	 */
+	private String search;
 	/*
 	 * 分配选题
 	 */
@@ -185,9 +188,19 @@ public class TopicInformationManagementAction extends ActionSupport
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
+		/*
+		 * 
+		 */
+		if (search == null) {
+			search = "";
+		} else {
+		}
+		/*
+		 * 
+		 */
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(gson.toJson(
-				topicInformationManagementService.listDesignationStudentInformation(studentSelectTopic, "-1", "-1")));
+		http_response.getWriter().write(gson.toJson(topicInformationManagementService
+				.listDesignationStudentInformation(studentSelectTopic, "-1", "-1", search)));
 	}
 
 	/**
@@ -430,6 +443,14 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	public void setAssignmentReviewTeacherId(String assignmentReviewTeacherId) {
 		this.assignmentReviewTeacherId = assignmentReviewTeacherId;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 }
