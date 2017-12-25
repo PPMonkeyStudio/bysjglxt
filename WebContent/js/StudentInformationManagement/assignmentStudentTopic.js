@@ -59,29 +59,29 @@ function assignmentStudentTopic(button) {
 													console
 															.debug("正在进行的选题任务："
 																	+ topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name);
-													if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "提前选题") {
+													if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "分配选题") {
 														toastr
-																.error("还未到提前选题的时间");
+																.error("还未到分配选题的时间");
 														return;
 													}
 													break;
 												}
 											}
 
-											var xhr = false;
-											xhr = new XMLHttpRequest();
-											xhr.onreadystatechange = function() {
+											var xhr_2 = false;
+											xhr_2 = new XMLHttpRequest();
+											xhr_2.onreadystatechange = function() {
 												var message;
-												if (xhr.readyState == 4) {
-													if (xhr.status == 200) {
+												if (xhr_2.readyState == 4) {
+													if (xhr_2.status == 200) {
 														List_Student_By_PageAndSearch(1);
 													} else {
 														toastr
-																.error(xhr.status);
+																.error(xhr_2.status);
 													}
 												}
 											}
-											xhr
+											xhr_2
 													.open("POST",
 															"/bysjglxt/topic/TopicInformationManagement_assignmentStudentTopic");
 											var formData = new FormData();
@@ -94,17 +94,17 @@ function assignmentStudentTopic(button) {
 													"assignmentStudentUserId",
 													button.id);
 
-											xhr.send(formData);
+											xhr_2.send(formData);
 
 										}
 									} else {
-										toastr.error(xhr.status);
+										toastr.error(xhr_2.status);
 									}
 								}
 							}
 							xhr
 									.open("POST",
-											"/bysjglxt/topic/TopicInformationManagement_getTopicCurrentProcess");
+											"/bysjglxt/process/ProcessManagement_getTopicCurrentProcess");
 							xhr.send(null);
 
 						}
