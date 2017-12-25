@@ -525,6 +525,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_topic_select where topic_select_topic = '" + topicId + "'";
 		Query query = session.createQuery(hql);
 		listSelect = query.list();
+		session.clear();
 		return listSelect;
 	}
 
@@ -535,6 +536,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_student_basic where student_basic_id = '" + user_student_basic + "'";
 		Query query = session.createQuery(hql);
 		listSelect = (bysjglxt_student_basic) query.uniqueResult();
+		session.clear();
 		return listSelect;
 	}
 
@@ -769,6 +771,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		Session session = getSession();
 		Query query = session.createQuery(hql);
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		session.clear();
 		return bysjglxt_topic;
 	}
 
