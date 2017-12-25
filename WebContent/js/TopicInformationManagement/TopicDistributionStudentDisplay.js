@@ -94,7 +94,7 @@ function list_DistributionStudent(topic) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (new_td.innerHTML = student_json[num].bysjglxtStudentUser.user_student_is_select_topic == 1) {
+					if (new_td.innerHTML = student_json[num].designation == 1) {
 						new_td.innerHTML = '<button class="btn btn-default" id="'
 								+ student_json[num].bysjglxtStudentUser.user_student_id
 								+ '_'
@@ -140,7 +140,7 @@ function DistributionStudent(student_topic) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				if (xhr.responseText == 'success') {
-					toastr.success(xhr.responseText);
+					toastr.success("操作成功");
 					list_DistributionStudent(str_student_topic[1])
 				}
 			}
@@ -151,8 +151,6 @@ function DistributionStudent(student_topic) {
 
 	formData.append("studentID", str_student_topic[0]);
 	formData.append("studentSelectTopic", str_student_topic[1]);
-	console.debug(str_student_topic[0]);
-	console.debug(str_student_topic[1]);
 	xhr
 			.open("POST",
 					"/bysjglxt/topic/TopicInformationManagement_distributionTopicStudent");
