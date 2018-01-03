@@ -14,26 +14,6 @@ function InitializationMyGraduationProject() {
 			if (xhr.status == 200) {
 
 				currentProcessDto = JSON.parse(xhr.responseText);
-				console.debug("InitializationMyGraduationProject:"
-						+ xhr.responseText);
-				if (xhr.responseText == '{}') {
-					$
-							.confirm({
-								title : '未开启流程',
-								content : '点击确认后将自动跳转到流程页面',
-								type : 'red',
-								buttons : {
-									确认 : {
-										btnClass : 'btn-red',
-										action : function() {
-											window.location = '/bysjglxt/process/ProcessManagement_ProcessDefinitionListPage';
-										}
-									},
-								}
-							});
-
-					return;
-				}
 				for (var num = 0; currentProcessDto.listTaskBelongProcess.length; num++) {
 					if (currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
 						current_processDefinitionName = currentProcessDto.listTaskBelongProcess[num].taskDefinition.task_definition_name;
@@ -56,7 +36,7 @@ function InitializationMyGraduationProject() {
 					banner_Taskbook_Teacher.style.color = 'white';
 					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
 					Initialization_Taskbook_Teacher();
-					console.debug("in:"+current_processDefinitionName);
+					console.debug("in:" + current_processDefinitionName);
 					/*
 					 * 
 					 */

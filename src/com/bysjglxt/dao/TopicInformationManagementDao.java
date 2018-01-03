@@ -7,6 +7,7 @@ import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
@@ -17,9 +18,14 @@ import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
 public interface TopicInformationManagementDao {
 
+	
+	public bysjglxt_process_instance getProcessInstanceByManStatePAndName(String topic_select_student);
+	
 	public boolean CreateTopic(bysjglxt_topic newTopic);
 
 	public boolean DeleteTopic(String topicID);
+
+	public boolean saveObj(Object obj);
 
 	public boolean updateTopicState(String topicID, String moTime);
 
@@ -41,7 +47,7 @@ public interface TopicInformationManagementDao {
 	public boolean createStudentSclectInformation(bysjglxt_topic_select bysjglxt_topic_select);
 
 	public boolean addTopicStudentNum(String topicID);
-	
+
 	public boolean addObject(Object obj);
 
 	public boolean addTeacherUserSrtudentNum(String user_teacher_id);
@@ -110,6 +116,8 @@ public interface TopicInformationManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_topic_select getSelectTopicById(String selectId);
 
+	public com.bysjglxt.domain.DO.bysjglxt_topic_select getSelectTopicByOwnId(String selectId);
+
 	public com.bysjglxt.domain.DO.bysjglxt_process_instance getProcessInstanceByManStateAndName(
 			String topic_select_student);
 
@@ -118,7 +126,8 @@ public interface TopicInformationManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_task_instance getTaskInstanceByNameAndProcessInstanceId(
 			String task_definition_id, String process_instance_id);
 
-	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade,String search);
+	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade,
+			String search);
 
 	public com.bysjglxt.domain.DO.bysjglxt_topic getTopicByIdAndStudent(String student_user, String topicId);
 

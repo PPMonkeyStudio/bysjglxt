@@ -56,8 +56,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
 
-	
-	
 	/**
 	 * 保存毕业论文
 	 * 
@@ -978,6 +976,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	@Override
 	public int updateEvaluateTutor(bysjglxt_evaluate_tutor updateEvaluateTutor) {
+		System.out.println("kk" + updateEvaluateTutor);
 		int flag = 2;
 		bysjglxt_evaluate_tutor bysjglxt_evaluate_tutor = new bysjglxt_evaluate_tutor();
 		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
@@ -1283,6 +1282,10 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		doc = new XWPFDocument(is);
 		xwpfTUtil.replaceInPara(doc, params);
 		xwpfTUtil.replaceInTable(doc, params);
+		File ff = new File(lj + "kokokoko.docx");
+		if (!ff.exists()) {
+			ff.createNewFile();
+		}
 		OutputStream os = new FileOutputStream(lj + "kokokoko.docx");
 		doc.write(os);
 		xwpfTUtil.close(os);
@@ -1344,7 +1347,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 							.getTeacherUserByUserId(bysjglxt_topic_select.getTopic_select_teacher_review());
 					// 根据老师basicid获得评阅老师basic表
 					bysjglxt_teacher_basic_evaluate = graduationProjectManagementDao
-							.getTeacherBasicByBasicId(bysjglxt_teacher_user_evaluate.getUser_teacher_id());
+							.getTeacherBasicByBasicId(bysjglxt_teacher_user_evaluate.getUser_teacher_basic());
 					params.put("${coverEvaluateName}", bysjglxt_teacher_basic_evaluate.getName());
 					params.put("${coverEvaluateTitle}", bysjglxt_teacher_basic_evaluate.getProfessional_title());
 				} else {

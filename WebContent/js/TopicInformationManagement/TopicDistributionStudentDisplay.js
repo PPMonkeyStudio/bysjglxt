@@ -84,7 +84,7 @@ function list_DistributionStudent(topic) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (new_td.innerHTML = student_json[num].designation == 1) {
+					if (new_td.innerHTML = student_json[num].designation != 1) {
 						new_td.innerHTML = '✔';
 					} else {
 						new_td.innerHTML = '';
@@ -94,7 +94,7 @@ function list_DistributionStudent(topic) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (new_td.innerHTML = student_json[num].designation == 1) {
+					if (new_td.innerHTML = student_json[num].designation != 1) {
 						new_td.innerHTML = '<button class="btn btn-default" id="'
 								+ student_json[num].bysjglxtStudentUser.user_student_id
 								+ '_'
