@@ -226,6 +226,21 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_topic_select);
+			session.flush();
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean saveObj(Object obj) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(obj);
+			session.flush();
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
@@ -707,6 +722,16 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		return bysjglxt_topic_select;
 	}
 
+	@Override
+	public bysjglxt_topic_select getSelectTopicByOwnId(String selectId) {
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_topic = '" + selectId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		return bysjglxt_topic_select;
+	}
+
 	// 根据流程实例化者、状态以及流程定义名获取流程实例
 	@Override
 	public bysjglxt_process_instance getProcessInstanceByManStateAndName(String topic_select_student) {
@@ -773,6 +798,18 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
 		session.clear();
 		return bysjglxt_topic;
+	}
+
+	@Override
+	public bysjglxt_process_instance getProcessInstanceByManStatePAndName(String topic_select_student) {
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		Session session = getSession();
+		String hql = "select processInstance from bysjglxt_process_instance processInstance,bysjglxt_process_definition processDefinition where processInstance.process_instance_process_definition=processDefinition.process_definition_id ";
+		hql = hql + " and processInstance.process_instance_man='" + topic_select_student
+				+ "' and processInstance.process_instance_state='活动' and processDefinition.process_definition_name='毕业设计流程' ";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		return bysjglxt_process_instance;
 	}
 
 }

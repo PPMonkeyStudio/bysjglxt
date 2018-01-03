@@ -480,6 +480,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void updateEvaluateTutor() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
+		System.out.println("ll:" + updateEvaluateTutor);
 		if (graduationProjectManagementService.updateEvaluateTutor(updateEvaluateTutor) == 1) {
 			http_response.getWriter().write("保存成功");
 		} else {

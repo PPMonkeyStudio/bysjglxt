@@ -6,14 +6,13 @@ function studentSelectTopic() {
 	} else {
 		for (var num = 0; topicCurrentProcessDTO.listTaskBelongProcess.length; num++) {
 			if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
-				if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name == "正式选题") {
+				if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "正式选题") {
 					toastr.error("还未到正式选题的时间");
 					return;
 				}
 				break;
 			}
 		}
-
 		var xhr_2 = false;
 		xhr_2 = new XMLHttpRequest();
 		xhr_2.onreadystatechange = function() {

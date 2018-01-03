@@ -91,7 +91,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		StudentInformationDTO studentInformationDTO = null;
 		List<bysjglxt_student_user> listAllStudentUserInformation = studentInformationManagementDao
 				.list_StudentUserInformation_All();
-
 		for (bysjglxt_student_user student_user : listAllStudentUserInformation) {
 			studentInformationDTO = new StudentInformationDTO();
 			studentInformationDTO.setBysjglxtStudentUser(student_user);
