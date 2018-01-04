@@ -45,11 +45,11 @@ function List_MyTask(pageIndex) {
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 1) {
-						new_td.innerHTML = '<span class="label label-primary">正在进行</span>';
+						new_td.innerHTML = '<span class="label label-primary"><i class="fa fa-snowflake-o fa-pulse"></i> 正在进行</span>';
 					} else if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 2) {
-						new_td.innerHTML = '<span class="label label-default">未开始</span>';
+						new_td.innerHTML = '<span class="label label-success"><i class="fa fa-graduation-cap"></i> 未开始</span>';
 					} else {
-						new_td.innerHTML = '<span class="label label-success">已结束</span>';
+						new_td.innerHTML = '<span class="label label-default"><i class="fa fa-check-square-o"></i> 已结束</span>';
 					}
 
 					new_td = document.createElement("td");
