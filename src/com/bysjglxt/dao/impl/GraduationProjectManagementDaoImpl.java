@@ -123,8 +123,6 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return flag;
 	}
 
-	
-	
 	@Override
 	public int fillEmptyEvaluateReview(bysjglxt_evaluate_review bysjglxt_evaluate_review) {
 		int flag = 1;
@@ -1201,5 +1199,18 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_dissertation = (bysjglxt_dissertation) query.uniqueResult();
 		session.clear();
 		return bysjglxt_dissertation;
+	}
+
+	// 根据user Id获取studentBasic表的信息
+	@Override
+	public bysjglxt_student_basic getStudentBasicByUserId(String userId) {
+		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
+		Session session = getSession();
+		String hql = "select basic from bysjglxt_student_basic basic,bysjglxt_student_user user where basic.student_basic_id=user.user_student_basic and user.user_student_id='"
+				+ userId + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_student_basic = (bysjglxt_student_basic) query.uniqueResult();
+		session.clear();
+		return bysjglxt_student_basic;
 	}
 }

@@ -2,6 +2,7 @@ package com.bysjglxt.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import com.bysjglxt.domain.DO.bysjglxt_defence;
@@ -226,8 +227,7 @@ public interface GraduationProjectManagementService {
 	 * 记录员填写的部分
 	 */
 	public int updateDefenceRecorder(bysjglxt_defence updateDefence);
-	
-	
+
 	/**
 	 * 这里是教师指导的毕业设计
 	 * 
@@ -286,8 +286,9 @@ public interface GraduationProjectManagementService {
 	public bysjglxt_defence get_Defence(String userId);
 
 	/************************************ 下面是导出word的实现 ****************************************************/
+
 	// 导出所有
-	public File exportAll(String userId) throws Exception;
+	public File exportAll(List<String> userId) throws Exception;
 
 	/**
 	 * 1.导出封面
