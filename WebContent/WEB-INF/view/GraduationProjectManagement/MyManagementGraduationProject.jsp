@@ -36,11 +36,18 @@
 				<h3 class="panel-title">毕业设计管理</h3>
 			</div>
 			<div class="panel-body">
-				<div style="width: 500px; float: left;">
+				<div style="width: 100%; float: left;">
 					<button class="btn btn-default"
 						onclick="Start_GraduationProject_All()">
 						<i class="fa fa-bug"></i>
 						开启所有符合条件的毕业设计流程
+					</button>
+				</div>
+				<div style="width: 500px; float: left;">
+					<button class="btn btn-default" style="margin: 10px 0;"
+						onclick="exportStudentsGraduation()">
+						<i class="fa fa-suitcase"></i>
+						批量导出《毕业设计过程管理手册》
 					</button>
 				</div>
 				<div style="height: 34px;">
@@ -74,7 +81,7 @@
 								</select>
 							</th>
 							<th>进程</th>
-							<th>毕业设计</th>
+							<th>操作</th>
 							<th>答辩</th>
 						</tr>
 					</tbody>
@@ -159,5 +166,7 @@
 	src="<%=basePath%>js/GraduationProjectManagement/topicReview.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Start_GraduationProject_All.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/exportGraduation.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 </html>

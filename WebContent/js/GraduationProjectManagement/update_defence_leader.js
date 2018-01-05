@@ -4,7 +4,7 @@ function update_defence_leader(button) {
 				columnClass : 'col-md-12',
 				title : '',
 				content : '<h5>答辩评语：</h5>'
-						+ '<textarea class="form-control" style="resize: none;height:100px;" id="textarea_defence_leader_comment"></textarea>'
+						+ '<textarea class="form-control" style="resize: none;height:200px;" id="textarea_defence_leader_comment"></textarea>'
 						+ '<h5>答辩评分：</h5>'
 						+ '<table id="table_defence_leader" class="table table-bordered table-hover" style="text-align: center;">'
 						+ '<tbody>' + '</tbody>' + '</table>',

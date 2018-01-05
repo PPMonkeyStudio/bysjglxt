@@ -2,9 +2,8 @@ function update_defence_record(button) {
 	$
 			.confirm({
 				columnClass : 'col-md-6 col-md-offset-3',
-				title : '',
-				content : '<h5>答辩记录：</h5>'
-						+ '<textarea class="form-control" style="resize: none;" id="textarea_defence_record"></textarea>',
+				title : '答辩记录',
+				content : '<textarea class="form-control" style="resize: none;height:300px;" id="textarea_defence_record"></textarea>',
 				type : 'blue',
 				buttons : {
 					修改 : {
