@@ -16,7 +16,7 @@ function Get_Teacher_Section(select) {
 					option.value = SectionList[num].section_id;
 				}
 
-				$('#' + select.id).selectpicker('refresh');
+				// $('#' + select.id).selectpicker('refresh');
 			} else {
 				toastr.error(xhr.status);
 			}

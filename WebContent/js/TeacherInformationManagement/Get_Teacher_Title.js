@@ -15,7 +15,7 @@ function Get_Teacher_Title(select) {
 					option.value = TitleList[num];
 				}
 
-				$('#' + select.id).selectpicker('refresh');
+				// $('#' + select.id).selectpicker('refresh');
 				return TitleList;
 			} else {
 				toastr.error(xhr.status);

@@ -88,7 +88,7 @@
 							<th>姓名</th>
 							<th>
 								<select class="form-control" id="select_sex"
-									style="width: auto;"
+									style="width: auto;margin:0 auto;"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="男">男</option>
@@ -97,7 +97,7 @@
 							</th>
 							<th>
 								<select class="select_section form-control"
-									id="select_section" style="width: auto;"
+									id="select_section" style="width: auto;margin:0 auto;"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">教研室</option>
 									<option value="">未填写教研室</option>
@@ -105,7 +105,7 @@
 							</th>
 							<th>
 								<select class="form-control" id="select_title"
-									style="width: auto;" data-live-search="true"
+									style="width: auto;margin:0 auto;" data-live-search="true"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">职称</option>
 									<option value="">未填写职称</option>
@@ -114,7 +114,7 @@
 							<th>指导学生数</th>
 							<th>
 								<select class="form-control" id="select_recorder"
-									style="width: auto;"
+									style="width: auto;margin:0 auto;"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">记录员</option>
 									<option value="1">是记录员</option>
@@ -123,7 +123,7 @@
 							</th>
 							<th>
 								<select class="form-control" id="select_defenceLeader"
-									style="width: auto;"
+									style="width: auto;margin:0 auto;"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">答辩小组组长</option>
 									<option value="1">是答辩小组组长</option>
@@ -351,7 +351,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 </body>
 <script>
-	$('select').selectpicker('refresh');
+// 	$('select').selectpicker('refresh');
 </script>
 <script>
 	Get_Teacher_Section(document.getElementById("select_section"));
