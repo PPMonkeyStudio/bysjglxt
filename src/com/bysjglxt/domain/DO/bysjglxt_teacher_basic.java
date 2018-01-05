@@ -2,42 +2,33 @@ package com.bysjglxt.domain.DO;
 
 public class bysjglxt_teacher_basic {
 
-	private String teacher_basic_id;
-	private String job_number;
-	private String name;
-	private String sex;
-	private String birthday;
-	private String induction_date;
-	private String job_statue;
-	private String unit_number;
-	private String unit_name;
-	private String highest_education;
-	private String highest_degree;
-	private String learn_edge_structure;
-	private String professional_title;
-	private String subject_category;
-	private String teaching_type;
-	private String teaching_profession_name;
-	private String teaching_profession_no;
-	private String profession_teaching_date;
-	private String experimental_technical_personnel;
-	private String double_teacher_type;
-	private String engineering_background;
-	private String industry_background;
-	private String graduate_tutor_type;
-	private String number_of_doctor;
-	private String number_of_master;
-	private String teacher_basic_gmt_create;
-	private String teacher_basic_gmt_modified;
-	private String student_basic_level;
-
-	public String getStudent_basic_level() {
-		return student_basic_level;
-	}
-
-	public void setStudent_basic_level(String student_basic_level) {
-		this.student_basic_level = student_basic_level;
-	}
+	private String teacher_basic_id="";
+	private String job_number="";
+	private String name="";
+	private String sex="";
+	private String birthday="";
+	private String induction_date="";
+	private String job_statue="";
+	private String unit_number="";
+	private String unit_name="";
+	private String highest_education="";
+	private String highest_degree="";
+	private String learn_edge_structure="";
+	private String professional_title="";
+	private String subject_category="";
+	private String teaching_type="";
+	private String teaching_profession_name="";
+	private String teaching_profession_no="";
+	private String profession_teaching_date="";
+	private String experimental_technical_personnel="";
+	private String double_teacher_type="";
+	private String engineering_background="";
+	private String industry_background="";
+	private String graduate_tutor_type="";
+	private String number_of_doctor="";
+	private String number_of_master="";
+	private String teacher_basic_gmt_create="";
+	private String teacher_basic_gmt_modified="";
 
 	public String getTeacher_basic_id() {
 		return teacher_basic_id;
@@ -269,8 +260,7 @@ public class bysjglxt_teacher_basic {
 				+ double_teacher_type + ", engineering_background=" + engineering_background + ", industry_background="
 				+ industry_background + ", graduate_tutor_type=" + graduate_tutor_type + ", number_of_doctor="
 				+ number_of_doctor + ", number_of_master=" + number_of_master + ", teacher_basic_gmt_create="
-				+ teacher_basic_gmt_create + ", teacher_basic_gmt_modified=" + teacher_basic_gmt_modified
-				+ ", student_basic_level=" + student_basic_level + "]";
+				+ teacher_basic_gmt_create + ", teacher_basic_gmt_modified=" + teacher_basic_gmt_modified + "]";
 	}
 
 }
