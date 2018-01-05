@@ -41,7 +41,6 @@ function list_DistributionStudent(topic) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug(xhr.responseText);
 				var student_json = JSON.parse(xhr.responseText);
 				/*
 				 * 

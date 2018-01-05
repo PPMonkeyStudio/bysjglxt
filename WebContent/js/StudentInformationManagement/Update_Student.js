@@ -56,7 +56,7 @@ function Update_Student() {
 			if (xhr.status == 200) {
 				if (xhr.responseText == "success") {
 					toastr.success("更新成功");
-					List_Student_By_PageAndSearch(1);
+					List_Student_By_PageAndSearch(student_json.pageIndex);
 				}
 			} else {
 				toastr.error(xhr.status);
