@@ -19,7 +19,11 @@ function exportStudentsGraduation() {
 						+ '<tbody>'
 						+ '<tr>'
 						+ '<th>姓名</th>'
-						+ '<th>专业</th>'
+						+ '<th>'
+						+ '<select class="form-control" id="select_major" data-live-search="true" style="width: auto;" onchange="List_Student_By_PageAndSearch(1)">'
+						+ '<option value="-1">专业名称</option>'
+						+ '</select>'
+						+ '</th>'
 						+ '<th>级别</th>'
 						+ '<th><label class="fancy-checkbox"><input id="checkbox_all_select" type="checkbox"onclick="all_select()"><span>全选</span></label></th>'
 						+ '</tr>' + '</tbody>' + '</table>',
