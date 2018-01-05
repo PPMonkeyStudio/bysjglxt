@@ -13,7 +13,7 @@ function Get_Student_Level(select) {
 					select.appendChild(option);
 					option.value = LevelList[num];
 				}
-				$('#' + select.id).selectpicker('refresh');
+				// $('#' + select.id).selectpicker('refresh');
 			} else {
 				toastr.error(xhr.status);
 			}

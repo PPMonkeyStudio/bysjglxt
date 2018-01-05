@@ -43,8 +43,6 @@ function Update_Student() {
 	document.getElementById("button_stop_update").style.display = "none";
 	document.getElementById("button_start_update").style.display = "block";
 
-	$("#modal_Student_Information").modal("hide");
-
 	/*
 	 * 
 	 */
@@ -56,7 +54,9 @@ function Update_Student() {
 			if (xhr.status == 200) {
 				if (xhr.responseText == "success") {
 					toastr.success("更新成功");
-					List_Student_By_PageAndSearch(1);
+					$("#modal_Student_Information").modal("hide");
+					List_Student_By_PageAndSearch(student_json.pageIndex);
+					Student_Information_Display(this_button);
 				}
 			} else {
 				toastr.error(xhr.status);
@@ -158,6 +158,9 @@ function Update_Student() {
 
 	formData.append("updateStudent.student_basic_college", document
 			.getElementById("info_student_basic_college").value);
+
+	formData.append("updateStudent.student_basic_level", document
+			.getElementById("info_student_basic_level").value);
 
 	xhr.send(formData);
 }

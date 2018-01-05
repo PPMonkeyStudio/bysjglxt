@@ -18,7 +18,7 @@ function Delete_Student() {
 									if (xhr.status == 200) {
 										if (xhr.responseText == "success") {
 											toastr.success("删除成功");
-											List_Student_By_PageAndSearch(1);
+											List_Student_By_PageAndSearch(student_json.pageIndex);
 										}
 									} else {
 										toastr.error(xhr.status);

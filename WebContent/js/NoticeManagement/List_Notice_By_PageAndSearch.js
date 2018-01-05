@@ -13,7 +13,7 @@ function List_Notice_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("通知:" + xhr.responseText);
+				// console.debug("通知:" + xhr.responseText);
 				notice_json = JSON.parse(xhr.responseText);
 				/*
 				 * 

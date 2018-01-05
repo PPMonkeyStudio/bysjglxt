@@ -11,28 +11,7 @@
 <head>
 <meta http-equiv="Content-Type"
 	content="text/html; charset=UTF-8">
-<!---------------------------------------------------------------------------------------------------->
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/List_Student_By_PageAndSearch.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Student_Information_Display.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/PreviewStudentEXCEL.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Delete_Student.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Level.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Update_Student.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Student_Give_Operate_Premission.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/Student_Take_Operate_Premission.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/StudentInformationManagement/assignmentStudentTopic.js"></script>
-<!---------------------------------------------------------------------------------------------------->
+
 <title>学生信息管理</title>
 </head>
 <body>
@@ -83,7 +62,7 @@
 							<th>姓名</th>
 							<th>
 								<select class="form-control" id="select_sex"
-									style="width: auto;"
+									style="width: auto;margin:0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="男">男</option>
@@ -92,21 +71,21 @@
 							</th>
 							<th>
 								<select class="form-control" id="select_major"
-									data-live-search="true" style="width: auto;"
+									data-live-search="true" style="width: auto;margin:0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">专业名称</option>
 								</select>
 							</th>
 							<th>
 								<select class="form-control" id="select_level"
-									data-live-search="true" style="width: auto;"
+									data-live-search="true" style="width: auto;margin:0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">级别</option>
 								</select>
 							</th>
 							<th>
 								<select class="form-control" id="select_premission"
-									style="width: auto;"
+									style="width: auto;margin:0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
 									<option value="1">活动</option>
@@ -115,7 +94,7 @@
 							</th>
 							<th>
 								<select class="form-control" id="select_is_select_topic"
-									style="width: auto;"
+									style="width: auto;margin:0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">选题状态</option>
 									<option value="1">已选题</option>
@@ -302,10 +281,32 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 </body>
+<!---------------------------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/List_Student_By_PageAndSearch.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Student_Information_Display.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/PreviewStudentEXCEL.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Delete_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Level.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Update_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Student_Give_Operate_Premission.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Student_Take_Operate_Premission.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/assignmentStudentTopic.js"></script>
+<!---------------------------------------------------------------------------------------------------->
 <script>
-	$('select').selectpicker('refresh');
+	//$('select').selectpicker('refresh');
 </script>
-<script>
+<script> 
 	var select_major = document.getElementById("select_major");
 	var select_level = document.getElementById("select_level");
 	Get_Student_Major(select_major);

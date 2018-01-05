@@ -50,7 +50,8 @@ function assignmentStudentTopic(button) {
 									if (xhr.status == 200) {
 										var topicCurrentProcessDTO = JSON
 												.parse(xhr.responseText);
-										if (topicCurrentProcessDTO == null) {
+										if (topicCurrentProcessDTO == null
+												|| topicCurrentProcessDTO.listTaskBelongProcess == null) {
 											toastr.error("管理员未开启选题的流程");
 											return;
 										} else {
@@ -74,7 +75,7 @@ function assignmentStudentTopic(button) {
 												var message;
 												if (xhr_2.readyState == 4) {
 													if (xhr_2.status == 200) {
-														List_Student_By_PageAndSearch(1);
+														List_Student_By_PageAndSearch(student_json.pageIndex);
 													} else {
 														toastr
 																.error(xhr_2.status);

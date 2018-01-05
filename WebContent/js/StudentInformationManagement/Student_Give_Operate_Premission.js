@@ -18,7 +18,7 @@ function Student_Give_Operate_Premission() {
 									if (xhr.status == 200) {
 										if (xhr.responseText == "success") {
 											toastr.success("已打开所选学生");
-											List_Student_By_PageAndSearch(1);
+											List_Student_By_PageAndSearch(student_json.pageIndex);
 										}
 									} else {
 										toastr.error(xhr.status);

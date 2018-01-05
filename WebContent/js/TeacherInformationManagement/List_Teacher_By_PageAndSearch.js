@@ -34,14 +34,11 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 
 					new_tr = document.createElement("tr");
 
-					new_tr.appendChild(document.createTextNode(''));
-
 					table_teacher.firstElementChild.appendChild(new_tr);
 
 					new_tr.className = "new_tr";
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
 						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.job_number;
@@ -50,7 +47,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
 						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name;
@@ -59,7 +55,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
 						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex;
@@ -68,7 +63,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtSection != undefined
 							&& teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name != "") {
@@ -78,7 +72,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					}
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined
 							&& teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title != "") {
@@ -88,7 +81,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					}
 					//
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance != "-1") {
 						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num
@@ -99,7 +91,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					}
 					//
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_recorder == 1) {
 						new_td.innerHTML = '✔';
@@ -109,7 +100,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					}
 					//
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
 						new_td.innerHTML = '✔';
@@ -120,7 +110,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 
 					//
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i style="cursor: pointer;" id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
@@ -128,8 +117,10 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 							+ '<i style="cursor: pointer;margin:0 0 0 10px;" id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
 							+ '" onclick="Teacher_Fix_User(this)" class="fa fa-wrench  "></i>';
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<label class="fancy-checkbox">'
 							+ '<input id="'

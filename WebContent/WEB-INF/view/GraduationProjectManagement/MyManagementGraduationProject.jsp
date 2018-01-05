@@ -168,5 +168,9 @@
 	src="<%=basePath%>js/GraduationProjectManagement/Start_GraduationProject_All.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/exportGraduation.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Level.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 </html>

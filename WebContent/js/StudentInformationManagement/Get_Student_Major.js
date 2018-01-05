@@ -14,7 +14,7 @@ function Get_Student_Major(select) {
 					option.value = MajorList[num];
 				}
 
-				$('#' + select.id).selectpicker('refresh');
+				// $('#' + select.id).selectpicker('refresh');
 
 			} else {
 				toastr.error(xhr.status);

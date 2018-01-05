@@ -13,7 +13,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("我管理的毕业设计：" + xhr.responseText);
+				// console.debug("我管理的毕业设计：" + xhr.responseText);
 				myManagementGraduationProject_json = JSON
 						.parse(xhr.responseText);
 				/*
