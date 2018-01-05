@@ -10,6 +10,7 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
 public interface StudentInformationManagementDao {
@@ -90,5 +91,7 @@ public interface StudentInformationManagementDao {
 	List<String> listStudent_Level();
 
 	List<bysjglxt_student_user> getListStudentByNotClose();
+
+	List<bysjglxt_student_user> getListStudentByExport(ExportGeaduationStudentDTO exportGeaduationStudentDTO);
 
 }

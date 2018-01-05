@@ -4,21 +4,26 @@ import java.io.File;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
+import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
 public interface StudentInformationManagementService {
 
-	
+	/**
+	 * 可以导出毕业设计过程管理手册的学生信息
+	 * 
+	 * @param exportGeaduationStudentDTO
+	 *            这个参数主要为了完成对信息的筛选条件
+	 * @return
+	 */
+	public ExportGeaduationStudentDTO listStudentGreauation(ExportGeaduationStudentDTO exportGeaduationStudentDTO);
+
 	public List<StudentInformationDTO> listStudentNoClose();
-	
-	
-	
+
 	/**
 	 * @说明 学生信息的Excel文件流转化为bysjglxt_student_basic的List
-	 *
 	 * @param StudentExcel
-	 * 
 	 * @return List<bysjglxt_student_basic>
 	 * @throws Exception
 	 */
@@ -28,7 +33,6 @@ public interface StudentInformationManagementService {
 	/**
 	 * @说明 将学生基础信息List生成bysjglxt_student_basic以及基于此生成的bysjglxt_user_student，
 	 *     存储到数据库中
-	 * 
 	 * @param studentBasicList
 	 *            学生基础信息List
 	 * @return 是否存储成功,1是 0否
@@ -37,14 +41,12 @@ public interface StudentInformationManagementService {
 
 	/**
 	 * @说明 获取数据库中所有的bysjglxt_student_basic记录以及bysjglxt_user_student记录，
-	 * 
 	 * @return StudentInformationDTO的List
 	 */
 	public List<StudentInformationDTO> list_StudentInformationDTO_All();
 
 	/**
 	 * @说明 通过领导小组组长手动添加的学生记录，生成用户表及基础信息表，一并存入数据库中
-	 * 
 	 * @param student_basic
 	 *            手动输入的学生基础信息
 	 * @return 是否存储成功,1是 0否
@@ -53,7 +55,6 @@ public interface StudentInformationManagementService {
 
 	/**
 	 * @说明 通过多选删除选中的学生用户表以及基础信息表，
-	 * 
 	 * @param useStudentNumList
 	 *            由要删除的学生学号组成的列表
 	 * @return 是否删除成功,1是 0否
