@@ -37,7 +37,6 @@ public class ExcelToBean2 {
 	 */
 	public static <T> List<Map<String, Object>> parseUpdateExcel(Workbook workbook, String user) {
 		userPropertiesBundle = ResourceBundle.getBundle(user);
-
 		List<Map<String, Object>> result = new LinkedList<Map<String, Object>>();
 		XSSFRow row_0 = (XSSFRow) workbook.getSheetAt(0).getRow(0);
 		int excleRowLength = row_0.getPhysicalNumberOfCells();
@@ -46,8 +45,7 @@ public class ExcelToBean2 {
 			for (int i = 0; i < columnName.length; i++) { // 从资源文件中获取
 				// 获取第0行i列的数据
 				String str = row_0.getCell(i).getStringCellValue().trim();
-				// 编码转换
-				str = new String(str.getBytes("utf-8"), "ISO-8859-1").trim();
+				str = new String(str.getBytes("UTF-8"), "ISO-8859-1").trim();
 				if (userPropertiesBundle.containsKey(str)) {
 					columnName[i] = userPropertiesBundle.getString(str);
 				}
@@ -62,7 +60,7 @@ public class ExcelToBean2 {
 			for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
 				XSSFRow row = sheet.getRow(rowIndex);
 				Map<String, Object> map = new HashMap<String, Object>();
-				for (int cellIndex = 0; cellIndex < row.getPhysicalNumberOfCells(); cellIndex++) {
+				for (int cellIndex = 0; cellIndex < row.getLastCellNum(); cellIndex++) {
 					// cell
 					XSSFCell cell = row.getCell(cellIndex);
 					if (columnName[cellIndex] != null && columnName[cellIndex].trim().length() > 0) { // 该列值在对应的java对象中有值
@@ -111,7 +109,7 @@ public class ExcelToBean2 {
 			for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
 				HSSFRow row = sheet.getRow(rowIndex);
 				Map<String, Object> map = new HashMap<String, Object>();
-				for (int cellIndex = 0; cellIndex < row.getPhysicalNumberOfCells(); cellIndex++) {
+				for (int cellIndex = 0; cellIndex < row.getLastCellNum(); cellIndex++) {
 					// cell
 					HSSFCell cell = row.getCell(cellIndex);
 					if (columnName[cellIndex] != null && columnName[cellIndex].trim().length() > 0) { // 该列值在对应的java对象中有值

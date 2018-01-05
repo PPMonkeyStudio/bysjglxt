@@ -89,6 +89,7 @@ public class StudentInformationManagementAction extends ActionSupport
 		return "CreateStudentPage";
 	}
 
+	// 遍历可导出毕业设计过程管理手册学生
 	public void listStudentGreauation() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -103,6 +104,7 @@ public class StudentInformationManagementAction extends ActionSupport
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * @说明 获取所有学生信息，通过ajax返回
 	 * 
