@@ -2,6 +2,8 @@ package bysjglxt;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -141,9 +143,12 @@ public class testGraduation {
 
 	// 测试到处毕业设计书
 	@Test
-	public void testAll() {
+	public void testA() {
+		List<String> l = new ArrayList<>();
+		l.add("353265b4-dabe-40c3-a193-05591a4db318");
+		l.add("f3ac7ce1-50e5-43c9-b6f0-1a918e7577cc");
 		try {
-			graduationProjectManagementService.exportAll("860f9cbb-1557-4702-96eb-eaa4e310e88c");
+			graduationProjectManagementService.exportAll(l);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

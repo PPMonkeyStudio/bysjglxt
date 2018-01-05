@@ -38,7 +38,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		List<String> listStudentSelect = new ArrayList<>();
 		String hql = "SELECT selectTopic.topic_select_student FROM bysjglxt_topic_select selectTopic, bysjglxt_student_user studentUser WHERE selectTopic.topic_select_student = studentUser.user_student_id AND studentUser.user_student_is_operate_premission=1";
 		hql = hql
-				+ " AND selectTopic.topic_select_student NOT IN (SELECT processInstance.process_instance_man FROM bysjglxt_process_instance processInstance WHERE processInstance.process_instance_state = '活动' AND processInstance.process_instance_process_definition = '"
+				+ " AND selectTopic.topic_select_student NOT IN (SELECT processInstance.process_instance_man FROM bysjglxt_process_instance processInstance WHERE processInstance.process_instance_state = '活动' OR processInstance.process_instance_state = '结束' AND processInstance.process_instance_process_definition = '"
 				+ process_definition_id + "')";
 		Session session = getSession();
 		Query query = session.createQuery(hql);

@@ -11,6 +11,7 @@ import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
@@ -121,6 +122,8 @@ public interface GraduationProjectManagementDao {
 	public int fillEmptyInDissertation(bysjglxt_dissertation bysjglxt_dissertation);
 
 	public com.bysjglxt.domain.DO.bysjglxt_dissertation getThesisByStudentId(String userId);
+
+	public bysjglxt_student_basic getStudentBasicByUserId(String userId);
 
 
 }

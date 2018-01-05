@@ -1,24 +1,22 @@
 package util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.junit.Test;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class TeamUtil {
 
 	static SimpleDateFormat formatter;
 
-	
-	//匹配正则表达式
-	
-	
-	
-	
 	// 添加数字中文化的方法
 	public static String format(String text) {
 		for (int i = 0; i < 10; i++) {
@@ -173,5 +171,27 @@ public class TeamUtil {
 		Pattern pattern = Pattern.compile("[0-9]{1,}");
 		Matcher matcher = pattern.matcher((CharSequence) strNum);
 		return matcher.matches();
+	}
+
+	// 压缩多个文件成一个zip文件
+	public static void zipFiles(List<File> srcfile, File zipfile) {
+		byte[] buf = new byte[1024];
+		try {
+			// ZipOutputStream类：完成文件或文件夹的压缩
+			ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipfile));
+			for (File f : srcfile) {
+				FileInputStream in = new FileInputStream(f);
+				out.putNextEntry(new ZipEntry(f.getName()));
+				int len;
+				while ((len = in.read(buf)) > 0) {
+					out.write(buf, 0, len);
+				}
+				out.closeEntry();
+				in.close();
+			}
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

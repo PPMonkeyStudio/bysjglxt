@@ -1236,7 +1236,30 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	}
 
 	@Override
-	public File exportAll(String userId) throws Exception {
+	public File exportAll(List<String> userListId) throws Exception {
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			System.out.println("获取初始路径失败");
+			e.printStackTrace();
+		}
+		List<File> fileList = new ArrayList<File>();
+		for (String usrId : userListId) {
+			fileList.add(exportOneStudent(usrId));
+		}
+		File zipFile = new File("E:\\毕业设计过程管理手册.zip");
+		TeamUtil.zipFiles(fileList, zipFile);
+		for (String usrId : userListId) {
+			exportOneStudent(usrId).delete();
+		}
+		return zipFile;
+	}
+
+	// 导出单个人
+	public File exportOneStudent(String userId) throws Exception {
 		/*
 		 * 获取路径
 		 */
@@ -1277,22 +1300,28 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		XwpfTUtil xwpfTUtil = new XwpfTUtil();
 		XWPFDocument doc;
 		String fileNameInResource = ServletActionContext.getServletContext().getRealPath("/DocTmp/ttt.docx");
+		// String fileNamefInResource = "F:\\ttt.docx";
 		InputStream is;
 		is = new FileInputStream(fileNameInResource);
+		// is = new FileInputStream(fileNamefInResource);
 		doc = new XWPFDocument(is);
 		xwpfTUtil.replaceInPara(doc, params);
 		xwpfTUtil.replaceInTable(doc, params);
-		File ff = new File(lj + "kokokoko.docx");
+		// 根据user Id获取学生信息
+		bysjglxt_student_basic studentBasic = new bysjglxt_student_basic();
+		studentBasic = graduationProjectManagementDao.getStudentBasicByUserId(userId);
+		File ff = new File(lj + studentBasic.getStudent_basic_name() + "的毕业设计的过程管理手册.docx");
 		if (!ff.exists()) {
 			ff.createNewFile();
 		}
-		OutputStream os = new FileOutputStream(lj + "kokokoko.docx");
+		OutputStream os = new FileOutputStream(lj + studentBasic.getStudent_basic_name() + "的毕业设计的过程管理手册.docx");
 		doc.write(os);
 		xwpfTUtil.close(os);
 		xwpfTUtil.close(is);
 		os.flush();
 		os.close();
-		return new File(lj + "kokokoko.docx");
+		return new File(lj + studentBasic.getStudent_basic_name() + "的毕业设计的过程管理手册.docx");
+
 	}
 
 	// 导出封面
