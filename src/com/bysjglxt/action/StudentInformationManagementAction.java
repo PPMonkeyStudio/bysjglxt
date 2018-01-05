@@ -11,6 +11,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
+import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 import com.bysjglxt.service.StudentInformationManagementService;
 import com.google.gson.Gson;
@@ -44,6 +45,8 @@ public class StudentInformationManagementAction extends ActionSupport
 	private List<bysjglxt_student_basic> Save_Student_EXCEL_List;
 
 	private StudentInformationManagementVO studentInformationManagementVO;
+
+	private ExportGeaduationStudentDTO exportGeaduationStudentDTO;
 
 	/*
 	 * 删除所选学生列表
@@ -86,6 +89,20 @@ public class StudentInformationManagementAction extends ActionSupport
 		return "CreateStudentPage";
 	}
 
+	public void listStudentGreauation() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		exportGeaduationStudentDTO = studentInformationManagementService
+				.listStudentGreauation(exportGeaduationStudentDTO);
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			http_response.getWriter().write(gson.toJson(exportGeaduationStudentDTO));
+		} catch (IOException e) {
+			System.out.println("遍历可导出毕业设计过程管理手册学生出错");
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * @说明 获取所有学生信息，通过ajax返回
 	 * 
@@ -349,6 +366,14 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	public void setListTakeOperatePremissionStudentID(List<String> listTakeOperatePremissionStudentID) {
 		ListTakeOperatePremissionStudentID = listTakeOperatePremissionStudentID;
+	}
+
+	public ExportGeaduationStudentDTO getExportGeaduationStudentDTO() {
+		return exportGeaduationStudentDTO;
+	}
+
+	public void setExportGeaduationStudentDTO(ExportGeaduationStudentDTO exportGeaduationStudentDTO) {
+		this.exportGeaduationStudentDTO = exportGeaduationStudentDTO;
 	}
 
 }

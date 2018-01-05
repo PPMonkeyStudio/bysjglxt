@@ -1250,7 +1250,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		for (String usrId : userListId) {
 			fileList.add(exportOneStudent(usrId));
 		}
-		File zipFile = new File("E:\\毕业设计过程管理手册.zip");
+		File zipFile = new File(lj + "毕业设计过程管理手册.zip");
 		TeamUtil.zipFiles(fileList, zipFile);
 		for (String usrId : userListId) {
 			exportOneStudent(usrId).delete();
@@ -1310,17 +1310,19 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		// 根据user Id获取学生信息
 		bysjglxt_student_basic studentBasic = new bysjglxt_student_basic();
 		studentBasic = graduationProjectManagementDao.getStudentBasicByUserId(userId);
-		File ff = new File(lj + studentBasic.getStudent_basic_name() + "的毕业设计的过程管理手册.docx");
+		String pa = lj + "毕业设计过程管理手册——" + studentBasic.getStudent_basic_num() + studentBasic.getStudent_basic_name()
+				+ ".docx";
+		File ff = new File(pa);
 		if (!ff.exists()) {
 			ff.createNewFile();
 		}
-		OutputStream os = new FileOutputStream(lj + studentBasic.getStudent_basic_name() + "的毕业设计的过程管理手册.docx");
+		OutputStream os = new FileOutputStream(pa);
 		doc.write(os);
 		xwpfTUtil.close(os);
 		xwpfTUtil.close(is);
 		os.flush();
 		os.close();
-		return new File(lj + studentBasic.getStudent_basic_name() + "的毕业设计的过程管理手册.docx");
+		return new File(pa);
 
 	}
 

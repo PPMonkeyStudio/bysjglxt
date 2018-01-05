@@ -20,6 +20,7 @@ import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
 import util.TeamUtil;
@@ -611,7 +612,25 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		String hql = "from bysjglxt_student_user where user_student_is_operate_premission ='1'";
 		Query query = session.createQuery(hql);
 		listStudentByNotClose = query.list();
+		session.clear();
 		return listStudentByNotClose;
+	}
+
+	@Override
+	public List<bysjglxt_student_user> getListStudentByExport(ExportGeaduationStudentDTO exportGeaduationStudentDTO) {
+		List<bysjglxt_student_user> listUser = new ArrayList<>();
+		Session session = getSession();
+		String hql = "select usr from bysjglxt_student_basic basic, bysjglxt_process_definition definition, bysjglxt_student_user usr,bysjglxt_process_instance instance where basic.student_basic_id=usr.user_student_basic and instance.process_instance_process_definition=definition.process_definition_id and instance.process_instance_man=usr.user_student_id and definition.process_definition_name='毕业设计流程'";
+		if (exportGeaduationStudentDTO.getMajor() != null && !("-1".equals(exportGeaduationStudentDTO.getMajor()))) {
+			hql = hql + " and basic.student_basic_major='" + exportGeaduationStudentDTO.getMajor().trim() + "'";
+		}
+		if (exportGeaduationStudentDTO.getLevel() != null && !("-1".equals(exportGeaduationStudentDTO.getLevel()))) {
+			hql = hql + " and basic.student_basic_level='" + exportGeaduationStudentDTO.getLevel().trim() + "'";
+		}
+		Query query = session.createQuery(hql);
+		listUser = query.list();
+		session.clear();
+		return listUser;
 	}
 
 }

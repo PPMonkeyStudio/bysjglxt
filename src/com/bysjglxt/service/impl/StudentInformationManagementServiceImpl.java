@@ -21,6 +21,7 @@ import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 import com.bysjglxt.service.StudentInformationManagementService;
@@ -367,6 +368,30 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			listStudentNoClose.add(studentInformationDTO);
 		}
 		return listStudentNoClose;
+	}
+
+	// 导出可以导出毕业设计过程管理手册
+	@Override
+	public ExportGeaduationStudentDTO listStudentGreauation(ExportGeaduationStudentDTO exportGeaduationStudentDTO) {
+		List<bysjglxt_student_user> listStudentUser = new ArrayList<>();
+		List<StudentInformationDTO> listStudentInformationDTO = new ArrayList<>();
+		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
+		bysjglxt_student_basic studentBasic = new bysjglxt_student_basic();
+		// 获取可以进行导出的学生信息
+		listStudentUser = studentInformationManagementDao.getListStudentByExport(exportGeaduationStudentDTO);
+		// 遍历学生user信息拿到学生basic表的信息
+		for (bysjglxt_student_user bysjglxt_student_user : listStudentUser) {
+			// 学生basic信息
+			studentInformationDTO = new StudentInformationDTO();
+			studentBasic = new bysjglxt_student_basic();
+			studentBasic = studentInformationManagementDao
+					.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_user.getUser_student_basic());
+			studentInformationDTO.setBysjglxtStudentUser(bysjglxt_student_user);
+			studentInformationDTO.setBysjglxtStudentBasic(studentBasic);
+			listStudentInformationDTO.add(studentInformationDTO);
+		}
+		exportGeaduationStudentDTO.setListStudentInformationDTO(listStudentInformationDTO);
+		return exportGeaduationStudentDTO;
 	}
 
 }
