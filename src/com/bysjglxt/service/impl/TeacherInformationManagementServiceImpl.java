@@ -17,7 +17,7 @@ import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 import com.bysjglxt.service.TeacherInformationManagementService;
 
-import util.ExcelToBean;
+import util.ExcelToBean2;
 import util.TeamUtil;
 import util.md5;
 
@@ -41,12 +41,12 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		List<Map<String, Object>> list = null;
 		if ("xlsx".equals(houzhui)) {
 			XSSFWorkbook workbook = new XSSFWorkbook(input);
-			list = ExcelToBean.parseUpdateExcel(workbook, "bysjglxt_teacher_basic");
+			list = ExcelToBean2.parseUpdateExcel(workbook, "bysjglxt_teacher_basic");
 		} else {
 			HSSFWorkbook workbook = new HSSFWorkbook(input);
-			list = ExcelToBean.parseExcel(workbook, "bysjglxt_teacher_basic");
+			list = ExcelToBean2.parseExcel(workbook, "bysjglxt_teacher_basic");
 		}
-		List<bysjglxt_teacher_basic> lists = ExcelToBean.toObjectPerproList(list, bysjglxt_teacher_basic.class);
+		List<bysjglxt_teacher_basic> lists = ExcelToBean2.toObjectPerproList(list, bysjglxt_teacher_basic.class);
 		return lists;
 	}
 

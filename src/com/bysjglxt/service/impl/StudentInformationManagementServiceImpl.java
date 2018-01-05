@@ -25,7 +25,7 @@ import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 import com.bysjglxt.service.StudentInformationManagementService;
 
-import util.ExcelToBean;
+import util.ExcelToBean2;
 import util.TeamUtil;
 import util.md5;
 
@@ -46,12 +46,12 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		List<Map<String, Object>> list = null;
 		if ("xlsx".equals(houzhui)) {
 			XSSFWorkbook workbook = new XSSFWorkbook(input);
-			list = ExcelToBean.parseUpdateExcel(workbook, "bysjglxt_student_basic");
+			list = ExcelToBean2.parseUpdateExcel(workbook, "bysjglxt_student_basic");
 		} else {
 			HSSFWorkbook workbook = new HSSFWorkbook(input);
-			list = ExcelToBean.parseExcel(workbook, "bysjglxt_student_basic");
+			list = ExcelToBean2.parseExcel(workbook, "bysjglxt_student_basic");
 		}
-		List<bysjglxt_student_basic> lists = ExcelToBean.toObjectPerproList(list, bysjglxt_student_basic.class);
+		List<bysjglxt_student_basic> lists = ExcelToBean2.toObjectPerproList(list, bysjglxt_student_basic.class);
 		return lists;
 	}
 
