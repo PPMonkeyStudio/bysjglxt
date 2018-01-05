@@ -1,17 +1,13 @@
 package com.bysjglxt.action;
 
-import java.io.BufferedOutputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -83,18 +79,20 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 */
 	private String DissertationUserID;
 	private List<String> listStringUse;
+	private String StringUse;
 
 	/*
 	 * 
 	 */
 	public String MyGraduationProjectPage() {
-		System.out.println("MyTutorGraduationProjectStudentID:" + MyTutorGraduationProjectStudentID);
-		if (MyTutorGraduationProjectStudentID != null) {
-			ActionContext.getContext().getSession().put("MyTutorGraduationProjectStudentID",
-					MyTutorGraduationProjectStudentID);
-		} else {
-			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
-		}
+		// System.out.println("MyTutorGraduationProjectStudentID:" +
+		// MyTutorGraduationProjectStudentID);
+		// if (MyTutorGraduationProjectStudentID != null) {
+		// ActionContext.getContext().getSession().put("MyTutorGraduationProjectStudentID",
+		// MyTutorGraduationProjectStudentID);
+		// } else {
+		// ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
+		// }
 		return "MyGraduationProjectPage";
 	}
 
@@ -317,17 +315,21 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	}
 
-	// 导出我的以及批量导出应该是调用同一个方法
+	/**
+	 * 导出我的以及批量导出应该是调用同一个方法
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
 	public String exportAll() throws Exception {
-		// 这个应该是前端直接给的
+		//
 		// listStringUse.add(((StudentInformationDTO)
 		// ActionContext.getContext().getSession().get("userStudentDTO"))
 		// .getBysjglxtStudentUser().getUser_student_id());
-		listStringUse = new ArrayList<String>();
-		listStringUse.add("353265b4-dabe-40c3-a193-05591a4db318");
-		listStringUse.add("f3ac7ce1-50e5-43c9-b6f0-1a918e7577cc");
 		//
-		//
+		String[] StringUse_sz = StringUse.split(",");
+		listStringUse = Arrays.asList(StringUse_sz);
+		System.out.println("listStringUse:" + listStringUse);
 		//
 		File exportFile = graduationProjectManagementService.exportAll(listStringUse);
 		fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
@@ -454,7 +456,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void updateStudentSummary() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		System.out.println("ffff");
 		if (graduationProjectManagementService.updateStudentSummary(updateSummary) == 1) {
 			http_response.getWriter().write("保存成功");
 		} else {
@@ -792,6 +793,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setListStringUse(List<String> listStringUse) {
 		this.listStringUse = listStringUse;
+	}
+
+	public String getStringUse() {
+		return StringUse;
+	}
+
+	public void setStringUse(String stringUse) {
+		StringUse = stringUse;
 	}
 
 }
