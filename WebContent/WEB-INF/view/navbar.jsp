@@ -102,7 +102,8 @@
 								class="">课题列表</a>
 						</li>
 						<li>
-							<a href="<%=basePath%>topic/TopicInformationManagement_MyTopicListPage">我的课题</a>
+							<a
+								href="<%=basePath%>topic/TopicInformationManagement_MyTopicListPage">我的课题</a>
 						</li>
 					</ul>
 				</li>
@@ -141,10 +142,10 @@
 							<a
 								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyGraduationProjectPage">我的毕业设计</a>
 						</li>
-<!-- 						<li class="student_control"> -->
-<!-- 							<a -->
-<%-- 								href="<%=basePath%>graduationProject/GraduationProjectManagement_exportAll">导出我的毕业设计</a> --%>
-<!-- 						</li> -->
+						<!-- 						<li class="student_control"> -->
+						<!-- 							<a -->
+						<%-- 								href="<%=basePath%>graduationProject/GraduationProjectManagement_exportAll">导出我的毕业设计</a> --%>
+						<!-- 						</li> -->
 					</ul>
 				</li>
 				<!--  -->
@@ -204,7 +205,9 @@
 		</nav>
 </body>
 <script type="text/javascript">
-	getUserSessionForAjax();
+	window.onload = function() {
+		getUserSessionForAjax();
+	}
 </script>
 <style>
 th {
@@ -219,9 +222,11 @@ td {
 td i {
 	line-height: 33px !important;
 }
+
 table select {
 	text-align: center !important;
 }
+
 td button i {
 	line-height: 20px !important;
 }

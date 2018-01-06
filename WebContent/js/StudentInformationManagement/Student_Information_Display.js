@@ -59,8 +59,8 @@
 			new_tr_1 = document.createElement("tr");
 			new_tr_1.appendChild(document.createTextNode(''));
 			table_student_detail.firstElementChild.appendChild(new_tr_1)
-			new_tr_1.innerHTML = '<th>年龄</th><td><input id="info_student_basic_age" style="text-align: center;" class="input_StudentInformation form-control" disabled="disabled" value="'
-					+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_age
+			new_tr_1.innerHTML = '<th>级别</th><td><input id="info_student_basic_level" style="text-align: center;" class="input_StudentInformation form-control" disabled="disabled" value="'
+					+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_level
 					+ '"></input></td><th>性别</th><td><input id="info_student_basic_sex" style="text-align: center;" class="input_StudentInformation form-control" disabled="disabled" value="'
 					+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_sex
 					+ '"></input></td>';
@@ -166,18 +166,8 @@
 			/*
 			 * 
 			 */
-			new_tr_1 = document.createElement("tr");
-			new_tr_1.appendChild(document.createTextNode(''));
-			table_student_detail.firstElementChild.appendChild(new_tr_1)
-			new_tr_1.innerHTML = '<th>级别</th><td><input id="info_student_basic_level" style="text-align: center;" class="input_StudentInformation form-control" disabled="disabled" value="'
-					+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_level
-					+ '"></input></td><th></th><td></td>';
 		}
 
 	}
-
-	/*
-	 * 
-	 */
 
 }
