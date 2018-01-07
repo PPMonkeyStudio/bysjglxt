@@ -63,7 +63,9 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		boolean flag = false;
 		bysjglxt_student_user bysjglxt_student_user = null;
 		bysjglxt_major bysjglxt_major = null;
+		System.out.println("userId" + userId);
 		String college = getCollegeByUserId(userId);
+		System.out.println("college:" + college);
 		for (bysjglxt_student_basic bysjglxt_student_basic : studentBasicList) {
 			bysjglxt_student_user = new bysjglxt_student_user();
 			/**
@@ -104,6 +106,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			bysjglxt_student_user.setUser_student_belong_college(college);
 			bysjglxt_student_user.setUser_student_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_student_user.setUser_student_gmt_modified(bysjglxt_student_user.getUser_student_gmt_create());
+			System.out.println("------cunchu");
 			flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
 			if (!flag)
 				break;
@@ -425,8 +428,8 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	public String getCollegeByUserId(String userId) {
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		bysjglxt_teacher_user = studentInformationManagementDao.getTeacherUserById(userId);
-		if (bysjglxt_teacher_user.getUser_teacher_belong_college() == null
-				|| bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() == 0) {
+		if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
+				&& bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >= 0) {
 			return bysjglxt_teacher_user.getUser_teacher_belong_college().trim();
 		}
 		return null;
