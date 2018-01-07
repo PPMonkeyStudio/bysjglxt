@@ -15,7 +15,7 @@ function Teacher_Take_Leader() {
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
 										toastr.success("已关闭所选教师的答辩小组组长权限");
-										List_Teacher_By_PageAndSearch(1);
+										List_Teacher_By_PageAndSearch(teacher_json.pageIndex);
 									} else {
 										toastr.error(xhr.status);
 									}

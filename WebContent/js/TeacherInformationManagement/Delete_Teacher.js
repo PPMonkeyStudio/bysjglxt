@@ -17,7 +17,7 @@ function Delete_Teacher() {
 									if (xhr.status == 200) {
 										if (xhr.responseText == "success") {
 											toastr.success("删除成功");
-											List_Teacher_By_PageAndSearch(1);
+											List_Teacher_By_PageAndSearch(teacher_json.pageIndex);
 										}
 									} else {
 										toastr.error(xhr.status);

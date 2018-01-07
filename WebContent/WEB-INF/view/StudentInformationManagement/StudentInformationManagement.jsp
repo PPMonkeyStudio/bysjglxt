@@ -68,13 +68,13 @@
 									<option value="男">男</option>
 									<option value="女">女</option>
 								</select>
-							</th>
+							</th> 
 							<th>
 								<select class="form-control" id="select_major"
 									data-live-search="true"
 									style="width: auto; margin: 0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">专业名称</option>
+									<option value="-1">专业（全部）</option>
 								</select>
 							</th>
 							<th>
@@ -82,14 +82,14 @@
 									data-live-search="true"
 									style="width: auto; margin: 0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">级别</option>
+									<option value="-1">级别（全部）</option>
 								</select>
 							</th>
 							<th>
 								<select class="form-control" id="select_premission"
 									style="width: auto; margin: 0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">状态</option>
+									<option value="-1">状态（全部）</option>
 									<option value="1">活动</option>
 									<option value="0">已关闭</option>
 								</select>
@@ -98,7 +98,7 @@
 								<select class="form-control" id="select_is_select_topic"
 									style="width: auto; margin: 0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
-									<option value="-1">选题状态</option>
+									<option value="-1">选题状态（全部）</option>
 									<option value="1">已选题</option>
 									<option value="2">未选题</option>
 								</select>

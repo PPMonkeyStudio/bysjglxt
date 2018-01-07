@@ -118,7 +118,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 								+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
 								+ '<li><a id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-								+ '" onclick="Student_Information_Display(this)" >详细</a></li>'
+								+ '" onclick="Student_Information_Display(this)" >详细基础信息</a></li>'
 								+ '<li><a id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
 								+ '" onclick="assignmentStudentTopic(this)">分配选题</a></li>'
@@ -129,7 +129,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 								+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
 								+ '<li><a id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-								+ '" onclick="Student_Information_Display(this)" >详细</a></li>'
+								+ '" onclick="Student_Information_Display(this)" >详细基础信息</a></li>'
 								+ '</div>';
 					}
 

@@ -38,6 +38,9 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 
 					new_tr.className = "new_tr";
 
+					/*
+					 * 工号
+					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
@@ -45,7 +48,9 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					} else {
 						new_td.innerHTML = '无';
 					}
-
+					/*
+					 * 姓名
+					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
@@ -53,7 +58,9 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					} else {
 						new_td.innerHTML = '无';
 					}
-
+					/*
+					 * 性别
+					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
@@ -61,7 +68,9 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					} else {
 						new_td.innerHTML = '无';
 					}
-
+					/*
+					 * 教研室
+					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtSection != undefined
@@ -70,16 +79,25 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					} else {
 						new_td.innerHTML = '无';
 					}
-
-					new_td = document.createElement("td");
-					new_tr.appendChild(new_td);
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined
-							&& teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title != "") {
-						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title;
-					} else {
-						new_td.innerHTML = '无';
-					}
-					//
+					/*
+					 * 职称
+					 */
+					// new_td = document.createElement("td");
+					// new_tr.appendChild(new_td);
+					// if
+					// (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic
+					// != undefined
+					// &&
+					// teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title
+					// != "") {
+					// new_td.innerHTML =
+					// teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title;
+					// } else {
+					// new_td.innerHTML = '无';
+					// }
+					/*
+					 * 指导学生数
+					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance != "-1") {
@@ -87,38 +105,58 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 								+ '/'
 								+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance;
 					} else {
-						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num;
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num
+								+ '/∞';
 					}
-					//
+					/*
+					 * 记录员
+					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_recorder == 1) {
 						new_td.innerHTML = '✔';
 					} else {
-						new_td.innerHTML = '✘';
-						new_td.style.color = "#ff5063";
+						new_td.innerHTML = '';
+						// new_td.style.color = "#ff5063";
 					}
-					//
+					/*
+					 * 答辩小组组长
+					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
 						new_td.innerHTML = '✔';
 					} else {
-						new_td.innerHTML = '✘';
-						new_td.style.color = "#ff5063";
+						new_td.innerHTML = '';
+						// new_td.style.color = "#ff5063";
 					}
-
-					//
+					/*
+					 * 操作
+					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<i style="cursor: pointer;" id="'
+					// new_td.innerHTML = '<i style="cursor: pointer;" id="'
+					// +
+					// teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
+					// + '" onclick="Teacher_Information_Display(this)"
+					// class="fa fa-edit "></i>'
+					// + '<i style="cursor: pointer;margin:0 0 0 10px;" id="'
+					// +
+					// teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
+					// + '" onclick="Teacher_Fix_User(this)" class="fa fa-wrench
+					// "></i>';
+					new_td.innerHTML = '<div class="dropdown" >'
+							+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
+							+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
+							+ '<li><a id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
-							+ '" onclick="Teacher_Information_Display(this)" class="fa fa-edit  "></i>'
-							+ '<i style="cursor: pointer;margin:0 0 0 10px;" id="'
+							+ '" onclick="Teacher_Information_Display(this)" >详细基础信息</a></li>'
+							+ '<li><a id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
-							+ '" onclick="Teacher_Fix_User(this)" class="fa fa-wrench  "></i>';
+							+ '" onclick="Teacher_Fix_User(this)">其他信息</a></li>'
+							+ '</div>';
 					/*
-					 * 
+					 * 选择
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
@@ -191,10 +229,10 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 	/*
 	 * 职称
 	 */
-	if (document.getElementById("select_title").value != "-1") {
-		formData.append("teacherInformationManagementVO.professional_title",
-				document.getElementById("select_title").value);
-	}
+	// if (document.getElementById("select_title").value != "-1") {
+	// formData.append("teacherInformationManagementVO.professional_title",
+	// document.getElementById("select_title").value);
+	// }
 	/*
 	 * 记录员
 	 */
