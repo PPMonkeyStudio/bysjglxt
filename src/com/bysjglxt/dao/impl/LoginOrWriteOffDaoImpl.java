@@ -39,11 +39,14 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 
 	@Override
 	public bysjglxt_teacher_user getBysjglxtTeacherUserByNum(String username) {
+		System.out.println("gggg");
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		Session session = getSession();
 		String hql = "from bysjglxt_teacher_user where user_teacher_num='" + username + "'";
-		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		System.out.println("ggggg" + hql);
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		System.out.println("gggggg");
 		session.clear();
 		return bysjglxt_teacher_user;
 	}

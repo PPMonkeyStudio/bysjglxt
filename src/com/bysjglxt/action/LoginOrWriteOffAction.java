@@ -35,6 +35,7 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 	 * 登录
 	 */
 	public void login() throws IOException {
+		System.out.println("g");
 		http_response.setContentType("text/html;charset=utf-8");
 		switch (loginOrWriteOffService.login(username, password)) {
 		//
@@ -58,6 +59,7 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 					username);
 			ActionContext.getContext().getSession().put("userTeacherDTO", userTeacherDTO);
 			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
+			System.out.println("ggg");
 			http_response.getWriter().write("教师登录成功");
 			break;
 		}
