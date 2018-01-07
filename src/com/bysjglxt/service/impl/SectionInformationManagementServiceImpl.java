@@ -22,9 +22,22 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 		this.sectionInformationManagementDao = sectionInformationManagementDao;
 	}
 
+	// 根据使用者Id获取学院
+	public String getCollegeByUserId(String userId) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user = sectionInformationManagementDao.getBysjglxtTeacherUserById(userId);
+		if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
+				&& bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >= 0) {
+			return bysjglxt_teacher_user.getUser_teacher_belong_college().trim();
+		}
+		return null;
+	}
+
 	@Override
 	public SectionInformationManagementVO VO_Section_By_Page(
-			SectionInformationManagementVO sectionInformationManagementVO) {
+			SectionInformationManagementVO sectionInformationManagementVO, String userId) {
+		// 获取学院
+		String college = getCollegeByUserId(userId);
 		List<TeacherInformationDTO> listTeacherInformationDTO = new ArrayList<TeacherInformationDTO>();
 		List<bysjglxt_section> listBysjglxtSection = new ArrayList<bysjglxt_section>();
 		TeacherInformationDTO teacherInformationDTO = null;
@@ -46,7 +59,8 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 			sectionInformationManagementVO.setHaveNextPage(true);
 		}
 		// 据分页得到教研室信息
-		listBysjglxtSection = sectionInformationManagementDao.getListSectionByPage(sectionInformationManagementVO);
+		listBysjglxtSection = sectionInformationManagementDao.getListSectionByPage(sectionInformationManagementVO,
+				college);
 		// 遍历所有教研室资料得到教研室主任信息
 		for (bysjglxt_section bysjglxt_section : listBysjglxtSection) {
 			teacherInformationDTO = new TeacherInformationDTO();
@@ -72,7 +86,8 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 	}
 
 	@Override
-	public boolean Create_Section(bysjglxt_section newSection) {
+	public boolean Create_Section(bysjglxt_section newSection, String userId) {
+		newSection.setSection_college_id(getCollegeByUserId(userId));
 		newSection.setSection_id(TeamUtil.getUuid());
 		newSection.setSection_gmt_create(TeamUtil.getStringSecond());
 		newSection.setSection_gmt_modified(TeamUtil.getStringSecond());

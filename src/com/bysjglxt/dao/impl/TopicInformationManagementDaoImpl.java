@@ -344,10 +344,11 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	}
 
 	@Override
-	public List<bysjglxt_topic> getAllTopic() {
+	public List<bysjglxt_topic> getAllTopic(String college) {
 		Session session = getSession();
 		List<bysjglxt_topic> listAllTopic = new ArrayList<bysjglxt_topic>();
-		String hql = "from bysjglxt_topic where topic_examine_state = '审核已通过'";
+		String hql = "select topic from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher=teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college='"
+				+ college + "' and topic.topic_examine_state = '审核已通过'";
 		Query query = session.createQuery(hql);
 		listAllTopic = query.list();
 		return listAllTopic;
@@ -753,10 +754,12 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	 */
 	@Override
 	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade,
-			String search) {
+			String search, String college) {
 		List<bysjglxt_student_user> listUser = new ArrayList<bysjglxt_student_user>();
 		String hql = "select studentUser from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where studentUser.user_student_basic=studentBasic.student_basic_id ";
-		hql = hql + " and studentUser.user_student_is_operate_premission=1 ";
+		hql = hql
+				+ " and studentUser.user_student_is_operate_premission=1 and studentUser.user_student_belong_college='"
+				+ college + "' ";
 		if (search != null && search.trim().length() > 0) {
 			String sss = "%" + search.trim() + "%";
 			hql = hql + " and studentBasic.student_basic_num like '" + sss + "'";

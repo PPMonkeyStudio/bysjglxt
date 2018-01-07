@@ -55,7 +55,7 @@ public interface TopicInformationManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_section getTeacherSection(String user_teacher_section);
 
-	public List<bysjglxt_topic> getAllTopic();
+	public List<bysjglxt_topic> getAllTopic(String college);
 
 	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO, int studentOrTeacher,
 			String collegeId);
@@ -117,7 +117,7 @@ public interface TopicInformationManagementDao {
 			String task_definition_id, String process_instance_id);
 
 	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade,
-			String search);
+			String search,String college);
 
 	public com.bysjglxt.domain.DO.bysjglxt_topic getTopicByIdAndStudent(String student_user, String topicId);
 

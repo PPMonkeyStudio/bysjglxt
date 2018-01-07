@@ -14,14 +14,14 @@ public interface SectionInformationManagementService {
 	 * @return SectionInformationManagementVO
 	 */
 	public SectionInformationManagementVO VO_Section_By_Page(
-			SectionInformationManagementVO sectionInformationManagementVO);
+			SectionInformationManagementVO sectionInformationManagementVO, String userId);
 
 	/**
 	 * @DATE 2017-10-31 创建教研室
 	 * 
 	 */
 
-	public boolean Create_Section(bysjglxt_section newSection);
+	public boolean Create_Section(bysjglxt_section newSection, String userId);
 
 	/**
 	 * @DATE 2017-10-31 批量删除教研室
@@ -34,14 +34,12 @@ public interface SectionInformationManagementService {
 	 * @DATE 2017-10-31 遍历出所有的教研室
 	 */
 	public List<bysjglxt_section> listBysjglxtSection();
-	
+
 	/**
-	 * @DATE 2017-10-31
-	 * 更改教研室
+	 * @DATE 2017-10-31 更改教研室
 	 * 
 	 * 
 	 */
 	public boolean updateSection(bysjglxt_section bysjglxt_section);
-	
-	
+
 }

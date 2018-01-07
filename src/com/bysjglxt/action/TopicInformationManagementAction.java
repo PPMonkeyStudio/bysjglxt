@@ -101,12 +101,14 @@ public class TopicInformationManagementAction extends ActionSupport
 	}
 
 	public void listSelectBysjglxtTopic() throws IOException {
-
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
 		http_response.setContentType("text/html;charset=utf-8");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
-		List<bysjglxt_topic> list_topic = topicInformationManagementService.listSelectBysjglxtTopic();
+		List<bysjglxt_topic> list_topic = topicInformationManagementService
+				.listSelectBysjglxtTopic(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.getWriter().write(gson.toJson(list_topic));
 	}
 
@@ -130,12 +132,10 @@ public class TopicInformationManagementAction extends ActionSupport
 	public void CreateTopic() throws IOException {
 		topicInformationManagementDTO.setTeacherInformationDTO(new TeacherInformationDTO());
 		topicInformationManagementDTO.getTeacherInformationDTO().setBysjglxtTeacherUser(new bysjglxt_teacher_user());
-
 		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
 				.get("userTeacherDTO");
 		topicInformationManagementDTO.getTeacherInformationDTO().getBysjglxtTeacherUser()
 				.setUser_teacher_id(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
-
 		topicInformationManagementService.CreateTopic(topicInformationManagementDTO);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
@@ -144,7 +144,6 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	public void UpdateTopic() throws IOException {
 		topicInformationManagementService.updateTopic(topicInformationManagementDTO.getBysjglxtTopic());
-
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}
@@ -155,12 +154,10 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void ListTopicByPageAndSearch() throws IOException {
-
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-
 		if (ActionContext.getContext().getSession().get("userStudentDTO") == null) {
 			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
 					.get("userTeacherDTO");
@@ -198,6 +195,8 @@ public class TopicInformationManagementAction extends ActionSupport
 		/*
 		 * 
 		 */
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
 		if (search == null) {
 			search = "";
 		} else {
@@ -206,8 +205,10 @@ public class TopicInformationManagementAction extends ActionSupport
 		 * 
 		 */
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(gson.toJson(topicInformationManagementService
-				.listDesignationStudentInformation(studentSelectTopic, "-1", "-1", search)));
+		http_response.getWriter()
+				.write(gson
+						.toJson(topicInformationManagementService.listDesignationStudentInformation(studentSelectTopic,
+								"-1", "-1", search, userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
 	}
 
 	/**

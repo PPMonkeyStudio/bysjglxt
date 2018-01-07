@@ -10,10 +10,12 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.SectionInformationManagementVO;
 import com.bysjglxt.service.SectionInformationManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -80,8 +82,10 @@ public class SectionInformationManagementAction extends ActionSupport
 			GsonBuilder gsonBuilder = new GsonBuilder();
 			gsonBuilder.setPrettyPrinting();
 			Gson gson = gsonBuilder.create();
-			sectionInformationManagementVO = sectionInformationManagementService
-					.VO_Section_By_Page(sectionInformationManagementVO);
+			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+					.get("userTeacherDTO");
+			sectionInformationManagementVO = sectionInformationManagementService.VO_Section_By_Page(
+					sectionInformationManagementVO, userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 			http_response.setContentType("text/html;charset=utf-8");
 			http_response.getWriter().write(gson.toJson(sectionInformationManagementVO));
 		} catch (Exception e) {
@@ -95,8 +99,10 @@ public class SectionInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void CreateSection() throws IOException {
-		sectionInformationManagementService.Create_Section(newSection);
-
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		sectionInformationManagementService.Create_Section(newSection,
+				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}

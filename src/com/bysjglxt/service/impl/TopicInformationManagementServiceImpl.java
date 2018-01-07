@@ -444,16 +444,28 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		return flag;
 	}
 
+	// 根据使用者Id获取学院
+	public String getCollegeByUserId(String userId) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUser(userId);
+		if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
+				&& bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >= 0) {
+			return bysjglxt_teacher_user.getUser_teacher_belong_college().trim();
+		}
+		return null;
+	}
+
 	/**
 	 * 遍历出所有可以进行选择的课题
 	 */
 	@Override
-	public List<bysjglxt_topic> listSelectBysjglxtTopic() {
+	public List<bysjglxt_topic> listSelectBysjglxtTopic(String userId) {
+		String college = getCollegeByUserId(userId);
 		boolean flag = true;
 		List<bysjglxt_topic> listAllBysjglxtTopic = new ArrayList<bysjglxt_topic>();
 		List<bysjglxt_topic> listSelectBysjglxtTopic = new ArrayList<bysjglxt_topic>();
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
-		listAllBysjglxtTopic = topicInformationManagementDao.getAllTopic();
+		listAllBysjglxtTopic = topicInformationManagementDao.getAllTopic(college);
 		for (bysjglxt_topic bysjglxt_topic : listAllBysjglxtTopic) {
 			flag = true;
 			bysjglxt_teacher_user = new bysjglxt_teacher_user();
@@ -816,7 +828,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	 */
 	@Override
 	public List<DesignationStudentInformationDTO> listDesignationStudentInformation(String topicId, String studentMajor,
-			String studentGrade, String search) {
+			String studentGrade, String search, String userId) {
+		String college = getCollegeByUserId(userId);
 		List<bysjglxt_student_user> listStudentUser = new ArrayList<bysjglxt_student_user>();
 		DesignationStudentInformationDTO designationStudentInformationDTO = null;
 		List<DesignationStudentInformationDTO> listDesignation = new ArrayList<DesignationStudentInformationDTO>();
@@ -825,7 +838,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		// bysjglxt_student_user
 		// 获取所有拥有操作权限的学生,以及可以进行筛选
 		listStudentUser = topicInformationManagementDao.getListStudentUserByDesignation(studentMajor, studentGrade,
-				search);
+				search, college);
 		for (bysjglxt_student_user student_user : listStudentUser) {
 			designationStudentInformationDTO = new DesignationStudentInformationDTO();
 			bysjglxt_topic = new bysjglxt_topic();

@@ -13,11 +13,13 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 import com.bysjglxt.service.SectionInformationManagementService;
 import com.bysjglxt.service.TeacherInformationManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -104,11 +106,12 @@ public class TeacherInformationManagementAction extends ActionSupport
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
-		teacherInformationManagementVO = teacherInformationManagementService
-				.VO_TEACHER_By_PageAndSearch(teacherInformationManagementVO);
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		teacherInformationManagementVO = teacherInformationManagementService.VO_TEACHER_By_PageAndSearch(
+				teacherInformationManagementVO, userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(teacherInformationManagementVO));
-
 	}
 
 	/**
@@ -123,7 +126,6 @@ public class TeacherInformationManagementAction extends ActionSupport
 
 		List<bysjglxt_teacher_basic> list_PreviewTeacherEXCEL = teacherInformationManagementService
 				.convertTeacherExcelToList(EXCEL_Teacher, EXCEL_TeacherFileName);
-
 		http_response.setContentType("text/html;charset=utf-8");
 
 		http_response.getWriter().write(gson.toJson(list_PreviewTeacherEXCEL));
@@ -148,11 +150,12 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 */
 	public void SaveTeacherEXCEL() throws Exception {
 		http_response.setContentType("text/html;charset=utf-8");
-
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
 		List<bysjglxt_teacher_basic> list_PreviewTeacherEXCEL = teacherInformationManagementService
 				.convertTeacherExcelToList(EXCEL_Teacher, EXCEL_TeacherFileName);
-
-		if (teacherInformationManagementService.saveTeacherList(list_PreviewTeacherEXCEL)) {
+		if (teacherInformationManagementService.saveTeacherList(list_PreviewTeacherEXCEL,
+				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())) {
 			http_response.getWriter().write("success");
 		} else {
 			http_response.getWriter().write("fail");
@@ -185,7 +188,10 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @创建教师
 	 */
 	public void CreateTeacher() {
-		teacherInformationManagementService.save_NewTeacher(newTeacher);
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		teacherInformationManagementService.save_NewTeacher(newTeacher,
+				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.setContentType("text/html;charset=utf-8");
 		try {
 			http_response.getWriter().write("success");
@@ -200,13 +206,14 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * 
 	 */
 	public void GetTeacherSection() throws Exception {
-
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		List<bysjglxt_section> list_Section = teacherInformationManagementService.listBysjglxtSection();
-
+		List<bysjglxt_section> list_Section = teacherInformationManagementService
+				.listBysjglxtSection(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.getWriter().write(gson.toJson(list_Section));
 
 	}
@@ -217,16 +224,20 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void ListTeacherAll() throws IOException {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter()
-				.write(gson.toJson(teacherInformationManagementService.list_TeacherInformationDTO_All()));
+		http_response.getWriter().write(gson.toJson(teacherInformationManagementService
+				.list_TeacherInformationDTO_All(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
 
 	}
 
 	public void GetTeacherTitle() throws IOException {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();

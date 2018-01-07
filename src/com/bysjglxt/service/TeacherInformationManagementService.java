@@ -34,7 +34,7 @@ public interface TeacherInformationManagementService {
 	 *            教师基础信息List
 	 * @return 是否存储成功,1是 0否
 	 */
-	public boolean saveTeacherList(List<bysjglxt_teacher_basic> teacherBasicList);
+	public boolean saveTeacherList(List<bysjglxt_teacher_basic> teacherBasicList, String userId);
 
 	/**
 	 * @DATE 2017-10-29
@@ -43,7 +43,7 @@ public interface TeacherInformationManagementService {
 	 * 
 	 * @return
 	 */
-	public List<TeacherInformationDTO> list_TeacherInformationDTO_All();
+	public List<TeacherInformationDTO> list_TeacherInformationDTO_All(String userId);
 
 	/**
 	 * @待测试
@@ -54,7 +54,7 @@ public interface TeacherInformationManagementService {
 	 *            手动输入的教师基础信息
 	 * @return 是否存储成功,1是 0否
 	 */
-	public boolean save_NewTeacher(bysjglxt_teacher_basic teacher_basic);
+	public boolean save_NewTeacher(bysjglxt_teacher_basic teacher_basic, String userId);
 
 	/**
 	 * @待测试
@@ -72,7 +72,7 @@ public interface TeacherInformationManagementService {
 	 * 
 	 * @return
 	 */
-	public List<bysjglxt_section> listBysjglxtSection();
+	public List<bysjglxt_section> listBysjglxtSection(String userId);
 
 	/**
 	 * 
@@ -86,7 +86,7 @@ public interface TeacherInformationManagementService {
 	 * @return 封装好的TeacherInformationManagementVO（类中所有页面信息均要封装）
 	 */
 	public TeacherInformationManagementVO VO_TEACHER_By_PageAndSearch(
-			TeacherInformationManagementVO teacherInformationManagementVO);
+			TeacherInformationManagementVO teacherInformationManagementVO, String userId);
 
 	/**
 	 * @DATE 2017-11-1 弃用 使用DTO更新教师信息
@@ -155,8 +155,8 @@ public interface TeacherInformationManagementService {
 	 * 批量驳回记录员权限
 	 * 
 	 * @param listTeacherUserId
-	 * @return   1成功
-	 * @return  -1失败
+	 * @return 1成功
+	 * @return -1失败
 	 */
 	public int removeRecoder(List<String> listTeacherUserId);
 
@@ -164,8 +164,8 @@ public interface TeacherInformationManagementService {
 	 * 批量驳回答辩小组身份
 	 * 
 	 * @param listTeacherUserId
-	 * @return  1 成功
-	 * @return  -1失败
+	 * @return 1 成功
+	 * @return -1失败
 	 */
 	public int removeLeader(List<String> listTeacherUserId);
 

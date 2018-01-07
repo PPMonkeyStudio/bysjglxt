@@ -26,16 +26,6 @@ public class teeeee {
 		this.sectionInformationManagementService = sectionInformationManagementService;
 	}
 
-	// 测试创建教研室
-	@Test
-	public void eddd() {
-		bysjglxt_section newSection = new bysjglxt_section();
-		newSection.setSection_leader("09f6e95d-a743-481d-bb4c-d60488d38ead");
-		newSection.setSection_name("kk教研室");
-		boolean flag = sectionInformationManagementService.Create_Section(newSection);
-		System.out.println(flag);
-	}
-
 	// 测试删除教研室
 	@Test
 	public void tetetet() {
@@ -44,6 +34,7 @@ public class teeeee {
 		boolean flag = sectionInformationManagementService.deleteSection(listSectionId);
 		System.out.println(flag);
 	}
+
 	// 测试更新教研室
 	@Test
 	public void teettete() {
@@ -53,14 +44,6 @@ public class teeeee {
 		bysjglxt_section.setSection_leader("166c2390-a79a-4ab1-b2ff-73d283e3aa65");
 		boolean flag = sectionInformationManagementService.updateSection(bysjglxt_section);
 		System.out.println(flag);
-	}
-	// 测试分页显示教研室主任信息
-	@Test
-	public void fffff() {
-		SectionInformationManagementVO VO_Section_By_Page = new SectionInformationManagementVO();
-		VO_Section_By_Page = sectionInformationManagementService.VO_Section_By_Page(VO_Section_By_Page);
-		System.out.println(VO_Section_By_Page);
-
 	}
 
 }
