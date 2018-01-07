@@ -23,7 +23,6 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 
 	@Override
 	public int login(String username, String password) {
-		System.out.println("gg");
 		if (username == null || username.trim().length() <= 0) {
 			return -1;
 		}
@@ -53,7 +52,6 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 		}
 		// 2.在teacher_user表中查询
 		bysjglxt_teacher_user = loginOrWriteOffDao.getBysjglxtTeacherUserByNum(username);
-		System.out.println("ggg");
 		if (bysjglxt_teacher_user == null) {
 			flag = -1;
 		} else {
