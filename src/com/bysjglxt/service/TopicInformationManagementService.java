@@ -11,10 +11,10 @@ import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 public interface TopicInformationManagementService {
 
 	/**
-	 * 获取关于某课题学生是否已经被指定的List<DTO>
+	 * 获取关于某课题学生的List<DTO>
 	 */
 	public List<DesignationStudentInformationDTO> listDesignationStudentInformation(String topicId, String studentMajor,
-			String studentGrade, String search);
+			String studentGrade, String search, String userId);
 
 	/**
 	 * 
@@ -136,7 +136,7 @@ public interface TopicInformationManagementService {
 	 * @说明 遍历出所有可以选择的课题用于分配最后剩余的学生
 	 * @return
 	 */
-	public List<bysjglxt_topic> listSelectBysjglxtTopic();
+	public List<bysjglxt_topic> listSelectBysjglxtTopic(String userId);
 
 	/**
 	 * 学生点击我的课题拿出属于自己已经选择的课题

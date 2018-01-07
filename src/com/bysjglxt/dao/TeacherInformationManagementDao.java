@@ -9,7 +9,7 @@ import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 
 public interface TeacherInformationManagementDao {
 
-	public List<bysjglxt_teacher_user> list_TeacherUserInformation_All();
+	public List<bysjglxt_teacher_user> list_TeacherUserInformation_All(String college);
 
 	public bysjglxt_teacher_basic get_TeacherBasicInformation_ByUserBasic(String user_teacher_basic);
 
@@ -29,9 +29,9 @@ public interface TeacherInformationManagementDao {
 	public bysjglxt_teacher_user getTeacherInfoByBasicId(String teacher_basic_id);
 
 	public List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch(
-			TeacherInformationManagementVO teacherInformationManagementVO);
+			TeacherInformationManagementVO teacherInformationManagementVO, String college);
 
-	public List<bysjglxt_section> listBysjglxtSection();
+	public List<bysjglxt_section> listBysjglxtSection(String college);
 
 	public bysjglxt_section get_TeacherSectionInformation_ByUserSectionId(String user_teacher_section);
 
@@ -41,10 +41,13 @@ public interface TeacherInformationManagementDao {
 
 	public List<String> list_Teacher_Title();
 
-	public List<bysjglxt_teacher_basic> getResultBySearch(TeacherInformationManagementVO teacherInformationManagementVO);
+	public List<bysjglxt_teacher_basic> getResultBySearch(TeacherInformationManagementVO teacherInformationManagementVO,
+			String college);
 
-	public boolean updatePassword(String user_teacher_id, String password,String moTime);
+	public boolean updatePassword(String user_teacher_id, String password, String moTime);
 
 	public boolean teacherBasicIsExist(String job_number);
+
+	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByMajorCode(String trim);
 
 }

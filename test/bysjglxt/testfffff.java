@@ -51,16 +51,6 @@ public class testfffff {
 				"3b3c4c65-0e6f-4386-bba7-17ac0ed166ff"));
 	}
 
-	// 遍历出所有可以进行选择的课题
-	@Test
-	public void testD() {
-		List<bysjglxt_topic> listSelectBysjglxtTopic = new ArrayList<bysjglxt_topic>();
-		listSelectBysjglxtTopic = topicManagementService.listSelectBysjglxtTopic();
-		System.out.println(listSelectBysjglxtTopic.size());
-		System.out.println(listSelectBysjglxtTopic);
-
-	}
-
 	// 测试创建课题
 	@Test
 	public void testG() {

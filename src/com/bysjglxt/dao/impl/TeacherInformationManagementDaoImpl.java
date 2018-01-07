@@ -29,10 +29,10 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	}
 
 	@Override
-	public List<bysjglxt_teacher_user> list_TeacherUserInformation_All() {
+	public List<bysjglxt_teacher_user> list_TeacherUserInformation_All(String college) {
 		Session session = getSession();
 		List<bysjglxt_teacher_user> listAllTeacherUserInformation = null;
-		String hql = "from bysjglxt_teacher_user";
+		String hql = "from bysjglxt_teacher_user where user_teacher_belong_college='" + college + "'";
 		Query query = session.createQuery(hql);
 		listAllTeacherUserInformation = query.list();
 		return listAllTeacherUserInformation;
@@ -81,6 +81,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + teacher_id + "'";
 		Query query = session.createQuery(hql);
 		TeacherInformation = (bysjglxt_teacher_user) query.uniqueResult();
+		session.clear();
 		return TeacherInformation;
 	}
 
@@ -167,10 +168,11 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 
 	@Override
 	public List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch(
-			TeacherInformationManagementVO teacherInformationManagementVO) {
+			TeacherInformationManagementVO teacherInformationManagementVO, String college) {
 		Session session = getSession();
 		boolean flag = false;
-		String hql = "select distinct(basic) from bysjglxt_teacher_basic basic,bysjglxt_teacher_user teacher_user where basic.teacher_basic_id=teacher_user.user_teacher_basic";
+		String hql = "select distinct(basic) from bysjglxt_teacher_basic basic,bysjglxt_teacher_user teacher_user where teacher_user.user_teacher_belong_college='"
+				+ college + "' and basic.teacher_basic_id=teacher_user.user_teacher_basic";
 		// 判断搜索框中的字符串是不是全是数字
 		if (TeamUtil.isDigit(teacherInformationManagementVO.getSearch())) {
 			flag = true;
@@ -252,10 +254,10 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	}
 
 	@Override
-	public List<bysjglxt_section> listBysjglxtSection() {
+	public List<bysjglxt_section> listBysjglxtSection(String college) {
 		Session session = getSession();
 		List<bysjglxt_section> listSection = new ArrayList<bysjglxt_section>();
-		String hql = "from bysjglxt_section";
+		String hql = "from bysjglxt_section where section_college_id = '" + college + "'";
 		Query query = session.createQuery(hql);
 		listSection = query.list();
 		return listSection;
@@ -298,10 +300,11 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 	}
 
 	@Override
-	public List<bysjglxt_teacher_basic> getResultBySearch(
-			TeacherInformationManagementVO teacherInformationManagementVO) {
+	public List<bysjglxt_teacher_basic> getResultBySearch(TeacherInformationManagementVO teacherInformationManagementVO,
+			String college) {
 		Session session = getSession();
-		String hql = "select distinct(basic) from bysjglxt_teacher_basic basic,bysjglxt_teacher_user teacher_user where basic.teacher_basic_id=teacher_user.user_teacher_basic";
+		String hql = "select distinct(basic) from bysjglxt_teacher_basic basic,bysjglxt_teacher_user teacher_user where basic.teacher_basic_id=teacher_user.user_teacher_basic and teacher_user.user_teacher_belong_college='"
+				+ college + "'";
 		boolean flag = false;
 		// 判断搜索框中的字符串是不是全是数字
 		if (TeamUtil.isDigit(teacherInformationManagementVO.getSearch())) {
@@ -380,5 +383,16 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		} else {
 			return false;
 		}
+	}
+
+	@Override
+	public bysjglxt_section getSectionByMajorCode(String trim) {
+		Session session = getSession();
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		String hql = "select section from bysjglxt_section section,bysjglxt_major major where section.section_id=major.major_belong_section and major.major_professionalcode='"
+				+ trim + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (com.bysjglxt.domain.DO.bysjglxt_section) query.uniqueResult();
+		return bysjglxt_section;
 	}
 }

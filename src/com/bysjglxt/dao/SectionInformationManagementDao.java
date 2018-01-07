@@ -10,7 +10,8 @@ public interface SectionInformationManagementDao {
 
 	int getCountSectionLeader();
 
-	List<bysjglxt_section> getListSectionByPage(SectionInformationManagementVO sectionInformationManagementVO);
+	List<bysjglxt_section> getListSectionByPage(SectionInformationManagementVO sectionInformationManagementVO,
+			String college);
 
 	com.bysjglxt.domain.DO.bysjglxt_teacher_user getBysjglxtTeacherUserById(String section_id);
 
@@ -26,5 +27,4 @@ public interface SectionInformationManagementDao {
 
 	boolean setTeacherUserSectionNull(String string);
 
-	
 }

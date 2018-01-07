@@ -14,7 +14,7 @@ public class bysjglxt_teacher_user {
 	private String user_teacher_belong_college;
 	private int user_teacher_is_recorder;
 	private int user_teacher_is_defence_leader;
-	private int user_teacher_is_college_admin = 0;
+	private int user_teacher_is_college_admin = 2;
 
 	@Override
 	public String toString() {

@@ -42,23 +42,6 @@ public class testteacher {
 		}
 	}
 
-	// 测试存储
-	@Test
-	public void fffff() {
-		File file = new File("F:\\kk.xls");
-		String name = "kk.xls";
-		List<bysjglxt_teacher_basic> jiji = new ArrayList<bysjglxt_teacher_basic>();
-
-		try {
-			jiji = teacherInformationManagementService.convertTeacherExcelToList(file, name);
-			System.out.println(jiji);
-			boolean flag = teacherInformationManagementService.saveTeacherList(jiji);
-			System.out.println(flag);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 	// 测试删除教师信息
 	@Test
 	public void testttttt() {
@@ -66,16 +49,6 @@ public class testteacher {
 		re.add("006d1f31-2472-4dd6-955f-bc0534c204ac");
 		boolean flag = teacherInformationManagementService.remove_TeacherList(re);
 		System.out.println(flag);
-	}
-
-	// 测试分页得到数据
-	@Test
-	public void efdsfdsf() {
-		TeacherInformationManagementVO VO_TEACHER_By_PageAndSearch = new TeacherInformationManagementVO();
-		VO_TEACHER_By_PageAndSearch = teacherInformationManagementService
-				.VO_TEACHER_By_PageAndSearch(VO_TEACHER_By_PageAndSearch);
-		System.out.println(VO_TEACHER_By_PageAndSearch);
-
 	}
 
 }

@@ -35,9 +35,10 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 	}
 
 	@Override
-	public List<bysjglxt_section> getListSectionByPage(SectionInformationManagementVO sectionInformationManagementVO) {
+	public List<bysjglxt_section> getListSectionByPage(SectionInformationManagementVO sectionInformationManagementVO,
+			String college) {
 		Session session = getSession();
-		String hql = "from bysjglxt_section order by section_gmt_create";
+		String hql = "from bysjglxt_section where section_college_id='" + college + "' order by section_gmt_create";
 		Query query = session.createQuery(hql);
 		query.setFirstResult(
 				(sectionInformationManagementVO.getPageIndex() - 1) * sectionInformationManagementVO.getPageSize());
