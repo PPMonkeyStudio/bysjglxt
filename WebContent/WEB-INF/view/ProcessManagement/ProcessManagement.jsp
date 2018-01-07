@@ -61,7 +61,7 @@
 		</div>
 
 		<div id="maxDiv_List_ProcessDefinition" class="panel"
-			style="width: 95%; margin: 20px auto;">
+			style="width: 960px; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
 				<h3 class="panel-title">流程定义</h3>
@@ -69,7 +69,7 @@
 			<div class="panel-body">
 				<div style="height: 34px;">
 					<div style="width: 500px; float: left;">
-						<button class="leader_control btn btn-default"
+						<button class="admin_control btn btn-default"
 							onclick="CreatProcessDefinition()">
 							<i class="fa fa-plus-square"></i> 创建流程
 						</button>
@@ -93,7 +93,7 @@
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
 				</div>
 				<div style="height: 34px; margin: 0 0 20px 0;">
-					<button class="leader_control btn btn-danger"
+					<button class="admin_control btn btn-danger"
 						onclick="Delete_Process()" style="float: right; margin: 0 10px;">
 						<i class="fa fa-trash-o"></i> 删除所选
 					</button>

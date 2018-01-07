@@ -86,7 +86,7 @@ function evaluate_tutor() {
 				new_td.style = "text-align: center;";
 				switch (evaluate_tutor.evaluate_tutor_grade_training_objective) {
 				case 0: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()" class="form-control" id="evaluate_tutor_grade_training_objective" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
 							+ '<option value="0" selected="selected">0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -97,7 +97,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 1: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
 							+ '<option value="0">0</option>'
 							+ '<option value="1"  selected="selected">1</option>'
 							+ '<option value="2">2</option>'
@@ -108,7 +108,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 2: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2" selected="selected">2</option>'
@@ -119,7 +119,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 3: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -130,7 +130,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 4: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -141,7 +141,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 5: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"   class="form-control" id="evaluate_tutor_grade_training_objective" >'
 							+ '<option value="0">0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -152,7 +152,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 6: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_training_objective" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -191,7 +191,7 @@ function evaluate_tutor() {
 				new_td.style = "text-align: center;";
 				switch (evaluate_tutor.evaluate_tutor_grade_difficulty) {
 				case 0: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
 							+ '<option value="0" selected="selected">0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -200,7 +200,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 1: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
 							+ '<option value="0">0</option>'
 							+ '<option value="1"  selected="selected">1</option>'
 							+ '<option value="2">2</option>'
@@ -209,7 +209,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 2: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2" selected="selected">2</option>'
@@ -218,7 +218,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 3: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -227,7 +227,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 4: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_difficulty" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -264,7 +264,7 @@ function evaluate_tutor() {
 				new_td.style = "text-align: center;";
 				switch (evaluate_tutor.evaluate_tutor_grade_workload) {
 				case 0: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
 							+ '<option value="0" selected="selected">0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -274,7 +274,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 1: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
 							+ '<option value="0">0</option>'
 							+ '<option value="1"  selected="selected">1</option>'
 							+ '<option value="2">2</option>'
@@ -284,7 +284,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 2: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2" selected="selected">2</option>'
@@ -294,7 +294,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 3: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -304,7 +304,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 4: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -314,7 +314,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 5: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_workload" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -352,7 +352,7 @@ function evaluate_tutor() {
 				new_td.style = "text-align: center;";
 				switch (evaluate_tutor.evaluate_tutor_grade_bind) {
 				case 0: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
 							+ '<option value="0" selected="selected">0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -362,7 +362,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 1: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
 							+ '<option value="0">0</option>'
 							+ '<option value="1"  selected="selected">1</option>'
 							+ '<option value="2">2</option>'
@@ -372,7 +372,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 2: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2" selected="selected">2</option>'
@@ -382,7 +382,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 3: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -392,7 +392,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 4: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -402,7 +402,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 5: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_bind" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -440,7 +440,7 @@ function evaluate_tutor() {
 				new_td.style = "text-align: center;";
 				switch (evaluate_tutor.evaluate_tutor_grade_comprehensive) {
 				case 0: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
 							+ '<option value="0" selected="selected">0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -453,7 +453,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 1: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
 							+ '<option value="0">0</option>'
 							+ '<option value="1"  selected="selected">1</option>'
 							+ '<option value="2">2</option>'
@@ -466,7 +466,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 2: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2" selected="selected">2</option>'
@@ -479,7 +479,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 3: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -492,7 +492,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 4: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -505,7 +505,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 5: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -518,7 +518,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 6: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -531,7 +531,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 7: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -544,7 +544,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 8: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_comprehensive" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -585,7 +585,7 @@ function evaluate_tutor() {
 				new_td.style = "text-align: center;";
 				switch (evaluate_tutor.evaluate_tutor_grade_reference) {
 				case 0: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
 							+ '<option value="0" selected="selected">0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -596,7 +596,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 1: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
 							+ '<option value="0">0</option>'
 							+ '<option value="1"  selected="selected">1</option>'
 							+ '<option value="2">2</option>'
@@ -607,7 +607,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 2: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2" selected="selected">2</option>'
@@ -618,7 +618,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 3: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -629,7 +629,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 4: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -640,7 +640,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 5: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -651,7 +651,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 6: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -689,7 +689,7 @@ function evaluate_tutor() {
 				new_td.style = "text-align: center;";
 				switch (evaluate_tutor.evaluate_tutor_grade_experimental_design) {
 				case 0: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
 							+ '<option value="0" selected="selected">0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -701,7 +701,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 1: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
 							+ '<option value="0">0</option>'
 							+ '<option value="1"  selected="selected">1</option>'
 							+ '<option value="2">2</option>'
@@ -713,7 +713,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 2: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2" selected="selected">2</option>'
@@ -725,7 +725,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 3: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -737,7 +737,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 4: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -749,7 +749,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 5: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -761,7 +761,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 6: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -773,7 +773,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 7: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_experimental_design" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -811,7 +811,7 @@ function evaluate_tutor() {
 				new_td.style = "text-align: center;";
 				switch (evaluate_tutor.evaluate_tutor_grade_comprehensive) {
 				case 0: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_computing" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_computing" >'
 							+ '<option value="0" selected="selected">0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2">2</option>'
@@ -822,7 +822,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 1: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_computing" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_computing" >'
 							+ '<option value="0">0</option>'
 							+ '<option value="1"  selected="selected">1</option>'
 							+ '<option value="2">2</option>'
@@ -833,7 +833,7 @@ function evaluate_tutor() {
 					break;
 				}
 				case 2: {
-					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()" onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_computing" >'
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_computing" >'
 							+ '<option value="0" >0</option>'
 							+ '<option value="1">1</option>'
 							+ '<option value="2" selected="selected">2</option>'

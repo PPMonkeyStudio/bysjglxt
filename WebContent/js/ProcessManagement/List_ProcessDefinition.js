@@ -40,40 +40,35 @@ function List_ProcessDefinition(pageIndex) {
 					}
 
 					new_tr = document.createElement("tr");
-
-					new_tr.appendChild(document.createTextNode(''));
 					table_processDefinition.firstElementChild
 							.appendChild(new_tr);
 					new_tr.className = "new_tr";
-
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (processDefinition_json[num].process_definition_name != undefined) {
 						new_td.innerHTML = processDefinition_json[num].process_definition_name;
 					} else {
 						new_td.innerHTML = '无';
 					}
-
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (processDefinition_json[num].process_definition_instance_role == 1) {
 						new_td.innerHTML = '领导小组组长';
 					} else {
 						new_td.innerHTML = '学生';
 					}
-
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					if (processDefinition_json[num].process_definition_instance_role == 2
-							&& userTeacherDTO != null
-							&& userTeacherDTO.bysjglxtLeader != null) {
-						new_td.innerHTML = '<button class="btn btn-default" id="'
-								+ processDefinition_json[num].process_definition_id
-								+ '" onclick="UpdateProcessDefinition(this)" >详细</button>';
-					} else {
+					if (processDefinition_json[num].process_definition_name == '选题流程') {
 						new_td.innerHTML = '<button class="btn btn-default" id="'
 								+ processDefinition_json[num].process_definition_id
 								+ '" onclick="UpdateProcessDefinition(this)" >详细</button>'
@@ -87,8 +82,15 @@ function List_ProcessDefinition(pageIndex) {
 								+ 'style="margin:0 0 0 10px;">'
 								+ '开启流程'
 								+ '</button>' + '</a>';
+					} else {
+						new_td.innerHTML = '<button class="btn btn-default" id="'
+								+ processDefinition_json[num].process_definition_id
+								+ '" onclick="UpdateProcessDefinition(this)" >详细</button>';
 					}
 
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);

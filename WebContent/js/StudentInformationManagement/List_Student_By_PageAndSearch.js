@@ -2,7 +2,7 @@
 
 function List_Student_By_PageAndSearch(pageIndex) {
 
-	document.getElementById("i_pulse").style.display = "block";
+	// document.getElementById("i_pulse").style.display = "block";
 
 	/*
 	 * 
@@ -150,9 +150,10 @@ function List_Student_By_PageAndSearch(pageIndex) {
 				document.getElementById("span_totalPages").innerHTML = student_json.totalPages;
 				document.getElementById("span_totalRecords").innerHTML = student_json.totalRecords;
 				// 让加载图标消失
-				document.getElementById("i_pulse").style.display = "none";
+				// document.getElementById("i_pulse").style.display = "none";
 				// 让全选框取消选择
-				document.getElementById("checkbox_all_select").checked = false;
+				// document.getElementById("checkbox_all_select").checked =
+				// false;
 				/*
 				 * 角色控制
 				 */
