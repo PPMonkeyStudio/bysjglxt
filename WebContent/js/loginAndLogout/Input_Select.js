@@ -14,7 +14,9 @@ function all_select() {
 		}
 	}
 }
+
 function class_select(all_select, myClass) {
+
 	var checkbox_all_select = document.getElementById(all_select);
 
 	var checkbox_select = document.getElementsByClassName(myClass);

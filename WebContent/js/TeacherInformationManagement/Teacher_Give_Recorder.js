@@ -16,7 +16,7 @@ function Teacher_Give_Recorder() {
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
 										toastr.success("已打开所选教师的记录员权限");
-										List_Teacher_By_PageAndSearch(1);
+										List_Teacher_By_PageAndSearch(teacher_json.pageIndex);
 									} else {
 										toastr.error(xhr.status);
 									}

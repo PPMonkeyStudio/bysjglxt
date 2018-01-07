@@ -56,7 +56,7 @@
 							<th>流程实例</th>
 							<th>
 								<select class="form-control" id="select_state"
-									style="width: auto;" data-live-search="true"
+									style="width: auto;margin:0 auto;" data-live-search="true"
 									onchange="List_MyTask(1)">
 									<option value="-1">状态（全部）</option>
 									<option value="1">正在进项</option>
@@ -109,7 +109,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 </body>
 <script>
-	$('select').selectpicker('refresh');
+	
 </script>
 <script>
 	
