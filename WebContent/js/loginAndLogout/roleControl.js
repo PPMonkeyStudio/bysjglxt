@@ -36,4 +36,6 @@ function roleControl() {
 		}
 	}
 
+	stop_load();
+
 }

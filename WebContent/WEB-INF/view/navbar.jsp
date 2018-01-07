@@ -50,10 +50,29 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/NoticeManagement/List_Navbar_Notice.js"></script>
 <!--------------------------------------------------------------------------------->
+<link rel="stylesheet"
+	href="<%=basePath%>css/loginAndLogout/load.css" />
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/load.js"></script>
+<!--------------------------------------------------------------------------------->
 <!--------------------------------------------------------------------------------->
 <title>Insert title here</title>
 </head>
+
 <body>
+	<!----权限遮罩层----------------------------------------------------------------------------->
+	<!--------------------------------------------------------------------------------->
+	<!--------------------------------------------------------------------------------->
+	<div id="cloth">
+		<h3>正在载入权限模块...</h3>
+	</div>
+	<div id="div_load"></div>
+	<script type="text/javascript">
+		start_load();
+	</script>
+	<!--------------------------------------------------------------------------------->
+	<!--------------------------------------------------------------------------------->
+	<!--------------------------------------------------------------------------------->
 	<div id="wrapper">
 		<nav class="navbar navbar-default navbar-fixed-top">
 		<div
@@ -204,6 +223,7 @@
 		</div>
 		</nav>
 </body>
+
 <script type="text/javascript">
 	window.onload = function() {
 		getUserSessionForAjax();
