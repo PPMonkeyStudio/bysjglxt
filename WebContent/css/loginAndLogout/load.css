@@ -1,3 +1,6 @@
+/*
+*此文件不可用自动对齐代码
+*/
 #cloth {
 	position: absolute;
 	top: 0;
@@ -45,70 +48,31 @@
 	animation: div_load_after 1.5s infinite linear;
 }
 
-@
-keyframes div_load { 0% {
+@keyframes div_load { 
+	0% {
 	transform: rotate(0deg);
-}
+	}
+	
+	50%{
+	transform:rotate(180deg);
+	background:#2ecc71;
+	}
+	
+	100%{
+	transform:rotate(360deg);
+	}
 
-50%
-{
-transform
-:
- 
-rotate
-(180deg);background
-:
-#2ecc71
-;
 }
-100%
-{
-transform
-:
- 
-rotate
-(360deg);
-}
-}
-@
-keyframes div_load_after { 0% {
+@keyframes div_load_after { 
+	0% {
 	border-top: 10px solid #9b59b6;
 	border-bottom: 10px solid #9b59b6;
-}
-50%
-{
-border-top
-:
-10px
- 
-solid
- 
-#3498db
-;border-bottom
-:
-10px
- 
-solid
- 
-#3498db
-;
-}
-100%
-{
-border-top
-:
-10px
- 
-solid
- 
-#9b59b6
-;border-bottom
-:
-10px
- 
-solid
- 
-#9b59b6
-;
-}
+	}
+	50%{
+	border-top:10px solid #3498db;
+	border-bottom:10px solid #3498db;
+	}
+	100%{border-top:10px solid #9b59b6;
+	border-bottom:10px solid #9b59b6;
+	}
 }

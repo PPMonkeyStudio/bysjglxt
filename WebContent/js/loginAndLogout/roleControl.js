@@ -28,12 +28,12 @@ function roleControl() {
 		/*
 		 * 领导小组组长
 		 */
-		if (userTeacherDTO.bysjglxtLeader == null) {
-			long = leader_delete.length;
-			for (var num = 0; num < long; num++) {
-				leader_delete[0].parentNode.removeChild(leader_delete[0]);
-			}
-		}
+		// if (userTeacherDTO.bysjglxtLeader == null) {
+		// long = leader_delete.length;
+		// for (var num = 0; num < long; num++) {
+		// leader_delete[0].parentNode.removeChild(leader_delete[0]);
+		// }
+		// }
 	}
 
 	stop_load();
