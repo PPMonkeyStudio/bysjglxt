@@ -75,7 +75,7 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 		// 管理员登录
 		case 3: {
 			bysjglxt_admin bysjglxt_admin = (bysjglxt_admin) loginOrWriteOffService.loginInformation(3, username);
-			ActionContext.getContext().getSession().put("superAdmin", bysjglxt_admin);
+			ActionContext.getContext().getSession().put("admin", bysjglxt_admin);
 			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
 			http_response.getWriter().write("管理员登录成功");
 			break;

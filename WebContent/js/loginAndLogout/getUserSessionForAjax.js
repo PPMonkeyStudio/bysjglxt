@@ -1,6 +1,6 @@
 var userTeacherDTO = null;
 var userStudentDTO = null;
-
+var admin = null;
 function getUserSessionForAjax() {
 	var xhr = false;
 	xhr = new XMLHttpRequest();
@@ -26,13 +26,19 @@ function getUserSessionForAjax() {
 					userStudentDTO = userJsonDTO;
 					//
 					var USER_NAME = document.getElementById("USER_NAME");
-					USER_NAME.innerHTML = userJsonDTO.bysjglxtStudentBasic.student_basic_name;
+					USER_NAME.innerHTML = userStudentDTO.bysjglxtStudentBasic.student_basic_name;
 					roleControl();
 				} else if (userJsonDTO.bysjglxtTeacherUser != null) {
 					userTeacherDTO = userJsonDTO;
 					//
 					var USER_NAME = document.getElementById("USER_NAME");
-					USER_NAME.innerHTML = userJsonDTO.bysjglxtTeacherBasic.name;
+					USER_NAME.innerHTML = userTeacherDTO.bysjglxtTeacherBasic.name;
+					roleControl();
+				} else if (userJsonDTO.admin_id != null) {
+					admin = userJsonDTO;
+					//
+					var USER_NAME = document.getElementById("USER_NAME");
+					USER_NAME.innerHTML = '系统管理员';
 					roleControl();
 				} else {
 					roleControl();

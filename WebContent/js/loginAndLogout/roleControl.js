@@ -2,7 +2,8 @@ function roleControl() {
 	var long = 0;
 	var student_delete = document.getElementsByClassName("student_control");
 	var teacher_delete = document.getElementsByClassName("teacher_control");
-	var leader_delete = document.getElementsByClassName("leader_control");
+	var college_control = document.getElementsByClassName("college_control");
+	var admin_control = document.getElementsByClassName("admin_control");
 	/*
 	 * 学生
 	 */
@@ -20,22 +21,34 @@ function roleControl() {
 		for (var num = 0; num < long; num++) {
 			teacher_delete[0].parentNode.removeChild(teacher_delete[0]);
 		}
-		long = leader_delete.length;
+		//
+		long = college_control.length;
 		for (var num = 0; num < long; num++) {
-			leader_delete[0].parentNode.removeChild(leader_delete[0]);
+			college_control[0].parentNode.removeChild(college_control[0]);
 		}
 	} else {
 		/*
-		 * 领导小组组长
+		 * 院系管理员
 		 */
-		// if (userTeacherDTO.bysjglxtLeader == null) {
-		// long = leader_delete.length;
-		// for (var num = 0; num < long; num++) {
-		// leader_delete[0].parentNode.removeChild(leader_delete[0]);
-		// }
-		// }
+		if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_college_admin == '2') {
+			long = college_control.length;
+			for (var num = 0; num < long; num++) {
+				college_control[0].parentNode.removeChild(college_control[0]);
+			}
+		}
 	}
-
+	/*
+	 * 系统管理员
+	 */
+	if (admin == null) {
+		long = admin_control.length;
+		for (var num = 0; num < long; num++) {
+			admin_control[0].parentNode.removeChild(admin_control[0]);
+		}
+	}
+	/*
+	 * 
+	 */
 	stop_load();
 
 }

@@ -87,7 +87,7 @@
 					</a>
 				</li>
 				<!--  -->
-				<li class="leader_control dropdown" style="float: left;">
+				<li class="college_control dropdown" style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>信息</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
@@ -127,7 +127,7 @@
 					</ul>
 				</li>
 				<!--  -->
-				<li class="dropdown" style="float: left;">
+				<li class="college_control dropdown" style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>流程</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
