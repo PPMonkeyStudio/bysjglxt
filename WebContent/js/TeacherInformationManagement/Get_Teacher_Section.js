@@ -8,14 +8,15 @@ function Get_Teacher_Section(select) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				SectionList = JSON.parse(xhr.responseText);
-				// for (var num = 0; num < SectionList.length; num++) {
-				// var option = document.createElement("option");
-				// option.appendChild(document
-				// .createTextNode(SectionList[num].section_name));
-				// select.appendChild(option);
-				// option.value = SectionList[num].section_id;
-				// }
-
+				if (select != undefined) {
+					for (var num = 0; num < SectionList.length; num++) {
+						var option = document.createElement("option");
+						option.appendChild(document
+								.createTextNode(SectionList[num].section_name));
+						select.appendChild(option);
+						option.value = SectionList[num].section_id;
+					}
+				}
 				// $('#' + select.id).selectpicker('refresh');
 			} else {
 				toastr.error(xhr.status);

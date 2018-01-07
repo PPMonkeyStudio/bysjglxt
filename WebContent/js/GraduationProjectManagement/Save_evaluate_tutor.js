@@ -13,9 +13,7 @@ function Save_evaluate_tutor() {
 			}
 		}
 	}
-	xhr
-			.open("POST",
-					"/bysjglxt/graduationProject/GraduationProjectManagement_updateEvaluateTutor");
+
 	formData.append("updateEvaluateReview.evaluate_tutor_id", document
 			.getElementById("evaluate_tutor_id").value);
 	formData
@@ -79,7 +77,9 @@ function Save_evaluate_tutor() {
 	/*
 	 * 
 	 */
-
+	xhr
+			.open("POST",
+					"/bysjglxt/graduationProject/GraduationProjectManagement_updateEvaluateTutor");
 	/*
 	 * 
 	 */

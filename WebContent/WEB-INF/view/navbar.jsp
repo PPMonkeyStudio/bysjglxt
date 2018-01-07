@@ -168,6 +168,23 @@
 					</ul>
 				</li>
 				<!--  -->
+
+				<li class="college_control dropdown" style="float: left;">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						<span>流程</span>
+						<i class="icon-submenu lnr lnr-chevron-down"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a
+								href="<%=basePath%>process/ProcessManagement_ProcessDefinitionListPage">流程列表</a>
+						</li>
+						<li>
+							<a href="<%=basePath%>process/ProcessManagement_MyTask">我的任务</a>
+						</li>
+					</ul>
+				</li>
+				<!--  -->
 			</ul>
 			<!--  -->
 			<ul class="nav navbar-nav navbar-right"

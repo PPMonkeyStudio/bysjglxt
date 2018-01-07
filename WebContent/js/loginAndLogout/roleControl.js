@@ -30,7 +30,7 @@ function roleControl() {
 		/*
 		 * 院系管理员
 		 */
-		if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_college_admin == '2') {
+		if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_college_admin == 2) {
 			long = college_control.length;
 			for (var num = 0; num < long; num++) {
 				college_control[0].parentNode.removeChild(college_control[0]);
