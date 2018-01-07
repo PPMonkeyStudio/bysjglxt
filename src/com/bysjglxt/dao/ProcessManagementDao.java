@@ -2,7 +2,6 @@ package com.bysjglxt.dao;
 
 import java.util.List;
 
-import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
@@ -23,8 +22,6 @@ public interface ProcessManagementDao {
 	public bysjglxt_process_definition getProcessDefinition(String process_definition_id);
 
 	public bysjglxt_student_user getStudentUser(String operation);
-
-	public bysjglxt_leader getLeader(String operation);
 
 	public boolean instanceProcess(bysjglxt_process_instance processInstance);
 
@@ -52,8 +49,6 @@ public interface ProcessManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_section getSectionById(String user_teacher_id);
 
-	public List<com.bysjglxt.domain.DO.bysjglxt_leader> getListLeader();
-
 	public List<com.bysjglxt.domain.DO.bysjglxt_process_instance> getListProcessInstanceByDefinitionId(
 			String processDefinitionId);
 
@@ -66,7 +61,7 @@ public interface ProcessManagementDao {
 	public boolean deleteTaskDefinitionByProcessDefinitionId(String processDefinitionId);
 
 	public boolean deleteProcessDefinitionByProcessDefinitionId(String processDefinitionId);
-	
+
 	public bysjglxt_process_instance getProcessInstanceByDefinitionAndMan(String process_definition_id,
 			String operation);
 
@@ -96,6 +91,11 @@ public interface ProcessManagementDao {
 
 	public String getStudentNameByUserId(String stringId);
 
-	
-	
+	// 根据学院来获取管理员
+	public List<com.bysjglxt.domain.DO.bysjglxt_teacher_user> getListAdminCollegeByCollege(
+			String user_student_belong_college);
+
+	// 根据专业名称获取教研室对象
+	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByMajorId(String user_student_belong_major);
+
 }

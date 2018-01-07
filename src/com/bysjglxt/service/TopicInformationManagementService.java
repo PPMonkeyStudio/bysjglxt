@@ -58,9 +58,11 @@ public interface TopicInformationManagementService {
 	 * @DATE 2017-10-28
 	 * @说明 采纳课题
 	 * @param topicID
+	 * @param adminUserId
+	 *            是采纳该课题的老师的userID
 	 * @return 1成功 0失败
 	 */
-	public boolean adoptTopic(List<String> topicID);
+	public boolean adoptTopic(List<String> topicID, String adminUserId);
 
 	/**
 	 * @DATE 2017-10-28
@@ -76,7 +78,7 @@ public interface TopicInformationManagementService {
 	 * @param topicID
 	 * @return
 	 */
-	public boolean notAdoptTopic(List<String> topicID);
+	public boolean notAdoptTopic(List<String> topicID, String adminUserId);
 
 	/**
 	 * @DATE 2017-10-29
@@ -92,7 +94,7 @@ public interface TopicInformationManagementService {
 	 * @return 封装好的topicManagementVO
 	 */
 	public TopicInformationManagementVO VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
-			int studentOrTeacher);
+			int studentOrTeacher, String userId);
 
 	/**
 	 * @DOTO
@@ -167,14 +169,6 @@ public interface TopicInformationManagementService {
 	 * @return
 	 */
 	public List<StudentInformationDTO> listStudentSelectTopic(String topicId);
-
-	/**
-	 * (指定) 弃用
-	 * 
-	 * @param studentUserId
-	 * @return
-	 */
-	public int specialStudentSelectTopic(String studentUserId, String topicId);
 
 	/**
 	 * 

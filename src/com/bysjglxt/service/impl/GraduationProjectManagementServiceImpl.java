@@ -22,7 +22,6 @@ import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
-import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
@@ -148,66 +147,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		return 1;
 	}
 
-	// 上传毕业论文 弃用
-	@Override
-	public int uploadDissertation(String userId, File file, String thesisName) throws IOException {
-		/*
-		 * 获取路径
-		 */
-		String lj = "";
-		try {
-			Properties props = new Properties();
-			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
-			lj = props.getProperty("lj");
-		} catch (Exception e) {
-			System.out.println("获取初始路径失败");
-			e.printStackTrace();
-		}
-		// 查找学生是否已经上传毕业论文
-		boolean flag = false;
-		String path = lj + "graduagtionThesi/";
-		bysjglxt_dissertation bysjglxt_dissertation = null;
-		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
-		if (bysjglxt_dissertation != null && bysjglxt_dissertation.getDissertation_student() != null
-				&& bysjglxt_dissertation.getDissertation_student().trim().length() > 0) {
-			// 说明学生已经进行过上传了
-			// 删除学生上传的文件
-			path = path + bysjglxt_dissertation.getDissertation_file();
-			File deleteFile = new File(path);
-			deleteFile.delete();
-			// 删除学生毕业论文记录
-			flag = graduationProjectManagementDao.deleteThesisByUserId(userId);
-			if (!flag) {
-				return -1;
-			}
-
-		} else {
-			bysjglxt_dissertation = new bysjglxt_dissertation();
-		}
-		if (file != null) {
-			path = path + thesisName;
-			File newFile = new File(path);
-			FileUtils.copyFile(file, newFile);
-			// 将上传的毕业论文的文件名存储到数据库中
-			bysjglxt_dissertation.setDissertation_id(TeamUtil.getStringSecond());
-			bysjglxt_dissertation.setDissertation_student(userId);
-			bysjglxt_dissertation.setDissertation_file(thesisName);
-			bysjglxt_dissertation.setDissertation_gmt_create(TeamUtil.getStringSecond());
-			bysjglxt_dissertation.setDissertation_gmt_modified(TeamUtil.getStringSecond());
-			flag = graduationProjectManagementDao.fillEmptyThesisRecord(bysjglxt_dissertation);
-			if (!flag)
-				return -2;
-		} else {
-			bysjglxt_dissertation.setDissertation_id(TeamUtil.getStringSecond());
-			bysjglxt_dissertation.setDissertation_student(userId);
-			bysjglxt_dissertation.setDissertation_gmt_create(TeamUtil.getStringSecond());
-			bysjglxt_dissertation.setDissertation_gmt_modified(TeamUtil.getStringSecond());
-			flag = graduationProjectManagementDao.fillEmptyThesisRecord(bysjglxt_dissertation);
-		}
-
-		return 1;
-	}
-
 	// 下载毕业论文
 	@Override
 	public File downloadDissertation(String userId) {
@@ -250,10 +189,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_task_instance taskInstance = new bysjglxt_task_instance();
 		bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
 		bysjglxt_section bysjglxt_section = new bysjglxt_section();
-		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
 		bysjglxt_student_user bysjglxtStudentUser = new bysjglxt_student_user();
 		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
-		List<bysjglxt_topic_select> listTopicSelect = new ArrayList<bysjglxt_topic_select>();
 		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
 		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
 		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
@@ -265,30 +202,36 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		String actor = "";
 		String section = "";
 		// 1.判断老师是不是领导小组角色
-		bysjglxt_leader = graduationProjectManagementDao.getLeader(teacherUserId);
-		if (bysjglxt_leader != null) {
-			actor = "领导小组长";
-		} else {
-			// 根据教研室主任userId获取教研室
-			bysjglxt_section = graduationProjectManagementDao.getSectionByUserId(teacherUserId);
-			if (bysjglxt_section != null) {
-				actor = "教研室主任";
-				section = bysjglxt_section.getSection_name();
+		bysjglxt_teacher_user = graduationProjectManagementDao.getTeacherUserByUserId(teacherUserId);
+		if (bysjglxt_teacher_user != null) {
+			if (bysjglxt_teacher_user.getUser_teacher_is_college_admin() == 1) {
+				actor = "系部管理员";
 			} else {
-				// 1.判断老师是不是记录员或答辩小组长
-				// 根据userId获取teacherUser表信息
-				bysjglxt_teacher_user = graduationProjectManagementDao.getTeacherUserByUserId(teacherUserId);
-				if (bysjglxt_teacher_user.getUser_teacher_is_recorder() == 1) {
-					actor = "记录员";
+				// 根据教研室主任userId获取教研室
+				bysjglxt_section = graduationProjectManagementDao.getSectionByUserId(teacherUserId);
+				if (bysjglxt_section != null) {
+					actor = "教研室主任";
+					section = bysjglxt_section.getSection_id();
 				} else {
-					if (bysjglxt_teacher_user.getUser_teacher_is_defence_leader() == 1) {
-						actor = "答辩小组长";
+					// 1.判断老师是不是记录员或答辩小组长
+					// 根据userId获取teacherUser表信息
+					bysjglxt_teacher_user = graduationProjectManagementDao.getTeacherUserByUserId(teacherUserId);
+					if (bysjglxt_teacher_user.getUser_teacher_is_recorder() == 1) {
+						actor = "记录员";
 					} else {
-						actor = "无";
+						if (bysjglxt_teacher_user.getUser_teacher_is_defence_leader() == 1) {
+							actor = "答辩小组长";
+						} else {
+							actor = "无";
+						}
 					}
 				}
 			}
+			System.out.println(actor);
+		} else {
+			return teacherTutorStudentVO;
 		}
+
 		// 获得总记录数
 		list_Allbysjglxt_topic_select = graduationProjectManagementDao
 				.getTeacherTutorStudentAllSelectTopic(teacherTutorStudentVO, teacherUserId, actor, section);
@@ -378,19 +321,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			// 根据选题所属课题拿到课题表信息
 			bysjglxtTopic = graduationProjectManagementDao
 					.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
-			/*
-			 * if (teacherTutorStudentVO.getSearch() != null &&
-			 * teacherTutorStudentVO.getSearch().trim().length() > 0) {
-			 * bysjglxtTopic.setTopic_name_chinese(bysjglxtTopic.
-			 * getTopic_name_chinese().replaceAll(
-			 * teacherTutorStudentVO.getSearch(),
-			 * "<span style='color: #ff5063;'>" +
-			 * teacherTutorStudentVO.getSearch().trim() + "</span>")); }
-			 */
 			if (bysjglxtTopic != null) {
 				teacherTutorStudentDTO.setBysjglxtTopic(bysjglxtTopic);
 			}
-
 			list_TeacherTutorStudentDTO.add(teacherTutorStudentDTO);
 		}
 		teacherTutorStudentVO.setList_TeacherTutorStudentDTO(list_TeacherTutorStudentDTO);

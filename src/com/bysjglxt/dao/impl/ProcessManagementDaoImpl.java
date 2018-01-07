@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.ProcessManagementDao;
-import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
@@ -102,17 +101,6 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Query query = session.createQuery(hql);
 		bysjglxt_student_user = (com.bysjglxt.domain.DO.bysjglxt_student_user) query.uniqueResult();
 		return bysjglxt_student_user;
-	}
-
-	// 根据领导小组ID获取leader表
-	@Override
-	public bysjglxt_leader getLeader(String operation) {
-		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
-		Session session = getSession();
-		String hql = "from bysjglxt_leader where leader_teacher_id = '" + operation + "'";
-		Query query = session.createQuery(hql);
-		bysjglxt_leader = (com.bysjglxt.domain.DO.bysjglxt_leader) query.uniqueResult();
-		return bysjglxt_leader;
 	}
 
 	// 实例化流程实例
@@ -304,16 +292,6 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Query query = session.createQuery(hql);
 		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
 		return bysjglxt_section;
-	}
-
-	@Override
-	public List<bysjglxt_leader> getListLeader() {
-		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
-		Session session = getSession();
-		String hql = "from bysjglxt_leader";
-		Query query = session.createQuery(hql);
-		listLeader = query.list();
-		return listLeader;
 	}
 
 	@Override
@@ -541,6 +519,30 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Session session = getSession();
 		Query query = session.createQuery(hql);
 		return query.uniqueResult().toString();
+	}
+
+	// 根据学院获取该学院管理员
+	@Override
+	public List<bysjglxt_teacher_user> getListAdminCollegeByCollege(String user_student_belong_college) {
+		List<bysjglxt_teacher_user> list_bysjglxt_teacher_user = new ArrayList<bysjglxt_teacher_user>();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_is_college_admin=1 and user_teacher_belong_college='"
+				+ user_student_belong_college + "'";
+		Query query = session.createQuery(hql);
+		list_bysjglxt_teacher_user = query.list();
+		return list_bysjglxt_teacher_user;
+	}
+
+	// 根据专业Id获取教研室对象
+	@Override
+	public bysjglxt_section getSectionByMajorId(String user_student_belong_major) {
+		Session session = getSession();
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		String hql = "select section from bysjglxt_section section,bysjglxt_major major where section.section_id=major.major_belong_section and major.major_id='"
+				+ user_student_belong_major + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		return bysjglxt_section;
 	}
 
 }

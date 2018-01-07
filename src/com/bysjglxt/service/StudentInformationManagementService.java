@@ -3,6 +3,7 @@ package com.bysjglxt.service;
 import java.io.File;
 import java.util.List;
 
+import com.bysjglxt.domain.DO.bysjglxt_major;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
@@ -17,9 +18,10 @@ public interface StudentInformationManagementService {
 	 *            这个参数主要为了完成对信息的筛选条件
 	 * @return
 	 */
-	public ExportGeaduationStudentDTO listStudentGreauation(ExportGeaduationStudentDTO exportGeaduationStudentDTO);
+	public ExportGeaduationStudentDTO listStudentGreauation(ExportGeaduationStudentDTO exportGeaduationStudentDTO,
+			String college);
 
-	public List<StudentInformationDTO> listStudentNoClose();
+	public List<StudentInformationDTO> listStudentNoClose(String userId);
 
 	/**
 	 * @说明 学生信息的Excel文件流转化为bysjglxt_student_basic的List
@@ -37,7 +39,7 @@ public interface StudentInformationManagementService {
 	 *            学生基础信息List
 	 * @return 是否存储成功,1是 0否
 	 */
-	public boolean saveStudentList(List<bysjglxt_student_basic> studentBasicList);
+	public boolean saveStudentList(List<bysjglxt_student_basic> studentBasicList, String userId);
 
 	/**
 	 * @说明 获取数据库中所有的bysjglxt_student_basic记录以及bysjglxt_user_student记录，
@@ -51,7 +53,7 @@ public interface StudentInformationManagementService {
 	 *            手动输入的学生基础信息
 	 * @return 是否存储成功,1是 0否
 	 */
-	public boolean save_NewStudent(bysjglxt_student_basic student_basic);
+	public boolean save_NewStudent(bysjglxt_student_basic student_basic, String userId);
 
 	/**
 	 * @说明 通过多选删除选中的学生用户表以及基础信息表，
@@ -76,7 +78,7 @@ public interface StudentInformationManagementService {
 	 * @return 封装好的StudentInformationManagementVO（类中所有页面信息均要封装）
 	 */
 	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
-			StudentInformationManagementVO studentInformationManagementVO);
+			StudentInformationManagementVO studentInformationManagementVO, String userId);
 
 	/**
 	 * 
@@ -86,7 +88,7 @@ public interface StudentInformationManagementService {
 	 * @return 返回List<String>专业名
 	 * @throws Exception
 	 */
-	public List<String> list_Student_Major() throws Exception;
+	public List<bysjglxt_major> list_Student_Major(String userId) throws Exception;
 
 	/**
 	 * 遍历出所有年级

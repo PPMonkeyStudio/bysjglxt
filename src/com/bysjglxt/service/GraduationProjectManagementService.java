@@ -19,18 +19,6 @@ import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 public interface GraduationProjectManagementService {
 
 	/**
-	 * 上传毕业论文 弃用
-	 * 
-	 * @param file
-	 * @param thesisName
-	 * @return -1 上传过后删除失败
-	 * @return -2存储失败
-	 * @return 1 成功
-	 * @throws IOException
-	 */
-	public int uploadDissertation(String userId, File file, String thesisName) throws IOException;
-
-	/**
 	 * 下载毕业论文
 	 * 
 	 * @param userId

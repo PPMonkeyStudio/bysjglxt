@@ -14,12 +14,14 @@ import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_major;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
@@ -57,9 +59,11 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	}
 
 	@Override
-	public boolean saveStudentList(List<bysjglxt_student_basic> studentBasicList) {
+	public boolean saveStudentList(List<bysjglxt_student_basic> studentBasicList, String userId) {
 		boolean flag = false;
 		bysjglxt_student_user bysjglxt_student_user = null;
+		bysjglxt_major bysjglxt_major = null;
+		String college = getCollegeByUserId(userId);
 		for (bysjglxt_student_basic bysjglxt_student_basic : studentBasicList) {
 			bysjglxt_student_user = new bysjglxt_student_user();
 			/**
@@ -70,13 +74,34 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			}
 			bysjglxt_student_basic.setStudent_basic_id(TeamUtil.getUuid());
 			flag = studentInformationManagementDao.saveStudentBasic(bysjglxt_student_basic);
+			// 判断专业是否存在于数据库中,使用专业代码进行比较
+			if (bysjglxt_student_basic.getStudent_basic_professionalcode() != null
+					&& bysjglxt_student_basic.getStudent_basic_professionalcode().trim().length() > 0) {
+				// 根据专业代码在数据库中进行查询
+				bysjglxt_major = new bysjglxt_major();
+				bysjglxt_major = studentInformationManagementDao
+						.getMajorByMajorId(bysjglxt_student_basic.getStudent_basic_professionalcode().trim());
+				if (bysjglxt_major == null) {
+					bysjglxt_major = new bysjglxt_major();
+					bysjglxt_major.setMajor_id(TeamUtil.getUuid());
+					bysjglxt_major.setMajor_professionalcode(
+							bysjglxt_student_basic.getStudent_basic_professionalcode().trim());
+					bysjglxt_major.setMajor_name(bysjglxt_student_basic.getStudent_basic_major());
+					bysjglxt_major.setMajor_belong_section("无");
+					bysjglxt_major.setMajor_gmt_create(TeamUtil.getStringSecond());
+					bysjglxt_major.setMajor_gmt_modified(bysjglxt_major.getMajor_gmt_create());
+					flag = studentInformationManagementDao.saveObject(bysjglxt_major);
+				}
+			}
 			bysjglxt_student_user.setUser_student_id(TeamUtil.getUuid());
 			bysjglxt_student_user.setUser_student_num(bysjglxt_student_basic.getStudent_basic_num());
+			bysjglxt_student_user.setUser_student_belong_major(bysjglxt_major.getMajor_id());
 			bysjglxt_student_user
 					.setUser_student_password(md5.GetMD5Code(bysjglxt_student_basic.getStudent_basic_num()));
 			bysjglxt_student_user.setUser_student_is_select_topic(2);
 			bysjglxt_student_user.setUser_student_basic(bysjglxt_student_basic.getStudent_basic_id());
 			bysjglxt_student_user.setUser_student_is_operate_premission(1);
+			bysjglxt_student_user.setUser_student_belong_college(college);
 			bysjglxt_student_user.setUser_student_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_student_user.setUser_student_gmt_modified(bysjglxt_student_user.getUser_student_gmt_create());
 			flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
@@ -104,22 +129,45 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	}
 
 	@Override
-	public boolean save_NewStudent(bysjglxt_student_basic student_basic) {
+	public boolean save_NewStudent(bysjglxt_student_basic student_basic, String userId) {
+		String college = getCollegeByUserId(userId);
 		boolean flag = false;
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		student_basic.setStudent_basic_id(TeamUtil.getStringSecond());
+		bysjglxt_major bysjglxt_major = new bysjglxt_major();
 		flag = studentInformationManagementDao.studentBasicIsExist(student_basic.getStudent_basic_num());
 		if (flag) {
 			return false;
 		}
 		flag = studentInformationManagementDao.saveStudentBasic(student_basic);
+		// 判断专业是否存在于数据库中,使用专业代码进行比较
+		if (student_basic.getStudent_basic_professionalcode() != null
+				&& student_basic.getStudent_basic_professionalcode().trim().length() > 0) {
+			// 根据专业代码在数据库中进行查询
+			bysjglxt_major = new bysjglxt_major();
+			bysjglxt_major = studentInformationManagementDao
+					.getMajorByMajorId(student_basic.getStudent_basic_professionalcode().trim());
+			if (bysjglxt_major == null) {
+				bysjglxt_major = new bysjglxt_major();
+				bysjglxt_major.setMajor_id(TeamUtil.getUuid());
+				bysjglxt_major.setMajor_professionalcode(student_basic.getStudent_basic_professionalcode().trim());
+				bysjglxt_major.setMajor_name(student_basic.getStudent_basic_major());
+				bysjglxt_major.setMajor_belong_section("无");
+				bysjglxt_major.setMajor_gmt_create(TeamUtil.getStringSecond());
+				bysjglxt_major.setMajor_gmt_modified(bysjglxt_major.getMajor_gmt_create());
+				flag = studentInformationManagementDao.saveObject(bysjglxt_major);
+			}
+		}
+
 		bysjglxt_student_user.setUser_student_id(TeamUtil.getUuid());
 		bysjglxt_student_user.setUser_student_num(student_basic.getStudent_basic_num());
 		bysjglxt_student_user.setUser_student_password(md5.GetMD5Code(student_basic.getStudent_basic_num()));
 		bysjglxt_student_user.setUser_student_basic(student_basic.getStudent_basic_id());
 		bysjglxt_student_user.setUser_student_is_select_topic(2);
 		bysjglxt_student_user.setUser_student_is_operate_premission(1);
+		bysjglxt_student_user.setUser_student_belong_major(bysjglxt_major.getMajor_id());
 		bysjglxt_student_user.setUser_student_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_student_user.setUser_student_belong_college(college);
 		bysjglxt_student_user.setUser_student_gmt_modified(bysjglxt_student_user.getUser_student_gmt_create());
 		flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
 		return flag;
@@ -139,9 +187,10 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 
 	@Override
 	public StudentInformationManagementVO VO_Student_By_PageAndSearch(
-			StudentInformationManagementVO studentInformationManagementVO) {
+			StudentInformationManagementVO studentInformationManagementVO, String userId) {
+		String college = getCollegeByUserId(userId);
 		List<bysjglxt_student_basic> sizeList = studentInformationManagementDao
-				.getResultBySearch(studentInformationManagementVO);
+				.getResultBySearch(studentInformationManagementVO, college);
 		int i = sizeList.size();
 		studentInformationManagementVO.setTotalRecords(i);
 		studentInformationManagementVO.setTotalPages(((i - 1) / studentInformationManagementVO.getPageSize()) + 1);
@@ -159,7 +208,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		StudentInformationDTO studentInformationDTO = null;
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		List<bysjglxt_student_basic> listStudentBasicInformationByPage = studentInformationManagementDao
-				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO);
+				.listStudentBasicInformationByPageAndSearch(studentInformationManagementVO, college);
 		for (bysjglxt_student_basic bysjglxt_student_basic : listStudentBasicInformationByPage) {
 			studentInformationDTO = new StudentInformationDTO();
 			bysjglxt_student_user = studentInformationManagementDao
@@ -174,8 +223,9 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	}
 
 	@Override
-	public List<String> list_Student_Major() throws Exception {
-		return studentInformationManagementDao.listStudent_Major();
+	public List<bysjglxt_major> list_Student_Major(String userId) throws Exception {
+		String college = getCollegeByUserId(userId);
+		return studentInformationManagementDao.listStudent_Major(college);
 	}
 
 	@Override
@@ -350,13 +400,14 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	}
 
 	@Override
-	public List<StudentInformationDTO> listStudentNoClose() {
+	public List<StudentInformationDTO> listStudentNoClose(String userId) {
 		List<StudentInformationDTO> listStudentNoClose = new ArrayList<StudentInformationDTO>();
 		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
 		bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
 		List<bysjglxt_student_user> listBysjglxtStudentUser = new ArrayList<bysjglxt_student_user>();
+		String college = getCollegeByUserId(userId);
 		// 查找出所有没有关闭的学生
-		listBysjglxtStudentUser = studentInformationManagementDao.getListStudentByNotClose();
+		listBysjglxtStudentUser = studentInformationManagementDao.getListStudentByNotClose(college);
 		for (bysjglxt_student_user bysjglxt_student_user : listBysjglxtStudentUser) {
 			studentInformationDTO = new StudentInformationDTO();
 			bysjglxtStudentBasic = new bysjglxt_student_basic();
@@ -370,15 +421,35 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		return listStudentNoClose;
 	}
 
+	// 根据使用者Id获取学院
+	public String getCollegeByUserId(String userId) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user = studentInformationManagementDao.getTeacherUserById(userId);
+		if (bysjglxt_teacher_user.getUser_teacher_belong_college() == null
+				|| bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() == 0) {
+			return bysjglxt_teacher_user.getUser_teacher_belong_college().trim();
+		}
+		return null;
+	}
+
 	// 导出可以导出毕业设计过程管理手册
 	@Override
-	public ExportGeaduationStudentDTO listStudentGreauation(ExportGeaduationStudentDTO exportGeaduationStudentDTO) {
+	public ExportGeaduationStudentDTO listStudentGreauation(ExportGeaduationStudentDTO exportGeaduationStudentDTO,
+			String userId) {
 		List<bysjglxt_student_user> listStudentUser = new ArrayList<>();
 		List<StudentInformationDTO> listStudentInformationDTO = new ArrayList<>();
 		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
 		bysjglxt_student_basic studentBasic = new bysjglxt_student_basic();
+		// 获取操作者学院
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user = studentInformationManagementDao.getTeacherUserById(userId);
+		if (bysjglxt_teacher_user.getUser_teacher_belong_college() == null
+				|| bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() == 0) {
+			return exportGeaduationStudentDTO;
+		}
 		// 获取可以进行导出的学生信息
-		listStudentUser = studentInformationManagementDao.getListStudentByExport(exportGeaduationStudentDTO);
+		listStudentUser = studentInformationManagementDao.getListStudentByExport(exportGeaduationStudentDTO,
+				bysjglxt_teacher_user.getUser_teacher_belong_college());
 		// 遍历学生user信息拿到学生basic表的信息
 		for (bysjglxt_student_user bysjglxt_student_user : listStudentUser) {
 			// 学生basic信息

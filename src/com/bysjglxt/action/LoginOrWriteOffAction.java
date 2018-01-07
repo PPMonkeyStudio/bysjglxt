@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DO.bysjglxt_admin;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.service.LoginOrWriteOffService;
@@ -67,6 +68,14 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 			ActionContext.getContext().getSession().put("userStudentDTO", userStudentDTO);
 			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
 			http_response.getWriter().write("学生登录成功");
+			break;
+		}
+		// 管理员登录
+		case 3: {
+			bysjglxt_admin bysjglxt_admin = (bysjglxt_admin) loginOrWriteOffService.loginInformation(3, username);
+			ActionContext.getContext().getSession().put("superAdmin", bysjglxt_admin);
+			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
+			http_response.getWriter().write("管理员登录成功");
 			break;
 		}
 		}

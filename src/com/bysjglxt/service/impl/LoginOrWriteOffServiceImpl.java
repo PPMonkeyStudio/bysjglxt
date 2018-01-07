@@ -1,7 +1,7 @@
 package com.bysjglxt.service.impl;
 
 import com.bysjglxt.dao.LoginOrWriteOffDao;
-import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_admin;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
@@ -21,8 +21,6 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 		this.loginOrWriteOffDao = loginOrWriteOffDao;
 	}
 
-	
-	
 	@Override
 	public int login(String username, String password) {
 		if (username == null || username.trim().length() <= 0) {
@@ -34,6 +32,7 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 		int flag = 0;
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_admin bysjglxt_admin = new bysjglxt_admin();
 		// 1.在student_user表中查询
 		bysjglxt_student_user = loginOrWriteOffDao.getBysjglxtStudentUserByNum(username);
 		// 如果在学生user表中查询得到
@@ -64,6 +63,19 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 				return flag;
 			}
 		}
+		// 3.在管理员账号中查询
+		bysjglxt_admin = loginOrWriteOffDao.getAdminByAccount(username);
+		if (bysjglxt_admin == null) {
+			flag = -1;
+		} else {
+			if (bysjglxt_admin.getAdmin_password().equals(md5.GetMD5Code(password))) {
+				flag = 3;
+				return flag;
+			} else {
+				flag = -2;
+				return flag;
+			}
+		}
 		return flag;
 	}
 
@@ -75,7 +87,6 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 			bysjglxt_teacher_basic bysjglxtTeacherBasic = new bysjglxt_teacher_basic();
 			bysjglxt_teacher_user bysjglxtTeacherUser = new bysjglxt_teacher_user();
 			bysjglxt_section bysjglxtSection = new bysjglxt_section();
-			bysjglxt_leader bysjglxtLeader = new bysjglxt_leader();
 			bysjglxtTeacherUser = loginOrWriteOffDao.getBysjglxtTeacherUserByNum(username);
 			if (bysjglxtTeacherUser != null) {
 				bysjglxtTeacherBasic = loginOrWriteOffDao
@@ -85,17 +96,11 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 				bysjglxtSection = loginOrWriteOffDao
 						.getBysjglxtTeacherSection(bysjglxtTeacherUser.getUser_teacher_section());
 			}
-			if (bysjglxtTeacherUser != null) {
-				bysjglxtLeader = loginOrWriteOffDao.getLeaderById(bysjglxtTeacherUser.getUser_teacher_id());
-				if (bysjglxtLeader != null) {
-					teacherInformationDTO.setBysjglxtLeader(bysjglxtLeader);
-				}
-			}
 			teacherInformationDTO.setBysjglxtSection(bysjglxtSection);
 			teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxtTeacherBasic);
 			teacherInformationDTO.setBysjglxtTeacherUser(bysjglxtTeacherUser);
 			return teacherInformationDTO;
-		} else {
+		} else if (role == 2) {
 			// 则说明是学生登录
 			StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
 			bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
@@ -108,6 +113,12 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 			studentInformationDTO.setBysjglxtStudentBasic(bysjglxtStudentBasic);
 			studentInformationDTO.setBysjglxtStudentUser(bysjglxtStudentUser);
 			return studentInformationDTO;
+		} else if (role == 3) {
+			// 则说明是管理员登录
+			bysjglxt_admin bysjglxt_admin = new bysjglxt_admin();
+			bysjglxt_admin = loginOrWriteOffDao.getAdminByAccount(username);
+			return bysjglxt_admin;
 		}
+		return null;
 	}
 }

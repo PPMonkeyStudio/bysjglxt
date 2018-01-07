@@ -2,25 +2,18 @@ package com.bysjglxt.dao;
 
 import java.util.List;
 
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
-import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
-import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
-import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
-import com.bysjglxt.domain.DO.bysjglxt_record_progress;
-import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
-import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
 public interface TopicInformationManagementDao {
 
-	
 	public bysjglxt_process_instance getProcessInstanceByManStatePAndName(String topic_select_student);
-	
+
 	public boolean CreateTopic(bysjglxt_topic newTopic);
 
 	public boolean DeleteTopic(String topicID);
@@ -34,13 +27,13 @@ public interface TopicInformationManagementDao {
 	public boolean notAdoptTopic(String string, String moTime);
 
 	public List<com.bysjglxt.domain.DO.bysjglxt_topic> VO_Topic_By_PageAndSearch(
-			TopicInformationManagementVO topicManagementVO, int studentOrTeacher);
+			TopicInformationManagementVO topicManagementVO, int studentOrTeacher, String collegeId);
 
 	public bysjglxt_topic getBysjglxtTopicById(String topic_id);
 
 	public boolean teacherIsSelect(String topic_teacher);
 
-	public com.bysjglxt.domain.DO.bysjglxt_teacher_user getTeacherUser(String topic_teacher);
+	public bysjglxt_teacher_user getTeacherUser(String topic_teacher);
 
 	public boolean topicIsSelect(String topic_id);
 
@@ -64,7 +57,8 @@ public interface TopicInformationManagementDao {
 
 	public List<bysjglxt_topic> getAllTopic();
 
-	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO, int studentOrTeacher);
+	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO, int studentOrTeacher,
+			String collegeId);
 
 	public boolean updateStudentUserRecord(String studentID);
 
@@ -77,8 +71,6 @@ public interface TopicInformationManagementDao {
 	public boolean deleteTopicSelect(String topic_select_id);
 
 	public bysjglxt_topic_select getStudentTopicSelectByUserId(String studentUserId);
-
-	public bysjglxt_leader getLeader(String user_teacher_id);
 
 	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
 			String teacherUserId);
@@ -110,8 +102,6 @@ public interface TopicInformationManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_task_definition getTaskDefinitionById(String task_instance_task_definition);
 
-	public List<bysjglxt_leader> getAllLeader();
-
 	public boolean createNoti1ceRecord(bysjglxt_notice bysjglxt_notice);
 
 	public com.bysjglxt.domain.DO.bysjglxt_topic_select getSelectTopicById(String selectId);
@@ -130,5 +120,7 @@ public interface TopicInformationManagementDao {
 			String search);
 
 	public com.bysjglxt.domain.DO.bysjglxt_topic getTopicByIdAndStudent(String student_user, String topicId);
+
+	public List<com.bysjglxt.domain.DO.bysjglxt_teacher_user> getListAdminByCollege(String user_teacher_belong_college);
 
 }

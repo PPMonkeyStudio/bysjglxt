@@ -53,14 +53,6 @@ public class test {
 		System.out.println(flag);
 	}
 
-	// 测试采纳课题
-	@Test
-	public void testtt() {
-		List<String> topic_id = new ArrayList<String>();
-		topic_id.add("ffcc3ffb-9578-4ee0-bd5f-30ac73c224f3");
-		boolean flag = topicManagementService.adoptTopic(topic_id);
-		System.out.println(flag);
-	}
 
 	// 测试关闭
 	@Test
@@ -71,22 +63,7 @@ public class test {
 		System.out.println(flag);
 	}
 
-	// 测试未通过
-	@Test
-	public void testtttt() {
-		List<String> topic_id = new ArrayList<String>();
-		topic_id.add("ffcc3ffb-9578-4ee0-bd5f-30ac73c224f3");
-		boolean flag = topicManagementService.notAdoptTopic(topic_id);
-		System.out.println(flag);
-	}
 
-	// 测试分页显示
-	@Test
-	public void testttttt() {
-		TopicInformationManagementVO VO_Topic_By_PageAndSearch = new TopicInformationManagementVO();
-		VO_Topic_By_PageAndSearch = topicManagementService.VO_Topic_By_PageAndSearch(VO_Topic_By_PageAndSearch, 1);
-		System.out.println(VO_Topic_By_PageAndSearch);
-	}
 
 	// 测试选题
 	@Test

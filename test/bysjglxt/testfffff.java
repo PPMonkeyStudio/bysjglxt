@@ -61,14 +61,6 @@ public class testfffff {
 
 	}
 
-	// 测试分页
-	@Test
-	public void testE() {
-		TopicInformationManagementVO topicManagementVO = new TopicInformationManagementVO();
-		topicManagementVO = topicManagementService.VO_Topic_By_PageAndSearch(topicManagementVO, 2);
-		System.out.println(topicManagementVO);
-	}
-
 	// 测试创建课题
 	@Test
 	public void testG() {
