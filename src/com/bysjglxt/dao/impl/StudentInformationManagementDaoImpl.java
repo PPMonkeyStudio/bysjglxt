@@ -13,12 +13,14 @@ import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_major;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
@@ -116,9 +118,10 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 
 	@Override
 	public List<bysjglxt_student_basic> listStudentBasicInformationByPageAndSearch(
-			StudentInformationManagementVO studentInformationManagementVO) {
+			StudentInformationManagementVO studentInformationManagementVO, String college) {
 		Session session = getSession();
-		String hql = "select distinct(basic) from bysjglxt_student_basic basic,bysjglxt_student_user student_user where basic.student_basic_id=student_user.user_student_basic ";
+		String hql = "select distinct(basic) from bysjglxt_student_basic basic,bysjglxt_student_user student_user where basic.student_basic_id=student_user.user_student_basic and student_user.user_student_belong_college='"
+				+ college + "' ";
 		boolean flag = false;
 		// 判断搜索框中的字符串是不是全是数字
 		if (TeamUtil.isDigit(studentInformationManagementVO.getSearch())) {
@@ -217,10 +220,11 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public List<String> listStudent_Major() throws Exception {
+	public List<bysjglxt_major> listStudent_Major(String college) throws Exception {
 		Session session = getSession();
-		List<String> listStudent_Major = new ArrayList<String>();
-		String hql = "select distinct(student_basic_major) from bysjglxt_student_basic";
+		List<bysjglxt_major> listStudent_Major = new ArrayList<bysjglxt_major>();
+		String hql = "select major from bysjglxt_major major,bysjglxt_section section where major.major_belong_section=section.section_id and section_college_id='"
+				+ college + "'";
 		Query query = session.createQuery(hql);
 		listStudent_Major = query.list();
 		return listStudent_Major;
@@ -295,10 +299,11 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public List<bysjglxt_student_basic> getResultBySearch(
-			StudentInformationManagementVO studentInformationManagementVO) {
+	public List<bysjglxt_student_basic> getResultBySearch(StudentInformationManagementVO studentInformationManagementVO,
+			String college) {
 		Session session = getSession();
-		String hql = "select basic from bysjglxt_student_basic basic,bysjglxt_student_user student_user where basic.student_basic_id=student_user.user_student_basic";
+		String hql = "select basic from bysjglxt_student_basic basic,bysjglxt_student_user student_user where basic.student_basic_id=student_user.user_student_basic and student_user.user_student_belong_college='"
+				+ college + "'";
 		boolean flag = false;
 		// 判断搜索框中的字符串是不是全是数字
 		if (TeamUtil.isDigit(studentInformationManagementVO.getSearch())) {
@@ -606,10 +611,11 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public List<bysjglxt_student_user> getListStudentByNotClose() {
+	public List<bysjglxt_student_user> getListStudentByNotClose(String college) {
 		List<bysjglxt_student_user> listStudentByNotClose = new ArrayList<bysjglxt_student_user>();
 		Session session = getSession();
-		String hql = "from bysjglxt_student_user where user_student_is_operate_premission ='1'";
+		String hql = "from bysjglxt_student_user where user_student_is_operate_premission ='1' and user_student_belong_college='"
+				+ college + "' ";
 		Query query = session.createQuery(hql);
 		listStudentByNotClose = query.list();
 		session.clear();
@@ -617,10 +623,12 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	}
 
 	@Override
-	public List<bysjglxt_student_user> getListStudentByExport(ExportGeaduationStudentDTO exportGeaduationStudentDTO) {
+	public List<bysjglxt_student_user> getListStudentByExport(ExportGeaduationStudentDTO exportGeaduationStudentDTO,
+			String college) {
 		List<bysjglxt_student_user> listUser = new ArrayList<>();
 		Session session = getSession();
-		String hql = "select usr from bysjglxt_student_basic basic, bysjglxt_process_definition definition, bysjglxt_student_user usr,bysjglxt_process_instance instance where basic.student_basic_id=usr.user_student_basic and instance.process_instance_process_definition=definition.process_definition_id and instance.process_instance_man=usr.user_student_id and definition.process_definition_name='毕业设计流程'";
+		String hql = "select usr from bysjglxt_student_basic basic, bysjglxt_process_definition definition, bysjglxt_student_user usr,bysjglxt_process_instance instance where basic.student_basic_id=usr.user_student_basic and instance.process_instance_process_definition=definition.process_definition_id and instance.process_instance_man=usr.user_student_id and definition.process_definition_name='毕业设计流程' and usr.user_student_belong_college='"
+				+ college + "'";
 		if (exportGeaduationStudentDTO.getMajor() != null && !("-1".equals(exportGeaduationStudentDTO.getMajor()))) {
 			hql = hql + " and basic.student_basic_major='" + exportGeaduationStudentDTO.getMajor().trim() + "'";
 		}
@@ -631,6 +639,41 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		listUser = query.list();
 		session.clear();
 		return listUser;
+	}
+
+	@Override
+	public bysjglxt_teacher_user getTeacherUserById(String userId) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_id = '" + userId
+				+ "' and user_teacher_is_college_admin=1";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		return bysjglxt_teacher_user;
+	}
+
+	@Override
+	public bysjglxt_major getMajorByMajorId(String majorCode) {
+		bysjglxt_major bysjglxt_major = new bysjglxt_major();
+		Session session = getSession();
+		String hql = "from bysjglxt_major where major_professionalcode = '" + majorCode + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_major = (bysjglxt_major) query.uniqueResult();
+		return bysjglxt_major;
+	}
+
+	@Override
+	public boolean saveObject(Object obj) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(obj);
+			session.flush();
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }

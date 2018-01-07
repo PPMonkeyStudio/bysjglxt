@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-12-27 19:40:04 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-1-6 14:08:34 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_teacher_user" table="BYSJGLXT_TEACHER_USER">
         <id name="user_teacher_id" type="java.lang.String">
@@ -32,11 +32,17 @@
         <property name="user_teacher_gmt_modified" type="java.lang.String">
             <column name="USER_TEACHER_GMT_MODIFIED" />
         </property>
+        <property name="user_teacher_belong_college" type="java.lang.String">
+            <column name="USER_TEACHER_BELONG_COLLEGE" />
+        </property>
         <property name="user_teacher_is_recorder" type="int">
             <column name="USER_TEACHER_IS_RECORDER" />
         </property>
         <property name="user_teacher_is_defence_leader" type="int">
             <column name="USER_TEACHER_IS_DEFENCE_LEADER" />
+        </property>
+        <property name="user_teacher_is_college_admin" type="int">
+            <column name="USER_TEACHER_IS_COLLEGE_ADMIN" />
         </property>
     </class>
 </hibernate-mapping>

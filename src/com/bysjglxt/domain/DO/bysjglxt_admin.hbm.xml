@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-1-6 13:20:33 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.bysjglxt.domain.DO.bysjglxt_admin" table="BYSJGLXT_ADMIN">
+        <id name="admin_id" type="java.lang.String">
+            <column name="ADMIN_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="admin_account" type="java.lang.String">
+            <column name="ADMIN_ACCOUNT" />
+        </property>
+        <property name="admin_password" type="java.lang.String">
+            <column name="ADMIN_PASSWORD" />
+        </property>
+        <property name="admin_gmt_create" type="java.lang.String">
+            <column name="ADMIN_GMT_CREATE" />
+        </property>
+        <property name="admin_gmt_modified" type="java.lang.String">
+            <column name="ADMIN_GMT_MODIFIED" />
+        </property>
+    </class>
+</hibernate-mapping>

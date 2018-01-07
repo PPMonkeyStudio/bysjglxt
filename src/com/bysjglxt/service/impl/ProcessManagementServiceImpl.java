@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bysjglxt.dao.ProcessManagementDao;
-import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
@@ -13,6 +12,7 @@ import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ProcessDTO;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
@@ -196,9 +196,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		bysjglxt_student_user bysjglxt_student_user = null;
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		bysjglxt_task_instance bysjglxt_task_instance = null;
-		List<bysjglxt_leader> listLeader = new ArrayList<bysjglxt_leader>();
 		bysjglxt_section bysjglxt_section = null;
-		bysjglxt_leader bysjglxt_leader = null;
 		bysjglxt_student_basic bysjglxt_student_basic = null;
 		bysjglxt_topic_select bysjglxt_topic_select = null;
 		bysjglxt_task_instance bysjglxt_task_instanceFather = null;
@@ -227,7 +225,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			bysjglxt_section = new bysjglxt_section();
 			bysjglxt_student_user = new bysjglxt_student_user();
 			bysjglxt_student_basic = new bysjglxt_student_basic();
-			bysjglxt_leader = new bysjglxt_leader();
+			List<bysjglxt_teacher_user> listTeacherUser = new ArrayList<>();
+			bysjglxt_teacher_user bysjglxt_teacher_user = null;
 			bysjglxt_task_instance = new bysjglxt_task_instance();
 			bysjglxt_topic_select = new bysjglxt_topic_select();
 			bysjglxt_task_instanceFather = new bysjglxt_task_instance();
@@ -271,13 +270,19 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				}
 				break;
 			case 3:
-				// 领导小组长
-				listLeader = processManagementDao.getListLeader();
-				if (listLeader == null) {
+				bysjglxt_student_user = processManagementDao.getStudentUser(operation);
+				if (bysjglxt_student_user == null) {
+					return -1;
+				}
+				// 系部管理员
+				listTeacherUser = processManagementDao
+						.getListAdminCollegeByCollege(bysjglxt_student_user.getUser_student_belong_college());
+				if (listTeacherUser == null) {
 					return -3;
 				}
-				bysjglxt_leader = listLeader.get(0);
-				bysjglxt_task_instance.setTask_instance_role(bysjglxt_leader.getLeader_teacher_id());
+				bysjglxt_teacher_user = new bysjglxt_teacher_user();
+				bysjglxt_teacher_user = listTeacherUser.get(0);
+				bysjglxt_task_instance.setTask_instance_role(bysjglxt_teacher_user.getUser_teacher_id());
 				break;
 			case 4:
 				// 教研室主任
@@ -287,15 +292,9 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				if (bysjglxt_student_user == null) {
 					return -1;
 				}
-				// 根据学生userid获得basic表信息
-				bysjglxt_student_basic = processManagementDao
-						.getStudentBasicById(bysjglxt_student_user.getUser_student_basic());
-				if (bysjglxt_student_basic == null) {
-					return -1;
-				}
-				// 根据专业名称加获取教研室对象
+				// 根据学生专业获取教研室信息
 				bysjglxt_section = processManagementDao
-						.getSectionByName(bysjglxt_student_basic.getStudent_basic_major());
+						.getSectionByMajorId(bysjglxt_student_user.getUser_student_belong_major());
 				if (bysjglxt_section == null) {
 					return -1;
 				}

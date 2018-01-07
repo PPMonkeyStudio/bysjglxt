@@ -5,7 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.LoginOrWriteOffDao;
-import com.bysjglxt.domain.DO.bysjglxt_leader;
+import com.bysjglxt.domain.DO.bysjglxt_admin;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
@@ -23,9 +23,6 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 		return this.sessionFactory.getCurrentSession();
 	}
 
-	
-	
-	
 	/**
 	 * 根据学号得到学生登录表信息
 	 */
@@ -36,6 +33,7 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		Query query = session.createQuery(hql);
 		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
+		session.clear();
 		return bysjglxt_student_user;
 	}
 
@@ -46,6 +44,7 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		session.clear();
 		return bysjglxt_teacher_user;
 	}
 
@@ -56,6 +55,7 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 		bysjglxt_teacher_basic bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_basic = (bysjglxt_teacher_basic) query.uniqueResult();
+		session.clear();
 		return bysjglxt_teacher_basic;
 	}
 
@@ -66,6 +66,7 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 		bysjglxt_section bysjglxt_section = new bysjglxt_section();
 		Query query = session.createQuery(hql);
 		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		session.clear();
 		return bysjglxt_section;
 	}
 
@@ -76,16 +77,19 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
 		Query query = session.createQuery(hql);
 		bysjglxt_student_basic = (bysjglxt_student_basic) query.uniqueResult();
+		session.clear();
 		return bysjglxt_student_basic;
 	}
 
+	// 根据账号获取系统管理员信息
 	@Override
-	public bysjglxt_leader getLeaderById(String user_teacher_id) {
-		bysjglxt_leader bysjglxt_leader = new bysjglxt_leader();
+	public bysjglxt_admin getAdminByAccount(String username) {
+		bysjglxt_admin bysjglxt_admin = new bysjglxt_admin();
 		Session session = getSession();
-		String hql = "from bysjglxt_leader where leader_teacher_id = '" + user_teacher_id + "'";
+		String hql = "from bysjglxt_admin where admin_account = '" + username + "'";
 		Query query = session.createQuery(hql);
-		bysjglxt_leader = (bysjglxt_leader) query.uniqueResult();
-		return bysjglxt_leader;
+		bysjglxt_admin = (bysjglxt_admin) query.uniqueResult();
+		session.clear();
+		return bysjglxt_admin;
 	}
 }

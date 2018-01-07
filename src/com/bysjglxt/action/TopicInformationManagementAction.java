@@ -162,12 +162,19 @@ public class TopicInformationManagementAction extends ActionSupport
 		http_response.setContentType("text/html;charset=utf-8");
 
 		if (ActionContext.getContext().getSession().get("userStudentDTO") == null) {
-			http_response.getWriter().write(gson.toJson(
-					topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 1)));
+			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+					.get("userTeacherDTO");
+			http_response.getWriter()
+					.write(gson.toJson(
+							topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 1,
+									userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
 		} else {
-
-			http_response.getWriter().write(gson.toJson(
-					topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 2)));
+			StudentInformationDTO userStudentDTO = (StudentInformationDTO) ActionContext.getContext().getSession()
+					.get("userStudentDTO");
+			http_response.getWriter()
+					.write(gson.toJson(
+							topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 2,
+									userStudentDTO.getBysjglxtStudentUser().getUser_student_id())));
 		}
 	}
 
@@ -238,13 +245,19 @@ public class TopicInformationManagementAction extends ActionSupport
 	}
 
 	public void agreeTopicList() throws IOException {
-		topicInformationManagementService.adoptTopic(listAgreeTopicID);
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		topicInformationManagementService.adoptTopic(listAgreeTopicID,
+				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}
 
 	public void refuseTopicList() throws IOException {
-		topicInformationManagementService.notAdoptTopic(listRefuseTopicID);
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		topicInformationManagementService.notAdoptTopic(listRefuseTopicID,
+				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}

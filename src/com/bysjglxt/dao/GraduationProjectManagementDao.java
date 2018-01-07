@@ -107,8 +107,6 @@ public interface GraduationProjectManagementDao {
 	public List<bysjglxt_topic_select> getTeacherTutorStudentAllSelectTopic(TeacherTutorStudentVO teacherTutorStudentVO,
 			String teacherUserId, String actor, String section);
 
-	public com.bysjglxt.domain.DO.bysjglxt_leader getLeader(String teacherUserId);
-
 	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByUserId(String teacherUserId);
 
 	public com.bysjglxt.domain.DO.bysjglxt_dissertation getThesisByStudent(String userId);

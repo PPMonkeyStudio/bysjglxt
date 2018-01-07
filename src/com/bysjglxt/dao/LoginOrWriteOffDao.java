@@ -1,6 +1,5 @@
 package com.bysjglxt.dao;
 
-import com.bysjglxt.domain.DO.bysjglxt_leader;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
@@ -19,6 +18,6 @@ public interface LoginOrWriteOffDao {
 
 	public bysjglxt_student_basic getBysjglxtStudentBasicById(String user_student_basic);
 
-	public bysjglxt_leader getLeaderById(String user_teacher_id);
+	public com.bysjglxt.domain.DO.bysjglxt_admin getAdminByAccount(String username);
 
 }
