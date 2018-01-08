@@ -1087,6 +1087,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	@Override
 	public bysjglxt_taskbook get_TaskBook(String userId) {
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
+		System.out.println("userId:"+userId);
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskBookByUserId(userId);
 		return bysjglxt_taskbook;
 	}

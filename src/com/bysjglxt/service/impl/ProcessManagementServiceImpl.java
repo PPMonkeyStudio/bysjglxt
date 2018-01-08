@@ -44,10 +44,9 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 * @D 1.学生已经进行了选题
 	 * @D 2.没有开启毕业设计流程
 	 */
-	@Override
-	public List<String> listOpenGraduationProjectProcessStudentId(String process_definition_id) {
+	public List<String> listOpenGraduationProjectProcessStudentId(String process_definition_id, String college) {
 		List<String> listSelectStudent = new ArrayList<String>();
-		listSelectStudent = processManagementDao.getListStudentSelect(process_definition_id);
+		listSelectStudent = processManagementDao.getListStudentSelect(process_definition_id, college);
 		return listSelectStudent;
 	}
 
@@ -136,7 +135,9 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 * 
 	 */
 	@Override
-	public int openGraduProcess() {
+	public int openGraduProcess(String teacherUserId) {
+		// 获取系部管理员学院
+		String college = getCollegeByUserId(teacherUserId);
 		// 根据学生userId获取学生姓名
 		List<String> listGraduProcess = new ArrayList<>();
 		String studentName;
@@ -147,7 +148,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		if (processDefinition == null)
 			return 2;
 		// 获取需要开启流程的学生列表
-		listGraduProcess = listOpenGraduationProjectProcessStudentId(processDefinition.getProcess_definition_id());
+		listGraduProcess = listOpenGraduationProjectProcessStudentId(processDefinition.getProcess_definition_id(),
+				college);
 		// 遍历学生依次开启毕业设计流程
 		for (String stringId : listGraduProcess) {
 			studentName = null;
@@ -159,10 +161,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			if (studentName == null || studentName.trim().length() <= 0) {
 				continue;
 			}
-
 			openProcess(processDefinition.getProcess_definition_name() + "——" + studentName,
 					processDefinition.getProcess_definition_id(), stringId, 2);
-
 			if (i != 1) {
 				return -3;
 			}

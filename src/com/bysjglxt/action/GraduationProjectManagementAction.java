@@ -85,14 +85,12 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * 
 	 */
 	public String MyGraduationProjectPage() {
-		// System.out.println("MyTutorGraduationProjectStudentID:" +
-		// MyTutorGraduationProjectStudentID);
-		// if (MyTutorGraduationProjectStudentID != null) {
-		// ActionContext.getContext().getSession().put("MyTutorGraduationProjectStudentID",
-		// MyTutorGraduationProjectStudentID);
-		// } else {
-		// ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
-		// }
+		if (MyTutorGraduationProjectStudentID != null) {
+			ActionContext.getContext().getSession().put("MyTutorGraduationProjectStudentID",
+					MyTutorGraduationProjectStudentID);
+		} else {
+			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
+		}
 		return "MyGraduationProjectPage";
 	}
 

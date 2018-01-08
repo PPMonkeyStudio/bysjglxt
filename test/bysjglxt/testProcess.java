@@ -69,22 +69,4 @@ public class testProcess {
 		System.out.println(processManagementVo);
 	}
 
-	// 测试获取所有可以进行选题的学生
-	@Test
-	public void testGetAllStudentSelect() {
-		List<String> ll = new ArrayList<>();
-		ll = processManagementService.listOpenGraduationProjectProcessStudentId("d2bdf308-de04-4809-a75a-462bc7202bbf");
-		for (String string : ll) {
-			System.out.println("string:" + string);
-		}
-	}
-
-	// 开启毕业设计流程
-	@Test
-	public void testOpenGr() {
-
-		System.out.println(processManagementService.openGraduProcess());
-
-	}
-
 }

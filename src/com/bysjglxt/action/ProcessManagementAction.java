@@ -198,7 +198,10 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	 */
 	public void openGraduProcess() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(processManagementService.openGraduProcess());
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		http_response.getWriter().write(processManagementService
+				.openGraduProcess(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id()));
 	}
 
 	/**

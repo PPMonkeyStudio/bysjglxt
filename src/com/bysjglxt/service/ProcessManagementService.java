@@ -14,12 +14,7 @@ public interface ProcessManagementService {
 	/**
 	 * 开启毕业设计流程
 	 */
-	public int openGraduProcess();
-
-	/**
-	 * 获取所有需要进行选题的学生id
-	 */
-	public List<String> listOpenGraduationProjectProcessStudentId(String process_definition_id);
+	public int openGraduProcess(String teacherUserId);
 
 	/**
 	 * 获得当前正在进行的选题流程实例
