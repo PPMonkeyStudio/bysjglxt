@@ -94,6 +94,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			Session session = getSession();
 			String hql = "update bysjglxt_topic set topic_examine_state = '已关闭',topic_gmt_modified='" + moTime
 					+ "' where topic_id='" + string + "'";
+			System.out.println(hql);
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
@@ -123,7 +124,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
 			int studentOrTeacher, String collegeId) {
 		Session session = getSession();
-		String hql = "from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher=teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college='"
+		String hql = "select topic from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher=teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college='"
 				+ collegeId + "'";
 		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
 			hql = hql + " and topic.topic_source='" + topicManagementVO.getSource().trim() + "'";
@@ -358,7 +359,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO, int studentOrTeacher,
 			String collegeId) {
 		Session session = getSession();
-		String hql = "from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher=teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college='"
+		String hql = "select topic from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher=teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college='"
 				+ collegeId + "'";
 		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
 			hql = hql + " and topic_source='" + topicManagementVO.getSource().trim() + "'";
@@ -813,8 +814,14 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 
 	@Override
 	public List<bysjglxt_teacher_user> getListAdminByCollege(String user_teacher_belong_college) {
-
-		return null;
+		List<bysjglxt_teacher_user> teacherUser = new ArrayList<bysjglxt_teacher_user>();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_belong_college='" + user_teacher_belong_college
+				+ "' and user_teacher_is_college_admin=1";
+		Query query = session.createQuery(hql);
+		teacherUser = query.list();
+		session.clear();
+		return teacherUser;
 	}
 
 }

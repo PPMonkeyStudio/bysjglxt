@@ -12,5 +12,5 @@
 	<import resource="spring/GraduationProjectManagement.xml" />
 	<import resource="spring/ProcessManagement.xml" />
 	<import resource="spring/NoticeManagement.xml" />
-
+	<import resource="spring/CollegeManagement.xml" />
 </beans>
