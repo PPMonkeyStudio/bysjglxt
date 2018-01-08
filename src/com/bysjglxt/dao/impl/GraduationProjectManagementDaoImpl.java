@@ -276,6 +276,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		Session session = getSession();
 		String hql = "from bysjglxt_taskbook where bysjglxt_taskbook_student = '" + userId + "'";
+		System.out.println("hql:" + hql);
 		Query query = session.createQuery(hql);
 		bysjglxt_taskbook = (bysjglxt_taskbook) query.uniqueResult();
 		session.clear();
