@@ -172,7 +172,7 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	}
 
 	/**
-	 * 启动流程
+	 * 启动选题流程
 	 * 
 	 * @throws IOException
 	 */
@@ -186,16 +186,8 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 											bootProcess.getProcess_instance_process_definition(),
 											((TeacherInformationDTO) ActionContext.getContext().getSession()
 													.get("userTeacherDTO")).getBysjglxtTeacherUser()
-															.getUser_teacher_id()));
-		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
-			http_response
-					.getWriter().write(
-							processManagementService
-									.openProcess(bootProcess.getProcess_instance_name(),
-											bootProcess.getProcess_instance_process_definition(),
-											((StudentInformationDTO) ActionContext.getContext().getSession()
-													.get("userStudentDTO")).getBysjglxtStudentUser()
-															.getUser_student_id()));
+															.getUser_teacher_id(),
+											1));
 		}
 	}
 

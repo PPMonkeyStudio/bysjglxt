@@ -62,7 +62,7 @@ public interface ProcessManagementService {
 	 * @return -4 系统繁忙，所输入的参数有问题
 	 * @return -5 毕业设计 学生未选题
 	 */
-	public int openProcess(String processInstanceName, String process_definition_id, String operation);
+	public int openProcess(String processInstanceName, String process_definition_id, String operation, int fla);
 
 	/**
 	 * 遍历出所有的定义表

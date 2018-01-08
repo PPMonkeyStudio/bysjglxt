@@ -83,6 +83,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 
 	@Override
 	public boolean CreateTopic(TopicInformationManagementDTO topicInformationDTO) {
+		System.out.println("ppp");
 		boolean flag = false;
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
@@ -91,8 +92,10 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUser(
 				topicInformationDTO.getTeacherInformationDTO().getBysjglxtTeacherUser().getUser_teacher_id());
 		if (bysjglxt_teacher_user == null) {
+			System.out.println("lplpko");
 			return false;
 		}
+		System.out.println(":kokoji");
 		bysjglxt_topic newTopic = new bysjglxt_topic();
 		newTopic = topicInformationDTO.getBysjglxtTopic();
 		if (newTopic != null) {
@@ -103,8 +106,11 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			newTopic.setTopic_teacher(bysjglxt_teacher_user.getUser_teacher_id());
 			newTopic.setTopic_student_num(0);
 			newTopic.setTopic_student_max(-1);
-			flag = topicInformationManagementDao.addObject(newTopic);
+			System.out.println("fo");
+			System.out.println(newTopic);
+			flag = topicInformationManagementDao.CreateTopic(newTopic);
 		} else {
+			System.out.println("false");
 			return false;
 		}
 		if (!flag)
