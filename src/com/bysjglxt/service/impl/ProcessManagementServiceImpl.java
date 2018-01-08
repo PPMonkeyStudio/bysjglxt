@@ -54,7 +54,9 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 * 获得正在进行的选题流程实例
 	 */
 	@Override
-	public ProcessDTO getCurrentTaskIng() {
+	public ProcessDTO getCurrentTaskIng(String userId, int role) {
+		// 获取学院
+		String college = collegeJudge(role, userId);
 		ProcessDTO processDTO = new ProcessDTO();
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		List<TaskDTO> listTaskBelongProcess = new ArrayList<TaskDTO>();
@@ -62,8 +64,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		bysjglxt_task_definition taskDefinition = new bysjglxt_task_definition();
 		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
 		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
-		// 1.根据流程实例状态获得
-		bysjglxt_process_instance = processManagementDao.getSelectProcessInstance();
+		// 1.根据流程实例状态获得选题流程实例
+		bysjglxt_process_instance = processManagementDao.getSelectProcessInstance(college);
 		if (bysjglxt_process_instance != null) {
 			// 根据流程实例中流程定义Id获取流程定义
 			bysjglxt_process_definition = processManagementDao
@@ -137,7 +139,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	@Override
 	public int openGraduProcess(String teacherUserId) {
 		// 获取系部管理员学院
-		String college = getCollegeByUserId(teacherUserId);
+		String college = collegeJudge(1, teacherUserId);
 		// 根据学生userId获取学生姓名
 		List<String> listGraduProcess = new ArrayList<>();
 		String studentName;
@@ -170,13 +172,30 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		return 1;
 	}
 
-	// 根据使用者Id获取学院
-	public String getCollegeByUserId(String userId) {
-		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
-		bysjglxt_teacher_user = processManagementDao.getTeacherUserByNum(userId);
-		if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
-				&& bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >= 0) {
-			return bysjglxt_teacher_user.getUser_teacher_belong_college().trim();
+	// 根据user Id以及用户角色身份获取用户是哪个系的
+	public String collegeJudge(int studentOrTeacher, String userId) {
+		// 老师
+		if (studentOrTeacher == 1) {
+			bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_teacher_user = processManagementDao.getTeacherUserByNum(userId);
+			if (bysjglxt_teacher_user == null) {
+				return null;
+			}
+			if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
+					&& bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() > 0) {
+				return bysjglxt_teacher_user.getUser_teacher_belong_college();
+			}
+		} else {
+			// 学生
+			bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+			bysjglxt_student_user = processManagementDao.getStudentUser(userId);
+			if (bysjglxt_student_user == null) {
+				return null;
+			}
+			if (bysjglxt_student_user.getUser_student_belong_college() != null
+					&& bysjglxt_student_user.getUser_student_belong_college().trim().length() > 0) {
+				return bysjglxt_student_user.getUser_student_belong_college();
+			}
 		}
 		return null;
 	}
@@ -229,13 +248,10 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -3;
 		// 遍历任务表中属于这个流程的任务定义
 		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
-		System.out.println("list_bysjglxt_task_definition:" + list_bysjglxt_task_definition.size());
-		System.out.println("------------------------------");
 		// 判断第一个任务实例为正在进行
 		int x = 0;
 		String section = null;
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
-			System.out.println("lplplp:" + bysjglxt_task_definition);
 			x++;
 			section = null;
 			bysjglxt_section = new bysjglxt_section();
@@ -258,13 +274,11 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				// 判断那是否是学生点击开启流程
 				bysjglxt_student_user = processManagementDao.getStudentUser(operation);
 				if (bysjglxt_student_user == null) {
-					System.out.println("g");
 					return -1;
 				}
 				// 根据学生user ID获取学生选题表信息
 				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
 				if (bysjglxt_topic_select == null) {
-					System.out.println("p");
 					return -3;
 				}
 				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
@@ -290,7 +304,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			case 3:
 				String roleCollege = "";
 				if (fla == 1) {
-					roleCollege = getCollegeByUserId(operation);
+					roleCollege = collegeJudge(1, operation);
 				} else {
 					bysjglxt_student_user = processManagementDao.getStudentUser(operation);
 					if (bysjglxt_student_user == null) {
@@ -302,7 +316,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				// 系部管理员
 				listTeacherUser = processManagementDao.getListAdminCollegeByCollege(roleCollege);
 				if (listTeacherUser == null) {
-					System.out.println("jihugy");
 					return -3;
 				}
 				bysjglxt_teacher_user = new bysjglxt_teacher_user();
@@ -504,7 +517,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 *
 	 */
 	@Override
-	public ProcessDTO getCurrentTaskDTO(String userId) {
+	public ProcessDTO getCurrentTaskDTO(String userId, int role) {
+		String college = collegeJudge(role, userId);
 		TaskDTO taskDTO = new TaskDTO();
 		List<TaskDTO> listTaskDTO = new ArrayList<TaskDTO>();
 		ProcessDTO processDTO = new ProcessDTO();
@@ -512,8 +526,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		List<bysjglxt_task_instance> list_bysjglxt_task_instance = new ArrayList<bysjglxt_task_instance>();
-		// 1.根据用户Id及流程实例状态获取用户正在进行的流程实例
-		bysjglxt_process_instance = processManagementDao.getProcessInstanceByUserAndState(userId);
+		// 1.根据学院用户Id及流程实例状态获取用户正在进行的流程实例
+		bysjglxt_process_instance = processManagementDao.getProcessInstanceByUserAndState(userId, college);
 		// 2.根据流程定义ID获取流程定义
 		if (bysjglxt_process_instance != null) {
 			bysjglxt_process_definition = processManagementDao
@@ -698,29 +712,26 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 
 	// 获取某个流程正在进行的任务实例
 	//
-	@Override
-	public ProcessDetailDTO getTasking(String userId) {
-		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
-		bysjglxt_task_instance taskInstanceing = new bysjglxt_task_instance();
-		ProcessDetailDTO processDetailDTO = new ProcessDetailDTO();
-		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<bysjglxt_task_instance>();
-		// 根据1.在一个操作者中只有一个流程实例处于正在活动的状态获取流程实例
-		bysjglxt_process_instance = processManagementDao.getProcessInstanceByUserAndState(userId);
-		if (bysjglxt_process_instance == null)
-			return null;
-		// 根据流程实例获取所有属于改流程的任务实例
-		listTaskInstance = processManagementDao
-				.getListTaskInstanceByProcessInstanceId(bysjglxt_process_instance.getProcess_instance_id());
-		for (bysjglxt_task_instance bysjglxt_task_instance : listTaskInstance) {
-			// 根据任务实例也只会有一个处于正在进行的状态遍历属于该流程实例的任务实例
-			if (bysjglxt_task_instance.getTask_instance_state() == 1) {
-				taskInstanceing = bysjglxt_task_instance;
-				break;
-			}
-		}
-		processDetailDTO.setBysjglxtTaskInstance(taskInstanceing);
-		processDetailDTO.setBysjglxtProcessInstance(bysjglxt_process_instance);
-		return processDetailDTO;
-	}
+	/*
+	 * @Override public ProcessDetailDTO getTasking(String userId) {
+	 * bysjglxt_process_instance bysjglxt_process_instance = new
+	 * bysjglxt_process_instance(); bysjglxt_task_instance taskInstanceing = new
+	 * bysjglxt_task_instance(); ProcessDetailDTO processDetailDTO = new
+	 * ProcessDetailDTO(); List<bysjglxt_task_instance> listTaskInstance = new
+	 * ArrayList<bysjglxt_task_instance>(); //
+	 * 根据1.在一个操作者中只有一个流程实例处于正在活动的状态获取流程实例 bysjglxt_process_instance =
+	 * processManagementDao.getProcessInstanceByUserAndState(userId); if
+	 * (bysjglxt_process_instance == null) return null; // 根据流程实例获取所有属于改流程的任务实例
+	 * listTaskInstance = processManagementDao
+	 * .getListTaskInstanceByProcessInstanceId(bysjglxt_process_instance.
+	 * getProcess_instance_id()); for (bysjglxt_task_instance
+	 * bysjglxt_task_instance : listTaskInstance) { //
+	 * 根据任务实例也只会有一个处于正在进行的状态遍历属于该流程实例的任务实例 if
+	 * (bysjglxt_task_instance.getTask_instance_state() == 1) { taskInstanceing
+	 * = bysjglxt_task_instance; break; } }
+	 * processDetailDTO.setBysjglxtTaskInstance(taskInstanceing);
+	 * processDetailDTO.setBysjglxtProcessInstance(bysjglxt_process_instance);
+	 * return processDetailDTO; }
+	 */
 
 }

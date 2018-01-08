@@ -99,11 +99,9 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-
 			processManagementVO = processManagementService.getMyTaskByPage(processManagementVO,
 					((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
 							.getBysjglxtTeacherUser().getUser_teacher_id());
-
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 
 			processManagementVO = processManagementService.getMyTaskByPage(processManagementVO,
@@ -215,13 +213,16 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter().write(gson.toJson(processManagementService.getCurrentTaskDTO(
-					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
+			http_response.getWriter()
+					.write(gson.toJson(processManagementService.getCurrentTaskDTO(
+							(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"),
+							1)));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(processManagementService.getCurrentTaskDTO(
 							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
-									.getBysjglxtStudentUser().getUser_student_id())));
+									.getBysjglxtStudentUser().getUser_student_id(),
+							2)));
 		}
 	}
 
@@ -233,7 +234,21 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(gson.toJson(processManagementService.getCurrentTaskIng()));
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(processManagementService.getCurrentTaskIng(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id(),
+							1)));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(processManagementService.getCurrentTaskIng(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id(),
+							2)));
+		}
+
+		// http_response.getWriter().write(gson.toJson(processManagementService.getCurrentTaskIng()));
 	}
 
 	/**

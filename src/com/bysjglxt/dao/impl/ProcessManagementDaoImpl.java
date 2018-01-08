@@ -435,11 +435,12 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	}
 
 	@Override
-	public bysjglxt_process_instance getProcessInstanceByUserAndState(String userId) {
+	public bysjglxt_process_instance getProcessInstanceByUserAndState(String userId, String college) {
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		Session session = getSession();
-		String hql = "from bysjglxt_process_instance where process_instance_man='" + userId
-				+ "' and process_instance_state='活动'";
+		String hql = "select instance from bysjglxt_process_instance instance,bysjglxt_teacher_user teacherUser where teacherUser.user_teacher_id=instance.process_instance_man and teacherUser.user_teacher_belong_college='"
+				+ college + "' and instance.process_instance_man='" + userId
+				+ "' and instance.process_instance_state='活动'";
 		Query query = session.createQuery(hql);
 		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
 		return bysjglxt_process_instance;
@@ -489,10 +490,12 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	}
 
 	@Override
-	public bysjglxt_process_instance getSelectProcessInstance() {
+	public bysjglxt_process_instance getSelectProcessInstance(String college) {
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		Session session = getSession();
-		String hql = "select processInstance from bysjglxt_process_instance processInstance,bysjglxt_process_definition processDefinition where processInstance.process_instance_process_definition=processDefinition.process_definition_id ";
+		String hql = "select processInstance from bysjglxt_teacher_user teacherUser,bysjglxt_process_instance processInstance,bysjglxt_process_definition processDefinition where teacherUser.user_teacher_belong_college='"
+				+ college
+				+ "' and teacherUser.user_teacher_id=processInstance.process_instance_man and processInstance.process_instance_process_definition=processDefinition.process_definition_id ";
 		hql = hql
 				+ " and processDefinition.process_definition_name='选题流程' and processInstance.process_instance_state='活动'";
 		Query query = session.createQuery(hql);
