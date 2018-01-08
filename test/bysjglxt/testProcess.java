@@ -60,15 +60,6 @@ public class testProcess {
 		}
 	}
 
-	// 测试开启流程
-	@Test
-	public void testOpenProcess() {
-		int i = 0;
-		i = processManagementService.openProcess("TheOne", "cb339fb5-b0d6-49aa-b389-ffa8dc3d690a",
-				"00171b55-b96b-4f2b-97f0-58f11a22ae74");
-		System.out.println(i);
-	}
-
 	// 测试我的任务
 	@Test
 	public void testMyTask() {

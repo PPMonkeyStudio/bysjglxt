@@ -159,13 +159,26 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			if (studentName == null || studentName.trim().length() <= 0) {
 				continue;
 			}
+
 			openProcess(processDefinition.getProcess_definition_name() + "——" + studentName,
-					processDefinition.getProcess_definition_id(), stringId);
+					processDefinition.getProcess_definition_id(), stringId, 2);
+
 			if (i != 1) {
 				return -3;
 			}
 		}
 		return 1;
+	}
+
+	// 根据使用者Id获取学院
+	public String getCollegeByUserId(String userId) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user = processManagementDao.getTeacherUserByNum(userId);
+		if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
+				&& bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >= 0) {
+			return bysjglxt_teacher_user.getUser_teacher_belong_college().trim();
+		}
+		return null;
 	}
 
 	/**
@@ -177,7 +190,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 * @return
 	 */
 	@Override
-	public int openProcess(String processInstanceName, String process_definition_id, String operation) {
+	public int openProcess(String processInstanceName, String process_definition_id, String operation, int fla) {
 		// 判断用户是否已经开启该流程
 		bysjglxt_process_instance processInstanceIsOpen = new bysjglxt_process_instance();
 		// 根据流程定义ID以及流程实例化者ID判断是否已经开启流程
@@ -216,10 +229,13 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			return -3;
 		// 遍历任务表中属于这个流程的任务定义
 		list_bysjglxt_task_definition = processManagementDao.getListBelongProcess(process_definition_id);
+		System.out.println("list_bysjglxt_task_definition:" + list_bysjglxt_task_definition.size());
+		System.out.println("------------------------------");
 		// 判断第一个任务实例为正在进行
 		int x = 0;
 		String section = null;
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
+			System.out.println("lplplp:" + bysjglxt_task_definition);
 			x++;
 			section = null;
 			bysjglxt_section = new bysjglxt_section();
@@ -242,11 +258,13 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				// 判断那是否是学生点击开启流程
 				bysjglxt_student_user = processManagementDao.getStudentUser(operation);
 				if (bysjglxt_student_user == null) {
+					System.out.println("g");
 					return -1;
 				}
 				// 根据学生user ID获取学生选题表信息
 				bysjglxt_topic_select = processManagementDao.getStudentSelectTopicByStudentUserID(operation);
 				if (bysjglxt_topic_select == null) {
+					System.out.println("p");
 					return -3;
 				}
 				bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_tutor());
@@ -270,14 +288,21 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				}
 				break;
 			case 3:
-				bysjglxt_student_user = processManagementDao.getStudentUser(operation);
-				if (bysjglxt_student_user == null) {
-					return -1;
+				String roleCollege = "";
+				if (fla == 1) {
+					roleCollege = getCollegeByUserId(operation);
+				} else {
+					bysjglxt_student_user = processManagementDao.getStudentUser(operation);
+					if (bysjglxt_student_user == null) {
+						return -1;
+					}
+					roleCollege = bysjglxt_student_user.getUser_student_belong_college();
 				}
+
 				// 系部管理员
-				listTeacherUser = processManagementDao
-						.getListAdminCollegeByCollege(bysjglxt_student_user.getUser_student_belong_college());
+				listTeacherUser = processManagementDao.getListAdminCollegeByCollege(roleCollege);
 				if (listTeacherUser == null) {
+					System.out.println("jihugy");
 					return -3;
 				}
 				bysjglxt_teacher_user = new bysjglxt_teacher_user();

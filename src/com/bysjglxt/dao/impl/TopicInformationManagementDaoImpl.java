@@ -45,22 +45,14 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			flag = false;
 			e.printStackTrace();
 		}
-
 		return flag;
 	}
 
 	@Override
 	public boolean CreateTopic(bysjglxt_topic newTopic) {
 		boolean flag = true;
-		try {
-			Session session = getSession();
-			session.saveOrUpdate(newTopic);
-			session.flush();
-		} catch (Exception e) {
-			flag = false;
-			e.printStackTrace();
-		}
-
+		Session session = getSession();
+		session.save(newTopic);
 		return flag;
 	}
 
@@ -102,6 +94,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			Session session = getSession();
 			String hql = "update bysjglxt_topic set topic_examine_state = '已关闭',topic_gmt_modified='" + moTime
 					+ "' where topic_id='" + string + "'";
+			System.out.println(hql);
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
@@ -131,7 +124,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public List<bysjglxt_topic> VO_Topic_By_PageAndSearch(TopicInformationManagementVO topicManagementVO,
 			int studentOrTeacher, String collegeId) {
 		Session session = getSession();
-		String hql = "from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher=teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college='"
+		String hql = "select topic from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher=teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college='"
 				+ collegeId + "'";
 		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
 			hql = hql + " and topic.topic_source='" + topicManagementVO.getSource().trim() + "'";
@@ -178,6 +171,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_topic where topic_id ='" + topic_id + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		session.clear();
 		return bysjglxt_topic;
 	}
 
@@ -190,6 +184,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 				+ "' and user_teacher_max_guidance > user_teacher_guidance_num";
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		session.clear();
 		if (bysjglxt_teacher_user != null) {
 			flag = true;
 		}
@@ -204,6 +199,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_topic where topic_id='" + topic_id + "' and topic_student_max>topic_student_num";
 		Query query = session.createQuery(hql);
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		session.clear();
 		if (bysjglxt_topic != null) {
 			flag = true;
 		}
@@ -217,6 +213,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + topic_teacher + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		session.clear();
 		return bysjglxt_teacher_user;
 	}
 
@@ -320,6 +317,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + topic_teacher + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		session.clear();
 		return bysjglxt_teacher_user;
 	}
 
@@ -330,6 +328,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_teacher_basic where teacher_basic_id='" + user_teacher_basic + "'";
 		Query query = session.createQuery(hql);
 		TeacherBasicInformation = (bysjglxt_teacher_basic) query.uniqueResult();
+		session.clear();
 		return TeacherBasicInformation;
 	}
 
@@ -340,6 +339,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_section where section_id ='" + user_teacher_section + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		session.clear();
 		return bysjglxt_section;
 	}
 
@@ -351,6 +351,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 				+ college + "' and topic.topic_examine_state = '审核已通过'";
 		Query query = session.createQuery(hql);
 		listAllTopic = query.list();
+		session.clear();
 		return listAllTopic;
 	}
 
@@ -358,7 +359,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public List<bysjglxt_topic> VO_Topic_BySearch(TopicInformationManagementVO topicManagementVO, int studentOrTeacher,
 			String collegeId) {
 		Session session = getSession();
-		String hql = "from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher=teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college='"
+		String hql = "select topic from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher=teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college='"
 				+ collegeId + "'";
 		if (topicManagementVO.getSource() != null && topicManagementVO.getSource().trim().length() > 0) {
 			hql = hql + " and topic_source='" + topicManagementVO.getSource().trim() + "'";
@@ -410,6 +411,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_student_user where user_student_id ='" + studentID + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
+		session.clear();
 		return bysjglxt_student_user;
 	}
 
@@ -420,6 +422,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_topic_select where topic_select_topic = '" + topicId + "'";
 		Query query = session.createQuery(hql);
 		listTopicSelect = query.list();
+		session.clear();
 		return listTopicSelect;
 	}
 
@@ -461,6 +464,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_topic_select where topic_select_student = '" + studentUserId + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		session.clear();
 		return bysjglxt_topic_select;
 	}
 
@@ -555,6 +559,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_topic where topic_id = '" + topicID + "' and topic_student like '" + sel + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		session.clear();
 		return bysjglxt_topic;
 	}
 
@@ -602,6 +607,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_student_user where user_student_id = '" + userId + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
+		session.clear();
 		return bysjglxt_student_user;
 	}
 
@@ -645,6 +651,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_process_definition where process_definition_name = '" + string + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_process_definition = (bysjglxt_process_definition) query.uniqueResult();
+		session.clear();
 		return bysjglxt_process_definition;
 	}
 
@@ -657,6 +664,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 				+ process_definition_id + "' and process_instance_state = '" + string + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		session.clear();
 		return bysjglxt_process_instance;
 	}
 
@@ -668,6 +676,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 				+ "' and task_instance_state = '" + i + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
+		session.clear();
 		return bysjglxt_task_instance;
 	}
 
@@ -678,6 +687,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_task_definition where task_definition_id = '" + task_instance_task_definition + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
+		session.clear();
 		return bysjglxt_task_definition;
 	}
 
@@ -701,6 +711,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_topic_select where topic_select_id = '" + selectId + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		session.clear();
 		return bysjglxt_topic_select;
 	}
 
@@ -711,6 +722,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_topic_select where topic_select_topic = '" + selectId + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		session.clear();
 		return bysjglxt_topic_select;
 	}
 
@@ -724,6 +736,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 				+ "' and processInstance.process_instance_state='活动' and processDefinition.process_definition_name='选题流程' ";
 		Query query = session.createQuery(hql);
 		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		session.clear();
 		return bysjglxt_process_instance;
 	}
 
@@ -734,6 +747,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		String hql = "from bysjglxt_task_definition where task_definition_name = '" + string + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
+		session.clear();
 		return bysjglxt_task_definition;
 	}
 
@@ -746,6 +760,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 				+ "' and task_instance_task_definition = '" + task_definition_id + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
+		session.clear();
 		return bysjglxt_task_instance;
 	}
 
@@ -793,13 +808,20 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 				+ "' and processInstance.process_instance_state='活动' and processDefinition.process_definition_name='毕业设计流程' ";
 		Query query = session.createQuery(hql);
 		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		session.clear();
 		return bysjglxt_process_instance;
 	}
 
 	@Override
 	public List<bysjglxt_teacher_user> getListAdminByCollege(String user_teacher_belong_college) {
-
-		return null;
+		List<bysjglxt_teacher_user> teacherUser = new ArrayList<bysjglxt_teacher_user>();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_belong_college='" + user_teacher_belong_college
+				+ "' and user_teacher_is_college_admin=1";
+		Query query = session.createQuery(hql);
+		teacherUser = query.list();
+		session.clear();
+		return teacherUser;
 	}
 
 }

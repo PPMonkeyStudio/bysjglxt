@@ -51,7 +51,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			return -1;
 		bysjglxt_topic_select.setTopic_select_teacher_review(reviewId);
 		bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
-		System.out.println(bysjglxt_topic_select);
 		flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
 		if (!flag)
 			return -1;
@@ -60,20 +59,16 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_process_instance = topicInformationManagementDao
 				.getProcessInstanceByManStatePAndName(bysjglxt_topic_select.getTopic_select_student());
 		if (bysjglxt_process_instance != null) {
-			System.out.println("f");
 			// 根据任务定义名获取任务定义表
 			bysjglxt_task_definition = topicInformationManagementDao.getTaskDefinitionByName("评阅老师填写评阅审查表");
 			if (bysjglxt_task_definition != null) {
 				// 根据流程实例Id以及任务定义ID可以获取任务实例表
-				System.out.println("g");
 				bysjglxt_task_instance = topicInformationManagementDao.getTaskInstanceByNameAndProcessInstanceId(
 						bysjglxt_task_definition.getTask_definition_id(),
 						bysjglxt_process_instance.getProcess_instance_id());
 				if (bysjglxt_task_instance != null) {
-					System.out.println("k");
 					bysjglxt_task_instance
 							.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_review());
-					System.out.println(bysjglxt_task_instance);
 					topicInformationManagementDao.saveObj(bysjglxt_task_instance);
 				}
 			}
@@ -105,6 +100,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			newTopic.setTopic_student_max(-1);
 			flag = topicInformationManagementDao.addObject(newTopic);
 		} else {
+			System.out.println("false");
 			return false;
 		}
 		if (!flag)
