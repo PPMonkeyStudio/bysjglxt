@@ -83,7 +83,7 @@
 				<li class="dropdown" style="float: left;">
 					<a
 						href="<%=basePath%>loginLogout/LoginLogoutManagement_index">
-						<span>首页</span>
+						<span>说明</span>
 					</a>
 				</li>
 				<!--  -->
@@ -127,13 +127,13 @@
 					</ul>
 				</li>
 				<!--  -->
-				<li class="college_control dropdown" style="float: left;">
+				<li class=" dropdown" style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>流程</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
 					</a>
 					<ul class="dropdown-menu">
-						<li>
+						<li class="college_control">
 							<a
 								href="<%=basePath%>process/ProcessManagement_ProcessDefinitionListPage">流程列表</a>
 						</li>
@@ -167,22 +167,12 @@
 						<!-- 						</li> -->
 					</ul>
 				</li>
-				<!--  -->
-
-				<li class="college_control dropdown" style="float: left;">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						<span>流程</span>
-						<i class="icon-submenu lnr lnr-chevron-down"></i>
+				<!-- 由系统管理员唯一控制的模块，系统管理员也只可以控制这一个模块 -->
+				<li class="dropdown" style="float: left;">
+					<a
+						href="#">
+						<span>院系管理</span>
 					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a
-								href="<%=basePath%>process/ProcessManagement_ProcessDefinitionListPage">流程列表</a>
-						</li>
-						<li>
-							<a href="<%=basePath%>process/ProcessManagement_MyTask">我的任务</a>
-						</li>
-					</ul>
 				</li>
 				<!--  -->
 			</ul>

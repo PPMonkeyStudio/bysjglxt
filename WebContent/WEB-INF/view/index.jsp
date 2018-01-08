@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!---------------------------------------------------------------------------------------------------->
 <!---------------------------------------------------------------------------------------------------->
-<title>首页</title>
+<title>说明</title>
 </head>
 <body>
 	<s:action name="LoginLogoutManagement_navbar" namespace="/loginLogout"
