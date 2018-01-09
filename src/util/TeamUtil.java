@@ -147,6 +147,7 @@ public class TeamUtil {
 		String s = uuid.toString();
 		return s;
 	}
+	
 
 	// 判断一个字符是否是中文
 	public static boolean isChinese(char c) {
