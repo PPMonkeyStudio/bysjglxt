@@ -63,7 +63,12 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '无';
+					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].reviewTeacher != null) {
+						new_td.innerHTML = myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].reviewTeacher.bysjglxtTeacherBasic.name;
+					} else {
+						new_td.innerHTML = '未分配';
+					}
+
 					/*
 					 * 
 					 */
@@ -170,7 +175,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 								+ '" onclick="update_defence_leader(this)" >答辩评分</a></li>'
 								+ '</ul>' + '</div>';
 					} else {
-						new_td.innerHTML = '';
+						new_td.innerHTML = '无权限';
 					}
 					// }
 

@@ -14,6 +14,8 @@ function topicReview(button) {
 								var message;
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
+										toastr.success("已分配评阅教师");
+										List_MyManagementGraduationProject_By_PageAndSearch(myManagementGraduationProject_json.pageIndex);
 									} else {
 										toastr.error(xhr.status);
 									}
