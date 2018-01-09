@@ -104,7 +104,7 @@ function studentSelectTopic(this_button) {
 					if (userStudentDTO != null) {
 						if (json_topicCurrentProcessDTO == '{}') {
 						} else {
-							for (var num666 = 0; topicCurrentProcessDTO.listTaskBelongProcess.length; num666++) {
+							for (var num666 = 0; num666 < topicCurrentProcessDTO.listTaskBelongProcess.length; num666++) {
 								if (topicCurrentProcessDTO.listTaskBelongProcess[num666].taskInstance.task_instance_state == 1) {
 									if (topicCurrentProcessDTO.listTaskBelongProcess[num666].taskDefinition.task_definition_name == "正式选题") {
 										this.buttons.button_xt.show();

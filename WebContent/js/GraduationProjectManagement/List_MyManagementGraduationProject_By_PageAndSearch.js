@@ -76,12 +76,12 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 
-					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
-							|| myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance == null) {
+					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO == null
+							|| myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance == null) {
 						new_td.innerHTML = '<span class="label label-primary">未开始</span>';
-					} else if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance.task_instance_state == "1") {
+					} else if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "活动") {
 						new_td.innerHTML = '<span class="label label-danger">活动</span>';
-					} else if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance.task_instance_state == "2") {
+					} else if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "结束") {
 						new_td.innerHTML = '<span class="label label-dafaule">结束</span>';
 					}
 					/*
