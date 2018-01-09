@@ -828,7 +828,7 @@ function evaluate_tutor() {
 				// 
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
-				switch (evaluate_tutor.evaluate_tutor_grade_comprehensive) {
+				switch (evaluate_tutor.evaluate_tutor_grade_computing) {
 				case 0: {
 					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_computing" >'
 							+ '<option value="0" selected="selected">0</option>'
@@ -1485,7 +1485,7 @@ function evaluate_tutor() {
 				// 
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
-				switch (evaluate_tutor.evaluate_tutor_grade_comprehensive) {
+				switch (evaluate_tutor.evaluate_tutor_grade_instructions) {
 				case 0: {
 					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_instructions" >'
 							+ '<option value="0" selected="selected">0</option>'

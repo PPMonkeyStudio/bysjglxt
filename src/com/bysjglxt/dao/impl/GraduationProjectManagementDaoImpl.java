@@ -528,7 +528,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			switch (teacherTutorStudentVO.getState()) {
 			case -1:
 				// 不进行状态筛选
-				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser where teacherUser.user_teacher_belong_college=studentUser.user_student_belong_college  and topicSelect.topic_select_teacher_tutor=teacherUser.user_teacher_id and topicSelect.topic_select_student=studentUser.user_student_id and  and studentUser.user_student_is_operate_premission=1 and studentUser.user_student_belong_college='"
+				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser where teacherUser.user_teacher_belong_college=studentUser.user_student_belong_college  and topicSelect.topic_select_teacher_tutor=teacherUser.user_teacher_id and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1 and studentUser.user_student_belong_college='"
 						+ college + "' ";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
@@ -935,7 +935,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			switch (teacherTutorStudentVO.getState()) {
 			case -1:
 				// 不进行状态筛选
-				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser where teacherUser.user_teacher_belong_college=studentUser.user_student_belong_college  and topicSelect.topic_select_teacher_tutor=teacherUser.user_teacher_id and topicSelect.topic_select_student=studentUser.user_student_id and  and studentUser.user_student_is_operate_premission=1 and studentUser.user_student_belong_college='"
+				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser where teacherUser.user_teacher_belong_college=studentUser.user_student_belong_college  and topicSelect.topic_select_teacher_tutor=teacherUser.user_teacher_id and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_is_operate_premission=1 and studentUser.user_student_belong_college='"
 						+ college + "' ";
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
