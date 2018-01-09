@@ -4,12 +4,11 @@ public class bysjglxt_evaluate_tutor {
 	private String evaluate_tutor_id;
 	private String evaluate_tutor_student;
 	private String evaluate_tutor_teacher_comment;
-
 	private int evaluate_tutor_grade_training_objective = 6;
 	private int evaluate_tutor_grade_difficulty = 4;
 	private int evaluate_tutor_grade_workload = 5;
 	private int evaluate_tutor_grade_bind = 5;
-	private int evaluate_tutor_grade_comprehensive = 6;
+	private int evaluate_tutor_grade_comprehensive = 8;
 	private int evaluate_tutor_grade_reference = 6;
 	private int evaluate_tutor_grade_experimental_design = 7;
 	private int evaluate_tutor_grade_computing = 6;
