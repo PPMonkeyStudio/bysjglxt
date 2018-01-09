@@ -82,6 +82,8 @@
 	src="<%=basePath%>js/CollegeManagement/List_College.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/CollegeManagement/addCollege.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/CollegeManagement/updateAdmin.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 </html>

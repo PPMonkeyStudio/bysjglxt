@@ -1,22 +1,37 @@
 function addCollege() {
 	var jc = $
 			.confirm({
-				title : '添加院系',
-				content : '<form id="form_addCollege">'
+				title : '创建院系',
+				content : '<hr>'
+						+ '<p style="text-align: center;">创建之后不可删除，请谨慎操作</p>'
+						+ '<form id="form_addCollege">'
 						+ '<table  class="table table-bordered" style="text-align: center;">'
 						+ '<tbody>'
+						+ '<tr><td colspan="4">院系信息</td></tr>'
 						+ '<tr>'
 						+ '<td>院系代码：</td><td><input  name="college.college_code" class="form-control"  /></td>'
 						+ '</tr>'
 						+ '<tr>'
 						+ '<td>院系名称：</td><td><input  name="college.college_name" class="form-control"  /></td>'
-						+ '</tr>' + '</tbody>' + '</table>' + '</form>',
-				type : 'blue',
+						+ '</tr>'
+						+ '<tr><td colspan="4">院系管理员</td></tr>'
+						+ '<tr>'
+						+ '<td>工号：</td><td><input  name="" class="form-control"  /></td>'
+						+ '</tr>'
+						+ '<tr>'
+						+ '<td>姓名：</td><td><input  name="" class="form-control"  /></td>'
+						+ '</tr>' + '<tr>' + '<td>性别：</td><td>'
+						+ '<select  name="" class="form-control" >'
+						+ '<option value="男">男</option>'
+						+ '<option value="女">女</option>' + '</select>'
+						+ '</td>' + '</tr>' + '</tbody>' + '</table>'
+						+ '</form>',
+				type : 'red',
 				onContentReady : function() {
 				},
 				buttons : {
-					'添加' : {
-						btnClass : 'btn-blue',
+					'确认创建' : {
+						btnClass : 'btn-red',
 						action : function() {
 
 							var xhr = false;

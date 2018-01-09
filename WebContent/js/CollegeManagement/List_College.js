@@ -63,7 +63,7 @@ function List_College() {
 							+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
 							+ '<li><a id="'
 							+ college_json[num].college.college_id
-							+ '" onclick="Student_Information_Display(this)" >分配管理员</a></li>'
+							+ '" onclick="updateAdmin(this)" >分配管理员</a></li>'
 							+ '</div>';
 				}
 
