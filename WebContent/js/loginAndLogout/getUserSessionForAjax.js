@@ -87,9 +87,13 @@ function getUserSessionForAjax() {
 														List_MyManagementGraduationProject_By_PageAndSearch(1);
 													} catch (e) {
 														try {
-															List_College();
+															List_MyReviewGraduationProject_By_PageAndSearch(1);
 														} catch (e) {
+															try {
+																List_College();
+															} catch (e) {
 
+															}
 														}
 													}
 												}
