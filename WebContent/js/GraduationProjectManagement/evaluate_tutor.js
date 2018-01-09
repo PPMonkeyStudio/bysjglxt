@@ -575,10 +575,10 @@ function evaluate_tutor() {
 				new_td.style = "text-align: center;";
 				new_td.innerHTML = '查阅文献资料及资料应用';
 				new_tr.appendChild(new_td);
-				// 
+				//  
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
-				new_td.innerHTML = '6';
+				new_td.innerHTML = '7';
 				new_tr.appendChild(new_td);
 				// 
 				new_td = document.createElement("td");
@@ -592,7 +592,8 @@ function evaluate_tutor() {
 							+ '<option value="3">3</option>'
 							+ '<option value="4">4</option>'
 							+ '<option value="5">5</option>'
-							+ '<option value="6">6</option>' + '</select>';
+							+ '<option value="6">6</option>'
+							+ '<option value="7">7</option>' + '</select>';
 					break;
 				}
 				case 1: {
@@ -603,7 +604,8 @@ function evaluate_tutor() {
 							+ '<option value="3">3</option>'
 							+ '<option value="4">4</option>'
 							+ '<option value="5">5</option>'
-							+ '<option value="6">6</option>' + '</select>';
+							+ '<option value="6">6</option>'
+							+ '<option value="7">7</option>' + '</select>';
 					break;
 				}
 				case 2: {
@@ -614,7 +616,8 @@ function evaluate_tutor() {
 							+ '<option value="3">3</option>'
 							+ '<option value="4">4</option>'
 							+ '<option value="5">5</option>'
-							+ '<option value="6">6</option>' + '</select>';
+							+ '<option value="6">6</option>'
+							+ '<option value="7">7</option>' + '</select>';
 					break;
 				}
 				case 3: {
@@ -625,7 +628,8 @@ function evaluate_tutor() {
 							+ '<option value="3" selected="selected">3</option>'
 							+ '<option value="4">4</option>'
 							+ '<option value="5">5</option>'
-							+ '<option value="6">6</option>' + '</select>';
+							+ '<option value="6">6</option>'
+							+ '<option value="7">7</option>' + '</select>';
 					break;
 				}
 				case 4: {
@@ -636,7 +640,8 @@ function evaluate_tutor() {
 							+ '<option value="3">3</option>'
 							+ '<option value="4" selected="selected">4</option>'
 							+ '<option value="5">5</option>'
-							+ '<option value="6">6</option>' + '</select>';
+							+ '<option value="6">6</option>'
+							+ '<option value="7">7</option>' + '</select>';
 					break;
 				}
 				case 5: {
@@ -647,7 +652,8 @@ function evaluate_tutor() {
 							+ '<option value="3">3</option>'
 							+ '<option value="4">4</option>'
 							+ '<option value="5" selected="selected">5</option>'
-							+ '<option value="6">6</option>' + '</select>';
+							+ '<option value="6">6</option>'
+							+ '<option value="7">7</option>' + '</select>';
 					break;
 				}
 				case 6: {
@@ -659,6 +665,19 @@ function evaluate_tutor() {
 							+ '<option value="4">4</option>'
 							+ '<option value="5">5</option>'
 							+ '<option value="6" selected="selected">6</option>'
+							+ '<option value="7">7</option>' + '</select>';
+					break;
+				}
+				case 7: {
+					new_td.innerHTML = '<select onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="evaluate_tutor_grade_reference" >'
+							+ '<option value="0" >0</option>'
+							+ '<option value="1">1</option>'
+							+ '<option value="2">2</option>'
+							+ '<option value="3">3</option>'
+							+ '<option value="4">4</option>'
+							+ '<option value="5">5</option>'
+							+ '<option value="6">6</option>'
+							+ '<option value="7" selected="selected">7</option>'
 							+ '</select>';
 					break;
 				}
@@ -1686,7 +1705,7 @@ function evaluate_tutor() {
 				// 
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
-				new_td.innerHTML = '6';
+				new_td.innerHTML = '7';
 				new_tr.appendChild(new_td);
 				// 
 				new_td = document.createElement("td");
@@ -1807,10 +1826,9 @@ function evaluate_tutor() {
 				new_tr.appendChild(new_td);
 				// 
 				new_td = document.createElement("td");
-				new_td.style = "text-align: center;"; 
+				new_td.style = "text-align: center;";
 				new_td.innerHTML = '100';
 				new_tr.appendChild(new_td);
-				// evaluate_tutor_grade_total
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
 				new_td.innerHTML = '<input id="evaluate_tutor_grade_total" disabled="disabled" class="form-control" style="text-align: center;"/>';
