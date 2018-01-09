@@ -13,10 +13,13 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.struts2.ServletActionContext;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_comment;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
@@ -45,6 +48,7 @@ import com.bysjglxt.domain.DTO.TeacherTutorStudentDTO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
 
+import util.ExcelToBean2;
 import util.TeamUtil;
 import util.XwpfTUtil;
 
@@ -54,6 +58,42 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
+	}
+
+	// 导入评语
+	@Override
+	public int saveComment(File commentExcel, String EXCEL_CommentFileName, String userId) throws Exception {
+		String houzhui = EXCEL_CommentFileName.substring(EXCEL_CommentFileName.lastIndexOf(".") + 1);
+		FileInputStream input = new FileInputStream(commentExcel);
+		List<Map<String, Object>> list = null;
+		if ("xlsx".equals(houzhui)) {
+			XSSFWorkbook workbook = new XSSFWorkbook(input);
+			list = ExcelToBean2.parseUpdateExcel(workbook, "bysjglxt_comment");
+		} else {
+			HSSFWorkbook workbook = new HSSFWorkbook(input);
+			list = ExcelToBean2.parseExcel(workbook, "bysjglxt_comment");
+		}
+		List<bysjglxt_comment> lists = ExcelToBean2.toObjectPerproList(list, bysjglxt_comment.class);
+		String college = getCollegeByUserId(userId);
+		for (bysjglxt_comment comment : lists) {
+			comment.setComment_id(TeamUtil.getUuid());
+			comment.setComment_college(college);
+			comment.setComment_gmt_create(TeamUtil.getStringSecond());
+			comment.setComment_gmt_modified(comment.getComment_gmt_create());
+			graduationProjectManagementDao.saveObj(comment);
+		}
+		return 1;
+	}
+
+	// 根据使用者Id获取学院
+	public String getCollegeByUserId(String userId) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user = graduationProjectManagementDao.getTeacherUserByUserId(userId);
+		if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
+				&& bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >= 0) {
+			return bysjglxt_teacher_user.getUser_teacher_belong_college().trim();
+		}
+		return null;
 	}
 
 	/**
