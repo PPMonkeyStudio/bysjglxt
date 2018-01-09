@@ -8,7 +8,7 @@ public class bysjglxt_evaluate_review {
 	private int evaluate_review_grade_difficulty = 4;
 	private int evaluate_review_grade_workload = 5;
 	private int evaluate_review_grade_bind = 5;
-	private int evaluate_review_grade_comprehensive = 6;
+	private int evaluate_review_grade_comprehensive = 8;
 	private int evaluate_review_grade_reference = 7;
 	private int evaluate_review_grade_experimental_design = 7;
 	private int evaluate_review_grade_computing = 6;
