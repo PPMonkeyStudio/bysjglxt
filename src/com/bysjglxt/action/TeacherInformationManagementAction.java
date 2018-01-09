@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
@@ -40,6 +41,8 @@ public class TeacherInformationManagementAction extends ActionSupport
 	/*
 	 * 学生excel
 	 */
+	private bysjglxt_college college;
+
 	private File EXCEL_Teacher;
 
 	private String EXCEL_TeacherFileName;
@@ -219,6 +222,25 @@ public class TeacherInformationManagementAction extends ActionSupport
 	}
 
 	/**
+	 * 根据学院获取属于某个学院的所有老师
+	 */
+	public void listTeacherAllByCollege() {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			http_response.getWriter()
+					.write(gson.toJson(teacherInformationManagementService.list_TeacherInformationDTO_All(
+							userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id(), college.getCollege_id())));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * @说明 获得所有教师dto
 	 * 
 	 * @throws IOException
@@ -231,7 +253,7 @@ public class TeacherInformationManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write(gson.toJson(teacherInformationManagementService
-				.list_TeacherInformationDTO_All(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
+				.list_TeacherInformationDTO_All(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id(), "")));
 
 	}
 
@@ -358,6 +380,14 @@ public class TeacherInformationManagementAction extends ActionSupport
 
 	public void setUpdateTeacherBasic(bysjglxt_teacher_basic updateTeacherBasic) {
 		this.updateTeacherBasic = updateTeacherBasic;
+	}
+
+	public bysjglxt_college getCollege() {
+		return college;
+	}
+
+	public void setCollege(bysjglxt_college college) {
+		this.college = college;
 	}
 
 }
