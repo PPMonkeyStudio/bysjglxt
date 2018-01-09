@@ -45,6 +45,10 @@ function login() {
 					window.location = "/bysjglxt/loginLogout/LoginLogoutManagement_index";
 					break;
 				}
+				case "管理员登录成功": {
+					window.location = "/bysjglxt/college/CollegeManagement_CollegeManagementPage";
+					break;
+				}
 				}
 			} else {
 				button_login.disabled = "";

@@ -92,6 +92,8 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 			ActionContext.getContext().getSession().remove("userTeacherDTO");
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			ActionContext.getContext().getSession().remove("userStudentDTO");
+		} else if (ActionContext.getContext().getSession().get("admin") != null) {
+			ActionContext.getContext().getSession().remove("admin");
 		}
 
 		return "logout";
@@ -107,6 +109,8 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 			http_response.getWriter().write(gson.toJson(ActionContext.getContext().getSession().get("userTeacherDTO")));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter().write(gson.toJson(ActionContext.getContext().getSession().get("userStudentDTO")));
+		} else if (ActionContext.getContext().getSession().get("admin") != null) {
+			http_response.getWriter().write(gson.toJson(ActionContext.getContext().getSession().get("admin")));
 		}
 	}
 

@@ -27,7 +27,7 @@
 		<div class="panel" style="width: 960px; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
-				<h3 class="panel-title">院系管理</h3>
+				<h3 class="panel-title">您是系统管理员，只能对各院系的管理员进行控制</h3>
 			</div>
 			<!--  -->
 			<div class="panel-body">

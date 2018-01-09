@@ -59,6 +59,7 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 * 
 	 */
 	public void updateAdmin() {
+		System.out.println("修改管理员:" + bysjglxt_teacher_user.getUser_teacher_id());
 		if (collegeManagementService.updateCollegeAdmin(bysjglxt_teacher_user.getUser_teacher_id()) == -1) {
 			try {
 				http_response.getWriter().write("系统错误修改失败");

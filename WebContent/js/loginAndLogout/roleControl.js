@@ -1,25 +1,26 @@
 function roleControl() {
 	var long = 0;
-	var student_delete = document.getElementsByClassName("student_control");
-	var teacher_delete = document.getElementsByClassName("teacher_control");
+	var student_control = document.getElementsByClassName("student_control");
+	var teacher_control = document.getElementsByClassName("teacher_control");
 	var college_control = document.getElementsByClassName("college_control");
 	var admin_control = document.getElementsByClassName("admin_control");
+	var noAdmin_control = document.getElementsByClassName("noAdmin_control");
 	/*
 	 * 学生
 	 */
 	if (userStudentDTO == null) {
-		long = student_delete.length;
+		long = student_control.length;
 		for (var num = 0; num < long; num++) {
-			student_delete[0].parentNode.removeChild(student_delete[0]);
+			student_control[0].parentNode.removeChild(student_control[0]);
 		}
 	}
 	/*
 	 * 教师
 	 */
 	if (userTeacherDTO == null) {
-		long = teacher_delete.length;
+		long = teacher_control.length;
 		for (var num = 0; num < long; num++) {
-			teacher_delete[0].parentNode.removeChild(teacher_delete[0]);
+			teacher_control[0].parentNode.removeChild(teacher_control[0]);
 		}
 		//
 		long = college_control.length;
@@ -37,6 +38,7 @@ function roleControl() {
 			}
 		}
 	}
+
 	/*
 	 * 系统管理员
 	 */
@@ -44,6 +46,11 @@ function roleControl() {
 		long = admin_control.length;
 		for (var num = 0; num < long; num++) {
 			admin_control[0].parentNode.removeChild(admin_control[0]);
+		}
+	} else {
+		long = noAdmin_control.length;
+		for (var num = 0; num < long; num++) {
+			noAdmin_control[0].parentNode.removeChild(noAdmin_control[0]);
 		}
 	}
 	/*

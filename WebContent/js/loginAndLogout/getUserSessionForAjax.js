@@ -12,8 +12,8 @@ function getUserSessionForAjax() {
 				 * 
 				 */
 				try {
-					console.debug(xhr.responseText);
 					var userJsonDTO = JSON.parse(xhr.responseText);
+					console.debug(xhr.responseText);
 				} catch (e) {
 					toastr.error("登录状态失效");
 					window.location = "/bysjglxt/loginLogout/LoginLogoutManagement_logout";
@@ -51,7 +51,11 @@ function getUserSessionForAjax() {
 				/*
 				 * 
 				 */
-				List_Navbar_Notice();
+				if (userJsonDTO.admin_id != null) {
+
+				} else {
+					List_Navbar_Notice();
+				}
 				try {
 					List_Student_By_PageAndSearch(1);
 				} catch (e) {
