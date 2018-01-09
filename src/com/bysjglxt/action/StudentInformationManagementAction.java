@@ -191,6 +191,7 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	}
 
+	// 关闭学生信息
 	public void TakeStudentOperatePremission() throws IOException {
 		studentInformationManagementService.update_Take_Student_Operate_Permission(ListTakeOperatePremissionStudentID);
 		http_response.setContentType("text/html;charset=utf-8");

@@ -357,12 +357,16 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		return flag;
 	}
 
+	/**
+	 * 关闭学生权限操作 关闭学生权限： 1.将学生的状态更改为已关闭 2.如果学生已经选题,那么将该学生指导老师的指导学生数-1
+	 */
 	@Override
 	public boolean update_Take_Student_Operate_Permission(List<String> listString) {
 		boolean flag = false;
 		for (String string : listString) {
 			flag = studentInformationManagementDao.update_Take_Student_Operate_Permission(string,
 					TeamUtil.getStringSecond());
+			
 		}
 		return flag;
 	}
