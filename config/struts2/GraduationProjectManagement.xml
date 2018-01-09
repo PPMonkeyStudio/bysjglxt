@@ -11,6 +11,8 @@
 			</result>
 			<result name="MyTutorGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyTutorGraduationProject.jsp
 			</result>
+			<result name="MyReviewGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyReviewGraduationProject.jsp
+			</result>
 			<result name="MyManagementGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyManagementGraduationProject.jsp
 			</result>
 			<result name="exportAll" type="stream">

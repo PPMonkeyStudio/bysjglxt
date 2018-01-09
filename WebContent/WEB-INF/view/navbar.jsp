@@ -160,6 +160,10 @@
 							<a
 								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyTutorGraduationProjectPage">我指导的学生</a>
 						</li>
+						<li class="teacher_control">
+							<a
+								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyReviewGraduationProjectPage">我评阅的学生</a>
+						</li>
 						<li class="student_control">
 							<a
 								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyGraduationProjectPage">我的毕业设计</a>

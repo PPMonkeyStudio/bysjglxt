@@ -112,6 +112,15 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return "MyTutorGraduationProjectPage";
 	}
 
+	/**
+	 * 我评阅的毕业设计
+	 * 
+	 * @return
+	 */
+	public String MyReviewGraduationProjectPage() {
+		return "MyReviewGraduationProjectPage";
+	}
+
 	/*
 	 * 所有此教师指导的学生
 	 */
