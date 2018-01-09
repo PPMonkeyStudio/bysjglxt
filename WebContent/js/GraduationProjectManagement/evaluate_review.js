@@ -1879,7 +1879,8 @@ function evaluate_review() {
 				 */
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
-				if ("评阅老师填写评阅审查表" != current_processDefinitionName) {
+				if ("评阅老师填写评阅审查表" != current_processDefinitionName
+						|| userStudentDTO != null) {
 					document
 							.getElementById("evaluate_review_grade_training_objective").disabled = "disabled";
 					document.getElementById("evaluate_review_grade_difficulty").disabled = "disabled";
@@ -1905,43 +1906,6 @@ function evaluate_review() {
 							.getElementById("evaluate_review_grade_normalization").disabled = "disabled";
 					textarea_1.disabled = "disabled";
 					button_SaveGraduationProject.style.display = "none";
-				} else if (userStudentDTO != null) {
-					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
-						button_SaveGraduationProject.style.display = "block";
-					} else {
-						document
-								.getElementById("evaluate_review_grade_training_objective").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_difficulty").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_workload").disabled = "disabled";
-						document.getElementById("evaluate_review_grade_bind").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_comprehensive").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_reference").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_experimental_design").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_computing").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_foreign_language").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_computer").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_innovate").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_analysis").disabled = "disabled";
-						document.getElementById("evaluate_review_grade_chart").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_instructions").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_practicability").disabled = "disabled";
-						document
-								.getElementById("evaluate_review_grade_normalization").disabled = "disabled";
-						textarea_1.disabled = "disabled";
-						button_SaveGraduationProject.style.display = "none";
-					}
 				} else if (userTeacherDTO != null) {
 					if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
 						button_SaveGraduationProject.style.display = "block";
