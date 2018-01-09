@@ -362,11 +362,13 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	 */
 	@Override
 	public boolean update_Take_Student_Operate_Permission(List<String> listString) {
+		bysjglxt_topic_select bysjglxt_topic_select = null;
 		boolean flag = false;
 		for (String string : listString) {
+			bysjglxt_topic_select = new bysjglxt_topic_select();
 			flag = studentInformationManagementDao.update_Take_Student_Operate_Permission(string,
 					TeamUtil.getStringSecond());
-			
+
 		}
 		return flag;
 	}

@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_college;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.service.CollegeManagementService;
 import com.google.gson.Gson;
@@ -24,6 +25,7 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 */
 	private CollegeManagementService collegeManagementService;
 	private bysjglxt_teacher_user bysjglxt_teacher_user;
+	private bysjglxt_teacher_basic bysjglxt_teacher_basic;
 	private bysjglxt_college college;
 
 	/*
@@ -80,7 +82,7 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	public void addCollege() {
 		System.out.println(college);
 		try {
-			http_response.getWriter().write(collegeManagementService.addCollege(college));
+			http_response.getWriter().write(collegeManagementService.addCollege(college, bysjglxt_teacher_basic));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -142,6 +144,14 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 
 	public CollegeManagementService getCollegeManagementService() {
 		return collegeManagementService;
+	}
+
+	public bysjglxt_teacher_basic getBysjglxt_teacher_basic() {
+		return bysjglxt_teacher_basic;
+	}
+
+	public void setBysjglxt_teacher_basic(bysjglxt_teacher_basic bysjglxt_teacher_basic) {
+		this.bysjglxt_teacher_basic = bysjglxt_teacher_basic;
 	}
 
 	/*

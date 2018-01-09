@@ -214,7 +214,6 @@ public class StudentInformationManagementAction extends ActionSupport
 		List<bysjglxt_major> list_Student_Major = studentInformationManagementService
 				.list_Student_Major(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.getWriter().write(gson.toJson(list_Student_Major));
-
 	}
 
 	/**

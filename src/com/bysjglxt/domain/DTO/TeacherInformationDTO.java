@@ -1,6 +1,5 @@
 package com.bysjglxt.domain.DTO;
 
-import com.bysjglxt.domain.DO.bysjglxt_admin;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
