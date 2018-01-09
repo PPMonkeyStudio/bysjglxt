@@ -63,7 +63,8 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].reviewTeacher != null) {
+					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].reviewTeacher != null
+							&& myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].reviewTeacher.bysjglxtTeacherBasic != null) {
 						new_td.innerHTML = myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].reviewTeacher.bysjglxtTeacherBasic.name;
 					} else {
 						new_td.innerHTML = '未分配';
