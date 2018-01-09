@@ -51,11 +51,19 @@ function getUserSessionForAjax() {
 				/*
 				 * 
 				 */
+
 				if (userJsonDTO.admin_id != null) {
 
 				} else {
 					List_Navbar_Notice();
 				}
+				/*
+				 * 获取选题流程
+				 */
+				getTopicCurrentProcess();
+				/*
+				 * 
+				 */
 				try {
 					List_Student_By_PageAndSearch(1);
 				} catch (e) {

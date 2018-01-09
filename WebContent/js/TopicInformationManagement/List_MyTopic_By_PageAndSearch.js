@@ -125,13 +125,19 @@ function List_MyTopic_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<button style="cursor: pointer;" id="'
+					new_td.innerHTML = '<div class="dropdown" >'
+							+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
+							+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
+							+ '<li><a id="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" onclick="MyTopic_Information_Display(this)" class="btn btn-default">详情</button>'
-							+ '<button  style="cursor: pointer;" id="'
+							+ '" onclick="MyTopic_Information_Display(this)" >题目详情</a></li>'
+							+ '<li class="teacher_control"><a id="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" onclick="TopicDistributionStudentDisplay(this)" class="teacher_control btn btn-default">指定学生</button>';
-
+							+ '" onclick="TopicDistributionStudentDisplay(this)">指定学生提前选题</a></li>'
+							+ '</div>';
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);

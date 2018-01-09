@@ -75,10 +75,9 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtSection == undefined
 							|| teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name == "") {
-						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name;
-					} else {
 						new_td.innerHTML = '未分配';
-
+					} else {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name;
 					}
 					/*
 					 * 职称
