@@ -1807,14 +1807,13 @@ function evaluate_tutor() {
 				new_tr.appendChild(new_td);
 				// 
 				new_td = document.createElement("td");
-				new_td.style = "text-align: center;";
+				new_td.style = "text-align: center;"; 
 				new_td.innerHTML = '100';
 				new_tr.appendChild(new_td);
-				// 
+				// evaluate_tutor_grade_total
 				new_td = document.createElement("td");
-				new_td.id = "evaluate_tutor_grade_total";
 				new_td.style = "text-align: center;";
-				new_td.innerHTML = "";
+				new_td.innerHTML = '<input id="evaluate_tutor_grade_total" disabled="disabled" class="form-control" style="text-align: center;"/>';
 				new_tr.appendChild(new_td);
 				/*
 				 * 
@@ -2031,6 +2030,6 @@ function change_evaluate_tutor_grade_total() {
 			+ parseInt(document
 					.getElementById("evaluate_tutor_grade_normalization").value);
 
-	evaluate_tutor_grade_total.innerHTML = total;
+	evaluate_tutor_grade_total.value = total;
 
 }

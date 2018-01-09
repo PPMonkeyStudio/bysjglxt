@@ -37,7 +37,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		List<String> listStudentSelect = new ArrayList<>();
 		String hql = "SELECT selectTopic.topic_select_student FROM bysjglxt_topic_select selectTopic, bysjglxt_student_user studentUser WHERE studentUser.user_student_belong_college='"
 				+ college
-				+ "' selectTopic.topic_select_student = studentUser.user_student_id AND studentUser.user_student_is_operate_premission=1";
+				+ "' and selectTopic.topic_select_student = studentUser.user_student_id AND studentUser.user_student_is_operate_premission=1";
 		hql = hql
 				+ " AND selectTopic.topic_select_student NOT IN (SELECT processInstance.process_instance_man FROM bysjglxt_process_instance processInstance WHERE processInstance.process_instance_state = '活动' OR processInstance.process_instance_state = '结束' AND processInstance.process_instance_process_definition = '"
 				+ process_definition_id + "')";
@@ -438,7 +438,7 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	public bysjglxt_process_instance getProcessInstanceByUserAndState(String userId, String college) {
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		Session session = getSession();
-		String hql = "select instance from bysjglxt_process_instance instance,bysjglxt_teacher_user teacherUser where teacherUser.user_teacher_id=instance.process_instance_man and teacherUser.user_teacher_belong_college='"
+		String hql = "select instance from bysjglxt_process_instance instance,bysjglxt_student_user studentUser where studentUser.user_student_id=instance.process_instance_man and studentUser.user_student_belong_college='"
 				+ college + "' and instance.process_instance_man='" + userId
 				+ "' and instance.process_instance_state='活动'";
 		Query query = session.createQuery(hql);

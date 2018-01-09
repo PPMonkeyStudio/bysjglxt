@@ -212,17 +212,15 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
+
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter()
-					.write(gson.toJson(processManagementService.getCurrentTaskDTO(
-							(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"),
-							1)));
+			http_response.getWriter().write(gson.toJson(processManagementService.getCurrentTaskDTO(
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(processManagementService.getCurrentTaskDTO(
 							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
-									.getBysjglxtStudentUser().getUser_student_id(),
-							2)));
+									.getBysjglxtStudentUser().getUser_student_id())));
 		}
 	}
 

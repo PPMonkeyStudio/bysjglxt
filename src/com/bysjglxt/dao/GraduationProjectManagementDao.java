@@ -23,6 +23,8 @@ import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementDao {
 
+	public int saveObj(Object obj);
+	
 	public int fillEmptyInTaskBook(bysjglxt_taskbook bysjglxt_taskbook);
 
 	public int fillEmptyInOpening(bysjglxt_report_opening bysjglxt_report_opening);

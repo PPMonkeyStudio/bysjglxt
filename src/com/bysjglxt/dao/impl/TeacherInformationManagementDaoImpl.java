@@ -66,7 +66,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			session.save(bysjglxt_teacher_user);
+			session.saveOrUpdate(bysjglxt_teacher_user);
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
@@ -79,6 +79,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		Session session = getSession();
 		bysjglxt_teacher_user TeacherInformation = null;
 		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + teacher_id + "'";
+		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		TeacherInformation = (bysjglxt_teacher_user) query.uniqueResult();
 		session.clear();
