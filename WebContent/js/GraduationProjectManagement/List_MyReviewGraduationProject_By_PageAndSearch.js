@@ -32,7 +32,7 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 						.getElementById("table_myReviewGraduationProject");
 				var new_tr = null;
 				var new_td = null;
-				for (var num = 0; num < myReviewGraduationProject_json.list_TeacherReviewStudentDTO.length; num++) {
+				for (var num = 0; num < myReviewGraduationProject_json.list_TeacherTutorStudentDTO.length; num++) {
 
 					new_tr = document.createElement("tr");
 					new_tr.appendChild(document.createTextNode(''));
@@ -44,19 +44,19 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_num;
+					new_td.innerHTML = myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_num;
 					/*
 					 * 
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].studentInformationDTO.bysjglxtStudentBasic.student_basic_name;
+					new_td.innerHTML = myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentBasic.student_basic_name;
 					/*
 					 * 
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].bysjglxtTopic.topic_name_chinese;
+					new_td.innerHTML = myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].bysjglxtTopic.topic_name_chinese;
 
 					/*
 					 * 
@@ -64,12 +64,12 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 
-					if (myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].taskDTO == null
-							|| myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].taskDTO.taskInstance == null) {
+					if (myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
+							|| myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance == null) {
 						new_td.innerHTML = '<span class="label label-primary">未开始</span>';
-					} else if (myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].taskDTO.taskInstance.task_instance_state == "1") {
+					} else if (myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance.task_instance_state == "1") {
 						new_td.innerHTML = '<span class="label label-danger">活动</span>';
-					} else if (myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].taskDTO.taskInstance.task_instance_state == "2") {
+					} else if (myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance.task_instance_state == "2") {
 						new_td.innerHTML = '<span class="label label-dafaule">结束</span>';
 					}
 					/*
@@ -78,12 +78,12 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 
-					if (myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].taskDTO == null
-							|| myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].taskDTO.taskDefinition == null) {
+					if (myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
+							|| myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition == null) {
 						new_td.innerHTML = '<span class="label label-primary">未开始</span>';
 					} else {
 						new_td.innerHTML = '<span class="label label-success">'
-								+ myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].taskDTO.taskDefinition.task_definition_name
+								+ myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition.task_definition_name
 								+ '</span>';
 					}
 					/*
@@ -91,12 +91,12 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].taskDTO == null
-							|| myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].taskDTO.taskInstance == null) {
+					if (myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
+							|| myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance == null) {
 						new_td.innerHTML = '';
 					} else {
-						new_td.innerHTML = '<button  onclick="window.location = \'\/bysjglxt\/graduationProject\/GraduationProjectManagement_MyGraduationProjectPage?MyReviewGraduationProjectStudentID='
-								+ myReviewGraduationProject_json.list_TeacherReviewStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+						new_td.innerHTML = '<button  onclick="window.location = \'\/bysjglxt\/graduationProject\/GraduationProjectManagement_MyGraduationProjectPage?MyTutorGraduationProjectStudentID='
+								+ myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 								+ '\'" class="btn btn-default">毕业设计</button>';
 
 					}
