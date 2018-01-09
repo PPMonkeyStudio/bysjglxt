@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_college;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.service.CollegeManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,7 +23,7 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 * 
 	 */
 	private CollegeManagementService collegeManagementService;
-	private String tmpString;
+	private bysjglxt_teacher_user bysjglxt_teacher_user;
 	private bysjglxt_college college;
 
 	/*
@@ -58,7 +59,7 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 * 
 	 */
 	public void updateAdmin() {
-		if (collegeManagementService.updateCollegeAdmin(tmpString) == -1) {
+		if (collegeManagementService.updateCollegeAdmin(bysjglxt_teacher_user.getUser_teacher_id()) == -1) {
 			try {
 				http_response.getWriter().write("系统错误修改失败");
 			} catch (IOException e) {
@@ -123,12 +124,12 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 		this.http_request = http_request;
 	}
 
-	public String getTmpString() {
-		return tmpString;
+	public bysjglxt_teacher_user getBysjglxt_teacher_user() {
+		return bysjglxt_teacher_user;
 	}
 
-	public void setTmpString(String tmpString) {
-		this.tmpString = tmpString;
+	public void setBysjglxt_teacher_user(bysjglxt_teacher_user bysjglxt_teacher_user) {
+		this.bysjglxt_teacher_user = bysjglxt_teacher_user;
 	}
 
 	public bysjglxt_college getCollege() {
