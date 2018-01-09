@@ -21,7 +21,7 @@ public interface ProcessManagementService {
 	 * 
 	 * @return
 	 */
-	public ProcessDTO getCurrentTaskIng();
+	public ProcessDTO getCurrentTaskIng(String userId,int role);
 
 	/**
 	 * @说明 点击创建流程 1. 创建流程定义记录 1 成功 -1失败
@@ -85,7 +85,7 @@ public interface ProcessManagementService {
 	/**
 	 * 获得正在进行的流程
 	 */
-	public ProcessDTO getCurrentTaskDTO(String userId);
+	public ProcessDTO getCurrentTaskDTO(String userId,int role);
 
 	/**************************** 在点击通过或者是打回以及 ***************************************************/
 
@@ -111,6 +111,6 @@ public interface ProcessManagementService {
 	 * @return 没有处于活动状态的流程实例 null
 	 * @return
 	 */
-	public ProcessDetailDTO getTasking(String userId);
+	//public ProcessDetailDTO getTasking(String userId);
 
 }

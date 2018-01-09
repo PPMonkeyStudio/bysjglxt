@@ -233,8 +233,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 
 		// 获得总记录数
-		list_Allbysjglxt_topic_select = graduationProjectManagementDao
-				.getTeacherTutorStudentAllSelectTopic(teacherTutorStudentVO, teacherUserId, actor, section);
+		list_Allbysjglxt_topic_select = graduationProjectManagementDao.getTeacherTutorStudentAllSelectTopic(
+				teacherTutorStudentVO, teacherUserId, actor, section,
+				bysjglxt_teacher_user.getUser_teacher_belong_college());
 		int i = list_Allbysjglxt_topic_select.size();
 		teacherTutorStudentVO.setTotalRecords(i);
 		teacherTutorStudentVO.setTotalPages(((i - 1) / teacherTutorStudentVO.getPageSize()) + 1);
@@ -249,8 +250,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			teacherTutorStudentVO.setHaveNextPage(true);
 		}
 		// 1.根据教师ID筛选出符合条件的最多10条选题数据
-		list_bysjglxt_topic_select = graduationProjectManagementDao
-				.getTeacherTutorStudentSelectTopicByPage(teacherTutorStudentVO, teacherUserId, actor, section);
+		list_bysjglxt_topic_select = graduationProjectManagementDao.getTeacherTutorStudentSelectTopicByPage(
+				teacherTutorStudentVO, teacherUserId, actor, section,
+				bysjglxt_teacher_user.getUser_teacher_belong_college());
 		// 2.遍历选题拿到学生userId信息
 		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
 			processBelongDTO = new ProcessBelongDTO();
@@ -350,6 +352,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
 		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
 		bysjglxt_process_instance processInstance = new bysjglxt_process_instance();
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		List<bysjglxt_topic_select> list_bysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
 		List<bysjglxt_topic_select> list_Allbysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
 		// 判断老师的身份
@@ -362,9 +365,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		} else {
 			actor = "无";
 		}
+		bysjglxt_teacher_user = graduationProjectManagementDao.getTeacherUserByUserId(teacherUserId);
 		// 获得总记录数
-		list_Allbysjglxt_topic_select = graduationProjectManagementDao
-				.getTeacherTutorStudentAllSelectTopic(teacherTutorStudentVO, teacherUserId, actor, section);
+		list_Allbysjglxt_topic_select = graduationProjectManagementDao.getTeacherTutorStudentAllSelectTopic(
+				teacherTutorStudentVO, teacherUserId, actor, section,
+				bysjglxt_teacher_user.getUser_teacher_belong_college());
 		int i = list_Allbysjglxt_topic_select.size();
 		teacherTutorStudentVO.setTotalRecords(i);
 		teacherTutorStudentVO.setTotalPages(((i - 1) / teacherTutorStudentVO.getPageSize()) + 1);
@@ -379,8 +384,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			teacherTutorStudentVO.setHaveNextPage(true);
 		}
 		// 1.根据教师ID筛选出符合条件的最多10条选题数据
-		list_bysjglxt_topic_select = graduationProjectManagementDao
-				.getTeacherTutorStudentSelectTopicByPage(teacherTutorStudentVO, teacherUserId, actor, section);
+		list_bysjglxt_topic_select = graduationProjectManagementDao.getTeacherTutorStudentSelectTopicByPage(
+				teacherTutorStudentVO, teacherUserId, actor, section,
+				bysjglxt_teacher_user.getUser_teacher_belong_college());
 		// 2.遍历选题拿到学生userId信息
 		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
 			processBelongDTO = new ProcessBelongDTO();
@@ -1087,7 +1093,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	@Override
 	public bysjglxt_taskbook get_TaskBook(String userId) {
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
-		System.out.println("userId:"+userId);
+		System.out.println("userId:" + userId);
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskBookByUserId(userId);
 		return bysjglxt_taskbook;
 	}

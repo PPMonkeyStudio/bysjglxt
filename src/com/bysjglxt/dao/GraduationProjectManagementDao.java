@@ -93,7 +93,8 @@ public interface GraduationProjectManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_topic getStudentTopicByTopicId(String topic_select_topic);
 
 	public List<bysjglxt_topic_select> getTeacherTutorStudentSelectTopicByPage(
-			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId, String actor, String section);
+			TeacherTutorStudentVO teacherTutorStudentVO, String teacherUserId, String actor, String section,
+			String college);
 
 	public List<bysjglxt_process_instance> getProcessInstanceByMan(String topic_select_student);
 
@@ -105,7 +106,7 @@ public interface GraduationProjectManagementDao {
 	public bysjglxt_task_definition getTaskDefinition(String task_instance_task_definition);
 
 	public List<bysjglxt_topic_select> getTeacherTutorStudentAllSelectTopic(TeacherTutorStudentVO teacherTutorStudentVO,
-			String teacherUserId, String actor, String section);
+			String teacherUserId, String actor, String section, String college);
 
 	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByUserId(String teacherUserId);
 
@@ -122,6 +123,5 @@ public interface GraduationProjectManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_dissertation getThesisByStudentId(String userId);
 
 	public bysjglxt_student_basic getStudentBasicByUserId(String userId);
-
 
 }

@@ -127,8 +127,13 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	 * 
 	 */
 	@Override
-	public List<TeacherInformationDTO> list_TeacherInformationDTO_All(String userId) {
-		String college = getCollegeByUserId(userId);
+	public List<TeacherInformationDTO> list_TeacherInformationDTO_All(String userId, String colle) {
+		String college = "";
+		if (colle != null && colle.trim().length() > 0) {
+			college = colle;
+		} else {
+			college = getCollegeByUserId(userId);
+		}
 		List<TeacherInformationDTO> list_TeacherInformationDTO_All = new ArrayList<TeacherInformationDTO>();
 		TeacherInformationDTO teacherInformationDTO = null;
 		List<bysjglxt_teacher_user> listAllTeacherUserInformation = teacherInformationManagementDao

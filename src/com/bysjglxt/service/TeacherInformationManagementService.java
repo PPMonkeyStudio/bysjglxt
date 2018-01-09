@@ -43,7 +43,7 @@ public interface TeacherInformationManagementService {
 	 * 
 	 * @return
 	 */
-	public List<TeacherInformationDTO> list_TeacherInformationDTO_All(String userId);
+	public List<TeacherInformationDTO> list_TeacherInformationDTO_All(String userId, String college);
 
 	/**
 	 * @待测试
