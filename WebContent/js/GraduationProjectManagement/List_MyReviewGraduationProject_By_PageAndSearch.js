@@ -126,7 +126,7 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 	xhr
 			.open(
 					"POST",
-					"/bysjglxt/graduationProject/GraduationProjectManagement_ListMyReviewGraduationProjectByPageAndSearch");
+					"/bysjglxt/graduationProject/GraduationProjectManagement_listMyReviewGraduationProjectByPageAndSearch");
 
 	var formData = new FormData();
 	/*
@@ -141,17 +141,17 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 	var search = document.getElementById("input_search").value;
 	if (search == undefined || search == null || search == "") {
 	} else {
-		formData.append("teacherReviewStudentVO.search", search);
+		formData.append("teacherTutorStudentVO.search", search);
 	}
 	/*
 	 * 
 	 */
-	formData.append("teacherReviewStudentVO.state", document
+	formData.append("teacherTutorStudentVO.state", document
 			.getElementById("select_state").value);
 	/*
 	 * 
 	 */
-	formData.append("teacherReviewStudentVO.pageIndex", pageIndex);
+	formData.append("teacherTutorStudentVO.pageIndex", pageIndex);
 
 	xhr.send(formData);
 
