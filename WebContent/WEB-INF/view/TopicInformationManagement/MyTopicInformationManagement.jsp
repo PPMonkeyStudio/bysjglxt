@@ -74,8 +74,8 @@
 						<tr>
 							<th>中文名称</th>
 							<th>
-								<select class="form-control" style="width: auto;"
-									id="select_source"
+								<select class="form-control"
+									style="width: auto; margin: 0 auto;" id="select_source"
 									onchange="List_MyTopic_By_PageAndSearch(1)">
 									<option value="-1">课题来源</option>
 									<option value="各类课题项目">各类课题项目</option>
@@ -86,8 +86,8 @@
 								</select>
 							</th>
 							<th>
-								<select class="form-control" style="width: auto;"
-									id="select_type"
+								<select class="form-control"
+									style="width: auto; margin: 0 auto;" id="select_type"
 									onchange="List_MyTopic_By_PageAndSearch(1)">
 									<option value="-1">课题性质</option>
 									<option value="理论研究">理论研究</option>
@@ -99,8 +99,8 @@
 							<th>已选学生数</th>
 							<th>指导教师</th>
 							<th class="teacher_control">
-								<select class="form-control" style="width: auto;"
-									id="select_state"
+								<select class="form-control"
+									style="width: auto; margin: 0 auto;" id="select_state"
 									onchange="List_MyTopic_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
 									<option value="未审核">未审核</option>
@@ -209,7 +209,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 
 	<!---------------------------------------------------------------------------------------------------->
-	
+
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
@@ -219,9 +219,9 @@
 <script src="<%=basePath%>js/jquery.multi-select.js"
 	type="text/javascript"></script>
 <script>
-	$('#select_source').selectpicker('refresh');
-	$('#select_type').selectpicker('refresh');
-	$('#select_state').selectpicker('refresh');
+	// 	$('#select_source').selectpicker('refresh');
+	// 	$('#select_type').selectpicker('refresh');
+	// 	$('#select_state').selectpicker('refresh');
 </script>
 <style>
 .class_distributionTopicStudent {

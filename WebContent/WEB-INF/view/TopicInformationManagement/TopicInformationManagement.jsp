@@ -77,7 +77,7 @@
 					<tbody>
 						<tr>
 							<th>中文名称</th>
-							<th><select class="form-control" style="width: auto;"
+							<th><select class="form-control" style="width: auto;margin:0 auto;"
 								id="select_source" onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">课题来源（全部）</option>
 									<option value="各类课题项目">各类课题项目</option>
@@ -86,7 +86,7 @@
 									<option value="自选">自选</option>
 									<option value="其它">其它</option>
 							</select></th>
-							<th><select class="form-control" style="width: auto;"
+							<th><select class="form-control" style="width: auto;margin:0 auto;"
 								id="select_type" onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">课题性质（全部）</option>
 									<option value="理论研究">理论研究</option>
@@ -95,12 +95,12 @@
 									<option value="实际应用">实际应用</option>
 							</select></th>
 							<th>已选学生数</th>
-							<th><select class="form-control" style="width: auto;"
+							<th><select class="form-control" style="width: auto;margin:0 auto;"
 								data-live-search="true" id="select_teacher"
 								onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">指导教师（全部）</option>
 							</select></th>
-							<th><select class="form-control" style="width: auto;"
+							<th><select class="form-control" style="width: auto;margin:0 auto;"
 								id="select_state" onchange="List_Topic_By_PageAndSearch(1)">
 									<option value="-1">状态（全部）</option>
 									<option value="已关闭">已关闭</option>
