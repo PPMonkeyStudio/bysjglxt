@@ -13,11 +13,13 @@ public class TeacherTutorStudentDTO {
 	private ProcessBelongDTO processBelongDTO; // 流程实例
 	private bysjglxt_topic bysjglxtTopic;
 	private StudentInformationDTO studentInformationDTO;
+	private TeacherInformationDTO reviewTeacher;
 
 	@Override
 	public String toString() {
 		return "TeacherTutorStudentDTO [taskDTO=" + taskDTO + ", processBelongDTO=" + processBelongDTO
-				+ ", bysjglxtTopic=" + bysjglxtTopic + ", studentInformationDTO=" + studentInformationDTO + "]";
+				+ ", bysjglxtTopic=" + bysjglxtTopic + ", studentInformationDTO=" + studentInformationDTO
+				+ ", reviewTeacher=" + reviewTeacher + "]";
 	}
 
 	public ProcessBelongDTO getProcessBelongDTO() {
@@ -50,6 +52,14 @@ public class TeacherTutorStudentDTO {
 
 	public void setStudentInformationDTO(StudentInformationDTO studentInformationDTO) {
 		this.studentInformationDTO = studentInformationDTO;
+	}
+
+	public TeacherInformationDTO getReviewTeacher() {
+		return reviewTeacher;
+	}
+
+	public void setReviewTeacher(TeacherInformationDTO reviewTeacher) {
+		this.reviewTeacher = reviewTeacher;
 	}
 
 }
