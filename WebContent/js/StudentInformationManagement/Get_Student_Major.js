@@ -9,9 +9,10 @@ function Get_Student_Major(select) {
 
 				for (var num = 0; num < MajorList.length; num++) {
 					var option = document.createElement("option");
-					option.appendChild(document.createTextNode(MajorList[num]));
+					option.appendChild(document
+							.createTextNode(MajorList[num].major_name));
 					select.appendChild(option);
-					option.value = MajorList[num];
+					option.value = MajorList[num].major_name;
 				}
 
 				// $('#' + select.id).selectpicker('refresh');

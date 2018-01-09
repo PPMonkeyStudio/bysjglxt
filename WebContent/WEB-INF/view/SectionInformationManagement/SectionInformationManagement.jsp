@@ -113,11 +113,7 @@
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">
-					<table id="table_section_update"
-						class="table table-hover table-bordered"
-						style="text-align: center;">
-						<tbody></tbody>
-					</table>
+					
 				</div>
 				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
 				<div class="modal-footer">
