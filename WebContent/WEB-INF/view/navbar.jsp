@@ -55,6 +55,8 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/loginAndLogout/load.js"></script>
 <!--------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/checkInput.js"></script>
 <!--------------------------------------------------------------------------------->
 <title>Insert title here</title>
 </head>
@@ -80,14 +82,15 @@
 		<div id="navbar-menu">
 			<ul class="nav navbar-nav navbar-left"
 				style="margin: 0 0 0 30px">
-				<li class="dropdown" style="float: left;">
+				<li class="noAdmin_control dropdown" style="float: left;">
 					<a
 						href="<%=basePath%>loginLogout/LoginLogoutManagement_index">
 						<span>说明</span>
 					</a>
 				</li>
 				<!--  -->
-				<li class="college_control dropdown" style="float: left;">
+				<li class="noAdmin_control college_control dropdown"
+					style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>信息</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
@@ -109,7 +112,7 @@
 					</ul>
 				</li>
 				<!--  -->
-				<li class="dropdown" style="float: left;">
+				<li class="noAdmin_control dropdown" style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>课题</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
@@ -127,7 +130,7 @@
 					</ul>
 				</li>
 				<!--  -->
-				<li class=" dropdown" style="float: left;">
+				<li class="noAdmin_control dropdown" style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>流程</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
@@ -143,7 +146,7 @@
 					</ul>
 				</li>
 				<!--  -->
-				<li class="dropdown" style="float: left;">
+				<li class="noAdmin_control dropdown" style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>毕业设计</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
@@ -168,19 +171,19 @@
 					</ul>
 				</li>
 				<!-- 由系统管理员唯一控制的模块，系统管理员也只可以控制这一个模块 -->
-				<li class="dropdown" style="float: left;">
-					<a
-						href="<%=basePath%>college/CollegeManagement_CollegeManagementPage">
-						<span>院系管理</span>
-					</a>
-				</li>
+				<!-- 				<li class="admin_control dropdown" style="float: left;"> -->
+				<!-- 					<a -->
+				<%-- 						href="<%=basePath%>college/CollegeManagement_CollegeManagementPage"> --%>
+				<%-- 						<span>院系管理</span> --%>
+				<!-- 					</a> -->
+				<!-- 				</li> -->
 				<!--  -->
 			</ul>
 			<!--  -->
 			<ul class="nav navbar-nav navbar-right"
 				style="margin: 0 50px 0 0">
 				<!--  -->
-				<li class="dropdown">
+				<li class="noAdmin_control dropdown">
 					<a href="#" class="dropdown-toggle icon-menu"
 						data-toggle="dropdown">
 						<i class="lnr lnr-alarm"></i>
@@ -195,7 +198,6 @@
 						</li>
 					</ul>
 				</li>
-
 				<!--  -->
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -204,12 +206,6 @@
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
 					</a>
 					<ul class="dropdown-menu">
-						<%-- <li>
-							<a href="#">
-								<i class="lnr lnr-user"></i>
-								<span>我的信息</span>
-							</a>
-						</li> --%>
 						<li>
 							<a href="#">
 								<i class="lnr lnr-lock"></i>
