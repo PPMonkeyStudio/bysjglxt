@@ -232,9 +232,8 @@ public class TeacherInformationManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		try {
-			http_response.getWriter()
-					.write(gson.toJson(teacherInformationManagementService.list_TeacherInformationDTO_All(
-							userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id(), college.getCollege_id())));
+			http_response.getWriter().write(gson.toJson(
+					teacherInformationManagementService.list_TeacherInformationDTO_All("", college.getCollege_id())));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -13,6 +13,7 @@ import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.service.CollegeManagementService;
 
 import util.TeamUtil;
+import util.md5;
 
 public class CollegeManagementServiceImpl implements CollegeManagementService {
 	private CollegeManagementDao collegeManagementDao;
@@ -101,12 +102,36 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		return 1;
 	}
 
+	/**
+	 * 添加管理员
+	 */
 	@Override
-	public int addCollege(bysjglxt_college college) {
+	public int addCollege(bysjglxt_college college, bysjglxt_teacher_basic bysjglxt_teacher_basic) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		// 添加学院
 		college.setCollege_id(TeamUtil.getUuid());
 		college.setCollege_gmt_create(TeamUtil.getStringSecond());
 		college.setCollege_gmt_modified(college.getCollege_gmt_create());
 		collegeManagementDao.saveObj(college);
+		// 添加教师管理员
+		bysjglxt_teacher_basic.setTeacher_basic_id(TeamUtil.getUuid());
+		bysjglxt_teacher_basic.setTeacher_basic_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_teacher_basic.setTeacher_basic_gmt_modified(bysjglxt_teacher_basic.getTeacher_basic_gmt_create());
+		collegeManagementDao.saveObj(bysjglxt_teacher_basic);
+		bysjglxt_teacher_user.setUser_teacher_id(TeamUtil.getUuid());
+		bysjglxt_teacher_user.setUser_teacher_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_teacher_user.setUser_teacher_gmt_modified(bysjglxt_teacher_user.getUser_teacher_gmt_create());
+		bysjglxt_teacher_user.setUser_teacher_num(bysjglxt_teacher_basic.getJob_number());
+		bysjglxt_teacher_user.setUser_teacher_password(md5.GetMD5Code(bysjglxt_teacher_basic.getJob_number()));
+		bysjglxt_teacher_user.setUser_teacher_basic(bysjglxt_teacher_basic.getTeacher_basic_id());
+		bysjglxt_teacher_user.setUser_teacher_section("");
+		bysjglxt_teacher_user.setUser_teacher_guidance_num(0);
+		bysjglxt_teacher_user.setUser_teacher_max_guidance(-1);
+		bysjglxt_teacher_user.setUser_teacher_is_recorder(2);
+		bysjglxt_teacher_user.setUser_teacher_belong_college(college.getCollege_id());
+		bysjglxt_teacher_user.setUser_teacher_is_college_admin(1);
+		bysjglxt_teacher_user.setUser_teacher_is_defence_leader(2);
+		collegeManagementDao.saveObj(bysjglxt_teacher_user);
 		return 1;
 	}
 

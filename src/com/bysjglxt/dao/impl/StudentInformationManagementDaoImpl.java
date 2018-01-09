@@ -272,10 +272,11 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_student_user set user_student_is_operate_premission=0,user_student_gmt_modified='"
+			String hql = "update bysjglxt_student_user set user_student_is_operate_premission=2,user_student_gmt_modified='"
 					+ moTime + "' where user_student_id='" + string + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
+			session.flush();
 		} catch (Exception e) {
 			e.printStackTrace();
 			flag = false;
@@ -382,7 +383,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 
 	}
 
-	// 删除选题
 	@Override
 	public bysjglxt_topic_select getTopicSelect(String user_student_id) {
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
@@ -393,6 +393,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		return bysjglxt_topic_select;
 	}
 
+	// 删除选题
 	@Override
 	public boolean deleteTopicSelect(String topic_select_id) {
 		boolean flag = true;
@@ -448,7 +449,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "delete from bysjglxt_taskbook where report_opening_id='" + topic_select_student + "'";
+			String hql = "delete from bysjglxt_report_opening where report_opening_id='" + topic_select_student + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
@@ -473,7 +474,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "delete from bysjglxt_record_progress where record_progress _id='" + record_progress_id + "'";
+			String hql = "delete from bysjglxt_record_progress where record_progress_id='" + record_progress_id + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {

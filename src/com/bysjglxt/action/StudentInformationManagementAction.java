@@ -184,6 +184,7 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	}
 
+	//打开学生
 	public void GiveStudentOperatePremission() throws IOException {
 		studentInformationManagementService.update_Give_Student_Operate_Permission(ListGiveOperatePremissionStudentID);
 		http_response.setContentType("text/html;charset=utf-8");
@@ -191,6 +192,7 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	}
 
+	// 关闭学生信息
 	public void TakeStudentOperatePremission() throws IOException {
 		studentInformationManagementService.update_Take_Student_Operate_Permission(ListTakeOperatePremissionStudentID);
 		http_response.setContentType("text/html;charset=utf-8");
@@ -213,7 +215,6 @@ public class StudentInformationManagementAction extends ActionSupport
 		List<bysjglxt_major> list_Student_Major = studentInformationManagementService
 				.list_Student_Major(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.getWriter().write(gson.toJson(list_Student_Major));
-
 	}
 
 	/**

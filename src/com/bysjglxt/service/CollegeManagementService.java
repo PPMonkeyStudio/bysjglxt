@@ -3,6 +3,7 @@ package com.bysjglxt.service;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_college;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DTO.CollegeInformationDTO;
 
 public interface CollegeManagementService {
@@ -15,6 +16,6 @@ public interface CollegeManagementService {
 	public int updateCollegeAdmin(String teacherUserId);
 
 	// 添加系部
-	public int addCollege(bysjglxt_college college);
+	public int addCollege(bysjglxt_college college, bysjglxt_teacher_basic bysjglxt_teacher_basic);
 
 }

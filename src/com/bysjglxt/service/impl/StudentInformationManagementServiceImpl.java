@@ -241,6 +241,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		return studentInformationManagementDao.listStudent_Grade();
 	}
 
+	// 打开学生
 	@Override
 	public boolean update_Give_Student_Operate_Permission(List<String> listString) {
 		boolean flag = false;
@@ -270,6 +271,11 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			}
 			// 对于没有权限的重新开启，会将所有的对应的学生的所有数据进行删除
 			if (bysjglxt_student_user.getUser_student_is_operate_premission() == 2) {
+				// 将学生信息更改
+				bysjglxt_student_user.setUser_student_is_select_topic(2);
+				bysjglxt_student_user.setUser_student_is_operate_premission(1);
+				bysjglxt_student_user.setUser_student_gmt_modified(TeamUtil.getStringSecond());
+				flag = studentInformationManagementDao.saveObject(bysjglxt_student_user);
 				// 1.删除该学生的选题
 				bysjglxt_topic_select = studentInformationManagementDao
 						.getTopicSelect(bysjglxt_student_user.getUser_student_id());
@@ -357,12 +363,32 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		return flag;
 	}
 
+	/**
+	 * 关闭学生权限操作 关闭学生权限： 1.将学生的状态更改为已关闭 2.如果学生已经选题,那么将该学生指导老师的指导学生数-1
+	 */
 	@Override
 	public boolean update_Take_Student_Operate_Permission(List<String> listString) {
+		bysjglxt_topic_select bysjglxt_topic_select = null;
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		boolean flag = false;
 		for (String string : listString) {
+			bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_topic_select = new bysjglxt_topic_select();
 			flag = studentInformationManagementDao.update_Take_Student_Operate_Permission(string,
 					TeamUtil.getStringSecond());
+			// 判断学生是否选题
+			bysjglxt_topic_select = studentInformationManagementDao.getTopicSelect(string);
+			if (bysjglxt_topic_select == null)
+				continue;
+			// 如果学生选题了,那么就将指导老师的指导学生数-1
+			bysjglxt_teacher_user = studentInformationManagementDao
+					.getTeacherUserById(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+			if (bysjglxt_teacher_user == null)
+				continue;
+			bysjglxt_teacher_user
+					.setUser_teacher_guidance_num(bysjglxt_teacher_user.getUser_teacher_guidance_num() - 1);
+			bysjglxt_teacher_user.setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
+			flag = studentInformationManagementDao.saveObject(bysjglxt_teacher_user);
 		}
 		return flag;
 	}
