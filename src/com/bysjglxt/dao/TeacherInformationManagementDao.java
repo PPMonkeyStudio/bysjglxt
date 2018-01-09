@@ -50,4 +50,6 @@ public interface TeacherInformationManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByMajorCode(String trim);
 
+	public com.bysjglxt.domain.DO.bysjglxt_student_user getStudentByUserId(String userId);
+
 }

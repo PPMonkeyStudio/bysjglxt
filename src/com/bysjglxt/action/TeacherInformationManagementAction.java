@@ -14,6 +14,7 @@ import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 import com.bysjglxt.service.SectionInformationManagementService;
@@ -232,8 +233,8 @@ public class TeacherInformationManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		try {
-			http_response.getWriter().write(gson.toJson(
-					teacherInformationManagementService.list_TeacherInformationDTO_All("", college.getCollege_id())));
+			http_response.getWriter().write(gson.toJson(teacherInformationManagementService
+					.list_TeacherInformationDTO_All("", college.getCollege_id(), 0)));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -251,9 +252,18 @@ public class TeacherInformationManagementAction extends ActionSupport
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(gson.toJson(teacherInformationManagementService
-				.list_TeacherInformationDTO_All(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id(), "")));
-
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter()
+					.write(gson.toJson(teacherInformationManagementService.list_TeacherInformationDTO_All(
+							userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id(), "", 1)));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter()
+					.write(gson
+							.toJson(teacherInformationManagementService.list_TeacherInformationDTO_All(
+									((StudentInformationDTO) ActionContext.getContext().getSession()
+											.get("userStudentDTO")).getBysjglxtStudentUser().getUser_student_id(),
+									"", 2)));
+		}
 	}
 
 	public void GetTeacherTitle() throws IOException {
