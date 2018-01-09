@@ -1,7 +1,6 @@
 package com.bysjglxt.action;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +9,6 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_college;
-import com.bysjglxt.domain.DTO.CollegeInformationDTO;
 import com.bysjglxt.service.CollegeManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,9 +24,17 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	private CollegeManagementService collegeManagementService;
 	private String tmpString;
 	private bysjglxt_college college;
+
 	/*
 	 * 
 	 */
+	/**
+	 * 
+	 * @return
+	 */
+	public String CollegeManagementPage() {
+		return "CollegeManagementPage";
+	}
 
 	/**
 	 * 遍历出所有的学院
@@ -51,7 +57,7 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 * 修改管理员
 	 * 
 	 */
-	public void uodateAdmin() {
+	public void updateAdmin() {
 		if (collegeManagementService.updateCollegeAdmin(tmpString) == -1) {
 			try {
 				http_response.getWriter().write("系统错误修改失败");
@@ -71,6 +77,7 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 * 添加学院
 	 */
 	public void addCollege() {
+		System.out.println(college);
 		try {
 			http_response.getWriter().write(collegeManagementService.addCollege(college));
 		} catch (IOException e) {
@@ -114,6 +121,26 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 
 	public void setHttp_request(HttpServletRequest http_request) {
 		this.http_request = http_request;
+	}
+
+	public String getTmpString() {
+		return tmpString;
+	}
+
+	public void setTmpString(String tmpString) {
+		this.tmpString = tmpString;
+	}
+
+	public bysjglxt_college getCollege() {
+		return college;
+	}
+
+	public void setCollege(bysjglxt_college college) {
+		this.college = college;
+	}
+
+	public CollegeManagementService getCollegeManagementService() {
+		return collegeManagementService;
 	}
 
 	/*

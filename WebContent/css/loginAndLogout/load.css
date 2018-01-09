@@ -16,7 +16,7 @@
 #cloth h3 {
 	position: absolute;
 	top: 50%;
-	left: calc(50% - 70px);
+	left: calc(50% - 50px);
 	z-index: 10000000000000000000000000000000000000000000000;
 }
 

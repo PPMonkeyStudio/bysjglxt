@@ -64,7 +64,7 @@
 	<!--------------------------------------------------------------------------------->
 	<!--------------------------------------------------------------------------------->
 	<div id="cloth">
-		<h3>正在载入权限模块...</h3>
+		<h3>正在解析数据...</h3>
 	</div>
 	<div id="div_load"></div>
 	<script type="text/javascript">
@@ -170,7 +170,7 @@
 				<!-- 由系统管理员唯一控制的模块，系统管理员也只可以控制这一个模块 -->
 				<li class="dropdown" style="float: left;">
 					<a
-						href="#">
+						href="<%=basePath%>college/CollegeManagement_CollegeManagementPage">
 						<span>院系管理</span>
 					</a>
 				</li>
