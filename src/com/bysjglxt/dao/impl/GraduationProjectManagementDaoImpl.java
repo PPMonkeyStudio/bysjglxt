@@ -49,6 +49,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_taskbook);
+			session.flush();
 		} catch (Exception e) {
 			flag = 2;
 			e.printStackTrace();
@@ -62,6 +63,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_report_opening);
+			session.flush();
 		} catch (Exception e) {
 			flag = 2;
 			e.printStackTrace();
@@ -75,6 +77,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_record_progressEarlystage);
+			session.flush();
 		} catch (Exception e) {
 			flag = 2;
 			e.printStackTrace();
@@ -88,6 +91,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_summary);
+			session.flush();
 		} catch (Exception e) {
 			flag = 2;
 			e.printStackTrace();
@@ -101,6 +105,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_examination_formal);
+			session.flush();
 		} catch (Exception e) {
 			flag = 2;
 			e.printStackTrace();
@@ -114,6 +119,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_evaluate_tutor);
+			session.flush();
+			session.flush();
 		} catch (Exception e) {
 			flag = 2;
 			e.printStackTrace();
@@ -127,6 +134,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_evaluate_review);
+			session.flush();
 		} catch (Exception e) {
 			flag = 2;
 			e.printStackTrace();
@@ -140,6 +148,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_defence);
+			session.flush();
 		} catch (Exception e) {
 			flag = 2;
 			e.printStackTrace();
@@ -276,7 +285,6 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		Session session = getSession();
 		String hql = "from bysjglxt_taskbook where bysjglxt_taskbook_student = '" + userId + "'";
-		System.out.println("hql:" + hql);
 		Query query = session.createQuery(hql);
 		bysjglxt_taskbook = (bysjglxt_taskbook) query.uniqueResult();
 		session.clear();
@@ -1145,6 +1153,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 					+ "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
+			session.flush();
 		} catch (HibernateException e) {
 			flag = false;
 			e.printStackTrace();
@@ -1158,6 +1167,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_dissertation);
+			session.flush();
 		} catch (Exception e) {
 			flag = false;
 			e.printStackTrace();
@@ -1182,6 +1192,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		try {
 			Session session = getSession();
 			session.saveOrUpdate(bysjglxt_dissertation);
+			session.flush();
 		} catch (Exception e) {
 			flag = 2;
 			e.printStackTrace();
@@ -1211,5 +1222,19 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_student_basic = (bysjglxt_student_basic) query.uniqueResult();
 		session.clear();
 		return bysjglxt_student_basic;
+	}
+
+	@Override
+	public int saveObj(Object obj) {
+		int flag = 1;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(obj);
+			session.flush();
+		} catch (Exception e) {
+			flag = 2;
+			e.printStackTrace();
+		}
+		return flag;
 	}
 }

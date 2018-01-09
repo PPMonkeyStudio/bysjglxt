@@ -94,7 +94,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			Session session = getSession();
 			String hql = "update bysjglxt_topic set topic_examine_state = '已关闭',topic_gmt_modified='" + moTime
 					+ "' where topic_id='" + string + "'";
-			System.out.println(hql);
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {

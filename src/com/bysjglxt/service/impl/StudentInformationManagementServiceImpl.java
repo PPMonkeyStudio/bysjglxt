@@ -15,11 +15,13 @@ import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_major;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
@@ -253,8 +255,12 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_examination_formal examinationFormal = null;
 		bysjglxt_evaluate_tutor evaluateTutor = null;
 		bysjglxt_evaluate_review evaluateReview = null;
+		bysjglxt_process_instance processInstance = null;
+		bysjglxt_task_instance taskInstance = null;
 		bysjglxt_defence defence = null;
 		for (String string : listString) {
+			processInstance = new bysjglxt_process_instance();
+			taskInstance = new bysjglxt_task_instance();
 			bysjglxt_topic_select = new bysjglxt_topic_select();
 			bysjglxt_student_user = new bysjglxt_student_user();
 			bysjglxt_taskbook = new bysjglxt_taskbook();
@@ -285,6 +291,11 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 				}
 				if (!flag)
 					break;
+				// 删除属于这个学生的毕业设计流程实例以及任务实例
+				
+				
+				
+				
 				// 2.删除对应学生任务书表
 				bysjglxt_taskbook = studentInformationManagementDao
 						.getTaskBookByStudent(bysjglxt_student_user.getUser_student_id());

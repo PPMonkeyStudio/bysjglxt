@@ -14,64 +14,64 @@ function Save_evaluate_tutor() {
 		}
 	}
 
-	formData.append("updateEvaluateReview.evaluate_tutor_id", document
+	formData.append("updateEvaluateTutor.evaluate_tutor_id", document
 			.getElementById("evaluate_tutor_id").value);
 	formData
 			.append(
-					"updateEvaluateReview.evaluate_tutor_grade_training_objective",
+					"updateEvaluateTutor.evaluate_tutor_grade_training_objective",
 					document
 							.getElementById("evaluate_tutor_grade_training_objective").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_difficulty",
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_difficulty",
 			document.getElementById("evaluate_tutor_grade_difficulty").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_workload",
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_workload",
 			document.getElementById("evaluate_tutor_grade_workload").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_bind", document
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_bind", document
 			.getElementById("evaluate_tutor_grade_bind").value);
 	formData
 			.append(
-					"updateEvaluateReview.evaluate_tutor_grade_comprehensive",
+					"updateEvaluateTutor.evaluate_tutor_grade_comprehensive",
 					document
 							.getElementById("evaluate_tutor_grade_comprehensive").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_reference",
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_reference",
 			document.getElementById("evaluate_tutor_grade_reference").value);
 	formData
 			.append(
-					"updateEvaluateReview.evaluate_tutor_grade_experimental_design",
+					"updateEvaluateTutor.evaluate_tutor_grade_experimental_design",
 					document
 							.getElementById("evaluate_tutor_grade_experimental_design").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_computing",
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_computing",
 			document.getElementById("evaluate_tutor_grade_computing").value);
 	formData
 			.append(
-					"updateEvaluateReview.evaluate_tutor_grade_foreign_language",
+					"updateEvaluateTutor.evaluate_tutor_grade_foreign_language",
 					document
 							.getElementById("evaluate_tutor_grade_foreign_language").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_computer",
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_computer",
 			document.getElementById("evaluate_tutor_grade_computer").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_innovate",
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_innovate",
 			document.getElementById("evaluate_tutor_grade_innovate").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_analysis",
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_analysis",
 			document.getElementById("evaluate_tutor_grade_analysis").value);
 
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_chart", document
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_chart", document
 			.getElementById("evaluate_tutor_grade_chart").value);
 
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_instructions",
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_instructions",
 			document.getElementById("evaluate_tutor_grade_instructions").value);
 
 	formData
 			.append(
-					"updateEvaluateReview.evaluate_tutor_grade_practicability",
+					"updateEvaluateTutor.evaluate_tutor_grade_practicability",
 					document
 							.getElementById("evaluate_tutor_grade_practicability").value);
 	formData
 			.append(
-					"updateEvaluateReview.evaluate_tutor_grade_normalization",
+					"updateEvaluateTutor.evaluate_tutor_grade_normalization",
 					document
 							.getElementById("evaluate_tutor_grade_normalization").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_grade_total", document
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_total", document
 			.getElementById("evaluate_tutor_grade_total").value);
-	formData.append("updateEvaluateReview.evaluate_tutor_teacher_comment",
+	formData.append("updateEvaluateTutor.evaluate_tutor_teacher_comment",
 			document.getElementById("evaluate_tutor_teacher_comment").value);
 
 	/*

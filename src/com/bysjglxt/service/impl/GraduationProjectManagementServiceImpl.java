@@ -915,13 +915,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	@Override
 	public int updateEvaluateTutor(bysjglxt_evaluate_tutor updateEvaluateTutor) {
-		System.out.println("kk" + updateEvaluateTutor);
 		int flag = 2;
 		bysjglxt_evaluate_tutor bysjglxt_evaluate_tutor = new bysjglxt_evaluate_tutor();
 		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
 		bysjglxt_evaluate_tutor = graduationProjectManagementDao
 				.findEvaluateTutor(updateEvaluateTutor.getEvaluate_tutor_id());
 		if (bysjglxt_evaluate_tutor != null) {
+
 			bysjglxt_evaluate_tutor
 					.setEvaluate_tutor_teacher_comment(updateEvaluateTutor.getEvaluate_tutor_teacher_comment());
 			bysjglxt_evaluate_tutor.setEvaluate_tutor_grade_training_objective(
@@ -958,8 +958,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_evaluate_tutor
 					.setEvaluate_tutor_is_teacher_opinion(updateEvaluateTutor.getEvaluate_tutor_is_teacher_opinion());
 			bysjglxt_evaluate_tutor.setEvaluate_tutor_gmt_modified(TeamUtil.getStringSecond());
-			flag = graduationProjectManagementDao.fillEmptyInEvaluateTutor(bysjglxt_evaluate_tutor);
-
+			System.out.println(bysjglxt_evaluate_tutor);
+			flag = graduationProjectManagementDao.saveObj(bysjglxt_evaluate_tutor);
+			System.out.println("flag:" + flag);
 			if (flag != 2) {
 				// 根据得到的答辩评分表将指导教师评分占比填写进去
 				bysjglxt_defence = graduationProjectManagementDao

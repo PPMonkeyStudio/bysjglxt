@@ -327,7 +327,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 		//
 		String[] StringUse_sz = StringUse.split(",");
 		listStringUse = Arrays.asList(StringUse_sz);
-		System.out.println("listStringUse:" + listStringUse);
 		//
 		File exportFile = graduationProjectManagementService.exportAll(listStringUse);
 		fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
@@ -356,7 +355,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void updateSectionTaskbook() throws IOException {
-		System.out.println(updateTaskbook);
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateSectionTaskbook(updateTaskbook) == 1) {
 			http_response.getWriter().write("保存成功");
@@ -489,8 +487,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	public void updateEvaluateTutor() throws IOException {
+		System.out.println("updateEvaluateTutor::::"+updateEvaluateTutor);
 		http_response.setContentType("text/html;charset=utf-8");
-		System.out.println("ll:" + updateEvaluateTutor);
 		if (graduationProjectManagementService.updateEvaluateTutor(updateEvaluateTutor) == 1) {
 			http_response.getWriter().write("保存成功");
 		} else {
@@ -546,8 +544,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public String downloadDissertation() throws UnsupportedEncodingException, FileNotFoundException {
 
-		System.out.println("DissertationUserID:" + DissertationUserID);
-
 		File downloadDissertation = graduationProjectManagementService.downloadDissertation(DissertationUserID);
 
 		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
@@ -558,8 +554,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	public void updateDissertation() throws IOException {
-		System.out.println("oldDissertation:'" + oldDissertation + "'");
-		System.out.println("newDissertation:'" + dissertationFileName + "'");
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response
 				.getWriter().write(

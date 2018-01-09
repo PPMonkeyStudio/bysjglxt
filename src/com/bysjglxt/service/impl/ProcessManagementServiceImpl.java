@@ -517,8 +517,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 *
 	 */
 	@Override
-	public ProcessDTO getCurrentTaskDTO(String userId, int role) {
-		String college = collegeJudge(role, userId);
+	public ProcessDTO getCurrentTaskDTO(String userId) {
+		String college = collegeJudge(2, userId);
 		TaskDTO taskDTO = new TaskDTO();
 		List<TaskDTO> listTaskDTO = new ArrayList<TaskDTO>();
 		ProcessDTO processDTO = new ProcessDTO();
