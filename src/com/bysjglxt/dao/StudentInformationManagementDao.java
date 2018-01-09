@@ -3,14 +3,17 @@ package com.bysjglxt.dao;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_major;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 
@@ -105,5 +108,23 @@ public interface StudentInformationManagementDao {
 
 	// 存储对象
 	boolean saveObject(Object obj);
+
+	// 根据学生UserId获取任务实例
+	public List<bysjglxt_task_instance> getTaskInstanceByProcessManId(String user_student_id);
+
+	// 根据任务实例Id删除任务实例
+	public boolean deleteTaskInstanceById(String task_instance_id);
+
+	// 获取所有流程实例
+	public List<bysjglxt_process_instance> getProcessInstanceByMan(String user_student_id);
+
+	// 据id删除
+	public boolean deleteProcessById(String process_instance_id);
+
+	// 获取毕业论文
+	public bysjglxt_dissertation getDissertationByUserId(String user_student_id);
+
+	// 删除毕业论文
+	public boolean deleteDissertationById(String dissertation_id);
 
 }

@@ -5,12 +5,14 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.bysjglxt.dao.StudentInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
@@ -255,12 +257,14 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_examination_formal examinationFormal = null;
 		bysjglxt_evaluate_tutor evaluateTutor = null;
 		bysjglxt_evaluate_review evaluateReview = null;
-		bysjglxt_process_instance processInstance = null;
-		bysjglxt_task_instance taskInstance = null;
+		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<>();
+		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<>();
+		bysjglxt_dissertation dissertation = null;
 		bysjglxt_defence defence = null;
 		for (String string : listString) {
-			processInstance = new bysjglxt_process_instance();
-			taskInstance = new bysjglxt_task_instance();
+			listTaskInstance = new ArrayList<>();
+			dissertation = new bysjglxt_dissertation();
+			listProcessInstance = new ArrayList<>();
 			bysjglxt_topic_select = new bysjglxt_topic_select();
 			bysjglxt_student_user = new bysjglxt_student_user();
 			bysjglxt_taskbook = new bysjglxt_taskbook();
@@ -292,10 +296,56 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 				if (!flag)
 					break;
 				// 删除属于这个学生的毕业设计流程实例以及任务实例
-				
-				
-				
-				
+				// 先删除任务实例
+				listTaskInstance = studentInformationManagementDao
+						.getTaskInstanceByProcessManId(bysjglxt_student_user.getUser_student_id());
+				for (bysjglxt_task_instance bysjglxt_task_instance : listTaskInstance) {
+					flag = studentInformationManagementDao
+							.deleteTaskInstanceById(bysjglxt_task_instance.getTask_instance_id());
+					if (!flag)
+						break;
+				}
+				// 删除流程实例
+				listProcessInstance = studentInformationManagementDao
+						.getProcessInstanceByMan(bysjglxt_student_user.getUser_student_id());
+				for (bysjglxt_process_instance bysjglxt_process_instance : listProcessInstance) {
+					flag = studentInformationManagementDao
+							.deleteProcessById(bysjglxt_process_instance.getProcess_instance_id());
+					if (!flag)
+						break;
+				}
+				// 删除毕业论文
+				dissertation = studentInformationManagementDao
+						.getDissertationByUserId(bysjglxt_student_user.getUser_student_id());
+				if (dissertation != null) {
+					if (dissertation.getDissertation_file() != null
+							&& dissertation.getDissertation_file().trim().length() > 0) {
+						/*
+						 * 获取路径
+						 */
+						String lj = "";
+						try {
+							Properties props = new Properties();
+							props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+							lj = props.getProperty("lj");
+						} catch (Exception e) {
+							System.out.println("获取初始路径失败");
+							e.printStackTrace();
+						}
+						String path = lj + "graduagtionThesi/";
+						path = path + dissertation.getDissertation_id() + "_" + dissertation.getDissertation_file();
+						File deleteFile = new File(path);
+						if (deleteFile.exists()) {
+							deleteFile.delete();
+						}
+						// 删除记录
+						flag = studentInformationManagementDao
+								.deleteDissertationById(dissertation.getDissertation_id());
+						if (!flag)
+							break;
+					}
+				}
+
 				// 2.删除对应学生任务书表
 				bysjglxt_taskbook = studentInformationManagementDao
 						.getTaskBookByStudent(bysjglxt_student_user.getUser_student_id());
