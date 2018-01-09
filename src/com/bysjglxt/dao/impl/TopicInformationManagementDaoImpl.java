@@ -52,7 +52,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public boolean CreateTopic(bysjglxt_topic newTopic) {
 		boolean flag = true;
 		Session session = getSession();
-		session.save(newTopic);
+		session.saveOrUpdate(newTopic);
 		return flag;
 	}
 
@@ -133,8 +133,8 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		}
 		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + topicManagementVO.getSearch().trim() + "%";
-			hql = hql + " and topic.topic_name_chinese like '" + search + "' or topic.topic_name_english like '"
-					+ search + "' ";
+			hql = hql + " and (topic.topic_name_chinese like '" + search + "' or topic.topic_name_english like '"
+					+ search + "') ";
 		}
 		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
 			hql = hql + " and topic.topic_examine_state = '" + topicManagementVO.getState() + "'";
@@ -368,7 +368,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		}
 		if (topicManagementVO.getSearch() != null && topicManagementVO.getSearch().trim().length() > 0) {
 			String search = "%" + topicManagementVO.getSearch().trim() + "%";
-			hql = hql + " and topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "'";
+			hql = hql + " and (topic_name_chinese like '" + search + "' or topic_name_english like '" + search + "')";
 		}
 		if (topicManagementVO.getState() != null && topicManagementVO.getState().trim().length() > 0) {
 			hql = hql + " and topic_examine_state = '" + topicManagementVO.getState() + "'";
