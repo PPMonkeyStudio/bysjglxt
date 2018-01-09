@@ -23,8 +23,6 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/studentSelectTopic.js"></script>
 <script type="text/javascript"
-	src="<%=basePath%>js/TopicInformationManagement/studentSelectTopic_early.js"></script>
-<script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/Get_Teacher.js"></script>
 
 <!---------------------------------------------------------------------------------------------------->
