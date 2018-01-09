@@ -82,7 +82,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					} else if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "活动") {
 						new_td.innerHTML = '<span class="label label-danger">活动</span>';
 					} else if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "结束") {
-						new_td.innerHTML = '<span class="label label-dafaule">结束</span>';
+						new_td.innerHTML = '<span class="label label-default">结束</span>';
 					}
 					/*
 					 * 
