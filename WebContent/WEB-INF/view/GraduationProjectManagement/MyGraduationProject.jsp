@@ -293,7 +293,6 @@
 	<!---------------------------------------------------------------------------------------------------->
 </body>
 <script>
-	$('select').selectpicker('refresh');
 </script>
 <script>
 	$(document).ready(function() {
