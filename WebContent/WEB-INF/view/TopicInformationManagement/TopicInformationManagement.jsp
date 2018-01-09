@@ -208,7 +208,6 @@
 	<!---------------------------------------------------------------------------------------------------->
 </body>
 <script>
-	$('select').selectpicker('refresh');
 </script>
 <script>
 	Get_Teacher(document.getElementById("select_teacher"));

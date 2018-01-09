@@ -58,6 +58,9 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/loginAndLogout/checkInput.js"></script>
 <!--------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/getTopicCurrentProcess.js"></script>
+<!--------------------------------------------------------------------------------->
 <title>Insert title here</title>
 </head>
 

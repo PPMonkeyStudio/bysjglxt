@@ -131,28 +131,41 @@ function list_DistributionStudent(topic) {
  * 指定单个学生选此题
  */
 function DistributionStudent(student_topic) {
-	var str_student_topic = student_topic.id.split("_");
-	var xhr = false;
-	xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		var message;
-		if (xhr.readyState == 4) {
-			if (xhr.status == 200) {
-				if (xhr.responseText == 'success') {
-					toastr.success("操作成功");
-					list_DistributionStudent(str_student_topic[1])
+	if (json_topicCurrentProcessDTO == '{}') {
+		toastr.error("管理员未开启选题的流程");
+		return;
+	} else {
+		for (var num = 0; topicCurrentProcessDTO.listTaskBelongProcess.length; num++) {
+			if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
+				if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "公布选题") {
+					toastr.error("还未到公布选题的时间");
+					return;
+				}
+				break;
+			}
+		}
+		var str_student_topic = student_topic.id.split("_");
+		var xhr = false;
+		xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function() {
+			var message;
+			if (xhr.readyState == 4) {
+				if (xhr.status == 200) {
+					if (xhr.responseText == 'success') {
+						toastr.success("操作成功");
+						list_DistributionStudent(str_student_topic[1])
+					}
 				}
 			}
 		}
+
+		var formData = new FormData();
+
+		formData.append("studentID", str_student_topic[0]);
+		formData.append("studentSelectTopic", str_student_topic[1]);
+		xhr
+				.open("POST",
+						"/bysjglxt/topic/TopicInformationManagement_distributionTopicStudent");
+		xhr.send(formData);
 	}
-
-	var formData = new FormData();
-
-	formData.append("studentID", str_student_topic[0]);
-	formData.append("studentSelectTopic", str_student_topic[1]);
-	xhr
-			.open("POST",
-					"/bysjglxt/topic/TopicInformationManagement_distributionTopicStudent");
-	xhr.send(formData);
-
 }
