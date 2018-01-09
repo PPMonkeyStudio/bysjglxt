@@ -10,15 +10,18 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.StudentInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
+import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_major;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
@@ -675,6 +678,70 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	// 遍历出某个学生的任务实例
+	@Override
+	public List<bysjglxt_task_instance> getTaskInstanceByProcessManId(String user_student_id) {
+		List<bysjglxt_task_instance> listTaskInstance = new ArrayList<>();
+		Session session = getSession();
+		String hql = "select taskInstance from bysjglxt_task_instance taskInstance,bysjglxt_process_instance processInstance where taskInstance.task_instance_process_instance=processInstance.process_instance_id and processInstance.process_instance_man='"
+				+ user_student_id + "'";
+		System.out.println(hql);
+		Query query = session.createQuery(hql);
+		listTaskInstance = query.list();
+		session.clear();
+		return listTaskInstance;
+	}
+
+	// 删除某个任务实例
+	@Override
+	public boolean deleteTaskInstanceById(String task_instance_id) {
+		Session session = getSession();
+		String hql = "delete from bysjglxt_task_instance where task_instance_id='" + task_instance_id + "'";
+		Query query = session.createQuery(hql);
+		query.executeUpdate();
+		return true;
+	}
+
+	@Override
+	public List<bysjglxt_process_instance> getProcessInstanceByMan(String user_student_id) {
+		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<>();
+		Session session = getSession();
+		String hql = "from bysjglxt_process_instance where process_instance_man='" + user_student_id + "'";
+		Query query = session.createQuery(hql);
+		listProcessInstance = query.list();
+		session.clear();
+		return listProcessInstance;
+	}
+
+	@Override
+	public boolean deleteProcessById(String process_instance_id) {
+		Session session = getSession();
+		String hql = "delete from bysjglxt_process_instance where process_instance_id='" + process_instance_id + "'";
+		Query query = session.createQuery(hql);
+		query.executeUpdate();
+		return true;
+	}
+
+	// 获取毕业论文
+	@Override
+	public bysjglxt_dissertation getDissertationByUserId(String user_student_id) {
+		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
+		Session session = getSession();
+		String hql = "from bysjglxt_dissertation where dissertation_student = '" + user_student_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_dissertation = (bysjglxt_dissertation) query.uniqueResult();
+		return bysjglxt_dissertation;
+	}
+
+	@Override
+	public boolean deleteDissertationById(String dissertation_id) {
+		Session session = getSession();
+		String hql = "delete from bysjglxt_dissertation where dissertation_id='" + dissertation_id + "'";
+		Query query = session.createQuery(hql);
+		query.executeUpdate();
+		return true;
 	}
 
 }
