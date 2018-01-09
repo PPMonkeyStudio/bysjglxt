@@ -136,15 +136,6 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					// if
-					// (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO
-					// == null
-					// ||
-					// myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance
-					// == null) {
-					//
-					// new_td.innerHTML = '';
-					// } else {
 					if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 1
 							&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
 						new_td.innerHTML = '<div class="dropdown" >'

@@ -98,13 +98,6 @@ function update_defence_leader(button) {
 								console.debug("defence:" + xhr.responseText);
 								var defence = JSON.parse(xhr.responseText);
 
-								var textarea_defence_leader_comment = document
-										.getElementById("textarea_defence_leader_comment");
-								if (defence.defence_leader_comment != undefined) {
-									textarea_defence_leader_comment.innerHTML = defence.defence_leader_comment;
-								} else {
-									textarea_defence_leader_comment.innerHTML = '';
-								}
 								/*
 								 * 
 								 */
@@ -133,7 +126,7 @@ function update_defence_leader(button) {
 								var new_td = document.createElement("td");
 								switch (defence.defence_grade_writing) {
 								case 0: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_writing()" class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()" class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" selected="selected">0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -149,7 +142,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 1: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1"  selected="selected">1</option>'
 											+ '<option value="2">2</option>'
@@ -165,7 +158,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 2: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2" selected="selected">2</option>'
@@ -181,7 +174,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 3: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -197,7 +190,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 4: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -213,7 +206,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 5: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -229,7 +222,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 6: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -245,7 +238,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 7: {
-									new_td.innerHTML = '<select onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -261,7 +254,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 8: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -277,7 +270,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 9: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -293,7 +286,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 10: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_writing()"  class="form-control" id="defence_grade_writing" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_writing" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -328,7 +321,7 @@ function update_defence_leader(button) {
 								var new_td = document.createElement("td");
 								switch (defence.defence_grade_normalization) {
 								case 0: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_normalization()" class="form-control" id="defence_grade_normalization" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()" class="form-control" id="defence_grade_normalization" >'
 											+ '<option value="0"  selected="selected">0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -340,7 +333,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 1: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_normalization()"  class="form-control" id="defence_grade_normalization" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_normalization" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1" selected="selected">1</option>'
 											+ '<option value="2">2</option>'
@@ -352,7 +345,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 2: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_normalization()"  class="form-control" id="defence_grade_normalization" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_normalization" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2" selected="selected">2</option>'
@@ -364,7 +357,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 3: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_normalization()"  class="form-control" id="defence_grade_normalization" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_normalization" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -376,7 +369,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 4: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_normalization()"  class="form-control" id="defence_grade_normalization" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_normalization" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -388,7 +381,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 5: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_normalization()"  class="form-control" id="defence_grade_normalization" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_normalization" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -400,7 +393,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 6: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_normalization()"  class="form-control" id="defence_grade_normalization" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_normalization" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -500,7 +493,7 @@ function update_defence_leader(button) {
 								var new_td = document.createElement("td");
 								switch (defence.defence_grade_technology) {
 								case 0: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()" class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()" class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0"  selected="selected">0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -520,7 +513,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 1: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1" selected="selected">1</option>'
 											+ '<option value="2">2</option>'
@@ -540,7 +533,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 2: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2" selected="selected">2</option>'
@@ -560,7 +553,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 3: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -580,7 +573,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 4: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -600,7 +593,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 5: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -620,7 +613,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 6: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -636,7 +629,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 7: {
-									new_td.innerHTML = '<select onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -652,7 +645,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 8: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -672,7 +665,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 9: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -692,7 +685,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 10: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -712,7 +705,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 11: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -732,7 +725,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 12: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -752,7 +745,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 13: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -772,7 +765,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 14: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_technology()"  class="form-control" id="defence_grade_technology" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_technology" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -811,7 +804,7 @@ function update_defence_leader(button) {
 								var new_td = document.createElement("td");
 								switch (defence.defence_grade_practicability) {
 								case 0: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()" class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()" class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0"  selected="selected">0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -833,7 +826,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 1: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1" selected="selected">1</option>'
 											+ '<option value="2">2</option>'
@@ -855,7 +848,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 2: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2" selected="selected">2</option>'
@@ -877,7 +870,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 3: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -899,7 +892,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 4: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -921,7 +914,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 5: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -943,7 +936,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 6: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -965,7 +958,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 7: {
-									new_td.innerHTML = '<select onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -987,7 +980,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 8: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1009,7 +1002,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 9: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1031,7 +1024,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 10: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1053,7 +1046,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 11: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1075,7 +1068,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 12: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1097,7 +1090,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 13: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1119,7 +1112,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 14: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1141,7 +1134,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 15: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1163,7 +1156,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 16: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_practicability()"  class="form-control" id="defence_grade_practicability" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_practicability" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1205,7 +1198,7 @@ function update_defence_leader(button) {
 								var new_td = document.createElement("td");
 								switch (defence.defence_grade_appearance) {
 								case 0: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_appearance()" class="form-control" id="defence_grade_appearance" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()" class="form-control" id="defence_grade_appearance" >'
 											+ '<option value="0"  selected="selected">0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1216,7 +1209,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 1: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_appearance()"  class="form-control" id="defence_grade_appearance" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_appearance" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1" selected="selected">1</option>'
 											+ '<option value="2">2</option>'
@@ -1227,7 +1220,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 2: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_appearance()"  class="form-control" id="defence_grade_appearance" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_appearance" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2" selected="selected">2</option>'
@@ -1238,7 +1231,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 3: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_appearance()"  class="form-control" id="defence_grade_appearance" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_appearance" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1249,7 +1242,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 4: {
-									new_td.innerHTML = '<select   onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="defence_grade_appearance" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_appearance" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1260,7 +1253,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 5: {
-									new_td.innerHTML = '<select   onchange="change_evaluate_tutor_grade_total()"  class="form-control" id="defence_grade_appearance" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_appearance" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1293,7 +1286,7 @@ function update_defence_leader(button) {
 								var new_td = document.createElement("td");
 								switch (defence.defence_grade_statement) {
 								case 0: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()" class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()" class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0"  selected="selected">0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1319,7 +1312,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 1: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1" selected="selected">1</option>'
 											+ '<option value="2">2</option>'
@@ -1345,7 +1338,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 2: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2" selected="selected">2</option>'
@@ -1371,7 +1364,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 3: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1397,7 +1390,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 4: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1423,7 +1416,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 5: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1449,7 +1442,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 6: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1475,7 +1468,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 7: {
-									new_td.innerHTML = '<select onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1501,7 +1494,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 8: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1527,7 +1520,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 9: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1553,7 +1546,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 10: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1579,7 +1572,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 11: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1605,7 +1598,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 12: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1631,7 +1624,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 13: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1657,7 +1650,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 14: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1683,7 +1676,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 15: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1709,7 +1702,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 16: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1735,7 +1728,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 17: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1761,7 +1754,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 18: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1787,7 +1780,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 19: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1813,7 +1806,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 20: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_statement()"  class="form-control" id="defence_grade_statement" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_statement" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1857,7 +1850,7 @@ function update_defence_leader(button) {
 								var new_td = document.createElement("td");
 								switch (defence.defence_grade_answer) {
 								case 0: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()" class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()" class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0"  selected="selected">0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1888,7 +1881,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 1: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1" selected="selected">1</option>'
 											+ '<option value="2">2</option>'
@@ -1919,7 +1912,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 2: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2" selected="selected">2</option>'
@@ -1950,7 +1943,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 3: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -1981,7 +1974,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 4: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2012,7 +2005,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 5: {
-									new_td.innerHTML = '<select   onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select   onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2043,7 +2036,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 6: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2074,7 +2067,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 7: {
-									new_td.innerHTML = '<select onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2105,7 +2098,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 8: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2136,7 +2129,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 9: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2167,7 +2160,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 10: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2198,7 +2191,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 11: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2229,7 +2222,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 12: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2260,7 +2253,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 13: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2291,7 +2284,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 14: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2322,7 +2315,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 15: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2353,7 +2346,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 16: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2384,7 +2377,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 17: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2415,7 +2408,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 18: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2446,7 +2439,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 19: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2477,7 +2470,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 20: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2508,7 +2501,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 21: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2539,7 +2532,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 22: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2570,7 +2563,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 23: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2601,7 +2594,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 24: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2632,7 +2625,7 @@ function update_defence_leader(button) {
 									break;
 								}
 								case 25: {
-									new_td.innerHTML = '<select  onchange="change_defence_grade_answer()"  class="form-control" id="defence_grade_answer" >'
+									new_td.innerHTML = '<select  onchange="change_defence_grade_defence()"  class="form-control" id="defence_grade_answer" >'
 											+ '<option value="0" >0</option>'
 											+ '<option value="1">1</option>'
 											+ '<option value="2">2</option>'
@@ -2665,7 +2658,24 @@ function update_defence_leader(button) {
 
 								}
 								new_tr.appendChild(new_td);
-
+								/*
+								 * 
+								 * 
+								 * 
+								 */
+								var new_tr = document.createElement("tr");
+								table_defence_leader.firstChild
+										.appendChild(new_tr);
+								var new_td = document.createElement("td");
+								new_td.innerHTML = '总分';
+								new_tr.appendChild(new_td);
+								var new_td = document.createElement("td");
+								new_td.innerHTML = '100';
+								new_tr.appendChild(new_td);
+								var new_td = document.createElement("td");
+								new_td.style = "text-align: center;";
+								new_td.innerHTML = '<input id="defence_grade_defence" disabled="disabled" class="form-control" style="text-align: center;"/>';
+								new_tr.appendChild(new_td);
 								/*
 								 * 
 								 * 
@@ -2675,6 +2685,20 @@ function update_defence_leader(button) {
 								 * 
 								 * 
 								 * 
+								 * 
+								 */
+								change_defence_grade_defence();
+								/*
+								 * 
+								 */
+								var textarea_defence_leader_comment = document
+										.getElementById("textarea_defence_leader_comment");
+								if (defence.defence_leader_comment != undefined) {
+									textarea_defence_leader_comment.innerHTML = defence.defence_leader_comment;
+								} else {
+									textarea_defence_leader_comment.innerHTML = '';
+								}
+								/*
 								 * 
 								 */
 							} else {
@@ -2692,4 +2716,19 @@ function update_defence_leader(button) {
 					xhr.send(formData);
 				}
 			});
+}
+
+function change_defence_grade_defence() {
+	var defence_grade_defence = document
+			.getElementById("defence_grade_defence");
+
+	var total = parseInt(document.getElementById("defence_grade_writing").value)
+			+ parseInt(document.getElementById("defence_grade_normalization").value)
+			+ parseInt(document.getElementById("defence_grade_complete").value)
+			+ parseInt(document.getElementById("defence_grade_technology").value)
+			+ parseInt(document.getElementById("defence_grade_practicability").value)
+			+ parseInt(document.getElementById("defence_grade_appearance").value)
+			+ parseInt(document.getElementById("defence_grade_statement").value)
+			+ parseInt(document.getElementById("defence_grade_answer").value);
+	defence_grade_defence.value = total;
 }
