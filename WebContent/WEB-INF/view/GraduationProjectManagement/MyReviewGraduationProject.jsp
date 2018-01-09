@@ -14,10 +14,10 @@
 
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
-	src="<%=basePath%>js/GraduationProjectManagement/List_MyTutorGraduationProject_By_PageAndSearch.js"></script>
+	src="<%=basePath%>js/GraduationProjectManagement/List_MyReviewGraduationProject_By_PageAndSearch.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
-<title>我指导的毕业设计</title>
+<title>我评阅的毕业设计</title>
 </head>
 <body>
 	<s:action name="LoginLogoutManagement_navbar" namespace="/loginLogout"
@@ -35,20 +35,20 @@
 		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
-				<h3 class="panel-title">我指导的学生</h3>
+				<h3 class="panel-title">我评阅的学生</h3>
 			</div>
 			<div class="panel-body">
 				<div style="height: 34px;">
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
 						<input id="input_search" class="form-control"
-							oninput="List_MyTutorGraduationProject_By_PageAndSearch(1)"
+							oninput="List_MyReviewGraduationProject_By_PageAndSearch(1)"
 							type="text"> <span class="input-group-addon"> <i
 							class="fa fa-search"></i>
 						</span>
 					</div>
 				</div>
-				<table id="table_myTutorGraduationProject"
+				<table id="table_myReviewGraduationProject"
 					class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
@@ -58,7 +58,7 @@
 							<th>毕业设计名称</th>
 							<th class="teacher_control"><select class="form-control"
 								style="width: auto;" id="select_state"
-								onchange="List_MyTutorGraduationProject_By_PageAndSearch(1)">
+								onchange="List_MyReviewGraduationProject_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
 									<option value="1">正在进行</option>
 									<option value="2">未开始</option>

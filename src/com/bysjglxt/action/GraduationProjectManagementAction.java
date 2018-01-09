@@ -112,6 +112,15 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return "MyTutorGraduationProjectPage";
 	}
 
+	/**
+	 * 我评阅的毕业设计
+	 * 
+	 * @return
+	 */
+	public String MyReviewGraduationProjectPage() {
+		return "MyReviewGraduationProjectPage";
+	}
+
 	/*
 	 * 所有此教师指导的学生
 	 */
@@ -487,7 +496,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	public void updateEvaluateTutor() throws IOException {
-		System.out.println("updateEvaluateTutor::::"+updateEvaluateTutor);
+		System.out.println("updateEvaluateTutor::::" + updateEvaluateTutor);
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateEvaluateTutor(updateEvaluateTutor) == 1) {
 			http_response.getWriter().write("保存成功");
