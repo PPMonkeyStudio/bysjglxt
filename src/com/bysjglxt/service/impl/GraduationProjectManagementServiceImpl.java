@@ -40,6 +40,7 @@ import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ProcessBelongDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherTutorStudentDTO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
@@ -185,17 +186,20 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		TeacherTutorStudentDTO teacherTutorStudentDTO = new TeacherTutorStudentDTO();
 		TaskDTO taskDTO = new TaskDTO();
 		ProcessBelongDTO processBelongDTO = null;
+		TeacherInformationDTO teacherInformationDTO = new TeacherInformationDTO();
 		bysjglxt_task_definition taskDefinition = new bysjglxt_task_definition();
 		bysjglxt_task_instance taskInstance = new bysjglxt_task_instance();
 		bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
 		bysjglxt_section bysjglxt_section = new bysjglxt_section();
 		bysjglxt_student_user bysjglxtStudentUser = new bysjglxt_student_user();
 		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
+		bysjglxt_teacher_basic bysjglxt_teacher_basic = null;
 		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
 		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
 		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
 		bysjglxt_process_instance processInstance = new bysjglxt_process_instance();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user teacherUser = null;
 		List<bysjglxt_topic_select> list_bysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
 		List<bysjglxt_topic_select> list_Allbysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
 		// 判断老师的身份
@@ -256,6 +260,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		// 2.遍历选题拿到学生userId信息
 		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
 			processBelongDTO = new ProcessBelongDTO();
+			bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
+			teacherUser = new bysjglxt_teacher_user();
+			teacherInformationDTO = new TeacherInformationDTO();
 			taskDTO = new TaskDTO();
 			taskDefinition = new bysjglxt_task_definition();
 			bysjglxtStudentUser = new bysjglxt_student_user();
@@ -265,6 +272,25 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			processInstance = new bysjglxt_process_instance();
 			bysjglxtTopic = new bysjglxt_topic();
 			studentInformationDTO = new StudentInformationDTO();
+			if (bysjglxt_topic_select.getTopic_select_teacher_review() != null
+					&& bysjglxt_topic_select.getTopic_select_teacher_review().trim().length() > 0) {
+				// 添加评阅老师信息
+				// 获取teacherUserbyId
+				teacherUser = graduationProjectManagementDao
+						.getTeacherUserByUserId(bysjglxt_topic_select.getTopic_select_teacher_review().trim());
+				if (teacherUser != null) {
+					if (teacherUser.getUser_teacher_basic() != null
+							&& teacherUser.getUser_teacher_basic().trim().length() > 0) {
+						bysjglxt_teacher_basic = graduationProjectManagementDao
+								.getTeacherBasicByBasicId(teacherUser.getUser_teacher_basic().trim());
+						if (bysjglxt_teacher_basic != null) {
+							teacherInformationDTO.setBysjglxtTeacherBasic(bysjglxt_teacher_basic);
+						}
+						teacherInformationDTO.setBysjglxtTeacherUser(teacherUser);
+					}
+				}
+			}
+
 			// 3.根据选题所属学生拿到学生user表
 			bysjglxtStudentUser = graduationProjectManagementDao
 					.getStudentUserByUserId(bysjglxt_topic_select.getTopic_select_student());
@@ -317,6 +343,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			} else {
 				System.out.println("学生user表为空");
 			}
+			teacherTutorStudentDTO.setReviewTeacher(teacherInformationDTO);
 			teacherTutorStudentDTO.setProcessBelongDTO(processBelongDTO);
 			teacherTutorStudentDTO.setStudentInformationDTO(studentInformationDTO);
 			teacherTutorStudentDTO.setTaskDTO(taskDTO);
