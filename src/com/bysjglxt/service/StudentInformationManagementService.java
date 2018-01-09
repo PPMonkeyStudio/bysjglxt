@@ -12,6 +12,11 @@ import com.bysjglxt.domain.VO.StudentInformationManagementVO;
 public interface StudentInformationManagementService {
 
 	/**
+	 * 
+	 */
+	public int distributionStudentMajor(String studentUserId, String collegeId);
+
+	/**
 	 * 可以导出毕业设计过程管理手册的学生信息
 	 * 
 	 * @param exportGeaduationStudentDTO

@@ -11,6 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.bysjglxt.dao.StudentInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
@@ -553,6 +554,50 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		}
 		exportGeaduationStudentDTO.setListStudentInformationDTO(listStudentInformationDTO);
 		return exportGeaduationStudentDTO;
+	}
+
+	/**
+	 * 根据学生userId以及专业Id分配专业
+	 */
+	@Override
+	public int distributionStudentMajor(String studentUserId, String majorId) {
+		boolean flag = false;
+		bysjglxt_major bysjglxt_major = new bysjglxt_major();
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
+		// 分配专业
+		// 1.获取专业信息
+		bysjglxt_major = studentInformationManagementDao.getMajorByMajorId(majorId);
+		if (bysjglxt_major == null) {
+			return -1;
+		}
+		// 2.更改user表中信息
+		bysjglxt_student_user = studentInformationManagementDao.getStudentByNum(studentUserId);
+		if (bysjglxt_student_user == null) {
+			return -1;
+		}
+		bysjglxt_student_user.setUser_student_belong_major(bysjglxt_major.getMajor_id());
+		bysjglxt_student_user.setUser_student_gmt_modified(TeamUtil.getStringSecond());
+		flag = studentInformationManagementDao.saveObject(bysjglxt_student_user);
+		if (!flag)
+			return -1;
+		if (bysjglxt_student_user.getUser_student_basic() != null
+				&& bysjglxt_student_user.getUser_student_basic().trim().length() > 0) {
+			bysjglxt_student_basic = studentInformationManagementDao
+					.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_user.getUser_student_basic().trim());
+			if (bysjglxt_student_basic != null) {
+				bysjglxt_student_basic.setStudent_basic_major(bysjglxt_major.getMajor_name());
+				if (bysjglxt_major.getMajor_professionalcode() != null
+						&& bysjglxt_major.getMajor_professionalcode().trim().length() > 0) {
+					bysjglxt_student_basic
+							.setStudent_basic_professionalcode(bysjglxt_major.getMajor_professionalcode().trim());
+				}
+				flag = studentInformationManagementDao.saveObject(bysjglxt_student_basic);
+				if (!flag)
+					return -1;
+			}
+		}
+		return 1;
 	}
 
 }
