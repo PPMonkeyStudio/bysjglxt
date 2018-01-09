@@ -82,6 +82,7 @@ function dissertationChange(dissertation) {
 	} else {
 		div_dissertation_name.className = "div_old_dissertation";
 	}
+	div_dissertation_del.id = "div_dissertation_del";
 	div_dissertation_del.innerHTML = "X";
 	div_dissertation_del.style.width = "auto";
 	div_dissertation_del.style.float = "left";

@@ -64,26 +64,34 @@ function dissertation() {
 				 */
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
+				var div_dissertation_del = document
+						.getElementById("div_dissertation_del");
 				if ("学生提交答辩论文" != current_processDefinitionName) {
 					div_2.parentNode.removeChild(div_2);
 					button_SaveGraduationProject.style.display = "none";
+					div_dissertation_del.style.display = "none";
 				} else if (userStudentDTO != null) {
 					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
 						button_SaveGraduationProject.style.display = "block";
+						div_dissertation_del.style.display = "block";
 					} else {
 						div_2.parentNode.removeChild(div_2);
 						button_SaveGraduationProject.style.display = "none";
+						div_dissertation_del.style.display = "none";
 					}
 				} else if (userTeacherDTO != null) {
 					if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
 						button_SaveGraduationProject.style.display = "block";
+						div_dissertation_del.style.display = "block";
 					} else {
 						div_2.parentNode.removeChild(div_2);
 						button_SaveGraduationProject.style.display = "none";
+						div_dissertation_del.style.display = "none";
 					}
 				} else {
 					div_2.parentNode.removeChild(div_2);
 					button_SaveGraduationProject.style.display = "none";
+					div_dissertation_del.style.display = "none";
 				}
 				/*
 				 * 
