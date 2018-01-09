@@ -157,7 +157,7 @@
 									.appendChild(new_tr_1)
 							new_tr_1.innerHTML = '<th>专业代码</th><td><input name="updateStudent.student_basic_professionalcode" style="text-align: center;" class=" form-control"  value="'
 									+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_professionalcode
-									+ '"></input></td><th>专业名称</th><td><input name="updateStudent.student_basic_major" style="text-align: center;" class=" form-control"  value="'
+									+ '"></input></td><th>专业名称</th><td><input name="updateStudent.student_basic_major" style="text-align: center;" disabled="disabled" class=" form-control"  value="'
 									+ student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_major
 									+ '"></input></td>';
 							/*
