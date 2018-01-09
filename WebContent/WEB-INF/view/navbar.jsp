@@ -55,6 +55,8 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/loginAndLogout/load.js"></script>
 <!--------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/checkInput.js"></script>
 <!--------------------------------------------------------------------------------->
 <title>Insert title here</title>
 </head>
@@ -87,7 +89,8 @@
 					</a>
 				</li>
 				<!--  -->
-				<li class="noAdmin_control college_control dropdown" style="float: left;">
+				<li class="noAdmin_control college_control dropdown"
+					style="float: left;">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span>信息</span>
 						<i class="icon-submenu lnr lnr-chevron-down"></i>
@@ -168,12 +171,12 @@
 					</ul>
 				</li>
 				<!-- 由系统管理员唯一控制的模块，系统管理员也只可以控制这一个模块 -->
-<!-- 				<li class="admin_control dropdown" style="float: left;"> -->
-<!-- 					<a -->
-<%-- 						href="<%=basePath%>college/CollegeManagement_CollegeManagementPage"> --%>
-<%-- 						<span>院系管理</span> --%>
-<!-- 					</a> -->
-<!-- 				</li> -->
+				<!-- 				<li class="admin_control dropdown" style="float: left;"> -->
+				<!-- 					<a -->
+				<%-- 						href="<%=basePath%>college/CollegeManagement_CollegeManagementPage"> --%>
+				<%-- 						<span>院系管理</span> --%>
+				<!-- 					</a> -->
+				<!-- 				</li> -->
 				<!--  -->
 			</ul>
 			<!--  -->

@@ -9,19 +9,21 @@ function addCollege() {
 						+ '<tbody>'
 						+ '<tr><td colspan="4">院系信息</td></tr>'
 						+ '<tr>'
-						+ '<td>院系代码：</td><td><input  name="college.college_code" class="form-control"  /></td>'
+						+ '<td>院系代码：</td><td><input input_explain="sads" name="college.college_code" class="input_not_empty form-control"  /></td>'
 						+ '</tr>'
 						+ '<tr>'
-						+ '<td>院系名称：</td><td><input  name="college.college_name" class="form-control"  /></td>'
+						+ '<td>院系名称：</td><td><input  name="college.college_name" class="input_not_empty form-control"  /></td>'
 						+ '</tr>'
 						+ '<tr><td colspan="4">院系管理员</td></tr>'
 						+ '<tr>'
-						+ '<td>工号：</td><td><input  name="" class="form-control"  /></td>'
+						+ '<td>工号：</td><td><input name="bysjglxt_teacher_basic.job_number" class="input_not_empty form-control"  /></td>'
 						+ '</tr>'
 						+ '<tr>'
-						+ '<td>姓名：</td><td><input  name="" class="form-control"  /></td>'
-						+ '</tr>' + '<tr>' + '<td>性别：</td><td>'
-						+ '<select  name="" class="form-control" >'
+						+ '<td>姓名：</td><td><input  name="bysjglxt_teacher_basic.name" class="input_not_empty form-control"  /></td>'
+						+ '</tr>'
+						+ '<tr>'
+						+ '<td>性别：</td><td>'
+						+ '<select  name="bysjglxt_teacher_basic.sex" class="form-control" >'
 						+ '<option value="男">男</option>'
 						+ '<option value="女">女</option>' + '</select>'
 						+ '</td>' + '</tr>' + '</tbody>' + '</table>'
@@ -48,8 +50,18 @@ function addCollege() {
 									}
 								}
 							}
+							/*
+							 * 
+							 */
+							if (!checkInputNotEmpty()) {
+								return false;
+							}
+							/*
+							 * 
+							 */
 							var formData = new FormData(document
 									.getElementById("form_addCollege"));
+
 							xhr
 									.open("POST",
 											"/bysjglxt/college/CollegeManagement_addCollege");
