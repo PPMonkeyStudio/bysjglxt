@@ -65,19 +65,72 @@
 							new_tr_1.innerHTML = '<input name="updateTeacherUser.user_teacher_num" style="text-align: center;display:none;" class="form-control"  value="'
 									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_num
 									+ '"></input>';
+							/*
+							 * 密码
+							 */
 							new_tr_1 = document.createElement("tr");
 							table_teacher_user.firstElementChild
 									.appendChild(new_tr_1)
 							new_tr_1.innerHTML = '<input name="updateTeacherUser.user_teacher_password"  style="text-align: center;display:none;" class="form-control"  value="'
 									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_password
 									+ '"></input>';
+							/*
+							 * 基础信息
+							 */
 							new_tr_1 = document.createElement("tr");
 							table_teacher_user.firstElementChild
 									.appendChild(new_tr_1)
 							new_tr_1.innerHTML = '<input name="updateTeacherUser.user_teacher_basic"  style="text-align: center;display:none;" class="form-control"  value="'
 									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_basic
 									+ '"></input>';
-							//
+							/*
+							 * 指导学生
+							 */
+							new_tr_1 = document.createElement("tr");
+							table_teacher_user.firstElementChild
+									.appendChild(new_tr_1)
+							new_tr_1.innerHTML = '<input name="updateTeacherUser.user_teacher_guidance_num"  style="text-align: center;display:none;" class="form-control"  value="'
+									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num
+									+ '"></input>';
+							/*
+							 * 学院
+							 */
+							new_tr_1 = document.createElement("tr");
+							table_teacher_user.firstElementChild
+									.appendChild(new_tr_1)
+							new_tr_1.innerHTML = '<input name="updateTeacherUser.user_teacher_belong_college"  style="text-align: center;display:none;" class="form-control"  value="'
+									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_belong_college
+									+ '"></input>';
+							/*
+							 * 管理员权限
+							 */
+							new_tr_1 = document.createElement("tr");
+							table_teacher_user.firstElementChild
+									.appendChild(new_tr_1)
+							new_tr_1.innerHTML = '<input name="updateTeacherUser.user_teacher_is_college_admin"  style="text-align: center;display:none;" class="form-control"  value="'
+									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_college_admin
+									+ '"></input>';
+							/*
+							 * 记录员
+							 */
+							new_tr_1 = document.createElement("tr");
+							table_teacher_user.firstElementChild
+									.appendChild(new_tr_1)
+							new_tr_1.innerHTML = '<input name="updateTeacherUser.user_teacher_is_recorder"  style="text-align: center;display:none;" class="form-control"  value="'
+									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_recorder
+									+ '"></input>';
+							/*
+							 * 答辩小组组长
+							 */
+							new_tr_1 = document.createElement("tr");
+							table_teacher_user.firstElementChild
+									.appendChild(new_tr_1)
+							new_tr_1.innerHTML = '<input name="updateTeacherUser.user_teacher_is_defence_leader"  style="text-align: center;display:none;" class="form-control"  value="'
+									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_defence_leader
+									+ '"></input>';
+							/*
+							 * 创建时间
+							 */
 							new_tr_1 = document.createElement("tr");
 							table_teacher_user.firstElementChild
 									.appendChild(new_tr_1)
