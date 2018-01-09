@@ -12,6 +12,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_major;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
@@ -73,6 +74,10 @@ public class StudentInformationManagementAction extends ActionSupport
 	 */
 	private bysjglxt_student_basic updateStudent;
 
+	private bysjglxt_student_user studentUser;
+
+	private bysjglxt_major major;
+
 	/**
 	 * @说明 跳转列表页
 	 * 
@@ -108,6 +113,24 @@ public class StudentInformationManagementAction extends ActionSupport
 			System.out.println("遍历可导出毕业设计过程管理手册学生出错");
 			e.printStackTrace();
 		}
+	}
+
+	// 分配学生专业
+	// 1.分配的专业id
+	// 2.谁改变专业studentUserId
+	public void distributionStudentMajor() {
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			if (studentInformationManagementService.distributionStudentMajor(studentUser.getUser_student_id(),
+					major.getMajor_id()) == -1) {
+				http_response.getWriter().write("分配失败");
+			} else {
+				http_response.getWriter().write("分配成功");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -184,7 +207,7 @@ public class StudentInformationManagementAction extends ActionSupport
 
 	}
 
-	//打开学生
+	// 打开学生
 	public void GiveStudentOperatePremission() throws IOException {
 		studentInformationManagementService.update_Give_Student_Operate_Permission(ListGiveOperatePremissionStudentID);
 		http_response.setContentType("text/html;charset=utf-8");

@@ -21,7 +21,7 @@ public class bysjglxt_evaluate_tutor {
 	private int evaluate_tutor_grade_practicability = 6;
 	private int evaluate_tutor_grade_normalization = 7;
 	private int evaluate_tutor_grade_total;
-	private int evaluate_tutor_is_teacher_opinion;
+	private int evaluate_tutor_is_teacher_opinion=1;
 	private String evaluate_tutor_gmt_create;
 	private String evaluate_tutor_gmt_modified;
 

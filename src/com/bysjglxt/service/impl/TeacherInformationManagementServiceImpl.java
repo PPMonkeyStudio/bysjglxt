@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
@@ -51,15 +52,17 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	}
 
 	// 根据使用者Id获取学院
-	public String getCollegeByUserId(String userId) {
-		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
-		bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(userId);
-		if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
-				&& bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >= 0) {
-			return bysjglxt_teacher_user.getUser_teacher_belong_college().trim();
-		}
-		return null;
-	}
+	/*
+	 * public String getCollegeByUserId(String userId) { bysjglxt_teacher_user
+	 * bysjglxt_teacher_user = new bysjglxt_teacher_user();
+	 * bysjglxt_teacher_user =
+	 * teacherInformationManagementDao.getStudentById(userId); if
+	 * (bysjglxt_teacher_user.getUser_teacher_belong_college() != null &&
+	 * bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >=
+	 * 0) { return
+	 * bysjglxt_teacher_user.getUser_teacher_belong_college().trim(); } return
+	 * null; }
+	 */
 
 	/**
 	 * OK
@@ -67,7 +70,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	@Override
 	public boolean saveTeacherList(List<bysjglxt_teacher_basic> teacherBasicList, String userId) {
 		// 获取操作人是哪个学院的
-		String college = getCollegeByUserId(userId);
+		String college = collegeJudge(1, userId);
 		//
 		boolean flag = false;
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
@@ -123,16 +126,48 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		return flag;
 	}
 
+	// 根据user Id以及用户角色身份获取用户是哪个系的
+	public String collegeJudge(int studentOrTeacher, String userId) {
+		// 老师
+		if (studentOrTeacher == 1) {
+			bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+			bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(userId);
+			if (bysjglxt_teacher_user == null) {
+				return null;
+			}
+			if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
+					&& bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() > 0) {
+				return bysjglxt_teacher_user.getUser_teacher_belong_college();
+			}
+		} else {
+			// 学生
+			bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+			bysjglxt_student_user = teacherInformationManagementDao.getStudentByUserId(userId);
+			if (bysjglxt_student_user == null) {
+				return null;
+			}
+			if (bysjglxt_student_user.getUser_student_belong_college() != null
+					&& bysjglxt_student_user.getUser_student_belong_college().trim().length() > 0) {
+				return bysjglxt_student_user.getUser_student_belong_college();
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * 
 	 */
 	@Override
-	public List<TeacherInformationDTO> list_TeacherInformationDTO_All(String userId, String colle) {
+	public List<TeacherInformationDTO> list_TeacherInformationDTO_All(String userId, String colle, int role) {
 		String college = "";
 		if (colle != null && colle.trim().length() > 0) {
 			college = colle;
 		} else {
-			college = getCollegeByUserId(userId);
+			if (role == 1) {
+				college = collegeJudge(1, userId);
+			} else {
+				college = collegeJudge(2, userId);
+			}
 		}
 		List<TeacherInformationDTO> list_TeacherInformationDTO_All = new ArrayList<TeacherInformationDTO>();
 		TeacherInformationDTO teacherInformationDTO = null;
@@ -153,7 +188,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	 */
 	@Override
 	public boolean save_NewTeacher(bysjglxt_teacher_basic teacher_basic, String userId) {
-		String college = getCollegeByUserId(userId);
+		String college = collegeJudge(1, userId);
 		boolean flag = false;
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		bysjglxt_section bysjglxt_section = null;
@@ -220,7 +255,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	public TeacherInformationManagementVO VO_TEACHER_By_PageAndSearch(
 			TeacherInformationManagementVO teacherInformationManagementVO, String userId) {
 		// 根据user Id获取学院
-		String college = getCollegeByUserId(userId);
+		String college = collegeJudge(1, userId);
 		List<bysjglxt_teacher_basic> sizeList = teacherInformationManagementDao
 				.getResultBySearch(teacherInformationManagementVO, college);
 		int i = sizeList.size();
@@ -266,7 +301,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	 */
 	@Override
 	public List<bysjglxt_section> listBysjglxtSection(String userId) {
-		String college = getCollegeByUserId(userId);
+		String college = collegeJudge(1, userId);
 		return teacherInformationManagementDao.listBysjglxtSection(college);
 	}
 

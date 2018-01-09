@@ -1107,12 +1107,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_evaluate_tutor
 					.setEvaluate_tutor_grade_normalization(updateEvaluateTutor.getEvaluate_tutor_grade_normalization());
 			bysjglxt_evaluate_tutor.setEvaluate_tutor_grade_total(updateEvaluateTutor.getEvaluate_tutor_grade_total());
-			bysjglxt_evaluate_tutor
-					.setEvaluate_tutor_is_teacher_opinion(updateEvaluateTutor.getEvaluate_tutor_is_teacher_opinion());
+			if (bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_total() > 60) {
+				bysjglxt_evaluate_tutor.setEvaluate_tutor_is_teacher_opinion(1);
+			} else {
+				bysjglxt_evaluate_tutor.setEvaluate_tutor_is_teacher_opinion(0);
+			}
 			bysjglxt_evaluate_tutor.setEvaluate_tutor_gmt_modified(TeamUtil.getStringSecond());
-			System.out.println(bysjglxt_evaluate_tutor);
 			flag = graduationProjectManagementDao.saveObj(bysjglxt_evaluate_tutor);
-			System.out.println("flag:" + flag);
 			if (flag != 2) {
 				// 根据得到的答辩评分表将指导教师评分占比填写进去
 				bysjglxt_defence = graduationProjectManagementDao
@@ -1184,7 +1185,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			if (flag != 2) {
 				bysjglxt_defence = graduationProjectManagementDao
 						.findDefenceByUserId(bysjglxt_evaluate_review.getEvaluate_review_student());
-				bysjglxt_defence.setDefence_grade_evaluate_tutor(
+				bysjglxt_defence.setDefence_grade_evaluate_review(
 						bysjglxt_evaluate_review.getEvaluate_review_grade_total() * 0.3);
 				bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 				flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
@@ -1210,10 +1211,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_defence.setDefence_grade_statement(updateDefence.getDefence_grade_statement());
 			bysjglxt_defence.setDefence_grade_answer(updateDefence.getDefence_grade_answer());
 			bysjglxt_defence.setDefence_grade_defence(updateDefence.getDefence_grade_defence());
-			bysjglxt_defence
-					.setDefence_total((int) (Math.round((bysjglxt_defence.getDefence_grade_evaluate_tutor() * 0.4
-							+ bysjglxt_defence.getDefence_grade_evaluate_review()
-							+ bysjglxt_defence.getDefence_grade_evaluate_tutor()) + 0.5)));
+			bysjglxt_defence.setDefence_total((int) (Math.round((bysjglxt_defence.getDefence_grade_defence() * 0.4
+					+ bysjglxt_defence.getDefence_grade_evaluate_review() * 0.3
+					+ bysjglxt_defence.getDefence_grade_evaluate_tutor() * 0.3) + 0.5)));
 			/**
 			 * 
 			 * 五级评分制 优：90 中：80 良：70 及格：60 不及格：<60
