@@ -125,8 +125,7 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 							&& userTeacherDTO.bysjglxtLeader != null) {
 						new_td.innerHTML = '<button style="" id="'
 								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-								+ '" onclick="studentSelectTopic(this)" class="btn btn-default">详细</button>'
-								+ '';
+								+ '" onclick="studentSelectTopic(this)" class="btn btn-default">详细</button>';
 					} else {
 						new_td.innerHTML = '<button style="" id="'
 								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
