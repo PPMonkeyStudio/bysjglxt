@@ -127,6 +127,23 @@ public class GraduationProjectManagementAction extends ActionSupport
 		http_response.getWriter().write(gson.toJson(teacherTutorStudentVO));
 	}
 
+	/**
+	 * 我评阅的毕业设计
+	 * 
+	 * @throws IOException
+	 */
+	public void listMyReviewGraduationProjectByPageAndSearch() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+
+		teacherTutorStudentVO = graduationProjectManagementService.teacherReviewStudentVO(teacherTutorStudentVO,
+				((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+						.getBysjglxtTeacherUser().getUser_teacher_id());
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(teacherTutorStudentVO));
+	}
+
 	public void ListMyManagementGraduationProjectByPageAndSearch() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -487,7 +504,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	public void updateEvaluateTutor() throws IOException {
-		System.out.println("updateEvaluateTutor::::"+updateEvaluateTutor);
+		System.out.println("updateEvaluateTutor::::" + updateEvaluateTutor);
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateEvaluateTutor(updateEvaluateTutor) == 1) {
 			http_response.getWriter().write("保存成功");

@@ -332,6 +332,131 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		return teacherTutorStudentVO;
 	}
 
+	@Override
+	public TeacherTutorStudentVO teacherReviewStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
+			String teacherUserId) {
+		List<TeacherTutorStudentDTO> list_TeacherTutorStudentDTO = new ArrayList<TeacherTutorStudentDTO>();
+		TeacherTutorStudentDTO teacherTutorStudentDTO = new TeacherTutorStudentDTO();
+		TaskDTO taskDTO = new TaskDTO();
+		ProcessBelongDTO processBelongDTO = null;
+		bysjglxt_task_definition taskDefinition = new bysjglxt_task_definition();
+		bysjglxt_task_instance taskInstance = new bysjglxt_task_instance();
+		bysjglxt_student_basic bysjglxtStudentBasic = new bysjglxt_student_basic();
+		bysjglxt_student_user bysjglxtStudentUser = new bysjglxt_student_user();
+		bysjglxt_topic bysjglxtTopic = new bysjglxt_topic();
+		StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
+		List<bysjglxt_process_instance> listProcessInstance = new ArrayList<bysjglxt_process_instance>();
+		bysjglxt_process_definition bysjglxt_process_definition = new bysjglxt_process_definition();
+		bysjglxt_process_instance processInstance = new bysjglxt_process_instance();
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		List<bysjglxt_topic_select> list_bysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
+		List<bysjglxt_topic_select> list_Allbysjglxt_topic_select = new ArrayList<bysjglxt_topic_select>();
+		// 判断老师的身份
+		String actor = "评阅老师";
+		String section = "";
+		bysjglxt_teacher_user = graduationProjectManagementDao.getTeacherUserByUserId(teacherUserId);
+		// 获得总记录数
+		list_Allbysjglxt_topic_select = graduationProjectManagementDao.getTeacherTutorStudentAllSelectTopic(
+				teacherTutorStudentVO, teacherUserId, actor, section,
+				bysjglxt_teacher_user.getUser_teacher_belong_college());
+		int i = list_Allbysjglxt_topic_select.size();
+		teacherTutorStudentVO.setTotalRecords(i);
+		teacherTutorStudentVO.setTotalPages(((i - 1) / teacherTutorStudentVO.getPageSize()) + 1);
+		if (teacherTutorStudentVO.getPageIndex() <= 1) {
+			teacherTutorStudentVO.setHavePrePage(false);
+		} else {
+			teacherTutorStudentVO.setHavePrePage(true);
+		}
+		if (teacherTutorStudentVO.getPageIndex() >= teacherTutorStudentVO.getTotalPages()) {
+			teacherTutorStudentVO.setHaveNextPage(false);
+		} else {
+			teacherTutorStudentVO.setHaveNextPage(true);
+		}
+		// 1.根据教师ID筛选出符合条件的最多10条选题数据
+		list_bysjglxt_topic_select = graduationProjectManagementDao.getTeacherTutorStudentSelectTopicByPage(
+				teacherTutorStudentVO, teacherUserId, actor, section,
+				bysjglxt_teacher_user.getUser_teacher_belong_college());
+		// 2.遍历选题拿到学生userId信息
+		for (bysjglxt_topic_select bysjglxt_topic_select : list_bysjglxt_topic_select) {
+			processBelongDTO = new ProcessBelongDTO();
+			taskDTO = new TaskDTO();
+			taskDefinition = new bysjglxt_task_definition();
+			bysjglxtStudentUser = new bysjglxt_student_user();
+			bysjglxtStudentBasic = new bysjglxt_student_basic();
+			taskInstance = new bysjglxt_task_instance();
+			teacherTutorStudentDTO = new TeacherTutorStudentDTO();
+			processInstance = new bysjglxt_process_instance();
+			bysjglxtTopic = new bysjglxt_topic();
+			studentInformationDTO = new StudentInformationDTO();
+			// 3.根据选题所属学生拿到学生user表
+			bysjglxtStudentUser = graduationProjectManagementDao
+					.getStudentUserByUserId(bysjglxt_topic_select.getTopic_select_student());
+
+			if (bysjglxtStudentUser != null) {
+				// 变颜色
+				if (teacherTutorStudentVO.getSearch() != null
+						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
+					bysjglxtStudentUser.setUser_student_num(bysjglxtStudentUser.getUser_student_num().replaceAll(
+							teacherTutorStudentVO.getSearch(),
+							"<span style='color: #ff5063;'>" + teacherTutorStudentVO.getSearch().trim() + "</span>"));
+				}
+				// 根据学生basicId获取学生basic表
+				bysjglxtStudentBasic = graduationProjectManagementDao
+						.getStudentBasicByBasicId(bysjglxtStudentUser.getUser_student_basic());
+				if (bysjglxtStudentBasic != null) {
+					studentInformationDTO.setBysjglxtStudentBasic(bysjglxtStudentBasic);
+					studentInformationDTO.setBysjglxtStudentUser(bysjglxtStudentUser);
+				}
+				// 根据学生userId获取该学生所有的流程实例记录
+				listProcessInstance = graduationProjectManagementDao
+						.getProcessInstanceByMan(bysjglxt_topic_select.getTopic_select_student());
+				// 遍历
+				for (bysjglxt_process_instance bysjglxt_process_instance : listProcessInstance) {
+					bysjglxt_process_definition = new bysjglxt_process_definition();
+					// 根据流程定义ID获取流程定义表
+					bysjglxt_process_definition = graduationProjectManagementDao.getProcessDefinitionByID(
+							bysjglxt_process_instance.getProcess_instance_process_definition());
+					if (bysjglxt_process_definition != null) {
+						if ("毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
+							processInstance = bysjglxt_process_instance;
+							processBelongDTO.setBysjglxt_process_definition(bysjglxt_process_definition);
+							processBelongDTO.setBysjglxt_process_instance(processInstance);
+							break;
+						}
+					}
+				}
+				if (processInstance != null) {
+					// 一个流程实例中只有一个任务实例是处于正在进行的状态
+					// 根据流程实例ID以及任务实例状态即可判断得到流程进度
+					taskInstance = graduationProjectManagementDao
+							.getTaskInstanceByProcessInstanceId(processInstance.getProcess_instance_id());
+					if (taskInstance != null) {
+						// 根据任务实例所属任务定义ID获取任务定义
+						taskDefinition = graduationProjectManagementDao
+								.getTaskDefinition(taskInstance.getTask_instance_task_definition());
+						taskDTO.setTaskDefinition(taskDefinition);
+						taskDTO.setTaskInstance(taskInstance);
+					}
+				}
+			} else {
+				System.out.println("学生user表为空");
+			}
+			teacherTutorStudentDTO.setProcessBelongDTO(processBelongDTO);
+			teacherTutorStudentDTO.setStudentInformationDTO(studentInformationDTO);
+			teacherTutorStudentDTO.setTaskDTO(taskDTO);
+			// 根据选题所属课题拿到课题表信息
+			bysjglxtTopic = graduationProjectManagementDao
+					.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
+			if (bysjglxtTopic != null) {
+				teacherTutorStudentDTO.setBysjglxtTopic(bysjglxtTopic);
+			}
+
+			list_TeacherTutorStudentDTO.add(teacherTutorStudentDTO);
+		}
+		teacherTutorStudentVO.setList_TeacherTutorStudentDTO(list_TeacherTutorStudentDTO);
+		return teacherTutorStudentVO;
+	}
+
 	/**
 	 * 我指导的毕业设计
 	 */

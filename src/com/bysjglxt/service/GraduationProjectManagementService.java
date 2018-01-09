@@ -228,6 +228,16 @@ public interface GraduationProjectManagementService {
 			String teacherUserId);
 
 	/**
+	 * 这个是我评阅的学生信息
+	 * 
+	 * @param teacherTutorStudentVO
+	 * @param user_teacher_id
+	 * @return
+	 */
+	public TeacherTutorStudentVO teacherReviewStudentVO(TeacherTutorStudentVO teacherTutorStudentVO,
+			String user_teacher_id);
+
+	/**
 	 * 
 	 * 这里是我管理的毕业设计
 	 * 
