@@ -77,7 +77,6 @@
 									id="select_section" style="width: auto;margin:0 auto;"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">教研室</option>
-									<option value="">未填写教研室</option>
 								</select>
 							</th>
 <!-- 							<th> -->
