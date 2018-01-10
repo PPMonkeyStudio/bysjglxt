@@ -561,12 +561,14 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	 */
 	@Override
 	public int distributionStudentMajor(String studentUserId, String majorId) {
+		System.out.println("23");
 		boolean flag = false;
 		bysjglxt_major bysjglxt_major = new bysjglxt_major();
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
 		// 分配专业
 		// 1.获取专业信息
+		System.out.println("majorId：" + majorId);
 		bysjglxt_major = studentInformationManagementDao.getMajorByMajorId(majorId);
 		if (bysjglxt_major == null) {
 			return -1;
