@@ -1357,13 +1357,11 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Session session = getSession();
 		List<bysjglxt_comment> getListComment = new ArrayList<>();
 		String hql = "from bysjglxt_comment where comment_college='" + college + "'";
-		if (commentInformationVO.getCategory() != null && commentInformationVO.getCategory().trim().length() > 0
-				&& commentInformationVO.getCategory() != "-1") {
+		if (!("-1".equals(commentInformationVO.getCategory()))) {
 			hql = hql + " and comment_category='" + commentInformationVO.getCategory().trim() + "'";
 		}
-		if (commentInformationVO.getGrade() != null && commentInformationVO.getGrade().trim().length() > 0
-				&& commentInformationVO.getGrade() != "-1") {
-			hql = hql + " and comment_category='" + commentInformationVO.getGrade().trim() + "'";
+		if (!("-1".equals(commentInformationVO.getGrade()))) {
+			hql = hql + " and comment_grade='" + commentInformationVO.getGrade().trim() + "'";
 		}
 		hql = hql + " order by comment_category,comment_grade";
 		System.out.println("评语:" + hql);
