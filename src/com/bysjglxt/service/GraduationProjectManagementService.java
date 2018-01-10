@@ -15,12 +15,23 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementService {
 
 	// 导入评语
 	public int saveComment(File studentExcel, String EXCEL_StudentFileName, String userId) throws Exception;
+
+	/**
+	 * 遍历评语
+	 * 
+	 * @param commentInformationVO
+	 * @param user_teacher_id
+	 * @return
+	 */
+	public CommentInformationVO getListAllCommentInformation(CommentInformationVO commentInformationVO,
+			String user_teacher_id);
 
 	/**
 	 * 下载毕业论文

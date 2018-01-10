@@ -45,6 +45,7 @@ import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherTutorStudentDTO;
+import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
 
@@ -58,6 +59,35 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
+	}
+
+	// 遍历评语
+	@Override
+	public CommentInformationVO getListAllCommentInformation(CommentInformationVO commentInformationVO, String userId) {
+		String college = getCollegeByUserId(userId);
+		List<bysjglxt_comment> listAllCommentInformation = new ArrayList<>();
+		// 获取记录数
+		// 这里的1 代表的是获取数量
+		listAllCommentInformation = graduationProjectManagementDao.getListAllCommentInformation(commentInformationVO,
+				college, 1);
+		int i = listAllCommentInformation.size();
+		commentInformationVO.setTotalRecords(i);
+		commentInformationVO.setTotalPages(((i - 1) / commentInformationVO.getPageSize()) + 1);
+		if (commentInformationVO.getPageIndex() <= 1) {
+			commentInformationVO.setHavePrePage(false);
+		} else {
+			commentInformationVO.setHavePrePage(true);
+		}
+		if (commentInformationVO.getPageIndex() >= commentInformationVO.getTotalPages()) {
+			commentInformationVO.setHaveNextPage(false);
+		} else {
+			commentInformationVO.setHaveNextPage(true);
+		}
+		// 内容
+		listAllCommentInformation = graduationProjectManagementDao.getListAllCommentInformation(commentInformationVO,
+				college, 2);
+		commentInformationVO.setListComment(listAllCommentInformation);
+		return commentInformationVO;
 	}
 
 	// 导入评语
@@ -2865,5 +2895,4 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return params;
 	}
-
 }

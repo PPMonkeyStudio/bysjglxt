@@ -2,6 +2,7 @@ package com.bysjglxt.dao;
 
 import java.util.List;
 
+import com.bysjglxt.domain.DO.bysjglxt_comment;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
@@ -19,6 +20,7 @@ import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementDao {
@@ -125,5 +127,9 @@ public interface GraduationProjectManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_dissertation getThesisByStudentId(String userId);
 
 	public bysjglxt_student_basic getStudentBasicByUserId(String userId);
+
+	public List<bysjglxt_comment> getListAllCommentInformation(CommentInformationVO commentInformationVO,
+			String college, int i);
+
 
 }
