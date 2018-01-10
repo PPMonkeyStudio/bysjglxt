@@ -571,6 +571,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		if (bysjglxt_major == null) {
 			return -1;
 		}
+		System.out.println("1");
 		// 2.更改user表中信息
 		bysjglxt_student_user = studentInformationManagementDao.getStudentByNum(studentUserId);
 		if (bysjglxt_student_user == null) {
@@ -581,6 +582,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		flag = studentInformationManagementDao.saveObject(bysjglxt_student_user);
 		if (!flag)
 			return -1;
+		System.out.println("2");
 		if (bysjglxt_student_user.getUser_student_basic() != null
 				&& bysjglxt_student_user.getUser_student_basic().trim().length() > 0) {
 			bysjglxt_student_basic = studentInformationManagementDao
