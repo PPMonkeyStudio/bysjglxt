@@ -36,7 +36,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 				for (var num = 0; num < myManagementGraduationProject_json.list_TeacherTutorStudentDTO.length; num++) {
 
 					new_tr = document.createElement("tr");
-					new_tr.appendChild(document.createTextNode(''));
+
 					table_myManagementGraduationProject.firstElementChild
 							.appendChild(new_tr);
 					new_tr.className = "new_tr";

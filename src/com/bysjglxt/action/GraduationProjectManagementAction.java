@@ -110,6 +110,10 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return "MyGraduationProjectPage";
 	}
 
+	public String CollegeCommentPage() {
+		return "CollegeCommentPage";
+	}
+
 	/**
 	 * 遍历评语
 	 */
