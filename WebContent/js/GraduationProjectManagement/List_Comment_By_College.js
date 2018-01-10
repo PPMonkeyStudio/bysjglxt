@@ -108,7 +108,7 @@ function List_Comment_By_College(pageIndex) {
 	/*
 	 * 
 	 */
-	formData.append("teacherManagementStudentVO.pageIndex", pageIndex);
+	formData.append("commentInformationVO.pageIndex", pageIndex);
 
 	xhr.send(formData);
 }

@@ -33,7 +33,8 @@ function evaluate_tutor() {
 				var table = document.createElement("table");
 				table.className = 'table table-bordered table-hover';
 				table.style = ""
-				table.innerHTML = '<tbody></tbody>';
+				table.innerHTML = '<tbody><input id="evaluate_tutor_student" style="display:none;" value="'
+						+ evaluate_tutor.evaluate_tutor_student + '"/></tbody>';
 				tab.appendChild(table);
 				var new_tr = null;
 				var new_td = null;
@@ -1831,7 +1832,8 @@ function evaluate_tutor() {
 				new_tr.appendChild(new_td);
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
-				new_td.innerHTML = '<input id="evaluate_tutor_grade_total" disabled="disabled" class="form-control" style="text-align: center;"/>';
+				new_td.innerHTML = '<input id="evaluate_tutor_grade_total" disabled="disabled" class="form-control" style="text-align: center;" value="'
+						+ evaluate_tutor.evaluate_tutor_grade_total + '"/>';
 				new_tr.appendChild(new_td);
 				/*
 				 * 
@@ -1863,7 +1865,7 @@ function evaluate_tutor() {
 				 * 
 				 * 
 				 */
-				change_evaluate_tutor_grade_total();
+				// change_evaluate_tutor_grade_total();
 				/*
 				 * 
 				 * 
@@ -2077,6 +2079,8 @@ function change_evaluate_tutor_grade_total() {
 					"updateEvaluateTutor.evaluate_tutor_grade_training_objective",
 					document
 							.getElementById("evaluate_tutor_grade_training_objective").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_student", document
+			.getElementById("evaluate_tutor_student").value);
 	formData.append("updateEvaluateTutor.evaluate_tutor_grade_difficulty",
 			document.getElementById("evaluate_tutor_grade_difficulty").value);
 	formData.append("updateEvaluateTutor.evaluate_tutor_grade_workload",

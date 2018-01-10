@@ -67,6 +67,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public String generateReviewTotalGraduationComment(bysjglxt_evaluate_review bysjglxt_evaluate_review) {
+		System.out.println(bysjglxt_evaluate_review);
 		String comment = "        ";
 		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
 		// 根据所属学生获取学生basic表
@@ -232,6 +233,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_comment bysjglxt_comment = new bysjglxt_comment();
 		// 1.根据分数判断等级
 		String grade = TeamUtil.grade(totalGrade, getGrade);
+		System.out.println(grade);
 		// 获取该类别中所有这个等级的评语
 		listComment = graduationProjectManagementDao.getListCommentByGradeAndCategory(commentCategory, grade);
 		// 根据listsize获取某一条

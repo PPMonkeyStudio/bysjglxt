@@ -51,8 +51,7 @@
 					</div>
 				</div>
 				<!--  -->
-				<table id="table_Comment"
-					class="table table-hover"
+				<table id="table_Comment" class="table table-hover"
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
@@ -75,7 +74,7 @@
 									<option value="-1">类别（全部）</option>
 									<option value="引言">引言</option>
 									<option value="工作态度">工作态度</option>
-									<option value="-选题质量">选题质量</option>
+									<option value="选题质量">选题质量</option>
 									<option value="题目难易度">题目难易度</option>
 									<option value="题目工作量">题目工作量</option>
 									<option value="题目与生产、科研、实验室建设等实际的结合程度">题目与生产、科研、实验室建设等实际的结合程度</option>

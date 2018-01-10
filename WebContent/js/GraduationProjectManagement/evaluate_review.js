@@ -32,7 +32,9 @@ function evaluate_review() {
 				var table = document.createElement("table");
 				table.className = 'table table-bordered table-hover';
 				table.style = ""
-				table.innerHTML = '<tbody></tbody>';
+				table.innerHTML = '<tbody><input id="evaluate_review_student" style="display:none;" value="'
+						+ evaluate_review.evaluate_review_student
+						+ '"/></tbody>';
 				tab.appendChild(table);
 				var new_tr = null;
 				var new_td = null;
@@ -1830,7 +1832,9 @@ function evaluate_review() {
 				// 
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
-				new_td.innerHTML = '<input id="evaluate_review_grade_total" disabled="disabled" class="form-control" style="text-align: center;"/>';
+				new_td.innerHTML = '<input id="evaluate_review_grade_total" disabled="disabled" value="'
+						+ evaluate_review.evaluate_review_grade_total
+						+ '" class="form-control" style="text-align: center;"/>';
 				new_tr.appendChild(new_td);
 				/*
 				 * 
@@ -1862,7 +1866,7 @@ function evaluate_review() {
 				 * 
 				 * 
 				 */
-				change_evaluate_review_grade_total();
+				// change_evaluate_review_grade_total();
 				/*
 				 * 
 				 * 
@@ -2040,6 +2044,8 @@ function change_evaluate_review_grade_total() {
 	var formData = new FormData();
 	formData.append("updateEvaluateReview.evaluate_review_id", document
 			.getElementById("evaluate_review_id").value);
+	formData.append("updateEvaluateReview.evaluate_review_student", document
+			.getElementById("evaluate_review_student").value);
 	formData
 			.append(
 					"updateEvaluateReview.evaluate_review_grade_training_objective",
