@@ -65,7 +65,7 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 
 					if (myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO == null
-							|| myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance == null) {
+							|| myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance == null) {
 						new_td.innerHTML = '<span class="label label-primary">未开始</span>';
 					} else if (myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "活动") {
 						new_td.innerHTML = '<span class="label label-danger">活动</span>';
@@ -81,7 +81,7 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 					if (myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
 							|| myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition == null) {
 						new_td.innerHTML = '<span class="label label-primary">未开始</span>';
-					} else if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "结束") {
+					} else if (myReviewGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "结束") {
 						new_td.innerHTML = '<span class="label label-default">结束</span>';
 					} else {
 						new_td.innerHTML = '<span class="label label-success">'

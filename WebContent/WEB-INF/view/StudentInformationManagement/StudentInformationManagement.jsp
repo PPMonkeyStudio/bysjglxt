@@ -116,9 +116,9 @@
 				</table>
 
 
-				<!-- 				<div id="i_pulse" style="text-align: center;"> -->
-				<!-- 					<i class="fa fa-spinner fa-pulse fa-3x"></i> -->
-				<!-- 				</div> -->
+				<div id="i_pulse" style="text-align: center;">
+					<i class="fa fa-spinner fa-pulse fa-3x"></i>
+				</div>
 
 
 

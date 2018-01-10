@@ -57,7 +57,7 @@
 							<th>学生</th>
 							<th>毕业设计名称</th>
 							<th class="teacher_control"><select class="form-control"
-								style="width: auto;" id="select_state"
+								style="width: auto;margin:0 auto;" id="select_state"
 								onchange="List_MyReviewGraduationProject_By_PageAndSearch(1)">
 									<option value="-1">状态</option>
 									<option value="1">正在进行</option>
