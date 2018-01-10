@@ -67,7 +67,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public String generateReviewTotalGraduationComment(bysjglxt_evaluate_review bysjglxt_evaluate_review) {
-		String comment = "";
+		String comment = "        ";
 		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
 		// 根据所属学生获取学生basic表
 		if (bysjglxt_evaluate_review.getEvaluate_review_student() != null
@@ -78,58 +78,66 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		// 1.引言
 		comment = comment
-				+ generateGraduationComment("引言", bysjglxt_evaluate_review.getEvaluate_review_grade_total(), 100);
+				+ generateGraduationComment("引言", bysjglxt_evaluate_review.getEvaluate_review_grade_total(), 100)
+				+ "\n";
 		// 2.工作态度
 		comment = comment
-				+ generateGraduationComment("工作态度", bysjglxt_evaluate_review.getEvaluate_review_grade_total(), 100);
+				+ generateGraduationComment("工作态度", bysjglxt_evaluate_review.getEvaluate_review_grade_total(), 100)
+				+ "\n";
 		// 3.选题质量
 		comment = comment + generateGraduationComment("选题质量",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_training_objective(), 6);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_training_objective(), 6) + "\n";
 		// 4.题目难易度
 		comment = comment
-				+ generateGraduationComment("题目难易度", bysjglxt_evaluate_review.getEvaluate_review_grade_difficulty(), 4);
+				+ generateGraduationComment("题目难易度", bysjglxt_evaluate_review.getEvaluate_review_grade_difficulty(), 4)
+				+ "\n";
 		// 5.题目工作量
 		comment = comment
-				+ generateGraduationComment("题目工作量", bysjglxt_evaluate_review.getEvaluate_review_grade_workload(), 5);
+				+ generateGraduationComment("题目工作量", bysjglxt_evaluate_review.getEvaluate_review_grade_workload(), 5)
+				+ "\n";
 		// 6.题目与生产、科研、实验室建设等实际的结合程度
 		comment = comment + generateGraduationComment("题目与生产、科研、实验室建设等实际的结合程度",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_bind(), 5);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_bind(), 5) + "\n";
 		// 7.综合运用知识
 		comment = comment + generateGraduationComment("综合运用知识",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_comprehensive(), 8);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_comprehensive(), 8) + "\n";
 		// 查阅文献资料及资料应用
 		comment = comment + generateGraduationComment("查阅文献资料及资料应用",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_reference(), 7);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_reference(), 7) + "\n";
 		// 实验设计
 		comment = comment + generateGraduationComment("实验设计",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_experimental_design(), 7);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_experimental_design(), 7) + "\n";
 		// 计算能力
 		comment = comment
-				+ generateGraduationComment("计算能力", bysjglxt_evaluate_review.getEvaluate_review_grade_computing(), 6);
+				+ generateGraduationComment("计算能力", bysjglxt_evaluate_review.getEvaluate_review_grade_computing(), 6)
+				+ "\n";
 		// 外语应用
 		comment = comment + generateGraduationComment("外语应用",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_foreign_language(), 6);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_foreign_language(), 6) + "\n";
 		// 计算机应用
 		comment = comment
-				+ generateGraduationComment("计算机应用", bysjglxt_evaluate_review.getEvaluate_review_grade_computer(), 6);
+				+ generateGraduationComment("计算机应用", bysjglxt_evaluate_review.getEvaluate_review_grade_computer(), 6)
+				+ "\n";
 		// 创新
 		comment = comment
-				+ generateGraduationComment("创新", bysjglxt_evaluate_review.getEvaluate_review_grade_innovate(), 7);
+				+ generateGraduationComment("创新", bysjglxt_evaluate_review.getEvaluate_review_grade_innovate(), 7)
+				+ "\n";
 		// 对实验结果的分析能力
 		comment = comment + generateGraduationComment("对实验结果的分析能力",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_analysis(), 7);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_analysis(), 7) + "\n";
 		// 插图（或图纸）质量
 		comment = comment
-				+ generateGraduationComment("插图（或图纸）质量", bysjglxt_evaluate_review.getEvaluate_review_grade_chart(), 6);
+				+ generateGraduationComment("插图（或图纸）质量", bysjglxt_evaluate_review.getEvaluate_review_grade_chart(), 6)
+				+ "\n";
 		// 设计的实用性与科学性
 		comment = comment + generateGraduationComment("设计的实用性与科学性",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_practicability(), 6);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_practicability(), 6) + "\n";
 		// 设计规范化程度
 		comment = comment + generateGraduationComment("设计规范化程度",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_normalization(), 7);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_normalization(), 7) + "\n";
 		// 设计说明书撰写水平
 		comment = comment + generateGraduationComment("设计说明书撰写水平",
-				bysjglxt_evaluate_review.getEvaluate_review_grade_instructions(), 7);
+				bysjglxt_evaluate_review.getEvaluate_review_grade_instructions(), 7) + "\n";
 		// 总结
 		comment = comment
 				+ generateGraduationComment("总结", bysjglxt_evaluate_review.getEvaluate_review_grade_total(), 100);
@@ -154,51 +162,62 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			comment = comment + bysjglxt_student_basic.getStudent_basic_name();
 		}
 		// 1.引言
-		comment = comment + generateGraduationComment("引言", evaluateTutor.getEvaluate_tutor_grade_total(), 100);
+		comment = comment + generateGraduationComment("引言", evaluateTutor.getEvaluate_tutor_grade_total(), 100) + "\n";
 		// 2.工作态度
-		comment = comment + generateGraduationComment("工作态度", evaluateTutor.getEvaluate_tutor_grade_total(), 100);
+		comment = comment + generateGraduationComment("工作态度", evaluateTutor.getEvaluate_tutor_grade_total(), 100)
+				+ "\n";
 		// 3.选题质量
 		comment = comment
-				+ generateGraduationComment("选题质量", evaluateTutor.getEvaluate_tutor_grade_training_objective(), 6);
+				+ generateGraduationComment("选题质量", evaluateTutor.getEvaluate_tutor_grade_training_objective(), 6)
+				+ "\n";
 		// 4.题目难易度
-		comment = comment + generateGraduationComment("题目难易度", evaluateTutor.getEvaluate_tutor_grade_difficulty(), 4);
+		comment = comment + generateGraduationComment("题目难易度", evaluateTutor.getEvaluate_tutor_grade_difficulty(), 4)
+				+ "\n";
 		// 5.题目工作量
-		comment = comment + generateGraduationComment("题目工作量", evaluateTutor.getEvaluate_tutor_grade_workload(), 5);
+		comment = comment + generateGraduationComment("题目工作量", evaluateTutor.getEvaluate_tutor_grade_workload(), 5)
+				+ "\n";
 		// 6.题目与生产、科研、实验室建设等实际的结合程度
 		comment = comment
-				+ generateGraduationComment("题目与生产、科研、实验室建设等实际的结合程度", evaluateTutor.getEvaluate_tutor_grade_bind(), 5);
+				+ generateGraduationComment("题目与生产、科研、实验室建设等实际的结合程度", evaluateTutor.getEvaluate_tutor_grade_bind(), 5)
+				+ "\n";
 		// 7.综合运用知识
 		comment = comment
-				+ generateGraduationComment("综合运用知识", evaluateTutor.getEvaluate_tutor_grade_comprehensive(), 8);
+				+ generateGraduationComment("综合运用知识", evaluateTutor.getEvaluate_tutor_grade_comprehensive(), 8) + "\n";
 		// 查阅文献资料及资料应用
 		comment = comment
-				+ generateGraduationComment("查阅文献资料及资料应用", evaluateTutor.getEvaluate_tutor_grade_reference(), 7);
+				+ generateGraduationComment("查阅文献资料及资料应用", evaluateTutor.getEvaluate_tutor_grade_reference(), 7) + "\n";
 		// 实验设计
 		comment = comment
-				+ generateGraduationComment("实验设计", evaluateTutor.getEvaluate_tutor_grade_experimental_design(), 7);
+				+ generateGraduationComment("实验设计", evaluateTutor.getEvaluate_tutor_grade_experimental_design(), 7)
+				+ "\n";
 		// 计算能力
-		comment = comment + generateGraduationComment("计算能力", evaluateTutor.getEvaluate_tutor_grade_computing(), 6);
+		comment = comment + generateGraduationComment("计算能力", evaluateTutor.getEvaluate_tutor_grade_computing(), 6)
+				+ "\n";
 		// 外语应用
 		comment = comment
-				+ generateGraduationComment("外语应用", evaluateTutor.getEvaluate_tutor_grade_foreign_language(), 6);
+				+ generateGraduationComment("外语应用", evaluateTutor.getEvaluate_tutor_grade_foreign_language(), 6) + "\n";
 		// 计算机应用
-		comment = comment + generateGraduationComment("计算机应用", evaluateTutor.getEvaluate_tutor_grade_computer(), 6);
+		comment = comment + generateGraduationComment("计算机应用", evaluateTutor.getEvaluate_tutor_grade_computer(), 6)
+				+ "\n";
 		// 创新
-		comment = comment + generateGraduationComment("创新", evaluateTutor.getEvaluate_tutor_grade_innovate(), 7);
+		comment = comment + generateGraduationComment("创新", evaluateTutor.getEvaluate_tutor_grade_innovate(), 7) + "\n";
 		// 对实验结果的分析能力
-		comment = comment
-				+ generateGraduationComment("对实验结果的分析能力", evaluateTutor.getEvaluate_tutor_grade_analysis(), 7);
+		comment = comment + generateGraduationComment("对实验结果的分析能力", evaluateTutor.getEvaluate_tutor_grade_analysis(), 7)
+				+ "\n";
 		// 插图（或图纸）质量
-		comment = comment + generateGraduationComment("插图（或图纸）质量", evaluateTutor.getEvaluate_tutor_grade_chart(), 6);
+		comment = comment + generateGraduationComment("插图（或图纸）质量", evaluateTutor.getEvaluate_tutor_grade_chart(), 6)
+				+ "\n";
 		// 设计的实用性与科学性
 		comment = comment
-				+ generateGraduationComment("设计的实用性与科学性", evaluateTutor.getEvaluate_tutor_grade_practicability(), 6);
+				+ generateGraduationComment("设计的实用性与科学性", evaluateTutor.getEvaluate_tutor_grade_practicability(), 6)
+				+ "\n";
 		// 设计规范化程度
 		comment = comment
-				+ generateGraduationComment("设计规范化程度", evaluateTutor.getEvaluate_tutor_grade_normalization(), 7);
+				+ generateGraduationComment("设计规范化程度", evaluateTutor.getEvaluate_tutor_grade_normalization(), 7) + "\n";
 		// 设计说明书撰写水平
 		comment = comment
-				+ generateGraduationComment("设计说明书撰写水平", evaluateTutor.getEvaluate_tutor_grade_instructions(), 7);
+				+ generateGraduationComment("设计说明书撰写水平", evaluateTutor.getEvaluate_tutor_grade_instructions(), 7)
+				+ "\n";
 		// 总结
 		comment = comment + generateGraduationComment("总结", evaluateTutor.getEvaluate_tutor_grade_total(), 100);
 		return comment;
