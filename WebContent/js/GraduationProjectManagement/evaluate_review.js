@@ -1848,7 +1848,7 @@ function evaluate_review() {
 				var textarea_1 = document.createElement("textarea");
 				textarea_1.id = "evaluate_review_teacher_comment";
 				textarea_1.className = 'form-control';
-				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:200px;"
+				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:400px;"
 				if (evaluate_review.evaluate_review_teacher_comment != null) {
 					textarea_1.innerHTML = evaluate_review.evaluate_review_teacher_comment;
 				} else {
