@@ -61,6 +61,36 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
 
+	/**
+	 * 更改评语
+	 */
+	@Override
+	public void updateComment(bysjglxt_comment comment) {
+		bysjglxt_comment bysjglxt_comment = new bysjglxt_comment();
+		bysjglxt_comment = graduationProjectManagementDao.getCommentById(comment.getComment_id());
+		bysjglxt_comment.setComment_category(comment.getComment_category());
+		bysjglxt_comment.setComment_content(comment.getComment_content());
+		bysjglxt_comment.setComment_grade(comment.getComment_grade());
+		bysjglxt_comment.setComment_gmt_modified(TeamUtil.getStringSecond());
+		graduationProjectManagementDao.saveObj(bysjglxt_comment);
+	}
+
+	/**
+	 * 删除评语
+	 * 
+	 */
+	@Override
+	public void deleteListComment(List<String> listCommentId) {
+		bysjglxt_comment bysjglxt_comment = null;
+		for (String comment_id : listCommentId) {
+			bysjglxt_comment = new bysjglxt_comment();
+			bysjglxt_comment = graduationProjectManagementDao.getCommentById(comment_id);
+			if (bysjglxt_comment != null) {
+				graduationProjectManagementDao.deleteCommentById(comment_id);
+			}
+		}
+	}
+
 	// 遍历评语
 	@Override
 	public CommentInformationVO getListAllCommentInformation(CommentInformationVO commentInformationVO, String userId) {
@@ -88,6 +118,17 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				college, 2);
 		commentInformationVO.setListComment(listAllCommentInformation);
 		return commentInformationVO;
+	}
+
+	// 添加单条评语
+	@Override
+	public void saveNewComment(bysjglxt_comment comment, String user_teacher_id) {
+		String college = getCollegeByUserId(user_teacher_id);
+		comment.setComment_id(TeamUtil.getUuid());
+		comment.setComment_college(college);
+		comment.setComment_gmt_create(TeamUtil.getStringSecond());
+		comment.setComment_gmt_modified(comment.getComment_gmt_create());
+		graduationProjectManagementDao.saveObj(comment);
 	}
 
 	// 导入评语
@@ -2895,4 +2936,5 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return params;
 	}
+
 }

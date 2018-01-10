@@ -1373,7 +1373,27 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			query.setMaxResults(commentInformationVO.getPageSize());
 		}
 		getListComment = query.list();
+		session.clear();
 		return getListComment;
+	}
+
+	@Override
+	public bysjglxt_comment getCommentById(String comment_id) {
+		Session session = getSession();
+		bysjglxt_comment bysjglxt_comment = new bysjglxt_comment();
+		String hql = "from bysjglxt_comment where comment_id='" + comment_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_comment = (bysjglxt_comment) query.uniqueResult();
+		session.clear();
+		return bysjglxt_comment;
+	}
+
+	@Override
+	public void deleteCommentById(String comment_id) {
+		Session session = getSession();
+		String hql = "delete from bysjglxt_comment where comment_id='" + comment_id + "'";
+		Query query = session.createQuery(hql);
+		query.executeUpdate();
 	}
 
 }
