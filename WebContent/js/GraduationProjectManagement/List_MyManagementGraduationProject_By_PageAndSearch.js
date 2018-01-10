@@ -129,43 +129,47 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO != null
-							&& myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition != null
-							&& myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "结束") {
-						if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 1
-								&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
-							new_td.innerHTML = '<div class="dropdown" >'
-									+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
-									+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
-									+ '<li><a id="'
-									+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
-									+ '" onclick="update_defence_record(this)" >答辩记录</a></li>'
-									+ '<li><a id="'
-									+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
-									+ '" onclick="update_defence_leader(this)" >答辩评分</a></li>'
-									+ '</ul>' + '</div>';
-						} else if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 1
-								&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 2) {
-							new_td.innerHTML = '<div class="dropdown" >'
-									+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
-									+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
-									+ '<li><a id="'
-									+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
-									+ '" onclick="update_defence_record(this)" >答辩记录</a></li>'
-									+ '</ul>' + '</div>';
-						} else if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 2
-								&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
-							new_td.innerHTML = '<div class="dropdown" >'
-									+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
-									+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
-									+ '<li><a id="'
-									+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
-									+ '" onclick="update_defence_leader(this)" >答辩评分</a></li>'
-									+ '</ul>' + '</div>';
+							&& myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition != null) {
+						if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "结束") {
+
+							if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 1
+									&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
+								new_td.innerHTML = '<div class="dropdown" >'
+										+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
+										+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
+										+ '<li><a id="'
+										+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+										+ '" onclick="update_defence_record(this)" >答辩记录</a></li>'
+										+ '<li><a id="'
+										+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+										+ '" onclick="update_defence_leader(this)" >答辩评分</a></li>'
+										+ '</ul>' + '</div>';
+							} else if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 1
+									&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 2) {
+								new_td.innerHTML = '<div class="dropdown" >'
+										+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
+										+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
+										+ '<li><a id="'
+										+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+										+ '" onclick="update_defence_record(this)" >答辩记录</a></li>'
+										+ '</ul>' + '</div>';
+							} else if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 2
+									&& userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
+								new_td.innerHTML = '<div class="dropdown" >'
+										+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
+										+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
+										+ '<li><a id="'
+										+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+										+ '" onclick="update_defence_leader(this)" >答辩评分</a></li>'
+										+ '</ul>' + '</div>';
+							} else {
+								new_td.innerHTML = '无权限';
+							}
 						} else {
-							new_td.innerHTML = '无权限';
+							new_td.innerHTML = '<span class="label label-danger">毕业设计流程未结束</span>';
 						}
 					} else {
-						new_td.innerHTML = '毕业流程未结束';
+						new_td.innerHTML = '<span class="label label-default">未开启毕业设计流程</span>';
 					}
 
 					// }
