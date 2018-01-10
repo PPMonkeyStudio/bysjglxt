@@ -112,3 +112,33 @@ function List_Comment_By_College(pageIndex) {
 
 	xhr.send(formData);
 }
+function flip(flipPage) {
+	switch (flipPage) {
+	case 1: {
+		List_Comment_By_College(1)
+		break;
+	}
+	case 2: {
+		if (CollegeComment_json.pageIndex - 1 == 0) {
+			toastr.warning("已经是第一页了");
+		} else {
+			List_Comment_By_College(CollegeComment_json.pageIndex - 1);
+		}
+		break;
+	}
+	case 3: {
+		if (CollegeComment_json.pageIndex == CollegeComment_json.totalPages) {
+			toastr.warning("已经是最后一页了");
+		} else {
+			List_Comment_By_College(CollegeComment_json.pageIndex + 1);
+		}
+		break;
+	}
+	case 4: {
+		List_Comment_By_College(CollegeComment_json.totalPages);
+
+		break;
+	}
+
+	}
+}
