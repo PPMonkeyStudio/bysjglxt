@@ -27,6 +27,15 @@ public class testGraduation {
 		this.graduationProjectManagementService = graduationProjectManagementService;
 	}
 
+	@Test
+	public void fdfddf() {
+		try {
+			graduationProjectManagementService.saveComment(new File("F:\\11221.xlsx"), "11221.xlsx", "");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	// 测试保存毕业论文
 	@Test
 	public void saveGrad() {
