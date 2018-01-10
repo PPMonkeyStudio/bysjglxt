@@ -1,7 +1,6 @@
 package com.bysjglxt.service;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +20,14 @@ import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementService {
 
-	
+	/**
+	 * 组合评阅老师评语
+	 * 
+	 */
+	public String generateReviewTotalGraduationComment(bysjglxt_evaluate_review bysjglxt_evaluate_review);
 	
 	/**
-	 * 组合评语
+	 * 组合指导老师评语
 	 */
 	public String generateTutorTotalGraduationComment(bysjglxt_evaluate_tutor evaluateTutor);
 	
