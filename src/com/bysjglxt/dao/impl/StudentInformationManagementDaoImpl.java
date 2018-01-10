@@ -660,7 +660,7 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 	public bysjglxt_major getMajorByMajorId(String majorCode) {
 		bysjglxt_major bysjglxt_major = new bysjglxt_major();
 		Session session = getSession();
-		String hql = "from bysjglxt_major where major_professionalcode = '" + majorCode + "'";
+		String hql = "from bysjglxt_major where major_id = '" + majorCode + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_major = (bysjglxt_major) query.uniqueResult();
 		return bysjglxt_major;
