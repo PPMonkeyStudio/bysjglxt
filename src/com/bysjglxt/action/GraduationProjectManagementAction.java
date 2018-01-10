@@ -123,13 +123,27 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	/**
-	 * 生成毕业设计的评语
+	 * 生成指导老师毕业设计的评语
 	 */
 	public void generateTutorGraduationComment() {
 		http_response.setContentType("text/html;charset=utf-8");
 		try {
 			http_response.getWriter()
 					.write(graduationProjectManagementService.generateTutorTotalGraduationComment(updateEvaluateTutor));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 生成评阅老师评语
+	 * 
+	 */
+	public void generateReviewGraduationComment() {
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			http_response.getWriter().write(
+					graduationProjectManagementService.generateReviewTotalGraduationComment(updateEvaluateReview));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
