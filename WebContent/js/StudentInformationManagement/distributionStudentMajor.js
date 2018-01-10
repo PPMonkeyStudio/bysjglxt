@@ -21,7 +21,7 @@ function distributionStudentMajor(this_button) {
 											List_Student_By_PageAndSearch(student_json.pageIndex);
 											jc.close();
 										} else {
-											toastr.success("分配失败");
+											toastr.error("分配失败");
 										}
 									} else {
 										toastr.error(xhr.status);
