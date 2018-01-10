@@ -21,6 +21,20 @@ import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementService {
 
+	
+	
+	/**
+	 * 组合评语
+	 */
+	public String generateTutorTotalGraduationComment(bysjglxt_evaluate_tutor evaluateTutor);
+	
+	/**
+	 * 生成单条评语
+	 * @param commentCategory
+	 * @param getGrade
+	 * @param totalGrade
+	 * @return
+	 */
 	public String generateGraduationComment(String commentCategory, int getGrade, int totalGrade);
 
 	/**

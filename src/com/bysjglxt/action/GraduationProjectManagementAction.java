@@ -125,8 +125,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 	/**
 	 * 生成毕业设计的评语
 	 */
-	public void generateGraduationComment() {
-		
+	public void generateTutorGraduationComment() {
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			http_response.getWriter()
+					.write(graduationProjectManagementService.generateTutorTotalGraduationComment(updateEvaluateTutor));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
