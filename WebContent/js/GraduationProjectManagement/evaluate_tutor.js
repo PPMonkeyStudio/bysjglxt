@@ -33,7 +33,8 @@ function evaluate_tutor() {
 				var table = document.createElement("table");
 				table.className = 'table table-bordered table-hover';
 				table.style = ""
-				table.innerHTML = '<tbody></tbody>';
+				table.innerHTML = '<tbody><input id="evaluate_tutor_student" style="display:none;" value="'
+						+ evaluate_tutor.evaluate_tutor_student + '"/></tbody>';
 				tab.appendChild(table);
 				var new_tr = null;
 				var new_td = null;
@@ -1831,7 +1832,8 @@ function evaluate_tutor() {
 				new_tr.appendChild(new_td);
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
-				new_td.innerHTML = '<input id="evaluate_tutor_grade_total" disabled="disabled" class="form-control" style="text-align: center;"/>';
+				new_td.innerHTML = '<input id="evaluate_tutor_grade_total" disabled="disabled" class="form-control" style="text-align: center;" value="'
+						+ evaluate_tutor.evaluate_tutor_grade_total + '"/>';
 				new_tr.appendChild(new_td);
 				/*
 				 * 
@@ -1845,7 +1847,7 @@ function evaluate_tutor() {
 				var textarea_1 = document.createElement("textarea");
 				textarea_1.id = "evaluate_tutor_teacher_comment";
 				textarea_1.className = 'form-control';
-				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:200px;"
+				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:400px;"
 				if (evaluate_tutor.evaluate_tutor_teacher_comment != null) {
 					textarea_1.innerHTML = evaluate_tutor.evaluate_tutor_teacher_comment;
 				} else {
@@ -1863,7 +1865,7 @@ function evaluate_tutor() {
 				 * 
 				 * 
 				 */
-				change_evaluate_tutor_grade_total();
+				// change_evaluate_tutor_grade_total();
 				/*
 				 * 
 				 * 
@@ -2049,5 +2051,92 @@ function change_evaluate_tutor_grade_total() {
 					.getElementById("evaluate_tutor_grade_normalization").value);
 
 	evaluate_tutor_grade_total.value = total;
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	var xhr = false;
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		var message;
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				var evaluate_tutor_teacher_comment = document
+						.getElementById("evaluate_tutor_teacher_comment");
+				evaluate_tutor_teacher_comment.value = xhr.responseText;
+			} else {
+				toastr.error(xhr.status);
+			}
+		}
+	}
+	var formData = new FormData();
+	formData
+			.append(
+					"updateEvaluateTutor.evaluate_tutor_grade_training_objective",
+					document
+							.getElementById("evaluate_tutor_grade_training_objective").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_student", document
+			.getElementById("evaluate_tutor_student").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_difficulty",
+			document.getElementById("evaluate_tutor_grade_difficulty").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_workload",
+			document.getElementById("evaluate_tutor_grade_workload").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_bind", document
+			.getElementById("evaluate_tutor_grade_bind").value);
+	formData
+			.append(
+					"updateEvaluateTutor.evaluate_tutor_grade_comprehensive",
+					document
+							.getElementById("evaluate_tutor_grade_comprehensive").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_reference",
+			document.getElementById("evaluate_tutor_grade_reference").value);
+	formData
+			.append(
+					"updateEvaluateTutor.evaluate_tutor_grade_experimental_design",
+					document
+							.getElementById("evaluate_tutor_grade_experimental_design").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_computing",
+			document.getElementById("evaluate_tutor_grade_computing").value);
+	formData
+			.append(
+					"updateEvaluateTutor.evaluate_tutor_grade_foreign_language",
+					document
+							.getElementById("evaluate_tutor_grade_foreign_language").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_computer",
+			document.getElementById("evaluate_tutor_grade_computer").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_innovate",
+			document.getElementById("evaluate_tutor_grade_innovate").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_analysis",
+			document.getElementById("evaluate_tutor_grade_analysis").value);
 
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_chart", document
+			.getElementById("evaluate_tutor_grade_chart").value);
+
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_instructions",
+			document.getElementById("evaluate_tutor_grade_instructions").value);
+
+	formData
+			.append(
+					"updateEvaluateTutor.evaluate_tutor_grade_practicability",
+					document
+							.getElementById("evaluate_tutor_grade_practicability").value);
+	formData
+			.append(
+					"updateEvaluateTutor.evaluate_tutor_grade_normalization",
+					document
+							.getElementById("evaluate_tutor_grade_normalization").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_grade_total", document
+			.getElementById("evaluate_tutor_grade_total").value);
+	formData.append("updateEvaluateTutor.evaluate_tutor_teacher_comment",
+			document.getElementById("evaluate_tutor_teacher_comment").value);
+	xhr
+			.open(
+					"POST",
+					"/bysjglxt/graduationProject/GraduationProjectManagement_generateTutorGraduationComment");
+
+	xhr.send(formData);
 }

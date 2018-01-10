@@ -63,22 +63,21 @@ function List_Comment_By_College(pageIndex) {
 					/*
 					 * 
 					 */
-
-					/*
-					 * 设置页数
-					 */
-					document.getElementById("span_pageIndex").innerHTML = CollegeComment_json.pageIndex;
-					document.getElementById("span_totalPages").innerHTML = CollegeComment_json.totalPages;
-					document.getElementById("span_totalRecords").innerHTML = CollegeComment_json.totalRecords;
-					// 让加载图标消失
-					document.getElementById("i_pulse").style.display = "none";
-					// 让全选框取消选择
-					document.getElementById("checkbox_all_select").checked = false;
-					/*
-					 * 角色控制
-					 */
-					roleControl();
 				}
+				/*
+				 * 设置页数
+				 */
+				document.getElementById("span_pageIndex").innerHTML = CollegeComment_json.pageIndex;
+				document.getElementById("span_totalPages").innerHTML = CollegeComment_json.totalPages;
+				document.getElementById("span_totalRecords").innerHTML = CollegeComment_json.totalRecords;
+				// 让加载图标消失
+				document.getElementById("i_pulse").style.display = "none";
+				// 让全选框取消选择
+				document.getElementById("checkbox_all_select").checked = false;
+				/*
+				 * 角色控制
+				 */
+				roleControl();
 			} else {
 				toastr.error(xhr.status);
 			}
@@ -109,7 +108,37 @@ function List_Comment_By_College(pageIndex) {
 	/*
 	 * 
 	 */
-	formData.append("teacherManagementStudentVO.pageIndex", pageIndex);
+	formData.append("commentInformationVO.pageIndex", pageIndex);
 
 	xhr.send(formData);
+}
+function flip(flipPage) {
+	switch (flipPage) {
+	case 1: {
+		List_Comment_By_College(1)
+		break;
+	}
+	case 2: {
+		if (CollegeComment_json.pageIndex - 1 == 0) {
+			toastr.warning("已经是第一页了");
+		} else {
+			List_Comment_By_College(CollegeComment_json.pageIndex - 1);
+		}
+		break;
+	}
+	case 3: {
+		if (CollegeComment_json.pageIndex == CollegeComment_json.totalPages) {
+			toastr.warning("已经是最后一页了");
+		} else {
+			List_Comment_By_College(CollegeComment_json.pageIndex + 1);
+		}
+		break;
+	}
+	case 4: {
+		List_Comment_By_College(CollegeComment_json.totalPages);
+
+		break;
+	}
+
+	}
 }

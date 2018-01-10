@@ -27,8 +27,11 @@ public class TeamUtil {
 
 	// 评分制
 	public static String grade(int totalGrade, int getGrade) {
-		int t = (int) (getGrade / totalGrade) * 100;
+		float grade = totalGrade;
+		int t = (int) ((getGrade / grade) * 100);
 		switch (t / 10) {
+		case 10:
+			return "很好";
 		case 9:
 			return "很好";
 		case 8:

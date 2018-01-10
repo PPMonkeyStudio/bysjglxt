@@ -46,7 +46,7 @@ function addCollege() {
 										jc.close();
 										List_College();
 									} else {
-										toastr.error(xhr_2.status);
+										toastr.error(xhr.status);
 									}
 								}
 							}

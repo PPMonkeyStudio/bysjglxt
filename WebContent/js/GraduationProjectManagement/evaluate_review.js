@@ -32,7 +32,9 @@ function evaluate_review() {
 				var table = document.createElement("table");
 				table.className = 'table table-bordered table-hover';
 				table.style = ""
-				table.innerHTML = '<tbody></tbody>';
+				table.innerHTML = '<tbody><input id="evaluate_review_student" style="display:none;" value="'
+						+ evaluate_review.evaluate_review_student
+						+ '"/></tbody>';
 				tab.appendChild(table);
 				var new_tr = null;
 				var new_td = null;
@@ -1830,7 +1832,9 @@ function evaluate_review() {
 				// 
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
-				new_td.innerHTML = '<input id="evaluate_review_grade_total" disabled="disabled" class="form-control" style="text-align: center;"/>';
+				new_td.innerHTML = '<input id="evaluate_review_grade_total" disabled="disabled" value="'
+						+ evaluate_review.evaluate_review_grade_total
+						+ '" class="form-control" style="text-align: center;"/>';
 				new_tr.appendChild(new_td);
 				/*
 				 * 
@@ -1844,7 +1848,7 @@ function evaluate_review() {
 				var textarea_1 = document.createElement("textarea");
 				textarea_1.id = "evaluate_review_teacher_comment";
 				textarea_1.className = 'form-control';
-				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:200px;"
+				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:400px;"
 				if (evaluate_review.evaluate_review_teacher_comment != null) {
 					textarea_1.innerHTML = evaluate_review.evaluate_review_teacher_comment;
 				} else {
@@ -1862,7 +1866,7 @@ function evaluate_review() {
 				 * 
 				 * 
 				 */
-				change_evaluate_review_grade_total();
+				// change_evaluate_review_grade_total();
 				/*
 				 * 
 				 * 
@@ -2015,5 +2019,98 @@ function change_evaluate_review_grade_total() {
 			+ parseInt(document
 					.getElementById("evaluate_review_grade_normalization").value);
 	evaluate_review_grade_total.value = total;
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	var xhr = false;
+	xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function() {
+		var message;
+		if (xhr.readyState == 4) {
+			if (xhr.status == 200) {
+				var evaluate_review_teacher_comment = document
+						.getElementById("evaluate_review_teacher_comment");
+				evaluate_review_teacher_comment.value = xhr.responseText;
+			} else {
+				toastr.error(xhr.status);
+			}
+		}
+	}
+	var formData = new FormData();
+	formData.append("updateEvaluateReview.evaluate_review_id", document
+			.getElementById("evaluate_review_id").value);
+	formData.append("updateEvaluateReview.evaluate_review_student", document
+			.getElementById("evaluate_review_student").value);
+	formData
+			.append(
+					"updateEvaluateReview.evaluate_review_grade_training_objective",
+					document
+							.getElementById("evaluate_review_grade_training_objective").value);
+	formData.append("updateEvaluateReview.evaluate_review_grade_difficulty",
+			document.getElementById("evaluate_review_grade_difficulty").value);
+	formData.append("updateEvaluateReview.evaluate_review_grade_workload",
+			document.getElementById("evaluate_review_grade_workload").value);
+	formData.append("updateEvaluateReview.evaluate_review_grade_bind", document
+			.getElementById("evaluate_review_grade_bind").value);
+	formData
+			.append(
+					"updateEvaluateReview.evaluate_review_grade_comprehensive",
+					document
+							.getElementById("evaluate_review_grade_comprehensive").value);
+	formData.append("updateEvaluateReview.evaluate_review_grade_reference",
+			document.getElementById("evaluate_review_grade_reference").value);
+	formData
+			.append(
+					"updateEvaluateReview.evaluate_review_grade_experimental_design",
+					document
+							.getElementById("evaluate_review_grade_experimental_design").value);
+	formData.append("updateEvaluateReview.evaluate_review_grade_computing",
+			document.getElementById("evaluate_review_grade_computing").value);
+	formData
+			.append(
+					"updateEvaluateReview.evaluate_review_grade_foreign_language",
+					document
+							.getElementById("evaluate_review_grade_foreign_language").value);
+	formData.append("updateEvaluateReview.evaluate_review_grade_computer",
+			document.getElementById("evaluate_review_grade_computer").value);
+	formData.append("updateEvaluateReview.evaluate_review_grade_innovate",
+			document.getElementById("evaluate_review_grade_innovate").value);
+	formData.append("updateEvaluateReview.evaluate_review_grade_analysis",
+			document.getElementById("evaluate_review_grade_analysis").value);
+
+	formData.append("updateEvaluateReview.evaluate_review_grade_chart",
+			document.getElementById("evaluate_review_grade_chart").value);
+
+	formData
+			.append(
+					"updateEvaluateReview.evaluate_review_grade_instructions",
+					document
+							.getElementById("evaluate_review_grade_instructions").value);
+
+	formData
+			.append(
+					"updateEvaluateReview.evaluate_review_grade_practicability",
+					document
+							.getElementById("evaluate_review_grade_practicability").value);
+	formData
+			.append(
+					"updateEvaluateReview.evaluate_review_grade_normalization",
+					document
+							.getElementById("evaluate_review_grade_normalization").value);
+	formData.append("updateEvaluateReview.evaluate_review_grade_total",
+			document.getElementById("evaluate_review_grade_total").value);
+	formData.append("updateEvaluateReview.evaluate_review_teacher_comment",
+			document.getElementById("evaluate_review_teacher_comment").value);
+	xhr
+			.open(
+					"POST",
+					"/bysjglxt/graduationProject/GraduationProjectManagement_generateReviewGraduationComment");
+
+	xhr.send(formData);
 
 }
