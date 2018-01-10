@@ -2130,8 +2130,9 @@ function change_evaluate_tutor_grade_total() {
 	formData.append("updateEvaluateTutor.evaluate_tutor_teacher_comment",
 			document.getElementById("evaluate_tutor_teacher_comment").value);
 	xhr
-			.open("POST",
-					"/bysjglxt/graduationProject/GraduationProjectManagement_");
+			.open(
+					"POST",
+					"/bysjglxt/graduationProject/GraduationProjectManagement_generateTutorGraduationComment");
 
 	xhr.send(formData);
 }

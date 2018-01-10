@@ -2101,8 +2101,9 @@ function change_evaluate_review_grade_total() {
 	formData.append("updateEvaluateReview.evaluate_review_teacher_comment",
 			document.getElementById("evaluate_review_teacher_comment").value);
 	xhr
-			.open("POST",
-					"/bysjglxt/graduationProject/GraduationProjectManagement_");
+			.open(
+					"POST",
+					"/bysjglxt/graduationProject/GraduationProjectManagement_generateReviewGraduationComment");
 
 	xhr.send(formData);
 
