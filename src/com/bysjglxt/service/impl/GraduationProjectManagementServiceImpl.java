@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -59,6 +60,96 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
+	}
+
+	/**
+	 * 组合指导老师评语
+	 * 
+	 * @param evaluateTutor
+	 * @return
+	 */
+	@Override
+	public String generateTutorTotalGraduationComment(bysjglxt_evaluate_tutor evaluateTutor) {
+		String comment = "";
+		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
+		// 根据所属学生获取学生basic表
+		if (evaluateTutor.getEvaluate_tutor_student() != null
+				&& evaluateTutor.getEvaluate_tutor_student().trim().length() > 0) {
+			bysjglxt_student_basic = graduationProjectManagementDao
+					.getStudentBasicByUserId(evaluateTutor.getEvaluate_tutor_student());
+			comment = comment + bysjglxt_student_basic.getStudent_basic_name();
+		}
+		// 1.引言
+		comment = comment + generateGraduationComment("引言", evaluateTutor.getEvaluate_tutor_grade_total(), 100);
+		// 2.工作态度
+		comment = comment + generateGraduationComment("工作态度", evaluateTutor.getEvaluate_tutor_grade_total(), 100);
+		// 3.选题质量
+		comment = comment
+				+ generateGraduationComment("选题质量", evaluateTutor.getEvaluate_tutor_grade_training_objective(), 6);
+		// 4.题目难易度
+		comment = comment + generateGraduationComment("题目难易度", evaluateTutor.getEvaluate_tutor_grade_difficulty(), 4);
+		// 5.题目工作量
+		comment = comment + generateGraduationComment("题目工作量", evaluateTutor.getEvaluate_tutor_grade_workload(), 5);
+		// 6.题目与生产、科研、实验室建设等实际的结合程度
+		comment = comment
+				+ generateGraduationComment("题目与生产、科研、实验室建设等实际的结合程度", evaluateTutor.getEvaluate_tutor_grade_bind(), 5);
+		// 7.综合运用知识
+		comment = comment
+				+ generateGraduationComment("综合运用知识", evaluateTutor.getEvaluate_tutor_grade_comprehensive(), 8);
+		// 查阅文献资料及资料应用
+		comment = comment
+				+ generateGraduationComment("查阅文献资料及资料应用", evaluateTutor.getEvaluate_tutor_grade_reference(), 7);
+		// 实验设计
+		comment = comment
+				+ generateGraduationComment("实验设计", evaluateTutor.getEvaluate_tutor_grade_experimental_design(), 7);
+		// 计算能力
+		comment = comment + generateGraduationComment("计算能力", evaluateTutor.getEvaluate_tutor_grade_computing(), 6);
+		// 外语应用
+		comment = comment
+				+ generateGraduationComment("外语应用", evaluateTutor.getEvaluate_tutor_grade_foreign_language(), 6);
+		// 计算机应用
+		comment = comment + generateGraduationComment("计算机应用", evaluateTutor.getEvaluate_tutor_grade_computer(), 6);
+		// 创新
+		comment = comment + generateGraduationComment("创新", evaluateTutor.getEvaluate_tutor_grade_innovate(), 7);
+		// 对实验结果的分析能力
+		comment = comment
+				+ generateGraduationComment("对实验结果的分析能力", evaluateTutor.getEvaluate_tutor_grade_analysis(), 7);
+		// 插图（或图纸）质量
+		comment = comment + generateGraduationComment("插图（或图纸）质量", evaluateTutor.getEvaluate_tutor_grade_chart(), 6);
+		// 设计的实用性与科学性
+		comment = comment
+				+ generateGraduationComment("设计的实用性与科学性", evaluateTutor.getEvaluate_tutor_grade_practicability(), 6);
+		// 设计规范化程度
+		comment = comment
+				+ generateGraduationComment("设计规范化程度", evaluateTutor.getEvaluate_tutor_grade_normalization(), 7);
+		// 设计说明书撰写水平
+		comment = comment
+				+ generateGraduationComment("设计说明书撰写水平", evaluateTutor.getEvaluate_tutor_grade_instructions(), 7);
+		// 总结
+		comment = comment + generateGraduationComment("总结", evaluateTutor.getEvaluate_tutor_grade_total(), 100);
+		return comment;
+	}
+
+	/**
+	 * 单点评语
+	 */
+	@Override
+	public String generateGraduationComment(String commentCategory, int getGrade, int totalGrade) {
+		List<bysjglxt_comment> listComment = new ArrayList<>();
+		bysjglxt_comment bysjglxt_comment = new bysjglxt_comment();
+		// 1.根据分数判断等级
+		String grade = TeamUtil.grade(totalGrade, getGrade);
+		// 获取该类别中所有这个等级的评语
+		listComment = graduationProjectManagementDao.getListCommentByGradeAndCategory(commentCategory, grade);
+		// 根据listsize获取某一条
+		if (listComment.size() > 0) {
+			Random rand = new Random();
+			bysjglxt_comment = listComment.get(rand.nextInt(listComment.size()));
+			return bysjglxt_comment.getComment_content();
+		} else {
+			return null;
+		}
+
 	}
 
 	/**

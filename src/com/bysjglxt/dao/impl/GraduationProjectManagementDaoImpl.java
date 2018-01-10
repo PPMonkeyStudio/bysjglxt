@@ -1364,7 +1364,6 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			hql = hql + " and comment_grade='" + commentInformationVO.getGrade().trim() + "'";
 		}
 		hql = hql + " order by comment_category,comment_grade";
-		System.out.println("评语:" + hql);
 		Query query = session.createQuery(hql);
 		if (i == 2) {
 			query.setFirstResult((commentInformationVO.getPageIndex() - 1) * commentInformationVO.getPageSize());
@@ -1394,4 +1393,15 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		query.executeUpdate();
 	}
 
+	@Override
+	public List<bysjglxt_comment> getListCommentByGradeAndCategory(String commentCategory, String grade) {
+		Session session = getSession();
+		List<bysjglxt_comment> listComment = new ArrayList<>();
+		String hql = "from bysjglxt_comment where comment_category='" + commentCategory + "' and comment_grade='"
+				+ grade + "'";
+		Query query = session.createQuery(hql);
+		listComment = query.list();
+		session.clear();
+		return listComment;
+	}
 }

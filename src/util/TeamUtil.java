@@ -25,6 +25,25 @@ public class TeamUtil {
 		return text;
 	}
 
+	// 评分制
+	public static String grade(int totalGrade, int getGrade) {
+		int t = (int) (getGrade / totalGrade) * 100;
+		switch (t / 10) {
+		case 9:
+			return "很好";
+		case 8:
+			return "很好";
+		case 7:
+			return "好";
+		case 6:
+			return "一般";
+		case 5:
+			return "一般";
+		default:
+			return "差";
+		}
+	}
+
 	// 5级评分制评分
 	public static String grade(int ggg) {
 
@@ -147,7 +166,6 @@ public class TeamUtil {
 		String s = uuid.toString();
 		return s;
 	}
-	
 
 	// 判断一个字符是否是中文
 	public static boolean isChinese(char c) {

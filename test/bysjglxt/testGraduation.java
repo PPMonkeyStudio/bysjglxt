@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
 
@@ -25,6 +26,15 @@ public class testGraduation {
 	public void setGraduationProjectManagementService(
 			GraduationProjectManagementService graduationProjectManagementService) {
 		this.graduationProjectManagementService = graduationProjectManagementService;
+	}
+
+	@Test
+	public void fss() {
+		bysjglxt_evaluate_tutor bysjglxt_evaluate_tutor = new bysjglxt_evaluate_tutor();
+		bysjglxt_evaluate_tutor = graduationProjectManagementService
+				.get_EvaluateTutor("9aad2819-8d92-4a61-9d95-4b1098169d9d");
+		System.out.println(
+				graduationProjectManagementService.generateTutorTotalGraduationComment(bysjglxt_evaluate_tutor));
 	}
 
 	@Test
