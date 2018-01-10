@@ -25,6 +25,7 @@ import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
+import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
 import com.google.gson.Gson;
@@ -92,6 +93,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * 
 	 */
 	private String DissertationUserID;
+	private CommentInformationVO commentInformationVO;
 	private List<String> listStringUse;
 	private String StringUse;
 
@@ -106,6 +108,26 @@ public class GraduationProjectManagementAction extends ActionSupport
 			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
 		}
 		return "MyGraduationProjectPage";
+	}
+
+	/**
+	 * 遍历评语
+	 */
+	public void listAllCommentCollege() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		commentInformationVO = graduationProjectManagementService.getListAllCommentInformation(commentInformationVO,
+				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			http_response.getWriter().write(gson.toJson(commentInformationVO));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -872,6 +894,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setEXCEL_CommentContentType(String eXCEL_CommentContentType) {
 		EXCEL_CommentContentType = eXCEL_CommentContentType;
+	}
+
+	public CommentInformationVO getCommentInformationVO() {
+		return commentInformationVO;
+	}
+
+	public void setCommentInformationVO(CommentInformationVO commentInformationVO) {
+		this.commentInformationVO = commentInformationVO;
 	}
 
 }

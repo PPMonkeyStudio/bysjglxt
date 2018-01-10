@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_comment;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
@@ -30,6 +31,7 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public class GraduationProjectManagementDaoImpl implements GraduationProjectManagementDao {
@@ -1347,4 +1349,31 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		}
 		return flag;
 	}
+
+	// 评语
+	@Override
+	public List<bysjglxt_comment> getListAllCommentInformation(CommentInformationVO commentInformationVO,
+			String college, int i) {
+		Session session = getSession();
+		List<bysjglxt_comment> getListComment = new ArrayList<>();
+		String hql = "from bysjglxt_comment where comment_college='" + college + "'";
+		if (commentInformationVO.getCategory() != null && commentInformationVO.getCategory().trim().length() > 0
+				&& commentInformationVO.getCategory() != "-1") {
+			hql = hql + " and comment_category='" + commentInformationVO.getCategory().trim() + "'";
+		}
+		if (commentInformationVO.getGrade() != null && commentInformationVO.getGrade().trim().length() > 0
+				&& commentInformationVO.getGrade() != "-1") {
+			hql = hql + " and comment_category='" + commentInformationVO.getGrade().trim() + "'";
+		}
+		hql = hql + " order by comment_category,comment_grade";
+		System.out.println("评语:" + hql);
+		Query query = session.createQuery(hql);
+		if (i == 2) {
+			query.setFirstResult((commentInformationVO.getPageIndex() - 1) * commentInformationVO.getPageSize());
+			query.setMaxResults(commentInformationVO.getPageSize());
+		}
+		getListComment = query.list();
+		return getListComment;
+	}
+
 }
