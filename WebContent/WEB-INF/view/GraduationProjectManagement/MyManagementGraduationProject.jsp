@@ -67,7 +67,7 @@
 					<tbody>
 						<tr>
 							<th>学号</th>
-							<th>学生</th>
+							<th>姓名</th>
 							<th>毕业设计名称</th>
 							<th>评阅教师</th>
 							<th class="teacher_control">
