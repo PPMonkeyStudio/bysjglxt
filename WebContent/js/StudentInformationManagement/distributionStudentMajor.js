@@ -63,37 +63,31 @@ function distributionStudentMajor(this_button) {
 								var table_distributionStudentMajor = document
 										.getElementById("table_distributionStudentMajor");
 								table_distributionStudentMajor.firstElementChild.innerHTML = "";
-								for (var num = 0; num < distributionMajor_json.length; num++) {
-									/*
-									 * 
-									 */
-									new_tr_1 = document.createElement("tr");
-									table_distributionStudentMajor.firstElementChild
-											.appendChild(new_tr_1);
-									new_tr_1.innerHTML = '<th></th><td><input name="studentUser.user_student_id"  style="text-align: center;display:none;" class="form-control"  value="'
-											+ this_button.id
-											+ '"></input></td>';
-									/*
-									 * 
-									 */
-									new_tr_1 = document.createElement("tr");
-									table_distributionStudentMajor.firstElementChild
-											.appendChild(new_tr_1)
-									new_tr_1.innerHTML = '<th>选择专业</th><td><select name="major.major_id" id="select_distributionStudentMajor" style="text-align: center;" class="form-control"  value="'
-											+ distributionMajor_json[num].major_id
-											+ '"></select></td>';
-									for (var num2 = 0; num2 < distributionMajor_json.length; num2++) {
-										var option = document
-												.createElement("option");
-										option
-												.appendChild(document
-														.createTextNode(distributionMajor_json[num2].major_name));
-										document
-												.getElementById(
-														"select_distributionStudentMajor")
-												.appendChild(option);
-										option.value = distributionMajor_json[num2].major_id;
-									}
+								/*
+								 * 
+								 */
+								new_tr_1 = document.createElement("tr");
+								table_distributionStudentMajor.firstElementChild
+										.appendChild(new_tr_1);
+								new_tr_1.innerHTML = '<th></th><td><input name="studentUser.user_student_id"  style="text-align: center;display:none;" class="form-control"  value="'
+										+ this_button.id + '"></input></td>';
+								/*
+								 * 
+								 */
+								new_tr_1 = document.createElement("tr");
+								table_distributionStudentMajor.firstElementChild
+										.appendChild(new_tr_1)
+								new_tr_1.innerHTML = '<th>选择专业</th><td><select name="major.major_id" id="select_distributionStudentMajor" style="text-align: center;" class="form-control" ></select></td>';
+								for (var num2 = 0; num2 < distributionMajor_json.length; num2++) {
+									var option = document
+											.createElement("option");
+									option
+											.appendChild(document
+													.createTextNode(distributionMajor_json[num2].major_name));
+									document.getElementById(
+											"select_distributionStudentMajor")
+											.appendChild(option);
+									option.value = distributionMajor_json[num2].major_id;
 								}
 								/*
 								 * ajax结束
