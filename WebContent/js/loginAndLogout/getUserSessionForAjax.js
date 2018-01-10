@@ -100,7 +100,11 @@ function getUserSessionForAjax() {
 															try {
 																List_College();
 															} catch (e) {
+																try {
+																	List_Comment_By_College(1);
+																} catch (e) {
 
+																}
 															}
 														}
 													}
