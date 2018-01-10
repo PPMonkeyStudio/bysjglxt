@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
+import com.bysjglxt.domain.DO.bysjglxt_comment;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
@@ -82,6 +83,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	private bysjglxt_evaluate_tutor updateEvaluateTutor;
 	private bysjglxt_evaluate_review updateEvaluateReview;
 	private bysjglxt_defence updateDefence;
+	private bysjglxt_comment comment;
 	//
 	private File dissertation;
 	private String dissertationFileName;
@@ -96,6 +98,11 @@ public class GraduationProjectManagementAction extends ActionSupport
 	private CommentInformationVO commentInformationVO;
 	private List<String> listStringUse;
 	private String StringUse;
+	/**
+	 * 删除的评语list
+	 * 
+	 */
+	private List<String> listCommentId;
 
 	/*
 	 * 
@@ -112,6 +119,32 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public String CollegeCommentPage() {
 		return "CollegeCommentPage";
+	}
+
+	/**
+	 * 修改
+	 */
+	public void updateComment() {
+		graduationProjectManagementService.updateComment(comment);
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			http_response.getWriter().write("success");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 批量删除
+	 */
+	public void deleteListComment() {
+		graduationProjectManagementService.deleteListComment(listCommentId);
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			http_response.getWriter().write("success");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -135,6 +168,22 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	/**
+	 * 添加单条评语
+	 */
+	public void saveNewComment() {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		graduationProjectManagementService.saveNewComment(comment,
+				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			http_response.getWriter().write("添加成功");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * 导入评语
 	 */
 	public void saveComment() {
@@ -143,6 +192,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		try {
 			graduationProjectManagementService.saveComment(EXCEL_Comment, EXCEL_CommentFileName,
 					userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
+			http_response.setContentType("text/html;charset=utf-8");
+			http_response.getWriter().write("导入成功");
 		} catch (Exception e) {
 			System.out.println("导入出错");
 			e.printStackTrace();
@@ -888,6 +939,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return EXCEL_CommentFileName;
 	}
 
+	public bysjglxt_comment getComment() {
+		return comment;
+	}
+
+	public void setComment(bysjglxt_comment comment) {
+		this.comment = comment;
+	}
+
 	public void setEXCEL_CommentFileName(String eXCEL_CommentFileName) {
 		EXCEL_CommentFileName = eXCEL_CommentFileName;
 	}
@@ -906,6 +965,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setCommentInformationVO(CommentInformationVO commentInformationVO) {
 		this.commentInformationVO = commentInformationVO;
+	}
+
+	public List<String> getListCommentId() {
+		return listCommentId;
+	}
+
+	public void setListCommentId(List<String> listCommentId) {
+		this.listCommentId = listCommentId;
 	}
 
 }

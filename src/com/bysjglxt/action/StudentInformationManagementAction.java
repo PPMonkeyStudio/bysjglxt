@@ -57,11 +57,11 @@ public class StudentInformationManagementAction extends ActionSupport
 	 */
 	private List<String> ListDeleteStudentID;
 	/*
-	 * 删除所选学生列表
+	 * 
 	 */
 	private List<String> ListGiveOperatePremissionStudentID;
 	/*
-	 * 删除所选学生列表
+	 * 
 	 */
 	private List<String> ListTakeOperatePremissionStudentID;
 

@@ -26,7 +26,7 @@ import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 public interface GraduationProjectManagementDao {
 
 	public int saveObj(Object obj);
-	
+
 	public int fillEmptyInTaskBook(bysjglxt_taskbook bysjglxt_taskbook);
 
 	public int fillEmptyInOpening(bysjglxt_report_opening bysjglxt_report_opening);
@@ -131,5 +131,10 @@ public interface GraduationProjectManagementDao {
 	public List<bysjglxt_comment> getListAllCommentInformation(CommentInformationVO commentInformationVO,
 			String college, int i);
 
+	// 根据Id获取评语
+	public com.bysjglxt.domain.DO.bysjglxt_comment getCommentById(String comment_id);
+
+	// 删除
+	public void deleteCommentById(String comment_id);
 
 }

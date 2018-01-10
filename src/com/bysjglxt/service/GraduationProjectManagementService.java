@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.bysjglxt.domain.DO.bysjglxt_comment;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
@@ -20,8 +21,25 @@ import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementService {
 
+	/**
+	 * 更改评语
+	 * 
+	 * @param comment
+	 */
+	public void updateComment(bysjglxt_comment comment);
+
+	/**
+	 * 批量删除评语
+	 * 
+	 * @param listCommentId
+	 */
+	public void deleteListComment(List<String> listCommentId);
+
 	// 导入评语
 	public int saveComment(File studentExcel, String EXCEL_StudentFileName, String userId) throws Exception;
+
+	// 添加单条评语
+	public void saveNewComment(bysjglxt_comment comment, String user_teacher_id);
 
 	/**
 	 * 遍历评语

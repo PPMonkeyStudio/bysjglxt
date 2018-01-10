@@ -561,19 +561,16 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	 */
 	@Override
 	public int distributionStudentMajor(String studentUserId, String majorId) {
-		System.out.println("23");
 		boolean flag = false;
 		bysjglxt_major bysjglxt_major = new bysjglxt_major();
 		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
 		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
 		// 分配专业
 		// 1.获取专业信息
-		System.out.println("majorId：" + majorId);
 		bysjglxt_major = studentInformationManagementDao.getMajorByMajorId(majorId);
 		if (bysjglxt_major == null) {
 			return -1;
 		}
-		System.out.println("1");
 		// 2.更改user表中信息
 		bysjglxt_student_user = studentInformationManagementDao.getStudentByNum(studentUserId);
 		if (bysjglxt_student_user == null) {
@@ -584,7 +581,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		flag = studentInformationManagementDao.saveObject(bysjglxt_student_user);
 		if (!flag)
 			return -1;
-		System.out.println("2");
 		if (bysjglxt_student_user.getUser_student_basic() != null
 				&& bysjglxt_student_user.getUser_student_basic().trim().length() > 0) {
 			bysjglxt_student_basic = studentInformationManagementDao
