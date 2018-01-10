@@ -98,6 +98,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	private CommentInformationVO commentInformationVO;
 	private List<String> listStringUse;
 	private String StringUse;
+	private String graduationComment;
 	/**
 	 * 删除的评语list
 	 * 
@@ -119,6 +120,13 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public String CollegeCommentPage() {
 		return "CollegeCommentPage";
+	}
+
+	/**
+	 * 生成毕业设计的评语
+	 */
+	public void generateGraduationComment() {
+		
 	}
 
 	/**
@@ -769,6 +777,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public String getFileName() {
 		return fileName;
+	}
+
+	public String getGraduationComment() {
+		return graduationComment;
+	}
+
+	public void setGraduationComment(String graduationComment) {
+		this.graduationComment = graduationComment;
 	}
 
 	public void setFileName(String fileName) {

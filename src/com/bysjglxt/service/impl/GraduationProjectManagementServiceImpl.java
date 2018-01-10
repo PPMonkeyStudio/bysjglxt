@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -59,6 +60,23 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public String generateGraduationComment(String commentCategory, int getGrade, int totalGrade) {
+		List<bysjglxt_comment> listComment = new ArrayList<>();
+		bysjglxt_comment bysjglxt_comment = new bysjglxt_comment();
+		// 1.根据分数判断等级
+		String grade = TeamUtil.grade(totalGrade, getGrade);
+		// 获取该类别中所有这个等级的评语
+		listComment = graduationProjectManagementDao.getListCommentByGradeAndCategory(commentCategory, grade);
+		// 根据listsize获取某一条
+		Random rand = new Random();
+		bysjglxt_comment = listComment.get(rand.nextInt(listComment.size()));
+		return bysjglxt_comment.getComment_content();
 	}
 
 	/**

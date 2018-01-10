@@ -21,6 +21,8 @@ import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementService {
 
+	public String generateGraduationComment(String commentCategory, int getGrade, int totalGrade);
+
 	/**
 	 * 更改评语
 	 * 

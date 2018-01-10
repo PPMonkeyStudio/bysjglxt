@@ -137,4 +137,7 @@ public interface GraduationProjectManagementDao {
 	// 删除
 	public void deleteCommentById(String comment_id);
 
+	//获取评语list
+	public List<bysjglxt_comment> getListCommentByGradeAndCategory(String commentCategory, String grade);
+
 }
