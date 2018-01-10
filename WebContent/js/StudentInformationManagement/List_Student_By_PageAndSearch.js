@@ -122,6 +122,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 								+ '<li><a id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
 								+ '" onclick="assignmentStudentTopic(this)">分配选题</a></li>'
+								+ '<li><a id="'
+								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
+								+ '" onclick="distributionStudentMajor(this)">分配专业</a></li>'
 								+ '</div>';
 					} else {
 						new_td.innerHTML = '<div class="dropdown" >'
@@ -130,6 +133,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 								+ '<li><a id="'
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
 								+ '" onclick="Student_Information_Display(this)" >详细基础信息</a></li>'
+								+ '<li><a id="'
+								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
+								+ '" onclick="distributionStudentMajor(this)">分配专业</a></li>'
 								+ '</div>';
 					}
 

@@ -407,4 +407,20 @@ public class StudentInformationManagementAction extends ActionSupport
 		this.exportGeaduationStudentDTO = exportGeaduationStudentDTO;
 	}
 
+	public bysjglxt_student_user getStudentUser() {
+		return studentUser;
+	}
+
+	public void setStudentUser(bysjglxt_student_user studentUser) {
+		this.studentUser = studentUser;
+	}
+
+	public bysjglxt_major getMajor() {
+		return major;
+	}
+
+	public void setMajor(bysjglxt_major major) {
+		this.major = major;
+	}
+
 }

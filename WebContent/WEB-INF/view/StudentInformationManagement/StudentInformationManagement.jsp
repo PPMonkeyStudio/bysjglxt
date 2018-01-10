@@ -68,7 +68,7 @@
 									<option value="男">男</option>
 									<option value="女">女</option>
 								</select>
-							</th> 
+							</th>
 							<th>
 								<select class="form-control" id="select_major"
 									data-live-search="true"
@@ -116,9 +116,9 @@
 				</table>
 
 
-<!-- 				<div id="i_pulse" style="text-align: center;"> -->
-<!-- 					<i class="fa fa-spinner fa-pulse fa-3x"></i> -->
-<!-- 				</div> -->
+				<!-- 				<div id="i_pulse" style="text-align: center;"> -->
+				<!-- 					<i class="fa fa-spinner fa-pulse fa-3x"></i> -->
+				<!-- 				</div> -->
 
 
 
@@ -253,15 +253,13 @@
 	src="<%=basePath%>js/StudentInformationManagement/Student_Take_Operate_Premission.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/assignmentStudentTopic.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/distributionStudentMajor.js"></script>
 <!---------------------------------------------------------------------------------------------------->
-<script>
-	//$('select').selectpicker('refresh');
-</script>
 <script>
 	var select_major = document.getElementById("select_major");
 	var select_level = document.getElementById("select_level");
 	Get_Student_Major(select_major);
 	Get_Student_Level(select_level);
 </script>
-
 </html>

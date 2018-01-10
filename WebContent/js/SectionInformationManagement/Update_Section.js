@@ -81,6 +81,9 @@ function UpdateSection(thisSection) {
 					table_section_update.firstElementChild.innerHTML = "";
 					for (var num = 0; num < section_json.teacherInformationDTO.length; num++) {
 						if (section_json.teacherInformationDTO[num].bysjglxtSection.section_id == thisSection.id) {
+							/*
+							 * 
+							 */
 							new_tr_1 = document.createElement("tr");
 							table_section_update.firstElementChild
 									.appendChild(new_tr_1)
@@ -93,14 +96,18 @@ function UpdateSection(thisSection) {
 									+ '<input id="info_section_gmt_create" style="text-align: center;display:none;" class="form-control" disabled="disabled" value="'
 									+ section_json.teacherInformationDTO[num].bysjglxtSection.section_gmt_create
 									+ '"></input>';
-
+							/*
+							 * 
+							 */
 							new_tr_1 = document.createElement("tr");
 							table_section_update.firstElementChild
 									.appendChild(new_tr_1)
 							new_tr_1.innerHTML = '<th>教研室名称</th><td><input id="info_section_name" style="text-align: center;" class="form-control"  value="'
 									+ section_json.teacherInformationDTO[num].bysjglxtSection.section_name
 									+ '"></input></td>';
-
+							/*
+							 * 
+							 */
 							new_tr_1 = document.createElement("tr");
 							table_section_update.firstElementChild
 									.appendChild(new_tr_1)
