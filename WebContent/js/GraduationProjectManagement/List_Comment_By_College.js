@@ -63,22 +63,21 @@ function List_Comment_By_College(pageIndex) {
 					/*
 					 * 
 					 */
-
-					/*
-					 * 设置页数
-					 */
-					document.getElementById("span_pageIndex").innerHTML = CollegeComment_json.pageIndex;
-					document.getElementById("span_totalPages").innerHTML = CollegeComment_json.totalPages;
-					document.getElementById("span_totalRecords").innerHTML = CollegeComment_json.totalRecords;
-					// 让加载图标消失
-					document.getElementById("i_pulse").style.display = "none";
-					// 让全选框取消选择
-					document.getElementById("checkbox_all_select").checked = false;
-					/*
-					 * 角色控制
-					 */
-					roleControl();
 				}
+				/*
+				 * 设置页数
+				 */
+				document.getElementById("span_pageIndex").innerHTML = CollegeComment_json.pageIndex;
+				document.getElementById("span_totalPages").innerHTML = CollegeComment_json.totalPages;
+				document.getElementById("span_totalRecords").innerHTML = CollegeComment_json.totalRecords;
+				// 让加载图标消失
+				document.getElementById("i_pulse").style.display = "none";
+				// 让全选框取消选择
+				document.getElementById("checkbox_all_select").checked = false;
+				/*
+				 * 角色控制
+				 */
+				roleControl();
 			} else {
 				toastr.error(xhr.status);
 			}
