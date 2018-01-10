@@ -62,8 +62,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
 
-	
-	
 	/**
 	 * 组合指导老师评语
 	 * 
@@ -144,9 +142,14 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		// 获取该类别中所有这个等级的评语
 		listComment = graduationProjectManagementDao.getListCommentByGradeAndCategory(commentCategory, grade);
 		// 根据listsize获取某一条
-		Random rand = new Random();
-		bysjglxt_comment = listComment.get(rand.nextInt(listComment.size()));
-		return bysjglxt_comment.getComment_content();
+		if (listComment.size() > 0) {
+			Random rand = new Random();
+			bysjglxt_comment = listComment.get(rand.nextInt(listComment.size()));
+			return bysjglxt_comment.getComment_content();
+		} else {
+			return null;
+		}
+
 	}
 
 	/**
