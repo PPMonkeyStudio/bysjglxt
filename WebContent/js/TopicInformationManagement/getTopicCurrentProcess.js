@@ -55,8 +55,11 @@ function getTopicCurrentProcess() {
 		}
 	}
 
-	xhr.open("POST",
-			"/bysjglxt/process/ProcessManagement_getTopicCurrentProcess");
+	xhr
+			.open(
+					"POST",
+					"/bysjglxt/process/ProcessManagement_getTopicCurrentProcess",
+					false);
 
 	xhr.send();
 }

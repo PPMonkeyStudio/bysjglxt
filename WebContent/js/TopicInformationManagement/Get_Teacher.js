@@ -17,7 +17,6 @@ function Get_Teacher(select) {
 					option.value = TeacherList[num].bysjglxtTeacherUser.user_teacher_id;
 				}
 
-				$('#' + select.id).selectpicker('refresh');
 			} else {
 				toastr.error(xhr.status);
 			}

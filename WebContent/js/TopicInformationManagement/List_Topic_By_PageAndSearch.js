@@ -1,6 +1,21 @@
 ﻿var topic_json = null;
 
 function List_Topic_By_PageAndSearch(pageIndex) {
+	if (userStudentDTO != null) {
+		if (json_topicCurrentProcessDTO == '{}') {
+		} else {
+			for (var num6667 = 0; num6667 < topicCurrentProcessDTO.listTaskBelongProcess.length; num6667++) {
+				if (topicCurrentProcessDTO.listTaskBelongProcess[num6667].taskInstance.task_instance_state == 1) {
+					if (topicCurrentProcessDTO.listTaskBelongProcess[num6667].taskDefinition.task_definition_name == "创建选题") {
+						document.getElementById("div_TopicPage").parentNode
+								.removeChild(document
+										.getElementById("div_TopicPage"));
+						return;
+					}
+				}
+			}
+		}
+	}
 
 	document.getElementById("i_pulse").style.display = "block";
 	var xhr = false;
@@ -11,10 +26,11 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 			if (xhr.status == 200) {
 				topic_json = JSON.parse(xhr.responseText);
 				/*
-				 * *
 				 * 
-				 * 清空原表数据 /
-				 */var new_tr_list = document.getElementsByClassName("new_tr");
+				 * 
+				 * 清空原表数据
+				 */
+				var new_tr_list = document.getElementsByClassName("new_tr");
 				var long = new_tr_list.length;
 				for (var num = 0; num < long; num++) {
 					new_tr_list[0].parentNode.removeChild(new_tr_list[0]);

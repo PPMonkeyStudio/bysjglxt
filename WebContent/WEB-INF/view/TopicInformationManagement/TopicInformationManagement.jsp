@@ -51,10 +51,10 @@
 							role="progressbar"></div>
 					</div>
 				</div>
-				<hr>
+				<hr> 
 				<h3 class="panel-title">课题列表</h3>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body" id="div_TopicPage">
 
 
 				<div style="height: 34px;">
