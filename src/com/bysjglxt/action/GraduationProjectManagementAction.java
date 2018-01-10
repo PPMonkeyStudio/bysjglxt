@@ -48,6 +48,20 @@ public class GraduationProjectManagementAction extends ActionSupport
 	private TeacherTutorStudentVO teacherManagementStudentVO;
 
 	private String MyTutorGraduationProjectStudentID;
+
+	/**
+	 * 
+	 * 
+	 */
+	/*
+	 * 评语excel
+	 */
+	private File EXCEL_Comment;
+
+	private String EXCEL_CommentFileName;
+
+	private String EXCEL_CommentContentType;
+
 	/*
 	 * 
 	 */
@@ -92,6 +106,21 @@ public class GraduationProjectManagementAction extends ActionSupport
 			ActionContext.getContext().getSession().remove("MyTutorGraduationProjectStudentID");
 		}
 		return "MyGraduationProjectPage";
+	}
+
+	/**
+	 * 导入评语
+	 */
+	public void saveComment() {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		try {
+			graduationProjectManagementService.saveComment(EXCEL_Comment, EXCEL_CommentFileName,
+					userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
+		} catch (Exception e) {
+			System.out.println("导入出错");
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -819,6 +848,30 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setStringUse(String stringUse) {
 		StringUse = stringUse;
+	}
+
+	public File getEXCEL_Comment() {
+		return EXCEL_Comment;
+	}
+
+	public void setEXCEL_Comment(File eXCEL_Comment) {
+		EXCEL_Comment = eXCEL_Comment;
+	}
+
+	public String getEXCEL_CommentFileName() {
+		return EXCEL_CommentFileName;
+	}
+
+	public void setEXCEL_CommentFileName(String eXCEL_CommentFileName) {
+		EXCEL_CommentFileName = eXCEL_CommentFileName;
+	}
+
+	public String getEXCEL_CommentContentType() {
+		return EXCEL_CommentContentType;
+	}
+
+	public void setEXCEL_CommentContentType(String eXCEL_CommentContentType) {
+		EXCEL_CommentContentType = eXCEL_CommentContentType;
 	}
 
 }

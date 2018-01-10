@@ -1,6 +1,7 @@
 package com.bysjglxt.service;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,9 @@ import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
 public interface GraduationProjectManagementService {
+
+	// 导入评语
+	public int saveComment(File studentExcel, String EXCEL_StudentFileName, String userId) throws Exception;
 
 	/**
 	 * 下载毕业论文
