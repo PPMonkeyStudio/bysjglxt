@@ -35,7 +35,6 @@ function List_MyTopic_By_PageAndSearch(pageIndex) {
 					new_tr.className = "new_tr";
 
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != undefined
 							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_name_chinese != "") {
