@@ -1298,6 +1298,10 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return list_bysjglxt_topic_select;
 	}
 
+	/**
+	 * 填写论文
+	 * 
+	 */
 	@Override
 	public int fillEmptyInDissertation(bysjglxt_dissertation bysjglxt_dissertation) {
 		int flag = 1;
@@ -1312,6 +1316,9 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return flag;
 	}
 
+	/**
+	 * 根据学生Id获取课题
+	 */
 	@Override
 	public bysjglxt_dissertation getThesisByStudentId(String userId) {
 		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
@@ -1336,6 +1343,9 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return bysjglxt_student_basic;
 	}
 
+	/**
+	 * 保存
+	 */
 	@Override
 	public int saveObj(Object obj) {
 		int flag = 1;
@@ -1374,6 +1384,13 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return getListComment;
 	}
 
+	/*
+	 * 获取评论
+	 * 
+	 * @see
+	 * com.bysjglxt.dao.GraduationProjectManagementDao#getCommentById(java.lang.
+	 * String)
+	 */
 	@Override
 	public bysjglxt_comment getCommentById(String comment_id) {
 		Session session = getSession();
@@ -1385,6 +1402,10 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return bysjglxt_comment;
 	}
 
+	/*
+	 * 
+	 * 根据ID删除评论
+	 */
 	@Override
 	public void deleteCommentById(String comment_id) {
 		Session session = getSession();
@@ -1393,6 +1414,9 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		query.executeUpdate();
 	}
 
+	/**
+	 * 根据分类获取评论
+	 */
 	@Override
 	public List<bysjglxt_comment> getListCommentByGradeAndCategory(String commentCategory, String grade) {
 		Session session = getSession();
@@ -1404,4 +1428,5 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		session.clear();
 		return listComment;
 	}
+
 }

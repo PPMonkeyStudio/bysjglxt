@@ -11,7 +11,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.bysjglxt.domain.DO.bysjglxt_section;
-import com.bysjglxt.domain.VO.SectionInformationManagementVO;
 import com.bysjglxt.service.SectionInformationManagementService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
