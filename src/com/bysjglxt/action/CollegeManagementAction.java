@@ -16,6 +16,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * 
+ * @date 2018/2/19
+ * @author JXX
+ *
+ */
 public class CollegeManagementAction extends ActionSupport implements ServletResponseAware, ServletRequestAware {
 
 	private HttpServletResponse http_response;
@@ -28,12 +34,9 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	private bysjglxt_teacher_basic bysjglxt_teacher_basic;
 	private bysjglxt_college college;
 
-	/*
-	 * 
-	 */
 	/**
 	 * 
-	 * @return
+	 * @return 'webString'
 	 */
 	public String CollegeManagementPage() {
 		return "CollegeManagementPage";
@@ -58,7 +61,6 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 
 	/**
 	 * 修改管理员
-	 * 
 	 */
 	public void updateAdmin() {
 		System.out.println("修改管理员:" + bysjglxt_teacher_user.getUser_teacher_id());
@@ -92,10 +94,6 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	/*
 	 * 
 	 */
-	/*
-	 * 
-	 */
-
 	@Override
 	public void setServletRequest(HttpServletRequest http_request) {
 		this.http_request = http_request;

@@ -1627,6 +1627,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	@Override
 	public File exportAll(List<String> userListId) throws Exception {
+		if (userListId.size() <= 1) {
+			return null;
+		}
 		String lj = "";
 		try {
 			Properties props = new Properties();

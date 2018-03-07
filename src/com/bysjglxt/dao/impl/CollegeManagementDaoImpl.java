@@ -37,7 +37,7 @@ public class CollegeManagementDaoImpl implements CollegeManagementDao {
 	}
 
 	// 查找对应学院的管理员老师userId
-	@Override
+	@Override	
 	public List<bysjglxt_teacher_user> getListCollegeAdmin(String college_id) {
 		List<bysjglxt_teacher_user> listTeacherUser = new ArrayList<>();
 		Session session = getSession();

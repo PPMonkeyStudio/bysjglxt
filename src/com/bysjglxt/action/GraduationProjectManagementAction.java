@@ -34,6 +34,12 @@ import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+/**
+ * GraduationProjectManagementAction class
+ * 
+ * @date 2018/2/19
+ * @author JXX
+ */
 public class GraduationProjectManagementAction extends ActionSupport
 		implements ServletResponseAware, ServletRequestAware {
 	/*
@@ -447,6 +453,11 @@ public class GraduationProjectManagementAction extends ActionSupport
 		}
 	}
 
+	/**
+	 * 获取
+	 * 
+	 * @throws IOException
+	 */
 	public void get_EvaluateReview() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -463,6 +474,11 @@ public class GraduationProjectManagementAction extends ActionSupport
 		}
 	}
 
+	/**
+	 * 获取defence
+	 * 
+	 * @throws IOException
+	 */
 	public void get_Defence() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -487,12 +503,16 @@ public class GraduationProjectManagementAction extends ActionSupport
 		//
 		String[] StringUse_sz = StringUse.split(",");
 		listStringUse = Arrays.asList(StringUse_sz);
-		//
 		File exportFile = graduationProjectManagementService.exportAll(listStringUse);
-		fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
-		inputStream = new FileInputStream(exportFile);
-		exportFile.delete();
-		return "exportAll";
+		if (exportFile != null) {
+			fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
+			inputStream = new FileInputStream(exportFile);
+			exportFile.delete();
+			return "exportAll";
+		} else {
+			return "MyManagementGraduationProjectPage";
+		}
+
 	}
 
 	/**
@@ -523,6 +543,11 @@ public class GraduationProjectManagementAction extends ActionSupport
 		}
 	}
 
+	/**
+	 * 更新开题报告
+	 * 
+	 * @throws IOException
+	 */
 	public void updateReportOpening() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateReportOpening(updateReportOpening) == 1) {
@@ -684,7 +709,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	/*
-	 * 
+	 * 获取论文
 	 */
 	public void get_Dissertation() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -702,6 +727,13 @@ public class GraduationProjectManagementAction extends ActionSupport
 		}
 	}
 
+	/**
+	 * 下载毕业设计过程管理手册
+	 * 
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 */
 	public String downloadDissertation() throws UnsupportedEncodingException, FileNotFoundException {
 
 		File downloadDissertation = graduationProjectManagementService.downloadDissertation(DissertationUserID);
@@ -725,9 +757,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	}
 
-	/*
-	 * 
-	 */
 	/*
 	 * (non-Javadoc)
 	 * 

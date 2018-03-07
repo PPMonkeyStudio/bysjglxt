@@ -78,6 +78,8 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 			http_response.getWriter().write("管理员登录成功");
 			break;
 		}
+		default:
+			break;
 		}
 	}
 
