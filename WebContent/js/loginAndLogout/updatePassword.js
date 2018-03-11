@@ -53,8 +53,13 @@ function updatePassword() {
 								var message;
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
-										xhr.responseText
-
+										if (xhr.responseText == "success") {
+											toastr.success("修改成功");
+											return true;
+										} else {
+											toastr.error("修改失败");
+											return false;
+										}
 									} else {
 										toastr.error(xhr.status);
 									}
