@@ -12,6 +12,8 @@ import com.bysjglxt.domain.DO.bysjglxt_admin;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.service.LoginOrWriteOffService;
+import com.bysjglxt.service.StudentInformationManagementService;
+import com.bysjglxt.service.TeacherInformationManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionContext;
@@ -20,6 +22,8 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LoginOrWriteOffAction extends ActionSupport implements ServletResponseAware, ServletRequestAware {
 
 	private LoginOrWriteOffService loginOrWriteOffService;
+	private StudentInformationManagementService studentInformationManagementService;
+	private TeacherInformationManagementService teacherInformationManagementService;
 	private HttpServletResponse http_response;
 	private HttpServletRequest http_request;
 	/*
@@ -30,6 +34,8 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 	/*
 	 * 
 	 */
+	private String oldPassword;
+	private String newPassword;
 
 	/*
 	 * 登录
@@ -114,6 +120,24 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 		}
 	}
 
+	/*
+	 * 
+	 */
+	public void updatePassword() {
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			teacherInformationManagementService.updatePassword(
+					((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+							.getBysjglxtTeacherUser().getUser_teacher_id(),
+					newPassword);
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			studentInformationManagementService.updatePassword(
+					((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+							.getBysjglxtStudentUser().getUser_student_id(),
+					newPassword);
+		} else if (ActionContext.getContext().getSession().get("admin") != null) {
+		}
+	}
+
 	/**
 	 * 跳转到首页
 	 * 
@@ -185,5 +209,39 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	public StudentInformationManagementService getStudentInformationManagementService() {
+		return studentInformationManagementService;
+	}
+
+	public void setStudentInformationManagementService(
+			StudentInformationManagementService studentInformationManagementService) {
+		this.studentInformationManagementService = studentInformationManagementService;
+	}
+
+	public TeacherInformationManagementService getTeacherInformationManagementService() {
+		return teacherInformationManagementService;
+	}
+
+	public void setTeacherInformationManagementService(
+			TeacherInformationManagementService teacherInformationManagementService) {
+		this.teacherInformationManagementService = teacherInformationManagementService;
 	}
 }
