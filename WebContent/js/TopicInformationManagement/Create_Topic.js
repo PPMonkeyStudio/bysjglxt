@@ -34,11 +34,22 @@ function Create_Topic() {
 					var topic_source = document.getElementById("topic_source");
 					var topic_type = document.getElementById("topic_type");
 					var topic_remark = document.getElementById("topic_remark");
+					var topic_student_max = document
+							.getElementById("topic_student_max");
 
 					if (topic_name_chinese.value.length == 0) {
 						toastr.error("课题中文名称不能为空");
 						return;
 					}
+
+					if (topic_student_max.value == -1
+							|| (topic_student_max.value > 0 && topic_student_max.value < 100)) {
+
+					} else {
+						toastr.error("学生上线只能为-1（无限）或0-100的整数");
+						return;
+					}
+
 					var xhr_2 = false;
 					xhr_2 = new XMLHttpRequest();
 					xhr_2.onreadystatechange = function() {
@@ -52,7 +63,9 @@ function Create_Topic() {
 						}
 					}
 					var formData = new FormData();
-					xhr_2.open("POST","/bysjglxt/topic/TopicInformationManagement_CreateTopic");
+					xhr_2
+							.open("POST",
+									"/bysjglxt/topic/TopicInformationManagement_CreateTopic");
 					if (!topic_name_chinese.value == "") {
 						formData
 								.append(
@@ -84,7 +97,12 @@ function Create_Topic() {
 								.append(
 										"topicInformationManagementDTO.bysjglxtTopic.topic_remark",
 										topic_remark.value);
+
 					}
+					formData
+							.append(
+									"topicInformationManagementDTO.bysjglxtTopic.topic_student_max",
+									topic_student_max.value);
 					/*
 					 * 
 					 */

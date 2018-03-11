@@ -62,9 +62,12 @@
 					<h4>课题备注</h4>
 					<textarea id="topic_remark" class="form-control"
 						style="resize: none;"></textarea>
+					<h4>课题学生上限<span style="">（-1表示无上限）</span></h4>
+					<input id="topic_student_max" class="form-control"
+						style="margin: 0 0 20px 0;" value="-1">
 				</div>
 				<div style="height: 34px; margin: 30px 0;">
-					<button class="btn btn-default" onclick="Create_Topic()"
+					<button class="btn btn-primary" onclick="Create_Topic()"
 						style="float: right; margin: 0 10px;">
 						<i class="fa  fa-check "></i>
 						确认创建
@@ -72,7 +75,6 @@
 					<button class="btn btn-default"
 						onclick="window.location='<%=basePath%>topic/TopicInformationManagement_TopicListPage'"
 						style="float: right; margin: 0 10px;">
-						<i class="fa  fa-close "></i>
 						返回
 					</button>
 				</div>
