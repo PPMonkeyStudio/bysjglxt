@@ -51,24 +51,21 @@ function Update_Topic() {
 						return;
 					}
 
-					var xhr = false;
-					xhr = new XMLHttpRequest();
-					xhr.onreadystatechange = function() {
+					var xhr2 = false;
+					xhr2 = new XMLHttpRequest();
+					xhr2.onreadystatechange = function() {
 						var message;
-						if (xhr.readyState == 4) {
-							if (xhr.status == 200) {
-								window.location = "/bysjglxt/topic/TopicInformationManagement_MyTopicListPage";
+						if (xhr2.readyState == 4) {
+							if (xhr2.status == 200) {
+								$("#modal_Topic_Information").modal("hide");
+								List_MyTopic_By_PageAndSearch(topic_json.pageIndex);
 							} else {
-								toastr.error(xhr.status);
+								toastr.error(xhr2.status);
 							}
 						}
 					}
 
 					var formData = new FormData();
-
-					xhr
-							.open("POST",
-									"/bysjglxt/topic/TopicInformationManagement_UpdateTopic");
 
 					formData
 							.append(
@@ -109,15 +106,17 @@ function Update_Topic() {
 							.append(
 									"topicInformationManagementDTO.bysjglxtTopic.topic_student_max",
 									input_topic_student_max.value);
-
-					xhr.send(formData);
+					xhr2
+							.open("POST",
+									"/bysjglxt/topic/TopicInformationManagement_UpdateTopic");
+					xhr2.send(formData);
 
 					/*
 					 * 
 					 */
 				}
 			} else {
-				toastr.error(xhr.status);
+				toastr.error(xhr2.status);
 			}
 		}
 	}
