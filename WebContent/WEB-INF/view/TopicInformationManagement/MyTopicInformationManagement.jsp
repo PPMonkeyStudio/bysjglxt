@@ -48,10 +48,22 @@
 		<div class="panel" style="width: 95%; margin: 20px auto;">
 			<!--  -->
 			<div class="panel-heading">
-				<h3 class="panel-title">我的课题</h3>
+				<h3 class="panel-title">
+					<i class="fa fa-themeisle"></i>
+					我的课题
+				</h3>
 			</div>
 			<div class="panel-body">
 				<div style="height: 34px;">
+					<div style="width: 500px; float: left;">
+						<button class="teacher_control btn btn-default"
+							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_CreateTopicPage'">
+							<i class="fa fa-plus-square"></i>
+							创建课题
+						</button><a class="teacher_control  btn-link"
+							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_TopicListPage'">
+							课题列表</a>
+					</div>
 					<!-- 					<div style="width: 500px; float: left;"> -->
 					<!-- 						<button class="btn btn-default" -->
 					<%-- 							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_TopicListPage'"> --%>
