@@ -5,6 +5,7 @@ function Update_Topic() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+				alert(xhr.responseText)
 				var topicCurrentProcessDTO = JSON.parse(xhr.responseText);
 				if (topicCurrentProcessDTO == null) {
 					toastr.error("管理员未开启选题的流程");

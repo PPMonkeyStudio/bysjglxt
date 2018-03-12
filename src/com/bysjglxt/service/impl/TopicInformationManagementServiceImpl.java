@@ -96,8 +96,10 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			newTopic.setTopic_gmt_modified(TeamUtil.getStringSecond());
 			newTopic.setTopic_examine_state("未审核");
 			newTopic.setTopic_teacher(bysjglxt_teacher_user.getUser_teacher_id());
-			newTopic.setTopic_student_num(0);
-			newTopic.setTopic_student_max(-1);
+			/*
+			 * newTopic.setTopic_student_num(0);
+			 * newTopic.setTopic_student_max(-1);
+			 */
 			flag = topicInformationManagementDao.addObject(newTopic);
 		} else {
 			System.out.println("false");
@@ -140,6 +142,9 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			// 根据课题ID获得课题对象
 			bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicId);
 			if ("已关闭".equals(bysjglxt_topic.getTopic_examine_state())) {
+				continue;
+			}
+			if ("审核未通过".equals(bysjglxt_topic.getTopic_examine_state())) {
 				continue;
 			}
 			if (bysjglxt_topic != null) {

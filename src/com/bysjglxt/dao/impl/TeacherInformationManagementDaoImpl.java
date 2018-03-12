@@ -80,7 +80,6 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		Session session = getSession();
 		bysjglxt_teacher_user TeacherInformation = null;
 		String hql = "from bysjglxt_teacher_user where user_teacher_id='" + teacher_id + "'";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		TeacherInformation = (bysjglxt_teacher_user) query.uniqueResult();
 		session.clear();
