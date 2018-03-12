@@ -51,8 +51,11 @@
 							role="progressbar"></div>
 					</div>
 				</div>
-				<hr> 
-				<h3 class="panel-title">课题列表</h3>
+				<hr>
+				<h3 class="panel-title">
+					<i class="fa fa-balance-scale"></i>
+					课题列表
+				</h3>
 			</div>
 			<div class="panel-body" id="div_TopicPage">
 
@@ -64,6 +67,9 @@
 							<i class="fa fa-plus-square"></i>
 							创建课题
 						</button>
+						<a class="teacher_control  btn-link"
+							onclick="window.location='<%=basePath%>topic/TopicInformationManagement_MyTopicListPage'">
+							我的课题 </a>
 					</div>
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
