@@ -117,8 +117,6 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * 
 	 */
 	public void AssignmentReviewTeacher() throws IOException {
-		System.out.println("assignmentReviewTeacherId:" + assignmentReviewTeacherId);
-		System.out.println("assignmentTopicId:" + assignmentTopicId);
 		http_response.setContentType("text/html;charset=utf-8");
 		topicInformationManagementService.assignment(assignmentTopicId, assignmentReviewTeacherId);
 		http_response.getWriter().write("success");
@@ -144,6 +142,7 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	public void UpdateTopic() throws IOException {
 		topicInformationManagementService.updateTopic(topicInformationManagementDTO.getBysjglxtTopic());
+		System.out.println(topicInformationManagementDTO.getBysjglxtTopic());
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}

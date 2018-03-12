@@ -125,11 +125,11 @@
 				table_topic_detail.firstElementChild.appendChild(new_tr_1);
 				if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != null
 						&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_requirement != null) {
-					new_tr_1.innerHTML = '<th>实现要求</th><td><input style="text-align: center;" id="input_topic_requirement" class="form-control" value="'
+					new_tr_1.innerHTML = '<th>实现要求</th><td><textarea style="resize: none;" id="input_topic_requirement" class="form-control" value="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_requirement
-							+ '"></input></td>';
+							+ '"></textarea></td>';
 				} else {
-					new_tr_1.innerHTML = '<th>实现要求</th><td><input style="text-align: center;" id="input_topic_requirement" class="form-control"></input></td>';
+					new_tr_1.innerHTML = '<th>实现要求</th><td><textarea style="resize: none;" id="input_topic_requirement" class="form-control"></textarea></td>';
 				}
 				/*
 				 * 
@@ -139,11 +139,11 @@
 				table_topic_detail.firstElementChild.appendChild(new_tr_1);
 				if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != null
 						&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_remark != null) {
-					new_tr_1.innerHTML = '<th>备注</th><td><input style="text-align: center;" id="input_topic_remark" class="form-control" value="'
+					new_tr_1.innerHTML = '<th>备注</th><td><textarea style="resize: none;" id="input_topic_remark" class="form-control" value="'
 							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_remark
-							+ '"></input></td>';
+							+ '"></textarea></td>';
 				} else {
-					new_tr_1.innerHTML = '<th>备注</th><td><input style="text-align: center;" id="input_topic_remark" class="form-control"></input></td>';
+					new_tr_1.innerHTML = '<th>备注</th><td><textarea style="resize: none;" id="input_topic_remark" class="form-control"></textarea></td>';
 				}
 				/*
 				 * 
