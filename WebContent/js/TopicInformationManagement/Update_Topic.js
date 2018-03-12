@@ -5,7 +5,6 @@ function Update_Topic() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				alert(xhr.responseText)
 				var topicCurrentProcessDTO = JSON.parse(xhr.responseText);
 				if (topicCurrentProcessDTO == null) {
 					toastr.error("管理员未开启选题的流程");
@@ -57,6 +56,7 @@ function Update_Topic() {
 						var message;
 						if (xhr2.readyState == 4) {
 							if (xhr2.status == 200) {
+								toastr.success("已修改课题信息", "操作成功");
 								$("#modal_Topic_Information").modal("hide");
 								List_MyTopic_By_PageAndSearch(topic_json.pageIndex);
 							} else {
