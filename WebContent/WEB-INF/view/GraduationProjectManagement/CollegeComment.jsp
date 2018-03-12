@@ -57,17 +57,6 @@
 						<tr>
 							<th>内容</th>
 							<th class="teacher_control">
-								<select id="select_grade" class="form-control"
-									style="width: auto; margin: 0 auto;" id=""
-									onchange="List_Comment_By_College(1)">
-									<option value="-1">等级（全部）</option>
-									<option value="很好">等级（很好）</option>
-									<option value="好">等级（好）</option>
-									<option value="一般">等级（一般）</option>
-									<option value="差">等级（差）</option>
-								</select>
-							</th>
-							<th class="teacher_control">
 								<select id="select_category" class="form-control"
 									style="width: auto; margin: 0 auto;" id=""
 									onchange="List_Comment_By_College(1)">
@@ -93,6 +82,18 @@
 									<option value="总结">总结</option>
 								</select>
 							</th>
+							<th class="teacher_control">
+								<select id="select_grade" class="form-control"
+									style="width: auto; margin: 0 auto;" id=""
+									onchange="List_Comment_By_College(1)">
+									<option value="-1">等级（全部）</option>
+									<option value="很好">等级（很好）</option>
+									<option value="好">等级（好）</option>
+									<option value="一般">等级（一般）</option>
+									<option value="差">等级（差）</option>
+								</select>
+							</th>
+
 							<th>
 								<label class="fancy-checkbox">
 									<input id="checkbox_all_select" type="checkbox"

@@ -38,18 +38,19 @@ function List_Comment_By_College(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = CollegeComment_json.listComment[num].comment_content;
-					/*
-					 * 
-					 */
-					new_td = document.createElement("td");
-					new_tr.appendChild(new_td);
-					new_td.innerHTML = CollegeComment_json.listComment[num].comment_grade;
+
 					/*
 					 * 
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = CollegeComment_json.listComment[num].comment_category;
+					/*
+					 * 
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = CollegeComment_json.listComment[num].comment_grade;
 					/*
 					 * 选择
 					 */

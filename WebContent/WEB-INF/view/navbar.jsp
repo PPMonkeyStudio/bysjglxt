@@ -61,6 +61,9 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/getTopicCurrentProcess.js"></script>
 <!--------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/updatePassword.js"></script>
+<!--------------------------------------------------------------------------------->
 <title>Insert title here</title>
 </head>
 
@@ -218,7 +221,7 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li>
-							<a href="#">
+							<a href="#" onclick="updatePassword()">
 								<i class="lnr lnr-lock"></i>
 								<span>修改密码</span>
 							</a>
