@@ -1,6 +1,8 @@
 package com.bysjglxt.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +11,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_major;
+import com.bysjglxt.domain.DTO.SectionDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.MajorVO;
 import com.bysjglxt.service.MajorManagementService;
@@ -61,10 +64,32 @@ public class MajorManagementAction extends ActionSupport implements ServletRespo
 	}
 
 	// 手动添加专业
-	public void addMajor() {
-		
+	public void addMajor() throws IOException {
+		// 1成功添加
+		// -1数据问题
+		// -2添加失败
+		http_response.getWriter().write("" + majorManagementService.addMajor(bysjglxtMajor));
 	}
 
+	// 不要用
+	/*
+	 * public void listSection() throws IOException { GsonBuilder gsonBuilder =
+	 * new GsonBuilder(); gsonBuilder.setPrettyPrinting();// 格式化json数据 Gson gson
+	 * = gsonBuilder.create();
+	 * http_response.setContentType("text/html;charset=utf-8"); if
+	 * (ActionContext.getContext().getSession().get("userTeacherDTO") == null) {
+	 * http_response.getWriter().write("error"); } TeacherInformationDTO
+	 * userTeacherDTO = (TeacherInformationDTO)
+	 * ActionContext.getContext().getSession() .get("userTeacherDTO");
+	 * List<SectionDTO> sectionDTO = new ArrayList<>(); sectionDTO =
+	 * majorManagementService
+	 * .listSectionDTO(userTeacherDTO.getBysjglxtTeacherUser().
+	 * getUser_teacher_id());
+	 * http_response.getWriter().write(gson.toJson(sectionDTO)); }
+	 */
+	
+	
+	
 	/**
 	 * 
 	 */

@@ -112,8 +112,8 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 	}
 
 	@Override
-	public List<bysjglxt_section> listBysjglxtSection() {
-		return sectionInformationManagementDao.listBysjglxtSection();
+	public List<bysjglxt_section> listBysjglxtSection(String userId) {
+		return sectionInformationManagementDao.listBysjglxtSection(userId);
 	}
 
 	@Override

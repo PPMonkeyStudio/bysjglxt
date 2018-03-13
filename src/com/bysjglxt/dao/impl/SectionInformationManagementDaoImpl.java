@@ -98,10 +98,11 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 	}
 
 	@Override
-	public List<bysjglxt_section> listBysjglxtSection() {
+	public List<bysjglxt_section> listBysjglxtSection(String userId) {
 		Session session = getSession();
 		List<bysjglxt_section> listSection = new ArrayList<bysjglxt_section>();
-		String hql = "from bysjglxt_section";
+		String hql = "select section from bysjglxt_section section,bysjglxt_teacher_user teacherUser,bysjglxt_college college where teacherUser.user_teacher_belong_college=college.college_id and college.college_id=section.section_college_id and teacherUser.user_teacher_id='"
+				+ userId + "'";
 		Query query = session.createQuery(hql);
 		listSection = query.list();
 		return listSection;

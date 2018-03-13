@@ -32,8 +32,9 @@ public interface SectionInformationManagementService {
 	/**
 	 * 
 	 * @DATE 2017-10-31 遍历出所有的教研室
+	 * 
 	 */
-	public List<bysjglxt_section> listBysjglxtSection();
+	public List<bysjglxt_section> listBysjglxtSection(String userId);
 
 	/**
 	 * @DATE 2017-10-31 更改教研室

@@ -117,6 +117,25 @@ public class SectionInformationManagementAction extends ActionSupport
 		http_response.getWriter().write("success");
 	}
 
+	/**
+	 * 遍历出属于操作者的所有教研室
+	 * 
+	 * @throws IOException
+	 */
+	public void listBysjglxtSection() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") == null) {
+			http_response.getWriter().write("error");
+		}
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		http_response.getWriter().write(gson.toJson(sectionInformationManagementService
+				.listBysjglxtSection(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
+	}
+
 	/*
 	 * 
 	 */
