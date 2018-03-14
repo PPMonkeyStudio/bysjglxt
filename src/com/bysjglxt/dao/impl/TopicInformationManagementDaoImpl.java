@@ -47,12 +47,12 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		}
 		return flag;
 	}
-
+	
+	//弃用
 	@Override
 	public boolean CreateTopic(bysjglxt_topic newTopic) {
 		boolean flag = true;
-		Session session = getSession();
-		session.saveOrUpdate(newTopic);
+		getSession().saveOrUpdate(newTopic);
 		return flag;
 	}
 

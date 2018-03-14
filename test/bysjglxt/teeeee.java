@@ -45,4 +45,13 @@ public class teeeee {
 		System.out.println(flag);
 	}
 
+	@Test
+	public void testttt() {
+		List<bysjglxt_section> listSection = new ArrayList<>();
+		listSection = sectionInformationManagementService.listBysjglxtSection("bc1e8e7f-c8e8-4518-bb6f-fca8c9664d1f");
+		for (bysjglxt_section bysjglxt_section : listSection) {
+			System.out.println(bysjglxt_section);
+		}
+	}
+
 }

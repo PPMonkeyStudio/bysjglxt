@@ -679,7 +679,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		topic.setTopic_examine_state("未审核");
 		topic.setTopic_student_max(topicBy.getTopic_student_max());
 		topic.setTopic_remark(topicBy.getTopic_remark());
-		topicInformationManagementDao.CreateTopic(topic);
+		topicInformationManagementDao.addObject(topic);
 		// 添加通知记录
 		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
 		// 根据教师user Id获取教师user表信息

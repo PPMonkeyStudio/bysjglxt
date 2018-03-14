@@ -21,7 +21,7 @@ public interface SectionInformationManagementDao {
 
 	boolean deleteSection(String string);
 
-	List<bysjglxt_section> listBysjglxtSection();
+	List<bysjglxt_section> listBysjglxtSection(String userId);
 
 	boolean updateSection(bysjglxt_section bysjglxt_section);
 
