@@ -100,9 +100,9 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser != undefined) {
 						if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 1) {
-							new_td.innerHTML = '✔';
+							new_td.innerHTML = '<span class="label label-primary">已选题</span>';
 						} else {
-							new_td.innerHTML = '';
+							new_td.innerHTML = '<span class="label label-default">未选题</span>';
 						}
 
 					} else {

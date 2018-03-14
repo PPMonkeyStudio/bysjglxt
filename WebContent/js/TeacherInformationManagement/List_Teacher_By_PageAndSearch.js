@@ -114,9 +114,9 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_recorder == 1) {
-						new_td.innerHTML = '✔';
+						new_td.innerHTML = '<span class="label label-primary">是</span>';
 					} else {
-						new_td.innerHTML = '';
+						new_td.innerHTML = '<span class="label label-default">否</span>';
 						// new_td.style.color = "#ff5063";
 					}
 					/*
@@ -125,9 +125,9 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
-						new_td.innerHTML = '✔';
+						new_td.innerHTML = '<span class="label label-primary">是</span>';
 					} else {
-						new_td.innerHTML = '';
+						new_td.innerHTML = '<span class="label label-default">否</span>';
 						// new_td.style.color = "#ff5063";
 					}
 					/*
