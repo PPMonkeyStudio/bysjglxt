@@ -132,4 +132,16 @@ public class MajorManagementAction extends ActionSupport implements ServletRespo
 		this.majorVO = majorVO;
 	}
 
+	public bysjglxt_major getBysjglxtMajor() {
+		return bysjglxtMajor;
+	}
+
+	public void setBysjglxtMajor(bysjglxt_major bysjglxtMajor) {
+		this.bysjglxtMajor = bysjglxtMajor;
+	}
+
+	public MajorManagementService getMajorManagementService() {
+		return majorManagementService;
+	}
+
 }

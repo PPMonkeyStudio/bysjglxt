@@ -14,6 +14,8 @@
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/MajorManagement/List_Major_By_Page.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/MajorManagement/Create_Major.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>专业管理</title>
 </head>
@@ -34,9 +36,8 @@
 			<!--  -->
 			<div class="panel-body">
 				<div style="height: 34px;">
-
 					<div style="width: 500px; float: left;">
-						<button class="btn btn-default" onclick="">
+						<button class="btn btn-default" onclick="Create_Major()">
 							<i class="fa fa-plus-square"></i>
 							新增
 						</button>
@@ -104,9 +105,8 @@
 	<!---------------------------------------------------------------------------------------------------->
 
 </body>
-<script>
-	
-</script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TeacherInformationManagement/Get_Teacher_Section.js"></script>
 <script>
 	
 </script>
