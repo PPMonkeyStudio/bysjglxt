@@ -6,7 +6,8 @@
 	<package name="MajorManagement" namespace="/major" extends="struts-default">
 		<action name="MajorManagement_*" class="com.bysjglxt.action.MajorManagementAction"
 			method="{1}">
-			
+			<result name="MajorManagementPage">/WEB-INF/view/MajorManagement/MajorManagementPage.jsp
+			</result>
 		</action>
 	</package>
 </struts>

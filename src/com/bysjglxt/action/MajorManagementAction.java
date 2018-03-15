@@ -1,8 +1,6 @@
 package com.bysjglxt.action;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +9,6 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_major;
-import com.bysjglxt.domain.DTO.SectionDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.MajorVO;
 import com.bysjglxt.service.MajorManagementService;
@@ -44,6 +41,11 @@ public class MajorManagementAction extends ActionSupport implements ServletRespo
 	 * @throws IOException
 	 * 
 	 */
+
+	public String MajorManagementPage() {
+
+		return "MajorManagementPage";
+	}
 
 	// 获取该学院所有专业
 	public void listMajorByPage() throws IOException {
@@ -87,9 +89,7 @@ public class MajorManagementAction extends ActionSupport implements ServletRespo
 	 * getUser_teacher_id());
 	 * http_response.getWriter().write(gson.toJson(sectionDTO)); }
 	 */
-	
-	
-	
+
 	/**
 	 * 
 	 */

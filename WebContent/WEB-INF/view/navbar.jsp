@@ -115,6 +115,10 @@
 							<a
 								href="<%=basePath%>section/SectionInformationManagement_SectionManagementPage">教研室</a>
 						</li>
+						<li>
+							<a
+								href="<%=basePath%>major/MajorManagement_MajorManagementPage">专业</a>
+						</li>
 					</ul>
 				</li>
 				<!--  -->

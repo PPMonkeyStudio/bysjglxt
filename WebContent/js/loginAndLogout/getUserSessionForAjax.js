@@ -103,7 +103,10 @@ function getUserSessionForAjax() {
 																try {
 																	List_Comment_By_College(1);
 																} catch (e) {
-
+																	try {
+																		List_Major_By_Page(1);
+																	} catch (e) {
+																	}
 																}
 															}
 														}
