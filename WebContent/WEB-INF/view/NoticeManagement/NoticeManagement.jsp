@@ -49,9 +49,9 @@
 						</tr>
 					</tbody>
 				</table>
-				<div id="i_pulse" style="text-align: center;">
+				<!-- <div id="i_pulse" style="text-align: center;">
 					<i class="fa fa-spinner fa-pulse fa-3x"></i>
-				</div>
+				</div> -->
 				<div
 					style="margin: 0 auto; width: 400px; text-align: center;">
 					<button id="button_HomePage" class="btn btn-default"

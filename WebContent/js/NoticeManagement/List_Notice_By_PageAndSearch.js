@@ -2,7 +2,7 @@
 
 function List_Notice_By_PageAndSearch(pageIndex) {
 
-	document.getElementById("i_pulse").style.display = "block";
+	// document.getElementById("i_pulse").style.display = "block";
 
 	/*
 	 * 
@@ -70,9 +70,14 @@ function List_Notice_By_PageAndSearch(pageIndex) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<i class="fa fa-bell-slash" id="'
-							+ notice_json.listNoticeDTO[num].bysjglxt_notice.notice_id
-							+ '" onclick="readNotice(this)" style="cursor: pointer;" ></i>';
+					if (notice_json.listNoticeDTO[num].bysjglxt_notice.notice_state == 2) {
+						new_td.innerHTML = '<i class="fa fa-bell-slash" title="标记为已读" id="'
+								+ notice_json.listNoticeDTO[num].bysjglxt_notice.notice_id
+								+ '" onclick="readNotice(this)" style="cursor: pointer;" ></i>';
+					} else {
+						new_td.innerHTML = '';
+					}
+
 				}
 				/*
 				 * 设置页数
@@ -81,7 +86,7 @@ function List_Notice_By_PageAndSearch(pageIndex) {
 				document.getElementById("span_totalPages").innerHTML = notice_json.totalPages;
 				document.getElementById("span_totalRecords").innerHTML = notice_json.totalRecords;
 				// 让加载图标消失
-				document.getElementById("i_pulse").style.display = "none";
+				// document.getElementById("i_pulse").style.display = "none";
 				// 让全选框取消选择
 				// document.getElementById("checkbox_all_select").checked =
 				// false;

@@ -6,7 +6,8 @@ function readNotice(button) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				List_Notice_By_PageAndSearch(1);
+				List_Notice_By_PageAndSearch(notice_json.pageIndex);
+				List_Navbar_Notice();
 			} else {
 				toastr.error(xhr.status);
 			}
