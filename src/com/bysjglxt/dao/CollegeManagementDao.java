@@ -21,4 +21,10 @@ public interface CollegeManagementDao {
 
 	public void saveObj(Object obj);
 
+	public com.bysjglxt.domain.DO.bysjglxt_college getCollegeByCode(String trim);
+
+	public com.bysjglxt.domain.DO.bysjglxt_college getCollegeByName(String trim);
+
+	public com.bysjglxt.domain.DO.bysjglxt_teacher_basic getTeacherBasicByJobNum(String trim);
+
 }

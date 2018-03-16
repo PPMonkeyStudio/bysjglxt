@@ -83,9 +83,8 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 * 添加学院
 	 */
 	public void addCollege() {
-		System.out.println(college);
 		try {
-			http_response.getWriter().write(collegeManagementService.addCollege(college, bysjglxt_teacher_basic));
+			http_response.getWriter().write(collegeManagementService.addCollege(college, bysjglxt_teacher_basic) + "");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

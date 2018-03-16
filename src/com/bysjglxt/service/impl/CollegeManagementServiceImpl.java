@@ -104,10 +104,48 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 
 	/**
 	 * 添加管理员
+	 * 
+	 * @return -1 数据错误 1 正确
 	 */
 	@Override
 	public int addCollege(bysjglxt_college college, bysjglxt_teacher_basic bysjglxt_teacher_basic) {
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_college bysjglxt_college = new bysjglxt_college();
+		bysjglxt_teacher_basic teacherBasic = new bysjglxt_teacher_basic();
+		if (college.getCollege_code() == null || college.getCollege_code().trim().length() <= 0
+				|| college.getCollege_name() == null || college.getCollege_name().trim().length() <= 0) {
+			// 数据错误
+			return -1;
+		}
+		if (bysjglxt_teacher_basic.getName() == null || bysjglxt_teacher_basic.getName().trim().length() <= 0
+				|| bysjglxt_teacher_basic.getJob_number() == null
+				|| bysjglxt_teacher_basic.getJob_number().trim().length() <= 0) {
+			return -1;
+		}
+		// 根据所填写院系代码以及院系名称进行查询
+		if (college.getCollege_code() != null && college.getCollege_code().trim().length() > 0) {
+			bysjglxt_college = collegeManagementDao.getCollegeByCode(college.getCollege_code().trim());
+			if (bysjglxt_college != null) {
+				// 有重复
+				return -2;
+			}
+		}
+		if (college.getCollege_name() != null && college.getCollege_name().trim().length() > 0) {
+			bysjglxt_college = collegeManagementDao.getCollegeByName(college.getCollege_name().trim());
+			if (bysjglxt_college != null) {
+				// 有重复
+				return -2;
+			}
+		}
+		// 1.根据工号进行排除重复
+		if (bysjglxt_teacher_basic.getJob_number() != null
+				&& bysjglxt_teacher_basic.getJob_number().trim().length() > 0) {
+			teacherBasic = collegeManagementDao.getTeacherBasicByJobNum(bysjglxt_teacher_basic.getJob_number().trim());
+			if (teacherBasic != null) {
+				// 有重复
+				return -2;
+			}
+		}
 		// 添加学院
 		college.setCollege_id(TeamUtil.getUuid());
 		college.setCollege_gmt_create(TeamUtil.getStringSecond());
