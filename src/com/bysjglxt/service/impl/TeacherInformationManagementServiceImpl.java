@@ -239,9 +239,12 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	 * OK
 	 */
 	@Override
-	public boolean remove_TeacherList(List<String> useTeacherIdList) {
+	public boolean remove_TeacherList(List<String> useTeacherIdList, String userId) {
 		boolean flag = false;
 		for (String teacher_user_id : useTeacherIdList) {
+			if (teacher_user_id.equals(userId)) {
+				continue;
+			}
 			bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 			bysjglxt_teacher_user = teacherInformationManagementDao.getStudentById(teacher_user_id);
 			flag = teacherInformationManagementDao

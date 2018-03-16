@@ -42,13 +42,5 @@ public class testteacher {
 		}
 	}
 
-	// 测试删除教师信息
-	@Test
-	public void testttttt() {
-		List<String> re = new ArrayList<String>();
-		re.add("006d1f31-2472-4dd6-955f-bc0534c204ac");
-		boolean flag = teacherInformationManagementService.remove_TeacherList(re);
-		System.out.println(flag);
-	}
 
 }

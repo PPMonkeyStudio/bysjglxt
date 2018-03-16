@@ -65,7 +65,7 @@ public interface TeacherInformationManagementService {
 	 *            由要删除的教师工号组成的列表
 	 * @return 是否删除成功,1是 0否
 	 */
-	public boolean remove_TeacherList(List<String> useTeacherNumList);
+	public boolean remove_TeacherList(List<String> useTeacherNumList,String userId);
 
 	/**
 	 * 遍历得到所有的教研室
