@@ -362,7 +362,7 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		try {
 			Session session = getSession();
 			String hql = "update bysjglxt_teacher_user set user_teacher_password = '" + password
-					+ "',user_teacher_gmt_modified='" + moTime + "' where user_teacger_id='" + user_teacher_id + "'";
+					+ "',user_teacher_gmt_modified='" + moTime + "' where user_teacher_id='" + user_teacher_id + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 		} catch (HibernateException e) {
