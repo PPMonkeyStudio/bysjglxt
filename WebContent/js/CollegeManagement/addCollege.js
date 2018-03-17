@@ -42,7 +42,17 @@ function addCollege() {
 								var message;
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
-										toastr.success("创建成功");
+										switch (xhr.responseText) {
+										case '1':
+											toastr.success("创建成功");
+											break;
+										case '-2':
+											toastr.error("数据重复");
+											break;
+										case '-1':
+											toastr.error("数据错误");
+											break;
+										}
 										jc.close();
 										List_College();
 									} else {

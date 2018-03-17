@@ -140,8 +140,10 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void DeleteTeacher() throws IOException {
-		teacherInformationManagementService.remove_TeacherList(ListTeacherID);
-
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		teacherInformationManagementService.remove_TeacherList(ListTeacherID,
+				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 

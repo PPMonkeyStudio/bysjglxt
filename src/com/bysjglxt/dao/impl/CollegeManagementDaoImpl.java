@@ -37,7 +37,7 @@ public class CollegeManagementDaoImpl implements CollegeManagementDao {
 	}
 
 	// 查找对应学院的管理员老师userId
-	@Override	
+	@Override
 	public List<bysjglxt_teacher_user> getListCollegeAdmin(String college_id) {
 		List<bysjglxt_teacher_user> listTeacherUser = new ArrayList<>();
 		Session session = getSession();
@@ -90,6 +90,47 @@ public class CollegeManagementDaoImpl implements CollegeManagementDao {
 		Session session = getSession();
 		session.saveOrUpdate(obj);
 		session.flush();
+	}
+
+	/**
+	 * 根据学院代码进行查找
+	 */
+	@Override
+	public bysjglxt_college getCollegeByCode(String collegeCode) {
+		bysjglxt_college bysjglxt_college = new bysjglxt_college();
+		Session session = getSession();
+		String hql = "from bysjglxt_college where college_code='" + collegeCode + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_college = (bysjglxt_college) query.uniqueResult();
+		session.clear();
+		return bysjglxt_college;
+	}
+
+	/**
+	 * 根据学院名称进行查找
+	 */
+	@Override
+	public bysjglxt_college getCollegeByName(String collegeName) {
+		bysjglxt_college bysjglxt_college = new bysjglxt_college();
+		Session session = getSession();
+		String hql = "from bysjglxt_college where college_name='" + collegeName + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_college = (bysjglxt_college) query.uniqueResult();
+		session.clear();
+		return bysjglxt_college;
+	}
+	/**
+	 * 根据工号查找教师信息
+	 */
+	@Override
+	public bysjglxt_teacher_basic getTeacherBasicByJobNum(String teacherJobNum) {
+		bysjglxt_teacher_basic bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_basic where job_number='" + teacherJobNum + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_basic = (bysjglxt_teacher_basic) query.uniqueResult();
+		session.clear();
+		return bysjglxt_teacher_basic;
 	}
 
 }
