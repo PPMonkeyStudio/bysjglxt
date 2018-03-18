@@ -119,8 +119,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
 			bysjglxt_notice.setNotice_launch(bysjglxt_teacher_user.getUser_teacher_id());
 			bysjglxt_notice.setNotice_belong(teacher_user2.getUser_teacher_id());
-			bysjglxt_notice.setNotice_content("工号为" + bysjglxt_teacher_user.getUser_teacher_num() + "的老师创建课题\""
-					+ newTopic.getTopic_name_chinese() + "\"，等待审核");
+			bysjglxt_notice.setNotice_content("工号为:" + bysjglxt_teacher_user.getUser_teacher_num() + "的老师创建课题:"
+					+ newTopic.getTopic_name_chinese() + "需要审核");
 			bysjglxt_notice.setNotice_state(2);
 			bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
@@ -179,9 +179,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUser(adminUserId);
 		if (bysjglxt_teacher_user == null) {
-			/*
-			 * 你是个假的江鑫鑫哦
-			 */
 			System.out.println("你是个假的管理员");
 			return false;
 		}
