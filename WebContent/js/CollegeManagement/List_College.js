@@ -40,6 +40,12 @@ function List_College() {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
+					new_td.innerHTML = college_json[num].college.college_code;
+					/*
+					 * 
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
 					new_td.innerHTML = college_json[num].college.college_name;
 					/*
 					 * 
