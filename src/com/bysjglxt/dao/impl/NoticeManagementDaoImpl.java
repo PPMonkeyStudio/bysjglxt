@@ -102,6 +102,7 @@ public class NoticeManagementDaoImpl implements NoticeManagementDao {
 		if (noticeVO.getState() != 0) {
 			hql = hql + " and notice_state = '" + noticeVO.getState() + "'";
 		}
+		hql = hql + " order by notice_state desc,notice_gmt_create desc";
 		Query query = session.createQuery(hql);
 		query.setFirstResult((noticeVO.getPageIndex() - 1) * noticeVO.getPageSize());
 		query.setMaxResults(noticeVO.getPageSize());
