@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-26 20:45:46 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_examination_formal" table="BYSJGLXT_EXAMINATION_FORMAL">
         <id name="examination_formal_id" type="java.lang.String">
@@ -34,6 +34,9 @@
         </property>
         <property name="examination_formal_is_punctuation" type="int">
             <column name="EXAMINATION_FORMAL_IS_PUNCTUATION" />
+        </property>
+        <property name="examination_formal_is_chinese_keyword" type="int">
+            <column name="EXAMINATION_FORMAL_IS_CHINESE_KEYWORD" />
         </property>
         <property name="examination_formal_is_typo" type="int">
             <column name="EXAMINATION_FORMAL_IS_TYPO" />

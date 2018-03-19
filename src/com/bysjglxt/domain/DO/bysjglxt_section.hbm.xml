@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-26 20:45:46 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_section" table="BYSJGLXT_SECTION">
         <id name="section_id" type="java.lang.String">
@@ -13,6 +13,9 @@
         </property>
         <property name="section_leader" type="java.lang.String">
             <column name="SECTION_LEADER" />
+        </property>
+        <property name="section_college_id" type="java.lang.String">
+            <column name="SECTION_COLLEGE_ID" />
         </property>
         <property name="section_gmt_create" type="java.lang.String">
             <column name="SECTION_GMT_CREATE" />

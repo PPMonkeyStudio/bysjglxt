@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="loginOrWriteOffAction" class="com.bysjglxt.action.LoginOrWriteOffAction"
+		scope="prototype">
+		<property name="loginOrWriteOffService" ref="loginOrWriteOffService"></property>
+		<property name="studentInformationManagementService" ref="studentInformationManagementService"></property>
+		<property name="teacherInformationManagementService" ref="teacherInformationManagementService"></property>
+	</bean>
+
+	<bean id="loginOrWriteOffService" class="com.bysjglxt.service.impl.LoginOrWriteOffServiceImpl">
+		<property name="loginOrWriteOffDao" ref="loginOrWriteOffDao"></property>
+	</bean>
+
+	<bean id="loginOrWriteOffDao" class="com.bysjglxt.dao.impl.LoginOrWriteOffDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+
+</beans>

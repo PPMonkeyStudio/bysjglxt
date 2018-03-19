@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-26 20:45:46 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_record_progress" table="BYSJGLXT_RECORD_PROGRESS">
         <id name="record_progress_id" type="java.lang.String">
@@ -23,7 +23,7 @@
         <property name="record_progress_opinion" type="java.lang.String">
             <column name="RECORD_PROGRESS_OPINION" />
         </property>
-        <property name="record_progress_stage" type="int">
+        <property name="record_progress_stage" type="java.lang.String">
             <column name="RECORD_PROGRESS_STAGE" />
         </property>
         <property name="record_progress_gmt_create" type="java.lang.String">

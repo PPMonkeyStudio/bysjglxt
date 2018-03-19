@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2017-10-26 20:45:46 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_student_user" table="BYSJGLXT_STUDENT_USER">
         <id name="user_student_id" type="java.lang.String">
@@ -17,14 +17,23 @@
         <property name="user_student_basic" type="java.lang.String">
             <column name="USER_STUDENT_BASIC" />
         </property>
+        <property name="user_student_is_operate_premission" type="int">
+            <column name="USER_STUDENT_IS_OPERATE_PREMISSION" />
+        </property>
+        <property name="user_student_is_select_topic" type="int">
+            <column name="USER_STUDENT_IS_SELECT_TOPIC" />
+        </property>
+        <property name="user_student_belong_major" type="java.lang.String">
+            <column name="USER_STUDENT_BELONG_MAJOR" />
+        </property>
+        <property name="user_student_belong_college" type="java.lang.String">
+            <column name="USER_STUDENT_BELONG_COLLEGE" />
+        </property>
         <property name="user_student_gmt_create" type="java.lang.String">
             <column name="USER_STUDENT_GMT_CREATE" />
         </property>
         <property name="user_student_gmt_modified" type="java.lang.String">
             <column name="USER_STUDENT_GMT_MODIFIED" />
-        </property>
-        <property name="user_student_is_operate_premission" type="int">
-            <column name="USER_STUDENT_IS_OPERATE_PREMISSION" />
         </property>
     </class>
 </hibernate-mapping>

@@ -4,10 +4,19 @@ public class bysjglxt_taskbook {
 	private String taskbook_id;
 	private String bysjglxt_taskbook_student;
 	private String taskbook_acontent_required;
+	private String taskbook_reference;
 	private String taskbook_plan;
 	private String taskbook_opinion;
 	private String taskbook_gmt_create;
 	private String taskbook_gmt_modified;
+
+	public String getTaskbook_reference() {
+		return taskbook_reference;
+	}
+
+	public void setTaskbook_reference(String taskbook_reference) {
+		this.taskbook_reference = taskbook_reference;
+	}
 
 	public String getTaskbook_id() {
 		return taskbook_id;
@@ -69,9 +78,9 @@ public class bysjglxt_taskbook {
 	public String toString() {
 		return "bysjglxt_taskbook [taskbook_id=" + taskbook_id + ", bysjglxt_taskbook_student="
 				+ bysjglxt_taskbook_student + ", taskbook_acontent_required=" + taskbook_acontent_required
-				+ ", taskbook_plan=" + taskbook_plan + ", taskbook_opinion=" + taskbook_opinion
-				+ ", taskbook_gmt_create=" + taskbook_gmt_create + ", taskbook_gmt_modified=" + taskbook_gmt_modified
-				+ "]";
+				+ ", taskbook_reference=" + taskbook_reference + ", taskbook_plan=" + taskbook_plan
+				+ ", taskbook_opinion=" + taskbook_opinion + ", taskbook_gmt_create=" + taskbook_gmt_create
+				+ ", taskbook_gmt_modified=" + taskbook_gmt_modified + "]";
 	}
 
 }

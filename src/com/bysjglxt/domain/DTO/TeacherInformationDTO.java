@@ -1,5 +1,6 @@
 package com.bysjglxt.domain.DTO;
 
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 
@@ -9,12 +10,20 @@ public class TeacherInformationDTO {
 
 	private bysjglxt_teacher_user bysjglxtTeacherUser;
 
+	private bysjglxt_section bysjglxtSection;
+
 	/*
 	 * 
 	 */
 
 	public bysjglxt_teacher_basic getBysjglxtTeacherBasic() {
 		return bysjglxtTeacherBasic;
+	}
+
+	@Override
+	public String toString() {
+		return "TeacherInformationDTO [bysjglxtTeacherBasic=" + bysjglxtTeacherBasic + ", bysjglxtTeacherUser="
+				+ bysjglxtTeacherUser + ", bysjglxtSection=" + bysjglxtSection + "]";
 	}
 
 	public void setBysjglxtTeacherBasic(bysjglxt_teacher_basic bysjglxtTeacherBasic) {
@@ -29,4 +38,11 @@ public class TeacherInformationDTO {
 		this.bysjglxtTeacherUser = bysjglxtTeacherUser;
 	}
 
+	public bysjglxt_section getBysjglxtSection() {
+		return bysjglxtSection;
+	}
+
+	public void setBysjglxtSection(bysjglxt_section bysjglxtSection) {
+		this.bysjglxtSection = bysjglxtSection;
+	}
 }

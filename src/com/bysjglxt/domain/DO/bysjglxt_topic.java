@@ -2,7 +2,6 @@ package com.bysjglxt.domain.DO;
 
 public class bysjglxt_topic {
 	private String topic_id;
-	private String topic_num;
 	private String topic_name_chinese;
 	private String topic_name_english;
 	private String topic_requirement;
@@ -14,7 +13,16 @@ public class bysjglxt_topic {
 	private String topic_student;
 	private String topic_gmt_create;
 	private String topic_gmt_modified;
-	private int topic_examine_state;
+	private String topic_examine_state;
+	private int topic_student_num;
+
+	public int getTopic_student_num() {
+		return topic_student_num;
+	}
+
+	public void setTopic_student_num(int topic_student_num) {
+		this.topic_student_num = topic_student_num;
+	}
 
 	public String getTopic_id() {
 		return topic_id;
@@ -22,14 +30,6 @@ public class bysjglxt_topic {
 
 	public void setTopic_id(String topic_id) {
 		this.topic_id = topic_id;
-	}
-
-	public String getTopic_num() {
-		return topic_num;
-	}
-
-	public void setTopic_num(String topic_num) {
-		this.topic_num = topic_num;
 	}
 
 	public String getTopic_name_chinese() {
@@ -120,21 +120,23 @@ public class bysjglxt_topic {
 		this.topic_gmt_modified = topic_gmt_modified;
 	}
 
-	public int getTopic_examine_state() {
+	public String getTopic_examine_state() {
 		return topic_examine_state;
 	}
 
-	public void setTopic_examine_state(int topic_examine_state) {
+	public void setTopic_examine_state(String topic_examine_state) {
 		this.topic_examine_state = topic_examine_state;
 	}
 
 	@Override
 	public String toString() {
-		return "bysjglxt_topic [topic_id=" + topic_id + ", topic_num=" + topic_num + ", topic_name_chinese="
-				+ topic_name_chinese + ", topic_name_english=" + topic_name_english + ", topic_requirement="
-				+ topic_requirement + ", topic_source=" + topic_source + ", topic_type=" + topic_type
-				+ ", topic_student_max=" + topic_student_max + ", topic_remark=" + topic_remark + ", topic_teacher="
-				+ topic_teacher + ", topic_student=" + topic_student + ", topic_gmt_create=" + topic_gmt_create
-				+ ", topic_gmt_modified=" + topic_gmt_modified + ", topic_examine_state=" + topic_examine_state + "]";
+		return "bysjglxt_topic [topic_id=" + topic_id + ", topic_name_chinese=" + topic_name_chinese
+				+ ", topic_name_english=" + topic_name_english + ", topic_requirement=" + topic_requirement
+				+ ", topic_source=" + topic_source + ", topic_type=" + topic_type + ", topic_student_max="
+				+ topic_student_max + ", topic_remark=" + topic_remark + ", topic_teacher=" + topic_teacher
+				+ ", topic_student=" + topic_student + ", topic_gmt_create=" + topic_gmt_create
+				+ ", topic_gmt_modified=" + topic_gmt_modified + ", topic_examine_state=" + topic_examine_state
+				+ ", topic_student_num=" + topic_student_num + "]";
 	}
+
 }

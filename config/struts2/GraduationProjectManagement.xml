@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="GraduationProjectManagement" namespace="/graduationProject"
+		extends="struts-default">
+		<action name="GraduationProjectManagement_*"
+			class="com.bysjglxt.action.GraduationProjectManagementAction" method="{1}">
+			<result name="MyGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyGraduationProject.jsp
+			</result>
+			<result name="MyTutorGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyTutorGraduationProject.jsp
+			</result>
+			<result name="MyReviewGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyReviewGraduationProject.jsp
+			</result>
+			<result name="MyManagementGraduationProjectPage">/WEB-INF/view/GraduationProjectManagement/MyManagementGraduationProject.jsp
+			</result>
+			<result name="CollegeCommentPage">/WEB-INF/view/GraduationProjectManagement/CollegeComment.jsp
+			</result>
+			<result name="exportAll" type="stream">
+				<!-- 指定下载文件的类型 -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 返回流 inputName为action中的流变量名称 -->
+				<param name="inputName">inputStream</param>
+				<!-- attachment 这个参数可以设置成下载时是否出现个下载提示框，或者直接打开的。 -->
+				<!-- fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量 -->
+				<param name="contentDisposition">
+					filename=${fileName}
+				</param>
+				<!-- 指定下载文件时的缓冲大小 -->
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="downloadDissertation" type="stream">
+				<!-- 指定下载文件的类型 -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 返回流 inputName为action中的流变量名称 -->
+				<param name="inputName">inputStream</param>
+				<!-- attachment 这个参数可以设置成下载时是否出现个下载提示框，或者直接打开的。 -->
+				<!-- fileName指定生成的文件名字(适合动态生成文件名，比如做报表时，一般都要说是几月的统计数据之类)为action中变量 -->
+				<param name="contentDisposition">
+					filename=${fileName}
+				</param>
+				<!-- 指定下载文件时的缓冲大小 -->
+				<param name="bufferSize">1024</param>
+			</result>
+		</action>
+	</package>
+</struts>
