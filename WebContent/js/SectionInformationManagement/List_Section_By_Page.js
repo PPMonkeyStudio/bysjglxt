@@ -35,8 +35,10 @@ function List_Section_By_Page(pageIndex) {
 					new_tr.appendChild(document.createTextNode(''));
 					table_section.firstElementChild.appendChild(new_tr);
 					new_tr.className = "new_tr";
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (section_json.teacherInformationDTO[num].bysjglxtSection != undefined
 							&& section_json.teacherInformationDTO[num].bysjglxtSection.section_name != undefined) {
@@ -44,8 +46,10 @@ function List_Section_By_Page(pageIndex) {
 					} else {
 						new_td.innerHTML = '无';
 					}
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (section_json.teacherInformationDTO[num].bysjglxtTeacherBasic != undefined
 							&& section_json.teacherInformationDTO[num].bysjglxtTeacherBasic.name != undefined) {
@@ -53,14 +57,18 @@ function List_Section_By_Page(pageIndex) {
 					} else {
 						new_td.innerHTML = '无';
 					}
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<i id="'
 							+ section_json.teacherInformationDTO[num].bysjglxtSection.section_id
 							+ '" style="cursor: pointer;" modal_Section onclick="UpdateSection(this)" class="fa fa-edit "></i>';
+					/*
+					 * 
+					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<label class="fancy-checkbox">'
 							+ '<input id="'

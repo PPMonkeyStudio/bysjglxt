@@ -40,7 +40,24 @@ function List_College() {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
+					new_td.innerHTML = college_json[num].college.college_code;
+					/*
+					 * 
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
 					new_td.innerHTML = college_json[num].college.college_name;
+					/*
+					 * 
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
+					if (college_json[num].teacherInformationDTO == undefined
+							|| college_json[num].teacherInformationDTO.bysjglxtTeacherBasic == undefined) {
+						new_td.innerHTML = '无';
+					} else {
+						new_td.innerHTML = college_json[num].teacherInformationDTO.bysjglxtTeacherBasic.job_number;
+					}
 					/*
 					 * 
 					 */

@@ -46,17 +46,17 @@
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
-							<th>任务名</th>
-							<th>流程定义</th>
-							<th>流程实例</th>
+							<th>任务</th>
+							<th>所属流程</th>
+							<th>流程归属者</th>
 							<th>
 								<select class="form-control" id="select_state"
-									style="width: auto;margin:0 auto;" data-live-search="true"
-									onchange="List_MyTask(1)">
-									<option value="-1">状态（全部）</option>
-									<option value="1">正在进项</option>
-									<option value="2">未开始</option>
-									<option value="3">已结束</option>
+									style="width: auto; margin: 0 auto;"
+									data-live-search="true" onchange="List_MyTask(1)">
+<!-- 									<option value="-1">状态（全部）</option> -->
+									<option value="1" selected="selected">状态（正在进行）</option>
+									<option value="2">状态（未开始）</option>
+									<option value="3">状态（已结束）</option>
 								</select>
 							</th>
 							<th>操作</th>

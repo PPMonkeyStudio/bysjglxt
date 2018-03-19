@@ -14,8 +14,6 @@
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/MajorManagement/List_Major_By_Page.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>js/MajorManagement/Create_Major.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 <title>专业管理</title>
 </head>
@@ -107,7 +105,8 @@
 </body>
 <script type="text/javascript"
 	src="<%=basePath%>js/TeacherInformationManagement/Get_Teacher_Section.js"></script>
-<script>
-	
-</script>
+<script type="text/javascript"
+	src="<%=basePath%>js/MajorManagement/Create_Major.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/MajorManagement/Update_Major.js"></script>
 </html>

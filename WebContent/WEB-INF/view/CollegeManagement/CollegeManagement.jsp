@@ -43,8 +43,10 @@
 					style="text-align: center; margin: 20px 0;">
 					<tbody>
 						<tr>
+							<th>学院代码</th>
 							<th>学院名称</th>
-							<th>管理员</th>
+							<th>管理员工号</th>
+							<th>管理员姓名</th>
 							<th>操作</th>
 							<!-- 							<th> -->
 							<!-- 								<label class="fancy-checkbox"> -->

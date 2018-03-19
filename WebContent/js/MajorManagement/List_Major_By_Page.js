@@ -29,14 +29,12 @@ function List_Major_By_Page(pageIndex) {
 				var new_td;
 				for (var num = 0; num < major_json.listMajorDTO.length; num++) {
 					new_tr = document.createElement("tr");
-					new_tr.appendChild(document.createTextNode(''));
 					table_major.firstElementChild.appendChild(new_tr);
 					new_tr.className = "new_tr";
 					/*
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (major_json.listMajorDTO[num].bysjglxtMajor != undefined
 							&& major_json.listMajorDTO[num].bysjglxtMajor.major_professionalcode != undefined) {
@@ -48,7 +46,6 @@ function List_Major_By_Page(pageIndex) {
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (major_json.listMajorDTO[num].bysjglxtMajor != undefined
 							&& major_json.listMajorDTO[num].bysjglxtMajor.major_name != undefined) {
@@ -60,7 +57,6 @@ function List_Major_By_Page(pageIndex) {
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					if (major_json.listMajorDTO[num].bysjglxtSection != undefined
 							&& major_json.listMajorDTO[num].bysjglxtSection.section_name != undefined) {
@@ -72,14 +68,14 @@ function List_Major_By_Page(pageIndex) {
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = '';
+					new_td.innerHTML = '<i id="'
+							+ major_json.listMajorDTO[num].bysjglxtMajor.major_id
+							+ '" style="cursor: pointer;" modal_Section onclick="Update_Major(this)" class="fa fa-edit "></i>';
 					/*
 					 * 
 					 */
 					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<label class="fancy-checkbox">'
 							+ '<input id="'

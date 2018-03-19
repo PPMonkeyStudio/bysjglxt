@@ -73,6 +73,10 @@ public class MajorManagementAction extends ActionSupport implements ServletRespo
 		http_response.getWriter().write("" + majorManagementService.addMajor(bysjglxtMajor));
 	}
 
+	public void updateMajor() throws IOException {
+		http_response.getWriter().write("" + majorManagementService.updateSection(bysjglxtMajor));
+	}
+
 	// 不要用
 	/*
 	 * public void listSection() throws IOException { GsonBuilder gsonBuilder =
