@@ -62,6 +62,7 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * 分配选题
 	 */
 	private String assignmentStudentUserId;
+	//已更改成学生userId
 	private String assignmentTopicId;
 	private String assignmentReviewTeacherId;
 
