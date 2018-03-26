@@ -1692,8 +1692,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		params.putAll(exportDefence(userId));
 		XwpfTUtil xwpfTUtil = new XwpfTUtil();
 		XWPFDocument doc;
-		String fileNameInResource = ServletActionContext.getServletContext().getRealPath("/DocTmp/ttt.docx");
-		// String fileNamefInResource = "F:\\ttt.docx";
+		String fileNameInResource = ServletActionContext.getServletContext().getRealPath("/DocTmp/graduation.docx");
+		// String fileNamefInResource = "F:\\graduation.docx";
 		InputStream is;
 		is = new FileInputStream(fileNameInResource);
 		// is = new FileInputStream(fileNamefInResource);
