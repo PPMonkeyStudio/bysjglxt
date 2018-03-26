@@ -778,6 +778,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			String sss = "%" + search.trim() + "%";
 			hql = hql + " and studentBasic.student_basic_num like '" + sss + "'";
 		}
+		hql = hql + " order by studentUser.user_student_num";
 		Session session = getSession();
 		Query query = session.createQuery(hql);
 		listUser = query.list();

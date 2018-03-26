@@ -50,7 +50,7 @@
 			<div class="form-group">
 				<input type="email" class="form-control" id="login_username"
 					placeholder="账号">
-			</div>
+			</div> 
 			<div class="form-group">
 				<input type="password" class="form-control" id="login_password"
 					placeholder="密码">
