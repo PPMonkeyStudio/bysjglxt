@@ -466,16 +466,16 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		String num = "";
 		if (bysjglxt_student_user.getUser_student_basic() != null
 				&& bysjglxt_student_user.getUser_student_basic().trim().length() > 0) {
-			studentBasic = topicInformationManagementDao.getStudentBasic(studentID);
+			studentBasic = topicInformationManagementDao.getStudentBasic(bysjglxt_student_user.getUser_student_basic());
 			if (studentBasic != null) {
 				if (studentBasic.getStudent_basic_name() != null
 						&& studentBasic.getStudent_basic_name().trim().length() > 0) {
+					System.out.println(studentBasic);
 					name = studentBasic.getStudent_basic_name().trim();
-					num = studentBasic.getStudent_basic_idcaard();
+					num = studentBasic.getStudent_basic_num().trim();
 				}
 			}
 		}
-
 		bysjglxt_notice
 				.setNotice_content("【" + num + name + "】同学，选了您的课题【" + bysjglxt_topic.getTopic_name_chinese() + "】");
 		bysjglxt_notice.setNotice_state(2);
@@ -827,7 +827,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			if (bysjglxtBasic != null) {
 				if (bysjglxtBasic.getStudent_basic_idcaard() != null
 						&& bysjglxtBasic.getStudent_basic_idcaard().trim().length() > 0) {
-					num = bysjglxtBasic.getStudent_basic_idcaard().trim();
+					num = bysjglxtBasic.getStudent_basic_num().trim();
 				}
 				if (bysjglxtBasic.getStudent_basic_name() != null
 						&& bysjglxtBasic.getStudent_basic_name().trim().length() > 0) {

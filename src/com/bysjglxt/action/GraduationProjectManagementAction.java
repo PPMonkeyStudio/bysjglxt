@@ -229,7 +229,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 			http_response.setContentType("text/html;charset=utf-8");
 			http_response.getWriter().write("导入成功");
 		} catch (Exception e) {
-			System.out.println("导入出错");
 			e.printStackTrace();
 		}
 	}
@@ -672,7 +671,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	public void updateEvaluateTutor() throws IOException {
-		System.out.println("updateEvaluateTutor::::" + updateEvaluateTutor);
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateEvaluateTutor(updateEvaluateTutor) == 1) {
 			http_response.getWriter().write("保存成功");

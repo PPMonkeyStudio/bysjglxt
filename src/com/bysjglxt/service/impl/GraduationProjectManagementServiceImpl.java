@@ -67,7 +67,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public String generateReviewTotalGraduationComment(bysjglxt_evaluate_review bysjglxt_evaluate_review) {
-		System.out.println(bysjglxt_evaluate_review);
 		String comment = "        ";
 		bysjglxt_student_basic bysjglxt_student_basic = new bysjglxt_student_basic();
 		// 根据所属学生获取学生basic表
@@ -233,7 +232,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_comment bysjglxt_comment = new bysjglxt_comment();
 		// 1.根据分数判断等级
 		String grade = TeamUtil.grade(totalGrade, getGrade);
-		System.out.println(grade);
 		// 获取该类别中所有这个等级的评语
 		listComment = graduationProjectManagementDao.getListCommentByGradeAndCategory(commentCategory, grade);
 		// 根据listsize获取某一条
@@ -369,7 +367,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
 			lj = props.getProperty("lj");
 		} catch (Exception e) {
-			System.out.println("获取初始路径失败");
 			e.printStackTrace();
 		}
 		boolean flag = false;
@@ -457,7 +454,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
 			lj = props.getProperty("lj");
 		} catch (Exception e) {
-			System.out.println("获取初始路径失败");
 			e.printStackTrace();
 		}
 		// 1.根据user Id获得学生毕业论文表中的记录
@@ -528,11 +524,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					}
 				}
 			}
-			System.out.println(actor);
 		} else {
 			return teacherTutorStudentVO;
 		}
-
 		// 获得总记录数
 		list_Allbysjglxt_topic_select = graduationProjectManagementDao.getTeacherTutorStudentAllSelectTopic(
 				teacherTutorStudentVO, teacherUserId, actor, section,
@@ -638,7 +632,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					}
 				}
 			} else {
-				System.out.println("学生user表为空");
 			}
 			teacherTutorStudentDTO.setReviewTeacher(teacherInformationDTO);
 			teacherTutorStudentDTO.setProcessBelongDTO(processBelongDTO);
@@ -762,8 +755,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 						taskDTO.setTaskInstance(taskInstance);
 					}
 				}
-			} else {
-				System.out.println("学生user表为空");
 			}
 			teacherTutorStudentDTO.setProcessBelongDTO(processBelongDTO);
 			teacherTutorStudentDTO.setStudentInformationDTO(studentInformationDTO);
@@ -898,8 +889,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 						taskDTO.setTaskInstance(taskInstance);
 					}
 				}
-			} else {
-				System.out.println("学生user表为空");
 			}
 			teacherTutorStudentDTO.setProcessBelongDTO(processBelongDTO);
 			teacherTutorStudentDTO.setStudentInformationDTO(studentInformationDTO);
@@ -1543,7 +1532,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	@Override
 	public bysjglxt_taskbook get_TaskBook(String userId) {
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
-		System.out.println("userId:" + userId);
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskBookByUserId(userId);
 		return bysjglxt_taskbook;
 	}
@@ -1636,7 +1624,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
 			lj = props.getProperty("lj");
 		} catch (Exception e) {
-			System.out.println("获取初始路径失败");
 			e.printStackTrace();
 		}
 		List<File> fileList = new ArrayList<File>();
@@ -1662,7 +1649,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
 			lj = props.getProperty("lj");
 		} catch (Exception e) {
-			System.out.println("获取初始路径失败");
 			e.printStackTrace();
 		}
 		Map<String, Object> params = new HashMap<String, Object>();
