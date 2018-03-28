@@ -47,8 +47,8 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		}
 		return flag;
 	}
-	
-	//弃用
+
+	// 弃用
 	@Override
 	public boolean CreateTopic(bysjglxt_topic newTopic) {
 		boolean flag = true;
@@ -713,12 +713,12 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		session.clear();
 		return bysjglxt_topic_select;
 	}
-
+	
 	@Override
-	public bysjglxt_topic_select getSelectTopicByOwnId(String selectId) {
+	public bysjglxt_topic_select getSelectTopicByOwnId(String topicId) {
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
 		Session session = getSession();
-		String hql = "from bysjglxt_topic_select where topic_select_topic = '" + selectId + "'";
+		String hql = "from bysjglxt_topic_select where topic_select_student = '" + topicId + "'";
 		Query query = session.createQuery(hql);
 		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
 		session.clear();

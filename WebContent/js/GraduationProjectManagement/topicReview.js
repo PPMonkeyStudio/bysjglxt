@@ -28,7 +28,6 @@ function topicReview(button) {
 
 							var select_topicReview = document
 									.getElementById("select_topicReview");
-
 							var formData = new FormData();
 							formData.append("assignmentTopicId", button.id);
 

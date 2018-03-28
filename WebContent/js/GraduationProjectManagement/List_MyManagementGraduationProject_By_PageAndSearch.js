@@ -119,7 +119,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 								+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 								+ '" >毕业设计过程手册</a></li>'
 								+ '<li><a onclick="topicReview(this)" id="'
-								+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].bysjglxtTopic.topic_id
+								+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 								+ '">分配评阅教师</a></li>' + '</div>';
 
 					}

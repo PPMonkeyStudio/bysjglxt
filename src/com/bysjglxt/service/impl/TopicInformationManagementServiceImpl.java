@@ -39,14 +39,14 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 
 	// 添加评阅老师
 	@Override
-	public int assignment(String selectId, String reviewId) {
+	public int assignment(String studentUserId, String reviewId) {
 		boolean flag = false;
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
 		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		// 根据选题Id获取选题表信息
-		bysjglxt_topic_select = topicInformationManagementDao.getSelectTopicByOwnId(selectId);
+		bysjglxt_topic_select = topicInformationManagementDao.getSelectTopicByOwnId(studentUserId);
 		if (bysjglxt_topic_select == null)
 			return -1;
 		bysjglxt_topic_select.setTopic_select_teacher_review(reviewId);
@@ -73,6 +73,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				}
 			}
 		}
+		
 		return 1;
 	}
 
