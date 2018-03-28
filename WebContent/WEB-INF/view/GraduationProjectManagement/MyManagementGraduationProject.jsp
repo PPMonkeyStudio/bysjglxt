@@ -37,7 +37,7 @@
 			</div>
 			<div class="panel-body">
 				<div style="width: 100%; float: left;">
-					<button class="btn btn-default"
+					<button class="btn btn-default" id="button_Start_GraduationProject_All"
 						onclick="Start_GraduationProject_All()">
 						<i class="fa fa-bug"></i>
 						开启所有符合条件的毕业设计流程
