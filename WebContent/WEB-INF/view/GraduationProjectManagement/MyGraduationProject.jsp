@@ -144,85 +144,85 @@
 					<div class="navbar-inner">
 						<div class="container" style="width: 100%;">
 							<!--  -->
-							<!-- 							<div id="panel-scrolling-demo" class="panel"> -->
-							<div class="panel-body">
-								<!--  -->
-								<ul>
-									<li>
-										<a href="#tab1" data-toggle="tab"
-											id="banner_Taskbook_Teacher">1.指导老师完成任务书</a>
-									</li>
-									<li>
-										<a href="#tab2" data-toggle="tab"
-											id="banner_Taskbook_Section">2.教研室主任填写任务书审核意见</a>
-									</li>
-									<li>
-										<a href="#tab3" data-toggle="tab"
-											id="banner_report_opening">3.学生完成开题报告</a>
-									</li>
-									<li>
-										<a href="#tab4" data-toggle="tab"
-											id="banner_RecordProgress_1_Student">4.学生完成进展情况记录（前期准备阶段）</a>
-									</li>
-									<li>
-										<a href="#tab5" data-toggle="tab"
-											id="banner_RecordProgress_1_Teacher">5.指导老师填写进展情况意见（前期准备阶段）</a>
-									</li>
-									<li>
-										<a href="#tab6" data-toggle="tab"
-											id="banner_RecordProgress_2_Student">6.学生完成进展情况记录（撰写阶段）</a>
-									</li>
-									<li>
-										<a href="#tab7" data-toggle="tab"
-											id="banner_RecordProgress_2_Teacher">7.指导老师填写进展情况意见（撰写阶段）</a>
-									</li>
-									<li>
-										<a href="#tab8" data-toggle="tab"
-											id="banner_RecordProgress_3_Student">8.学生完成进展情况记录（中期自查阶段）</a>
-									</li>
-									<li>
-										<a href="#tab9" data-toggle="tab"
-											id="banner_RecordProgress_3_Teacher">9.指导老师填写进展情况意见（中期自查阶段）</a>
-									</li>
-									<li>
-										<a href="#tab10" data-toggle="tab"
-											id="banner_RecordProgress_4_Student">10.学生完成进展情况记录（完善阶段）</a>
-									</li>
-									<li>
-										<a href="#tab11" data-toggle="tab"
-											id="banner_RecordProgress_4_Teacher">11.指导老师填写进展情况意见（完善阶段）</a>
-									</li>
-									<li>
-										<a href="#tab12" data-toggle="tab"
-											id="banner_summary_student">12.学生完成个人学习总结</a>
-									</li>
-									<li>
-										<a href="#tab13" data-toggle="tab"
-											id="banner_summary_teacher">13.指导老师填写个人学习总结意见</a>
-									</li>
-									<li>
-										<a href="#tab14" data-toggle="tab"
-											id="banner_dissertation">14.学生提交答辩论文</a>
-									</li>
-									<li>
-										<a href="#tab15" data-toggle="tab"
-											id="banner_examination_formal_teacher">15.指导老师填写形式审查表</a>
-									</li>
-									<li>
-										<a href="#tab16" data-toggle="tab"
-											id="banner_examination_formal_leader">16.领导小组长填写形式审查表(核查)</a>
-									</li>
-									<li>
-										<a href="#tab17" data-toggle="tab"
-											id="banner_evaluate_tutor">17.指导老师填写评价审阅表</a>
-									</li>
-									<li>
-										<a href="#tab18" data-toggle="tab"
-											id="banner_evaluate_review">18.评阅老师填写评阅审查表</a>
-									</li>
-								</ul>
+							<div id="panel-scrolling-demo" class="panel">
+								<div class="panel-body">
+									<!--  -->
+									<ul>
+										<li>
+											<a href="#tab1" data-toggle="tab"
+												id="banner_Taskbook_Teacher">1.指导老师完成任务书</a>
+										</li>
+										<li>
+											<a href="#tab2" data-toggle="tab"
+												id="banner_Taskbook_Section">2.教研室主任填写任务书审核意见</a>
+										</li>
+										<li>
+											<a href="#tab3" data-toggle="tab"
+												id="banner_report_opening">3.学生完成开题报告</a>
+										</li>
+										<li>
+											<a href="#tab4" data-toggle="tab"
+												id="banner_RecordProgress_1_Student">4.学生完成进展情况记录（前期准备阶段）</a>
+										</li>
+										<li>
+											<a href="#tab5" data-toggle="tab"
+												id="banner_RecordProgress_1_Teacher">5.指导老师填写进展情况意见（前期准备阶段）</a>
+										</li>
+										<li>
+											<a href="#tab6" data-toggle="tab"
+												id="banner_RecordProgress_2_Student">6.学生完成进展情况记录（撰写阶段）</a>
+										</li>
+										<li>
+											<a href="#tab7" data-toggle="tab"
+												id="banner_RecordProgress_2_Teacher">7.指导老师填写进展情况意见（撰写阶段）</a>
+										</li>
+										<li>
+											<a href="#tab8" data-toggle="tab"
+												id="banner_RecordProgress_3_Student">8.学生完成进展情况记录（中期自查阶段）</a>
+										</li>
+										<li>
+											<a href="#tab9" data-toggle="tab"
+												id="banner_RecordProgress_3_Teacher">9.指导老师填写进展情况意见（中期自查阶段）</a>
+										</li>
+										<li>
+											<a href="#tab10" data-toggle="tab"
+												id="banner_RecordProgress_4_Student">10.学生完成进展情况记录（完善阶段）</a>
+										</li>
+										<li>
+											<a href="#tab11" data-toggle="tab"
+												id="banner_RecordProgress_4_Teacher">11.指导老师填写进展情况意见（完善阶段）</a>
+										</li>
+										<li>
+											<a href="#tab12" data-toggle="tab"
+												id="banner_summary_student">12.学生完成个人学习总结</a>
+										</li>
+										<li>
+											<a href="#tab13" data-toggle="tab"
+												id="banner_summary_teacher">13.指导老师填写个人学习总结意见</a>
+										</li>
+										<li>
+											<a href="#tab14" data-toggle="tab"
+												id="banner_dissertation">14.学生提交答辩论文</a>
+										</li>
+										<li>
+											<a href="#tab15" data-toggle="tab"
+												id="banner_examination_formal_teacher">15.指导老师填写形式审查表</a>
+										</li>
+										<li>
+											<a href="#tab16" data-toggle="tab"
+												id="banner_examination_formal_leader">16.领导小组长填写形式审查表(核查)</a>
+										</li>
+										<li>
+											<a href="#tab17" data-toggle="tab"
+												id="banner_evaluate_tutor">17.指导老师填写评价审阅表</a>
+										</li>
+										<li>
+											<a href="#tab18" data-toggle="tab"
+												id="banner_evaluate_review">18.评阅老师填写评阅审查表</a>
+										</li>
+									</ul>
+								</div>
 							</div>
-							<!-- 							</div> -->
 						</div>
 					</div>
 				</div>
@@ -293,6 +293,7 @@
 	<!---------------------------------------------------------------------------------------------------->
 </body>
 <script>
+	
 </script>
 <script>
 	$(document).ready(function() {
@@ -399,5 +400,6 @@
 </script>
 <link rel="stylesheet" href="<%=basePath%>css/square/blue.css" />
 <script type="text/javascript" src="<%=basePath%>js/icheck.js"></script>
-<script type="text/javascript" src="<%=basePath%>js/GraduationProjectManagement/exportGraduation.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/exportGraduation.js"></script>
 </html>

@@ -481,7 +481,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser  ";
@@ -494,7 +494,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
@@ -509,7 +509,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ "bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance";
 				hql = hql
 						+ " where topicSelect.topic_select_topic = topic.topic_id and processInstance.process_instance_man = topicSelect.topic_select_student)";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 3:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser ";
@@ -522,7 +522,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			}
 			break;
@@ -536,7 +536,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser  ";
@@ -548,7 +548,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
@@ -562,7 +562,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ "bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance";
 				hql = hql
 						+ " where topicSelect.topic_select_topic = topic.topic_id and processInstance.process_instance_man = topicSelect.topic_select_student)";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 3:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser ";
@@ -574,7 +574,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			}
 			break;
@@ -588,7 +588,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser  ";
@@ -600,7 +600,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
@@ -614,7 +614,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ "bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance";
 				hql = hql
 						+ " where topicSelect.topic_select_topic = topic.topic_id and processInstance.process_instance_man = topicSelect.topic_select_student)";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 3:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser ";
@@ -626,7 +626,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			}
 			break;
@@ -641,7 +641,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
 				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser,bysjglxt_process_instance processInstance ";
@@ -654,7 +654,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
 				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser"
@@ -669,7 +669,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ "bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance";
 				hql = hql
 						+ " where topicSelect.topic_select_topic = topic.topic_id and processInstance.process_instance_man = topicSelect.topic_select_student)";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 3:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser ";
@@ -682,7 +682,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
 				hql = hql + " and topicSelect.topic_select_teacher_tutor='" + teacherUserId + "'";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			}
 			break;
@@ -698,7 +698,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser  ";
@@ -710,7 +710,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_student_user studentUser "
@@ -724,7 +724,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ "bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance";
 				hql = hql
 						+ " where topicSelect.topic_select_topic = topic.topic_id and processInstance.process_instance_man = topicSelect.topic_select_student)";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 3:
 				hql = "select topicSelect from bysjglxt_teacher_user teacherUser,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance,bysjglxt_student_user studentUser ";
@@ -736,7 +736,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			}
 			break;
@@ -751,10 +751,14 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				for (bysjglxt_major bysjglxt_major : listMajor) {
-					hql = hql + " and (studentUser.user_student_belong_major='" + bysjglxt_major.getMajor_id() + "')";
+				hql = hql + "and( ";
+				for (int i = 0; i < listMajor.size(); i++) {
+					hql = hql + "studentUser.user_student_belong_major='" + listMajor.get(i).getMajor_id() + "' ";
+					if (i != listMajor.size() - 1) {
+						hql = hql + "or ";
+					}
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + ") order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
@@ -764,31 +768,40 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ " and process_instance_state='活动' ";
 				hql = hql
 						+ " and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1  ";
-				for (bysjglxt_major bysjglxt_major : listMajor) {
-					hql = hql + " and (studentUser.user_student_belong_major='" + bysjglxt_major.getMajor_id() + "')";
-				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "and( ";
+				for (int i = 0; i < listMajor.size(); i++) {
+					hql = hql + "studentUser.user_student_belong_major='" + listMajor.get(i).getMajor_id() + "' ";
+					if (i != listMajor.size() - 1) {
+						hql = hql + "or ";
+					}
+				}
+				hql = hql + ") order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
+
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
 						+ " where studentUser.user_student_belong_college='" + college
 						+ "' and topicSelect.topic_select_topic = topic.topic_id  and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1 ";
-				for (bysjglxt_major bysjglxt_major : listMajor) {
-					hql = hql + " and (studentUser.user_student_belong_major='" + bysjglxt_major.getMajor_id() + "')";
-				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + " and topicSelect.topic_select_id not in(select topicSelect.topic_select_id from "
+				hql = hql + "and( ";
+				for (int i = 0; i < listMajor.size(); i++) {
+					hql = hql + "studentUser.user_student_belong_major='" + listMajor.get(i).getMajor_id() + "' ";
+					if (i != listMajor.size() - 1) {
+						hql = hql + "or ";
+					}
+				}
+				hql = hql + ") and topicSelect.topic_select_id not in(select topicSelect.topic_select_id from "
 						+ "bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance";
 				hql = hql
 						+ " where topicSelect.topic_select_topic = topic.topic_id and processInstance.process_instance_man = topicSelect.topic_select_student)";
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			case 3:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
@@ -796,14 +809,18 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ "' and topicSelect.topic_select_topic = topic.topic_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
 						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1 ";
-				for (bysjglxt_major bysjglxt_major : listMajor) {
-					hql = hql + " and (studentUser.user_student_belong_major='" + bysjglxt_major.getMajor_id() + "')";
-				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "and( ";
+				for (int i = 0; i < listMajor.size(); i++) {
+					hql = hql + "studentUser.user_student_belong_major='" + listMajor.get(i).getMajor_id() + "' ";
+					if (i != listMajor.size() - 1) {
+						hql = hql + "or ";
+					}
+				}
+				hql = hql + ") order by studentUser.user_student_num,topicSelect.topic_select_gmt_create";
 				break;
 			}
 			break;
@@ -1154,14 +1171,19 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 				hql = "select topicSelect from bysjglxt_topic_select topicSelect,bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic "
 						+ "where studentUser.user_student_belong_college='" + college
 						+ "' and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1 ";
+
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				for (bysjglxt_major bysjglxt_major : listMajor) {
-					hql = hql + " and (studentUser.user_student_belong_major='" + bysjglxt_major.getMajor_id() + "')";
+				hql = hql + "and( ";
+				for (int i = 0; i < listMajor.size(); i++) {
+					hql = hql + "studentUser.user_student_belong_major='" + listMajor.get(i).getMajor_id() + "' ";
+					if (i != listMajor.size() - 1) {
+						hql = hql + "or ";
+					}
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + ") order by topicSelect.topic_select_gmt_create";
 				break;
 			case 1:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance ";
@@ -1171,27 +1193,35 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ " and process_instance_state='活动' ";
 				hql = hql
 						+ " and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1  ";
-				for (bysjglxt_major bysjglxt_major : listMajor) {
-					hql = hql + " and (studentUser.user_student_belong_major='" + bysjglxt_major.getMajor_id() + "')";
-				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "and( ";
+				for (int i = 0; i < listMajor.size(); i++) {
+					hql = hql + "studentUser.user_student_belong_major='" + listMajor.get(i).getMajor_id() + "' ";
+					if (i != listMajor.size() - 1) {
+						hql = hql + "or ";
+					}
+				}
+				hql = hql + ") order by topicSelect.topic_select_gmt_create";
 				break;
 			case 2:
 				hql = "select topicSelect from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect,bysjglxt_topic topic"
 						+ " where studentUser.user_student_belong_college='" + college
 						+ "' and topicSelect.topic_select_topic = topic.topic_id  and topicSelect.topic_select_student=studentUser.user_student_id and studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_is_operate_premission=1 ";
-				for (bysjglxt_major bysjglxt_major : listMajor) {
-					hql = hql + " and (studentUser.user_student_belong_major='" + bysjglxt_major.getMajor_id() + "')";
-				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + " and topicSelect.topic_select_id not in(select topicSelect.topic_select_id from "
+				hql = hql + "and( ";
+				for (int i = 0; i < listMajor.size(); i++) {
+					hql = hql + "studentUser.user_student_belong_major='" + listMajor.get(i).getMajor_id() + "' ";
+					if (i != listMajor.size() - 1) {
+						hql = hql + "or ";
+					}
+				}
+				hql = hql + ") and topicSelect.topic_select_id not in(select topicSelect.topic_select_id from "
 						+ "bysjglxt_topic_select topicSelect,bysjglxt_topic topic,bysjglxt_process_instance processInstance";
 				hql = hql
 						+ " where topicSelect.topic_select_topic = topic.topic_id and processInstance.process_instance_man = topicSelect.topic_select_student)";
@@ -1203,14 +1233,18 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 						+ "' and topicSelect.topic_select_topic = topic.topic_id and"
 						+ "  processInstance.process_instance_man = topicSelect.topic_select_student "
 						+ " and process_instance_state='结束' and studentUser.user_student_is_operate_premission=1 ";
-				for (bysjglxt_major bysjglxt_major : listMajor) {
-					hql = hql + " and (studentUser.user_student_belong_major='" + bysjglxt_major.getMajor_id() + "')";
-				}
 				if (teacherTutorStudentVO.getSearch() != null
 						&& teacherTutorStudentVO.getSearch().trim().length() > 0) {
 					hql = hql + " and studentUser.user_student_num like '%" + teacherTutorStudentVO.getSearch() + "%' ";
 				}
-				hql = hql + "order by topicSelect.topic_select_gmt_create";
+				hql = hql + "and( ";
+				for (int i = 0; i < listMajor.size(); i++) {
+					hql = hql + "studentUser.user_student_belong_major='" + listMajor.get(i).getMajor_id() + "' ";
+					if (i != listMajor.size() - 1) {
+						hql = hql + "or ";
+					}
+				}
+				hql = hql + ") order by topicSelect.topic_select_gmt_create";
 				break;
 			}
 			break;
