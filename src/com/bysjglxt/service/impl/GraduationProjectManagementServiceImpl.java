@@ -2,6 +2,7 @@ package com.bysjglxt.service.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -315,9 +316,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		graduationProjectManagementDao.saveObj(comment);
 	}
 
-	// 导入评语
+	// 评语预览
 	@Override
-	public int saveComment(File commentExcel, String EXCEL_CommentFileName, String userId) throws Exception {
+	public List<bysjglxt_comment> previewComment(File commentExcel, String EXCEL_CommentFileName) throws Exception {
 		String houzhui = EXCEL_CommentFileName.substring(EXCEL_CommentFileName.lastIndexOf(".") + 1);
 		FileInputStream input = new FileInputStream(commentExcel);
 		List<Map<String, Object>> list = null;
@@ -329,8 +330,14 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			list = ExcelToBean2.parseExcel(workbook, "bysjglxt_comment");
 		}
 		List<bysjglxt_comment> lists = ExcelToBean2.toObjectPerproList(list, bysjglxt_comment.class);
+		return lists;
+	}
+
+	// 存储评语
+	@Override
+	public int saveComment(List<bysjglxt_comment> listComment, String userId) throws Exception {
 		String college = getCollegeByUserId(userId);
-		for (bysjglxt_comment comment : lists) {
+		for (bysjglxt_comment comment : listComment) {
 			comment.setComment_id(TeamUtil.getUuid());
 			comment.setComment_college(college);
 			comment.setComment_gmt_create(TeamUtil.getStringSecond());
