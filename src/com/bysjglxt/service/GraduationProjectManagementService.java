@@ -56,7 +56,7 @@ public interface GraduationProjectManagementService {
 	public void deleteListComment(List<String> listCommentId);
 
 	// 导入评语
-	public int saveComment(File commentExcel, String EXCEL_CommentFileName, String userId) throws Exception;
+	public int saveComment(List<bysjglxt_comment> listComment, String userId) throws Exception;
 
 	// 添加单条评语
 	public void saveNewComment(bysjglxt_comment comment, String user_teacher_id);
@@ -436,5 +436,14 @@ public interface GraduationProjectManagementService {
 	 * 导出答辩评分表
 	 */
 	public Map<String, Object> exportDefence(String studentUserId);
+	
+	/**
+	 * 预览评语
+	 * @param eXCEL_Comment
+	 * @param eXCEL_CommentFileName
+	 * @return
+	 * @throws Exception 
+	 */
+	public List<bysjglxt_comment> previewComment(File eXCEL_Comment, String eXCEL_CommentFileName) throws Exception;
 
 }

@@ -37,15 +37,6 @@ public class testGraduation {
 				graduationProjectManagementService.generateTutorTotalGraduationComment(bysjglxt_evaluate_tutor));
 	}
 
-	@Test
-	public void fdfddf() {
-		try {
-			graduationProjectManagementService.saveComment(new File("F:\\11221.xlsx"), "11221.xlsx",
-					"bc1e8e7f-c8e8-4518-bb6f-fca8c9664d1f");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	// 测试保存毕业论文
 	@Test
