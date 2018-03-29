@@ -44,7 +44,8 @@
 							<i class="fa fa-plus-square"></i>
 							创建评语
 						</button>
-						<button class="btn btn-default">
+						<button class="btn btn-default" data-toggle="modal"
+							data-target="#modal_excel">
 							<i class="fa fa-upload"></i>
 							通过Excel导入评语
 						</button>
@@ -94,7 +95,7 @@
 								</select>
 							</th>
 
-							<th>
+							<th style="width: 100px;">
 								<label class="fancy-checkbox">
 									<input id="checkbox_all_select" type="checkbox"
 										onclick="all_select()">
@@ -151,7 +152,61 @@
 		<!--  -->
 
 	</div>
-
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!-------excel模态框------->
+	<div class="modal fade " id="modal_excel" data-keyboard="true"
+		tabindex="-1">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<!-- 模态弹出窗内容 -->
+				<!--弹出框头部，一般使用“modal-header”表示，主要包括标题和关闭按钮-->
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">通过Excel导入评语</h4>
+				</div>
+				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
+				<div class="modal-body">
+					<input id="input_upload_comment_excel" type="file"
+						onchange="Preview_Comment_EXCEL(this)">
+					<!--  -->
+					<div
+						style="width: 100%; max-height: 400px; min-height: 0px; overflow-x: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; border: 1px solid #ddd;">
+						<table id="table_excel_comment"
+							class="table table-bordered table-hover"
+							style="text-align: center;">
+							<tbody></tbody>
+						</table>
+					</div>
+					<!--  -->
+					<div id="i_pulse_2"
+						style="text-align: center; display: none;">
+						<i class="fa fa-spinner fa-pulse fa-3x"></i>
+					</div>
+				</div>
+				<!--弹出框脚部，一般使用“modal-footer”表示，主要放置操作按钮-->
+				<div class="modal-footer">
+					<button class="btn btn-danger"
+						onclick="remove_Preview_Comment_EXCEL()">
+						<i class="fa fa-trash-o"></i>
+						重置数据
+					</button>
+					<button class="btn btn-default"
+						onclick="Save_Comment_EXCEL()">
+						<i class="fa fa-check"></i>
+						确认导入
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
+	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
@@ -163,5 +218,7 @@
 	src="<%=basePath%>js/GraduationProjectManagement/saveNewComment.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/delete_comment.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Save_Comment_EXCEL.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 </html>

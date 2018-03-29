@@ -67,6 +67,7 @@ public class MajorManagementAction extends ActionSupport implements ServletRespo
 
 	// 手动添加专业
 	public void addMajor() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
 		// 1成功添加
 		// -1数据问题
 		// -2添加失败
@@ -74,6 +75,7 @@ public class MajorManagementAction extends ActionSupport implements ServletRespo
 	}
 
 	public void updateMajor() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("" + majorManagementService.updateSection(bysjglxtMajor));
 	}
 

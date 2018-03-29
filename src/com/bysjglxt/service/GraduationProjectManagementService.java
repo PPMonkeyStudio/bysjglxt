@@ -25,14 +25,15 @@ public interface GraduationProjectManagementService {
 	 * 
 	 */
 	public String generateReviewTotalGraduationComment(bysjglxt_evaluate_review bysjglxt_evaluate_review);
-	
+
 	/**
 	 * 组合指导老师评语
 	 */
 	public String generateTutorTotalGraduationComment(bysjglxt_evaluate_tutor evaluateTutor);
-	
+
 	/**
 	 * 生成单条评语
+	 * 
 	 * @param commentCategory
 	 * @param getGrade
 	 * @param totalGrade
@@ -55,7 +56,7 @@ public interface GraduationProjectManagementService {
 	public void deleteListComment(List<String> listCommentId);
 
 	// 导入评语
-	public int saveComment(File studentExcel, String EXCEL_StudentFileName, String userId) throws Exception;
+	public int saveComment(File commentExcel, String EXCEL_CommentFileName, String userId) throws Exception;
 
 	// 添加单条评语
 	public void saveNewComment(bysjglxt_comment comment, String user_teacher_id);

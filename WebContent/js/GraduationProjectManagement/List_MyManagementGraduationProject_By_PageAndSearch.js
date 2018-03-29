@@ -90,8 +90,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 
-					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
-							|| myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition == null) {
+					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance == null) {
 						new_td.innerHTML = '<span class="label label-primary">未开始</span>';
 					} else if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "结束") {
 						new_td.innerHTML = '<span class="label label-default">结束</span>';
@@ -128,8 +127,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO != null
-							&& myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskDefinition != null) {
+					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance != null) {
 						if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].processBelongDTO.bysjglxt_process_instance.process_instance_state == "结束") {
 
 							if (userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_recorder == 1

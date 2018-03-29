@@ -189,7 +189,7 @@
 						<span aria-hidden="true">&times;</span>
 						<span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title">通过Excel导入</h4>
+					<h4 class="modal-title">通过Excel导入学生</h4>
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">

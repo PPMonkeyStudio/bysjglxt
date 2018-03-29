@@ -15,7 +15,14 @@ function passTask(button) {
 								var message;
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
-										window.location = '/bysjglxt/process/ProcessManagement_MyTask';
+										if (xhr.responseText != "success") {
+											toastr.error(xhr.responseText);
+										} else {
+											/*
+											 * 我忘记我为何要刷新页面，好像是因为有东西要刷新才能保证
+											 */
+											window.location = '/bysjglxt/process/ProcessManagement_MyTask';
+										}
 									} else {
 										toastr.error(xhr.status);
 									}
