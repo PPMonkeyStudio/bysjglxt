@@ -34,6 +34,9 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	private bysjglxt_teacher_basic bysjglxt_teacher_basic;
 	private bysjglxt_college college;
 
+	/*
+	 * 
+	 */
 	/**
 	 * 
 	 * @return 'webString'

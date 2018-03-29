@@ -221,6 +221,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * 导入评语
 	 */
 	public void saveComment() {
+		System.out.println(EXCEL_CommentFileName);
 		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
 				.get("userTeacherDTO");
 		try {
