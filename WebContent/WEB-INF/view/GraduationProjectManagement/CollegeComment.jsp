@@ -220,5 +220,9 @@
 	src="<%=basePath%>js/GraduationProjectManagement/delete_comment.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Save_Comment_EXCEL.js"></script>
+	<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Preview_Comment_EXCEL.js"></script>
+	<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/remove_Preview_Comment_EXCEL.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 </html>

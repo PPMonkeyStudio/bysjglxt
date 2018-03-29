@@ -100,8 +100,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 	/*
 	 * 
 	 */
-	//评语列表
-	private	List<bysjglxt_comment> listComment;
+	// 评语列表
+	private List<bysjglxt_comment> listComment;
 	private String DissertationUserID;
 	private CommentInformationVO commentInformationVO;
 	private List<String> listStringUse;
@@ -222,7 +222,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	/**
 	 * 预览评语
 	 */
-	private void getPreviewListComment(){
+	public void getPreviewListComment() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
@@ -234,7 +234,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 存储评语
 	 */
@@ -1059,6 +1059,5 @@ public class GraduationProjectManagementAction extends ActionSupport
 	public void setListComment(List<bysjglxt_comment> listComment) {
 		this.listComment = listComment;
 	}
-	
 
 }
