@@ -73,27 +73,22 @@ public class MajorManagementServiceImpl implements MajorManagementService {
 		bysjglxt_major oldMajor = new bysjglxt_major();
 		if (major.getMajor_name() == null || major.getMajor_name().trim().length() <= 0) {
 			// 传到后台的数据有误
-			System.out.println("1");
 			return -1;
 		}
 		if (major.getMajor_professionalcode() == null || major.getMajor_professionalcode().trim().length() <= 0) {
-			System.out.println("2");
 			return -1;
 		}
 		if (major.getMajor_belong_section() == null || major.getMajor_belong_section().trim().length() <= 0) {
-			System.out.println("3");
 			return -1;
 		}
 		// 其中专业代码以及专业名称不能重复
 		// 根据专业名称进行查找
 		oldMajor = majorManagementDao.getMajorByName(major.getMajor_name().trim());
 		if (oldMajor != null) {
-			System.out.println("4");
 			return -1;
 		}
 		oldMajor = majorManagementDao.getMajorByProfrssional(major.getMajor_professionalcode().trim());
 		if (oldMajor != null) {
-			System.out.println("5");
 			return -1;
 		}
 		major.setMajor_id(TeamUtil.getUuid());
@@ -173,7 +168,6 @@ public class MajorManagementServiceImpl implements MajorManagementService {
 		bysjglxt_major.setMajor_name(major.getMajor_name());
 		bysjglxt_major.setMajor_professionalcode(major.getMajor_professionalcode());
 		bysjglxt_major.setMajor_gmt_modified(TeamUtil.getStringSecond());
-		System.out.println(bysjglxt_major);
 		return majorManagementDao.addObject(bysjglxt_major);
 	}
 

@@ -110,7 +110,6 @@ public class StudentInformationManagementAction extends ActionSupport
 		try {
 			http_response.getWriter().write(gson.toJson(exportGeaduationStudentDTO));
 		} catch (IOException e) {
-			System.out.println("遍历可导出毕业设计过程管理手册学生出错");
 			e.printStackTrace();
 		}
 	}
