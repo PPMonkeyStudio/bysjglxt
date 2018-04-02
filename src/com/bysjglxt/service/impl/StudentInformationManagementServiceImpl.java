@@ -73,6 +73,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		System.out.println("college:" + college);
 		for (bysjglxt_student_basic bysjglxt_student_basic : studentBasicList) {
 			bysjglxt_student_user = new bysjglxt_student_user();
+			bysjglxt_major = new bysjglxt_major();
 			/**
 			 * 根据学号判断该学生 是否存在，若存在则不进行保存
 			 */
@@ -111,7 +112,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			bysjglxt_student_user.setUser_student_belong_college(college);
 			bysjglxt_student_user.setUser_student_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_student_user.setUser_student_gmt_modified(bysjglxt_student_user.getUser_student_gmt_create());
-			System.out.println("------cunchu");
 			flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
 			if (!flag)
 				break;

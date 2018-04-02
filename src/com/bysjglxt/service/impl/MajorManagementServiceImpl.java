@@ -169,9 +169,11 @@ public class MajorManagementServiceImpl implements MajorManagementService {
 				return -1;
 			}
 		}
+		bysjglxt_major.setMajor_belong_section(major.getMajor_belong_section());
 		bysjglxt_major.setMajor_name(major.getMajor_name());
 		bysjglxt_major.setMajor_professionalcode(major.getMajor_professionalcode());
 		bysjglxt_major.setMajor_gmt_modified(TeamUtil.getStringSecond());
+		System.out.println(bysjglxt_major);
 		return majorManagementDao.addObject(bysjglxt_major);
 	}
 
