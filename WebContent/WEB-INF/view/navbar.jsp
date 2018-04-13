@@ -119,10 +119,6 @@
 							<a
 								href="<%=basePath%>major/MajorManagement_MajorManagementPage">专业管理</a>
 						</li>
-						<li class="college_control">
-							<a
-								href="<%=basePath%>graduationProject/GraduationProjectManagement_CollegeCommentPage">评语管理</a>
-						</li>
 					</ul>
 				</li>
 				<!--  -->
@@ -182,7 +178,10 @@
 							<a
 								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyGraduationProjectPage">我的毕业设计</a>
 						</li>
-
+						<li class="college_control">
+							<a
+								href="<%=basePath%>graduationProject/GraduationProjectManagement_CollegeCommentPage">评语管理</a>
+						</li>
 						<!-- 						<li class="student_control"> -->
 						<!-- 							<a -->
 						<%-- 								href="<%=basePath%>graduationProject/GraduationProjectManagement_exportAll">导出我的毕业设计</a> --%>

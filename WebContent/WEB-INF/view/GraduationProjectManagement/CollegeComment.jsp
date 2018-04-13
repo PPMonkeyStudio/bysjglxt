@@ -171,8 +171,17 @@
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">
+					<button class="btn btn-default" onclick="import_click()"
+						style="margin: 10px 0;">选择文件</button>
 					<input id="input_upload_comment_excel" type="file"
-						onchange="Preview_Comment_EXCEL(this)">
+						onchange="Preview_Comment_EXCEL(this)"
+						style="display: none;">
+					<script type="text/javascript">
+						function import_click() {
+							document.getElementById(
+									"input_upload_comment_excel").click();
+						}
+					</script>
 					<!--  -->
 					<div
 						style="width: 100%; max-height: 400px; min-height: 0px; overflow-x: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; border: 1px solid #ddd;">
@@ -220,9 +229,9 @@
 	src="<%=basePath%>js/GraduationProjectManagement/delete_comment.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Save_Comment_EXCEL.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Preview_Comment_EXCEL.js"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/remove_Preview_Comment_EXCEL.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 </html>

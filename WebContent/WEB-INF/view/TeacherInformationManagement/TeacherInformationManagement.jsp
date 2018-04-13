@@ -65,7 +65,7 @@
 							<th>姓名</th>
 							<th>
 								<select class="form-control" id="select_sex"
-									style="width: auto;margin:0 auto;"
+									style="width: auto; margin: 0 auto;"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">性别</option>
 									<option value="男">男</option>
@@ -74,23 +74,23 @@
 							</th>
 							<th>
 								<select class="select_section form-control"
-									id="select_section" style="width: auto;margin:0 auto;"
+									id="select_section" style="width: auto; margin: 0 auto;"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">教研室</option>
 								</select>
 							</th>
-<!-- 							<th> -->
-<%-- 								<select class="form-control" id="select_title" --%>
-<%-- 									style="width: auto;margin:0 auto;" data-live-search="true" --%>
-<%-- 									onchange="List_Teacher_By_PageAndSearch(1)"> --%>
-<!-- 									<option value="-1">职称</option> -->
-<!-- 									<option value="">未填写职称</option> -->
-<%-- 								</select> --%>
-<!-- 							</th> -->
+							<!-- 							<th> -->
+							<%-- 								<select class="form-control" id="select_title" --%>
+							<%-- 									style="width: auto;margin:0 auto;" data-live-search="true" --%>
+							<%-- 									onchange="List_Teacher_By_PageAndSearch(1)"> --%>
+							<!-- 									<option value="-1">职称</option> -->
+							<!-- 									<option value="">未填写职称</option> -->
+							<%-- 								</select> --%>
+							<!-- 							</th> -->
 							<th>指导学生数</th>
 							<th>
 								<select class="form-control" id="select_recorder"
-									style="width: auto;margin:0 auto;"
+									style="width: auto; margin: 0 auto;"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">记录员（全部）</option>
 									<option value="1">是记录员</option>
@@ -99,7 +99,7 @@
 							</th>
 							<th>
 								<select class="form-control" id="select_defenceLeader"
-									style="width: auto;margin:0 auto;"
+									style="width: auto; margin: 0 auto;"
 									onchange="List_Teacher_By_PageAndSearch(1)">
 									<option value="-1">答辩小组组长（全部）</option>
 									<option value="1">是答辩小组组长</option>
@@ -202,8 +202,17 @@
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">
+					<button class="btn btn-default" onclick="import_click()"
+						style="margin: 10px 0;">选择文件</button>
 					<input id="input_upload_Teacher_excel" type="file"
-						onchange="Preview_Teacher_EXCEL(this)">
+						onchange="Preview_Teacher_EXCEL(this)"
+						style="display: none;">
+					<script type="text/javascript">
+						function import_click() {
+							document.getElementById(
+									"input_upload_Teacher_excel").click();
+						}
+					</script>
 					<!--  -->
 					<div
 						style="width: 100%; max-height: 400px; min-height: 0px; overflow-x: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; border: 1px solid #ddd;">
@@ -262,7 +271,7 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/TeacherInformationManagement/Teacher_Take_Leader.js"></script>
 <script>
-// 	$('select').selectpicker('refresh');
+	// 	$('select').selectpicker('refresh');
 </script>
 <script>
 	Get_Teacher_Section(document.getElementById("select_section"));
