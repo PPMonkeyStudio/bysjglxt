@@ -93,6 +93,7 @@ public class MajorManagementDaoImpl implements MajorManagementDao {
 		String hql = "from bysjglxt_major where major_id='" + majorId + "'";
 		Query query = getSession().createQuery(hql);
 		major = (bysjglxt_major) query.uniqueResult();
+		
 		return major;
 	}
 

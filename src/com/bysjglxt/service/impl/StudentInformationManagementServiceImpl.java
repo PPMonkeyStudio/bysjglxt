@@ -68,11 +68,10 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		boolean flag = false;
 		bysjglxt_student_user bysjglxt_student_user = null;
 		bysjglxt_major bysjglxt_major = null;
-		System.out.println("userId" + userId);
 		String college = getCollegeByUserId(userId);
-		System.out.println("college:" + college);
 		for (bysjglxt_student_basic bysjglxt_student_basic : studentBasicList) {
 			bysjglxt_student_user = new bysjglxt_student_user();
+			bysjglxt_major = new bysjglxt_major();
 			/**
 			 * 根据学号判断该学生 是否存在，若存在则不进行保存
 			 */
@@ -87,7 +86,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 				// 根据专业代码在数据库中进行查询
 				bysjglxt_major = new bysjglxt_major();
 				bysjglxt_major = studentInformationManagementDao
-						.getMajorByMajorId(bysjglxt_student_basic.getStudent_basic_professionalcode().trim());
+						.getMajorByCode(bysjglxt_student_basic.getStudent_basic_professionalcode().trim());
 				if (bysjglxt_major == null) {
 					bysjglxt_major = new bysjglxt_major();
 					bysjglxt_major.setMajor_id(TeamUtil.getUuid());
@@ -111,7 +110,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			bysjglxt_student_user.setUser_student_belong_college(college);
 			bysjglxt_student_user.setUser_student_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_student_user.setUser_student_gmt_modified(bysjglxt_student_user.getUser_student_gmt_create());
-			System.out.println("------cunchu");
 			flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
 			if (!flag)
 				break;
@@ -154,7 +152,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			// 根据专业代码在数据库中进行查询
 			bysjglxt_major = new bysjglxt_major();
 			bysjglxt_major = studentInformationManagementDao
-					.getMajorByMajorId(student_basic.getStudent_basic_professionalcode().trim());
+					.getMajorByCode(student_basic.getStudent_basic_professionalcode().trim());
 			if (bysjglxt_major == null) {
 				bysjglxt_major = new bysjglxt_major();
 				bysjglxt_major.setMajor_id(TeamUtil.getUuid());
@@ -330,7 +328,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 							props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
 							lj = props.getProperty("lj");
 						} catch (Exception e) {
-							System.out.println("获取初始路径失败");
 							e.printStackTrace();
 						}
 						String path = lj + "graduagtionThesi/";

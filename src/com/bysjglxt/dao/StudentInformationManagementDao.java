@@ -103,9 +103,12 @@ public interface StudentInformationManagementDao {
 	// 根据教师User Id获取教师对象
 	com.bysjglxt.domain.DO.bysjglxt_teacher_user getTeacherUserById(String userId);
 
-	// 根据专业代码获取专业对象
+	// 根据专业id获取专业对象
 	com.bysjglxt.domain.DO.bysjglxt_major getMajorByMajorId(String trim);
 
+	//根据专业代码获取专业
+	bysjglxt_major getMajorByCode(String code);
+	
 	// 存储对象
 	boolean saveObject(Object obj);
 

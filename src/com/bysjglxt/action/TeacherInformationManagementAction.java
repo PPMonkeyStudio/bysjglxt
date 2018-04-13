@@ -184,7 +184,6 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @throws IOException
 	 */
 	public void UpdateTeacherUser() throws IOException {
-		System.out.println(updateTeacherUser);
 		teacherInformationManagementService.updateTeacherUser(updateTeacherUser);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");

@@ -104,7 +104,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			 */
 			flag = topicInformationManagementDao.addObject(newTopic);
 		} else {
-			System.out.println("false");
 			return false;
 		}
 		if (!flag)
@@ -194,7 +193,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_teacher_basic bysjglxtBasic = null;
 		bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUser(adminUserId);
 		if (bysjglxt_teacher_user == null) {
-			System.out.println("你是个假的管理员");
 			return false;
 		}
 		for (String string : topicID) {
@@ -264,7 +262,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUser(adminUserId);
 		if (bysjglxt_teacher_user == null) {
-			System.out.println("你是个假的管理员");
 			return false;
 		}
 		for (String string : topicID) {
@@ -471,7 +468,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			if (studentBasic != null) {
 				if (studentBasic.getStudent_basic_name() != null
 						&& studentBasic.getStudent_basic_name().trim().length() > 0) {
-					System.out.println(studentBasic);
 					name = studentBasic.getStudent_basic_name().trim();
 					num = studentBasic.getStudent_basic_num().trim();
 				}
