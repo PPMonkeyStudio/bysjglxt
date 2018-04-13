@@ -105,19 +105,23 @@
 						<li>
 							<a
 								href="<%=basePath%>student/StudentInformationManagement_listPage"
-								class="">学生</a>
+								class="">学生管理</a>
 						</li>
 						<li>
 							<a
-								href="<%=basePath%>teacher/TeacherInformationManagement_TeacherManagementPage">教师</a>
+								href="<%=basePath%>teacher/TeacherInformationManagement_TeacherManagementPage">教师管理</a>
 						</li>
 						<li>
 							<a
-								href="<%=basePath%>section/SectionInformationManagement_SectionManagementPage">教研室</a>
+								href="<%=basePath%>section/SectionInformationManagement_SectionManagementPage">教研室管理</a>
 						</li>
 						<li>
 							<a
-								href="<%=basePath%>major/MajorManagement_MajorManagementPage">专业</a>
+								href="<%=basePath%>major/MajorManagement_MajorManagementPage">专业管理</a>
+						</li>
+						<li class="college_control">
+							<a
+								href="<%=basePath%>graduationProject/GraduationProjectManagement_CollegeCommentPage">评语管理</a>
 						</li>
 					</ul>
 				</li>
@@ -130,12 +134,12 @@
 					<ul class="dropdown-menu">
 						<li>
 							<a
-								href="<%=basePath%>topic/TopicInformationManagement_TopicListPage"
-								class="">课题列表</a>
+								href="<%=basePath%>topic/TopicInformationManagement_MyTopicListPage">我的课题</a>
 						</li>
 						<li>
 							<a
-								href="<%=basePath%>topic/TopicInformationManagement_MyTopicListPage">我的课题</a>
+								href="<%=basePath%>topic/TopicInformationManagement_TopicListPage"
+								class="">全部课题</a>
 						</li>
 					</ul>
 				</li>
@@ -178,10 +182,7 @@
 							<a
 								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyGraduationProjectPage">我的毕业设计</a>
 						</li>
-						<li class="college_control">
-							<a
-								href="<%=basePath%>graduationProject/GraduationProjectManagement_CollegeCommentPage">评语管理</a>
-						</li>
+
 						<!-- 						<li class="student_control"> -->
 						<!-- 							<a -->
 						<%-- 								href="<%=basePath%>graduationProject/GraduationProjectManagement_exportAll">导出我的毕业设计</a> --%>
