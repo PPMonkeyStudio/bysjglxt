@@ -335,9 +335,20 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	// 存储评语
 	@Override
-	public int saveComment(List<bysjglxt_comment> listComment, String userId) throws Exception {
+	public int saveComment(File commentExcel, String EXCEL_CommentFileName, String userId) throws Exception {
 		String college = getCollegeByUserId(userId);
-		for (bysjglxt_comment comment : listComment) {
+		String houzhui = EXCEL_CommentFileName.substring(EXCEL_CommentFileName.lastIndexOf(".") + 1);
+		FileInputStream input = new FileInputStream(commentExcel);
+		List<Map<String, Object>> list = null;
+		if ("xlsx".equals(houzhui)) {
+			XSSFWorkbook workbook = new XSSFWorkbook(input);
+			list = ExcelToBean2.parseUpdateExcel(workbook, "bysjglxt_comment");
+		} else {
+			HSSFWorkbook workbook = new HSSFWorkbook(input);
+			list = ExcelToBean2.parseExcel(workbook, "bysjglxt_comment");
+		}
+		List<bysjglxt_comment> lists = ExcelToBean2.toObjectPerproList(list, bysjglxt_comment.class);
+		for (bysjglxt_comment comment : lists) {
 			comment.setComment_id(TeamUtil.getUuid());
 			comment.setComment_college(college);
 			comment.setComment_gmt_create(TeamUtil.getStringSecond());

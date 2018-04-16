@@ -242,7 +242,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
 				.get("userTeacherDTO");
 		try {
-			graduationProjectManagementService.saveComment(listComment,
+			graduationProjectManagementService.saveComment(EXCEL_Comment, EXCEL_CommentFileName,
 					userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 			http_response.setContentType("text/html;charset=utf-8");
 			http_response.getWriter().write("导入成功");

@@ -26,11 +26,7 @@ function Save_Comment_EXCEL() {
 					"/bysjglxt/graduationProject/GraduationProjectManagement_saveComment");
 
 	var formData = new FormData();
-
-	var input_upload_comment_excel = document
-			.getElementById("input_upload_comment_excel");
-	formData.append("EXCEL_Comment", input_upload_comment_excel.files[0]);
+	formData.append("EXCEL_Comment", EXCEL_Comment_File.files[0]);
 	xhr.send(formData);
-
 	document.getElementById("i_pulse_2").style.display = "block";
 }
