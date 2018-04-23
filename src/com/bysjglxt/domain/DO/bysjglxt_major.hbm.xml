@@ -3,25 +3,25 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_major" table="BYSJGLXT_MAJOR">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_major" table="bysjglxt_major">
         <id name="major_id" type="java.lang.String">
-            <column name="MAJOR_ID" />
+            <column name="major_id" />
             <generator class="assigned" />
         </id>
         <property name="major_professionalcode" type="java.lang.String">
-            <column name="MAJOR_PROFESSIONALCODE" />
+            <column name="major_professionalcode" />
         </property>
         <property name="major_name" type="java.lang.String">
-            <column name="MAJOR_NAME" />
+            <column name="major_name" />
         </property>
         <property name="major_belong_section" type="java.lang.String">
-            <column name="MAJOR_BELONG_SECTION" />
+            <column name="major_belong_section" />
         </property>
         <property name="major_gmt_create" type="java.lang.String">
-            <column name="MAJOR_GMT_CREATE" />
+            <column name="major_gmt_create" />
         </property>
         <property name="major_gmt_modified" type="java.lang.String">
-            <column name="MAJOR_GMT_MODIFIED" />
+            <column name="major_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

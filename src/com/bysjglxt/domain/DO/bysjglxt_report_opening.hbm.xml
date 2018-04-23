@@ -3,34 +3,34 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_report_opening" table="BYSJGLXT_REPORT_OPENING">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_report_opening" table="bysjglxt_report_opening">
         <id name="report_opening_id" type="java.lang.String">
-            <column name="REPORT_OPENING_ID" />
+            <column name="report_opening_id" />
             <generator class="assigned" />
         </id>
         <property name="report_opening_student" type="java.lang.String">
-            <column name="REPORT_OPENING_STUDENT" />
+            <column name="report_opening_student" />
         </property>
         <property name="report_opening_documentary_survey" type="java.lang.String">
-            <column name="REPORT_OPENING_DOCUMENTARY_SURVEY" />
+            <column name="report_opening_documentary_survey" />
         </property>
         <property name="report_opening_main" type="java.lang.String">
-            <column name="REPORT_OPENING_MAIN" />
+            <column name="report_opening_main" />
         </property>
         <property name="report_opening_detail" type="java.lang.String">
-            <column name="REPORT_OPENING_DETAIL" />
+            <column name="report_opening_detail" />
         </property>
         <property name="report_opening_reference" type="java.lang.String">
-            <column name="REPORT_OPENING_REFERENCE" />
+            <column name="report_opening_reference" />
         </property>
         <property name="report_opening_plan" type="java.lang.String">
-            <column name="REPORT_OPENING_PLAN" />
+            <column name="report_opening_plan" />
         </property>
         <property name="report_opening_gmt_create" type="java.lang.String">
-            <column name="REPORT_OPENING_GMT_CREATE" />
+            <column name="report_opening_gmt_create" />
         </property>
         <property name="report_opening_gmt_modified" type="java.lang.String">
-            <column name="REPORT_OPENING_GMT_MODIFIED" />
+            <column name="report_opening_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

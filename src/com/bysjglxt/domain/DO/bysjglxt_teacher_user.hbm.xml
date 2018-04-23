@@ -3,46 +3,46 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 13:09:31 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_teacher_user" table="BYSJGLXT_TEACHER_USER">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_teacher_user" table="bysjglxt_teacher_user">
         <id name="user_teacher_id" type="java.lang.String">
-            <column name="USER_TEACHER_ID" />
+            <column name="user_teacher_id" />
             <generator class="assigned" />
         </id>
         <property name="user_teacher_num" type="java.lang.String">
-            <column name="USER_TEACHER_NUM" />
+            <column name="user_teacher_num" />
         </property>
         <property name="user_teacher_password" type="java.lang.String">
-            <column name="USER_TEACHER_PASSWORD" />
+            <column name="user_teacher_password" />
         </property>
         <property name="user_teacher_basic" type="java.lang.String">
-            <column name="USER_TEACHER_BASIC" />
+            <column name="user_teacher_basic" />
         </property>
         <property name="user_teacher_section" type="java.lang.String">
-            <column name="USER_TEACHER_SECTION" />
+            <column name="user_teacher_section" />
         </property>
         <property name="user_teacher_max_guidance" type="int">
-            <column name="USER_TEACHER_MAX_GUIDANCE" />
+            <column name="user_teacher_max_guidance" />
         </property>
         <property name="user_teacher_guidance_num" type="int">
-            <column name="USER_TEACHER_GUIDANCE_NUM" />
+            <column name="user_teacher_guidance_num" />
         </property>
         <property name="user_teacher_gmt_create" type="java.lang.String">
-            <column name="USER_TEACHER_GMT_CREATE" />
+            <column name="user_teacher_gmt_create" />
         </property>
         <property name="user_teacher_gmt_modified" type="java.lang.String">
-            <column name="USER_TEACHER_GMT_MODIFIED" />
+            <column name="user_teacher_gmt_modified" />
         </property>
         <property name="user_teacher_belong_college" type="java.lang.String">
-            <column name="USER_TEACHER_BELONG_COLLEGE" />
+            <column name="user_teacher_belong_college" />
         </property>
         <property name="user_teacher_is_recorder" type="int">
-            <column name="USER_TEACHER_IS_RECORDER" />
+            <column name="user_teacher_is_recorder" />
         </property>
         <property name="user_teacher_is_defence_leader" type="int">
-            <column name="USER_TEACHER_IS_DEFENCE_LEADER" />
+            <column name="user_teacher_is_defence_leader" />
         </property>
         <property name="user_teacher_is_college_admin" type="int">
-            <column name="USER_TEACHER_IS_COLLEGE_ADMIN" />
+            <column name="user_teacher_is_college_admin" />
         </property>
     </class>
 </hibernate-mapping>

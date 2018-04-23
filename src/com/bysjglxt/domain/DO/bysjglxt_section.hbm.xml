@@ -3,25 +3,25 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_section" table="BYSJGLXT_SECTION">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_section" table="bysjglxt_section">
         <id name="section_id" type="java.lang.String">
-            <column name="SECTION_ID" />
+            <column name="section_id" />
             <generator class="assigned" />
         </id>
         <property name="section_name" type="java.lang.String">
-            <column name="SECTION_NAME" />
+            <column name="section_name" />
         </property>
         <property name="section_leader" type="java.lang.String">
-            <column name="SECTION_LEADER" />
+            <column name="section_leader" />
         </property>
         <property name="section_college_id" type="java.lang.String">
-            <column name="SECTION_COLLEGE_ID" />
+            <column name="section_college_id" />
         </property>
         <property name="section_gmt_create" type="java.lang.String">
-            <column name="SECTION_GMT_CREATE" />
+            <column name="section_gmt_create" />
         </property>
         <property name="section_gmt_modified" type="java.lang.String">
-            <column name="SECTION_GMT_MODIFIED" />
+            <column name="section_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

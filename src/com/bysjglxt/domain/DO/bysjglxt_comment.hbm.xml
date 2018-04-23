@@ -3,28 +3,28 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-10 2:21:32 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_comment" table="BYSJGLXT_COMMENT">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_comment" table="bysjglxt_comment">
         <id name="comment_id" type="java.lang.String">
-            <column name="COMMENT_ID" />
+            <column name="comment_id" />
             <generator class="assigned" />
         </id>
         <property name="comment_grade" type="java.lang.String">
-            <column name="COMMENT_GRADE" />
+            <column name="comment_grade" />
         </property>
         <property name="comment_category" type="java.lang.String">
-            <column name="COMMENT_CATEGORY" />
+            <column name="comment_category" />
         </property>
         <property name="comment_content" type="java.lang.String">
-            <column name="COMMENT_CONTENT" />
+            <column name="comment_content" />
         </property>
         <property name="comment_college" type="java.lang.String">
-            <column name="COMMENT_COLLEGE" />
+            <column name="comment_college" />
         </property>
         <property name="comment_gmt_create" type="java.lang.String">
-            <column name="COMMENT_GMT_CREATE" />
+            <column name="comment_gmt_create" />
         </property>
         <property name="comment_gmt_modified" type="java.lang.String">
-            <column name="COMMENT_GMT_MODIFIED" />
+            <column name="comment_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

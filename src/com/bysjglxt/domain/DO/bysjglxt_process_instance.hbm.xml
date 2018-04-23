@@ -3,28 +3,28 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_process_instance" table="BYSJGLXT_PROCESS_INSTANCE">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_process_instance" table="bysjglxt_process_instance">
         <id name="process_instance_id" type="java.lang.String">
-            <column name="PROCESS_INSTANCE_ID" />
+            <column name="process_instance_id" />
             <generator class="assigned" />
         </id>
         <property name="process_instance_process_definition" type="java.lang.String">
-            <column name="PROCESS_INSTANCE_PROCESS_DEFINITION" />
+            <column name="process_instance_process_definition" />
         </property>
         <property name="process_instance_state" type="java.lang.String">
-            <column name="PROCESS_INSTANCE_STATE" />
+            <column name="process_instance_state" />
         </property>
         <property name="process_instance_man" type="java.lang.String">
-            <column name="PROCESS_INSTANCE_MAN" />
+            <column name="process_instance_man" />
         </property>
         <property name="process_instance_name" type="java.lang.String">
-            <column name="PROCESS_INSTANCE_NAME" />
+            <column name="process_instance_name" />
         </property>
         <property name="process_instance_gmt_create" type="java.lang.String">
-            <column name="PROCESS_INSTANCE_GMT_CREATE" />
+            <column name="process_instance_gmt_create" />
         </property>
         <property name="process_instance_gmt_modified" type="java.lang.String">
-            <column name="PROCESS_INSTANCE_GMT_MODIFIED" />
+            <column name="process_instance_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

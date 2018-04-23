@@ -3,22 +3,22 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_dissertation" table="BYSJGLXT_DISSERTATION">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_dissertation" table="bysjglxt_dissertation">
         <id name="dissertation_id" type="java.lang.String">
-            <column name="DISSERTATION_ID" />
+            <column name="dissertation_id" />
             <generator class="assigned" />
         </id>
         <property name="dissertation_student" type="java.lang.String">
-            <column name="DISSERTATION_STUDENT" />
+            <column name="dissertation_student" />
         </property>
         <property name="dissertation_file" type="java.lang.String">
-            <column name="DISSERTATION_FILE" />
+            <column name="dissertation_file" />
         </property>
         <property name="dissertation_gmt_create" type="java.lang.String">
-            <column name="DISSERTATION_GMT_CREATE" />
+            <column name="dissertation_gmt_create" />
         </property>
         <property name="dissertation_gmt_modified" type="java.lang.String">
-            <column name="DISSERTATION_GMT_MODIFIED" />
+            <column name="dissertation_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

@@ -3,37 +3,37 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_student_user" table="BYSJGLXT_STUDENT_USER">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_student_user" table="bysjglxt_student_user">
         <id name="user_student_id" type="java.lang.String">
-            <column name="USER_STUDENT_ID" />
+            <column name="user_student_id" />
             <generator class="assigned" />
         </id>
         <property name="user_student_num" type="java.lang.String">
-            <column name="USER_STUDENT_NUM" />
+            <column name="user_student_num" />
         </property>
         <property name="user_student_password" type="java.lang.String">
-            <column name="USER_STUDENT_PASSWORD" />
+            <column name="user_student_password" />
         </property>
         <property name="user_student_basic" type="java.lang.String">
-            <column name="USER_STUDENT_BASIC" />
+            <column name="user_student_basic" />
         </property>
         <property name="user_student_is_operate_premission" type="int">
-            <column name="USER_STUDENT_IS_OPERATE_PREMISSION" />
+            <column name="user_student_is_operate_premission" />
         </property>
         <property name="user_student_is_select_topic" type="int">
-            <column name="USER_STUDENT_IS_SELECT_TOPIC" />
+            <column name="user_student_is_select_topic" />
         </property>
         <property name="user_student_belong_major" type="java.lang.String">
-            <column name="USER_STUDENT_BELONG_MAJOR" />
+            <column name="user_student_belong_major" />
         </property>
         <property name="user_student_belong_college" type="java.lang.String">
-            <column name="USER_STUDENT_BELONG_COLLEGE" />
+            <column name="user_student_belong_college" />
         </property>
         <property name="user_student_gmt_create" type="java.lang.String">
-            <column name="USER_STUDENT_GMT_CREATE" />
+            <column name="user_student_gmt_create" />
         </property>
         <property name="user_student_gmt_modified" type="java.lang.String">
-            <column name="USER_STUDENT_GMT_MODIFIED" />
+            <column name="user_student_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

@@ -3,31 +3,31 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_taskbook" table="BYSJGLXT_TASKBOOK">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_taskbook" table="bysjglxt_taskbook">
         <id name="taskbook_id" type="java.lang.String">
-            <column name="TASKBOOK_ID" />
+            <column name="taskbook_id" />
             <generator class="assigned" />
         </id>
         <property name="bysjglxt_taskbook_student" type="java.lang.String">
-            <column name="BYSJGLXT_TASKBOOK_STUDENT" />
+            <column name="bysjglxt_taskbook_student" />
         </property>
         <property name="taskbook_acontent_required" type="java.lang.String">
-            <column name="TASKBOOK_ACONTENT_REQUIRED" />
+            <column name="taskbook_acontent_required" />
         </property>
         <property name="taskbook_reference" type="java.lang.String">
-            <column name="TASKBOOK_REFERENCE" />
+            <column name="taskbook_reference" />
         </property>
         <property name="taskbook_plan" type="java.lang.String">
-            <column name="TASKBOOK_PLAN" />
+            <column name="taskbook_plan" />
         </property>
         <property name="taskbook_opinion" type="java.lang.String">
-            <column name="TASKBOOK_OPINION" />
+            <column name="taskbook_opinion" />
         </property>
         <property name="taskbook_gmt_create" type="java.lang.String">
-            <column name="TASKBOOK_GMT_CREATE" />
+            <column name="taskbook_gmt_create" />
         </property>
         <property name="taskbook_gmt_modified" type="java.lang.String">
-            <column name="TASKBOOK_GMT_MODIFIED" />
+            <column name="taskbook_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>
