@@ -100,6 +100,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 	/*
 	 * 
 	 */
+	// 评语列表
+	private List<bysjglxt_comment> listComment;
 	private String DissertationUserID;
 	private CommentInformationVO commentInformationVO;
 	private List<String> listStringUse;
@@ -218,7 +220,23 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	/**
-	 * 导入评语
+	 * 预览评语
+	 */
+	public void getPreviewListComment() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		try {
+			listComment = graduationProjectManagementService.previewComment(EXCEL_Comment, EXCEL_CommentFileName);
+			http_response.setContentType("text/html;charset=utf-8");
+			http_response.getWriter().write(gson.toJson(listComment));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 存储评语
 	 */
 	public void saveComment() {
 		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
@@ -1036,6 +1054,10 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setListCommentId(List<String> listCommentId) {
 		this.listCommentId = listCommentId;
+	}
+
+	public void setListComment(List<bysjglxt_comment> listComment) {
+		this.listComment = listComment;
 	}
 
 }

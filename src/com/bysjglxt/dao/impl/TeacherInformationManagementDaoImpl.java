@@ -223,7 +223,6 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 				(teacherInformationManagementVO.getPageIndex() - 1) * teacherInformationManagementVO.getPageSize());
 		query.setMaxResults(teacherInformationManagementVO.getPageSize());
 		List<bysjglxt_teacher_basic> listTeacherBasicInformationByPageAndSearch = query.list();
-
 		if (!flag && teacherInformationManagementVO.getSearch() != null
 				&& teacherInformationManagementVO.getSearch().trim().length() > 0) {
 			for (bysjglxt_teacher_basic bysjglxt_teacher_basic : listTeacherBasicInformationByPageAndSearch) {

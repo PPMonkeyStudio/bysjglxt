@@ -665,6 +665,16 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		bysjglxt_major = (bysjglxt_major) query.uniqueResult();
 		return bysjglxt_major;
 	}
+	
+	@Override
+	public bysjglxt_major getMajorByCode(String code) {
+		bysjglxt_major bysjglxt_major = new bysjglxt_major();
+		Session session = getSession();
+		String hql = "from bysjglxt_major where major_professionalcode = '" + code + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_major = (bysjglxt_major) query.uniqueResult();
+		return bysjglxt_major;
+	}
 
 	@Override
 	public boolean saveObject(Object obj) {
@@ -687,7 +697,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		Session session = getSession();
 		String hql = "select taskInstance from bysjglxt_task_instance taskInstance,bysjglxt_process_instance processInstance where taskInstance.task_instance_process_instance=processInstance.process_instance_id and processInstance.process_instance_man='"
 				+ user_student_id + "'";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		listTaskInstance = query.list();
 		session.clear();
@@ -743,5 +752,6 @@ public class StudentInformationManagementDaoImpl implements StudentInformationMa
 		query.executeUpdate();
 		return true;
 	}
+
 
 }

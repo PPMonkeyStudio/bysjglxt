@@ -551,7 +551,6 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			processDTO.setListTaskBelongProcess(listTaskDTO);
 
 		} else {
-			System.out.println("没有流程实例处于活动状态");
 		}
 		return processDTO;
 	}

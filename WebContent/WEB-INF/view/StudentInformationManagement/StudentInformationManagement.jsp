@@ -189,12 +189,21 @@
 						<span aria-hidden="true">&times;</span>
 						<span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title">通过Excel导入</h4>
+					<h4 class="modal-title">通过Excel导入学生</h4>
 				</div>
 				<!--弹出框主体，一般使用“modal-body”表示，弹出框的主要内容-->
 				<div class="modal-body">
+					<button class="btn btn-default" onclick="import_click()" style="margin: 10px 0;">
+						选择文件</button>
 					<input id="input_upload_student_excel" type="file"
-						onchange="Preview_Student_EXCEL(this)">
+						onchange="Preview_Student_EXCEL(this)"
+						style="display: none;">
+					<script type="text/javascript">
+						function import_click() {
+							document.getElementById(
+									"input_upload_student_excel").click();
+						}
+					</script>
 					<!--  -->
 					<div
 						style="width: 100%; max-height: 400px; min-height: 0px; overflow-x: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; -ms-overflow-style: -ms-autohiding-scrollbar; border: 1px solid #ddd;">

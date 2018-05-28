@@ -173,6 +173,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		TeacherInformationDTO teacherInformationDTO = null;
 		List<bysjglxt_teacher_user> listAllTeacherUserInformation = teacherInformationManagementDao
 				.list_TeacherUserInformation_All(college);
+
 		for (bysjglxt_teacher_user teacher_user : listAllTeacherUserInformation) {
 			teacherInformationDTO = new TeacherInformationDTO();
 			teacherInformationDTO.setBysjglxtTeacherUser(teacher_user);
@@ -281,6 +282,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		List<bysjglxt_teacher_basic> listTeacherBasicInformationByPage = teacherInformationManagementDao
 				.listTeacherBasicInformationByPageAndSearch(teacherInformationManagementVO, college);
 		for (bysjglxt_teacher_basic bysjglxt_teacher_basic : listTeacherBasicInformationByPage) {
+			bysjglxt_section = new bysjglxt_section();
 			teacherInformationDTO = new TeacherInformationDTO();
 			bysjglxt_teacher_user = teacherInformationManagementDao
 					.getTeacherInfoByBasicId(bysjglxt_teacher_basic.getTeacher_basic_id());

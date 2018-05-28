@@ -3,34 +3,34 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_task_definition" table="BYSJGLXT_TASK_DEFINITION">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_task_definition" table="bysjglxt_task_definition">
         <id name="task_definition_id" type="java.lang.String">
-            <column name="TASK_DEFINITION_ID" />
+            <column name="task_definition_id" />
             <generator class="assigned" />
         </id>
         <property name="task_definition_name" type="java.lang.String">
-            <column name="TASK_DEFINITION_NAME" />
+            <column name="task_definition_name" />
         </property>
         <property name="task_definition_process_definition" type="java.lang.String">
-            <column name="TASK_DEFINITION_PROCESS_DEFINITION" />
+            <column name="task_definition_process_definition" />
         </property>
         <property name="task_definition_type" type="int">
-            <column name="TASK_DEFINITION_TYPE" />
+            <column name="task_definition_type" />
         </property>
         <property name="task_definition_role" type="int">
-            <column name="TASK_DEFINITION_ROLE" />
+            <column name="task_definition_role" />
         </property>
         <property name="task_definition_return" type="java.lang.String">
-            <column name="TASK_DEFINITION_RETURN" />
+            <column name="task_definition_return" />
         </property>
         <property name="task_definition_father" type="java.lang.String">
-            <column name="TASK_DEFINITION_FATHER" />
+            <column name="task_definition_father" />
         </property>
         <property name="task_definition_gmt_create" type="java.lang.String">
-            <column name="TASK_DEFINITION_GMT_CREATE" />
+            <column name="task_definition_gmt_create" />
         </property>
         <property name="task_definition_gmt_modified" type="java.lang.String">
-            <column name="TASK_DEFINITION_GMT_MODIFIED" />
+            <column name="task_definition_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

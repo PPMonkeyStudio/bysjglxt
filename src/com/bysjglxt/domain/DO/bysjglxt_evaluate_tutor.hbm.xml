@@ -3,76 +3,76 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-9 22:33:30 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor" table="BYSJGLXT_EVALUATE_TUTOR">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor" table="bysjglxt_evaluate_tutor">
         <id name="evaluate_tutor_id" type="java.lang.String">
-            <column name="EVALUATE_TUTOR_ID" />
+            <column name="evaluate_tutor_id" />
             <generator class="assigned" />
         </id>
         <property name="evaluate_tutor_student" type="java.lang.String">
-            <column name="EVALUATE_TUTOR_STUDENT" />
+            <column name="evaluate_tutor_student" />
         </property>
         <property name="evaluate_tutor_teacher_comment" type="java.lang.String">
-            <column name="EVALUATE_TUTOR_TEACHER_COMMENT" />
+            <column name="evaluate_tutor_teacher_comment" />
         </property>
         <property name="evaluate_tutor_grade_training_objective" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_TRAINING_OBJECTIVE" />
+            <column name="evaluate_tutor_grade_training_objective" />
         </property>
         <property name="evaluate_tutor_grade_difficulty" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_DIFFICULTY" />
+            <column name="evaluate_tutor_grade_difficulty" />
         </property>
         <property name="evaluate_tutor_grade_workload" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_WORKLOAD" />
+            <column name="evaluate_tutor_grade_workload" />
         </property>
         <property name="evaluate_tutor_grade_bind" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_BIND" />
+            <column name="evaluate_tutor_grade_bind" />
         </property>
         <property name="evaluate_tutor_grade_comprehensive" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_COMPREHENSIVE" />
+            <column name="evaluate_tutor_grade_comprehensive" />
         </property>
         <property name="evaluate_tutor_grade_reference" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_REFERENCE" />
+            <column name="evaluate_tutor_grade_reference" />
         </property>
         <property name="evaluate_tutor_grade_experimental_design" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_EXPERIMENTAL_DESIGN" />
+            <column name="evaluate_tutor_grade_experimental_design" />
         </property>
         <property name="evaluate_tutor_grade_computing" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_COMPUTING" />
+            <column name="evaluate_tutor_grade_computing" />
         </property>
         <property name="evaluate_tutor_grade_foreign_language" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_FOREIGN_LANGUAGE" />
+            <column name="evaluate_tutor_grade_foreign_language" />
         </property>
         <property name="evaluate_tutor_grade_computer" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_COMPUTER" />
+            <column name="evaluate_tutor_grade_computer" />
         </property>
         <property name="evaluate_tutor_grade_innovate" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_INNOVATE" />
+            <column name="evaluate_tutor_grade_innovate" />
         </property>
         <property name="evaluate_tutor_grade_analysis" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_ANALYSIS" />
+            <column name="evaluate_tutor_grade_analysis" />
         </property>
         <property name="evaluate_tutor_grade_chart" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_CHART" />
+            <column name="evaluate_tutor_grade_chart" />
         </property>
         <property name="evaluate_tutor_grade_instructions" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_INSTRUCTIONS" />
+            <column name="evaluate_tutor_grade_instructions" />
         </property>
         <property name="evaluate_tutor_grade_practicability" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_PRACTICABILITY" />
+            <column name="evaluate_tutor_grade_practicability" />
         </property>
         <property name="evaluate_tutor_grade_normalization" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_NORMALIZATION" />
+            <column name="evaluate_tutor_grade_normalization" />
         </property>
         <property name="evaluate_tutor_grade_total" type="int">
-            <column name="EVALUATE_TUTOR_GRADE_TOTAL" />
+            <column name="evaluate_tutor_grade_total" />
         </property>
         <property name="evaluate_tutor_is_teacher_opinion" type="int">
-            <column name="EVALUATE_TUTOR_IS_TEACHER_OPINION" />
+            <column name="evaluate_tutor_is_teacher_opinion" />
         </property>
         <property name="evaluate_tutor_gmt_create" type="java.lang.String">
-            <column name="EVALUATE_TUTOR_GMT_CREATE" />
+            <column name="evaluate_tutor_gmt_create" />
         </property>
         <property name="evaluate_tutor_gmt_modified" type="java.lang.String">
-            <column name="EVALUATE_TUTOR_GMT_MODIFIED" />
+            <column name="evaluate_tutor_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

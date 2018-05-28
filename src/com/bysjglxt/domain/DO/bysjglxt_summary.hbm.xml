@@ -3,31 +3,31 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_summary" table="BYSJGLXT_SUMMARY">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_summary" table="bysjglxt_summary">
         <id name="summary_id" type="java.lang.String">
-            <column name="SUMMARY_ID" />
+            <column name="summary_id" />
             <generator class="assigned" />
         </id>
         <property name="summary_student" type="java.lang.String">
-            <column name="SUMMARY_STUDENT" />
+            <column name="summary_student" />
         </property>
         <property name="summary_gmt_start" type="java.lang.String">
-            <column name="SUMMARY_GMT_START" />
+            <column name="summary_gmt_start" />
         </property>
         <property name="summary_gmt_stop" type="java.lang.String">
-            <column name="SUMMARY_GMT_STOP" />
+            <column name="summary_gmt_stop" />
         </property>
         <property name="summary_summary" type="java.lang.String">
-            <column name="SUMMARY_SUMMARY" />
+            <column name="summary_summary" />
         </property>
         <property name="summary_opinion" type="java.lang.String">
-            <column name="SUMMARY_OPINION" />
+            <column name="summary_opinion" />
         </property>
         <property name="summary_gmt_create" type="java.lang.String">
-            <column name="SUMMARY_GMT_CREATE" />
+            <column name="summary_gmt_create" />
         </property>
         <property name="summary_gmt_modified" type="java.lang.String">
-            <column name="SUMMARY_GMT_MODIFIED" />
+            <column name="summary_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

@@ -3,28 +3,28 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_topic_select" table="BYSJGLXT_TOPIC_SELECT">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_topic_select" table="bysjglxt_topic_select">
         <id name="topic_select_id" type="java.lang.String">
-            <column name="TOPIC_SELECT_ID" />
+            <column name="topic_select_id" />
             <generator class="assigned" />
         </id>
         <property name="topic_select_student" type="java.lang.String">
-            <column name="TOPIC_SELECT_STUDENT" />
+            <column name="topic_select_student" />
         </property>
         <property name="topic_select_teacher_tutor" type="java.lang.String">
-            <column name="TOPIC_SELECT_TEACHER_TUTOR" />
+            <column name="topic_select_teacher_tutor" />
         </property>
         <property name="topic_select_teacher_review" type="java.lang.String">
-            <column name="TOPIC_SELECT_TEACHER_REVIEW" />
+            <column name="topic_select_teacher_review" />
         </property>
         <property name="topic_select_topic" type="java.lang.String">
-            <column name="TOPIC_SELECT_TOPIC" />
+            <column name="topic_select_topic" />
         </property>
         <property name="topic_select_gmt_create" type="java.lang.String">
-            <column name="TOPIC_SELECT_GMT_CREATE" />
+            <column name="topic_select_gmt_create" />
         </property>
         <property name="topic_select_gmt_modified" type="java.lang.String">
-            <column name="TOPIC_SELECT_GMT_MODIFIED" />
+            <column name="topic_select_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

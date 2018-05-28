@@ -34,6 +34,9 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	private bysjglxt_teacher_basic bysjglxt_teacher_basic;
 	private bysjglxt_college college;
 
+	/*
+	 * 
+	 */
 	/**
 	 * 
 	 * @return 'webString'
@@ -54,7 +57,6 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 		try {
 			http_response.getWriter().write(gson.toJson(collegeManagementService.listCollegeInformationDTO()));
 		} catch (IOException e) {
-			System.out.println("遍历学院出错");
 			e.printStackTrace();
 		}
 	}
@@ -63,7 +65,6 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 * 修改管理员
 	 */
 	public void updateAdmin() {
-		System.out.println("修改管理员:" + bysjglxt_teacher_user.getUser_teacher_id());
 		if (collegeManagementService.updateCollegeAdmin(bysjglxt_teacher_user.getUser_teacher_id()) == -1) {
 			try {
 				http_response.getWriter().write("系统错误修改失败");

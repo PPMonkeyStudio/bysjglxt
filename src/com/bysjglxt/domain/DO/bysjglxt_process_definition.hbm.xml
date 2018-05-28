@@ -3,22 +3,22 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_process_definition" table="BYSJGLXT_PROCESS_DEFINITION">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_process_definition" table="bysjglxt_process_definition">
         <id name="process_definition_id" type="java.lang.String">
-            <column name="PROCESS_DEFINITION_ID" />
+            <column name="process_definition_id" />
             <generator class="assigned" />
         </id>
         <property name="process_definition_name" type="java.lang.String">
-            <column name="PROCESS_DEFINITION_NAME" />
+            <column name="process_definition_name" />
         </property>
         <property name="process_definition_instance_role" type="int">
-            <column name="PROCESS_DEFINITION_INSTANCE_ROLE" />
+            <column name="process_definition_instance_role" />
         </property>
         <property name="process_definition_gmt_create" type="java.lang.String">
-            <column name="PROCESS_DEFINITION_GMT_CREATE" />
+            <column name="process_definition_gmt_create" />
         </property>
         <property name="process_definition_gmt_modified" type="java.lang.String">
-            <column name="PROCESS_DEFINITION_GMT_MODIFIED" />
+            <column name="process_definition_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

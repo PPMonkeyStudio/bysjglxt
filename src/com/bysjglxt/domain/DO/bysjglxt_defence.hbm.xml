@@ -3,64 +3,64 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_defence" table="BYSJGLXT_DEFENCE">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_defence" table="bysjglxt_defence">
         <id name="defence_id" type="java.lang.String">
-            <column name="DEFENCE_ID" />
+            <column name="defence_id" />
             <generator class="assigned" />
         </id>
         <property name="defence_student" type="java.lang.String">
-            <column name="DEFENCE_STUDENT" />
+            <column name="defence_student" />
         </property>
         <property name="defence_record" type="java.lang.String">
-            <column name="DEFENCE_RECORD" />
+            <column name="defence_record" />
         </property>
         <property name="defence_leader_comment" type="java.lang.String">
-            <column name="DEFENCE_LEADER_COMMENT" />
+            <column name="defence_leader_comment" />
         </property>
         <property name="defence_grade_writing" type="int">
-            <column name="DEFENCE_GRADE_WRITING" />
+            <column name="defence_grade_writing" />
         </property>
         <property name="defence_grade_normalization" type="int">
-            <column name="DEFENCE_GRADE_NORMALIZATION" />
+            <column name="defence_grade_normalization" />
         </property>
         <property name="defence_grade_complete" type="int">
-            <column name="DEFENCE_GRADE_COMPLETE" />
+            <column name="defence_grade_complete" />
         </property>
         <property name="defence_grade_technology" type="int">
-            <column name="DEFENCE_GRADE_TECHNOLOGY" />
+            <column name="defence_grade_technology" />
         </property>
         <property name="defence_grade_practicability" type="int">
-            <column name="DEFENCE_GRADE_PRACTICABILITY" />
+            <column name="defence_grade_practicability" />
         </property>
         <property name="defence_grade_appearance" type="int">
-            <column name="DEFENCE_GRADE_APPEARANCE" />
+            <column name="defence_grade_appearance" />
         </property>
         <property name="defence_grade_statement" type="int">
-            <column name="DEFENCE_GRADE_STATEMENT" />
+            <column name="defence_grade_statement" />
         </property>
         <property name="defence_grade_answer" type="int">
-            <column name="DEFENCE_GRADE_ANSWER" />
+            <column name="defence_grade_answer" />
         </property>
         <property name="defence_grade_defence" type="int">
-            <column name="DEFENCE_GRADE_DEFENCE" />
+            <column name="defence_grade_defence" />
         </property>
         <property name="defence_grade_evaluate_tutor" type="double">
-            <column name="DEFENCE_GRADE_EVALUATE_TUTOR" />
+            <column name="defence_grade_evaluate_tutor" />
         </property>
         <property name="defence_grade_evaluate_review" type="double">
-            <column name="DEFENCE_GRADE_EVALUATE_REVIEW" />
+            <column name="defence_grade_evaluate_review" />
         </property>
         <property name="defence_total" type="int">
-            <column name="DEFENCE_TOTAL" />
+            <column name="defence_total" />
         </property>
         <property name="defence_finally" type="java.lang.String">
-            <column name="DEFENCE_FINALLY" />
+            <column name="defence_finally" />
         </property>
         <property name="defence_gmt_create" type="java.lang.String">
-            <column name="DEFENCE_GMT_CREATE" />
+            <column name="defence_gmt_create" />
         </property>
         <property name="defence_gmt_modified" type="java.lang.String">
-            <column name="DEFENCE_GMT_MODIFIED" />
+            <column name="defence_gmt_modified" />
         </property>
     </class>
 </hibernate-mapping>

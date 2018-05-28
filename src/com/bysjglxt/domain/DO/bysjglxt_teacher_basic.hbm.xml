@@ -3,82 +3,82 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_teacher_basic" table="BYSJGLXT_TEACHER_BASIC">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_teacher_basic" table="bysjglxt_teacher_basic">
         <id name="teacher_basic_id" type="java.lang.String">
-            <column name="TEACHER_BASIC_ID" />
+            <column name="teacher_basic_id" />
             <generator class="assigned" />
         </id>
         <property name="job_number" type="java.lang.String">
-            <column name="JOB_NUMBER" />
+            <column name="job_number" />
         </property>
         <property name="name" type="java.lang.String">
-            <column name="NAME" />
+            <column name="name" />
         </property>
         <property name="sex" type="java.lang.String">
-            <column name="SEX" />
+            <column name="sex" />
         </property>
         <property name="birthday" type="java.lang.String">
-            <column name="BIRTHDAY" />
+            <column name="birthday" />
         </property>
         <property name="induction_date" type="java.lang.String">
-            <column name="INDUCTION_DATE" />
+            <column name="induction_date" />
         </property>
         <property name="job_statue" type="java.lang.String">
-            <column name="JOB_STATUE" />
+            <column name="job_statue" />
         </property>
         <property name="unit_number" type="java.lang.String">
-            <column name="UNIT_NUMBER" />
+            <column name="unit_number" />
         </property>
         <property name="unit_name" type="java.lang.String">
-            <column name="UNIT_NAME" />
+            <column name="unit_name" />
         </property>
         <property name="highest_education" type="java.lang.String">
-            <column name="HIGHEST_EDUCATION" />
+            <column name="highest_education" />
         </property>
         <property name="highest_degree" type="java.lang.String">
-            <column name="HIGHEST_DEGREE" />
+            <column name="highest_degree" />
         </property>
         <property name="learn_edge_structure" type="java.lang.String">
-            <column name="LEARN_EDGE_STRUCTURE" />
+            <column name="learn_edge_structure" />
         </property>
         <property name="professional_title" type="java.lang.String">
-            <column name="PROFESSIONAL_TITLE" />
+            <column name="professional_title" />
         </property>
         <property name="subject_category" type="java.lang.String">
-            <column name="SUBJECT_CATEGORY" />
+            <column name="subject_category" />
         </property>
         <property name="teaching_type" type="java.lang.String">
-            <column name="TEACHING_TYPE" />
+            <column name="teaching_type" />
         </property>
         <property name="teaching_profession_name" type="java.lang.String">
-            <column name="TEACHING_PROFESSION_NAME" />
+            <column name="teaching_profession_name" />
         </property>
         <property name="teaching_profession_no" type="java.lang.String">
-            <column name="TEACHING_PROFESSION_NO" />
+            <column name="teaching_profession_no" />
         </property>
         <property name="profession_teaching_date" type="java.lang.String">
-            <column name="PROFESSION_TEACHING_DATE" />
+            <column name="profession_teaching_date" />
         </property>
         <property name="experimental_technical_personnel" type="java.lang.String">
-            <column name="EXPERIMENTAL_TECHNICAL_PERSONNEL" />
+            <column name="experimental_technical_personnel" />
         </property>
         <property name="double_teacher_type" type="java.lang.String">
-            <column name="DOUBLE_TEACHER_TYPE" />
+            <column name="double_teacher_type" />
         </property>
         <property name="engineering_background" type="java.lang.String">
-            <column name="ENGINEERING_BACKGROUND" />
+            <column name="engineering_background" />
         </property>
         <property name="industry_background" type="java.lang.String">
-            <column name="INDUSTRY_BACKGROUND" />
+            <column name="industry_background" />
         </property>
         <property name="graduate_tutor_type" type="java.lang.String">
-            <column name="GRADUATE_TUTOR_TYPE" />
+            <column name="graduate_tutor_type" />
         </property>
         <property name="number_of_doctor" type="java.lang.String">
-            <column name="NUMBER_OF_DOCTOR" />
+            <column name="number_of_doctor" />
         </property>
         <property name="number_of_master" type="java.lang.String">
-            <column name="NUMBER_OF_MASTER" />
+            <column name="number_of_master" />
         </property>
         <property name="teacher_basic_gmt_create" type="java.lang.String">
             <column name="TEACHER_BASIC_GMT_CREATE" />

@@ -256,8 +256,22 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	 */
 	public void passTask() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		processManagementService.pass(passTaskID);
-		http_response.getWriter().write("success");
+		switch (processManagementService.pass(passTaskID)) {
+		case -5: {
+			http_response.getWriter().write("下一步任务无执行者");
+			break;
+		}
+		case 1: {
+			http_response.getWriter().write("success");
+			break;
+		}
+		default: {
+			http_response.getWriter().write("错误");
+			break;
+		}
+		}
+		;
+
 	}
 
 	public void dropTask() throws IOException {

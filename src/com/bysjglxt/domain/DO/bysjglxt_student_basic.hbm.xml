@@ -3,88 +3,88 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_student_basic" table="BYSJGLXT_STUDENT_BASIC">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_student_basic" table="bysjglxt_student_basic">
         <id name="student_basic_id" type="java.lang.String">
-            <column name="STUDENT_BASIC_ID" />
+            <column name="student_basic_id" />
             <generator class="assigned" />
         </id>
         <property name="student_basic_num" type="java.lang.String">
-            <column name="STUDENT_BASIC_NUM" />
+            <column name="student_basic_num" />
         </property>
         <property name="student_basic_name" type="java.lang.String">
-            <column name="STUDENT_BASIC_NAME" />
+            <column name="student_basic_name" />
         </property>
         <property name="student_basic_year" type="java.lang.String">
-            <column name="STUDENT_BASIC_YEAR" />
+            <column name="student_basic_year" />
         </property>
         <property name="student_basic_grade" type="java.lang.String">
-            <column name="STUDENT_BASIC_GRADE" />
+            <column name="student_basic_grade" />
         </property>
         <property name="student_basic_idtype" type="java.lang.String">
-            <column name="STUDENT_BASIC_IDTYPE" />
+            <column name="student_basic_idtype" />
         </property>
         <property name="student_basic_idcaard" type="java.lang.String">
-            <column name="STUDENT_BASIC_IDCAARD" />
+            <column name="student_basic_idcaard" />
         </property>
         <property name="student_basic_sex" type="java.lang.String">
-            <column name="STUDENT_BASIC_SEX" />
+            <column name="student_basic_sex" />
         </property>
         <property name="student_basic_nation" type="java.lang.String">
-            <column name="STUDENT_BASIC_NATION" />
+            <column name="student_basic_nation" />
         </property>
         <property name="student_basic_politicalvisage" type="java.lang.String">
-            <column name="STUDENT_BASIC_POLITICALVISAGE" />
+            <column name="student_basic_politicalvisage" />
         </property>
         <property name="student_basic_native_place" type="java.lang.String">
-            <column name="STUDENT_BASIC_NATIVE_PLACE" />
+            <column name="student_basic_native_place" />
         </property>
         <property name="student_basic_studenttype" type="java.lang.String">
-            <column name="STUDENT_BASIC_STUDENTTYPE" />
+            <column name="student_basic_studenttype" />
         </property>
         <property name="student_basic_enrollmenttype" type="java.lang.String">
-            <column name="STUDENT_BASIC_ENROLLMENTTYPE" />
+            <column name="student_basic_enrollmenttype" />
         </property>
         <property name="student_basic_teachingmethods" type="java.lang.String">
-            <column name="STUDENT_BASIC_TEACHINGMETHODS" />
+            <column name="student_basic_teachingmethods" />
         </property>
         <property name="student_basic_professionalcode" type="java.lang.String">
-            <column name="STUDENT_BASIC_PROFESSIONALCODE" />
+            <column name="student_basic_professionalcode" />
         </property>
         <property name="student_basic_major" type="java.lang.String">
-            <column name="STUDENT_BASIC_MAJOR" />
+            <column name="student_basic_major" />
         </property>
         <property name="student_basic_college" type="java.lang.String">
-            <column name="STUDENT_BASIC_COLLEGE" />
+            <column name="student_basic_college" />
         </property>
         <property name="student_basic_phone" type="java.lang.String">
-            <column name="STUDENT_BASIC_PHONE" />
+            <column name="student_basic_phone" />
         </property>
         <property name="student_basic_independentmajorname" type="java.lang.String">
-            <column name="STUDENT_BASIC_INDEPENDENTMAJORNAME" />
+            <column name="student_basic_independentmajorname" />
         </property>
         <property name="student_basic_is_normalmajor" type="java.lang.String">
-            <column name="STUDENT_BASIC_IS_NORMALMAJOR" />
+            <column name="student_basic_is_normalmajor" />
         </property>
         <property name="student_basic_is_disability" type="java.lang.String">
-            <column name="STUDENT_BASIC_IS_DISABILITY" />
+            <column name="student_basic_is_disability" />
         </property>
         <property name="student_basic_householdregistrationtype" type="java.lang.String">
-            <column name="STUDENT_BASIC_HOUSEHOLDREGISTRATIONTYPE" />
+            <column name="student_basic_householdregistrationtype" />
         </property>
         <property name="student_basic_transactiontypes" type="java.lang.String">
-            <column name="STUDENT_BASIC_TRANSACTIONTYPES" />
+            <column name="student_basic_transactiontypes" />
         </property>
         <property name="student_basic_entranceeducation" type="java.lang.String">
-            <column name="STUDENT_BASIC_ENTRANCEEDUCATION" />
+            <column name="student_basic_entranceeducation" />
         </property>
         <property name="student_basic_enrollmentmode" type="java.lang.String">
-            <column name="STUDENT_BASIC_ENROLLMENTMODE" />
+            <column name="student_basic_enrollmentmode" />
         </property>
         <property name="student_basic_reasonsfordroppingoutofschool" type="java.lang.String">
-            <column name="STUDENT_BASIC_REASONSFORDROPPINGOUTOFSCHOOL" />
+            <column name="student_basic_reasonsfordroppingoutofschool" />
         </property>
         <property name="student_basic_level" type="java.lang.String">
-            <column name="STUDENT_BASIC_LEVEL" />
+            <column name="student_basic_level" />
         </property>
     </class>
 </hibernate-mapping>
