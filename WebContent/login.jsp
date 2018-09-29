@@ -36,7 +36,7 @@
 <!--------------------------------------------------------------------------------->
 <!--------------------------------------------------------------------------------->
 <!--------------------------------------------------------------------------------->
-<title>毕业设计管理系统</title>
+<title>毕业设计过程管理系统</title>
 </head>
 <body>
 	<div class="panel" style="width: 550px; margin: 100px auto;">
@@ -44,7 +44,7 @@
 			<div>
 				<img src="<%=basePath%>img/logo.jpg" height="40px">
 			</div>
-			<h2 style="text-align: center;">毕业设计管理系统</h2>
+			<h2 style="text-align: center;">毕业设计过程管理系统</h2>
 		</div>
 		<div class="panel-body" style="margin: 0 0 20px 0;">
 			<div class="form-group">
