@@ -104,24 +104,57 @@
 							<td><input id="input_profession_teaching_date"
 								class="form-control" type="text"></td>
 							<th>是否实验技术人员</th>
-							<td><input id="input_experimental_technical_personnel"
-								class="form-control" type="text"></td>
+							<td>
+							
+							<select class="form-control" style="width: auto;"
+								id="input_experimental_technical_personnel"><option value="是">是</option>
+									<option value="否">否</option>
+							</select>
+							<!-- <input id="input_experimental_technical_personnel"
+								class="form-control" type="text"></td> -->
 						</tr>
 						<tr>
 							<th>是否双师型</th>
-							<td><input id="input_double_teacher_type"
-								class="form-control" type="text"></td>
+							<td>
+							<select class="form-control" style="width: auto;"
+								id="input_double_teacher_type"><option value="是">是</option>
+									<option value="否">否</option>
+							</select>
+							<!-- <input id="input_double_teacher_type"
+								class="form-control" type="text"> -->
+								
+								
+								</td>
 							<th>是否工程背景</th>
-							<td><input id="input_engineering_background"
-								class="form-control" type="text"></td>
+							<td>
+							<select class="form-control" style="width: auto;"
+								id="input_engineering_background"><option value="是">是</option>
+									<option value="否">否</option>
+							</select> <!-- <input id="input_engineering_background"
+								class="form-control" type="text"> -->
+
+							</td>
 						</tr>
 						<tr>
 							<th>是否行业背景</th>
-							<td><input id="input_industry_background"
-								class="form-control" type="text"></td>
+							<td>
+							<select class="form-control" style="width: auto;"
+								id="input_industry_background"><option value="是">是</option>
+									<option value="否">否</option>
+							</select>
+							<!-- <input id="input_industry_background"
+								class="form-control" type="text">
+							 -->	
+							</td>
 							<th>研究生导师类型</th>
-							<td><input id="input_graduate_tutor_type"
-								class="form-control" type="text"></td>
+							<td>
+							<!-- <input id="input_graduate_tutor_type"
+								class="form-control" type="text"> -->
+							<select class="form-control" style="width: auto;"
+								id="input_graduate_tutor_type"><option value="是">是</option>
+									<option value="否">否</option>
+							</select>
+							</td>
 						</tr>
 						<tr>
 							<th>校内指导博士生人数</th>

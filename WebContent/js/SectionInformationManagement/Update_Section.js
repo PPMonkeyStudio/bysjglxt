@@ -3,7 +3,7 @@ function UpdateSection(thisSection) {
 	var jc = $
 			.confirm({
 				columnClass : 'col-md-6 col-md-offset-3',
-				title : '学生详细信息',
+				title : '教研室详细信息',
 				content : '<form id="form_UpdateSection">'
 						+ '<table id="table_section_update" class="table table-hover table-bordered" style="text-align: center;">'
 						+ '<tbody></tbody>' + '</table>' + '</form>',
