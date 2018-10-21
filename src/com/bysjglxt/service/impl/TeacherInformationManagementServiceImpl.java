@@ -54,14 +54,12 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	// 根据使用者Id获取学院
 	/*
 	 * public String getCollegeByUserId(String userId) { bysjglxt_teacher_user
-	 * bysjglxt_teacher_user = new bysjglxt_teacher_user();
-	 * bysjglxt_teacher_user =
+	 * bysjglxt_teacher_user = new bysjglxt_teacher_user(); bysjglxt_teacher_user =
 	 * teacherInformationManagementDao.getStudentById(userId); if
 	 * (bysjglxt_teacher_user.getUser_teacher_belong_college() != null &&
-	 * bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >=
-	 * 0) { return
-	 * bysjglxt_teacher_user.getUser_teacher_belong_college().trim(); } return
-	 * null; }
+	 * bysjglxt_teacher_user.getUser_teacher_belong_college().trim().length() >= 0)
+	 * { return bysjglxt_teacher_user.getUser_teacher_belong_college().trim(); }
+	 * return null; }
 	 */
 
 	/**
@@ -368,17 +366,27 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	}
 
 	@Override
-	public boolean updatePassword(String user_teacher_id, String password) {
-		boolean flag = false;
+	public int updatePassword(String user_teacher_id, String password, String oldPassword) {
 		if (user_teacher_id == null || user_teacher_id.trim().length() <= 0) {
-			return false;
+			return -1;
 		}
 		if (password == null || password.trim().length() <= 0) {
-			return false;
+			return -1;
 		}
-		flag = teacherInformationManagementDao.updatePassword(user_teacher_id, md5.GetMD5Code(password),
+		if (oldPassword == null || oldPassword.trim().length() <= 0) {
+			return -1;
+		}
+		bysjglxt_teacher_user teacherUser = new bysjglxt_teacher_user();
+		teacherUser = teacherInformationManagementDao.getStudentById(user_teacher_id);
+		if (teacherUser != null) {
+			if (teacherUser.getUser_teacher_password() != null
+					&& !(md5.GetMD5Code(oldPassword).equals(teacherUser.getUser_teacher_password()))) {
+				return -1;
+			}
+		}
+		teacherInformationManagementDao.updatePassword(user_teacher_id, md5.GetMD5Code(password),
 				TeamUtil.getStringSecond());
-		return flag;
+		return 1;
 	}
 
 	// 批量增加记录员

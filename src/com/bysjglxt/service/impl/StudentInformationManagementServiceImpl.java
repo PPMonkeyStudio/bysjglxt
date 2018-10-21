@@ -474,17 +474,27 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	}
 
 	@Override
-	public boolean updatePassword(String user_student_id, String password) {
-		boolean flag = false;
+	public int updatePassword(String user_student_id, String password, String oldPassword) {
 		if (user_student_id == null || user_student_id.trim().length() <= 0) {
-			return false;
+			return -1;
 		}
 		if (password == null || password.trim().length() <= 0) {
-			return false;
+			return -1;
 		}
-		flag = studentInformationManagementDao.updatePassword(user_student_id, md5.GetMD5Code(password),
+		if (oldPassword == null || oldPassword.trim().length() <= 0) {
+			return -1;
+		}
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = studentInformationManagementDao.getStudentByNum(user_student_id);
+		if (studentUser != null) {
+			if (studentUser.getUser_student_password() != null
+					&& !(md5.GetMD5Code(oldPassword).equals(studentUser.getUser_student_password()))) {
+				return -1;
+			}
+		}
+		studentInformationManagementDao.updatePassword(user_student_id, md5.GetMD5Code(password),
 				TeamUtil.getStringSecond());
-		return flag;
+		return 1;
 	}
 
 	@Override

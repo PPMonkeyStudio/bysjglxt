@@ -38,8 +38,7 @@ public interface StudentInformationManagementService {
 			throws Exception;
 
 	/**
-	 * @说明 将学生基础信息List生成bysjglxt_student_basic以及基于此生成的bysjglxt_user_student，
-	 *     存储到数据库中
+	 * @说明 将学生基础信息List生成bysjglxt_student_basic以及基于此生成的bysjglxt_user_student， 存储到数据库中
 	 * @param studentBasicList
 	 *            学生基础信息List
 	 * @return 是否存储成功,1是 0否
@@ -155,6 +154,6 @@ public interface StudentInformationManagementService {
 	 * 更改密码
 	 * 
 	 */
-	public boolean updatePassword(String user_student_id, String password);
+	public int updatePassword(String user_student_id, String password, String oldPassword);
 
 }

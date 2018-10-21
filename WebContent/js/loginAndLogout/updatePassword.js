@@ -9,6 +9,9 @@ function updatePassword() {
 						// + '<input type="password" id="oldPassword"
 						// class="form-control" required />'
 						// + '</tr>'
+						+ '<tr>旧密码：'
+						+ '<input type="password" id="oldPassword" class="form-control" required />'
+						+ '</tr>'
 						+ '<tr>新密码：'
 						+ '<input type="password" id="newPassword" class="form-control" required />'
 						+ '</tr>'
@@ -21,6 +24,8 @@ function updatePassword() {
 						action : function() {
 							// var oldPassword = document
 							// .getElementById("oldPassword");
+							var oldPassword = document
+									.getElementById("oldPassword");
 							var newPassword = document
 									.getElementById("newPassword");
 							var newPassword2 = document
@@ -53,12 +58,13 @@ function updatePassword() {
 								var message;
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
-										if (xhr.responseText == "success") {
+										if (xhr.responseText == "1") {
 											toastr.success("修改成功");
-											return true;
+											jc.close();
+										} else if (xhr.responseText == "-1") {
+											toastr.error("旧密码输入错误");
 										} else {
 											toastr.error("修改失败");
-											return false;
 										}
 									} else {
 										toastr.error(xhr.status);
@@ -66,13 +72,12 @@ function updatePassword() {
 								}
 							}
 							var formData = new FormData();
-							// formData.append("oldPassword",
-							// oldPassword.value);
 							formData.append("newPassword", newPassword.value);
-							xhr
-									.open("POST",
+							formData.append("oldPassword", oldPassword.value);
+							xhr.open("POST",
 											"/bysjglxt/loginLogout/LoginLogoutManagement_updatePassword");
 							xhr.send(formData);
+							return false;
 						}
 					},
 					'返回 ' : function() {

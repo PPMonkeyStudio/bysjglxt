@@ -126,17 +126,17 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 	public void updatePassword() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			teacherInformationManagementService.updatePassword(
-					((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
-							.getBysjglxtTeacherUser().getUser_teacher_id(),
-					newPassword);
-			http_response.getWriter().write("success");
+			http_response.getWriter()
+					.write(teacherInformationManagementService.updatePassword(
+							((TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO"))
+									.getBysjglxtTeacherUser().getUser_teacher_id(),
+							newPassword, oldPassword) + "");
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
-			studentInformationManagementService.updatePassword(
-					((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
-							.getBysjglxtStudentUser().getUser_student_id(),
-					newPassword);
-			http_response.getWriter().write("success");
+			http_response.getWriter()
+					.write(studentInformationManagementService.updatePassword(
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id(),
+							newPassword, oldPassword) + "");
 		} else if (ActionContext.getContext().getSession().get("admin") != null) {
 			http_response.getWriter().write("error");
 		}

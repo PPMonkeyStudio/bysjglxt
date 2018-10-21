@@ -131,7 +131,7 @@ public interface TeacherInformationManagementService {
 	 * @param password
 	 * @return
 	 */
-	public boolean updatePassword(String user_teacher_id, String password);
+	public int updatePassword(String user_teacher_id, String password,String oldPassword);
 
 	/**
 	 * 批量增加记录员
