@@ -119,6 +119,7 @@ public class CollegeManagementDaoImpl implements CollegeManagementDao {
 		session.clear();
 		return bysjglxt_college;
 	}
+
 	/**
 	 * 根据工号查找教师信息
 	 */
@@ -131,6 +132,17 @@ public class CollegeManagementDaoImpl implements CollegeManagementDao {
 		bysjglxt_teacher_basic = (bysjglxt_teacher_basic) query.uniqueResult();
 		session.clear();
 		return bysjglxt_teacher_basic;
+	}
+
+	@Override
+	public bysjglxt_college getCollegeById(String id) {
+		bysjglxt_college bysjglxt_college = new bysjglxt_college();
+		Session session = getSession();
+		String hql = "from bysjglxt_college where college_id='" + id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_college = (bysjglxt_college) query.uniqueResult();
+		session.clear();
+		return bysjglxt_college;
 	}
 
 }

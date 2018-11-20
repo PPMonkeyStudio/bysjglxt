@@ -26,5 +26,11 @@ public interface CollegeManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_college getCollegeByName(String trim);
 
 	public com.bysjglxt.domain.DO.bysjglxt_teacher_basic getTeacherBasicByJobNum(String trim);
+	/**
+	 * 根据id获取学院
+	 * @param id
+	 * @return
+	 */
+	public bysjglxt_college getCollegeById(String id);
 
 }

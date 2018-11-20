@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -13,9 +14,30 @@ import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.junit.Test;
+
 public class TeamUtil {
 
 	static SimpleDateFormat formatter;
+
+	private static final int MONTH = 3;
+
+	// 判断当前时间是在属于第几届
+	public static String getPeoiod() {
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
+		if (month <= MONTH) {
+			return year + "";
+		}
+		return year + 1 + "";
+	}
+
+	
+	@Test
+	public void gg() {
+		System.out.println(getPeoiod());
+	}
 
 	// 添加数字中文化的方法
 	public static String format(String text) {

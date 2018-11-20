@@ -194,4 +194,21 @@ public interface TopicInformationManagementService {
 	 */
 	public int dropTopic(String studentUserId);
 
+	/**
+	 * 获取某个系的所有选题
+	 * @param topic
+	 * @param user_teacher_belong_college
+	 * @return
+	 */
+	public List<bysjglxt_topic> listAllTopic(bysjglxt_topic topic, String user_teacher_belong_college);
+
+	/**
+	 * 根据id获取课题
+	 * @param topicId
+	 * @return
+	 */
+	public bysjglxt_topic getTopicById(String topicId);
+
+	
+
 }

@@ -11,7 +11,7 @@ public class TeacherInformationDTO {
 	private bysjglxt_teacher_user bysjglxtTeacherUser;
 
 	private bysjglxt_section bysjglxtSection;
-
+	
 	/*
 	 * 
 	 */

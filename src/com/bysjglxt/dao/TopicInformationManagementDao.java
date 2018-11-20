@@ -117,10 +117,28 @@ public interface TopicInformationManagementDao {
 			String task_definition_id, String process_instance_id);
 
 	public List<bysjglxt_student_user> getListStudentUserByDesignation(String studentMajor, String studentGrade,
-			String search,String college);
+			String search, String college);
 
 	public com.bysjglxt.domain.DO.bysjglxt_topic getTopicByIdAndStudent(String student_user, String topicId);
 
 	public List<com.bysjglxt.domain.DO.bysjglxt_teacher_user> getListAdminByCollege(String user_teacher_belong_college);
+
+	public String getTopicMaxNumByYear(String topic_year);
+
+	/**
+	 * 根据条件获取所有的选题
+	 * 
+	 * @param topic
+	 * @param user_teacher_belong_college
+	 * @return
+	 */
+	public List<bysjglxt_topic> listAllTopic(bysjglxt_topic topic, String user_teacher_belong_college);
+
+	/**
+	 * 获取课题
+	 * @param topicId
+	 * @return
+	 */
+	public bysjglxt_topic getTopicById(String topicId);
 
 }

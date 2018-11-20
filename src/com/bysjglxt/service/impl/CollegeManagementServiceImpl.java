@@ -22,10 +22,12 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		this.collegeManagementDao = collegeManagementDao;
 	}
 
+	
+	
+	
 	/**
 	 * 
 	 */
-
 	@Override
 	public List<CollegeInformationDTO> listCollegeInformationDTO() {
 		List<CollegeInformationDTO> listCollegeInformationDTO = new ArrayList<>();
@@ -171,6 +173,16 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		bysjglxt_teacher_user.setUser_teacher_is_defence_leader(2);
 		collegeManagementDao.saveObj(bysjglxt_teacher_user);
 		return 1;
+	}
+
+
+
+	/**
+	 * 
+	 */
+	@Override
+	public bysjglxt_college getCollegetById(String id) {
+		return this.collegeManagementDao.getCollegeById(id);
 	}
 
 }

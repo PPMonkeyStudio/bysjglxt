@@ -1,51 +1,57 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-1-7 17:18:31 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-11-19 23:01:29 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_topic" table="bysjglxt_topic">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_topic" table="BYSJGLXT_TOPIC">
         <id name="topic_id" type="java.lang.String">
-            <column name="topic_id" />
+            <column name="TOPIC_ID" />
             <generator class="assigned" />
         </id>
         <property name="topic_name_chinese" type="java.lang.String">
-            <column name="topic_name_chinese" />
+            <column name="TOPIC_NAME_CHINESE" />
+        </property>
+        <property name="topic_num" type="java.lang.String">
+            <column name="TOPIC_NUM" />
+        </property>
+        <property name="topic_year" type="java.lang.String">
+            <column name="TOPIC_YEAR" />
         </property>
         <property name="topic_name_english" type="java.lang.String">
-            <column name="topic_name_english" />
+            <column name="TOPIC_NAME_ENGLISH" />
         </property>
         <property name="topic_requirement" type="java.lang.String">
-            <column name="topic_requirement" />
+            <column name="TOPIC_REQUIREMENT" />
         </property>
         <property name="topic_source" type="java.lang.String">
-            <column name="topic_source" />
+            <column name="TOPIC_SOURCE" />
         </property>
         <property name="topic_type" type="java.lang.String">
-            <column name="topic_type" />
+            <column name="TOPIC_TYPE" />
         </property>
         <property name="topic_student_max" type="int">
-            <column name="topic_student_max" />
+            <column name="TOPIC_STUDENT_MAX" />
         </property>
         <property name="topic_remark" type="java.lang.String">
-            <column name="topic_remark" />
+            <column name="TOPIC_REMARK" />
         </property>
         <property name="topic_teacher" type="java.lang.String">
-            <column name="topic_teacher" />
+            <column name="TOPIC_TEACHER" />
         </property>
         <property name="topic_student" type="java.lang.String">
-            <column name="topic_student" />
+            <column name="TOPIC_STUDENT" />
         </property>
         <property name="topic_gmt_create" type="java.lang.String">
-            <column name="topic_gmt_create" />
+            <column name="TOPIC_GMT_CREATE" />
         </property>
         <property name="topic_gmt_modified" type="java.lang.String">
-            <column name="topic_gmt_modified" />
+            <column name="TOPIC_GMT_MODIFIED" />
         </property>
         <property name="topic_examine_state" type="java.lang.String">
-            <column name="topic_examine_state" />
+            <column name="TOPIC_EXAMINE_STATE" />
         </property>
         <property name="topic_student_num" type="int">
-            <column name="topic_student_num" />
+            <column name="TOPIC_STUDENT_NUM" />
         </property>
     </class>
 </hibernate-mapping>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_section;
@@ -20,6 +21,7 @@ import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
+import com.bysjglxt.service.CollegeManagementService;
 import com.bysjglxt.service.TopicInformationManagementService;
 
 import util.TeamUtil;
@@ -29,6 +31,16 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	// Dao层的注入
 	private TopicInformationManagementDao topicInformationManagementDao;
 
+	private CollegeManagementService collegeManagementService;
+
+	public void setCollegeManagementService(CollegeManagementService collegeManagementService) {
+		this.collegeManagementService = collegeManagementService;
+	}
+
+	public CollegeManagementService getCollegeManagementService() {
+		return collegeManagementService;
+	}
+
 	public TopicInformationManagementDao getTopicInformationManagementDao() {
 		return topicInformationManagementDao;
 	}
@@ -36,7 +48,13 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	public void setTopicInformationManagementDao(TopicInformationManagementDao topicInformationManagementDao) {
 		this.topicInformationManagementDao = topicInformationManagementDao;
 	}
-
+	/**
+	 * 获取所有的某个系的选题
+	 */
+	@Override
+	public List<bysjglxt_topic> listAllTopic(bysjglxt_topic topic, String user_teacher_belong_college) {
+		return this.topicInformationManagementDao.listAllTopic(topic,user_teacher_belong_college);
+	}
 	// 添加评阅老师
 	@Override
 	public int assignment(String studentUserId, String reviewId) {
@@ -73,7 +91,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				}
 			}
 		}
-		
+
 		return 1;
 	}
 
@@ -90,6 +108,9 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		if (bysjglxt_teacher_user == null) {
 			return false;
 		}
+		// 根据教师user基础信息表获取学院信息
+		bysjglxt_college college = this.collegeManagementService
+				.getCollegetById(bysjglxt_teacher_user.getUser_teacher_belong_college());
 		bysjglxt_topic newTopic = new bysjglxt_topic();
 		newTopic = topicInformationDTO.getBysjglxtTopic();
 		if (newTopic != null) {
@@ -98,10 +119,18 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			newTopic.setTopic_gmt_modified(TeamUtil.getStringSecond());
 			newTopic.setTopic_examine_state("未审核");
 			newTopic.setTopic_teacher(bysjglxt_teacher_user.getUser_teacher_id());
-			/*
-			 * newTopic.setTopic_student_num(0);
-			 * newTopic.setTopic_student_max(-1);
-			 */
+			// 获取今年的课题最大值
+			newTopic.setTopic_year(TeamUtil.getPeoiod());
+			// 获取该年的最大课题编号数
+			String maxNumber = this.topicInformationManagementDao.getTopicMaxNumByYear(newTopic.getTopic_year());
+			if (maxNumber != null && maxNumber.trim().length() > 0) {
+				int nextNumber = Integer.parseInt(maxNumber);
+				nextNumber = nextNumber + 1;
+				String num = String.format("%04d", nextNumber);
+				newTopic.setTopic_num("xt" + college.getCollege_code() + newTopic.getTopic_year() + num);
+			} else {
+				newTopic.setTopic_num("xt" + college.getCollege_code() + newTopic.getTopic_year() + "0001");
+			}
 			flag = topicInformationManagementDao.addObject(newTopic);
 		} else {
 			return false;
@@ -987,4 +1016,11 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		flag = topicInformationManagementDao.CreateTopic(bysjglxt_topic);
 		return flag;
 	}
+
+	@Override
+	public bysjglxt_topic getTopicById(String topicId) {
+		return this.topicInformationManagementDao.getTopicById(topicId);
+	}
+
+
 }

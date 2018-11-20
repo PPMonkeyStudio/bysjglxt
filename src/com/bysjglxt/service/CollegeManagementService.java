@@ -18,4 +18,7 @@ public interface CollegeManagementService {
 	// 添加系部
 	public int addCollege(bysjglxt_college college, bysjglxt_teacher_basic bysjglxt_teacher_basic);
 
+	
+	public bysjglxt_college getCollegetById(String id);
+	
 }

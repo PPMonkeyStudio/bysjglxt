@@ -62,10 +62,14 @@ public class TopicInformationManagementAction extends ActionSupport
 	 * 分配选题
 	 */
 	private String assignmentStudentUserId;
-	//已更改成学生userId
+	// 已更改成学生userId
 	private String assignmentTopicId;
 	private String assignmentReviewTeacherId;
 
+	private bysjglxt_topic topic;
+
+	private String topicId;
+	
 	/*
 	 * 
 	 */
@@ -73,6 +77,43 @@ public class TopicInformationManagementAction extends ActionSupport
 	/*
 	 * 
 	 */
+
+	public String getTopicId() {
+		return topicId;
+	}
+	public void setTopicId(String topicId) {
+		this.topicId = topicId;
+	}
+	/**
+	 * @throws IOException 
+	 * 
+	 */
+	public void getTopicById() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		bysjglxt_topic topic = topicInformationManagementService.getTopicById(topicId);
+		http_response.getWriter().write(gson.toJson(topic));
+	}
+	/**
+	 * 获取所有的选题
+	 * 
+	 * @throws IOException
+	 */
+	public void listAllTopic() throws IOException {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		http_response.setContentType("text/html;charset=utf-8");
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		System.out.println("d:"+topic);
+		List<bysjglxt_topic> list_topic = topicInformationManagementService.listAllTopic(topic,
+				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_belong_college());
+		http_response.getWriter().write(gson.toJson(list_topic));
+	}
+
 	/**
 	 * @说明 跳转列表页
 	 * 
@@ -162,17 +203,13 @@ public class TopicInformationManagementAction extends ActionSupport
 		if (ActionContext.getContext().getSession().get("userStudentDTO") == null) {
 			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
 					.get("userTeacherDTO");
-			http_response.getWriter()
-					.write(gson.toJson(
-							topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 1,
-									userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
+			http_response.getWriter().write(gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(
+					topicInformationManagementVO, 1, userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
 		} else {
 			StudentInformationDTO userStudentDTO = (StudentInformationDTO) ActionContext.getContext().getSession()
 					.get("userStudentDTO");
-			http_response.getWriter()
-					.write(gson.toJson(
-							topicInformationManagementService.VO_Topic_By_PageAndSearch(topicInformationManagementVO, 2,
-									userStudentDTO.getBysjglxtStudentUser().getUser_student_id())));
+			http_response.getWriter().write(gson.toJson(topicInformationManagementService.VO_Topic_By_PageAndSearch(
+					topicInformationManagementVO, 2, userStudentDTO.getBysjglxtStudentUser().getUser_student_id())));
 		}
 	}
 
@@ -206,10 +243,8 @@ public class TopicInformationManagementAction extends ActionSupport
 		 * 
 		 */
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter()
-				.write(gson
-						.toJson(topicInformationManagementService.listDesignationStudentInformation(studentSelectTopic,
-								"-1", "-1", search, userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
+		http_response.getWriter().write(gson.toJson(topicInformationManagementService.listDesignationStudentInformation(
+				studentSelectTopic, "-1", "-1", search, userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
 	}
 
 	/**
@@ -231,8 +266,8 @@ public class TopicInformationManagementAction extends ActionSupport
 			//
 			http_response.getWriter()
 					.write(gson.toJson(topicInformationManagementService.VO_TopicBelongStudent_By_PageAndSearch(
-							topicInformationManagementVO, studentInformationDTO.getBysjglxtStudentUser()
-									.getUser_student_id())));
+							topicInformationManagementVO,
+							studentInformationDTO.getBysjglxtStudentUser().getUser_student_id())));
 		} else if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
 			//
 			TeacherInformationDTO teacherInformationDTO = (TeacherInformationDTO) ActionContext.getContext()
@@ -240,8 +275,8 @@ public class TopicInformationManagementAction extends ActionSupport
 			//
 			http_response.getWriter()
 					.write(gson.toJson(topicInformationManagementService.VO_TopicBelongTeacher_By_PageAndSearch(
-							topicInformationManagementVO, teacherInformationDTO.getBysjglxtTeacherUser()
-									.getUser_teacher_id())));
+							topicInformationManagementVO,
+							teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
 		}
 
 	}
@@ -311,15 +346,20 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	/**
 	 * 分配课题
+	 * @throws IOException 
 	 */
-	public void assignmentStudentTopic() {
+	public void assignmentStudentTopic() throws IOException {
 		topicInformationManagementService.assignmentStudentTopic(assignmentStudentUserId, assignmentTopicId);
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
 	}
 
-	public void dropTopic() {
+	public void dropTopic() throws IOException {
 		topicInformationManagementService
 				.dropTopic(((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 						.getBysjglxtStudentUser().getUser_student_id());
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write("success");
 	}
 
 	/*
@@ -466,6 +506,14 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	public void setSearch(String search) {
 		this.search = search;
+	}
+
+	public bysjglxt_topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(bysjglxt_topic topic) {
+		this.topic = topic;
 	}
 
 }

@@ -14,6 +14,8 @@
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/Create_Topic.js"></script>
+<script type="text/javascript" src="<%=basePath%>/js/TopicInformationManagement/OverTheYearsTopic.js"></script>
+<%-- <script type="text/javascript" src="<%=basePath%>/js/TopicInformationManagement/TopicDistributionStudentDisplay.js"></script> --%>
 <!---------------------------------------------------------------------------------------------------->
 <title>创建课题</title>
 </head>
@@ -29,7 +31,8 @@
 		<!---------------------------------------------------------------------------------------------------->
 		<div class="panel" style="width: 900px; margin: 20px auto;">
 			<div class="panel-heading">
-				<h3 class="panel-title">新增课题</h3>
+				<span class="panel-title">新增课题</span>
+				<span style="float:right"><a onclick="overTheYearsTopic(this)" href="javascript:void(0);">从历年选题中选择</a></span>
 			</div>
 			<div class="panel-body">
 				<div>

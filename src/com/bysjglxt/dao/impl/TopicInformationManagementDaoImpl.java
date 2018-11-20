@@ -147,7 +147,8 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic.topic_teacher = '" + topicManagementVO.getTeacher() + "'";
 		}
-		hql = hql + " order by topic.topic_examine_state desc,topic.topic_gmt_create desc";
+		hql = hql
+				+ " and topic.topic_year = (select max(bt.topic_year) from  bysjglxt_topic bt) order by topic.topic_examine_state desc,topic.topic_gmt_create desc";
 		Query query = session.createQuery(hql);
 		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
 		query.setMaxResults(topicManagementVO.getPageSize());
@@ -713,7 +714,7 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		session.clear();
 		return bysjglxt_topic_select;
 	}
-	
+
 	@Override
 	public bysjglxt_topic_select getSelectTopicByOwnId(String topicId) {
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
@@ -822,6 +823,49 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		teacherUser = query.list();
 		session.clear();
 		return teacherUser;
+	}
+
+	@Override
+	public String getTopicMaxNumByYear(String topic_year) {
+		Session session = getSession();
+		Query query = session.createSQLQuery(
+				"SELECT MAX(SUBSTR(topic.topic_num,9,4)) from bysjglxt_topic topic where topic.topic_year = '"
+						+ topic_year + "'");
+		String number = (String) query.uniqueResult();
+		return number;
+	}
+
+	@Override
+	public List<bysjglxt_topic> listAllTopic(bysjglxt_topic topic, String user_teacher_belong_college) {
+		List<bysjglxt_topic> listTopic = new ArrayList<>();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic topic where 1=1";
+
+		if (null != topic) {
+			if (topic.getTopic_source() != null && topic.getTopic_source().length() > 0) {
+				hql = hql + " and topic.topic_source='" + topic.getTopic_source() + "'";
+			}
+			if (null != topic.getTopic_type() && topic.getTopic_type().length() > 0) {
+				hql = hql + " and topic_type = '" + topic.getTopic_type() + "'";
+			}
+		}
+		hql = hql + " order by topic.topic_gmt_modified desc";
+		System.out.println(hql);
+		Query query = session.createQuery(hql);
+		listTopic = query.list();
+		session.clear();
+		return listTopic;
+	}
+
+	@Override
+	public bysjglxt_topic getTopicById(String topicId) {
+		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
+		String hql = "from bysjglxt_topic where topic_id='" + topicId+"'";
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
+		session.clear();
+		return bysjglxt_topic;
 	}
 
 }

@@ -3,6 +3,8 @@ package com.bysjglxt.domain.DO;
 public class bysjglxt_topic {
 	private String topic_id;
 	private String topic_name_chinese;
+	private String topic_num;
+	private String topic_year;
 	private String topic_name_english;
 	private String topic_requirement;
 	private String topic_source;
@@ -15,6 +17,24 @@ public class bysjglxt_topic {
 	private String topic_gmt_modified;
 	private String topic_examine_state;
 	private int topic_student_num;
+
+	
+	
+	public String getTopic_num() {
+		return topic_num;
+	}
+
+	public void setTopic_num(String topic_num) {
+		this.topic_num = topic_num;
+	}
+
+	public String getTopic_year() {
+		return topic_year;
+	}
+
+	public void setTopic_year(String topic_year) {
+		this.topic_year = topic_year;
+	}
 
 	public int getTopic_student_num() {
 		return topic_student_num;
@@ -130,13 +150,25 @@ public class bysjglxt_topic {
 
 	@Override
 	public String toString() {
-		return "bysjglxt_topic [topic_id=" + topic_id + ", topic_name_chinese=" + topic_name_chinese
-				+ ", topic_name_english=" + topic_name_english + ", topic_requirement=" + topic_requirement
-				+ ", topic_source=" + topic_source + ", topic_type=" + topic_type + ", topic_student_max="
-				+ topic_student_max + ", topic_remark=" + topic_remark + ", topic_teacher=" + topic_teacher
-				+ ", topic_student=" + topic_student + ", topic_gmt_create=" + topic_gmt_create
-				+ ", topic_gmt_modified=" + topic_gmt_modified + ", topic_examine_state=" + topic_examine_state
-				+ ", topic_student_num=" + topic_student_num + "]";
+		return "bysjglxt_topic [topic_id=" + topic_id + ", topic_name_chinese=" + topic_name_chinese + ", topic_num="
+				+ topic_num + ", topic_year=" + topic_year + ", topic_name_english=" + topic_name_english
+				+ ", topic_requirement=" + topic_requirement + ", topic_source=" + topic_source + ", topic_type="
+				+ topic_type + ", topic_student_max=" + topic_student_max + ", topic_remark=" + topic_remark
+				+ ", topic_teacher=" + topic_teacher + ", topic_student=" + topic_student + ", topic_gmt_create="
+				+ topic_gmt_create + ", topic_gmt_modified=" + topic_gmt_modified + ", topic_examine_state="
+				+ topic_examine_state + ", topic_student_num=" + topic_student_num + ", getTopic_num()="
+				+ getTopic_num() + ", getTopic_year()=" + getTopic_year() + ", getTopic_student_num()="
+				+ getTopic_student_num() + ", getTopic_id()=" + getTopic_id() + ", getTopic_name_chinese()="
+				+ getTopic_name_chinese() + ", getTopic_name_english()=" + getTopic_name_english()
+				+ ", getTopic_requirement()=" + getTopic_requirement() + ", getTopic_source()=" + getTopic_source()
+				+ ", getTopic_type()=" + getTopic_type() + ", getTopic_student_max()=" + getTopic_student_max()
+				+ ", getTopic_remark()=" + getTopic_remark() + ", getTopic_teacher()=" + getTopic_teacher()
+				+ ", getTopic_student()=" + getTopic_student() + ", getTopic_gmt_create()=" + getTopic_gmt_create()
+				+ ", getTopic_gmt_modified()=" + getTopic_gmt_modified() + ", getTopic_examine_state()="
+				+ getTopic_examine_state() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+	
 
 }

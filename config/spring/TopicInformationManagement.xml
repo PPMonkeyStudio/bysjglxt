@@ -11,6 +11,7 @@
 
 	<bean id="topicInformationManagementService" class="com.bysjglxt.service.impl.TopicInformationManagementServiceImpl">
 		<property name="topicInformationManagementDao" ref="topicInformationManagementDao"></property>
+		<property name="collegeManagementService" ref="collegeManagementService"></property>
 	</bean>
 
 	<bean id="topicInformationManagementDao" class="com.bysjglxt.dao.impl.TopicInformationManagementDaoImpl">
