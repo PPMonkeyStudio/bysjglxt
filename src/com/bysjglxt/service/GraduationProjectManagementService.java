@@ -32,6 +32,13 @@ public interface GraduationProjectManagementService {
 	public String generateTutorTotalGraduationComment(bysjglxt_evaluate_tutor evaluateTutor);
 
 	/**
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public File exportAll() throws Exception;
+	
+	/**
 	 * 生成单条评语
 	 * 
 	 * @param commentCategory

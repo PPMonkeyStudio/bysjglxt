@@ -1,5 +1,6 @@
 package com.bysjglxt.service.impl;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +53,9 @@ import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import util.ExcelToBean2;
 import util.TeamUtil;
 import util.XwpfTUtil;
@@ -918,10 +923,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			 * if (teacherTutorStudentVO.getSearch() != null &&
 			 * teacherTutorStudentVO.getSearch().trim().length() > 0) {
 			 * bysjglxtTopic.setTopic_name_chinese(bysjglxtTopic.
-			 * getTopic_name_chinese().replaceAll(
-			 * teacherTutorStudentVO.getSearch(),
-			 * "<span style='color: #ff5063;'>" +
-			 * teacherTutorStudentVO.getSearch().trim() + "</span>")); }
+			 * getTopic_name_chinese().replaceAll( teacherTutorStudentVO.getSearch(),
+			 * "<span style='color: #ff5063;'>" + teacherTutorStudentVO.getSearch().trim() +
+			 * "</span>")); }
 			 */
 			if (bysjglxtTopic != null) {
 				teacherTutorStudentDTO.setBysjglxtTopic(bysjglxtTopic);
@@ -1545,7 +1549,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		return flag;
 	}
 
-	/******************************** 下面是我的毕业设计需要 ***************************************/
+	/********************************
+	 * 下面是我的毕业设计需要
+	 ***************************************/
 
 	@Override
 	public bysjglxt_taskbook get_TaskBook(String userId) {
@@ -1655,6 +1661,41 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return zipFile;
 	}
+
+	// ---------------------------------------------------------------------------------------------//
+
+	/**
+	 * 
+	 * @return
+	 * @throws IOException
+	 * @throws TemplateException
+	 */
+	public File exportAll() throws Exception {
+		Map<String, Object> params = new HashMap<String, Object>();
+		// 获取文件路径
+		String lj = "";
+		Properties props = new Properties();
+		props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+		lj = props.getProperty("lj");
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("x1", "毕业设计过程管理手册毕业设计过程管理手册毕业设计过程管理手册毕业设计过程管理手册毕业设计过程管理手册毕业设计过程管理手册");
+		param.put("x2", "江鑫鑫");
+		param.put("x3", "2019");
+		param.put("x4", "9");
+		param.put("x5", "12");
+		params.putAll(param);
+		Configuration configuration = new Configuration();
+		configuration.setDefaultEncoding("UTF-8");
+		// 设置编码
+		configuration.setClassForTemplateLoading(this.getClass(), "");
+		Template t = configuration.getTemplate("abc.ftl", "UTF-8");
+		OutputStream os = new FileOutputStream(lj + "kokokoko.doc");
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
+		t.process(params, bw);
+		return new File(lj + "kokokoko.doc");
+	}
+
+	// ---------------------------------------------------------------------------------------------//
 
 	// 导出单个人
 	public File exportOneStudent(String userId) throws Exception {

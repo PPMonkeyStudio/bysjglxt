@@ -518,9 +518,10 @@ public class GraduationProjectManagementAction extends ActionSupport
 		// ActionContext.getContext().getSession().get("userStudentDTO"))
 		// .getBysjglxtStudentUser().getUser_student_id());
 		//
-		String[] StringUse_sz = StringUse.split(",");
-		listStringUse = Arrays.asList(StringUse_sz);
-		File exportFile = graduationProjectManagementService.exportAll(listStringUse);
+//		String[] StringUse_sz = StringUse.split(",");
+//		listStringUse = Arrays.asList(StringUse_sz);
+//		File exportFile = graduationProjectManagementService.exportAll(listStringUse);
+		File exportFile = graduationProjectManagementService.exportAll();
 		if (exportFile != null) {
 			fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
 			inputStream = new FileInputStream(exportFile);
