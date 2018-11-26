@@ -1463,4 +1463,24 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return listComment;
 	}
 
+	/**
+	 * 开题报告文件置空
+	 */
+	@Override
+	public boolean deleteReportOpeningFileByUserId(String userId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_report_opening set report_opening_file=null where report_opening_student='" + userId
+					+ "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+			session.flush();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

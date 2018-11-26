@@ -453,5 +453,23 @@ public interface GraduationProjectManagementService {
 	 * @throws Exception
 	 */
 	public List<bysjglxt_comment> previewComment(File eXCEL_Comment, String eXCEL_CommentFileName) throws Exception;
+	/**
+	 * 更新开题报告
+	 * @param dissertation
+	 * @param oldDissertation
+	 * @param user_student_id
+	 * @param dissertationFileName
+	 * @return
+	 * @throws IOException 
+	 */
+	public int saveReportOpening(File dissertation, String oldDissertation, String user_student_id,
+			String dissertationFileName) throws IOException;
+
+	/**
+	 * 下载开题报告
+	 * @param dissertationUserID
+	 * @return
+	 */
+	public File downloadReportOpening(String dissertationUserID);
 
 }

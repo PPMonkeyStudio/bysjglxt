@@ -64,8 +64,7 @@ function dissertation() {
 				 */
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
-				var div_dissertation_del = document
-						.getElementById("div_dissertation_del");
+				var div_dissertation_del = document.getElementById("div_dissertation_del");
 				if ("学生提交答辩论文" != current_processDefinitionName) {
 					div_2.parentNode.removeChild(div_2);
 					button_SaveGraduationProject.style.display = "none";

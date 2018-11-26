@@ -140,4 +140,6 @@ public interface GraduationProjectManagementDao {
 	//获取评语list
 	public List<bysjglxt_comment> getListCommentByGradeAndCategory(String commentCategory, String grade);
 
+	public boolean deleteReportOpeningFileByUserId(String userId);
+
 }

@@ -341,6 +341,11 @@ public class GraduationProjectManagementAction extends ActionSupport
 		}
 	}
 
+	/**
+	 * 获取开题报告
+	 * 
+	 * @throws IOException
+	 */
 	public void get_ReportOpening() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
@@ -349,6 +354,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
 			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_ReportOpening(
 					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
+			System.out
+					.println((String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_ReportOpening(
@@ -517,9 +524,10 @@ public class GraduationProjectManagementAction extends ActionSupport
 		// ActionContext.getContext().getSession().get("userStudentDTO"))
 		// .getBysjglxtStudentUser().getUser_student_id());
 		//
-//		String[] StringUse_sz = StringUse.split(",");
-//		listStringUse = Arrays.asList(StringUse_sz);
-//		File exportFile = graduationProjectManagementService.exportAll(listStringUse);
+		// String[] StringUse_sz = StringUse.split(",");
+		// listStringUse = Arrays.asList(StringUse_sz);
+		// File exportFile =
+		// graduationProjectManagementService.exportAll(listStringUse);
 		File exportFile = graduationProjectManagementService.exportAll();
 		if (exportFile != null) {
 			fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
@@ -554,20 +562,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 	public void updateSectionTaskbook() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService.updateSectionTaskbook(updateTaskbook) == 1) {
-			http_response.getWriter().write("保存成功");
-		} else {
-			http_response.getWriter().write("系统繁忙");
-		}
-	}
-
-	/**
-	 * 更新开题报告
-	 * 
-	 * @throws IOException
-	 */
-	public void updateReportOpening() throws IOException {
-		http_response.setContentType("text/html;charset=utf-8");
-		if (graduationProjectManagementService.updateReportOpening(updateReportOpening) == 1) {
 			http_response.getWriter().write("保存成功");
 		} else {
 			http_response.getWriter().write("系统繁忙");
@@ -744,7 +738,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	/**
-	 * 下载毕业设计过程管理手册
+	 * 下载毕业论文
 	 * 
 	 * @return
 	 * @throws UnsupportedEncodingException
@@ -761,23 +755,59 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return "downloadDissertation";
 	}
 
+	/**
+	 * 下载开题报告
+	 * 
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 */
+	public String downloadReportOpening() throws UnsupportedEncodingException, FileNotFoundException {
+
+		File downloadDissertation = graduationProjectManagementService.downloadReportOpening(DissertationUserID);
+
+//		fileName = new String(downloadDissertation.getName().getBytes(""), "UTF-8");
+		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(downloadDissertation);
+
+		return "downloadDissertation";
+	}
+
 	public void updateDissertation() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response
-				.getWriter().write(
-						graduationProjectManagementService
-								.saveDissertation(dissertation, oldDissertation,
-										((StudentInformationDTO) ActionContext.getContext().getSession()
-												.get("userStudentDTO")).getBysjglxtStudentUser().getUser_student_id(),
-										dissertationFileName));
+		http_response.getWriter()
+				.write(graduationProjectManagementService.saveDissertation(dissertation, oldDissertation,
+						((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+								.getBysjglxtStudentUser().getUser_student_id(),
+						dissertationFileName) + "");
 
+	}
+
+	/**
+	 * 更新开题报告
+	 * 
+	 * @throws IOException
+	 */
+	public void updateReportOpening() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter()
+				.write(graduationProjectManagementService.saveReportOpening(dissertation, oldDissertation,
+						((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+								.getBysjglxtStudentUser().getUser_student_id(),
+						dissertationFileName) + "");
+		/*
+		 * if
+		 * (graduationProjectManagementService.updateReportOpening(updateReportOpening)
+		 * == 1) { http_response.getWriter().write("保存成功"); } else {
+		 * http_response.getWriter().write("系统繁忙"); }
+		 */
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.apache.struts2.interceptor.ServletRequestAware#setServletRequest(
+	 * @see org.apache.struts2.interceptor.ServletRequestAware#setServletRequest(
 	 * javax.servlet.http.HttpServletRequest)
 	 */
 	@Override

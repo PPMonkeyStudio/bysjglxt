@@ -60,6 +60,7 @@
 	src="<%=basePath%>js/GraduationProjectManagement/Save_Taskbook_Section.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Save_report_opening.js"></script>
+	
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Save_RecordProgress_1_Student.js"></script>
 <script type="text/javascript"
@@ -95,6 +96,8 @@
 	src="<%=basePath%>js/GraduationProjectManagement/saveGraduationProject.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/uploadDissertation.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadReportOpening.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>我的毕业设计</title>

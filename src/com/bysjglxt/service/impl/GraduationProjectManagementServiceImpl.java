@@ -374,6 +374,87 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		return null;
 	}
 
+	@Override
+	public int saveReportOpening(File file, String oldFileName, String userId, String newFileName) throws IOException {
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		boolean flag = false;
+		String path = "";
+		bysjglxt_report_opening reportOpening = new bysjglxt_report_opening();
+		reportOpening = graduationProjectManagementDao.getReportOpeningUser(userId);
+		// 如果新文件为空
+		if (file == null) {
+			path = lj + "bysjglxt/reportOpening/";
+			// 判断旧文件是否处于空的状态
+			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
+				// 如果是空
+				// 判断：在数据库中属于这个学生的开题报告是否存在
+				if (reportOpening != null && reportOpening.getReport_opening_file() != null
+						&& reportOpening.getReport_opening_file().trim().length() > 0) {
+					// 如果存在,则将原有毕业论文删除
+					// 先进行删除
+					// 删除学生上传的文件
+					path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
+					File deleteFile = new File(path);
+					deleteFile.delete();
+					flag = graduationProjectManagementDao.deleteReportOpeningFileByUserId(userId);
+					return 1;
+				} else {
+					// 如果不存在,不进行任何操作
+					return 1;
+				}
+			} else {
+				// 如果不是空
+				// 不进行操作
+				return 1;
+			}
+		} else {
+			path = lj + "bysjglxt/reportOpening/";
+			// 如果新文件存在
+			// 1.判断是否有属于这个学生的毕业论文存在
+			if (reportOpening != null && reportOpening.getReport_opening_file() != null
+					&& reportOpening.getReport_opening_file().trim().length() > 0) {
+				// 如果存在
+				// 先进行删除
+				// 删除学生上传的文件
+				path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
+				File deleteFile = new File(path);
+				deleteFile.delete();
+				// 删除学生毕业论文记录
+				flag = graduationProjectManagementDao.deleteReportOpeningFileByUserId(userId);
+				if (!flag) {
+					return -1;
+				}
+			}
+			path = lj + "bysjglxt/reportOpening/";
+			// 保存毕业论文
+			// 1.上传毕业论文
+			if (reportOpening != null) {
+				path = path + reportOpening.getReport_opening_id() + "_" + newFileName;
+				File newFile = new File(path);
+				FileUtils.copyFile(file, newFile);
+				// 存储数据到数据库
+				reportOpening.setReport_opening_file(newFileName);
+				reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
+				flag = graduationProjectManagementDao.saveObj(reportOpening) == 1 ? true : false;
+				if (!flag)
+					return -2;
+			} else {
+				return -2;
+			}
+		}
+		return 0;
+	}
+
 	/**
 	 * 保存毕业论文
 	 * 
@@ -397,7 +478,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
 		// 如果新文件为空
 		if (file == null) {
-			path = lj + "graduagtionThesi/";
+			path = lj + "bysjglxt/graduagtionThesi/";
 			// 判断旧文件是否处于空的状态
 			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
 				// 如果是空
@@ -464,7 +545,35 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return 1;
 	}
-
+	
+	/**
+	 * 下载开题报告
+	 */
+	@Override
+	public File downloadReportOpening(String userID) {
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 1.根据user Id获得学生毕业论文表中的记录
+		bysjglxt_report_opening reportOpening = new bysjglxt_report_opening();
+		String path = lj + "bysjglxt/reportOpening/";
+		reportOpening = graduationProjectManagementDao.getReportOpeningUser(userID);
+		if (reportOpening == null) {
+			return null;
+		}
+		path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
+		File file = new File(path);
+		return file;
+	}
+	
 	// 下载毕业论文
 	@Override
 	public File downloadDissertation(String userId) {
@@ -1109,13 +1218,21 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_report_opening = graduationProjectManagementDao
 				.getReportOpening(updateReportOpening.getReport_opening_id());
 		if (bysjglxt_report_opening != null) {
-			
-			/*bysjglxt_report_opening.setReport_opening_documentary_survey(updateReportOpening.getReport_opening_documentary_survey());
-			bysjglxt_report_opening.setReport_opening_main(updateReportOpening.getReport_opening_main());
-			bysjglxt_report_opening.setReport_opening_detail(updateReportOpening.getReport_opening_detail());
-			bysjglxt_report_opening.setReport_opening_reference(updateReportOpening.getReport_opening_reference());
-			bysjglxt_report_opening.setReport_opening_plan(updateReportOpening.getReport_opening_plan());*/
-			bysjglxt_report_opening.setReport_opening_gmt_modified(updateReportOpening.getReport_opening_gmt_modified());
+
+			/*
+			 * bysjglxt_report_opening.setReport_opening_documentary_survey(
+			 * updateReportOpening.getReport_opening_documentary_survey());
+			 * bysjglxt_report_opening.setReport_opening_main(updateReportOpening.
+			 * getReport_opening_main());
+			 * bysjglxt_report_opening.setReport_opening_detail(updateReportOpening.
+			 * getReport_opening_detail());
+			 * bysjglxt_report_opening.setReport_opening_reference(updateReportOpening.
+			 * getReport_opening_reference());
+			 * bysjglxt_report_opening.setReport_opening_plan(updateReportOpening.
+			 * getReport_opening_plan());
+			 */
+			bysjglxt_report_opening
+					.setReport_opening_gmt_modified(updateReportOpening.getReport_opening_gmt_modified());
 			flag = graduationProjectManagementDao.fillEmptyInOpening(bysjglxt_report_opening);
 		}
 		return flag;
@@ -1899,7 +2016,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
 		Map<String, Object> params = new HashMap<String, Object>();
 		// 根据userId获取user表
-		bysjglxt_student_user = graduationProjectManagementDao.getStudentUserByUserId(studentUserId);
+		/*bysjglxt_student_user = graduationProjectManagementDao.getStudentUserByUserId(studentUserId);
 		if (bysjglxt_student_user != null) {
 			// 根据basicId获取basic表
 			bysjglxt_student_basic = graduationProjectManagementDao
@@ -1948,7 +2065,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				params.put("${openingReference}", "");
 				params.put("${openingPlan}", "");
 			}
-		}
+		}*/
 		return params;
 	}
 
@@ -3169,5 +3286,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return params;
 	}
+
+
 
 }
