@@ -6,7 +6,7 @@ function Initialization_report_opening() {
 }
 
 function report_opening() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '学生完成开题报告';
+	document.getElementById("GraduationProjectTitle").innerHTML = '学生上传开题报告';
 	var xhr = false;
 	var formData = new FormData();
 	xhr = new XMLHttpRequest();
@@ -29,88 +29,36 @@ function report_opening() {
 				 * 
 				 */
 				var h4 = document.createElement("h4");
-				h4.innerHTML = '文献综述：';
+				h4.innerHTML = '提交开题报告：';
 				tab.appendChild(h4);
-				var textarea_1 = document.createElement("textarea");
-				textarea_1.id = 'report_opening_documentary_survey';
-				textarea_1.className = 'form-control';
-				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:200px;"
-				if (report_opening.report_opening_documentary_survey != null) {
-					textarea_1.innerHTML = report_opening.report_opening_documentary_survey;
-				} else {
-					textarea_1.innerHTML = '';
-				}
-				tab.appendChild(textarea_1);
 				/*
 				 * 
 				 */
-				var h4 = document.createElement("h4");
-				h4.innerHTML = '主要内容：';
-				tab.appendChild(h4);
-				var textarea_2 = document.createElement("textarea");
-				textarea_2.id = 'report_opening_main';
-				textarea_2.className = 'form-control';
-				textarea_2.style = "margin:10px 0 50px 0;resize: none;height:200px;"
-				if (report_opening.report_opening_main != null) {
-					textarea_2.innerHTML = report_opening.report_opening_main;
+				var div = document.createElement("div");
+				div.id = "div_report_opening_box";
+				tab.appendChild(div);
+				/*if (dissertation.dissertation_file != null) {
+					var div_2 = document.createElement("div");
+					div_2.innerHTML = '<button class="btn btn-default" '
+							+ 'onclick="addDissertation()">上传</button>';
+					tab.appendChild(div_2);
+					if (dissertation.dissertation_file != '') {
+						dissertationChange(dissertation.dissertation_file);
+					}
+
 				} else {
-					textarea_2.innerHTML = '';
-				}
-				tab.appendChild(textarea_2);
-				/*
-				 * 
-				 */
-				var h4 = document.createElement("h4");
-				h4.innerHTML = '详细提纲：';
-				tab.appendChild(h4);
-				var textarea_3 = document.createElement("textarea");
-				textarea_3.id = 'report_opening_detail';
-				textarea_3.className = 'form-control';
-				textarea_3.style = "margin:10px 0 50px 0;resize: none;height:200px;"
-				if (report_opening.report_opening_detail != null) {
-					textarea_3.innerHTML = report_opening.report_opening_detail;
-				} else {
-					textarea_3.innerHTML = '';
-				}
-				tab.appendChild(textarea_3);
-				/*
-				 * 
-				 */
-				var h4 = document.createElement("h4");
-				h4.innerHTML = '参考文献：';
-				tab.appendChild(h4);
-				var textarea_4 = document.createElement("textarea");
-				textarea_4.id = 'report_opening_reference';
-				textarea_4.className = 'form-control';
-				textarea_4.style = "margin:10px 0 50px 0;resize: none;height:200px;"
-				if (report_opening.report_opening_reference != null) {
-					textarea_4.innerHTML = report_opening.report_opening_reference;
-				} else {
-					textarea_4.innerHTML = '';
-				}
-				tab.appendChild(textarea_4);
-				/*
-				 * 
-				 */
-				var h4 = document.createElement("h4");
-				h4.innerHTML = '进程计划：';
-				tab.appendChild(h4);
-				var textarea_5 = document.createElement("textarea");
-				textarea_5.id = 'report_opening_plan';
-				textarea_5.className = 'form-control';
-				textarea_5.style = "margin:10px 0 50px 0;resize: none;height:200px;"
-				if (report_opening.report_opening_plan != null) {
-					textarea_5.innerHTML = report_opening.report_opening_plan;
-				} else {
-					textarea_5.innerHTML = '';
-				}
-				tab.appendChild(textarea_5);
+					var div_2 = document.createElement("div");
+					div_2.innerHTML = '<button class="btn btn-default" '
+							+ 'onclick="addDissertation()">上传</button>';
+					tab.appendChild(div_2);
+				}*/
+				
 				/*
 				 * 让不是现在进行的流程的不可编辑
 				 */
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
-				if ("学生完成开题报告" != current_processDefinitionName) {
+				if ("学生上传开题报告" != current_processDefinitionName) {
 					textarea_1.disabled = "disabled";
 					textarea_2.disabled = "disabled";
 					textarea_3.disabled = "disabled";

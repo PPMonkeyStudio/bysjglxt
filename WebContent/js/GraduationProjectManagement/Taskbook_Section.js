@@ -5,7 +5,7 @@ function Initialization_Taskbook_Section() {
 }
 
 function Taskbook_Section() {
-	document.getElementById("GraduationProjectTitle").innerHTML = '教研室主任填写任务书审核意见';
+	document.getElementById("GraduationProjectTitle").innerHTML = '指导小组组长填写任务书审核意见';
 	/*
 	 * 
 	 */
@@ -31,7 +31,7 @@ function Taskbook_Section() {
 				 * 
 				 */
 				var h4 = document.createElement("h4");
-				h4.innerHTML = '教研室审核意见：';
+				h4.innerHTML = '指导小组组长审核意见：';
 				tab.appendChild(h4);
 				var textarea_1 = document.createElement("textarea");
 				textarea_1.id = 'taskbook_opinion';
@@ -48,7 +48,7 @@ function Taskbook_Section() {
 				 */
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
-				if ("教研室主任填写任务书审核意见" != current_processDefinitionName) {
+				if ("指导小组组长填写任务书审核意见" != current_processDefinitionName) {
 					textarea_1.disabled = "disabled";
 					button_SaveGraduationProject.style.display = "none";
 				} else if (userStudentDTO != null) {

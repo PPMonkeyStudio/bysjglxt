@@ -4,11 +4,11 @@ function saveGraduationProject() {
 		Save_Taskbook_Teacher();
 		break;
 	}
-	case "教研室主任填写任务书审核意见": {
+	case "指导小组组长填写任务书审核意见": {
 		Save_Taskbook_Section();
 		break;
 	}
-	case "学生完成开题报告": {
+	case "学生上传开题报告": {
 		Save_report_opening();
 		break;
 	}

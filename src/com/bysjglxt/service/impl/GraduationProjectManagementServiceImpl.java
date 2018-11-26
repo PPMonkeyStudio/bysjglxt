@@ -1109,14 +1109,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_report_opening = graduationProjectManagementDao
 				.getReportOpening(updateReportOpening.getReport_opening_id());
 		if (bysjglxt_report_opening != null) {
-			bysjglxt_report_opening
-					.setReport_opening_documentary_survey(updateReportOpening.getReport_opening_documentary_survey());
+			
+			/*bysjglxt_report_opening.setReport_opening_documentary_survey(updateReportOpening.getReport_opening_documentary_survey());
 			bysjglxt_report_opening.setReport_opening_main(updateReportOpening.getReport_opening_main());
 			bysjglxt_report_opening.setReport_opening_detail(updateReportOpening.getReport_opening_detail());
 			bysjglxt_report_opening.setReport_opening_reference(updateReportOpening.getReport_opening_reference());
-			bysjglxt_report_opening.setReport_opening_plan(updateReportOpening.getReport_opening_plan());
-			bysjglxt_report_opening
-					.setReport_opening_gmt_modified(updateReportOpening.getReport_opening_gmt_modified());
+			bysjglxt_report_opening.setReport_opening_plan(updateReportOpening.getReport_opening_plan());*/
+			bysjglxt_report_opening.setReport_opening_gmt_modified(updateReportOpening.getReport_opening_gmt_modified());
 			flag = graduationProjectManagementDao.fillEmptyInOpening(bysjglxt_report_opening);
 		}
 		return flag;

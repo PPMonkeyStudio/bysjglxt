@@ -154,11 +154,11 @@
 										</li>
 										<li>
 											<a href="#tab2" data-toggle="tab"
-												id="banner_Taskbook_Section">2.教研室主任填写任务书审核意见</a>
+												id="banner_Taskbook_Section">2.指导小组组长填写任务书审核意见</a>
 										</li>
 										<li>
 											<a href="#tab3" data-toggle="tab"
-												id="banner_report_opening">3.学生完成开题报告</a>
+												id="banner_report_opening">3.学生上传开题报告</a>
 										</li>
 										<li>
 											<a href="#tab4" data-toggle="tab"
@@ -220,6 +220,7 @@
 											<a href="#tab18" data-toggle="tab"
 												id="banner_evaluate_review">18.评阅老师填写评阅审查表</a>
 										</li>
+										
 									</ul>
 								</div>
 							</div>

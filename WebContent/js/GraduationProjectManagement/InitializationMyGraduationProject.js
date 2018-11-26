@@ -46,7 +46,7 @@ function InitializationMyGraduationProject() {
 					 */
 					break;
 				}
-				case "教研室主任填写任务书审核意见": {
+				case "指导小组组长填写任务书审核意见": {
 					var banner_Taskbook_Section = document
 							.getElementById("banner_Taskbook_Section");
 					banner_Taskbook_Section.style.color = 'white';
@@ -61,7 +61,7 @@ function InitializationMyGraduationProject() {
 					 */
 					break;
 				}
-				case "学生完成开题报告": {
+				case "学生上传开题报告": {
 					var banner_report_opening = document
 							.getElementById("banner_report_opening");
 					banner_report_opening.style.color = 'white';
