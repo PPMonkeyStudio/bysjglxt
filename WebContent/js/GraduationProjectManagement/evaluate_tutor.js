@@ -17,7 +17,7 @@ function evaluate_tutor() {
 			if (xhr.status == 200) {
 				console.debug("指导老师填写评价审阅表：" + xhr.responseText);
 				var evaluate_tutor = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab17");
+				var tab = document.getElementById("tab19");
 				tab.innerHTML = '';
 				/*
 				 * 
@@ -702,7 +702,7 @@ function evaluate_tutor() {
 				// 	
 				new_td = document.createElement("td");
 				new_td.style = "text-align: center;";
-				new_td.innerHTML = '6';
+				new_td.innerHTML = '7';
 				new_tr.appendChild(new_td);
 				// 
 				new_td = document.createElement("td");
@@ -1882,59 +1882,124 @@ function evaluate_tutor() {
 				 */
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
-				if ("指导老师填写评价审阅表" != current_processDefinitionName) {
-					document
-							.getElementById("evaluate_tutor_grade_training_objective").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_bind").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_comprehensive").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_experimental_design").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_foreign_language").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_chart").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_instructions").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_practicability").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_normalization").disabled = "disabled";
-					textarea_1.disabled = "disabled";
-					button_SaveGraduationProject.style.display = "none";
-				} else if (userStudentDTO != null) {
-					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
-						button_SaveGraduationProject.style.display = "block";
-					} else {
+				if ('-1' == k) {
+					if ("指导老师填写评价审阅表" != current_processDefinitionName) {
 						document
 								.getElementById("evaluate_tutor_grade_training_objective").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
 						document.getElementById("evaluate_tutor_grade_bind").disabled = "disabled";
 						document
 								.getElementById("evaluate_tutor_grade_comprehensive").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
 						document
 								.getElementById("evaluate_tutor_grade_experimental_design").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
 						document
 								.getElementById("evaluate_tutor_grade_foreign_language").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_chart").disabled = "disabled";
 						document
-								.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
+								.getElementById("evaluate_tutor_grade_instructions").disabled = "disabled";
 						document
-								.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
+								.getElementById("evaluate_tutor_grade_practicability").disabled = "disabled";
 						document
-								.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
+								.getElementById("evaluate_tutor_grade_normalization").disabled = "disabled";
+						textarea_1.disabled = "disabled";
+						button_SaveGraduationProject.style.display = "none";
+					} else if (userStudentDTO != null) {
+						if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							document
+									.getElementById("evaluate_tutor_grade_training_objective").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
+							document.getElementById("evaluate_tutor_grade_bind").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_comprehensive").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_experimental_design").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_foreign_language").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
+							document.getElementById("evaluate_tutor_grade_chart").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_instructions").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_practicability").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_normalization").disabled = "disabled";
+							textarea_1.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
+					} else if (userTeacherDTO != null) {
+						if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							document
+									.getElementById("evaluate_tutor_grade_training_objective").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
+							document.getElementById("evaluate_tutor_grade_bind").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_comprehensive").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_experimental_design").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_foreign_language").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
+							document.getElementById("evaluate_tutor_grade_chart").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_instructions").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_practicability").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_normalization").disabled = "disabled";
+							textarea_1.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
+					} else {
+						document
+								.getElementById("evaluate_tutor_grade_training_objective").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_bind").disabled = "disabled";
+						document
+								.getElementById("evaluate_tutor_grade_comprehensive").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
+						document
+								.getElementById("evaluate_tutor_grade_experimental_design").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
+						document
+								.getElementById("evaluate_tutor_grade_foreign_language").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
 						document.getElementById("evaluate_tutor_grade_chart").disabled = "disabled";
 						document
 								.getElementById("evaluate_tutor_grade_instructions").disabled = "disabled";
@@ -1945,33 +2010,98 @@ function evaluate_tutor() {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
 					}
-				} else if (userTeacherDTO != null) {
-					if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
-						button_SaveGraduationProject.style.display = "block";
+				}else if('1' == k) {
+					if (userStudentDTO != null) {
+						if (_userId_Task == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							document
+									.getElementById("evaluate_tutor_grade_training_objective").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
+							document.getElementById("evaluate_tutor_grade_bind").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_comprehensive").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_experimental_design").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_foreign_language").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
+							document.getElementById("evaluate_tutor_grade_chart").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_instructions").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_practicability").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_normalization").disabled = "disabled";
+							textarea_1.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
+					} else if (userTeacherDTO != null) {
+						if (_userId_Task == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							document
+									.getElementById("evaluate_tutor_grade_training_objective").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
+							document.getElementById("evaluate_tutor_grade_bind").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_comprehensive").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_experimental_design").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_foreign_language").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
+							document.getElementById("evaluate_tutor_grade_chart").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_instructions").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_practicability").disabled = "disabled";
+							document
+									.getElementById("evaluate_tutor_grade_normalization").disabled = "disabled";
+							textarea_1.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
 					} else {
 						document
 								.getElementById("evaluate_tutor_grade_training_objective").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
 						document.getElementById("evaluate_tutor_grade_bind").disabled = "disabled";
 						document
 								.getElementById("evaluate_tutor_grade_comprehensive").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
 						document
 								.getElementById("evaluate_tutor_grade_experimental_design").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
 						document
 								.getElementById("evaluate_tutor_grade_foreign_language").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
-						document
-								.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
+						document.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
 						document.getElementById("evaluate_tutor_grade_chart").disabled = "disabled";
 						document
 								.getElementById("evaluate_tutor_grade_instructions").disabled = "disabled";
@@ -1982,33 +2112,8 @@ function evaluate_tutor() {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
 					}
-				} else {
-					document
-							.getElementById("evaluate_tutor_grade_training_objective").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_difficulty").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_workload").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_bind").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_comprehensive").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_reference").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_experimental_design").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_computing").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_foreign_language").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_computer").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_innovate").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_analysis").disabled = "disabled";
-					document.getElementById("evaluate_tutor_grade_chart").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_instructions").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_practicability").disabled = "disabled";
-					document
-							.getElementById("evaluate_tutor_grade_normalization").disabled = "disabled";
-					textarea_1.disabled = "disabled";
-					button_SaveGraduationProject.style.display = "none";
 				}
+				
 			} else {
 				toastr.error(xhr.status);
 			}

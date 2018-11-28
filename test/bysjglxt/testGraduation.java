@@ -29,6 +29,12 @@ public class testGraduation {
 	}
 
 	@Test
+	public void pp() {
+		System.out.println("d:"+graduationProjectManagementService.getTaskInstance("指导老师填写个人学习工作总结意见","08735dfd-551a-49aa-9d5c-03b6d3a84e39"));
+	}
+	
+	
+	@Test
 	public void fss() {
 		bysjglxt_evaluate_tutor bysjglxt_evaluate_tutor = new bysjglxt_evaluate_tutor();
 		bysjglxt_evaluate_tutor = graduationProjectManagementService

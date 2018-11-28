@@ -372,7 +372,9 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return bysjglxt_defence;
 	}
 
-	/************************************ 导出 ******************************************/
+	/************************************
+	 * 导出
+	 ******************************************/
 
 	// 根据userid获取user表中信息
 	@Override
@@ -1471,8 +1473,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		boolean flag = true;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_report_opening set report_opening_file=null where report_opening_student='" + userId
-					+ "'";
+			String hql = "update bysjglxt_report_opening set report_opening_file=null where report_opening_student='"
+					+ userId + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 			session.flush();
@@ -1481,6 +1483,24 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			e.printStackTrace();
 		}
 		return flag;
+	}
+
+	@Override
+	public bysjglxt_task_instance getTaskInstance(String taskName, String userId) {
+		Session session = getSession();
+		String hql = "SELECT"//
+				+ "	taskInstance"//
+				+ " FROM"//
+				+ " bysjglxt_task_instance taskInstance,"//
+				+ " bysjglxt_task_definition taskDefinition,"//
+				+ " bysjglxt_process_instance processInstance"//
+				+ " WHERE"//
+				+ " taskInstance.task_instance_process_instance = processInstance.process_instance_id"//
+				+ " AND taskInstance.task_instance_task_definition = taskDefinition.task_definition_id"//
+				+ " AND taskDefinition.task_definition_name='" + taskName + "'"//
+				+ " AND processInstance.process_instance_man='" + userId + "'";
+		Query query = session.createQuery(hql);
+		return (bysjglxt_task_instance) query.uniqueResult();
 	}
 
 }

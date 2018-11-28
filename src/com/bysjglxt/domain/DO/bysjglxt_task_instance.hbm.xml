@@ -1,36 +1,39 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-11-28 15:53:20 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_task_instance" table="bysjglxt_task_instance">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_task_instance" table="BYSJGLXT_TASK_INSTANCE">
         <id name="task_instance_id" type="java.lang.String">
-            <column name="task_instance_id" />
+            <column name="TASK_INSTANCE_ID" />
             <generator class="assigned" />
         </id>
         <property name="task_instance_process_instance" type="java.lang.String">
-            <column name="task_instance_process_instance" />
+            <column name="TASK_INSTANCE_PROCESS_INSTANCE" />
         </property>
         <property name="task_instance_task_definition" type="java.lang.String">
-            <column name="task_instance_task_definition" />
+            <column name="TASK_INSTANCE_TASK_DEFINITION" />
         </property>
         <property name="task_instance_role" type="java.lang.String">
-            <column name="task_instance_role" />
+            <column name="TASK_INSTANCE_ROLE" />
         </property>
         <property name="task_instance_father" type="java.lang.String">
-            <column name="task_instance_father" />
+            <column name="TASK_INSTANCE_FATHER" />
         </property>
         <property name="task_instance_return" type="java.lang.String">
-            <column name="task_instance_return" />
+            <column name="TASK_INSTANCE_RETURN" />
         </property>
         <property name="task_instance_state" type="int">
-            <column name="task_instance_state" />
+            <column name="TASK_INSTANCE_STATE" />
         </property>
         <property name="task_instance_gmt_create" type="java.lang.String">
-            <column name="task_instance_gmt_create" />
+            <column name="TASK_INSTANCE_GMT_CREATE" />
+        </property>
+        <property name="task_instance_is_update" type="int">
+            <column name="TASK_INSTANCE_IS_UPDATE" />
         </property>
         <property name="task_instance_gmt_modified" type="java.lang.String">
-            <column name="task_instance_gmt_modified" />
+            <column name="TASK_INSTANCE_GMT_MODIFIED" />
         </property>
     </class>
 </hibernate-mapping>

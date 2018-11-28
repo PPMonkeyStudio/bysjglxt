@@ -9,8 +9,8 @@ public class bysjglxt_evaluate_tutor {
 	private int evaluate_tutor_grade_workload = 5;
 	private int evaluate_tutor_grade_bind = 5;
 	private int evaluate_tutor_grade_comprehensive = 8;
-	private int evaluate_tutor_grade_reference = 6;
-	private int evaluate_tutor_grade_experimental_design = 7;
+	private int evaluate_tutor_grade_reference = 7;
+	private int evaluate_tutor_grade_experimental_design = 6;
 	private int evaluate_tutor_grade_computing = 6;
 	private int evaluate_tutor_grade_foreign_language = 6;
 	private int evaluate_tutor_grade_computer = 6;

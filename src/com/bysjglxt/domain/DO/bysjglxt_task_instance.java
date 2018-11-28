@@ -9,7 +9,16 @@ public class bysjglxt_task_instance {
 	private String task_instance_return;
 	private int task_instance_state;
 	private String task_instance_gmt_create;
+	private int task_instance_is_update = -1;
 	private String task_instance_gmt_modified;
+
+	public int getTask_instance_is_update() {
+		return task_instance_is_update;
+	}
+
+	public void setTask_instance_is_update(int task_instance_is_update) {
+		this.task_instance_is_update = task_instance_is_update;
+	}
 
 	public String getTask_instance_id() {
 		return task_instance_id;
@@ -89,8 +98,8 @@ public class bysjglxt_task_instance {
 				+ task_instance_process_instance + ", task_instance_task_definition=" + task_instance_task_definition
 				+ ", task_instance_role=" + task_instance_role + ", task_instance_father=" + task_instance_father
 				+ ", task_instance_return=" + task_instance_return + ", task_instance_state=" + task_instance_state
-				+ ", task_instance_gmt_create=" + task_instance_gmt_create + ", task_instance_gmt_modified="
-				+ task_instance_gmt_modified + "]";
+				+ ", task_instance_gmt_create=" + task_instance_gmt_create + ", task_instance_is_update="
+				+ task_instance_is_update + ", task_instance_gmt_modified=" + task_instance_gmt_modified + "]";
 	}
 
 }

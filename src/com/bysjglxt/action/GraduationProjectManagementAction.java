@@ -106,6 +106,24 @@ public class GraduationProjectManagementAction extends ActionSupport
 	private List<String> listStringUse;
 	private String StringUse;
 	private String graduationComment;
+	private String taskInstanceName;
+
+	/**
+	 * 根据条件获取任务实例
+	 * @throws IOException 
+	 */
+	public void getTaskInstance() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.getTaskInstance(taskInstanceName,(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.getTaskInstance(taskInstanceName,((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO")).getBysjglxtStudentUser().getUser_student_id())));
+		}
+	}
+
 	/**
 	 * 删除的评语list
 	 * 
@@ -766,7 +784,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 		File downloadDissertation = graduationProjectManagementService.downloadReportOpening(DissertationUserID);
 
-//		fileName = new String(downloadDissertation.getName().getBytes(""), "UTF-8");
+		// fileName = new String(downloadDissertation.getName().getBytes(""), "UTF-8");
 		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
 		inputStream = new FileInputStream(downloadDissertation);
 
@@ -1088,6 +1106,18 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void setListComment(List<bysjglxt_comment> listComment) {
 		this.listComment = listComment;
+	}
+
+	public String getTaskInstanceName() {
+		return taskInstanceName;
+	}
+
+	public void setTaskInstanceName(String taskInstanceName) {
+		this.taskInstanceName = taskInstanceName;
+	}
+
+	public List<bysjglxt_comment> getListComment() {
+		return listComment;
 	}
 
 }

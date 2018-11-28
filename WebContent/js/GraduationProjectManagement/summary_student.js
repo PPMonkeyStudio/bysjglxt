@@ -19,7 +19,7 @@ function summary_student() {
 			if (xhr.status == 200) {
 				
 				var summary = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab12");
+				var tab = document.getElementById("tab14");
 				tab.innerHTML = '';
 				/*
 				 * 
@@ -48,29 +48,52 @@ function summary_student() {
 				/*
 				 * 让不是现在进行的流程的不可编辑
 				 */
+				
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
-				if ("学生完成个人学习工作总结" != current_processDefinitionName) {
-					textarea_1.disabled = "disabled";
-					button_SaveGraduationProject.style.display = "none";
-				} else if (userStudentDTO != null) {
-					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
-						button_SaveGraduationProject.style.display = "block";
+				if ('-1' == k) {
+					if ("学生完成个人学习工作总结" != current_processDefinitionName) {
+						textarea_1.disabled = "disabled";
+						button_SaveGraduationProject.style.display = "none";
+					} else if (userStudentDTO != null) {
+						if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							textarea_1.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
+					} else if (userTeacherDTO != null) {
+						if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							textarea_1.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
 					} else {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
 					}
-				} else if (userTeacherDTO != null) {
-					if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
-						button_SaveGraduationProject.style.display = "block";
+				}else if('1' == k) {
+					if (userStudentDTO != null) {
+						if (_userId_Task == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							textarea_1.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
+					} else if (userTeacherDTO != null) {
+						if (_userId_Task == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							textarea_1.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
 					} else {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
 					}
-				} else {
-					textarea_1.disabled = "disabled";
-					button_SaveGraduationProject.style.display = "none";
 				}
+				
 				/*
 				 * 
 				 */

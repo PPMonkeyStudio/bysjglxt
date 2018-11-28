@@ -14,9 +14,11 @@ import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
+import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
+import com.google.gson.JsonElement;
 
 public interface GraduationProjectManagementService {
 
@@ -471,5 +473,11 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public File downloadReportOpening(String dissertationUserID);
+	/**
+	 * 
+	 * @param string
+	 * @return
+	 */
+	public bysjglxt_task_instance getTaskInstance(String taskName,String userId);
 
 }

@@ -82,7 +82,9 @@ public interface GraduationProjectManagementDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_report_opening getReportOpeningUser(String userId);
 
-	/*************************************** 导出 *******************************************/
+	/***************************************
+	 * 导出
+	 *******************************************/
 
 	public com.bysjglxt.domain.DO.bysjglxt_student_user getStudentUserByUserId(String studentUserId);
 
@@ -137,9 +139,17 @@ public interface GraduationProjectManagementDao {
 	// 删除
 	public void deleteCommentById(String comment_id);
 
-	//获取评语list
+	// 获取评语list
 	public List<bysjglxt_comment> getListCommentByGradeAndCategory(String commentCategory, String grade);
 
 	public boolean deleteReportOpeningFileByUserId(String userId);
+
+	/**
+	 * 
+	 * @param taskName
+	 * @param userId
+	 * @return
+	 */
+	public bysjglxt_task_instance getTaskInstance(String taskName, String userId);
 
 }

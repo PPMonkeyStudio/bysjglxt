@@ -1,11 +1,10 @@
 function Initialization_Taskbook_Teacher() {
-	var banner_Taskbook_Teacher = document
-			.getElementById("banner_Taskbook_Teacher");
+	var banner_Taskbook_Teacher = document.getElementById("banner_Taskbook_Teacher");
 	Taskbook_Teacher();
 }
 
 function Taskbook_Teacher() {
-  	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师完成任务书';
+	document.getElementById("GraduationProjectTitle").innerHTML = '指导老师完成任务书';
 
 	/*
 	 * 
@@ -17,6 +16,7 @@ function Taskbook_Teacher() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
+
 				console.debug("taskbook:::" + xhr.responseText);
 				var taskbook = JSON.parse(xhr.responseText);
 				var tab = document.getElementById("tab1");
@@ -82,37 +82,64 @@ function Taskbook_Teacher() {
 				/*
 				 * 让不是现在进行的流程的不可编辑
 				 */
-				console.debug("bukebian:"+current_processDefinitionName);
+				console.debug("bukebian:" + current_processDefinitionName);
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
-				if ("指导老师完成任务书" != current_processDefinitionName) {
-					textarea_1.disabled = "disabled";
-					textarea_2.disabled = "disabled";
-					textarea_3.disabled = "disabled";
-					button_SaveGraduationProject.style.display = "none";
-				} else if (userStudentDTO != null) {
-					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
-						button_SaveGraduationProject.style.display = "block";
+				if ('-1' == k) {
+					if ("指导老师完成任务书" != current_processDefinitionName) {
+						textarea_1.disabled = "disabled";
+						textarea_2.disabled = "disabled";
+						textarea_3.disabled = "disabled";
+						button_SaveGraduationProject.style.display = "none";
+					} else if (userStudentDTO != null) {
+						if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							textarea_1.disabled = "disabled";
+							textarea_2.disabled = "disabled";
+							textarea_3.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
+					} else if (userTeacherDTO != null) {
+						if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							textarea_1.disabled = "disabled";
+							textarea_2.disabled = "disabled";
+							textarea_3.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
 					} else {
 						textarea_1.disabled = "disabled";
 						textarea_2.disabled = "disabled";
 						textarea_3.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
 					}
-				} else if (userTeacherDTO != null) {
-					if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
-						button_SaveGraduationProject.style.display = "block";
+				}else if('1' == k) {
+					if (userStudentDTO != null) {
+						if (_userId_Task == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							textarea_1.disabled = "disabled";
+							textarea_2.disabled = "disabled";
+							textarea_3.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
+					} else if (userTeacherDTO != null) {
+						if (_userId_Task == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+							button_SaveGraduationProject.style.display = "block";
+						} else {
+							textarea_1.disabled = "disabled";
+							textarea_2.disabled = "disabled";
+							textarea_3.disabled = "disabled";
+							button_SaveGraduationProject.style.display = "none";
+						}
 					} else {
 						textarea_1.disabled = "disabled";
 						textarea_2.disabled = "disabled";
 						textarea_3.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
 					}
-				} else {
-					textarea_1.disabled = "disabled";
-					textarea_2.disabled = "disabled";
-					textarea_3.disabled = "disabled";
-					button_SaveGraduationProject.style.display = "none";
 				}
 
 			} else {

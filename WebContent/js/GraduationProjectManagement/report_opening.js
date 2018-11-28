@@ -15,7 +15,7 @@ function report_opening() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var report_opening = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab3");
+				var tab = document.getElementById("tab4");
 				tab.innerHTML = '';
 				/*
 				 * 
@@ -52,39 +52,68 @@ function report_opening() {
 							+ 'onclick="addReportOpeningFile()">上传</button>';
 					tab.appendChild(div_2);
 				}
-				
+
 				/*
 				 * 让不是现在进行的流程的不可编辑
 				 */
-				var button_SaveGraduationProject = document.getElementById("button_SaveGraduationProject");
-				var div_reportopening_del = document.getElementById("div_report_opening_del");
-				if ("学生上传开题报告" != current_processDefinitionName) {
-					div_2.parentNode.removeChild(div_2);
-					button_SaveGraduationProject.style.display = "none";
-					div_reportopening_del.style.display = "none";
-				} else if (userStudentDTO != null) {
-					if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
-						button_SaveGraduationProject.style.display = "block";
-						div_reportopening_del.style.display = "block";
+				var button_SaveGraduationProject = document
+						.getElementById("button_SaveGraduationProject");
+				var div_reportopening_del = document
+						.getElementById("div_report_opening_del");
+				if ('-1' == k) {
+					if ("学生上传开题报告" != current_processDefinitionName) {
+						div_2.parentNode.removeChild(div_2);
+						button_SaveGraduationProject.style.display = "none";
+						div_reportopening_del.style.display = "none";
+					} else if (userStudentDTO != null) {
+						if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+							button_SaveGraduationProject.style.display = "block";
+							div_reportopening_del.style.display = "block";
+						} else {
+							div_2.parentNode.removeChild(div_2);
+							button_SaveGraduationProject.style.display = "none";
+							div_reportopening_del.style.display = "none";
+						}
+					} else if (userTeacherDTO != null) {
+						if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+							button_SaveGraduationProject.style.display = "block";
+							div_reportopening_del.style.display = "block";
+						} else {
+							div_2.parentNode.removeChild(div_2);
+							button_SaveGraduationProject.style.display = "none";
+							div_reportopening_del.style.display = "none";
+						}
 					} else {
 						div_2.parentNode.removeChild(div_2);
 						button_SaveGraduationProject.style.display = "none";
 						div_reportopening_del.style.display = "none";
 					}
-				} else if (userTeacherDTO != null) {
-					if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
-						button_SaveGraduationProject.style.display = "block";
-						div_reportopening_del.style.display = "block";
+				} else if ('1' == k) {
+					if (userStudentDTO != null) {
+						if (_userId_Task == userStudentDTO.bysjglxtStudentUser.user_student_id) {
+							button_SaveGraduationProject.style.display = "block";
+							div_reportopening_del.style.display = "block";
+						} else {
+							div_2.parentNode.removeChild(div_2);
+							button_SaveGraduationProject.style.display = "none";
+							div_reportopening_del.style.display = "none";
+						}
+					} else if (userTeacherDTO != null) {
+						if (_userId_Task == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
+							button_SaveGraduationProject.style.display = "block";
+							div_reportopening_del.style.display = "block";
+						} else {
+							div_2.parentNode.removeChild(div_2);
+							button_SaveGraduationProject.style.display = "none";
+							div_reportopening_del.style.display = "none";
+						}
 					} else {
 						div_2.parentNode.removeChild(div_2);
 						button_SaveGraduationProject.style.display = "none";
 						div_reportopening_del.style.display = "none";
 					}
-				} else {
-					div_2.parentNode.removeChild(div_2);
-					button_SaveGraduationProject.style.display = "none";
-					div_reportopening_del.style.display = "none";
 				}
+
 			} else {
 				toastr.error(xhr.status);
 			}

@@ -52,6 +52,7 @@ import com.bysjglxt.domain.DTO.TeacherTutorStudentDTO;
 import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
+import com.google.gson.JsonElement;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -67,6 +68,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
+
+	@Override
+	public bysjglxt_task_instance getTaskInstance(String taskName,String userId) {
+		System.out.println("s:"+userId);
+		System.out.println(graduationProjectManagementDao.getTaskInstance(taskName,userId));
+		return graduationProjectManagementDao.getTaskInstance(taskName,userId);
+	}	
 
 	/**
 	 * 组合评阅老师评语
@@ -545,7 +553,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return 1;
 	}
-	
+
 	/**
 	 * 下载开题报告
 	 */
@@ -573,7 +581,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		File file = new File(path);
 		return file;
 	}
-	
+
 	// 下载毕业论文
 	@Override
 	public File downloadDissertation(String userId) {
@@ -630,6 +638,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		// 判断老师的身份
 		String actor = "";
 		String section = "";
+		// TODO 如果一个身份即是带角色的身份又是答辩小组长等身份 那么就会报错
 		// 1.判断老师是不是领导小组角色
 		bysjglxt_teacher_user = graduationProjectManagementDao.getTeacherUserByUserId(teacherUserId);
 		if (bysjglxt_teacher_user != null) {
@@ -2016,56 +2025,47 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
 		Map<String, Object> params = new HashMap<String, Object>();
 		// 根据userId获取user表
-		/*bysjglxt_student_user = graduationProjectManagementDao.getStudentUserByUserId(studentUserId);
-		if (bysjglxt_student_user != null) {
-			// 根据basicId获取basic表
-			bysjglxt_student_basic = graduationProjectManagementDao
-					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
-			if (bysjglxt_student_basic != null) {
-				params.put("${openingNum}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${openingNam}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${openingMajor}", bysjglxt_student_basic.getStudent_basic_major());
-				int sessional = Integer.parseInt(bysjglxt_student_basic.getStudent_basic_level());
-				sessional = sessional + 4;
-				params.put("${openingSessional}", sessional + "");
-			} else {
-				params.put("${openingNum}", "");
-				params.put("${openingNam}", "");
-				params.put("${openingMajor}", "");
-				params.put("${openingSessional}", "");
-			}
-			// 根据userid获取学生选题信息
-			bysjglxt_topic_select = graduationProjectManagementDao
-					.getStudentSelectTopic(bysjglxt_student_user.getUser_student_id());
-			if (bysjglxt_topic_select != null) {
-				// 根据课题ID获取课题表信息
-				bysjglxt_topic = graduationProjectManagementDao
-						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
-				if (bysjglxt_topic != null) {
-					params.put("${openingChineseName}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${openingEnglishName}", bysjglxt_topic.getTopic_name_english());
-				} else {
-					params.put("${openingChineseName}", "");
-					params.put("${openingEnglishName}", "");
-				}
-			}
-			// 根据userId获取开题报告
-			bysjglxt_report_opening = graduationProjectManagementDao
-					.getReportOpeningUser(bysjglxt_student_user.getUser_student_id());
-			if (bysjglxt_report_opening != null) {
-				params.put("${openingDocumentSurvey}", bysjglxt_report_opening.getReport_opening_documentary_survey());
-				params.put("${openingMain}", bysjglxt_report_opening.getReport_opening_main());
-				params.put("${openingDetail}", bysjglxt_report_opening.getReport_opening_detail());
-				params.put("${openingReference}", bysjglxt_report_opening.getReport_opening_reference());
-				params.put("${openingPlan}", bysjglxt_report_opening.getReport_opening_plan());
-			} else {
-				params.put("${openingDocumentSurvey}", "");
-				params.put("${openingMain}", "");
-				params.put("${openingDetail}", "");
-				params.put("${openingReference}", "");
-				params.put("${openingPlan}", "");
-			}
-		}*/
+		/*
+		 * bysjglxt_student_user =
+		 * graduationProjectManagementDao.getStudentUserByUserId(studentUserId); if
+		 * (bysjglxt_student_user != null) { // 根据basicId获取basic表 bysjglxt_student_basic
+		 * = graduationProjectManagementDao
+		 * .getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic()); if
+		 * (bysjglxt_student_basic != null) { params.put("${openingNum}",
+		 * bysjglxt_student_basic.getStudent_basic_num()); params.put("${openingNam}",
+		 * bysjglxt_student_basic.getStudent_basic_name());
+		 * params.put("${openingMajor}",
+		 * bysjglxt_student_basic.getStudent_basic_major()); int sessional =
+		 * Integer.parseInt(bysjglxt_student_basic.getStudent_basic_level()); sessional
+		 * = sessional + 4; params.put("${openingSessional}", sessional + ""); } else {
+		 * params.put("${openingNum}", ""); params.put("${openingNam}", "");
+		 * params.put("${openingMajor}", ""); params.put("${openingSessional}", ""); }
+		 * // 根据userid获取学生选题信息 bysjglxt_topic_select = graduationProjectManagementDao
+		 * .getStudentSelectTopic(bysjglxt_student_user.getUser_student_id()); if
+		 * (bysjglxt_topic_select != null) { // 根据课题ID获取课题表信息 bysjglxt_topic =
+		 * graduationProjectManagementDao
+		 * .getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic()); if
+		 * (bysjglxt_topic != null) { params.put("${openingChineseName}",
+		 * bysjglxt_topic.getTopic_name_chinese()); params.put("${openingEnglishName}",
+		 * bysjglxt_topic.getTopic_name_english()); } else {
+		 * params.put("${openingChineseName}", ""); params.put("${openingEnglishName}",
+		 * ""); } } // 根据userId获取开题报告 bysjglxt_report_opening =
+		 * graduationProjectManagementDao
+		 * .getReportOpeningUser(bysjglxt_student_user.getUser_student_id()); if
+		 * (bysjglxt_report_opening != null) { params.put("${openingDocumentSurvey}",
+		 * bysjglxt_report_opening.getReport_opening_documentary_survey());
+		 * params.put("${openingMain}",
+		 * bysjglxt_report_opening.getReport_opening_main());
+		 * params.put("${openingDetail}",
+		 * bysjglxt_report_opening.getReport_opening_detail());
+		 * params.put("${openingReference}",
+		 * bysjglxt_report_opening.getReport_opening_reference());
+		 * params.put("${openingPlan}",
+		 * bysjglxt_report_opening.getReport_opening_plan()); } else {
+		 * params.put("${openingDocumentSurvey}", ""); params.put("${openingMain}", "");
+		 * params.put("${openingDetail}", ""); params.put("${openingReference}", "");
+		 * params.put("${openingPlan}", ""); } }
+		 */
 		return params;
 	}
 
@@ -3286,7 +3286,5 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return params;
 	}
-
-
 
 }

@@ -16,7 +16,7 @@ function evaluate_review() {
 			if (xhr.status == 200) {
 				console.debug("评阅老师填写评阅审查表：" + xhr.responseText);
 				var evaluate_review = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab18");
+				var tab = document.getElementById("tab20");
 				tab.innerHTML = '';
 				/*
 				 * 

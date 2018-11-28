@@ -3,7 +3,10 @@ var currentProcessDto = null;
 var current_processDefinitionName = null;
 // 正在执行这个任务的角色的id
 var current_processInstanceUserID = null;
-
+// 是否可以查看编辑
+var k = null;
+// 该任务的执行者
+var _userId_Task = null;
 function InitializationMyGraduationProject() {
 	var xhr = false;
 	var formData = new FormData();
@@ -29,7 +32,7 @@ function InitializationMyGraduationProject() {
 				 * 
 				 */
 				switch (current_processDefinitionName) {
-
+				
 				case "指导老师完成任务书": {
 					var banner_Taskbook_Teacher = document
 							.getElementById("banner_Taskbook_Teacher");
@@ -46,12 +49,44 @@ function InitializationMyGraduationProject() {
 					 */
 					break;
 				}
+				case "学生接受任务": {
+					var banner_Taskbook_Teacher = document
+							.getElementById("banner_Taskbook_Student");
+					banner_Taskbook_Teacher.style.color = 'white';
+					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
+					Initialization_Taskbook_Student();
+					console.debug("in:" + current_processDefinitionName);
+					/*
+					 * 
+					 */
+					var $current = 0;
+					/*
+					 * 
+					 */
+					break;
+				}
+				case "指导老师确认开题报告": {
+					var banner_Taskbook_Teacher = document
+							.getElementById("banner_report_opening_teacher");
+					banner_Taskbook_Teacher.style.color = 'white';
+					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
+					Initialization_Report_Opening_Teacher();
+					console.debug("in:" + current_processDefinitionName);
+					/*
+					 * 
+					 */
+					var $current = 0;
+					/*
+					 * 
+					 */
+					break;
+				}
 				case "指导小组组长填写任务书审核意见": {
 					var banner_Taskbook_Section = document
 							.getElementById("banner_Taskbook_Section");
 					banner_Taskbook_Section.style.color = 'white';
 					banner_Taskbook_Section.parentNode.style.backgroundColor = '#428bca';
-					Initialization_Taskbook_Section();
+					Initialization_Taskbook_Section("指导小组组长填写任务书审核意见");
 					/*
 					 * 
 					 */
@@ -261,7 +296,7 @@ function InitializationMyGraduationProject() {
 							.getElementById("banner_examination_formal_leader");
 					banner_examination_formal_leader.style.color = 'white';
 					banner_examination_formal_leader.parentNode.style.backgroundColor = '#428bca';
-					Initialization_examination_formal_teacher();
+					Initialization_examination_formal_leader();
 					/*
 					 * 
 					 */
