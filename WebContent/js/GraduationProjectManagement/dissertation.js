@@ -55,6 +55,17 @@ function dissertation() {
 							+ 'onclick="addDissertation()">上传</button>';
 					tab.appendChild(div_2);
 				}
+				var ulSave = document.createElement("ul");
+				ulSave.className='pager wizard';
+				var liSave = document.createElement("li");
+				liSave.id='button_SaveGraduationProject';
+				var aSave = document.createElement('a');
+				aSave.href='####';
+				aSave.onclick = Save_dissertation
+				aSave.text='提交更新';
+				liSave.appendChild(aSave);
+				ulSave.appendChild(liSave);
+				tab.appendChild(ulSave);
 				/*
 				 * 
 				 */

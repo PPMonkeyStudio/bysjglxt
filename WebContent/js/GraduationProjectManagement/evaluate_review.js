@@ -1855,6 +1855,18 @@ function evaluate_review() {
 					textarea_1.innerHTML = '';
 				}
 				tab.appendChild(textarea_1);
+				var ulSave = document.createElement("ul");
+				ulSave.className='pager wizard';
+				var liSave = document.createElement("li");
+				liSave.id='button_SaveGraduationProject';
+				var aSave = document.createElement('a');
+				aSave.href='####';
+				aSave.onclick = Save_evaluate_review
+				aSave.text='提交更新';
+				liSave.appendChild(aSave);
+				ulSave.appendChild(liSave);
+				tab.appendChild(ulSave);
+				
 				/*
 				 * 
 				 * 

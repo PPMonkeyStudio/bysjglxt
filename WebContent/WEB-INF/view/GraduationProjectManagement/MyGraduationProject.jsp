@@ -278,25 +278,25 @@
 						<div class="tab-pane" id="tab18"></div>
 						<div class="tab-pane" id="tab19"></div>
 						<div class="tab-pane" id="tab20"></div>
-						<ul class="pager wizard">
-							<!-- <li class="previous first">
+						<!-- <ul class="pager wizard">
+							<li class="previous first">
 								<a href="#">第一个任务</a>
-							</li> -->
+							</li>
 							<li class="" id="button_SaveGraduationProject">
 								<a href="####" onclick='saveGraduationProject()'>提交更新</a>
 							</li>
-							<!-- <li class="previous">
+							<li class="previous">
 								<a href="#">上一个任务</a>
-							</li> -->
+							</li>
 
 
-							<!-- <li class="next last">
+							<li class="next last">
 								<a href="#">最后一个任务</a>
-							</li> -->
-							<!-- <li class="next">
+							</li>
+							<li class="next">
 								<a href="#">下一个任务</a>
-							</li> -->
-						</ul>
+							</li>
+						</ul> -->
 					</div>
 					<!--  -->
 				</div>

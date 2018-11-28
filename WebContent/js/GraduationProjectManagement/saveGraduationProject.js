@@ -1,4 +1,5 @@
 function saveGraduationProject() {
+	alert('dd:'+k);
 	switch (current_processDefinitionName) {
 	case "指导老师完成任务书": {
 		Save_Taskbook_Teacher();

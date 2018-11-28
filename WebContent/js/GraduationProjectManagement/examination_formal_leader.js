@@ -1194,6 +1194,17 @@ function examination_formal_leader() {
 					radioClass : 'iradio_square-blue',
 					increaseArea : '20%',
 				});
+				var ulSave = document.createElement("ul");
+				ulSave.className='pager wizard';
+				var liSave = document.createElement("li");
+				liSave.id='button_SaveGraduationProject';
+				var aSave = document.createElement('a');
+				aSave.href='####';
+				aSave.onclick = Save_examination_formal_leader
+				aSave.text='提交更新';
+				liSave.appendChild(aSave);
+				ulSave.appendChild(liSave);
+				tab.appendChild(ulSave);
 				/*
 				 * 
 				 * 让不是现在进行的流程的不可编辑
