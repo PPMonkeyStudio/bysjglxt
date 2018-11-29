@@ -14,7 +14,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				teacher_json = JSON.parse(xhr.responseText);
-				console.log(teacher_json)
 				/*
 				 * 清空原表数据
 				 */

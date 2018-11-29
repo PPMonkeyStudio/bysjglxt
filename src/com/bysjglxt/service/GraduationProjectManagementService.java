@@ -16,6 +16,7 @@ import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.google.gson.JsonElement;
@@ -39,7 +40,7 @@ public interface GraduationProjectManagementService {
 	 * @throws Exception
 	 */
 	public File exportAll() throws Exception;
-	
+
 	/**
 	 * 生成单条评语
 	 * 
@@ -345,7 +346,9 @@ public interface GraduationProjectManagementService {
 	// 10.获取答辩评分及成绩评定表
 	public bysjglxt_defence get_Defence(String userId);
 
-	/************************************ 下面是导出word的实现 ****************************************************/
+	/************************************
+	 * 下面是导出word的实现
+	 ****************************************************/
 
 	// 导出所有
 	public File exportAll(List<String> userId) throws Exception;
@@ -455,29 +458,42 @@ public interface GraduationProjectManagementService {
 	 * @throws Exception
 	 */
 	public List<bysjglxt_comment> previewComment(File eXCEL_Comment, String eXCEL_CommentFileName) throws Exception;
+
 	/**
 	 * 更新开题报告
+	 * 
 	 * @param dissertation
 	 * @param oldDissertation
 	 * @param user_student_id
 	 * @param dissertationFileName
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public int saveReportOpening(File dissertation, String oldDissertation, String user_student_id,
 			String dissertationFileName) throws IOException;
 
 	/**
 	 * 下载开题报告
+	 * 
 	 * @param dissertationUserID
 	 * @return
 	 */
 	public File downloadReportOpening(String dissertationUserID);
+
 	/**
 	 * 
 	 * @param string
 	 * @return
 	 */
-	public bysjglxt_task_instance getTaskInstance(String taskName,String userId);
+	public bysjglxt_task_instance getTaskInstance(String taskName, String userId);
+
+	public List<TaskDTO> getStudentGraduationProcess(String studentUserId);
+
+	/**
+	 * 更改状态
+	 * 
+	 * @return
+	 */
+	public int updateTaskInstaceState(String studentUserId, int state);
 
 }

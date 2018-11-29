@@ -11,7 +11,6 @@ function List_College() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug(xhr.responseText);
 				college_json = JSON.parse(xhr.responseText);
 				/*
 				 * 

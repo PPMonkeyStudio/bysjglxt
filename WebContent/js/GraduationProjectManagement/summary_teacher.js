@@ -41,7 +41,6 @@ function summary_teacher() {
 				if (summary.summary_opinion != null) {
 					textarea_1.innerHTML = summary.summary_opinion;
 				} else {
-					console.debug("个人学习工作总结意见为空");
 					textarea_1.innerHTML = '';
 				}
 				tab.appendChild(textarea_1);

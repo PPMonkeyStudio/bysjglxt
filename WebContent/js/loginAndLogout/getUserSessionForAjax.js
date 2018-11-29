@@ -13,7 +13,6 @@ function getUserSessionForAjax() {
 				 */
 				try {
 					var userJsonDTO = JSON.parse(xhr.responseText);
-					console.debug(xhr.responseText);
 				} catch (e) {
 					toastr.error("登录状态失效");
 					window.location = "/bysjglxt/loginLogout/LoginLogoutManagement_logout";

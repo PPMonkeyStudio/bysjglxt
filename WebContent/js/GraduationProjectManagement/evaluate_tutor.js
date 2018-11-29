@@ -15,7 +15,6 @@ function evaluate_tutor() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("指导老师填写评价审阅表：" + xhr.responseText);
 				var evaluate_tutor = JSON.parse(xhr.responseText);
 				var tab = document.getElementById("tab19");
 				tab.innerHTML = '';

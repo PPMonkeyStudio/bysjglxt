@@ -5,7 +5,6 @@ function Save_dissertation() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug(xhr.responseText);
 				toastr.success("毕业论文修改成功");
 			} else {
 				toastr.error(xhr.status);

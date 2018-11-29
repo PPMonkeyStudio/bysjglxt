@@ -8,6 +8,18 @@ public class TaskDTO {
 	private bysjglxt_task_definition taskDefinition;
 	private bysjglxt_task_instance taskInstance;
 	
+	
+	
+	public TaskDTO() {
+		super();
+	}
+
+	public TaskDTO(bysjglxt_task_definition taskDefinition, bysjglxt_task_instance taskInstance) {
+		super();
+		this.taskDefinition = taskDefinition;
+		this.taskInstance = taskInstance;
+	}
+
 	@Override
 	public String toString() {
 		return "TaskDTO [taskDefinition=" + taskDefinition + ", taskInstance=" + taskInstance + "]";

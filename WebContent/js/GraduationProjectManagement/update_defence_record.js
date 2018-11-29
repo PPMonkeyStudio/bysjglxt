@@ -46,7 +46,6 @@ function update_defence_record(button) {
 						var message;
 						if (xhr.readyState == 4) {
 							if (xhr.status == 200) {
-								console.debug("defence:" + xhr.responseText);
 								var defence = JSON.parse(xhr.responseText);
 								var textarea_defence_record = document
 										.getElementById("textarea_defence_record");

@@ -31,6 +31,7 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
@@ -458,6 +459,29 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		listMajor = query.list();
 		session.clear();
 		return listMajor;
+	}
+
+	/**
+	 * 获取学生的毕业设计流程
+	 */
+	@Override
+	public List<TaskDTO> getStudentGraduationProcess(String studentUserId) {
+		List<TaskDTO> listTask = new ArrayList<TaskDTO>();
+		Session session = getSession();
+		String hql = "select "//
+				+ " new com.bysjglxt.domain.DTO.TaskDTO(taskDefinition,taskInstance)"//
+				+ " FROM"//
+				+ " bysjglxt_task_definition taskDefinition,"//
+				+ " bysjglxt_task_instance taskInstance,"//
+				+ " bysjglxt_process_instance processInstance"//
+				+ " where taskInstance.task_instance_task_definition = taskDefinition.task_definition_id"//
+				+ " AND taskInstance.task_instance_process_instance = processInstance.process_instance_id"//
+				+ " AND processInstance.process_instance_man = '" + studentUserId + "'"//
+				+ " ORDER BY taskDefinition.task_definition_gmt_create";
+		Query query = session.createQuery(hql);
+		listTask = query.list();
+		session.clear();
+		return listTask;
 	}
 
 	// 根据指导老师ID获得分页显示的学生选题
@@ -1304,6 +1328,24 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 			session.flush();
 		} catch (HibernateException e) {
 			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	/**
+	 * 更改状态
+	 */
+	@Override
+	public int updateTaskInstaceState(String studentUserId, int state) {
+		int flag = 1;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_task_instance set task_instance_is_update="+state+" where task_instance_id = '"+studentUserId+"'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+			session.flush();
+		} catch (HibernateException e) {
+			flag = 0;
 			e.printStackTrace();
 		}
 		return flag;

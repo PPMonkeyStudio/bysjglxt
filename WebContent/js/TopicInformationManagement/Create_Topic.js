@@ -6,7 +6,6 @@ function Create_Topic() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("获取当前选题流程:" + xhr.responseText);
 				var topicCurrentProcessDTO = JSON.parse(xhr.responseText);
 				if (xhr.responseText == '{}') {
 					toastr.error("管理员未开启选题的流程");
@@ -14,9 +13,6 @@ function Create_Topic() {
 				} else {
 					for (var num = 0; topicCurrentProcessDTO.listTaskBelongProcess.length; num++) {
 						if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
-							console
-									.debug("正在进行的选题任务："
-											+ topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name);
 							if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "创建选题") {
 								toastr.error("还未到创建选题的时间");
 								return;

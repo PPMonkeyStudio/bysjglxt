@@ -117,9 +117,6 @@ function assign(obj){
 			}else {
 				for (var num = 0; topicCurrentProcessDTO.listTaskBelongProcess.length; num++) {
 					if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
-						console
-								.debug("正在进行的选题任务："
-										+ topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name);
 						if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "分配选题") {
 							toastr
 									.error("还未到分配选题的时间");

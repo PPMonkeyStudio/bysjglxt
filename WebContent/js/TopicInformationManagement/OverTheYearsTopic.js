@@ -170,7 +170,6 @@ function selectTopicPre(obj){
 	
 	/*
 	 * var tr_parent = $obj.parent().parent();
-	 * $('#topic_name_chinese').val("理论研究") console.log(tr_parent);
 	 */
 	jc.close();
 }

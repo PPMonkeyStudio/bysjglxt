@@ -17,7 +17,6 @@ function Taskbook_Teacher() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 
-				console.debug("taskbook:::" + xhr.responseText);
 				var taskbook = JSON.parse(xhr.responseText);
 				var tab = document.getElementById("tab1");
 				tab.innerHTML = '';
@@ -93,7 +92,6 @@ function Taskbook_Teacher() {
 				/*
 				 * 让不是现在进行的流程的不可编辑
 				 */
-				console.debug("bukebian:" + current_processDefinitionName);
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
 				if ('-1' == k) {

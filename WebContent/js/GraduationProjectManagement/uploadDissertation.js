@@ -24,7 +24,6 @@ function addDissertation() {
 function dissertationChange(dissertation) {
 
 	num_dissertation++;
-	console.debug("num_dissertation：" + num_dissertation);
 	var div_dissertation_box = document.getElementById("div_dissertation_box");
 	var div_dissertation_father = document.createElement("div");
 	var div_dissertation_img = document.createElement("img");
@@ -98,7 +97,6 @@ function dissertationChange(dissertation) {
 function del_dissertation() {
 
 	num_dissertation--;
-	console.debug("num_dissertation：" + num_dissertation);
 	var div_dissertation_box = document.getElementById("div_dissertation_box");
 	var div_dissertation_father = document
 			.getElementById("div_dissertation_father");

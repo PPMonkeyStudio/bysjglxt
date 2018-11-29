@@ -16,6 +16,8 @@
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/List_MyTutorGraduationProject_By_PageAndSearch.js"></script>
+	<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/processController.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>我指导的毕业设计</title>

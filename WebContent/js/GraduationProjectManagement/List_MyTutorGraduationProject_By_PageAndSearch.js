@@ -13,7 +13,6 @@ function List_MyTutorGraduationProject_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("我指导的毕业设计：" + xhr.responseText);
 				myTutorGraduationProject_json = JSON.parse(xhr.responseText);
 				/*
 				 * 
@@ -93,9 +92,9 @@ function List_MyTutorGraduationProject_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
 							|| myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance == null) {
-						new_td.innerHTML = '';
+						new_td.innerHTML = '<button onclick="processController(this)" id="'+myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id+'" class="btn btn-default">更改控制</button>';
 					} else {
-						new_td.innerHTML = '<button  onclick="window.location = \'\/bysjglxt\/graduationProject\/GraduationProjectManagement_MyGraduationProjectPage?MyTutorGraduationProjectStudentID='
+						new_td.innerHTML = '<button onclick="processController(this)" id="'+myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id+'" class="btn btn-default">更改控制</button><button  onclick="window.location = \'\/bysjglxt\/graduationProject\/GraduationProjectManagement_MyGraduationProjectPage?MyTutorGraduationProjectStudentID='
 								+ myTutorGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 								+ '\'" class="btn btn-default">毕业设计过程手册</button>';
 

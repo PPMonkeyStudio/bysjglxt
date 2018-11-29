@@ -3,7 +3,6 @@ package com.bysjglxt.service.impl;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,7 +51,6 @@ import com.bysjglxt.domain.DTO.TeacherTutorStudentDTO;
 import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
-import com.google.gson.JsonElement;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -68,7 +66,20 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
-
+	/**
+	 * 更改状态
+	 */
+	@Override
+	public int updateTaskInstaceState(String studentUserId, int state) {
+		return graduationProjectManagementDao.updateTaskInstaceState(studentUserId,state);
+	}
+	/**
+	 * 获取学生的流程
+	 */
+	@Override
+	public List<TaskDTO> getStudentGraduationProcess(String studentUserId) {
+		return graduationProjectManagementDao.getStudentGraduationProcess(studentUserId);
+	}
 	@Override
 	public bysjglxt_task_instance getTaskInstance(String taskName,String userId) {
 		System.out.println("s:"+userId);

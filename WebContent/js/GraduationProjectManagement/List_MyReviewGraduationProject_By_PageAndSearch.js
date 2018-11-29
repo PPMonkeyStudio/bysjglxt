@@ -13,7 +13,6 @@ function List_MyReviewGraduationProject_By_PageAndSearch(pageIndex) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("我评阅的毕业设计：" + xhr.responseText);
 				myReviewGraduationProject_json = JSON.parse(xhr.responseText);
 				/*
 				 * 

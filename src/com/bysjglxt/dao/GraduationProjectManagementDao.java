@@ -20,6 +20,7 @@ import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
@@ -151,5 +152,16 @@ public interface GraduationProjectManagementDao {
 	 * @return
 	 */
 	public bysjglxt_task_instance getTaskInstance(String taskName, String userId);
+
+	public List<TaskDTO> getStudentGraduationProcess(String studentUserId);
+
+	/**
+	 * 更改状态
+	 * 
+	 * @param studentUserId
+	 * @param state
+	 * @return
+	 */
+	public int updateTaskInstaceState(String studentUserId, int state);
 
 }

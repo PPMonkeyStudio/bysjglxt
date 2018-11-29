@@ -39,6 +39,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @date 2018/2/19
  * @author JXX
  */
+@SuppressWarnings("serial")
 public class GraduationProjectManagementAction extends ActionSupport
 		implements ServletResponseAware, ServletRequestAware {
 	/*
@@ -108,9 +109,61 @@ public class GraduationProjectManagementAction extends ActionSupport
 	private String graduationComment;
 	private String taskInstanceName;
 
+	private String studentUserId;
+
+	private int state;
+	private String taskInstanceId;
+	
+	
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public String getTaskInstanceId() {
+		return taskInstanceId;
+	}
+
+	public void setTaskInstanceId(String taskInstanceId) {
+		this.taskInstanceId = taskInstanceId;
+	}
+
+	public String getStudentUserId() {
+		return studentUserId;
+	}
+
+	public void setStudentUserId(String studentUserId) {
+		this.studentUserId = studentUserId;
+	}
+
+	/**
+	 * @throws IOException 
+	 * 
+	 */
+	public void updateTaskInstaceState() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(graduationProjectManagementService.updateTaskInstaceState(taskInstanceId,state)+"");
+	}
+	
+	/**
+	 * 获取某个学生毕业设计流程
+	 * @throws IOException 
+	 */
+	public void getStudentGraduationProcess() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(graduationProjectManagementService.getStudentGraduationProcess(studentUserId)));
+	}
+
 	/**
 	 * 根据条件获取任务实例
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void getTaskInstance() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
@@ -118,9 +171,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
-			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.getTaskInstance(taskInstanceName,(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
+			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.getTaskInstance(
+					taskInstanceName,
+					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
-			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.getTaskInstance(taskInstanceName,((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO")).getBysjglxtStudentUser().getUser_student_id())));
+			http_response.getWriter()
+					.write(gson.toJson(graduationProjectManagementService.getTaskInstance(taskInstanceName,
+							((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+									.getBysjglxtStudentUser().getUser_student_id())));
 		}
 	}
 

@@ -21,10 +21,6 @@ function InitializationMyGraduationProject() {
 					if (currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
 						current_processDefinitionName = currentProcessDto.listTaskBelongProcess[num].taskDefinition.task_definition_name;
 						current_processInstanceUserID = currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_role;
-						console.debug("正在进行的流程定义名："
-								+ current_processDefinitionName);
-						console.debug("正在进行的流程实例所属用户ID："
-								+ current_processInstanceUserID);
 						break;
 					}
 				}
@@ -39,7 +35,6 @@ function InitializationMyGraduationProject() {
 					banner_Taskbook_Teacher.style.color = 'white';
 					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
 					Initialization_Taskbook_Teacher();
-					console.debug("in:" + current_processDefinitionName);
 					/*
 					 * 
 					 */
@@ -55,7 +50,6 @@ function InitializationMyGraduationProject() {
 					banner_Taskbook_Teacher.style.color = 'white';
 					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
 					Initialization_Taskbook_Student();
-					console.debug("in:" + current_processDefinitionName);
 					/*
 					 * 
 					 */
@@ -71,7 +65,6 @@ function InitializationMyGraduationProject() {
 					banner_Taskbook_Teacher.style.color = 'white';
 					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
 					Initialization_Report_Opening_Teacher();
-					console.debug("in:" + current_processDefinitionName);
 					/*
 					 * 
 					 */

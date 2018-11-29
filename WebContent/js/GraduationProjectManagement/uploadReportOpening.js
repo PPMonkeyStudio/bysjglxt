@@ -23,7 +23,6 @@ function addReportOpeningFile() {
 
 function reportOpeningFileChange(report_opening) {
 	num_reportopening++;
-	console.debug("num_reportopening：" + num_reportopening);
 	var div_report_opening_box = document.getElementById("div_report_opening_box");
 	var div_report_opening_father = document.createElement("div");
 	var div_report_opening_img = document.createElement("img");
@@ -96,7 +95,6 @@ function reportOpeningFileChange(report_opening) {
 function delReportOpening() {
 
 	num_reportopening--;
-	console.debug("num_reportopening：" + num_reportopening);
 	var div_report_opening_box = document.getElementById("div_report_opening_box");
 	var div_report_opening_father = document
 			.getElementById("div_report_opening_father");

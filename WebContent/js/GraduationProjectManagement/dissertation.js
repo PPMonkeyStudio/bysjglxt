@@ -16,7 +16,6 @@ function dissertation() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				console.debug("毕业论文：" + xhr.responseText);
 				var dissertation = JSON.parse(xhr.responseText);
 				var tab = document.getElementById("tab16");
 				tab.innerHTML = '';

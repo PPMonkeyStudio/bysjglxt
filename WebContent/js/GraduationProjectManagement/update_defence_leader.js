@@ -95,7 +95,6 @@ function update_defence_leader(button) {
 						var message;
 						if (xhr.readyState == 4) {
 							if (xhr.status == 200) {
-								console.debug("defence:" + xhr.responseText);
 								var defence = JSON.parse(xhr.responseText);
 
 								/*

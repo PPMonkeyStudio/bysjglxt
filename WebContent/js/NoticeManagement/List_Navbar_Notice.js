@@ -13,7 +13,6 @@ function List_Navbar_Notice() {
 				xhr.onreadystatechange = function() {
 					if (xhr.readyState == 4) {
 						if (xhr.status == 200) {
-							// console.debug("导航的通知:" + xhr.responseText);
 							var navbarNotice_json = JSON
 									.parse(xhr.responseText);
 							/*
