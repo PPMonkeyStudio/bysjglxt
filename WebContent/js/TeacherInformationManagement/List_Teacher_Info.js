@@ -1,4 +1,4 @@
-﻿﻿var teacher_json = null;
+﻿var teacher_json = null;
 
 function List_Teacher_By_PageAndSearch(pageIndex) {
 
@@ -14,7 +14,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				teacher_json = JSON.parse(xhr.responseText);
-				console.log(teacher_json)
 				/*
 				 * 清空原表数据
 				 */
@@ -70,66 +69,54 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 						new_td.innerHTML = '无';
 					}
 					/*
-					 * 教研室
+					 * 出生年月
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtSection == undefined
-							|| teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name == "") {
-						new_td.innerHTML = '未分配';
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.birthday;
 					} else {
-						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name;
+						new_td.innerHTML = '无';
 					}
 					/*
-					 * 职称
-					 */
-					// new_td = document.createElement("td");
-					// new_tr.appendChild(new_td);
-					// if
-					// (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic
-					// != undefined
-					// &&
-					// teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title
-					// != "") {
-					// new_td.innerHTML =
-					// teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title;
-					// } else {
-					// new_td.innerHTML = '无';
-					// }
-					/*
-					 * 指导学生数
+					 * 单位名称
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance != "-1") {
-						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num
-								+ '/'
-								+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance;
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.unit_name;
 					} else {
-						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_guidance_num
-								+ '/∞';
+						new_td.innerHTML = '无';
 					}
 					/*
-					 * 记录员
+					 * 学历
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_recorder == 1) {
-						new_td.innerHTML = '<span class="label label-primary">是</span>';
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_education;
 					} else {
-						new_td.innerHTML = '<span class="label label-default">否</span>';
-						// new_td.style.color = "#ff5063";
+						new_td.innerHTML = '无';
 					}
 					/*
-					 * 答辩小组组长
+					 * 最高学位
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_is_defence_leader == 1) {
-						new_td.innerHTML = '<span class="label label-primary">是</span>';
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_degree;
 					} else {
-						new_td.innerHTML = '<span class="label label-default">否</span>';
-						// new_td.style.color = "#ff5063";
+						new_td.innerHTML = '无';
+					}
+					/*
+					 * 专业技术职称
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title;
+					} else {
+						new_td.innerHTML = '无';
 					}
 					/*
 					 * 操作
@@ -152,9 +139,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 							+ '<li><a id="'
 							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
 							+ '" onclick="Teacher_Information_Display(this)" >详细基础信息</a></li>'
-							+ '<li><a id="'
-							+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_id
-							+ '" onclick="Teacher_Fix_User(this)">其他信息</a></li>'
 							+ '</div>';
 					/*
 					 * 选择

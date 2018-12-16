@@ -8,6 +8,7 @@ import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.TeacherDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
 public interface TopicInformationManagementDao {
@@ -123,7 +124,7 @@ public interface TopicInformationManagementDao {
 
 	public List<com.bysjglxt.domain.DO.bysjglxt_teacher_user> getListAdminByCollege(String user_teacher_belong_college);
 
-	public String getTopicMaxNumByYear(String topic_year);
+	public String getTopicMaxNumByYear(String topic_year,String user_teacher_belong_college);
 
 	/**
 	 * 根据条件获取所有的选题
@@ -140,5 +141,26 @@ public interface TopicInformationManagementDao {
 	 * @return
 	 */
 	public bysjglxt_topic getTopicById(String topicId);
+	/**
+	 * 获取创建选题的老师
+	 * @param year
+	 * @return
+	 */
+	public List<bysjglxt_teacher_user> getTeacherUserCreateTopic(String year,String teacherColleage);
+
+	/**
+	 * 根据老师以及年份获取该老师所有创建的课题
+	 * @param user_teacher_id
+	 * @param year
+	 * @return
+	 */
+	public List<bysjglxt_topic> getTopicByTeacherIdAndYear(String user_teacher_id, String year);
+	/**
+	 * 获取未创建选题的信息
+	 * @param year
+	 * @param user_teacher_belong_college
+	 * @return
+	 */
+	public List<bysjglxt_teacher_user> getTeacherUserNotTopic(String year, String user_teacher_belong_college);
 
 }

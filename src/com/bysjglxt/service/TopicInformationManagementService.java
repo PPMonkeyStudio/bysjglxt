@@ -5,8 +5,12 @@ import java.util.List;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DTO.DesignationStudentInformationDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherTopicInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
+import com.google.gson.JsonElement;
 
 public interface TopicInformationManagementService {
 
@@ -44,7 +48,7 @@ public interface TopicInformationManagementService {
 	 * @return 1成功 0失败
 	 * 
 	 */
-	public boolean CreateTopic(TopicInformationManagementDTO topicInformationDTO);
+	public boolean CreateTopic(TopicInformationManagementDTO topicInformationDTO,String teacherColleage);
 
 	/**
 	 * @DATE 2017-10-28
@@ -208,6 +212,18 @@ public interface TopicInformationManagementService {
 	 * @return
 	 */
 	public bysjglxt_topic getTopicById(String topicId);
+
+	/**
+	 * 创建选题情况获取
+	 * @param created
+	 */
+	public List<TeacherTopicInformationDTO> getTeacherTopicInfo(String teacherColleage);
+	/**
+	 * 获取未创建选题的老师
+	 * @param user_teacher_belong_college
+	 * @return
+	 */
+	public List<TeacherDTO> getTeacherNotTopicInfo(String user_teacher_belong_college);
 
 	
 

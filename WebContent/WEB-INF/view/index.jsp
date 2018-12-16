@@ -26,7 +26,29 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">欢迎使用毕业设计管理系统</h3>
 			</div>
-			<div class="panel-body"></div>
+			<div class="panel-body">
+				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
+					<div class="panel-heading" style="background-color:#BBB;color:#FFF;">
+						<h3 class="panel-title">正在进行</h3>
+					</div>
+					<div class="panel-body">
+					</div>
+				</div>
+				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
+					<div class="panel-heading" style="background-color:#BBB;color:#FFF;">
+						<h3 class="panel-title">待完成</h3>
+					</div>
+					<div class="panel-body">
+					</div>
+				</div>
+				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
+					<div class="panel-heading" style="background-color:#BBB;color:#FFF;">
+						<h3 class="panel-title">已完成</h3>
+					</div>
+					<div class="panel-body">
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!---------------------------------------------------------------------------------------------------->

@@ -89,6 +89,15 @@ public class StudentInformationManagementAction extends ActionSupport
 	}
 
 	/**
+	 * @说明 跳转列学生信息管理页
+	 * 
+	 * @return
+	 */
+	public String listStudentInfoPage() {
+		return "listStudentInfoPage";
+	}
+	
+	/**
 	 * @说明 跳转手动添加学生页
 	 * 
 	 * @return

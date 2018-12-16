@@ -18,11 +18,14 @@ import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.DesignationStudentInformationDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherTopicInformationDTO;
 import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 import com.bysjglxt.service.CollegeManagementService;
 import com.bysjglxt.service.TopicInformationManagementService;
+import com.google.gson.JsonElement;
 
 import util.TeamUtil;
 
@@ -48,13 +51,15 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	public void setTopicInformationManagementDao(TopicInformationManagementDao topicInformationManagementDao) {
 		this.topicInformationManagementDao = topicInformationManagementDao;
 	}
+
 	/**
 	 * 获取所有的某个系的选题
 	 */
 	@Override
 	public List<bysjglxt_topic> listAllTopic(bysjglxt_topic topic, String user_teacher_belong_college) {
-		return this.topicInformationManagementDao.listAllTopic(topic,user_teacher_belong_college);
+		return this.topicInformationManagementDao.listAllTopic(topic, user_teacher_belong_college);
 	}
+
 	// 添加评阅老师
 	@Override
 	public int assignment(String studentUserId, String reviewId) {
@@ -96,7 +101,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	}
 
 	@Override
-	public boolean CreateTopic(TopicInformationManagementDTO topicInformationDTO) {
+	public boolean CreateTopic(TopicInformationManagementDTO topicInformationDTO, String teacherColleage) {
 		boolean flag = false;
 		bysjglxt_teacher_basic basicBasic = new bysjglxt_teacher_basic();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
@@ -122,7 +127,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			// 获取今年的课题最大值
 			newTopic.setTopic_year(TeamUtil.getPeoiod());
 			// 获取该年的最大课题编号数
-			String maxNumber = this.topicInformationManagementDao.getTopicMaxNumByYear(newTopic.getTopic_year());
+			String maxNumber = this.topicInformationManagementDao.getTopicMaxNumByYear(newTopic.getTopic_year(),
+					teacherColleage);
 			if (maxNumber != null && maxNumber.trim().length() > 0) {
 				int nextNumber = Integer.parseInt(maxNumber);
 				nextNumber = nextNumber + 1;
@@ -1022,5 +1028,60 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		return this.topicInformationManagementDao.getTopicById(topicId);
 	}
 
+	/**
+	 * 获取老师创建课题的情况
+	 */
+	@Override
+	public List<TeacherTopicInformationDTO> getTeacherTopicInfo(String teacherColleage) {
+		//
+		String year = TeamUtil.getPeoiod();
+		// 获取在该年份创建过选题的老师
+		List<bysjglxt_teacher_user> listUser = new ArrayList<>();
+		bysjglxt_teacher_basic teacherBasic = new bysjglxt_teacher_basic();
+		TeacherTopicInformationDTO teacherTopicInformationDTO = null;
+		List<TeacherTopicInformationDTO> listInfo = new ArrayList<>();
+		List<bysjglxt_topic> listTopic = new ArrayList<>();
+		listUser = topicInformationManagementDao.getTeacherUserCreateTopic(year, teacherColleage);
+		// 获取老师的详细信息
+		for (bysjglxt_teacher_user teacherUser : listUser) {
+			listTopic = new ArrayList<>();
+			teacherBasic = new bysjglxt_teacher_basic();
+			teacherTopicInformationDTO = new TeacherTopicInformationDTO();
+			teacherBasic = topicInformationManagementDao.getTeacherBasicInfo(teacherUser.getUser_teacher_basic());
+			teacherTopicInformationDTO.setTeacherUser(teacherUser);
+			teacherTopicInformationDTO.setTeacherBasic(teacherBasic);
+			// 获取对应的课题
+			listTopic = topicInformationManagementDao.getTopicByTeacherIdAndYear(teacherUser.getUser_teacher_id(),
+					year);
+			teacherTopicInformationDTO.setListTopic(listTopic);
+			listInfo.add(teacherTopicInformationDTO);
+		}
+		return listInfo;
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public List<TeacherDTO> getTeacherNotTopicInfo(String user_teacher_belong_college) {
+		TeacherDTO teacherDTO = new TeacherDTO();
+		// 获取未创建选题的老师基础信息
+		List<TeacherDTO> list = new ArrayList<>();
+		List<bysjglxt_teacher_user> listTeacherUser = new ArrayList<>();
+		bysjglxt_teacher_basic teacherBasic = new bysjglxt_teacher_basic();
+		String year = TeamUtil.getPeoiod();
+		listTeacherUser = topicInformationManagementDao.getTeacherUserNotTopic(year, user_teacher_belong_college);
+		System.out.println(listTeacherUser.size());
+		for (bysjglxt_teacher_user bysjglxt_teacher_user : listTeacherUser) {
+			teacherDTO = new TeacherDTO();
+			teacherBasic = new bysjglxt_teacher_basic();
+			teacherBasic = topicInformationManagementDao
+					.getTeacherBasicInfo(bysjglxt_teacher_user.getUser_teacher_basic());
+			teacherDTO.setTacherBasic(teacherBasic);
+			teacherDTO.setTeacherUser(bysjglxt_teacher_user);
+			list.add(teacherDTO);
+		}
+		return list;
+	}
 
 }

@@ -72,6 +72,10 @@ public class TeacherInformationManagementAction extends ActionSupport
 		return "TeacherManagementPage";
 	}
 
+	public String listTeacherInfoPage() {
+		return "listTeacherInfoPage";
+	}
+	
 	public String CreateTeacherPage() {
 
 		return "CreateTeacherPage";

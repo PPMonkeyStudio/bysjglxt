@@ -10,6 +10,7 @@
 			method="{1}">
 			<result name="listPage">/WEB-INF/view/StudentInformationManagement/StudentInformationManagement.jsp
 			</result>
+			<result name="listStudentInfoPage">/WEB-INF/view/StudentInformationManagement/StudentInformation.jsp</result>
 			<result name="CreateStudentPage">/WEB-INF/view/StudentInformationManagement/CreateStudent.jsp
 			</result>
 		</action>

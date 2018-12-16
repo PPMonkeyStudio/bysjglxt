@@ -64,9 +64,6 @@ public class testfffff {
 		bysjglxt_teacher_user.setUser_teacher_id("02cf3c5a-a3c0-49e1-8e60-3219a782c9cd");
 		teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
 		topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
-		boolean flag = topicManagementService.CreateTopic(topicInformationDTO);
-		System.out.println(flag);
-
 	}
 
 	// 测试学生点击我的课题

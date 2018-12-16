@@ -10,6 +10,8 @@
 			method="{1}">
 			<result name="TeacherManagementPage">/WEB-INF/view/TeacherInformationManagement/TeacherInformationManagement.jsp
 			</result>
+			<result name="listTeacherInfoPage">/WEB-INF/view/TeacherInformationManagement/TeacherInformation.jsp
+			</result>
 			<result name="CreateTeacherPage">/WEB-INF/view/TeacherInformationManagement/CreateTeacher.jsp
 			</result>
 		</action>

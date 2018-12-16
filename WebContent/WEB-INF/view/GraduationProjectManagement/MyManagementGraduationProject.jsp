@@ -13,7 +13,8 @@
 	content="text/html; charset=UTF-8">
 <!--页面公用-------------------------------------------------------------------------------------------------->
 
-
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/processController.js"></script>
 
 <title>毕业设计管理</title>
 </head>

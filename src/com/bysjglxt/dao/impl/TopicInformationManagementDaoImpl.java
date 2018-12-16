@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -826,11 +827,11 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	}
 
 	@Override
-	public String getTopicMaxNumByYear(String topic_year) {
+	public String getTopicMaxNumByYear(String topic_year, String user_teacher_belong_college) {
 		Session session = getSession();
 		Query query = session.createSQLQuery(
-				"SELECT MAX(SUBSTR(topic.topic_num,9,4)) from bysjglxt_topic topic where topic.topic_year = '"
-						+ topic_year + "'");
+				"SELECT MAX(SUBSTR(topic.topic_num,9,4)) from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher = teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college = '"
+						+ user_teacher_belong_college + "' and topic.topic_year = '" + topic_year + "'");
 		String number = (String) query.uniqueResult();
 		return number;
 	}
@@ -839,8 +840,8 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public List<bysjglxt_topic> listAllTopic(bysjglxt_topic topic, String user_teacher_belong_college) {
 		List<bysjglxt_topic> listTopic = new ArrayList<>();
 		Session session = getSession();
-		String hql = "from bysjglxt_topic topic where 1=1";
-
+		String hql = "from bysjglxt_topic topic,bysjglxt_teacher_user teacherUser where topic.topic_teacher = teacherUser.user_teacher_id and teacherUser.user_teacher_belong_college = '"
+				+ user_teacher_belong_college + "'";
 		if (null != topic) {
 			if (topic.getTopic_source() != null && topic.getTopic_source().length() > 0) {
 				hql = hql + " and topic.topic_source='" + topic.getTopic_source() + "'";
@@ -850,7 +851,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 			}
 		}
 		hql = hql + " order by topic.topic_gmt_modified desc";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		listTopic = query.list();
 		session.clear();
@@ -860,12 +860,71 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	@Override
 	public bysjglxt_topic getTopicById(String topicId) {
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
-		String hql = "from bysjglxt_topic where topic_id='" + topicId+"'";
+		String hql = "from bysjglxt_topic where topic_id='" + topicId + "'";
 		Session session = getSession();
 		Query query = session.createQuery(hql);
 		bysjglxt_topic = (bysjglxt_topic) query.uniqueResult();
 		session.clear();
 		return bysjglxt_topic;
+	}
+
+	@Override
+	public List<bysjglxt_teacher_user> getTeacherUserCreateTopic(String year, String teacherColleage) {
+		Session session = getSession();
+		List<bysjglxt_teacher_user> list = new ArrayList<>();
+		String sql = "SELECT"//
+				+ " *"//
+				+ " FROM"//
+				+ " bysjglxt_teacher_user teacherUser"//
+				+ " LEFT JOIN bysjglxt_topic topic ON teacherUser.user_teacher_id = topic.topic_teacher"//
+				+ " where topic.TOPIC_YEAR = '" + year + "'" + " and teacherUser.user_teacher_belong_college = '"
+				+ teacherColleage + "'"//
+				+ " GROUP BY teacherUser.user_teacher_id"//
+				+ " ORDER BY teacherUser.user_teacher_num";
+		SQLQuery sqlQuery = session.createSQLQuery(sql);
+		sqlQuery.addEntity(bysjglxt_teacher_user.class);
+		list = sqlQuery.list();
+		return list;
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public List<bysjglxt_topic> getTopicByTeacherIdAndYear(String user_teacher_id, String year) {
+		List<bysjglxt_topic> list = new ArrayList<>();
+		String hql = "from bysjglxt_topic where topic_teacher = '" + user_teacher_id + "' and topic_year = '" + year
+				+ "'";
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		list = query.list();
+		session.clear();
+		return list;
+	}
+
+	@Override
+	public List<bysjglxt_teacher_user> getTeacherUserNotTopic(String year, String user_teacher_belong_college) {
+		List<bysjglxt_teacher_user> list = new ArrayList<>();
+		Session session = getSession();
+		String sql = "SELECT"//
+				+ " *"//
+				+ " FROM"//
+				+ " bysjglxt_teacher_user teacherUser"//
+				+ " LEFT JOIN ("//
+				+ " SELECT"//
+				+ " topic.topic_id"//
+				+ " FROM"//
+				+ " bysjglxt_topic topic"//
+				+ " WHERE"//
+				+ " topic.TOPIC_YEAR = '" + year + "') t1" + " ON teacherUser.user_teacher_id = t1.topic_id"//
+				+ " WHERE"//
+				+ " t1.topic_id IS NULL"//
+				+ " and teacherUser.user_teacher_belong_college = '" + user_teacher_belong_college + "'"//
+				+ " ORDER BY teacherUser.user_teacher_num";
+		SQLQuery sqlQuery = session.createSQLQuery(sql);
+		sqlQuery.addEntity(bysjglxt_teacher_user.class);
+		list = sqlQuery.list();
+		return list;
 	}
 
 }

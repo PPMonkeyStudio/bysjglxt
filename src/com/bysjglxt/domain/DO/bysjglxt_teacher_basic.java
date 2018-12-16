@@ -29,6 +29,26 @@ public class bysjglxt_teacher_basic {
 	private String number_of_master="";
 	private String teacher_basic_gmt_create="";
 	private String teacher_basic_gmt_modified="";
+	private String phone;
+	private String qq;
+	
+	
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
 
 	public String getTeacher_basic_id() {
 		return teacher_basic_id;
@@ -260,7 +280,10 @@ public class bysjglxt_teacher_basic {
 				+ double_teacher_type + ", engineering_background=" + engineering_background + ", industry_background="
 				+ industry_background + ", graduate_tutor_type=" + graduate_tutor_type + ", number_of_doctor="
 				+ number_of_doctor + ", number_of_master=" + number_of_master + ", teacher_basic_gmt_create="
-				+ teacher_basic_gmt_create + ", teacher_basic_gmt_modified=" + teacher_basic_gmt_modified + "]";
+				+ teacher_basic_gmt_create + ", teacher_basic_gmt_modified=" + teacher_basic_gmt_modified + ", phone="
+				+ phone + ", qq=" + qq + "]";
 	}
+
+	
 
 }

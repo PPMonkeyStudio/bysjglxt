@@ -251,6 +251,18 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		// 判断第一个任务实例为正在进行
 		int x = 0;
 		String section = null;
+		List<String> listTask = new ArrayList<>();
+		//设置可以被更改的流程
+		listTask.add("学生完成进展情况记录（前期准备阶段）");
+		listTask.add("学生完成进展情况记录（中期自查阶段）");
+		listTask.add("学生完成个人学习工作总结");
+		listTask.add("学生完成进展情况记录（完善阶段）");
+		listTask.add("学生完成进展情况记录（撰写阶段）");
+		listTask.add("指导老师填写进展情况意见（中期自查阶段）");
+		listTask.add("指导老师填写进展情况意见（前期准备阶段）");
+		listTask.add("指导老师填写进展情况意见（完善阶段）");
+		listTask.add("指导老师填写进展情况意见（撰写阶段）");
+		listTask.add("指导老师填写个人学习工作总结意见");
 		for (bysjglxt_task_definition bysjglxt_task_definition : list_bysjglxt_task_definition) {
 			x++;
 			section = null;
@@ -266,6 +278,10 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			bysjglxt_task_instance.setTask_instance_id(TeamUtil.getUuid());
 			bysjglxt_task_instance
 					.setTask_instance_process_instance(bysjglxt_process_instance.getProcess_instance_id());
+			//设置流程默认可以被更改
+			if(listTask.contains(bysjglxt_task_definition.getTask_definition_name())) {
+				bysjglxt_task_instance.setTask_instance_is_update(1);
+			}
 			bysjglxt_task_instance.setTask_instance_task_definition(bysjglxt_task_definition.getTask_definition_id());
 			switch (bysjglxt_task_definition.getTask_definition_role()) {
 			case 1:
@@ -555,7 +571,9 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		return processDTO;
 	}
 
-	/********************************************** 下面是点击通过或打回 ***************************/
+	/**********************************************
+	 * 下面是点击通过或打回
+	 ***************************/
 
 	// 通过
 	@Override
@@ -717,17 +735,16 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 * bysjglxt_process_instance(); bysjglxt_task_instance taskInstanceing = new
 	 * bysjglxt_task_instance(); ProcessDetailDTO processDetailDTO = new
 	 * ProcessDetailDTO(); List<bysjglxt_task_instance> listTaskInstance = new
-	 * ArrayList<bysjglxt_task_instance>(); //
-	 * 根据1.在一个操作者中只有一个流程实例处于正在活动的状态获取流程实例 bysjglxt_process_instance =
+	 * ArrayList<bysjglxt_task_instance>(); // 根据1.在一个操作者中只有一个流程实例处于正在活动的状态获取流程实例
+	 * bysjglxt_process_instance =
 	 * processManagementDao.getProcessInstanceByUserAndState(userId); if
 	 * (bysjglxt_process_instance == null) return null; // 根据流程实例获取所有属于改流程的任务实例
 	 * listTaskInstance = processManagementDao
 	 * .getListTaskInstanceByProcessInstanceId(bysjglxt_process_instance.
-	 * getProcess_instance_id()); for (bysjglxt_task_instance
-	 * bysjglxt_task_instance : listTaskInstance) { //
-	 * 根据任务实例也只会有一个处于正在进行的状态遍历属于该流程实例的任务实例 if
-	 * (bysjglxt_task_instance.getTask_instance_state() == 1) { taskInstanceing
-	 * = bysjglxt_task_instance; break; } }
+	 * getProcess_instance_id()); for (bysjglxt_task_instance bysjglxt_task_instance
+	 * : listTaskInstance) { // 根据任务实例也只会有一个处于正在进行的状态遍历属于该流程实例的任务实例 if
+	 * (bysjglxt_task_instance.getTask_instance_state() == 1) { taskInstanceing =
+	 * bysjglxt_task_instance; break; } }
 	 * processDetailDTO.setBysjglxtTaskInstance(taskInstanceing);
 	 * processDetailDTO.setBysjglxtProcessInstance(bysjglxt_process_instance);
 	 * return processDetailDTO; }

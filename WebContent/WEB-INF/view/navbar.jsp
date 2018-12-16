@@ -109,7 +109,16 @@
 						</li>
 						<li>
 							<a
+								href="<%=basePath%>student/StudentInformationManagement_listStudentInfoPage"
+								class="">学生信息管理</a>
+						</li>
+						<li>
+							<a
 								href="<%=basePath%>teacher/TeacherInformationManagement_TeacherManagementPage">教师管理</a>
+						</li>
+						<li>
+							<a
+								href="<%=basePath%>teacher/TeacherInformationManagement_listTeacherInfoPage">教师信息管理</a>
 						</li>
 						<li>
 							<a

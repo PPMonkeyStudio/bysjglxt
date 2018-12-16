@@ -69,11 +69,34 @@ public class TopicInformationManagementAction extends ActionSupport
 	private bysjglxt_topic topic;
 
 	private String topicId;
-	
-	/*
-	 * 
-	 */
 
+	
+	public void getTeacherNotTopicInfo() throws IOException {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		http_response.setContentType("text/html;charset=utf-8");
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		http_response.getWriter().write(gson.toJson(topicInformationManagementService.getTeacherNotTopicInfo(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_belong_college())));
+	}
+	
+	/**
+	 * 获取当前年份的教师创建课题的情况列表
+	 * @return
+	 * @throws IOException 
+	 */
+	public void getTeacherTopicInfo() throws IOException {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		http_response.setContentType("text/html;charset=utf-8");
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		http_response.getWriter().write(gson.toJson(topicInformationManagementService.getTeacherTopicInfo(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_belong_college())));
+	}
+	
+	
 	/*
 	 * 
 	 */
@@ -176,7 +199,7 @@ public class TopicInformationManagementAction extends ActionSupport
 				.get("userTeacherDTO");
 		topicInformationManagementDTO.getTeacherInformationDTO().getBysjglxtTeacherUser()
 				.setUser_teacher_id(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
-		topicInformationManagementService.CreateTopic(topicInformationManagementDTO);
+		topicInformationManagementService.CreateTopic(topicInformationManagementDTO,userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_belong_college());
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 
@@ -184,9 +207,7 @@ public class TopicInformationManagementAction extends ActionSupport
 
 	public void UpdateTopic() throws IOException {
 		topicInformationManagementService.updateTopic(topicInformationManagementDTO.getBysjglxtTopic());
-
 		http_response.setContentType("text/html;charset=utf-8");
-
 		http_response.getWriter().write("success");
 	}
 

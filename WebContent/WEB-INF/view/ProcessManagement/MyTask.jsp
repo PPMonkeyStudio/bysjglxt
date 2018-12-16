@@ -15,10 +15,13 @@
 <!---------------------------------------------------------------------------------------------------->
 
 <!---------------------------------------------------------------------------------------------------->
-
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/ListTeacherCreateTopic.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/ListTeacherNotCreateTopic.js"></script>	
 <title>我的任务</title>
 </head>
-<body>
+<body> 
 	<s:action name="LoginLogoutManagement_navbar"
 		namespace="/loginLogout" executeResult="true" />
 	<!---------------------------------------------------------------------------------------------------->

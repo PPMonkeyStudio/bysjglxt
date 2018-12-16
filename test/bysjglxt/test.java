@@ -40,8 +40,6 @@ public class test {
 		teacherInformationDTO.setBysjglxtTeacherUser(bysjglxt_teacher_user);
 		topicInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
 		topicInformationDTO.setBysjglxtTopic(bysjglxt_topic);
-		boolean flag = topicManagementService.CreateTopic(topicInformationDTO);
-		System.out.println(flag);
 	}
 
 	// 测试删除课题
