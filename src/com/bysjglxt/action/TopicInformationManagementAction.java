@@ -69,7 +69,15 @@ public class TopicInformationManagementAction extends ActionSupport
 	private bysjglxt_topic topic;
 
 	private String topicId;
-
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public String allTopic() {
+		return "allTopic";
+	}
+	
 	
 	public void getTeacherNotTopicInfo() throws IOException {
 		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()

@@ -72,40 +72,13 @@
 									<option value="女">女</option>
 								</select>
 							</th>
-							<th>
-								<select class="select_section form-control"
-									id="select_section" style="width: auto; margin: 0 auto;"
-									onchange="List_Teacher_By_PageAndSearch(1)">
-									<option value="-1">教研室</option>
-								</select>
-							</th>
-							<!-- 							<th> -->
-							<%-- 								<select class="form-control" id="select_title" --%>
-							<%-- 									style="width: auto;margin:0 auto;" data-live-search="true" --%>
-							<%-- 									onchange="List_Teacher_By_PageAndSearch(1)"> --%>
-							<!-- 									<option value="-1">职称</option> -->
-							<!-- 									<option value="">未填写职称</option> -->
-							<%-- 								</select> --%>
-							<!-- 							</th> -->
-							<th>指导学生数</th>
-							<th>
-								<select class="form-control" id="select_recorder"
-									style="width: auto; margin: 0 auto;"
-									onchange="List_Teacher_By_PageAndSearch(1)">
-									<option value="-1">记录员（全部）</option>
-									<option value="1">是记录员</option>
-									<option value="2">不是记录员</option>
-								</select>
-							</th>
-							<th>
-								<select class="form-control" id="select_defenceLeader"
-									style="width: auto; margin: 0 auto;"
-									onchange="List_Teacher_By_PageAndSearch(1)">
-									<option value="-1">答辩小组组长（全部）</option>
-									<option value="1">是答辩小组组长</option>
-									<option value="2">不是答辩小组组长</option>
-								</select>
-							</th>
+							<th>出生年月</th>
+							<th>单位名称</th>
+							<th>学历</th>
+							<th>最高学位</th>
+							<th>专业技术职称</th>
+							<th>电话</th>
+							<th>QQ</th>
 							<th>操作</th>
 							<th>
 								<label class="fancy-checkbox">
@@ -125,30 +98,6 @@
 						style="float: right; margin: 0 10px;">
 						<i class="fa fa-trash-o"></i>
 						删除所选
-					</button>
-					<button class="btn btn-default"
-						onclick="Teacher_Take_Recorder()"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-recycle"></i>
-						收回记录员权限
-					</button>
-					<button class="btn btn-default"
-						onclick="Teacher_Give_Recorder()"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-handshake-o"></i>
-						赋予记录员权限
-					</button>
-					<button class="btn btn-default"
-						onclick="Teacher_Take_Leader()"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-recycle"></i>
-						收回答辩小组组长权限
-					</button>
-					<button class="btn btn-default"
-						onclick="Teacher_Give_Leader()"
-						style="float: right; margin: 0 10px;">
-						<i class="fa fa-handshake-o"></i>
-						赋予答辩小组组长权限
 					</button>
 				</div>
 				<div

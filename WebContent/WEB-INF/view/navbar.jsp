@@ -146,6 +146,11 @@
 								href="<%=basePath%>topic/TopicInformationManagement_TopicListPage"
 								class="">全部课题</a>
 						</li>
+						<li>
+							<a
+								href="<%=basePath%>topic/TopicInformationManagement_allTopic"
+								class="">所有课题</a>
+						</li>
 					</ul>
 				</li>
 				<!--  -->

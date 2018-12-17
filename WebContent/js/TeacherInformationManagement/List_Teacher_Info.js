@@ -118,6 +118,26 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					} else {
 						new_td.innerHTML = '无';
 					}
+					/**
+					 * QQ
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.qq;
+					} else {
+						new_td.innerHTML = '无';
+					}
+					/**
+					 * 电话
+					 */
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
+					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic != undefined) {
+						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.phone;
+					} else {
+						new_td.innerHTML = '无';
+					}
 					/*
 					 * 操作
 					 */
@@ -175,9 +195,7 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 		}
 	}
 
-	xhr
-			.open("POST",
-					"/bysjglxt/teacher/TeacherInformationManagement_ListTeacherByPageAndSearch");
+	xhr.open("POST","/bysjglxt/teacher/TeacherInformationManagement_ListTeacherByPageAndSearch");
 
 	var formData = new FormData();
 	/*
@@ -203,34 +221,6 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 		formData.append("teacherInformationManagementVO.sex", select_sex.value);
 	} else if (select_sex.value == "女") {
 		formData.append("teacherInformationManagementVO.sex", select_sex.value);
-	}
-	/*
-	 * 教研室
-	 */
-	if (document.getElementById("select_section").value != "-1") {
-		formData.append("teacherInformationManagementVO.section", document
-				.getElementById("select_section").value);
-	}
-	/*
-	 * 职称
-	 */
-	// if (document.getElementById("select_title").value != "-1") {
-	// formData.append("teacherInformationManagementVO.professional_title",
-	// document.getElementById("select_title").value);
-	// }
-	/*
-	 * 记录员
-	 */
-	if (document.getElementById("select_recorder").value != "-1") {
-		formData.append("teacherInformationManagementVO.recorder", document
-				.getElementById("select_recorder").value);
-	}
-	/*
-	 * 答辩小组组长
-	 */
-	if (document.getElementById("select_defenceLeader").value != "-1") {
-		formData.append("teacherInformationManagementVO.defenceLeader",
-				document.getElementById("select_defenceLeader").value);
 	}
 	/*
 	 * 
