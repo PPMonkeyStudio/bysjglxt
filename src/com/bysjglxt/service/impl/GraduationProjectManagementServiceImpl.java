@@ -395,6 +395,96 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return null;
 	}
+	/**
+	 * 保存完善的任务书
+	 * @throws IOException 
+	 */
+	@Override
+	public int saveWanTaskbook(File file, String oldFileName, String userId,String newFileName) throws IOException {
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		boolean flag = false;
+		String path = "";
+		bysjglxt_taskbook taskBook = new bysjglxt_taskbook();
+		taskBook = graduationProjectManagementDao.getTaskBookByUserId(userId);
+		// 如果新文件为空
+		if (file == null) {
+			path = lj + "bysjglxt/wanTaskbook/";
+			// 判断旧文件是否处于空的状态
+			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
+				// 如果是空
+				// 判断：在数据库中属于这个学生的开题报告是否存在
+				if (taskBook != null && taskBook.getTaskbook_wan_file() != null
+						&& taskBook.getTaskbook_wan_file().trim().length() > 0) {
+					// 如果存在,则将原有毕业论文删除
+					// 先进行删除
+					// 删除学生上传的文件
+					path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_wan_file();
+					File deleteFile = new File(path);
+					deleteFile.delete();
+					flag = graduationProjectManagementDao.deleteWanTaskBookFileByUserId(userId);
+					taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
+					taskBook.setTaskbook_wan_file_xiazai(-1);
+					graduationProjectManagementDao.saveObj(taskBook);
+					return 1;
+				} else {
+					// 如果不存在,不进行任何操作
+					return 1;
+				}
+			} else {
+				// 如果不是空
+				// 不进行操作
+				return 1;
+			}
+		} else {
+			path = lj + "bysjglxt/wanTaskbook/";
+			// 如果新文件存在
+			// 1.判断是否有属于这个学生的毕业论文存在
+			if (taskBook != null && taskBook.getTaskbook_wan_file() != null
+					&& taskBook.getTaskbook_wan_file().trim().length() > 0) {
+				// 如果存在
+				// 先进行删除
+				// 删除学生上传的文件
+				path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_wan_file();
+				File deleteFile = new File(path);
+				deleteFile.delete();
+				// 删除学生毕业论文记录
+				flag = graduationProjectManagementDao.deleteWanTaskBookFileByUserId(userId);
+				if (!flag) {
+					return -1;
+				}
+			}
+			path = lj + "bysjglxt/wanTaskbook/";
+			// 保存毕业论文
+			// 1.上传毕业论文
+			if (taskBook != null) {
+				path = path + taskBook.getTaskbook_id() + "_" + newFileName;
+				File newFile = new File(path);
+				FileUtils.copyFile(file, newFile);
+				// 存储数据到数据库
+				taskBook.setTaskbook_wan_file(newFileName);
+				taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
+				taskBook.setTaskbook_wan_file_xiazai(-1);
+				flag = graduationProjectManagementDao.saveObj(taskBook) == 1 ? true : false;
+				if (!flag)
+					return -2;
+			} else {
+				return -2;
+			}
+		}
+		return 0;
+	}
+	
+	
 	//保存任务书
 	@Override
 	public int saveXiaTaskbook(File file, String oldFileName, String userId,String newFileName) throws IOException {
@@ -651,6 +741,46 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			}
 		}
 		return 1;
+	}
+	/**
+	 * 下载完善任务书
+	 */
+	@Override
+	public File downloadWanTaskBook(String juese, String userID) {
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 1.根据user Id获得学生毕业论文表中的记录
+		bysjglxt_taskbook wanTaskbook = new bysjglxt_taskbook(); 
+		String path = lj + "bysjglxt/wanTaskbook/";
+		wanTaskbook = graduationProjectManagementDao.getTaskBookByUserId(userID);
+		if (wanTaskbook == null) {
+			return null;
+		}
+		path = path + wanTaskbook.getTaskbook_id() + "_" + wanTaskbook.getTaskbook_wan_file();
+		File file = new File(path);
+		//如果下载的人是学生
+		//获取某个学生的指导老师
+		bysjglxt_topic_select topicSelect = new bysjglxt_topic_select();
+		topicSelect = graduationProjectManagementDao.getStudentSelectTopic(userID);
+		if(topicSelect!=null && topicSelect.getTopic_select_teacher_tutor()!=null && topicSelect.getTopic_select_teacher_tutor().trim().length()>0) {
+			if((topicSelect.getTopic_select_teacher_tutor()).equals(juese)) {
+				//更改任务书
+				wanTaskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
+				wanTaskbook.setTaskbook_wan_file_xiazai(1);
+				graduationProjectManagementDao.saveObj(wanTaskbook);
+			}	
+		}
+		
+		return file;
 	}
 	//下载下发任务书
 	@Override
@@ -3423,6 +3553,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		return params;
 	}
 
-
+	
 
 }

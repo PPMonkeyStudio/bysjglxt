@@ -1,12 +1,11 @@
 var num_student_taskbook = 0;
-
+//TODO 将这边的数据进行初始化
 function addStudentTaskBook() {
 
-	if (num_student_taskbook >= 2) {
+	if (num_student_taskbook >= 1) {
 		toastr.error("已完善任务书，请先点击删除再上传");
 		return;
 	}
-
 	// 总父容器
 	var div_wan_taskbook_box = document.getElementById("div_wan_taskbook_box");
 
@@ -17,7 +16,7 @@ function addStudentTaskBook() {
 	input_wan_taskbook.className = "";
 	div_wan_taskbook_box.appendChild(input_wan_taskbook);
 	input_wan_taskbook.style.display = "none";
-	input_wan_taskbook.onchange = taskbookFileChange;
+	input_wan_taskbook.onchange = taskbookWanFileChange;
 	input_wan_taskbook.click();
 }
 

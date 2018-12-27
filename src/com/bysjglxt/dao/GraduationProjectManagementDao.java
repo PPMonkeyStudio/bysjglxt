@@ -169,5 +169,11 @@ public interface GraduationProjectManagementDao {
 	 * @return
 	 */
 	public boolean deleteXiaTaskBookFileByUserId(String userId);
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public boolean deleteWanTaskBookFileByUserId(String userId);
 
 }

@@ -852,6 +852,27 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	/**
+	 * 下载完善任务书
+	 * 
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 */
+	public String downloadWanTaskBook() throws UnsupportedEncodingException, FileNotFoundException {
+		String juese = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			juese = ((TeacherInformationDTO) ActionContext.getContext().getSession()
+					.get("userTeacherDTO")).getBysjglxtTeacherUser().getUser_teacher_id();
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			juese = "student";
+		}
+		File downloadDissertation = graduationProjectManagementService.downloadWanTaskBook(juese,DissertationUserID);
+		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(downloadDissertation);
+		return "downloadDissertation";
+	}
+	
+	/**
 	 * 下载开题报告
 	 * 
 	 * @return
@@ -914,6 +935,19 @@ public class GraduationProjectManagementAction extends ActionSupport
 		 */
 	}
 
+	// 更新wan任务书
+	public void updateWanTaskbook() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(graduationProjectManagementService.saveWanTaskbook(dissertation,
+				oldDissertation, studentUserId, dissertationFileName) + "");
+		/*
+		 * if
+		 * (graduationProjectManagementService.updateReportOpening(updateReportOpening)
+		 * == 1) { http_response.getWriter().write("保存成功"); } else {
+		 * http_response.getWriter().write("系统繁忙"); }
+		 */
+	}
 	/*
 	 * (non-Javadoc)
 	 * 

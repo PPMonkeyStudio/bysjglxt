@@ -483,11 +483,29 @@ public interface GraduationProjectManagementService {
 	public int saveXiaTaskbook(File dissertation, String oldDissertation, String user_student_id,
 			String dissertationFileName) throws IOException;
 	/**
+	 * 更新学生完善的任务书
+	 * @param dissertation
+	 * @param oldDissertation
+	 * @param studentUserId
+	 * @param dissertationFileName
+	 * @return
+	 * @throws IOException 
+	 */
+	public int saveWanTaskbook(File dissertation, String oldDissertation, String studentUserId,
+			String dissertationFileName) throws IOException;
+	/**
 	 * 下载任务书
 	 * @param dissertationUserID
 	 * @return
 	 */
 	public File downloadXiaTaskBook(String juese,String dissertationUserID);
+	/**
+	 * 下载完善任务书
+	 * @param juese
+	 * @param dissertationUserID
+	 * @return
+	 */
+	public File downloadWanTaskBook(String juese, String dissertationUserID);
 	/**
 	 * 下载开题报告
 	 * 
