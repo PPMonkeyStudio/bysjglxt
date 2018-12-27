@@ -18,7 +18,7 @@ function RecordProgress_3_Teacher() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var recordprocess_3 = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab11");
+				var tab = document.getElementById("tab12");
 				tab.innerHTML = '';
 				/*
 				 * 

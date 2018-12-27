@@ -18,7 +18,7 @@ function RecordProgress_2_Student() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var recordprocess_2 = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab8");
+				var tab = document.getElementById("tab9");
 				tab.innerHTML = '';
 				/*
 				 * 

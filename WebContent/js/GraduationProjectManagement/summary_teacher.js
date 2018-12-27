@@ -18,7 +18,7 @@ function summary_teacher() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var summary = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab15");
+				var tab = document.getElementById("tab16");
 				tab.innerHTML = '';
 				/*
 				 * 

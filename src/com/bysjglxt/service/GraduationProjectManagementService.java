@@ -512,7 +512,7 @@ public interface GraduationProjectManagementService {
 	 * @param dissertationUserID
 	 * @return
 	 */
-	public File downloadReportOpening(String dissertationUserID);
+	public File downloadReportOpening(String juese,String dissertationUserID);
 
 	/**
 	 * 

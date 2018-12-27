@@ -19,7 +19,7 @@ function examination_formal_leader() {
 			if (xhr.status == 200) {
 
 				var examination_formal = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab18");
+				var tab = document.getElementById("tab19");
 				tab.innerHTML = '';
 				/*
 				 * 

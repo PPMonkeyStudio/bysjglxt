@@ -19,6 +19,9 @@ function Save_report_opening() {
 			formData.append("dissertation", input_report_opening.files[0]);
 		}
 	}
+	var studentUserId = document.getElementById("student_id_report_opening");
+	console.log(studentUserId.value);
+	formData.append("studentUserId",studentUserId.value);
 	/*
 	 * 
 	 */

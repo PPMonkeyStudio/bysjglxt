@@ -28,6 +28,22 @@ function report_opening() {
 				/*
 				 * 
 				 */
+				var textarea_1 = document.createElement("textarea");
+				textarea_1.id = 'student_id_report_opening';
+				textarea_1.style = "display:none;"
+				textarea_1.innerHTML = report_opening.report_opening_student;
+				tab.appendChild(textarea_1);
+				/*
+				 * 
+				 */
+				var textarea_2 = document.createElement("textarea");
+				textarea_2.id = 'report_file_is_xiazai';
+				textarea_2.style = "display:none;"
+				textarea_2.innerHTML = report_opening.report_file_is_xiazai;
+				tab.appendChild(textarea_2);
+				/*
+				 * 
+				 */
 				var h4 = document.createElement("h4");
 				h4.innerHTML = '提交开题报告：';
 				tab.appendChild(h4);

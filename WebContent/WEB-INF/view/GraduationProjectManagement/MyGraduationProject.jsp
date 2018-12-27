@@ -197,71 +197,71 @@
 												id="banner_Taskbook_Student">3.学生接受任务</a>
 										</li> -->
 										<li>
-											<a href="#tab4" data-toggle="tab"
+											<a href="#tab5" data-toggle="tab"
 												id="banner_report_opening">5.学生上传开题报告</a>
 										</li>
 										<li>
-											<a href="#tab5" data-toggle="tab"
+											<a href="#tab6" data-toggle="tab"
 												id="banner_report_opening_teacher">6.指导老师确认开题报告</a>
 										</li>
 										<li>
-											<a href="#tab6" data-toggle="tab"
+											<a href="#tab7" data-toggle="tab"
 												id="banner_RecordProgress_1_Student">7.学生完成进展情况记录（前期准备阶段）</a>
 										</li>
 										<li>
-											<a href="#tab7" data-toggle="tab"
+											<a href="#tab8" data-toggle="tab"
 												id="banner_RecordProgress_1_Teacher">8.指导老师填写进展情况意见（前期准备阶段）</a>
 										</li>
 										<li>
-											<a href="#tab8" data-toggle="tab"
+											<a href="#tab9" data-toggle="tab"
 												id="banner_RecordProgress_2_Student">9.学生完成进展情况记录（撰写阶段）</a>
 										</li>
 										<li>
-											<a href="#tab9" data-toggle="tab"
+											<a href="#tab10" data-toggle="tab"
 												id="banner_RecordProgress_2_Teacher">10.指导老师填写进展情况意见（撰写阶段）</a>
 										</li>
 										<li>
-											<a href="#tab10" data-toggle="tab"
+											<a href="#tab11" data-toggle="tab"
 												id="banner_RecordProgress_3_Student">11.学生完成进展情况记录（中期自查阶段）</a>
 										</li>
 										<li>
-											<a href="#tab11" data-toggle="tab"
+											<a href="#tab12" data-toggle="tab"
 												id="banner_RecordProgress_3_Teacher">12.指导老师填写进展情况意见（中期自查阶段）</a>
 										</li>
 										<li>
-											<a href="#tab12" data-toggle="tab"
+											<a href="#tab13" data-toggle="tab"
 												id="banner_RecordProgress_4_Student">13.学生完成进展情况记录（完善阶段）</a>
 										</li>
 										<li>
-											<a href="#tab13" data-toggle="tab"
+											<a href="#tab14" data-toggle="tab"
 												id="banner_RecordProgress_4_Teacher">14.指导老师填写进展情况意见（完善阶段）</a>
 										</li>
 										<li>
-											<a href="#tab14" data-toggle="tab"
+											<a href="#tab15" data-toggle="tab"
 												id="banner_summary_student">15.学生完成个人学习总结</a>
 										</li>
 										<li>
-											<a href="#tab15" data-toggle="tab"
+											<a href="#tab16" data-toggle="tab"
 												id="banner_summary_teacher">16.指导老师填写个人学习总结意见</a>
 										</li>
 										<li>
-											<a href="#tab16" data-toggle="tab"
+											<a href="#tab17" data-toggle="tab"
 												id="banner_dissertation">17.学生提交答辩论文</a>
 										</li>
 										<li>
-											<a href="#tab17" data-toggle="tab"
+											<a href="#tab18" data-toggle="tab"
 												id="banner_examination_formal_teacher">18.指导老师填写形式审查表</a>
 										</li>
 										<li>
-											<a href="#tab18" data-toggle="tab"
+											<a href="#tab19" data-toggle="tab"
 												id="banner_examination_formal_leader">19.领导小组长填写形式审查表(核查)</a>
 										</li>
 										<li>
-											<a href="#tab19" data-toggle="tab"
+											<a href="#tab20" data-toggle="tab"
 												id="banner_evaluate_tutor">20.指导老师填写评价审阅表</a>
 										</li>
 										<li>
-											<a href="#tab20" data-toggle="tab"
+											<a href="#tab21" data-toggle="tab"
 												id="banner_evaluate_review">21.评阅老师填写评阅审查表</a>
 										</li>
 										
@@ -441,7 +441,8 @@
 					break;
 				}
 				case 20: {
-					evaluate_review();
+					get_taskinstance_byname("评阅老师填写评阅审查表");
+					/* evaluate_review(); */
 					break;
 				}
 				}

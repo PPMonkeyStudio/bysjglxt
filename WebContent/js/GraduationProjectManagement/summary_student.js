@@ -19,7 +19,7 @@ function summary_student() {
 			if (xhr.status == 200) {
 				
 				var summary = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab14");
+				var tab = document.getElementById("tab15");
 				tab.innerHTML = '';
 				/*
 				 * 

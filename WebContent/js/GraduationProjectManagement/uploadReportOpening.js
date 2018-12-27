@@ -40,6 +40,10 @@ function reportOpeningFileChange(report_opening) {
 	div_report_opening_father.id = "div_report_opening_father";
 	div_report_opening_name.href = '/bysjglxt/graduationProject/GraduationProjectManagement_downloadReportOpening?DissertationUserID='
 		+ currentProcessDto.processInstance.process_instance_man;
+	var xiazaiWanOk = document.getElementById("report_file_is_xiazai");
+	if("1" == xiazaiWanOk.value){
+		div_report_opening_name.style.color="green";
+	}
 	// 求出后缀
 	if (report_opening == "[object Event]") {
 		var input_annex_type = report_opening.target.files[0].name

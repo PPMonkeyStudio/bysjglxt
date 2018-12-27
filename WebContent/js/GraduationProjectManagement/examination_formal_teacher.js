@@ -19,7 +19,7 @@ function examination_formal_teacher() {
 			if (xhr.status == 200) {
 
 				var examination_formal = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab17");
+				var tab = document.getElementById("tab18");
 				tab.innerHTML = '';
 				/*
 				 * 

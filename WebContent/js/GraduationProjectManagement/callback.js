@@ -54,6 +54,8 @@ function callBack(instanseName){
 	case "指导老师填写评价审阅表":
 		evaluate_tutor();
 		break;
-		
+	case "评阅老师填写评阅审查表":
+		evaluate_review();
+		break;
 	}
 }

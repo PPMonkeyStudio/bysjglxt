@@ -1,5 +1,4 @@
 function Initialization_evaluate_review() {
-
 	var banner_evaluate_review = document
 			.getElementById("banner_evaluate_review");
 	banner_evaluate_review.click();
@@ -15,7 +14,7 @@ function evaluate_review() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var evaluate_review = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab20");
+				var tab = document.getElementById("tab21");
 				tab.innerHTML = '';
 				/*
 				 * 
@@ -1894,6 +1893,7 @@ function evaluate_review() {
 				 */
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
+				console.log("kk:",current_processDefinitionName);
 				if ("评阅老师填写评阅审查表" != current_processDefinitionName
 						|| userStudentDTO != null) {
 					document

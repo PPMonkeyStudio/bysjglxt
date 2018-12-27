@@ -431,7 +431,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_wan_file();
 					File deleteFile = new File(path);
 					deleteFile.delete();
-					flag = graduationProjectManagementDao.deleteWanTaskBookFileByUserId(userId);
+//					flag = graduationProjectManagementDao.deleteWanTaskBookFileByUserId(userId);
+					taskBook.setTaskbook_wan_file(null);
 					taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 					taskBook.setTaskbook_wan_file_xiazai(-1);
 					graduationProjectManagementDao.saveObj(taskBook);
@@ -518,7 +519,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_xia_file();
 					File deleteFile = new File(path);
 					deleteFile.delete();
-					flag = graduationProjectManagementDao.deleteXiaTaskBookFileByUserId(userId);
+//					flag = graduationProjectManagementDao.deleteXiaTaskBookFileByUserId(userId);
+					taskBook.setTaskbook_xia_file(null);
 					taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 					taskBook.setTaskbook_xia_file_xiazai(-1);
 					graduationProjectManagementDao.saveObj(taskBook);
@@ -603,7 +605,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
 					File deleteFile = new File(path);
 					deleteFile.delete();
-					flag = graduationProjectManagementDao.deleteReportOpeningFileByUserId(userId);
+//					flag = graduationProjectManagementDao.deleteReportOpeningFileByUserId(userId);
+					reportOpening.setReport_opening_file(null);
+					reportOpening.setReport_file_is_xiazai(-1);
+					reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
+					graduationProjectManagementDao.saveObj(reportOpening);
 					return 1;
 				} else {
 					// 如果不存在,不进行任何操作
@@ -640,8 +646,10 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				File newFile = new File(path);
 				FileUtils.copyFile(file, newFile);
 				// 存储数据到数据库
+				reportOpening.setReport_file_is_xiazai(-1);
 				reportOpening.setReport_opening_file(newFileName);
 				reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
+				System.out.println("d:"+reportOpening);
 				flag = graduationProjectManagementDao.saveObj(reportOpening) == 1 ? true : false;
 				if (!flag)
 					return -2;
@@ -702,7 +710,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return 1;
 			}
 		} else {
-			path = lj + "graduagtionThesi/";
+			path = lj + "bysjglxt/graduagtionThesi/";
 			// 如果新文件存在
 			bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
 			// 1.判断是否有属于这个学生的毕业论文存在
@@ -721,7 +729,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					return -1;
 				}
 			}
-			path = lj + "graduagtionThesi/";
+			path = lj + "bysjglxt/graduagtionThesi/";
 			// 保存毕业论文
 			// 1.上传毕业论文
 			bysjglxt_dissertation = new bysjglxt_dissertation();
@@ -820,7 +828,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 * 下载开题报告
 	 */
 	@Override
-	public File downloadReportOpening(String userID) {
+	public File downloadReportOpening(String juese,String userID) {
 		/*
 		 * 获取路径
 		 */
@@ -841,6 +849,18 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
 		File file = new File(path);
+		//如果下载的人是学生
+		//获取某个学生的指导老师
+		bysjglxt_topic_select topicSelect = new bysjglxt_topic_select();
+		topicSelect = graduationProjectManagementDao.getStudentSelectTopic(userID);
+		if(topicSelect!=null && topicSelect.getTopic_select_teacher_tutor()!=null && topicSelect.getTopic_select_teacher_tutor().trim().length()>0) {
+			if((topicSelect.getTopic_select_teacher_tutor()).equals(juese)) {
+				//更改任务书
+				reportOpening.setReport_file_is_xiazai(1);
+				reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
+				graduationProjectManagementDao.saveObj(reportOpening);
+			}	
+		}
 		return file;
 	}
 

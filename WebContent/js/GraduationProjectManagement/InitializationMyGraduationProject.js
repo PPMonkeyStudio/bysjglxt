@@ -19,8 +19,11 @@ function InitializationMyGraduationProject() {
 				currentProcessDto = JSON.parse(xhr.responseText);
 				for (var num = 0; currentProcessDto.listTaskBelongProcess.length; num++) {
 					if (currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
+						console.log("dd:"+currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_role);
 						current_processDefinitionName = currentProcessDto.listTaskBelongProcess[num].taskDefinition.task_definition_name;
+						console.log("current_processDefinitionName:"+current_processDefinitionName);
 						current_processInstanceUserID = currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_role;
+						console.log("current_processInstanceUserID:"+current_processInstanceUserID);
 						break;
 					}
 				}
@@ -73,51 +76,6 @@ function InitializationMyGraduationProject() {
 					 */
 					break;
 				}
-				/*case "指导老师完成任务书": {
-					var banner_Taskbook_Teacher = document
-							.getElementById("banner_Taskbook_Teacher");
-					banner_Taskbook_Teacher.style.color = 'white';
-					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
-					Initialization_Taskbook_Teacher();
-					
-					 * 
-					 
-					var $current = 0;
-					
-					 * 
-					 
-					break;
-				}
-				case "学生接受任务": {
-					var banner_Taskbook_Teacher = document
-							.getElementById("banner_Taskbook_Student");
-					banner_Taskbook_Teacher.style.color = 'white';
-					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
-					Initialization_Taskbook_Student();
-					
-					 * 
-					 
-					var $current = 0;
-					
-					 * 
-					 
-					break;
-				}*/
-				case "指导老师确认开题报告": {
-					var banner_Taskbook_Teacher = document
-							.getElementById("banner_report_opening_teacher");
-					banner_Taskbook_Teacher.style.color = 'white';
-					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
-					Initialization_Report_Opening_Teacher();
-					/*
-					 * 
-					 */
-					var $current = 0;
-					/*
-					 * 
-					 */
-					break;
-				}
 				case "指导小组组长填写任务书审核意见": {
 					var banner_Taskbook_Section = document
 							.getElementById("banner_Taskbook_Section");
@@ -142,12 +100,28 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 2;
+					var $current = 4;
 					/*
 					 * 
 					 */
 					break;
 				}
+				case "指导老师确认开题报告": {
+					var banner_Taskbook_Teacher = document
+							.getElementById("banner_report_opening_teacher");
+					banner_Taskbook_Teacher.style.color = 'white';
+					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
+					Initialization_Report_Opening_Teacher();
+					/*
+					 * 
+					 */
+					var $current = 5;
+					/*
+					 * 
+					 */
+					break;
+				}
+				
 				case "学生完成进展情况记录（前期准备阶段）": {
 					var banner_RecordProgress_1_Student = document
 							.getElementById("banner_RecordProgress_1_Student");
@@ -157,7 +131,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 3;
+					var $current = 6;
 					/*
 					 * 
 					 */
@@ -172,7 +146,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 4;
+					var $current = 7;
 					/*
 					 * 
 					 */
@@ -187,7 +161,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 5;
+					var $current = 8;
 					/*
 					 * 
 					 */
@@ -202,7 +176,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 6;
+					var $current = 9;
 					/*
 					 * 
 					 */
@@ -217,7 +191,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 7;
+					var $current = 10;
 					/*
 					 * 
 					 */
@@ -232,7 +206,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 8;
+					var $current = 11;
 					/*
 					 * 
 					 */
@@ -247,7 +221,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 9;
+					var $current = 12;
 					/*
 					 * 
 					 */
@@ -262,7 +236,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 10;
+					var $current = 13;
 					/*
 					 * 
 					 */
@@ -277,7 +251,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 11;
+					var $current = 14;
 					/*
 					 * 
 					 */
@@ -292,7 +266,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 12;
+					var $current = 15;
 					/*
 					 * 
 					 */
@@ -307,7 +281,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 13;
+					var $current = 16;
 					/*
 					 * 
 					 */
@@ -322,13 +296,13 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 14;
+					var $current = 17;
 					/*
 					 * 
 					 */
 					break;
 				}
-				case "领导小组长填写形式审查表(核查)": {
+				case "指导小组组长填写形式审查表（核查）": {
 					var banner_examination_formal_leader = document
 							.getElementById("banner_examination_formal_leader");
 					banner_examination_formal_leader.style.color = 'white';
@@ -337,7 +311,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 15;
+					var $current = 18;
 					/*
 					 * 
 					 */
@@ -352,7 +326,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 16;
+					var $current = 19;
 					/*
 					 * 
 					 */
@@ -367,7 +341,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 17;
+					var $current = 20;
 					/*
 					 * 
 					 */
@@ -375,7 +349,7 @@ function InitializationMyGraduationProject() {
 				}
 
 				}
-				var $total = 18;
+				var $total = 20;
 				var $percent = ($current / $total) * 100;
 				$('#my_progress-bar').innerHTML = $percent + '%';
 				$('#rootwizard .progress-bar').css({

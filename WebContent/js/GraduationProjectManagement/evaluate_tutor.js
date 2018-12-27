@@ -16,7 +16,7 @@ function evaluate_tutor() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var evaluate_tutor = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab19");
+				var tab = document.getElementById("tab20");
 				tab.innerHTML = '';
 				/*
 				 * 

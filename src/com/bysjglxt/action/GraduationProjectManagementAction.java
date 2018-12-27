@@ -880,8 +880,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * @throws FileNotFoundException
 	 */
 	public String downloadReportOpening() throws UnsupportedEncodingException, FileNotFoundException {
-
-		File downloadDissertation = graduationProjectManagementService.downloadReportOpening(DissertationUserID);
+		String juese = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			juese = ((TeacherInformationDTO) ActionContext.getContext().getSession()
+					.get("userTeacherDTO")).getBysjglxtTeacherUser().getUser_teacher_id();
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			juese = "student";
+		}
+		File downloadDissertation = graduationProjectManagementService.downloadReportOpening(juese,DissertationUserID);
 
 		// fileName = new String(downloadDissertation.getName().getBytes(""), "UTF-8");
 		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
@@ -908,11 +914,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 	public void updateReportOpening() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter()
-				.write(graduationProjectManagementService.saveReportOpening(dissertation, oldDissertation,
-						((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
-								.getBysjglxtStudentUser().getUser_student_id(),
-						dissertationFileName) + "");
+		http_response.getWriter().write(graduationProjectManagementService.saveReportOpening(dissertation, oldDissertation,studentUserId,dissertationFileName) + "");
 		/*
 		 * if
 		 * (graduationProjectManagementService.updateReportOpening(updateReportOpening)
