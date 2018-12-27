@@ -55,10 +55,11 @@ function List_MyTask(pageIndex) {
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
+					var sss = '';
 					if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_state == 1) {
 						if("创建选题" == myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskDefinition.task_definition_name){
-							var sss = '<button class="btn btn-default" onclick="ListTeacherCreateTopic()">创建选题老师情况</button>';
-							sss = sss + '<button class="btn btn-default" onclick="ListTeacherNotCreateTopic()">未创建选题老师情况</button>';
+							sss += '<button class="btn btn-default" onclick="ListTeacherCreateTopic()">创建选题老师情况</button>';
+							sss += '<button class="btn btn-default" onclick="ListTeacherNotCreateTopic()">未创建选题老师情况</button>';
 						}
 						if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskDefinition.task_definition_type == 1) {
 							sss = sss + '<button  id="'

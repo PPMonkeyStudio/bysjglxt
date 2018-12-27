@@ -30,7 +30,16 @@ public class bysjglxt_student_basic {
 	private String student_basic_reasonsfordroppingoutofschool = "";
 	private String student_basic_level = "";
 	private String student_basic_qq = "无";
+	private String student_basic_class = "";
 	
+	public String getStudent_basic_class() {
+		return student_basic_class;
+	}
+
+	public void setStudent_basic_class(String student_basic_class) {
+		this.student_basic_class = student_basic_class;
+	}
+
 	public String getStudent_basic_qq() {
 		return student_basic_qq;
 	}
@@ -275,8 +284,11 @@ public class bysjglxt_student_basic {
 				+ ", student_basic_entranceeducation=" + student_basic_entranceeducation
 				+ ", student_basic_enrollmentmode=" + student_basic_enrollmentmode
 				+ ", student_basic_reasonsfordroppingoutofschool=" + student_basic_reasonsfordroppingoutofschool
-				+ ", student_basic_level=" + student_basic_level + ", student_basic_qq=" + student_basic_qq + "]";
+				+ ", student_basic_level=" + student_basic_level + ", student_basic_qq=" + student_basic_qq
+				+ ", student_basic_class=" + student_basic_class + "]";
 	}
+
+	
 
 	
 }

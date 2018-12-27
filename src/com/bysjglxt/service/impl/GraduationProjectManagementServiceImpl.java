@@ -66,13 +66,15 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
+
 	/**
 	 * 更改状态
 	 */
 	@Override
 	public int updateTaskInstaceState(String studentUserId, int state) {
-		return graduationProjectManagementDao.updateTaskInstaceState(studentUserId,state);
+		return graduationProjectManagementDao.updateTaskInstaceState(studentUserId, state);
 	}
+
 	/**
 	 * 获取学生的流程
 	 */
@@ -80,12 +82,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	public List<TaskDTO> getStudentGraduationProcess(String studentUserId) {
 		return graduationProjectManagementDao.getStudentGraduationProcess(studentUserId);
 	}
+
 	@Override
-	public bysjglxt_task_instance getTaskInstance(String taskName,String userId) {
-		System.out.println("s:"+userId);
-		System.out.println(graduationProjectManagementDao.getTaskInstance(taskName,userId));
-		return graduationProjectManagementDao.getTaskInstance(taskName,userId);
-	}	
+	public bysjglxt_task_instance getTaskInstance(String taskName, String userId) {
+		System.out.println("s:" + userId);
+		System.out.println(graduationProjectManagementDao.getTaskInstance(taskName, userId));
+		return graduationProjectManagementDao.getTaskInstance(taskName, userId);
+	}
 
 	/**
 	 * 组合评阅老师评语
@@ -1814,11 +1817,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
 		lj = props.getProperty("lj");
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("x1", "毕业设计过程管理手册毕业设计过程管理手册毕业设计过程管理手册毕业设计过程管理手册毕业设计过程管理手册毕业设计过程管理手册");
-		param.put("x2", "江鑫鑫");
-		param.put("x3", "2019");
-		param.put("x4", "9");
-		param.put("x5", "12");
 		params.putAll(param);
 		Configuration configuration = new Configuration();
 		configuration.setDefaultEncoding("UTF-8");
@@ -1833,7 +1831,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	// ---------------------------------------------------------------------------------------------//
 
-	// 导出单个人
+	// 导出单个人--放在单个人那里使用
 	public File exportOneStudent(String userId) throws Exception {
 		/*
 		 * 获取路径
@@ -1851,53 +1849,40 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		params.putAll(exportCover(userId));
 		// 任务书
 		params.putAll(exportTask(userId));
-		// 开题报告
-		params.putAll(exportOpeningReport(userId));
-		// 前期情况记录
-		params.putAll(exportEarlystage(userId));
-		// 中期情况记录
-		params.putAll(exportMetaphase(userId));
-		// 后期情况记录
-		params.putAll(exportLaterstage(userId));
-		// 完善情况记录
-		params.putAll(exportPerfect(userId));
-		// 个人学习工作总结
-		params.putAll(exportSummary(userId));
-		// 形式审查表
-		params.putAll(exportFormal(userId));
-		// 指导老师评价表
-		params.putAll(exportTeacherOpin(userId));
-		// 评阅老师评价表
-		params.putAll(exportReviewOpin(userId));
-		// 答辩评分表
-		params.putAll(exportDefence(userId));
-		XwpfTUtil xwpfTUtil = new XwpfTUtil();
-		XWPFDocument doc;
-		String fileNameInResource = ServletActionContext.getServletContext().getRealPath("/DocTmp/graduation.docx");
-		// String fileNamefInResource = "F:\\graduation.docx";
-		InputStream is;
-		is = new FileInputStream(fileNameInResource);
-		// is = new FileInputStream(fileNamefInResource);
-		doc = new XWPFDocument(is);
-		xwpfTUtil.replaceInPara(doc, params);
-		xwpfTUtil.replaceInTable(doc, params);
+		Configuration configuration = new Configuration();
+		configuration.setDefaultEncoding("UTF-8");
 		// 根据user Id获取学生信息
 		bysjglxt_student_basic studentBasic = new bysjglxt_student_basic();
 		studentBasic = graduationProjectManagementDao.getStudentBasicByUserId(userId);
-		String pa = lj + "毕业设计过程管理手册——" + studentBasic.getStudent_basic_num() + studentBasic.getStudent_basic_name()
-				+ ".docx";
-		File ff = new File(pa);
-		if (!ff.exists()) {
-			ff.createNewFile();
-		}
+		configuration.setClassForTemplateLoading(this.getClass(), "");
+		Template t = configuration.getTemplate("renwushu2.ftl", "UTF-8");
+		String pa = lj + "毕业设计过程管理手册——" + studentBasic.getStudent_basic_num()
+		+ studentBasic.getStudent_basic_name() + ".doc";
 		OutputStream os = new FileOutputStream(pa);
-		doc.write(os);
-		xwpfTUtil.close(os);
-		xwpfTUtil.close(is);
-		os.flush();
-		os.close();
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
+		t.process(params, bw);
 		return new File(pa);
-
+		
+		// 开题报告
+		// params.putAll(exportOpeningReport(userId));
+		// 前期情况记录
+		// params.putAll(exportEarlystage(userId));
+		// 中期情况记录
+		// params.putAll(exportMetaphase(userId));
+		// 后期情况记录
+		// params.putAll(exportLaterstage(userId));
+		// 完善情况记录
+		// params.putAll(exportPerfect(userId));
+		// 个人学习工作总结
+		// params.putAll(exportSummary(userId));
+		// 形式审查表
+		// params.putAll(exportFormal(userId));
+		// 指导老师评价表
+		// params.putAll(exportTeacherOpin(userId));
+		// 评阅老师评价表
+		// params.putAll(exportReviewOpin(userId));
+		// 答辩评分表
+		// params.putAll(exportDefence(userId));
 	}
 
 	// 导出封面
@@ -1921,17 +1906,23 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			if (bysjglxt_student_basic != null) {
 				int sessional = Integer.parseInt(bysjglxt_student_basic.getStudent_basic_level());
 				sessional = sessional + 4;
-				params.put("${coverStudentNum}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${coverStudentName}", bysjglxt_student_basic.getStudent_basic_name());
+				// 学号
+				params.put("f2", bysjglxt_student_basic.getStudent_basic_num());
+				// 姓名
+				params.put("f3", bysjglxt_student_basic.getStudent_basic_name());
+				// 学院
+				params.put("f4", bysjglxt_student_basic.getStudent_basic_college());
 				// 届别
-				params.put("${coverSessional}", sessional + "");
-				params.put("${coverMajor}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("f5", sessional + "");
+				// 专业班级
+				params.put("f6", bysjglxt_student_basic.getStudent_basic_major() + "专业    "
+						+ bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${coverStudentNum}", "");
-				params.put("${coverStudentName}", "");
-				params.put("${coverSessional}", "");
-				params.put("${coverMajor}", "");
-
+				params.put("f2", "");
+				params.put("f3", "");
+				params.put("f4", "");
+				params.put("f5", "");
+				params.put("f6", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -1943,8 +1934,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				// 根据老师basicId获得指导老师basic表
 				bysjglxt_teacher_basic_tutor = graduationProjectManagementDao
 						.getTeacherBasicByBasicId(bysjglxt_teacher_user_tutor.getUser_teacher_basic());
-				params.put("${coverTutorName}", bysjglxt_teacher_basic_tutor.getName());
-				params.put("${coverTutorTitle}", bysjglxt_teacher_basic_tutor.getProfessional_title());
+				params.put("f7", bysjglxt_teacher_basic_tutor.getName() + "    "
+						+ bysjglxt_teacher_basic_tutor.getProfessional_title());
 				if (bysjglxt_topic_select.getTopic_select_teacher_review() != null
 						&& bysjglxt_topic_select.getTopic_select_teacher_review().trim().length() > 0) {
 					// 根据老师userId获得评阅老师user表
@@ -1953,18 +1944,22 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					// 根据老师basicid获得评阅老师basic表
 					bysjglxt_teacher_basic_evaluate = graduationProjectManagementDao
 							.getTeacherBasicByBasicId(bysjglxt_teacher_user_evaluate.getUser_teacher_basic());
-					params.put("${coverEvaluateName}", bysjglxt_teacher_basic_evaluate.getName());
-					params.put("${coverEvaluateTitle}", bysjglxt_teacher_basic_evaluate.getProfessional_title());
+					params.put("f8", bysjglxt_teacher_basic_evaluate.getName() + "    "
+							+ bysjglxt_teacher_basic_evaluate.getProfessional_title());
 				} else {
-					params.put("${coverEvaluateName}", "");
-					params.put("${coverEvaluateTitle}", "");
+					params.put("f8", "");
 				}
+				// 根据选题获取课题
+				bysjglxt_topic topic = new bysjglxt_topic();
+				topic = graduationProjectManagementDao
+						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
+				params.put("f1", topic.getTopic_name_chinese());
 			} else {
-				params.put("${coverTutorName}", "");
-				params.put("${coverTutorTitle}", "");
-				params.put("${coverEvaluateName}", "");
-				params.put("${coverEvaluateTitle}", "");
+				params.put("f7", "");
+				params.put("f8", "");
+				params.put("f1", "");
 			}
+
 		}
 		return params;
 	}
@@ -1985,13 +1980,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${taskNum}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${taskNam}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${taskMajor}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("r1", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("r2", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("r3", bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${taskNum}", "");
-				params.put("${taskNam}", "");
-				params.put("${taskMajor}", "");
+				params.put("r1", "");
+				params.put("r2", "");
+				params.put("r3", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -2001,28 +1996,40 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${taskChineseName}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${taskEnglishName}", bysjglxt_topic.getTopic_name_english());
+					params.put("r4", bysjglxt_topic.getTopic_name_chinese());
+					params.put("r5", bysjglxt_topic.getTopic_name_english());
 				} else {
-					params.put("${taskChineseName}", "");
-					params.put("${taskEnglishName}", "");
+					params.put("r4", "");
+					params.put("r5", "");
 				}
 			}
 			// 根据user Id获取任务书表
 			bysjglxt_taskbook = graduationProjectManagementDao
 					.getTaskBookByUserId(bysjglxt_student_user.getUser_student_id());
 			if (bysjglxt_taskbook != null) {
-				params.put("${taskRequired}", bysjglxt_taskbook.getTaskbook_acontent_required());
-				params.put("${taskReference}", bysjglxt_taskbook.getTaskbook_reference());
-				params.put("${taskPlan}", bysjglxt_taskbook.getTaskbook_plan());
-				params.put("${taskOpinion}", bysjglxt_taskbook.getTaskbook_opinion());
+				params.put("r6", bysjglxt_taskbook.getTaskbook_acontent_required());
+				params.put("r7", bysjglxt_taskbook.getTaskbook_reference());
+				params.put("r8", bysjglxt_taskbook.getTaskbook_plan());
+				params.put("r13", bysjglxt_taskbook.getTaskbook_opinion());
 			} else {
-				params.put("${taskRequired}", "");
-				params.put("${taskReference}", "");
-				params.put("${taskPlan}", "");
-				params.put("${taskOpinion}", "");
+				params.put("r6", "");
+				params.put("r7", "");
+				params.put("r8", "");
+				params.put("r13", "");
 			}
 		}
+		params.put("r9", "");
+		params.put("r10", "");
+		params.put("r11", "");
+		params.put("r12", "");
+		params.put("r14", "");
+		params.put("r15", "");
+		params.put("r16", "");
+		params.put("r17", "");
+		params.put("r18", "");
+		params.put("r19", "");
+		params.put("r20", "");
+		params.put("r21", "");
 		return params;
 	}
 

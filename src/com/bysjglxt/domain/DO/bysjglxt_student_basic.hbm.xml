@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-12-16 21:00:33 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-12-25 10:56:16 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_student_basic" table="BYSJGLXT_STUDENT_BASIC">
         <id name="student_basic_id" type="java.lang.String">
@@ -88,6 +88,9 @@
         </property>
         <property name="student_basic_qq" type="java.lang.String">
             <column name="STUDENT_BASIC_QQ" />
+        </property>
+        <property name="student_basic_class" type="java.lang.String">
+            <column name="STUDENT_BASIC_CLASS" />
         </property>
     </class>
 </hibernate-mapping>

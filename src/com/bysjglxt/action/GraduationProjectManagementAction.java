@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -595,16 +597,14 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * @throws Exception
 	 */
 	public String exportAll() throws Exception {
-		//
-		// listStringUse.add(((StudentInformationDTO)
-		// ActionContext.getContext().getSession().get("userStudentDTO"))
-		// .getBysjglxtStudentUser().getUser_student_id());
-		//
-		// String[] StringUse_sz = StringUse.split(",");
-		// listStringUse = Arrays.asList(StringUse_sz);
-		// File exportFile =
-		// graduationProjectManagementService.exportAll(listStringUse);
-		File exportFile = graduationProjectManagementService.exportAll();
+		listStringUse = new ArrayList<>();
+		String[] StringUse_sz = StringUse.split(",");
+		listStringUse = Arrays.asList(StringUse_sz);
+		for (String string : StringUse_sz) {
+			System.out.println("string:"+string);
+		}
+		File exportFile = graduationProjectManagementService.exportAll(listStringUse);
+//		File exportFile = graduationProjectManagementService.exportAll();
 		if (exportFile != null) {
 			fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
 			inputStream = new FileInputStream(exportFile);

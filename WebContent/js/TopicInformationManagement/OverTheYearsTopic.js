@@ -76,6 +76,7 @@ function listAllTopic() {
 		data:formData,
 		success:function(data){
 			var topic_json = JSON.parse(data);
+			console.log('ddd',topic_json)
 			/**
 			 * 
 			 */
@@ -104,8 +105,8 @@ function listAllTopic() {
 				new_td = document.createElement("td");
 				new_tr.appendChild(new_td);
 				if (topic_json != undefined
-						&& topic_json[num].topic_name_chinese != "") {
-					new_td.innerHTML = topic_json[num].topic_name_chinese;
+						&& topic_json[num][0].topic_name_chinese != "") {
+					new_td.innerHTML = topic_json[num][0].topic_name_chinese;
 				} else {
 					new_td.innerHTML = '无';
 				}
@@ -114,8 +115,8 @@ function listAllTopic() {
 				new_td.appendChild(document.createTextNode(''));
 				new_tr.appendChild(new_td);
 				if (topic_json != undefined
-						&& topic_json[num].topic_source != "") {
-					new_td.innerHTML = topic_json[num].topic_source;
+						&& topic_json[num][0].topic_source != "") {
+					new_td.innerHTML = topic_json[num][0].topic_source;
 				} else {
 					new_td.innerHTML = '无';
 				}
@@ -124,8 +125,8 @@ function listAllTopic() {
 				new_td.appendChild(document.createTextNode(''));
 				new_tr.appendChild(new_td);
 				if (topic_json != undefined
-						&& topic_json[num].topic_type != "") {
-					new_td.innerHTML = topic_json[num].topic_type;
+						&& topic_json[num][0].topic_type != "") {
+					new_td.innerHTML = topic_json[num][0].topic_type;
 				} else {
 					new_td.innerHTML = '无';
 				}
@@ -136,7 +137,7 @@ function listAllTopic() {
 				new_td = document.createElement("td");
 				new_td.appendChild(document.createTextNode(''));
 				new_tr.appendChild(new_td);
-				new_td.innerHTML = '<button type="button" class="btn btn-default" id="' + topic_json[num].topic_id +'" onclick="selectTopicPre(this)" >选择</button>';
+				new_td.innerHTML = '<button type="button" class="btn btn-default" id="' + topic_json[num][0].topic_id +'" onclick="selectTopicPre(this)" >选择</button>';
 			}
 		},
 		error:function(){
