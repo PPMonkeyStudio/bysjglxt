@@ -32,6 +32,8 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/taskbook_wan_student.js"></script>
 <script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/taskbook_shen_teacher.js"></script>
+<script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Student.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Teacher.js"></script>
@@ -118,6 +120,9 @@
 	src="<%=basePath%>js/GraduationProjectManagement/uploadTaskbook.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/uploadStudentTaskbook.js"></script>		
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadShenTaskbook.js"></script>		
+
 <!---------------------------------------------------------------------------------------------------->
 
 <title>我的毕业设计</title>
@@ -364,7 +369,7 @@
 					break;
 				}
 				case 2: {
-					/* get_taskinstance_byname("学生完善任务书"); */
+					get_taskinstance_byname("指导老师审核任务书");
 					break;
 				}
 				case 3: {

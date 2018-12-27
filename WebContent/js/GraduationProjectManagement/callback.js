@@ -6,6 +6,9 @@ function callBack(instanseName){
 	case "学生完善任务书":
 		wan_taskbook();
 		break;
+	case "指导老师审核任务书":
+		shen_taskbook();
+		break;	
 	case "指导老师完成任务书":
 		Taskbook_Teacher();
 		break;

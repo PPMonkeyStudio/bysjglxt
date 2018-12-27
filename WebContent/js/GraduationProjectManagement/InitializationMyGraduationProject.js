@@ -58,6 +58,21 @@ function InitializationMyGraduationProject() {
 					 */
 					break;
 				}
+				case "指导老师审核任务书": {
+					var banner_shen_Taskbook_Teacher = document
+							.getElementById("banner_shen_Taskbook_Teacher");
+					banner_shen_Taskbook_Teacher.style.color = 'white';
+					banner_shen_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
+					Initialization_shen_Taskbook_Student();
+					/*
+					 * 
+					 */
+					var $current = 2;
+					/*
+					 * 
+					 */
+					break;
+				}
 				case "指导老师完成任务书": {
 					var banner_Taskbook_Teacher = document
 							.getElementById("banner_Taskbook_Teacher");
