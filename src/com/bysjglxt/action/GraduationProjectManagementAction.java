@@ -115,8 +115,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	private int state;
 	private String taskInstanceId;
-	
-	
+
 	public int getState() {
 		return state;
 	}
@@ -142,24 +141,27 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	/**
-	 * @throws IOException 
+	 * @throws IOException
 	 * 
 	 */
 	public void updateTaskInstaceState() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(graduationProjectManagementService.updateTaskInstaceState(taskInstanceId,state)+"");
+		http_response.getWriter()
+				.write(graduationProjectManagementService.updateTaskInstaceState(taskInstanceId, state) + "");
 	}
-	
+
 	/**
 	 * 获取某个学生毕业设计流程
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	public void getStudentGraduationProcess() throws IOException {
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();// 格式化json数据
 		Gson gson = gsonBuilder.create();
 		http_response.setContentType("text/html;charset=utf-8");
-		http_response.getWriter().write(gson.toJson(graduationProjectManagementService.getStudentGraduationProcess(studentUserId)));
+		http_response.getWriter()
+				.write(gson.toJson(graduationProjectManagementService.getStudentGraduationProcess(studentUserId)));
 	}
 
 	/**
@@ -601,10 +603,10 @@ public class GraduationProjectManagementAction extends ActionSupport
 		String[] StringUse_sz = StringUse.split(",");
 		listStringUse = Arrays.asList(StringUse_sz);
 		for (String string : StringUse_sz) {
-			System.out.println("string:"+string);
+			System.out.println("string:" + string);
 		}
 		File exportFile = graduationProjectManagementService.exportAll(listStringUse);
-//		File exportFile = graduationProjectManagementService.exportAll();
+		// File exportFile = graduationProjectManagementService.exportAll();
 		if (exportFile != null) {
 			fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
 			inputStream = new FileInputStream(exportFile);
@@ -821,13 +823,31 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * @throws FileNotFoundException
 	 */
 	public String downloadDissertation() throws UnsupportedEncodingException, FileNotFoundException {
-
 		File downloadDissertation = graduationProjectManagementService.downloadDissertation(DissertationUserID);
-
 		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
-
 		inputStream = new FileInputStream(downloadDissertation);
+		return "downloadDissertation";
+	}
 
+	/**
+	 * 下载下发任务书
+	 * 
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 */
+	public String downloadXiaTaskBook() throws UnsupportedEncodingException, FileNotFoundException {
+		String juese = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			juese = "teacher";
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			juese = ((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+					.getBysjglxtStudentUser().getUser_student_id();
+			System.out.println("xiazai:"+juese);
+		}
+		File downloadDissertation = graduationProjectManagementService.downloadXiaTaskBook(juese,DissertationUserID);
+		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(downloadDissertation);
 		return "downloadDissertation";
 	}
 
@@ -872,6 +892,20 @@ public class GraduationProjectManagementAction extends ActionSupport
 						((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 								.getBysjglxtStudentUser().getUser_student_id(),
 						dissertationFileName) + "");
+		/*
+		 * if
+		 * (graduationProjectManagementService.updateReportOpening(updateReportOpening)
+		 * == 1) { http_response.getWriter().write("保存成功"); } else {
+		 * http_response.getWriter().write("系统繁忙"); }
+		 */
+	}
+
+	// 更新任务书
+	public void updateXiaTaskbook() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(graduationProjectManagementService.saveXiaTaskbook(dissertation,
+				oldDissertation, studentUserId, dissertationFileName) + "");
 		/*
 		 * if
 		 * (graduationProjectManagementService.updateReportOpening(updateReportOpening)

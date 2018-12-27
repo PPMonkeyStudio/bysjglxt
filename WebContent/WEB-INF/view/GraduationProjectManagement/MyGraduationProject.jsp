@@ -21,12 +21,16 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/InitializationMyGraduationProject.js"></script>
 <!-------------------------------------------------------------------------------------------------->
-<script type="text/javascript"
-	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Teacher.js"></script>
+<%-- <script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Teacher.js"></script> --%>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Taskbook_Section.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/report_opening.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/taskbook_xia_teacher.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/taskbook_wan_student.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Student.js"></script>
 <script type="text/javascript"
@@ -99,6 +103,10 @@
 	src="<%=basePath%>js/GraduationProjectManagement/Save_evaluate_tutor.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/Save_evaluate_review.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Save_xia_taskbook.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Save_wan_taskbook.js"></script>
 <!-------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/saveGraduationProject.js"></script>
@@ -106,6 +114,10 @@
 	src="<%=basePath%>js/GraduationProjectManagement/uploadDissertation.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/uploadReportOpening.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadTaskbook.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadStudentTaskbook.js"></script>		
 <!---------------------------------------------------------------------------------------------------->
 
 <title>我的毕业设计</title>
@@ -161,83 +173,91 @@
 									<ul>
 										<li>
 											<a href="#tab1" data-toggle="tab"
-												id="banner_Taskbook_Teacher">1.指导老师完成任务书</a>
+												id="banner_xia_Taskbook_Teacher">1.指导老师下发任务书</a>
 										</li>
-										<li>
+										<li>	
 											<a href="#tab2" data-toggle="tab"
-												id="banner_Taskbook_Section">2.指导小组组长填写任务书审核意见</a>
+												id="banner_wan_Taskbook_Student">2.学生完善任务书</a>
 										</li>
 										<li>
 											<a href="#tab3" data-toggle="tab"
-												id="banner_Taskbook_Student">3.学生接受任务</a>
+												id="banner_shen_Taskbook_Teacher">3.指导老师审核任务书</a>
 										</li>
 										<li>
 											<a href="#tab4" data-toggle="tab"
-												id="banner_report_opening">4.学生上传开题报告</a>
+												id="banner_Taskbook_Section">4.指导小组组长填写任务书审核意见</a>
+										</li>
+										<!-- <li>
+											<a href="#tab3" data-toggle="tab"
+												id="banner_Taskbook_Student">3.学生接受任务</a>
+										</li> -->
+										<li>
+											<a href="#tab4" data-toggle="tab"
+												id="banner_report_opening">5.学生上传开题报告</a>
 										</li>
 										<li>
 											<a href="#tab5" data-toggle="tab"
-												id="banner_report_opening_teacher">5.指导老师确认开题报告</a>
+												id="banner_report_opening_teacher">6.指导老师确认开题报告</a>
 										</li>
 										<li>
 											<a href="#tab6" data-toggle="tab"
-												id="banner_RecordProgress_1_Student">6.学生完成进展情况记录（前期准备阶段）</a>
+												id="banner_RecordProgress_1_Student">7.学生完成进展情况记录（前期准备阶段）</a>
 										</li>
 										<li>
 											<a href="#tab7" data-toggle="tab"
-												id="banner_RecordProgress_1_Teacher">7.指导老师填写进展情况意见（前期准备阶段）</a>
+												id="banner_RecordProgress_1_Teacher">8.指导老师填写进展情况意见（前期准备阶段）</a>
 										</li>
 										<li>
 											<a href="#tab8" data-toggle="tab"
-												id="banner_RecordProgress_2_Student">8.学生完成进展情况记录（撰写阶段）</a>
+												id="banner_RecordProgress_2_Student">9.学生完成进展情况记录（撰写阶段）</a>
 										</li>
 										<li>
 											<a href="#tab9" data-toggle="tab"
-												id="banner_RecordProgress_2_Teacher">9.指导老师填写进展情况意见（撰写阶段）</a>
+												id="banner_RecordProgress_2_Teacher">10.指导老师填写进展情况意见（撰写阶段）</a>
 										</li>
 										<li>
 											<a href="#tab10" data-toggle="tab"
-												id="banner_RecordProgress_3_Student">10.学生完成进展情况记录（中期自查阶段）</a>
+												id="banner_RecordProgress_3_Student">11.学生完成进展情况记录（中期自查阶段）</a>
 										</li>
 										<li>
 											<a href="#tab11" data-toggle="tab"
-												id="banner_RecordProgress_3_Teacher">11.指导老师填写进展情况意见（中期自查阶段）</a>
+												id="banner_RecordProgress_3_Teacher">12.指导老师填写进展情况意见（中期自查阶段）</a>
 										</li>
 										<li>
 											<a href="#tab12" data-toggle="tab"
-												id="banner_RecordProgress_4_Student">12.学生完成进展情况记录（完善阶段）</a>
+												id="banner_RecordProgress_4_Student">13.学生完成进展情况记录（完善阶段）</a>
 										</li>
 										<li>
 											<a href="#tab13" data-toggle="tab"
-												id="banner_RecordProgress_4_Teacher">13.指导老师填写进展情况意见（完善阶段）</a>
+												id="banner_RecordProgress_4_Teacher">14.指导老师填写进展情况意见（完善阶段）</a>
 										</li>
 										<li>
 											<a href="#tab14" data-toggle="tab"
-												id="banner_summary_student">14.学生完成个人学习总结</a>
+												id="banner_summary_student">15.学生完成个人学习总结</a>
 										</li>
 										<li>
 											<a href="#tab15" data-toggle="tab"
-												id="banner_summary_teacher">15.指导老师填写个人学习总结意见</a>
+												id="banner_summary_teacher">16.指导老师填写个人学习总结意见</a>
 										</li>
 										<li>
 											<a href="#tab16" data-toggle="tab"
-												id="banner_dissertation">16.学生提交答辩论文</a>
+												id="banner_dissertation">17.学生提交答辩论文</a>
 										</li>
 										<li>
 											<a href="#tab17" data-toggle="tab"
-												id="banner_examination_formal_teacher">17.指导老师填写形式审查表</a>
+												id="banner_examination_formal_teacher">18.指导老师填写形式审查表</a>
 										</li>
 										<li>
 											<a href="#tab18" data-toggle="tab"
-												id="banner_examination_formal_leader">18.领导小组长填写形式审查表(核查)</a>
+												id="banner_examination_formal_leader">19.领导小组长填写形式审查表(核查)</a>
 										</li>
 										<li>
 											<a href="#tab19" data-toggle="tab"
-												id="banner_evaluate_tutor">19.指导老师填写评价审阅表</a>
+												id="banner_evaluate_tutor">20.指导老师填写评价审阅表</a>
 										</li>
 										<li>
 											<a href="#tab20" data-toggle="tab"
-												id="banner_evaluate_review">20.评阅老师填写评阅审查表</a>
+												id="banner_evaluate_review">21.评阅老师填写评阅审查表</a>
 										</li>
 										
 									</ul>
@@ -278,6 +298,7 @@
 						<div class="tab-pane" id="tab18"></div>
 						<div class="tab-pane" id="tab19"></div>
 						<div class="tab-pane" id="tab20"></div>
+						<div class="tab-pane" id="tab21"></div>
 						<!-- <ul class="pager wizard">
 							<li class="previous first">
 								<a href="#">第一个任务</a>
@@ -335,82 +356,90 @@
 			onTabShow : function(tab, navigation, index) {
 				switch (index) {
 				case 0: {
-					get_taskinstance_byname("指导老师完成任务书");
+					get_taskinstance_byname("指导老师下发任务书");
 					break;
 				}
 				case 1: {
-					get_taskinstance_byname("指导小组组长填写任务书审核意见");
+					get_taskinstance_byname("学生完善任务书");
 					break;
 				}
 				case 2: {
-					Taskbook_Student();
+					/* get_taskinstance_byname("学生完善任务书"); */
 					break;
 				}
 				case 3: {
+					get_taskinstance_byname("指导小组组长填写任务书审核意见");
+					break;
+				}
+				/* case 4: {
+					Taskbook_Student();
+					break;
+				} */
+				case 4: {
 					get_taskinstance_byname("学生上传开题报告");
 					break;
 				}
-				case 4: {
+				case 5: {
 					Report_Opening_Teacher();
 					break;
 				}
-				case 5: {
+				case 6: {
 					get_taskinstance_byname("学生完成进展情况记录（前期准备阶段）");
 					break;
 				}
-				case 6: {
+				case 7: {
 					get_taskinstance_byname("指导老师填写进展情况意见（前期准备阶段）");
 					break;
 				}
-				case 7: {
+				case 8: {
 					get_taskinstance_byname("学生完成进展情况记录（撰写阶段）");
 					break;
 				}
-				case 8: {
+				case 9: {
 					get_taskinstance_byname("指导老师填写进展情况意见（撰写阶段）");
 					break;
 				}
-				case 9: {
+				case 10: {
 					get_taskinstance_byname("学生完成进展情况记录（中期自查阶段）");
 					break;
 				}
-				case 10: {
+				case 11: {
 					get_taskinstance_byname("指导老师填写进展情况意见（中期自查阶段）");
 					break;
 				}
-				case 11: {
+				case 12: {
 					get_taskinstance_byname("学生完成进展情况记录（完善阶段）");
 					break;
 				}
-				case 12: {
+				case 13: {
 					get_taskinstance_byname("指导老师填写进展情况意见（完善阶段）");
 					break;
 				}
-				case 13: {
+				case 14: {
 					get_taskinstance_byname("学生完成个人学习工作总结");
 					break;
 				}
-				case 14: {
+				case 15: {
 					get_taskinstance_byname("指导老师填写个人学习工作总结意见");
 					break;
 				}
-				case 15: {
+				case 16: {
 					get_taskinstance_byname("学生提交答辩论文");
 					break;
 				}
-				case 16: {
+				case 17: {
 					get_taskinstance_byname("指导老师填写形式审查表");
 					break;
 				}
-				case 17: {
+				case 18: {
 					examination_formal_leader();
 					break;
 				}
-				case 18: {
+				case 19: {
 					get_taskinstance_byname("指导老师填写评价审阅表");
 					break;
 				}
-				case 19: {
+				case 20: {
 					evaluate_review();
 					break;
 				}

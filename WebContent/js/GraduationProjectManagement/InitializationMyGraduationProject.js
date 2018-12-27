@@ -28,7 +28,36 @@ function InitializationMyGraduationProject() {
 				 * 
 				 */
 				switch (current_processDefinitionName) {
-				
+				case "指导老师下发任务书": {
+					var banner_xia_Taskbook_Teacher = document
+							.getElementById("banner_xia_Taskbook_Teacher");
+					banner_xia_Taskbook_Teacher.style.color = 'white';
+					banner_xia_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
+					Initialization_xia_Taskbook_Teacher();
+					/*
+					 * 
+					 */
+					var $current = 0;
+					/*
+					 * 
+					 */
+					break;
+				}
+				case "学生完善任务书": {
+					var banner_wan_Taskbook_Student = document
+							.getElementById("banner_wan_Taskbook_Student");
+					banner_wan_Taskbook_Student.style.color = 'white';
+					banner_wan_Taskbook_Student.parentNode.style.backgroundColor = '#428bca';
+					Initialization_wan_Taskbook_Student();
+					/*
+					 * 
+					 */
+					var $current = 1;
+					/*
+					 * 
+					 */
+					break;
+				}
 				case "指导老师完成任务书": {
 					var banner_Taskbook_Teacher = document
 							.getElementById("banner_Taskbook_Teacher");

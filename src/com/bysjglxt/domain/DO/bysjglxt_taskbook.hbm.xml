@@ -1,33 +1,33 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-12-27 14:02:47 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_taskbook" table="bysjglxt_taskbook">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_taskbook" table="BYSJGLXT_TASKBOOK">
         <id name="taskbook_id" type="java.lang.String">
-            <column name="taskbook_id" />
+            <column name="TASKBOOK_ID" />
             <generator class="assigned" />
         </id>
         <property name="bysjglxt_taskbook_student" type="java.lang.String">
-            <column name="bysjglxt_taskbook_student" />
+            <column name="BYSJGLXT_TASKBOOK_STUDENT" />
         </property>
-        <property name="taskbook_acontent_required" type="java.lang.String">
-            <column name="taskbook_acontent_required" />
+        <property name="taskbook_xia_file" type="java.lang.String">
+            <column name="TASKBOOK_XIA_FILE" />
         </property>
-        <property name="taskbook_reference" type="java.lang.String">
-            <column name="taskbook_reference" />
+        <property name="taskbook_wan_file" type="java.lang.String">
+            <column name="TASKBOOK_WAN_FILE" />
         </property>
-        <property name="taskbook_plan" type="java.lang.String">
-            <column name="taskbook_plan" />
+        <property name="taskbook_wan_file_xiazai" type="java.lang.Integer">
+            <column name="TASKBOOK_WAN_FILE_XIAZAI" />
         </property>
-        <property name="taskbook_opinion" type="java.lang.String">
-            <column name="taskbook_opinion" />
+        <property name="taskbook_xia_file_xiazai" type="java.lang.Integer">
+            <column name="TASKBOOK_XIA_FILE_XIAZAI" />
         </property>
         <property name="taskbook_gmt_create" type="java.lang.String">
-            <column name="taskbook_gmt_create" />
+            <column name="TASKBOOK_GMT_CREATE" />
         </property>
         <property name="taskbook_gmt_modified" type="java.lang.String">
-            <column name="taskbook_gmt_modified" />
+            <column name="TASKBOOK_GMT_MODIFIED" />
         </property>
     </class>
 </hibernate-mapping>

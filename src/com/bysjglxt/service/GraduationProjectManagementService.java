@@ -471,7 +471,23 @@ public interface GraduationProjectManagementService {
 	 */
 	public int saveReportOpening(File dissertation, String oldDissertation, String user_student_id,
 			String dissertationFileName) throws IOException;
-
+	/**
+	 * 更新下发任务书
+	 * @param dissertation
+	 * @param oldDissertation
+	 * @param user_student_id
+	 * @param dissertationFileName
+	 * @return
+	 * @throws IOException 
+	 */
+	public int saveXiaTaskbook(File dissertation, String oldDissertation, String user_student_id,
+			String dissertationFileName) throws IOException;
+	/**
+	 * 下载任务书
+	 * @param dissertationUserID
+	 * @return
+	 */
+	public File downloadXiaTaskBook(String juese,String dissertationUserID);
 	/**
 	 * 下载开题报告
 	 * 
@@ -495,5 +511,7 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public int updateTaskInstaceState(String studentUserId, int state);
+
+
 
 }

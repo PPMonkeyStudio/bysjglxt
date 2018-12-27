@@ -3,23 +3,53 @@ package com.bysjglxt.domain.DO;
 public class bysjglxt_taskbook {
 	private String taskbook_id;
 	private String bysjglxt_taskbook_student;
-	private String taskbook_acontent_required;
-	private String taskbook_reference;
-	private String taskbook_plan;
-	private String taskbook_opinion;
+	/*
+	 * private String taskbook_acontent_required; private String taskbook_reference;
+	 * private String taskbook_plan; private String taskbook_opinion;
+	 */
+	private String taskbook_xia_file = "";
+	private String taskbook_wan_file = "";
+	private Integer taskbook_wan_file_xiazai = -1;
+	private Integer taskbook_xia_file_xiazai = -1;
+	
+	
 	private String taskbook_gmt_create;
 	private String taskbook_gmt_modified;
 
-	public String getTaskbook_reference() {
-		return taskbook_reference;
-	}
-
-	public void setTaskbook_reference(String taskbook_reference) {
-		this.taskbook_reference = taskbook_reference;
-	}
-
 	public String getTaskbook_id() {
 		return taskbook_id;
+	}
+
+	public String getTaskbook_xia_file() {
+		return taskbook_xia_file;
+	}
+
+	public Integer getTaskbook_wan_file_xiazai() {
+		return taskbook_wan_file_xiazai;
+	}
+
+	public void setTaskbook_wan_file_xiazai(Integer taskbook_wan_file_xiazai) {
+		this.taskbook_wan_file_xiazai = taskbook_wan_file_xiazai;
+	}
+
+	public Integer getTaskbook_xia_file_xiazai() {
+		return taskbook_xia_file_xiazai;
+	}
+
+	public void setTaskbook_xia_file_xiazai(Integer taskbook_xia_file_xiazai) {
+		this.taskbook_xia_file_xiazai = taskbook_xia_file_xiazai;
+	}
+
+	public void setTaskbook_xia_file(String taskbook_xia_file) {
+		this.taskbook_xia_file = taskbook_xia_file;
+	}
+
+	public String getTaskbook_wan_file() {
+		return taskbook_wan_file;
+	}
+
+	public void setTaskbook_wan_file(String taskbook_wan_file) {
+		this.taskbook_wan_file = taskbook_wan_file;
 	}
 
 	public void setTaskbook_id(String taskbook_id) {
@@ -32,30 +62,6 @@ public class bysjglxt_taskbook {
 
 	public void setBysjglxt_taskbook_student(String bysjglxt_taskbook_student) {
 		this.bysjglxt_taskbook_student = bysjglxt_taskbook_student;
-	}
-
-	public String getTaskbook_acontent_required() {
-		return taskbook_acontent_required;
-	}
-
-	public void setTaskbook_acontent_required(String taskbook_acontent_required) {
-		this.taskbook_acontent_required = taskbook_acontent_required;
-	}
-
-	public String getTaskbook_plan() {
-		return taskbook_plan;
-	}
-
-	public void setTaskbook_plan(String taskbook_plan) {
-		this.taskbook_plan = taskbook_plan;
-	}
-
-	public String getTaskbook_opinion() {
-		return taskbook_opinion;
-	}
-
-	public void setTaskbook_opinion(String taskbook_opinion) {
-		this.taskbook_opinion = taskbook_opinion;
 	}
 
 	public String getTaskbook_gmt_create() {
@@ -77,10 +83,12 @@ public class bysjglxt_taskbook {
 	@Override
 	public String toString() {
 		return "bysjglxt_taskbook [taskbook_id=" + taskbook_id + ", bysjglxt_taskbook_student="
-				+ bysjglxt_taskbook_student + ", taskbook_acontent_required=" + taskbook_acontent_required
-				+ ", taskbook_reference=" + taskbook_reference + ", taskbook_plan=" + taskbook_plan
-				+ ", taskbook_opinion=" + taskbook_opinion + ", taskbook_gmt_create=" + taskbook_gmt_create
-				+ ", taskbook_gmt_modified=" + taskbook_gmt_modified + "]";
+				+ bysjglxt_taskbook_student + ", taskbook_xia_file=" + taskbook_xia_file + ", taskbook_wan_file="
+				+ taskbook_wan_file + ", taskbook_wan_file_xiazai=" + taskbook_wan_file_xiazai
+				+ ", taskbook_xia_file_xiazai=" + taskbook_xia_file_xiazai + ", taskbook_gmt_create="
+				+ taskbook_gmt_create + ", taskbook_gmt_modified=" + taskbook_gmt_modified + "]";
 	}
+
+
 
 }

@@ -395,7 +395,92 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return null;
 	}
-
+	//保存任务书
+	@Override
+	public int saveXiaTaskbook(File file, String oldFileName, String userId,String newFileName) throws IOException {
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		boolean flag = false;
+		String path = "";
+		bysjglxt_taskbook taskBook = new bysjglxt_taskbook();
+		taskBook = graduationProjectManagementDao.getTaskBookByUserId(userId);
+		// 如果新文件为空
+		if (file == null) {
+			path = lj + "bysjglxt/xiaTaskbook/";
+			// 判断旧文件是否处于空的状态
+			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
+				// 如果是空
+				// 判断：在数据库中属于这个学生的开题报告是否存在
+				if (taskBook != null && taskBook.getTaskbook_xia_file() != null
+						&& taskBook.getTaskbook_xia_file().trim().length() > 0) {
+					// 如果存在,则将原有毕业论文删除
+					// 先进行删除
+					// 删除学生上传的文件
+					path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_xia_file();
+					File deleteFile = new File(path);
+					deleteFile.delete();
+					flag = graduationProjectManagementDao.deleteXiaTaskBookFileByUserId(userId);
+					taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
+					taskBook.setTaskbook_xia_file_xiazai(-1);
+					graduationProjectManagementDao.saveObj(taskBook);
+					return 1;
+				} else {
+					// 如果不存在,不进行任何操作
+					return 1;
+				}
+			} else {
+				// 如果不是空
+				// 不进行操作
+				return 1;
+			}
+		} else {
+			path = lj + "bysjglxt/xiaTaskbook/";
+			// 如果新文件存在
+			// 1.判断是否有属于这个学生的毕业论文存在
+			if (taskBook != null && taskBook.getTaskbook_xia_file() != null
+					&& taskBook.getTaskbook_xia_file().trim().length() > 0) {
+				// 如果存在
+				// 先进行删除
+				// 删除学生上传的文件
+				path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_xia_file();
+				File deleteFile = new File(path);
+				deleteFile.delete();
+				// 删除学生毕业论文记录
+				flag = graduationProjectManagementDao.deleteXiaTaskBookFileByUserId(userId);
+				if (!flag) {
+					return -1;
+				}
+			}
+			path = lj + "bysjglxt/xiaTaskbook/";
+			// 保存毕业论文
+			// 1.上传毕业论文
+			if (taskBook != null) {
+				path = path + taskBook.getTaskbook_id() + "_" + newFileName;
+				File newFile = new File(path);
+				FileUtils.copyFile(file, newFile);
+				// 存储数据到数据库
+				taskBook.setTaskbook_xia_file(newFileName);
+				taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
+				taskBook.setTaskbook_xia_file_xiazai(-1);
+				flag = graduationProjectManagementDao.saveObj(taskBook) == 1 ? true : false;
+				if (!flag)
+					return -2;
+			} else {
+				return -2;
+			}
+		}
+		return 0;
+	}
+	//保存开题报告
 	@Override
 	public int saveReportOpening(File file, String oldFileName, String userId, String newFileName) throws IOException {
 		/*
@@ -567,6 +652,39 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return 1;
 	}
+	//下载下发任务书
+	@Override
+	public File downloadXiaTaskBook(String juese,String userID) {
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 1.根据user Id获得学生毕业论文表中的记录
+		bysjglxt_taskbook xiaTaskbook = new bysjglxt_taskbook(); 
+		String path = lj + "bysjglxt/xiaTaskbook/";
+		xiaTaskbook = graduationProjectManagementDao.getTaskBookByUserId(userID);
+		if (xiaTaskbook == null) {
+			return null;
+		}
+		path = path + xiaTaskbook.getTaskbook_id() + "_" + xiaTaskbook.getTaskbook_xia_file();
+		File file = new File(path);
+		//如果下载的人是学生
+		if(userID.equals(juese)) {
+			//更改任务书
+			xiaTaskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
+			xiaTaskbook.setTaskbook_xia_file_xiazai(1);
+			graduationProjectManagementDao.saveObj(xiaTaskbook);
+		}
+		return file;
+	}
+
 
 	/**
 	 * 下载开题报告
@@ -1206,9 +1324,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
 		if (bysjglxt_taskbook != null) {
-			bysjglxt_taskbook.setTaskbook_acontent_required(updateTaskbook.getTaskbook_acontent_required());
+			/*bysjglxt_taskbook.setTaskbook_acontent_required(updateTaskbook.getTaskbook_acontent_required());
 			bysjglxt_taskbook.setTaskbook_reference(updateTaskbook.getTaskbook_reference());
-			bysjglxt_taskbook.setTaskbook_plan(updateTaskbook.getTaskbook_plan());
+			bysjglxt_taskbook.setTaskbook_plan(updateTaskbook.getTaskbook_plan());*/
 			bysjglxt_taskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInTaskBook(bysjglxt_taskbook);
 		}
@@ -1224,7 +1342,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
 		if (bysjglxt_taskbook != null) {
-			bysjglxt_taskbook.setTaskbook_opinion(updateTaskbook.getTaskbook_opinion());
+//			bysjglxt_taskbook.setTaskbook_opinion(updateTaskbook.getTaskbook_opinion());
 			bysjglxt_taskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInTaskBook(bysjglxt_taskbook);
 		}
@@ -2007,10 +2125,10 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_taskbook = graduationProjectManagementDao
 					.getTaskBookByUserId(bysjglxt_student_user.getUser_student_id());
 			if (bysjglxt_taskbook != null) {
-				params.put("r6", bysjglxt_taskbook.getTaskbook_acontent_required());
-				params.put("r7", bysjglxt_taskbook.getTaskbook_reference());
-				params.put("r8", bysjglxt_taskbook.getTaskbook_plan());
-				params.put("r13", bysjglxt_taskbook.getTaskbook_opinion());
+//				params.put("r6", bysjglxt_taskbook.getTaskbook_acontent_required());
+//				params.put("r7", bysjglxt_taskbook.getTaskbook_reference());
+//				params.put("r8", bysjglxt_taskbook.getTaskbook_plan());
+//				params.put("r13", bysjglxt_taskbook.getTaskbook_opinion());
 			} else {
 				params.put("r6", "");
 				params.put("r7", "");
@@ -3304,5 +3422,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return params;
 	}
+
+
 
 }

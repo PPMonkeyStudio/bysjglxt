@@ -1506,7 +1506,23 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		session.clear();
 		return listComment;
 	}
-
+	//下发任务书置空
+	@Override
+	public boolean deleteXiaTaskBookFileByUserId(String userId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_taskbook set taskbook_xia_file=null where bysjglxt_taskbook_student='"
+					+ userId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+			session.flush();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
 	/**
 	 * 开题报告文件置空
 	 */
@@ -1544,5 +1560,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		Query query = session.createQuery(hql);
 		return (bysjglxt_task_instance) query.uniqueResult();
 	}
+
+
 
 }

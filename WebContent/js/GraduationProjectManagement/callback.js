@@ -1,5 +1,11 @@
 function callBack(instanseName){
 	switch(instanseName){
+	case "指导老师下发任务书":
+		xia_taskbook();
+		break;
+	case "学生完善任务书":
+		wan_taskbook();
+		break;
 	case "指导老师完成任务书":
 		Taskbook_Teacher();
 		break;

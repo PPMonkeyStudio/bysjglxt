@@ -163,5 +163,11 @@ public interface GraduationProjectManagementDao {
 	 * @return
 	 */
 	public int updateTaskInstaceState(String studentUserId, int state);
+	/**
+	 * 根据学生删除下发任务书内容
+	 * @param userId
+	 * @return
+	 */
+	public boolean deleteXiaTaskBookFileByUserId(String userId);
 
 }
