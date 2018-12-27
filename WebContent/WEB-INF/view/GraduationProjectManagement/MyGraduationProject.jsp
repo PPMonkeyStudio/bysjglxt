@@ -376,10 +376,6 @@
 					get_taskinstance_byname("指导小组组长填写任务书审核意见");
 					break;
 				}
-				/* case 4: {
-					Taskbook_Student();
-					break;
-				} */
 				case 4: {
 					get_taskinstance_byname("学生上传开题报告");
 					break;

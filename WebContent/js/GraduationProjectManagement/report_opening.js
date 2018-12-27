@@ -15,7 +15,7 @@ function report_opening() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var report_opening = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab4");
+				var tab = document.getElementById("tab5");
 				tab.innerHTML = '';
 				/*
 				 * 

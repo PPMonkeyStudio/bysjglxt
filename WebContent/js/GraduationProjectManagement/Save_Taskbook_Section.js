@@ -16,12 +16,12 @@ function Save_Taskbook_Section() {
 			.open("POST",
 					"/bysjglxt/graduationProject/GraduationProjectManagement_updateSectionTaskbook");
 	var taskbook_id = document.getElementById("taskbook_id");
-	var taskbook_opinion = document.getElementById("taskbook_opinion");
+	var taskbook_leader_option = document.getElementById("taskbook_leader_option");
 	/*
 	 * 
 	 */
 	formData.append("updateTaskbook.taskbook_id", taskbook_id.innerHTML);
-	formData.append("updateTaskbook.taskbook_opinion", taskbook_opinion.value);
+	formData.append("updateTaskbook.taskbook_leader_option", taskbook_leader_option.value);
 	/*
 	 * 
 	 */

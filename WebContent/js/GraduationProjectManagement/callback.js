@@ -8,9 +8,6 @@ function callBack(instanseName){
 		break;
 	case "指导老师审核任务书":
 		shen_taskbook();
-		break;	
-	case "指导老师完成任务书":
-		Taskbook_Teacher();
 		break;
 	case "指导小组组长填写任务书审核意见":
 		Taskbook_Section();

@@ -1472,7 +1472,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
 		if (bysjglxt_taskbook != null) {
-//			bysjglxt_taskbook.setTaskbook_opinion(updateTaskbook.getTaskbook_opinion());
+			bysjglxt_taskbook.setTaskbook_leader_option(updateTaskbook.getTaskbook_leader_option());
 			bysjglxt_taskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInTaskBook(bysjglxt_taskbook);
 		}

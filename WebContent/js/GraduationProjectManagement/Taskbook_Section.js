@@ -17,7 +17,7 @@ function Taskbook_Section() {
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var taskbook = JSON.parse(xhr.responseText);
-				var tab = document.getElementById("tab2");
+				var tab = document.getElementById("tab4");
 				tab.innerHTML = '';
 				/*
 				 * 
@@ -34,11 +34,11 @@ function Taskbook_Section() {
 				h4.innerHTML = '指导小组组长审核意见：';
 				tab.appendChild(h4);
 				var textarea_1 = document.createElement("textarea");
-				textarea_1.id = 'taskbook_opinion';
+				textarea_1.id = 'taskbook_leader_option';
 				textarea_1.className = 'form-control';
 				textarea_1.style = "margin:10px 0 50px 0;resize: none;height:200px;"
-				if (taskbook.taskbook_opinion != null) {
-					textarea_1.innerHTML = taskbook.taskbook_opinion;
+				if (taskbook.taskbook_leader_option != null) {
+					textarea_1.innerHTML = taskbook.taskbook_leader_option;
 				} else {
 					textarea_1.innerHTML = '';
 				}

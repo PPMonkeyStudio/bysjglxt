@@ -73,19 +73,19 @@ function InitializationMyGraduationProject() {
 					 */
 					break;
 				}
-				case "指导老师完成任务书": {
+				/*case "指导老师完成任务书": {
 					var banner_Taskbook_Teacher = document
 							.getElementById("banner_Taskbook_Teacher");
 					banner_Taskbook_Teacher.style.color = 'white';
 					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
 					Initialization_Taskbook_Teacher();
-					/*
+					
 					 * 
-					 */
+					 
 					var $current = 0;
-					/*
+					
 					 * 
-					 */
+					 
 					break;
 				}
 				case "学生接受任务": {
@@ -94,15 +94,15 @@ function InitializationMyGraduationProject() {
 					banner_Taskbook_Teacher.style.color = 'white';
 					banner_Taskbook_Teacher.parentNode.style.backgroundColor = '#428bca';
 					Initialization_Taskbook_Student();
-					/*
+					
 					 * 
-					 */
+					 
 					var $current = 0;
-					/*
+					
 					 * 
-					 */
+					 
 					break;
-				}
+				}*/
 				case "指导老师确认开题报告": {
 					var banner_Taskbook_Teacher = document
 							.getElementById("banner_report_opening_teacher");
@@ -127,7 +127,7 @@ function InitializationMyGraduationProject() {
 					/*
 					 * 
 					 */
-					var $current = 1;
+					var $current = 3;
 					/*
 					 * 
 					 */
