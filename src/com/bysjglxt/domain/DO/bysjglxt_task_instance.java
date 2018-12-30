@@ -11,6 +11,25 @@ public class bysjglxt_task_instance {
 	private String task_instance_gmt_create;
 	private int task_instance_is_update = -1;
 	private String task_instance_gmt_modified;
+	private String task_instance_start;
+	private String task_instance_stop;
+	
+
+	public String getTask_instance_start() {
+		return task_instance_start;
+	}
+
+	public void setTask_instance_start(String task_instance_start) {
+		this.task_instance_start = task_instance_start;
+	}
+
+	public String getTask_instance_stop() {
+		return task_instance_stop;
+	}
+
+	public void setTask_instance_stop(String task_instance_stop) {
+		this.task_instance_stop = task_instance_stop;
+	}
 
 	public int getTask_instance_is_update() {
 		return task_instance_is_update;
@@ -99,7 +118,10 @@ public class bysjglxt_task_instance {
 				+ ", task_instance_role=" + task_instance_role + ", task_instance_father=" + task_instance_father
 				+ ", task_instance_return=" + task_instance_return + ", task_instance_state=" + task_instance_state
 				+ ", task_instance_gmt_create=" + task_instance_gmt_create + ", task_instance_is_update="
-				+ task_instance_is_update + ", task_instance_gmt_modified=" + task_instance_gmt_modified + "]";
+				+ task_instance_is_update + ", task_instance_gmt_modified=" + task_instance_gmt_modified
+				+ ", task_instance_start=" + task_instance_start + ", task_instance_stop=" + task_instance_stop + "]";
 	}
+
+	
 
 }

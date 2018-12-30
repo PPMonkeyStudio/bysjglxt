@@ -3,7 +3,11 @@ function update_defence_record(button) {
 			.confirm({
 				columnClass : 'col-md-6 col-md-offset-3',
 				title : '答辩记录',
-				content : '<textarea class="form-control" style="resize: none;height:300px;" id="textarea_defence_record"></textarea>',
+				content:`
+							<b>陈述时间:</b><input type="text" id="defence_chenshu_time">
+							<b>问答时间:</b><input type="text" id="defence_tiwen_time">
+							<textarea class="form-control" style="resize: none;height:300px;" id="textarea_defence_record"></textarea>
+						`,
 				type : 'blue',
 				buttons : {
 					修改 : {
@@ -28,6 +32,10 @@ function update_defence_record(button) {
 							var formData = new FormData();
 							var textarea_defence_record = document
 									.getElementById("textarea_defence_record");
+							var input_time1 = document.getElementById("defence_chenshu_time");
+							formData.append("updateDefence.defence_chenshu_time",input_time1.value);
+							var input_time2 = document.getElementById("defence_tiwen_time");
+							formData.append("updateDefence.defence_tiwen_time",input_time2.value);
 							formData.append("updateDefence.defence_student",
 									button.id);
 							formData.append("updateDefence.defence_record",

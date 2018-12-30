@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-11-28 15:53:20 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-12-30 14:55:49 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_task_instance" table="BYSJGLXT_TASK_INSTANCE">
         <id name="task_instance_id" type="java.lang.String">
@@ -34,6 +34,12 @@
         </property>
         <property name="task_instance_gmt_modified" type="java.lang.String">
             <column name="TASK_INSTANCE_GMT_MODIFIED" />
+        </property>
+        <property name="task_instance_start" type="java.lang.String">
+            <column name="TASK_INSTANCE_START" />
+        </property>
+        <property name="task_instance_stop" type="java.lang.String">
+            <column name="TASK_INSTANCE_STOP" />
         </property>
     </class>
 </hibernate-mapping>

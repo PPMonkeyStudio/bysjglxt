@@ -1,78 +1,78 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-1-9 17:37:18 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2018-12-30 22:13:41 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_evaluate_review" table="bysjglxt_evaluate_review">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_evaluate_review" table="BYSJGLXT_EVALUATE_REVIEW">
         <id name="evaluate_review_id" type="java.lang.String">
-            <column name="evaluate_review_id" />
+            <column name="EVALUATE_REVIEW_ID" />
             <generator class="assigned" />
         </id>
         <property name="evaluate_review_student" type="java.lang.String">
-            <column name="evaluate_review_student" />
+            <column name="EVALUATE_REVIEW_STUDENT" />
         </property>
         <property name="evaluate_review_teacher_comment" type="java.lang.String">
-            <column name="evaluate_review_teacher_comment" />
+            <column name="EVALUATE_REVIEW_TEACHER_COMMENT" />
         </property>
         <property name="evaluate_review_grade_training_objective" type="int">
-            <column name="evaluate_review_grade_training_objective" />
+            <column name="EVALUATE_REVIEW_GRADE_TRAINING_OBJECTIVE" />
         </property>
         <property name="evaluate_review_grade_difficulty" type="int">
-            <column name="evaluate_review_grade_difficulty" />
+            <column name="EVALUATE_REVIEW_GRADE_DIFFICULTY" />
         </property>
         <property name="evaluate_review_grade_workload" type="int">
-            <column name="evaluate_review_grade_workload" />
+            <column name="EVALUATE_REVIEW_GRADE_WORKLOAD" />
         </property>
         <property name="evaluate_review_grade_bind" type="int">
-            <column name="evaluate_review_grade_bind" />
+            <column name="EVALUATE_REVIEW_GRADE_BIND" />
         </property>
         <property name="evaluate_review_grade_comprehensive" type="int">
-            <column name="evaluate_review_grade_comprehensive" />
+            <column name="EVALUATE_REVIEW_GRADE_COMPREHENSIVE" />
         </property>
         <property name="evaluate_review_grade_reference" type="int">
-            <column name="evaluate_review_grade_reference" />
+            <column name="EVALUATE_REVIEW_GRADE_REFERENCE" />
         </property>
         <property name="evaluate_review_grade_experimental_design" type="int">
-            <column name="evaluate_review_grade_experimental_design" />
+            <column name="EVALUATE_REVIEW_GRADE_EXPERIMENTAL_DESIGN" />
         </property>
         <property name="evaluate_review_grade_computing" type="int">
-            <column name="evaluate_review_grade_computing" />
+            <column name="EVALUATE_REVIEW_GRADE_COMPUTING" />
         </property>
         <property name="evaluate_review_grade_foreign_language" type="int">
-            <column name="evaluate_review_grade_foreign_language" />
+            <column name="EVALUATE_REVIEW_GRADE_FOREIGN_LANGUAGE" />
         </property>
         <property name="evaluate_review_grade_computer" type="int">
-            <column name="evaluate_review_grade_computer" />
+            <column name="EVALUATE_REVIEW_GRADE_COMPUTER" />
         </property>
         <property name="evaluate_review_grade_innovate" type="int">
-            <column name="evaluate_review_grade_innovate" />
+            <column name="EVALUATE_REVIEW_GRADE_INNOVATE" />
         </property>
         <property name="evaluate_review_grade_analysis" type="int">
-            <column name="evaluate_review_grade_analysis" />
+            <column name="EVALUATE_REVIEW_GRADE_ANALYSIS" />
         </property>
         <property name="evaluate_review_grade_chart" type="int">
-            <column name="evaluate_review_grade_chart" />
+            <column name="EVALUATE_REVIEW_GRADE_CHART" />
         </property>
         <property name="evaluate_review_grade_instructions" type="int">
-            <column name="evaluate_review_grade_instructions" />
+            <column name="EVALUATE_REVIEW_GRADE_INSTRUCTIONS" />
         </property>
         <property name="evaluate_review_grade_practicability" type="int">
-            <column name="evaluate_review_grade_practicability" />
+            <column name="EVALUATE_REVIEW_GRADE_PRACTICABILITY" />
         </property>
         <property name="evaluate_review_grade_normalization" type="int">
-            <column name="evaluate_review_grade_normalization" />
+            <column name="EVALUATE_REVIEW_GRADE_NORMALIZATION" />
         </property>
         <property name="evaluate_review_grade_total" type="int">
-            <column name="evaluate_review_grade_total" />
+            <column name="EVALUATE_REVIEW_GRADE_TOTAL" />
         </property>
         <property name="evaluate_review_is_teacher_opinion" type="int">
-            <column name="evaluate_review_is_teacher_opinion" />
+            <column name="EVALUATE_REVIEW_IS_TEACHER_OPINION" />
         </property>
         <property name="evaluate_review_gmt_create" type="java.lang.String">
-            <column name="evaluate_review_gmt_create" />
+            <column name="EVALUATE_REVIEW_GMT_CREATE" />
         </property>
         <property name="evaluate_review_gmt_modified" type="java.lang.String">
-            <column name="evaluate_review_gmt_modified" />
+            <column name="EVALUATE_REVIEW_GMT_MODIFIED" />
         </property>
     </class>
 </hibernate-mapping>

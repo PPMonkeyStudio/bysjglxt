@@ -606,6 +606,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		// 更改任务实例状态,将之改为已结束
 		currentTaskInstance.setTask_instance_state(3);
 		currentTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
+		currentTaskInstance.setTask_instance_stop(TeamUtil.getStringSecond());
 		// 存储任务实例
 		flag = processManagementDao.instanceTask(currentTaskInstance);
 		bysjglxt_process_instance = processManagementDao
@@ -628,6 +629,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		}
 		// 更改任务实例状态,将之改为正在进行
 		nextTaskInstance.setTask_instance_state(1);
+		nextTaskInstance.setTask_instance_start(TeamUtil.getStringSecond());
 		nextTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
 		// 存储任务实例
 		flag = processManagementDao.instanceTask(nextTaskInstance);

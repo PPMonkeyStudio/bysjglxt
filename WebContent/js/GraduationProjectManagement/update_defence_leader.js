@@ -26,61 +26,22 @@ function update_defence_leader(button) {
 									}
 								}
 							}
-							xhr
-									.open("POST",
-											"/bysjglxt/graduationProject/GraduationProjectManagement_updateDefence");
+							xhr.open("POST","/bysjglxt/graduationProject/GraduationProjectManagement_updateDefence");
 							var formData = new FormData();
 							var textarea_defence_leader_comment = document
 									.getElementById("textarea_defence_leader_comment");
-							formData.append("updateDefence.defence_student",
-									button.id);
-							formData.append("updateDefence.defence_record",
-									textarea_defence_leader_comment.value);
-
-							formData.append(
-									"updateDefence.defence_leader_comment",
-									textarea_defence_leader_comment.value);
-							formData
-									.append(
-											"updateDefence.defence_grade_writing",
-											document
-													.getElementById("defence_grade_writing").value);
-							formData
-									.append(
-											"updateDefence.defence_grade_normalization",
-											document
-													.getElementById("defence_grade_normalization").value);
-							formData
-									.append(
-											"updateDefence.defence_grade_complete",
-											document
-													.getElementById("defence_grade_complete").value);
-							formData
-									.append(
-											"updateDefence.defence_grade_technology",
-											document
-													.getElementById("defence_grade_technology").value);
-							formData
-									.append(
-											"updateDefence.defence_grade_practicability",
-											document
-													.getElementById("defence_grade_practicability").value);
-							formData
-									.append(
-											"updateDefence.defence_grade_appearance",
-											document
-													.getElementById("defence_grade_appearance").value);
-							formData
-									.append(
-											"updateDefence.defence_grade_statement",
-											document
-													.getElementById("defence_grade_statement").value);
-							formData
-									.append(
-											"updateDefence.defence_grade_answer",
-											document
-													.getElementById("defence_grade_answer").value);
-
+							formData.append("updateDefence.defence_student",button.id);
+							formData.append("updateDefence.defence_record",textarea_defence_leader_comment.value);
+							formData.append("updateDefence.defence_leader_comment",textarea_defence_leader_comment.value);
+							formData.append("updateDefence.defence_grade_writing",document.getElementById("defence_grade_writing").value);
+							formData.append("updateDefence.defence_grade_normalization",document.getElementById("defence_grade_normalization").value);
+							formData.append("updateDefence.defence_grade_complete",document.getElementById("defence_grade_complete").value);
+							formData.append("updateDefence.defence_grade_technology",document.getElementById("defence_grade_technology").value);
+							formData.append("updateDefence.defence_grade_practicability",document.getElementById("defence_grade_practicability").value);
+							formData.append("updateDefence.defence_grade_appearance",document.getElementById("defence_grade_appearance").value);
+							formData.append("updateDefence.defence_grade_statement",document.getElementById("defence_grade_statement").value);
+							formData.append("updateDefence.defence_grade_answer",document.getElementById("defence_grade_answer").value);
+							formData.append("updateDefence.defence_grade_defence",document.getElementById("defence_grade_defence").value);
 							xhr.send(formData);
 						}
 					},
@@ -2690,8 +2651,7 @@ function update_defence_leader(button) {
 								/*
 								 * 
 								 */
-								var textarea_defence_leader_comment = document
-										.getElementById("textarea_defence_leader_comment");
+								var textarea_defence_leader_comment = document.getElementById("textarea_defence_leader_comment");
 								if (defence.defence_leader_comment != undefined) {
 									textarea_defence_leader_comment.innerHTML = defence.defence_leader_comment;
 								} else {

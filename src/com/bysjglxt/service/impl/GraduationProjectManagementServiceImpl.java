@@ -395,12 +395,14 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return null;
 	}
+
 	/**
 	 * 保存完善的任务书
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	@Override
-	public int saveWanTaskbook(File file, String oldFileName, String userId,String newFileName) throws IOException {
+	public int saveWanTaskbook(File file, String oldFileName, String userId, String newFileName) throws IOException {
 		/*
 		 * 获取路径
 		 */
@@ -431,7 +433,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_wan_file();
 					File deleteFile = new File(path);
 					deleteFile.delete();
-//					flag = graduationProjectManagementDao.deleteWanTaskBookFileByUserId(userId);
+					// flag = graduationProjectManagementDao.deleteWanTaskBookFileByUserId(userId);
 					taskBook.setTaskbook_wan_file(null);
 					taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 					taskBook.setTaskbook_wan_file_xiazai(-1);
@@ -484,11 +486,10 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return 0;
 	}
-	
-	
-	//保存任务书
+
+	// 保存任务书
 	@Override
-	public int saveXiaTaskbook(File file, String oldFileName, String userId,String newFileName) throws IOException {
+	public int saveXiaTaskbook(File file, String oldFileName, String userId, String newFileName) throws IOException {
 		/*
 		 * 获取路径
 		 */
@@ -519,7 +520,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_xia_file();
 					File deleteFile = new File(path);
 					deleteFile.delete();
-//					flag = graduationProjectManagementDao.deleteXiaTaskBookFileByUserId(userId);
+					// flag = graduationProjectManagementDao.deleteXiaTaskBookFileByUserId(userId);
 					taskBook.setTaskbook_xia_file(null);
 					taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 					taskBook.setTaskbook_xia_file_xiazai(-1);
@@ -572,7 +573,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return 0;
 	}
-	//保存开题报告
+
+	// 保存开题报告
 	@Override
 	public int saveReportOpening(File file, String oldFileName, String userId, String newFileName) throws IOException {
 		/*
@@ -605,7 +607,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
 					File deleteFile = new File(path);
 					deleteFile.delete();
-//					flag = graduationProjectManagementDao.deleteReportOpeningFileByUserId(userId);
+					// flag =
+					// graduationProjectManagementDao.deleteReportOpeningFileByUserId(userId);
 					reportOpening.setReport_opening_file(null);
 					reportOpening.setReport_file_is_xiazai(-1);
 					reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
@@ -649,7 +652,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				reportOpening.setReport_file_is_xiazai(-1);
 				reportOpening.setReport_opening_file(newFileName);
 				reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
-				System.out.println("d:"+reportOpening);
+				System.out.println("d:" + reportOpening);
 				flag = graduationProjectManagementDao.saveObj(reportOpening) == 1 ? true : false;
 				if (!flag)
 					return -2;
@@ -750,6 +753,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return 1;
 	}
+
 	/**
 	 * 下载完善任务书
 	 */
@@ -767,7 +771,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			e.printStackTrace();
 		}
 		// 1.根据user Id获得学生毕业论文表中的记录
-		bysjglxt_taskbook wanTaskbook = new bysjglxt_taskbook(); 
+		bysjglxt_taskbook wanTaskbook = new bysjglxt_taskbook();
 		String path = lj + "bysjglxt/wanTaskbook/";
 		wanTaskbook = graduationProjectManagementDao.getTaskBookByUserId(userID);
 		if (wanTaskbook == null) {
@@ -775,24 +779,26 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		path = path + wanTaskbook.getTaskbook_id() + "_" + wanTaskbook.getTaskbook_wan_file();
 		File file = new File(path);
-		//如果下载的人是学生
-		//获取某个学生的指导老师
+		// 如果下载的人是学生
+		// 获取某个学生的指导老师
 		bysjglxt_topic_select topicSelect = new bysjglxt_topic_select();
 		topicSelect = graduationProjectManagementDao.getStudentSelectTopic(userID);
-		if(topicSelect!=null && topicSelect.getTopic_select_teacher_tutor()!=null && topicSelect.getTopic_select_teacher_tutor().trim().length()>0) {
-			if((topicSelect.getTopic_select_teacher_tutor()).equals(juese)) {
-				//更改任务书
+		if (topicSelect != null && topicSelect.getTopic_select_teacher_tutor() != null
+				&& topicSelect.getTopic_select_teacher_tutor().trim().length() > 0) {
+			if ((topicSelect.getTopic_select_teacher_tutor()).equals(juese)) {
+				// 更改任务书
 				wanTaskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 				wanTaskbook.setTaskbook_wan_file_xiazai(1);
 				graduationProjectManagementDao.saveObj(wanTaskbook);
-			}	
+			}
 		}
-		
+
 		return file;
 	}
-	//下载下发任务书
+
+	// 下载下发任务书
 	@Override
-	public File downloadXiaTaskBook(String juese,String userID) {
+	public File downloadXiaTaskBook(String juese, String userID) {
 		/*
 		 * 获取路径
 		 */
@@ -805,7 +811,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			e.printStackTrace();
 		}
 		// 1.根据user Id获得学生毕业论文表中的记录
-		bysjglxt_taskbook xiaTaskbook = new bysjglxt_taskbook(); 
+		bysjglxt_taskbook xiaTaskbook = new bysjglxt_taskbook();
 		String path = lj + "bysjglxt/xiaTaskbook/";
 		xiaTaskbook = graduationProjectManagementDao.getTaskBookByUserId(userID);
 		if (xiaTaskbook == null) {
@@ -813,9 +819,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		path = path + xiaTaskbook.getTaskbook_id() + "_" + xiaTaskbook.getTaskbook_xia_file();
 		File file = new File(path);
-		//如果下载的人是学生
-		if(userID.equals(juese)) {
-			//更改任务书
+		// 如果下载的人是学生
+		if (userID.equals(juese)) {
+			// 更改任务书
 			xiaTaskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 			xiaTaskbook.setTaskbook_xia_file_xiazai(1);
 			graduationProjectManagementDao.saveObj(xiaTaskbook);
@@ -823,12 +829,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		return file;
 	}
 
-
 	/**
 	 * 下载开题报告
 	 */
 	@Override
-	public File downloadReportOpening(String juese,String userID) {
+	public File downloadReportOpening(String juese, String userID) {
 		/*
 		 * 获取路径
 		 */
@@ -849,17 +854,18 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
 		File file = new File(path);
-		//如果下载的人是学生
-		//获取某个学生的指导老师
+		// 如果下载的人是学生
+		// 获取某个学生的指导老师
 		bysjglxt_topic_select topicSelect = new bysjglxt_topic_select();
 		topicSelect = graduationProjectManagementDao.getStudentSelectTopic(userID);
-		if(topicSelect!=null && topicSelect.getTopic_select_teacher_tutor()!=null && topicSelect.getTopic_select_teacher_tutor().trim().length()>0) {
-			if((topicSelect.getTopic_select_teacher_tutor()).equals(juese)) {
-				//更改任务书
+		if (topicSelect != null && topicSelect.getTopic_select_teacher_tutor() != null
+				&& topicSelect.getTopic_select_teacher_tutor().trim().length() > 0) {
+			if ((topicSelect.getTopic_select_teacher_tutor()).equals(juese)) {
+				// 更改任务书
 				reportOpening.setReport_file_is_xiazai(1);
 				reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
 				graduationProjectManagementDao.saveObj(reportOpening);
-			}	
+			}
 		}
 		return file;
 	}
@@ -1474,9 +1480,12 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		bysjglxt_taskbook = graduationProjectManagementDao.getTaskbookById(updateTaskbook.getTaskbook_id());
 		if (bysjglxt_taskbook != null) {
-			/*bysjglxt_taskbook.setTaskbook_acontent_required(updateTaskbook.getTaskbook_acontent_required());
-			bysjglxt_taskbook.setTaskbook_reference(updateTaskbook.getTaskbook_reference());
-			bysjglxt_taskbook.setTaskbook_plan(updateTaskbook.getTaskbook_plan());*/
+			/*
+			 * bysjglxt_taskbook.setTaskbook_acontent_required(updateTaskbook.
+			 * getTaskbook_acontent_required());
+			 * bysjglxt_taskbook.setTaskbook_reference(updateTaskbook.getTaskbook_reference(
+			 * )); bysjglxt_taskbook.setTaskbook_plan(updateTaskbook.getTaskbook_plan());
+			 */
 			bysjglxt_taskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInTaskBook(bysjglxt_taskbook);
 		}
@@ -1834,7 +1843,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_defence = graduationProjectManagementDao
 						.findDefenceByUserId(bysjglxt_evaluate_tutor.getEvaluate_tutor_student());
 				bysjglxt_defence
-						.setDefence_grade_evaluate_tutor(bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_total() * 0.3);
+						.setDefence_grade_evaluate_tutor(bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_total());
 				bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 				flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 			}
@@ -1893,15 +1902,18 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					updateEvaluateReview.getEvaluate_review_grade_normalization());
 			bysjglxt_evaluate_review
 					.setEvaluate_review_grade_total(updateEvaluateReview.getEvaluate_review_grade_total());
-			bysjglxt_evaluate_review.setEvaluate_review_is_teacher_opinion(
-					updateEvaluateReview.getEvaluate_review_is_teacher_opinion());
+			if(bysjglxt_evaluate_review.getEvaluate_review_grade_total()>60) {
+				bysjglxt_evaluate_review.setEvaluate_review_is_teacher_opinion(1);
+			}else {
+				bysjglxt_evaluate_review.setEvaluate_review_is_teacher_opinion(0);
+			}
 			bysjglxt_evaluate_review.setEvaluate_review_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyEvaluateReview(bysjglxt_evaluate_review);
 			if (flag != 2) {
 				bysjglxt_defence = graduationProjectManagementDao
 						.findDefenceByUserId(bysjglxt_evaluate_review.getEvaluate_review_student());
 				bysjglxt_defence.setDefence_grade_evaluate_review(
-						bysjglxt_evaluate_review.getEvaluate_review_grade_total() * 0.3);
+						bysjglxt_evaluate_review.getEvaluate_review_grade_total());
 				bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 				flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 			}
@@ -1949,6 +1961,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_defence bysjglxt_defence = new bysjglxt_defence();
 		bysjglxt_defence = graduationProjectManagementDao.findDefenceByUserId(updateDefence.getDefence_student());
 		if (bysjglxt_defence != null) {
+			bysjglxt_defence.setDefence_chenshu_time(updateDefence.getDefence_chenshu_time());
+			bysjglxt_defence.setDefence_tiwen_time(updateDefence.getDefence_tiwen_time());
 			bysjglxt_defence.setDefence_record(updateDefence.getDefence_record());
 			bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
@@ -2115,42 +2129,49 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		Map<String, Object> params = new HashMap<String, Object>();
 		// 封面
 		params.putAll(exportCover(userId));
-		// 任务书
-		params.putAll(exportTask(userId));
+		// 前期情况记录
+		params.putAll(exportEarlystage(userId));
+		// 撰写阶段
+		params.putAll(exportMetaphase(userId));
+		// 中期自查情况记录
+		params.putAll(exportLaterstage(userId));
+		// 完善情况记录
+		params.putAll(exportPerfect(userId));
+		// 个人学习工作总结
+		params.putAll(exportSummary(userId));
+		// 形式审查表
+		params.putAll(exportFormal(userId));
+		// 指导老师评价表
+		params.putAll(exportTeacherOpin(userId));
+		// 评阅老师评价表
+		params.putAll(exportReviewOpin(userId));
+		// 答辩评分表
+		params.putAll(exportDefence(userId));
 		Configuration configuration = new Configuration();
 		configuration.setDefaultEncoding("UTF-8");
 		// 根据user Id获取学生信息
 		bysjglxt_student_basic studentBasic = new bysjglxt_student_basic();
 		studentBasic = graduationProjectManagementDao.getStudentBasicByUserId(userId);
 		configuration.setClassForTemplateLoading(this.getClass(), "");
-		Template t = configuration.getTemplate("renwushu2.ftl", "UTF-8");
-		String pa = lj + "毕业设计过程管理手册——" + studentBasic.getStudent_basic_num()
-		+ studentBasic.getStudent_basic_name() + ".doc";
+		Template t = configuration.getTemplate("graduation.ftl", "UTF-8");
+		String pa = lj + "毕业设计过程管理手册——" + studentBasic.getStudent_basic_num() + studentBasic.getStudent_basic_name()
+				+ ".doc";
 		OutputStream os = new FileOutputStream(pa);
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
 		t.process(params, bw);
 		return new File(pa);
-		
+		// 任务书
+		// params.putAll(exportTask(userId));
 		// 开题报告
 		// params.putAll(exportOpeningReport(userId));
-		// 前期情况记录
-		// params.putAll(exportEarlystage(userId));
-		// 中期情况记录
-		// params.putAll(exportMetaphase(userId));
-		// 后期情况记录
-		// params.putAll(exportLaterstage(userId));
-		// 完善情况记录
-		// params.putAll(exportPerfect(userId));
-		// 个人学习工作总结
-		// params.putAll(exportSummary(userId));
-		// 形式审查表
-		// params.putAll(exportFormal(userId));
-		// 指导老师评价表
-		// params.putAll(exportTeacherOpin(userId));
-		// 评阅老师评价表
-		// params.putAll(exportReviewOpin(userId));
-		// 答辩评分表
-		// params.putAll(exportDefence(userId));
+		
+	
+	
+		
+		
+		
+
+		
 	}
 
 	// 导出封面
@@ -2182,8 +2203,9 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				params.put("f4", bysjglxt_student_basic.getStudent_basic_college());
 				// 届别
 				params.put("f5", sessional + "");
+				// TODO 这里有变化
 				// 专业班级
-				params.put("f6", bysjglxt_student_basic.getStudent_basic_major() + "专业    "
+				params.put("f6", bysjglxt_student_basic.getStudent_basic_major() + "专业  "
 						+ bysjglxt_student_basic.getStudent_basic_class());
 			} else {
 				params.put("f2", "");
@@ -2221,7 +2243,21 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic topic = new bysjglxt_topic();
 				topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
-				params.put("f1", topic.getTopic_name_chinese());
+				System.out.println(topic.getTopic_name_chinese().length());
+				String name = "";
+				if (topic.getTopic_name_chinese() != null || !"".equals(topic.getTopic_name_chinese())) {
+					int j = 0;
+					while (j <= 1) {
+						for (int i = 0; i < (36 - topic.getTopic_name_chinese().trim().length() >> 1) - 2; i++) {
+							name += " ";
+						}
+						if (j == 0) {
+							name += topic.getTopic_name_chinese().trim();
+						}
+						j++;
+					}
+				}
+				params.put("f1", name);
 			} else {
 				params.put("f7", "");
 				params.put("f8", "");
@@ -2275,10 +2311,10 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_taskbook = graduationProjectManagementDao
 					.getTaskBookByUserId(bysjglxt_student_user.getUser_student_id());
 			if (bysjglxt_taskbook != null) {
-//				params.put("r6", bysjglxt_taskbook.getTaskbook_acontent_required());
-//				params.put("r7", bysjglxt_taskbook.getTaskbook_reference());
-//				params.put("r8", bysjglxt_taskbook.getTaskbook_plan());
-//				params.put("r13", bysjglxt_taskbook.getTaskbook_opinion());
+				// params.put("r6", bysjglxt_taskbook.getTaskbook_acontent_required());
+				// params.put("r7", bysjglxt_taskbook.getTaskbook_reference());
+				// params.put("r8", bysjglxt_taskbook.getTaskbook_plan());
+				// params.put("r13", bysjglxt_taskbook.getTaskbook_opinion());
 			} else {
 				params.put("r6", "");
 				params.put("r7", "");
@@ -2371,13 +2407,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${early}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${earlyNa}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${earlyMagor}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("q1", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("q2", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("q3", bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${early}", "");
-				params.put("${earlyNa}", "");
-				params.put("${earlyMagor}", "");
+				params.put("q1", "");
+				params.put("q2", "");
+				params.put("q3", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -2387,49 +2423,62 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${earlyChineseName}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${earlyEnglishName}", bysjglxt_topic.getTopic_name_english());
-				} else {
-					params.put("${earlyChineseName}", "");
-					params.put("${earlyEnglishName}", "");
+					params.put("q4", bysjglxt_topic.getTopic_name_chinese());
+					params.put("q5", bysjglxt_topic.getTopic_name_english());
 				}
+			}else {
+				params.put("q4", "");
+				params.put("q5", "");
 			}
 			// 根据user ID以及阶段获取进展情况记录表
 			bysjglxt_record_progress = graduationProjectManagementDao
 					.getRecordProgress(bysjglxt_student_user.getUser_student_id(), "前期");
 			if (bysjglxt_record_progress != null) {
-				if (bysjglxt_record_progress.getRecord_progress_gmt_start() != null
-						&& bysjglxt_record_progress.getRecord_progress_gmt_start().trim().length() > 0) {
-					params.put("${a}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-					params.put("${b}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-					params.put("${c}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				} else {
-					params.put("${a}", "");
-					params.put("${b}", "");
-					params.put("${c}", "");
+				if(bysjglxt_record_progress.getRecord_progress_record()!=null || bysjglxt_record_progress.getRecord_progress_record().trim().length()>0) {
+					params.put("q8", bysjglxt_record_progress.getRecord_progress_record());
+				}else {
+					params.put("q8", "");
 				}
-				if (bysjglxt_record_progress.getRecord_progress_gmt_stop() != null
-						&& bysjglxt_record_progress.getRecord_progress_gmt_stop().trim().length() > 0) {
-					params.put("${d}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-					params.put("${f}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-					params.put("${e}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				} else {
-					params.put("${d}", "");
-					params.put("${f}", "");
-					params.put("${e}", "");
+				if(bysjglxt_record_progress.getRecord_progress_opinion()!=null || bysjglxt_record_progress.getRecord_progress_opinion().trim().length()>0) {
+					params.put("q9", bysjglxt_record_progress.getRecord_progress_opinion());
+				}else {
+					params.put("q9", "");
 				}
-				params.put("${earlyProcessRecord}", bysjglxt_record_progress.getRecord_progress_record());
-				params.put("${earlyProcessOpinion}", bysjglxt_record_progress.getRecord_progress_opinion());
 			} else {
-				params.put("${a}", "");
-				params.put("${b}", "");
-				params.put("${c}", "");
-				params.put("${d}", "");
-				params.put("${f}", "");
-				params.put("${e}", "");
-				params.put("${earlyProcessRecord}", "");
-				params.put("${earlyProcessOpinion}", "");
+				params.put("q8", "");
+				params.put("q9", "");
 			}
+			//获取对应的任务实例
+			bysjglxt_task_instance taskInstanceStart = new bysjglxt_task_instance();
+			taskInstanceStart = graduationProjectManagementDao.getTaskInstance("学生完成进展情况记录（前期准备阶段）", studentUserId);
+			if(taskInstanceStart!=null && taskInstanceStart.getTask_instance_start().trim().length()>0) {
+				params.put("q6", TeamUtil.timeToYear(taskInstanceStart.getTask_instance_start())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceStart.getTask_instance_start())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceStart.getTask_instance_start())
+						+ " 日 ");
+			}else {
+				params.put("q6", "");
+			}
+			bysjglxt_task_instance taskInstanceEnd = new bysjglxt_task_instance();
+			taskInstanceEnd = graduationProjectManagementDao.getTaskInstance("指导老师填写进展情况意见（前期准备阶段）", studentUserId);
+			if(taskInstanceEnd!=null && taskInstanceEnd.getTask_instance_stop().trim().length()>0) {
+				params.put("q7", TeamUtil.timeToYear(taskInstanceEnd.getTask_instance_stop())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceEnd.getTask_instance_stop())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceEnd.getTask_instance_stop())
+						+ " 日 ");
+			}else {
+				params.put("q7", "");
+			}
+		}else {
+			params.put("q1", "");
+			params.put("q2", "");
+			params.put("q3", "");
+			params.put("q4", "");
+			params.put("q5", "");
+			params.put("q6", "");
+			params.put("q7", "");
+			params.put("q8", "");
+			params.put("q9", "");
 		}
 		return params;
 	}
@@ -2450,13 +2499,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${zhongN}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${zhongNa}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${zhongMajor}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("z1", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("z2", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("z3", bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${zhongN}", "");
-				params.put("${zhongNa}", "");
-				params.put("${zhongMajor}", "");
+				params.put("z1", "");
+				params.put("z2", "");
+				params.put("z3", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -2466,49 +2515,54 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${zhongChineseName}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${zhongEnglishName}", bysjglxt_topic.getTopic_name_english());
+					params.put("z4", bysjglxt_topic.getTopic_name_chinese());
+					params.put("z5", bysjglxt_topic.getTopic_name_english());
 				} else {
-					params.put("${zhongChineseName}", "");
-					params.put("${zhongEnglishName}", "");
+					params.put("z4", "");
+					params.put("z5", "");
 				}
 			}
 			// 根据user ID以及阶段获取进展情况记录表
 			bysjglxt_record_progress = graduationProjectManagementDao
 					.getRecordProgress(bysjglxt_student_user.getUser_student_id(), "中期");
 			if (bysjglxt_record_progress != null) {
-				if (bysjglxt_record_progress.getRecord_progress_gmt_start() != null
-						&& bysjglxt_record_progress.getRecord_progress_gmt_start().trim().length() > 0) {
-					params.put("${zy}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-					params.put("${zm}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-					params.put("${zd}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				} else {
-					params.put("${zy}", "");
-					params.put("${zm}", "");
-					params.put("${zd}", "");
-				}
-				if (bysjglxt_record_progress.getRecord_progress_gmt_stop() != null
-						&& bysjglxt_record_progress.getRecord_progress_gmt_stop().trim().length() > 0) {
-					params.put("${zyz}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-					params.put("${zmz}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-					params.put("${zdz}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				} else {
-					params.put("${zyz}", "");
-					params.put("${zmz}", "");
-					params.put("${zdz}", "");
-				}
-				params.put("${zhongRecord}", bysjglxt_record_progress.getRecord_progress_record());
-				params.put("${zhongOpinion}", bysjglxt_record_progress.getRecord_progress_opinion());
+				params.put("z8", bysjglxt_record_progress.getRecord_progress_record());
+				params.put("z9", bysjglxt_record_progress.getRecord_progress_opinion());
 			} else {
-				params.put("${zy}", "");
-				params.put("${zm}", "");
-				params.put("${zd}", "");
-				params.put("${zyz}", "");
-				params.put("${zmz}", "");
-				params.put("${zdz}", "");
-				params.put("${zhongRecord}", "");
-				params.put("${zhongOpinion}", "");
+				params.put("z8", "");
+				params.put("z9", "");
 			}
+			//获取对应的任务实例
+			bysjglxt_task_instance taskInstanceStart = new bysjglxt_task_instance();
+			taskInstanceStart = graduationProjectManagementDao.getTaskInstance("学生完成进展情况记录（撰写阶段）", studentUserId);
+			if(taskInstanceStart!=null && taskInstanceStart.getTask_instance_start().trim().length()>0) {
+				params.put("z6", TeamUtil.timeToYear(taskInstanceStart.getTask_instance_start())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceStart.getTask_instance_start())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceStart.getTask_instance_start())
+						+ " 日 ");
+			}else {
+				params.put("z6", "");
+			}
+			bysjglxt_task_instance taskInstanceEnd = new bysjglxt_task_instance();
+			taskInstanceEnd = graduationProjectManagementDao.getTaskInstance("指导老师填写进展情况意见（撰写阶段）", studentUserId);
+			if(taskInstanceEnd!=null && taskInstanceEnd.getTask_instance_stop().trim().length()>0) {
+				params.put("z7", TeamUtil.timeToYear(taskInstanceEnd.getTask_instance_stop())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceEnd.getTask_instance_stop())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceEnd.getTask_instance_stop())
+						+ " 日 ");
+			}else {
+				params.put("z7", "");
+			}
+		}else {
+			params.put("z1", "");
+			params.put("z2", "");
+			params.put("z3", "");
+			params.put("z4", "");
+			params.put("z5", "");
+			params.put("z6", "");
+			params.put("z7", "");
+			params.put("z8", "");
+			params.put("z9", "");
 		}
 		return params;
 	}
@@ -2529,13 +2583,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${houNu}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${houName}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${houMajor}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("z11", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("z12", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("z13", bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${houNu}", "");
-				params.put("${houName}", "");
-				params.put("${houMajor}", "");
+				params.put("z11", "");
+				params.put("z12", "");
+				params.put("z13", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -2545,49 +2599,54 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${houChineseName}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${houEnglishName}", bysjglxt_topic.getTopic_name_english());
+					params.put("z14", bysjglxt_topic.getTopic_name_chinese());
+					params.put("z15", bysjglxt_topic.getTopic_name_english());
 				} else {
-					params.put("${houChineseName}", "");
-					params.put("${houEnglishName}", "");
+					params.put("z14", "");
+					params.put("z15", "");
 				}
 			}
 			// 根据user ID以及阶段获取进展情况记录表
 			bysjglxt_record_progress = graduationProjectManagementDao
 					.getRecordProgress(bysjglxt_student_user.getUser_student_id(), "后期");
 			if (bysjglxt_record_progress != null) {
-				if (bysjglxt_record_progress.getRecord_progress_gmt_start() != null
-						&& bysjglxt_record_progress.getRecord_progress_gmt_start().trim().length() > 0) {
-					params.put("${hy}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-					params.put("${hm}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-					params.put("${hd}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				} else {
-					params.put("${hy}", "");
-					params.put("${hm}", "");
-					params.put("${hd}", "");
-				}
-				if (bysjglxt_record_progress.getRecord_progress_gmt_stop() != null
-						&& bysjglxt_record_progress.getRecord_progress_gmt_stop().trim().length() > 0) {
-					params.put("${hyh}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-					params.put("${hmy}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-					params.put("${hdh}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				} else {
-					params.put("${hyh}", "");
-					params.put("${hmy}", "");
-					params.put("${hdh}", "");
-				}
-				params.put("${houRecord}", bysjglxt_record_progress.getRecord_progress_record());
-				params.put("${houOpinion}", bysjglxt_record_progress.getRecord_progress_opinion());
+				params.put("z18", bysjglxt_record_progress.getRecord_progress_record());
+				params.put("z19", bysjglxt_record_progress.getRecord_progress_opinion());
 			} else {
-				params.put("${hy}", "");
-				params.put("${hm}", "");
-				params.put("${hd}", "");
-				params.put("${hyh}", "");
-				params.put("${hmy}", "");
-				params.put("${hdh}", "");
-				params.put("${houRecord}", "");
-				params.put("${houOpinion}", "");
+				params.put("z18", "");
+				params.put("z19", "");
 			}
+			//获取对应的任务实例
+			bysjglxt_task_instance taskInstanceStart = new bysjglxt_task_instance();
+			taskInstanceStart = graduationProjectManagementDao.getTaskInstance("学生完成进展情况记录（中期自查阶段）", studentUserId);
+			if(taskInstanceStart!=null && taskInstanceStart.getTask_instance_start().trim().length()>0) {
+				params.put("z16", TeamUtil.timeToYear(taskInstanceStart.getTask_instance_start())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceStart.getTask_instance_start())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceStart.getTask_instance_start())
+						+ " 日 ");
+			}else {
+				params.put("z16", "");
+			}
+			bysjglxt_task_instance taskInstanceEnd = new bysjglxt_task_instance();
+			taskInstanceEnd = graduationProjectManagementDao.getTaskInstance("指导老师填写进展情况意见（中期自查阶段）", studentUserId);
+			if(taskInstanceEnd!=null && taskInstanceEnd.getTask_instance_stop().trim().length()>0) {
+				params.put("z17", TeamUtil.timeToYear(taskInstanceEnd.getTask_instance_stop())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceEnd.getTask_instance_stop())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceEnd.getTask_instance_stop())
+						+ " 日 ");
+			}else {
+				params.put("z17", "");
+			}
+		}else {
+			params.put("z11", "");
+			params.put("z12", "");
+			params.put("z13", "");
+			params.put("z14", "");
+			params.put("z15", "");
+			params.put("z16", "");
+			params.put("z17", "");
+			params.put("z18", "");
+			params.put("z19", "");
 		}
 		return params;
 	}
@@ -2607,13 +2666,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${wanNu}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${wanName}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${wanMajor}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("w1", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("w2", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("w3", bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${wanNu}", "");
-				params.put("${wanName}", "");
-				params.put("${wanMajor}", "");
+				params.put("w1", "");
+				params.put("w2", "");
+				params.put("w3", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -2623,49 +2682,54 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${wanChineseName}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${wanEnglishName}", bysjglxt_topic.getTopic_name_english());
+					params.put("w4", bysjglxt_topic.getTopic_name_chinese());
+					params.put("w5", bysjglxt_topic.getTopic_name_english());
 				} else {
-					params.put("${wanChineseName}", "");
-					params.put("${wanEnglishName}", "");
+					params.put("w4", "");
+					params.put("w5", "");
 				}
 			}
 			// 根据user ID以及阶段获取进展情况记录表
 			bysjglxt_record_progress = graduationProjectManagementDao
 					.getRecordProgress(bysjglxt_student_user.getUser_student_id(), "完善");
 			if (bysjglxt_record_progress != null) {
-				if (bysjglxt_record_progress.getRecord_progress_gmt_start() != null
-						&& bysjglxt_record_progress.getRecord_progress_gmt_start().trim().length() > 0) {
-					params.put("${wy}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-					params.put("${wm}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-					params.put("${wd}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_start()));
-				} else {
-					params.put("${wy}", "");
-					params.put("${wm}", "");
-					params.put("${wd}", "");
-				}
-				if (bysjglxt_record_progress.getRecord_progress_gmt_stop() != null
-						&& bysjglxt_record_progress.getRecord_progress_gmt_stop().trim().length() > 0) {
-					params.put("${wyw}", TeamUtil.timeToYear(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-					params.put("${wmw}", TeamUtil.timeToMonth(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-					params.put("${wdw}", TeamUtil.timeToDay(bysjglxt_record_progress.getRecord_progress_gmt_stop()));
-				} else {
-					params.put("${wyw}", "");
-					params.put("${wmw}", "");
-					params.put("${wdw}", "");
-				}
-				params.put("${wanRecord}", bysjglxt_record_progress.getRecord_progress_record());
-				params.put("${wanOpinion}", bysjglxt_record_progress.getRecord_progress_opinion());
+				params.put("w8", bysjglxt_record_progress.getRecord_progress_record());
+				params.put("w9", bysjglxt_record_progress.getRecord_progress_opinion());
 			} else {
-				params.put("${wy}", "");
-				params.put("${wm}", "");
-				params.put("${wd}", "");
-				params.put("${wyw}", "");
-				params.put("${wmw}", "");
-				params.put("${wdw}", "");
-				params.put("${wanRecord}", "");
-				params.put("${wanOpinion}", "");
+				params.put("w8", "");
+				params.put("w9", "");
 			}
+			//获取对应的任务实例
+			bysjglxt_task_instance taskInstanceStart = new bysjglxt_task_instance();
+			taskInstanceStart = graduationProjectManagementDao.getTaskInstance("学生完成进展情况记录（完善阶段）", studentUserId);
+			if(taskInstanceStart!=null && taskInstanceStart.getTask_instance_start().trim().length()>0) {
+				params.put("w6", TeamUtil.timeToYear(taskInstanceStart.getTask_instance_start())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceStart.getTask_instance_start())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceStart.getTask_instance_start())
+						+ " 日 ");
+			}else {
+				params.put("w6", "");
+			}
+			bysjglxt_task_instance taskInstanceEnd = new bysjglxt_task_instance();
+			taskInstanceEnd = graduationProjectManagementDao.getTaskInstance("指导老师填写进展情况意见（完善阶段）", studentUserId);
+			if(taskInstanceEnd!=null && taskInstanceEnd.getTask_instance_stop().trim().length()>0) {
+				params.put("w7", TeamUtil.timeToYear(taskInstanceEnd.getTask_instance_stop())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceEnd.getTask_instance_stop())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceEnd.getTask_instance_stop())
+						+ " 日 ");
+			}else {
+				params.put("w7", "");
+			}
+		}else {
+			params.put("w1", "");
+			params.put("w2", "");
+			params.put("w3", "");
+			params.put("w4", "");
+			params.put("w5", "");
+			params.put("w6", "");
+			params.put("w7", "");
+			params.put("w8", "");
+			params.put("w9", "");
 		}
 		return params;
 	}
@@ -2685,13 +2749,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${sumNum}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${sumName}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${sumMagir}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("g1", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("g2", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("g3", bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${sumNum}", "");
-				params.put("${sumName}", "");
-				params.put("${sumMagir}", "");
+				params.put("g1", "");
+				params.put("g2", "");
+				params.put("g3", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -2701,48 +2765,53 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${sumChineseName}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${sumEnglishName}", bysjglxt_topic.getTopic_name_english());
+					params.put("g4", bysjglxt_topic.getTopic_name_chinese());
+					params.put("g5", bysjglxt_topic.getTopic_name_english());
 				} else {
-					params.put("${sumChineseName}", "");
-					params.put("${sumEnglishName}", "");
+					params.put("g4", "");
+					params.put("g5", "");
 				}
 			}
 			// 根据user Id获取个人学习工作总结
 			bysjglxt_summary = graduationProjectManagementDao.getSummary(bysjglxt_student_user.getUser_student_id());
 			if (bysjglxt_summary != null) {
-				if (bysjglxt_summary.getSummary_gmt_start() != null
-						&& bysjglxt_summary.getSummary_gmt_start().trim().length() > 0) {
-					params.put("${sy}", TeamUtil.timeToYear(bysjglxt_summary.getSummary_gmt_start()));
-					params.put("${sm}", TeamUtil.timeToMonth(bysjglxt_summary.getSummary_gmt_start()));
-					params.put("${sd}", TeamUtil.timeToDay(bysjglxt_summary.getSummary_gmt_start()));
-				} else {
-					params.put("${sy}", "");
-					params.put("${sm}", "");
-					params.put("${sd}", "");
-				}
-				if (bysjglxt_summary.getSummary_gmt_stop() != null
-						&& bysjglxt_summary.getSummary_gmt_stop().trim().length() > 0) {
-					params.put("${sys}", TeamUtil.timeToYear(bysjglxt_summary.getSummary_gmt_stop()));
-					params.put("${sms}", TeamUtil.timeToMonth(bysjglxt_summary.getSummary_gmt_stop()));
-					params.put("${sds}", TeamUtil.timeToDay(bysjglxt_summary.getSummary_gmt_stop()));
-				} else {
-					params.put("${sys}", "");
-					params.put("${sms}", "");
-					params.put("${sds}", "");
-				}
-				params.put("${sumSummary}", bysjglxt_summary.getSummary_summary());
-				params.put("${sumOpinion}", bysjglxt_summary.getSummary_opinion());
+				params.put("g8", bysjglxt_summary.getSummary_summary());
+				params.put("g9", bysjglxt_summary.getSummary_opinion());
 			} else {
-				params.put("${sy}", "");
-				params.put("${sm}", "");
-				params.put("${sd}", "");
-				params.put("${sys}", "");
-				params.put("${sms}", "");
-				params.put("${sds}", "");
-				params.put("${sumSummary}", "");
-				params.put("${sumOpinion}", "");
+				params.put("g8", "");
+				params.put("g9", "");
 			}
+			//获取对应的任务实例
+			bysjglxt_task_instance taskInstanceStart = new bysjglxt_task_instance();
+			taskInstanceStart = graduationProjectManagementDao.getTaskInstance("学生完成个人学习工作总结", studentUserId);
+			if(taskInstanceStart!=null && taskInstanceStart.getTask_instance_start().trim().length()>0) {
+				params.put("g6", TeamUtil.timeToYear(taskInstanceStart.getTask_instance_start())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceStart.getTask_instance_start())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceStart.getTask_instance_start())
+						+ " 日 ");
+			}else {
+				params.put("g6", "");
+			}
+			bysjglxt_task_instance taskInstanceEnd = new bysjglxt_task_instance();
+			taskInstanceEnd = graduationProjectManagementDao.getTaskInstance("指导老师填写个人学习工作总结意见", studentUserId);
+			if(taskInstanceEnd!=null && taskInstanceEnd.getTask_instance_stop().trim().length()>0) {
+				params.put("g7", TeamUtil.timeToYear(taskInstanceEnd.getTask_instance_stop())
+						+ " 年 " + TeamUtil.timeToMonth(taskInstanceEnd.getTask_instance_stop())
+						+ " 月 " + TeamUtil.timeToDay(taskInstanceEnd.getTask_instance_stop())
+						+ " 日 ");
+			}else {
+				params.put("g7", "");
+			}
+		}else {
+			params.put("g1", "");
+			params.put("g2", "");
+			params.put("g3", "");
+			params.put("g4", "");
+			params.put("g5", "");
+			params.put("g6", "");
+			params.put("g7", "");
+			params.put("g8", "");
+			params.put("g9", "");
 		}
 		return params;
 	}
@@ -2766,13 +2835,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${forNum}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${forNam}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${forMajor}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("x1", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("x2", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("x3", bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${forNum}", "");
-				params.put("${forNam}", "");
-				params.put("${forMajor}", "");
+				params.put("x1", "");
+				params.put("x2", "");
+				params.put("x3", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -2782,11 +2851,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${forChineseName}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${forEnglishName}", bysjglxt_topic.getTopic_name_english());
+					params.put("x4", bysjglxt_topic.getTopic_name_chinese());
+					params.put("x5", bysjglxt_topic.getTopic_name_english());
 				} else {
-					params.put("${forChineseName}", "");
-					params.put("${forEnglishName}", "");
+					params.put("x4", "");
+					params.put("x5", "");
 				}
 			}
 			// 根据user Id获取形式审查表
@@ -2795,396 +2864,396 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			if (bysjglxt_examination_formal != null) {
 				switch (bysjglxt_examination_formal.getExamination_formal_is_cover()) {
 				case 1:
-					params.put("${1a}", "✓");
-					params.put("${1b}", "");
-					params.put("${1c}", "");
+					params.put("x6a", "✓");
+					params.put("x6b", "");
+					params.put("x6c", "");
 					break;
 				case 0:
-					params.put("${1a}", "");
-					params.put("${1b}", "✓");
-					params.put("${1c}", "");
+					params.put("x6a", "");
+					params.put("x6b", "✓");
+					params.put("x6c", "");
 					break;
 				case -1:
-					params.put("${1a}", "");
-					params.put("${1b}", "");
-					params.put("${1c}", "✓");
+					params.put("x6a", "");
+					params.put("x6b", "");
+					params.put("x6c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_a4()) {
 				case 1:
-					params.put("${2a}", "✓");
-					params.put("${2b}", "");
-					params.put("${2c}", "");
+					params.put("x7a", "✓");
+					params.put("x7b", "");
+					params.put("x7c", "");
 					break;
 				case 0:
-					params.put("${2a}", "");
-					params.put("${2b}", "✓");
-					params.put("${2c}", "");
+					params.put("x7a", "");
+					params.put("x7b", "✓");
+					params.put("x7c", "");
 					break;
 				case -1:
-					params.put("${2a}", "");
-					params.put("${2b}", "");
-					params.put("${2c}", "✓");
+					params.put("x7a", "");
+					params.put("x7b", "");
+					params.put("x7c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_format()) {
 				case 1:
-					params.put("${3a}", "✓");
-					params.put("${3b}", "");
-					params.put("${3c}", "");
+					params.put("x8a", "✓");
+					params.put("x8b", "");
+					params.put("x8c", "");
 					break;
 				case 0:
-					params.put("${3a}", "");
-					params.put("${3b}", "✓");
-					params.put("${3c}", "");
+					params.put("x8a", "");
+					params.put("x8b", "✓");
+					params.put("x8c", "");
 					break;
 				case -1:
-					params.put("${3a}", "");
-					params.put("${3b}", "");
-					params.put("${3c}", "✓");
+					params.put("x8a", "");
+					params.put("x8b", "");
+					params.put("x8c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_abstract_chinese()) {
 				case 1:
-					params.put("${4a}", "✓");
-					params.put("${4b}", "");
-					params.put("${4c}", "");
+					params.put("x9a", "✓");
+					params.put("x9b", "");
+					params.put("x9c", "");
 					break;
 				case 0:
-					params.put("${4a}", "");
-					params.put("${4b}", "✓");
-					params.put("${4c}", "");
+					params.put("x9a", "");
+					params.put("x9b", "✓");
+					params.put("x9c", "");
 					break;
 				case -1:
-					params.put("${4a}", "");
-					params.put("${4b}", "");
-					params.put("${4c}", "✓");
+					params.put("x9a", "");
+					params.put("x9b", "");
+					params.put("x9c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_chinese_keyword()) {
 				case 1:
-					params.put("${5a}", "✓");
-					params.put("${5b}", "");
-					params.put("${5c}", "");
+					params.put("x10a", "✓");
+					params.put("x10b", "");
+					params.put("x10c", "");
 					break;
 				case 0:
-					params.put("${5a}", "");
-					params.put("${5b}", "✓");
-					params.put("${5c}", "");
+					params.put("x10a", "");
+					params.put("x10b", "✓");
+					params.put("x10c", "");
 					break;
 				case -1:
-					params.put("${5a}", "");
-					params.put("${5b}", "");
-					params.put("${5c}", "✓");
+					params.put("x10a", "");
+					params.put("x10b", "");
+					params.put("x10c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_abstract_foreign()) {
 				case 1:
-					params.put("${6a}", "✓");
-					params.put("${6b}", "");
-					params.put("${6c}", "");
+					params.put("x11a", "✓");
+					params.put("x11b", "");
+					params.put("x11c", "");
 					break;
 				case 0:
-					params.put("${6a}", "");
-					params.put("${6b}", "✓");
-					params.put("${6c}", "");
+					params.put("x11a", "");
+					params.put("x11b", "✓");
+					params.put("x11c", "");
 					break;
 				case -1:
-					params.put("${6a}", "");
-					params.put("${6b}", "");
-					params.put("${6c}", "✓");
+					params.put("x11a", "");
+					params.put("x11b", "");
+					params.put("x11c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_catalog()) {
 				case 1:
-					params.put("${7a}", "✓");
-					params.put("${7b}", "");
-					params.put("${7c}", "");
+					params.put("x12a", "✓");
+					params.put("x12b", "");
+					params.put("x12c", "");
 					break;
 				case 0:
-					params.put("${7a}", "");
-					params.put("${7b}", "✓");
-					params.put("${7c}", "");
+					params.put("x12a", "");
+					params.put("x12b", "✓");
+					params.put("x12c", "");
 					break;
 				case -1:
-					params.put("${7a}", "");
-					params.put("${7b}", "");
-					params.put("${7c}", "✓");
+					params.put("x12a", "");
+					params.put("x12b", "");
+					params.put("x12c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_headline()) {
 				case 1:
-					params.put("${8a}", "✓");
-					params.put("${8b}", "");
-					params.put("${8c}", "");
+					params.put("x13a", "✓");
+					params.put("x13b", "");
+					params.put("x13c", "");
 					break;
 				case 0:
-					params.put("${8a}", "");
-					params.put("${8b}", "✓");
-					params.put("${8c}", "");
+					params.put("x13a", "");
+					params.put("x13b", "✓");
+					params.put("x13c", "");
 					break;
 				case -1:
-					params.put("${8a}", "");
-					params.put("${8b}", "");
-					params.put("${8c}", "✓");
+					params.put("x13a", "");
+					params.put("x13b", "");
+					params.put("x13c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_punctuation()) {
 				case 1:
-					params.put("${9a}", "✓");
-					params.put("${9b}", "");
-					params.put("${9c}", "");
+					params.put("x14a", "✓");
+					params.put("x14b", "");
+					params.put("x14c", "");
 					break;
 				case 0:
-					params.put("${9a}", "");
-					params.put("${9b}", "✓");
-					params.put("${9c}", "");
+					params.put("x14a", "");
+					params.put("x14b", "✓");
+					params.put("x14c", "");
 					break;
 				case -1:
-					params.put("${9a}", "");
-					params.put("${9b}", "");
-					params.put("${9c}", "✓");
+					params.put("x14a", "");
+					params.put("x14b", "");
+					params.put("x14c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_typo()) {
 				case 1:
-					params.put("${10a}", "✓");
-					params.put("${10b}", "");
-					params.put("${10c}", "");
+					params.put("x15a", "✓");
+					params.put("x15b", "");
+					params.put("x15c", "");
 					break;
 				case 0:
-					params.put("${10a}", "");
-					params.put("${10b}", "✓");
-					params.put("${10c}", "");
+					params.put("x15a", "");
+					params.put("x15b", "✓");
+					params.put("x15c", "");
 					break;
 				case -1:
-					params.put("${10a}", "");
-					params.put("${10b}", "");
-					params.put("${10c}", "✓");
+					params.put("x15a", "");
+					params.put("x15b", "");
+					params.put("x15c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_reference_ten()) {
 				case 1:
-					params.put("${11a}", "✓");
-					params.put("${11b}", "");
-					params.put("${11c}", "");
+					params.put("x16a", "✓");
+					params.put("x16b", "");
+					params.put("x16c", "");
 					break;
 				case 0:
-					params.put("${11a}", "");
-					params.put("${11b}", "✓");
-					params.put("${11c}", "");
+					params.put("x16a", "");
+					params.put("x16b", "✓");
+					params.put("x16c", "");
 					break;
 				case -1:
-					params.put("${11a}", "");
-					params.put("${11b}", "");
-					params.put("${11c}", "✓");
+					params.put("x16a", "");
+					params.put("x16b", "");
+					params.put("x16c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_reference_foreign()) {
 				case 1:
-					params.put("${12a}", "✓");
-					params.put("${12b}", "");
-					params.put("${12c}", "");
+					params.put("x17a", "✓");
+					params.put("x17b", "");
+					params.put("x17c", "");
 					break;
 				case 0:
-					params.put("${12a}", "");
-					params.put("${12b}", "✓");
-					params.put("${12c}", "");
+					params.put("x17a", "");
+					params.put("x17b", "✓");
+					params.put("x17c", "");
 					break;
 				case -1:
-					params.put("${12a}", "");
-					params.put("${12b}", "");
-					params.put("${12c}", "✓");
+					params.put("x17a", "");
+					params.put("x17b", "");
+					params.put("x17c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_reference_new()) {
 				case 1:
-					params.put("${13a}", "✓");
-					params.put("${13b}", "");
-					params.put("${13c}", "");
+					params.put("x18a", "✓");
+					params.put("x18b", "");
+					params.put("x18c", "");
 					break;
 				case 0:
-					params.put("${13a}", "");
-					params.put("${13b}", "✓");
-					params.put("${13c}", "");
+					params.put("x18a", "");
+					params.put("x18b", "✓");
+					params.put("x18c", "");
 					break;
 				case -1:
-					params.put("${13a}", "");
-					params.put("${13b}", "");
-					params.put("${13c}", "✓");
+					params.put("x18a", "");
+					params.put("x18b", "");
+					params.put("x18c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_reference_num()) {
 				case 1:
-					params.put("${14a}", "✓");
-					params.put("${14b}", "");
-					params.put("${14c}", "");
+					params.put("x19a", "✓");
+					params.put("x19b", "");
+					params.put("x19c", "");
 					break;
 				case 0:
-					params.put("${14a}", "");
-					params.put("${14b}", "✓");
-					params.put("${14c}", "");
+					params.put("x19a", "");
+					params.put("x19b", "✓");
+					params.put("x19c", "");
 					break;
 				case -1:
-					params.put("${14a}", "");
-					params.put("${14b}", "");
-					params.put("${14c}", "✓");
+					params.put("x19a", "");
+					params.put("x19b", "");
+					params.put("x19c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_reference_format()) {
 				case 1:
-					params.put("${15a}", "✓");
-					params.put("${15b}", "");
-					params.put("${15c}", "");
+					params.put("x20a", "✓");
+					params.put("x20b", "");
+					params.put("x20c", "");
 					break;
 				case 0:
-					params.put("${15a}", "");
-					params.put("${15b}", "✓");
-					params.put("${15c}", "");
+					params.put("x20a", "");
+					params.put("x20b", "✓");
+					params.put("x20c", "");
 					break;
 				case -1:
-					params.put("${15a}", "");
-					params.put("${15b}", "");
-					params.put("${15c}", "✓");
+					params.put("x20a", "");
+					params.put("x20b", "");
+					params.put("x20c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_progress_metaphase()) {
 				case 1:
-					params.put("${16a}", "✓");
-					params.put("${16b}", "");
-					params.put("${16c}", "");
+					params.put("x21a", "✓");
+					params.put("x21b", "");
+					params.put("x21c", "");
 					break;
 				case 0:
-					params.put("${16a}", "");
-					params.put("${16b}", "✓");
-					params.put("${16c}", "");
+					params.put("x21a", "");
+					params.put("x21b", "✓");
+					params.put("x21c", "");
 					break;
 				case -1:
-					params.put("${16a}", "");
-					params.put("${16b}", "");
-					params.put("${16c}", "✓");
+					params.put("x21a", "");
+					params.put("x21b", "");
+					params.put("x21c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_progress_summary()) {
 				case 1:
-					params.put("${17a}", "✓");
-					params.put("${17b}", "");
-					params.put("${17c}", "");
+					params.put("x22a", "✓");
+					params.put("x22b", "");
+					params.put("x22c", "");
 					break;
 				case 0:
-					params.put("${17a}", "");
-					params.put("${17b}", "✓");
-					params.put("${17c}", "");
+					params.put("x22a", "");
+					params.put("x22b", "✓");
+					params.put("x22c", "");
 					break;
 				case -1:
-					params.put("${17a}", "");
-					params.put("${17b}", "");
-					params.put("${17c}", "✓");
+					params.put("x22a", "");
+					params.put("x22b", "");
+					params.put("x22c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_progress_actual()) {
 				case 1:
-					params.put("${18a}", "✓");
-					params.put("${18b}", "");
-					params.put("${18c}", "");
+					params.put("x23a", "✓");
+					params.put("x23b", "");
+					params.put("x23c", "");
 					break;
 				case 0:
-					params.put("${18a}", "");
-					params.put("${18b}", "✓");
-					params.put("${18c}", "");
+					params.put("x23a", "");
+					params.put("x23b", "✓");
+					params.put("x23c", "");
 					break;
 				case -1:
-					params.put("${18a}", "");
-					params.put("${18b}", "");
-					params.put("${18c}", "✓");
+					params.put("x23a", "");
+					params.put("x23b", "");
+					params.put("x23c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_progress_complete()) {
 				case 1:
-					params.put("${19a}", "✓");
-					params.put("${19b}", "");
-					params.put("${19c}", "");
+					params.put("x24a", "✓");
+					params.put("x24b", "");
+					params.put("x24c", "");
 					break;
 				case 0:
-					params.put("${19a}", "");
-					params.put("${19b}", "✓");
-					params.put("${19c}", "");
+					params.put("x24a", "");
+					params.put("x24b", "✓");
+					params.put("x24c", "");
 					break;
 				case -1:
-					params.put("${19a}", "");
-					params.put("${19b}", "");
-					params.put("${19c}", "✓");
+					params.put("x24a", "");
+					params.put("x24b", "");
+					params.put("x24c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_progress_logic()) {
 				case 1:
-					params.put("${20a}", "✓");
-					params.put("${20b}", "");
-					params.put("${20c}", "");
+					params.put("x25a", "✓");
+					params.put("x25b", "");
+					params.put("x25c", "");
 					break;
 				case 0:
-					params.put("${20a}", "");
-					params.put("${20b}", "✓");
-					params.put("${20c}", "");
+					params.put("x25a", "");
+					params.put("x25b", "✓");
+					params.put("x25c", "");
 					break;
 				case -1:
-					params.put("${20a}", "");
-					params.put("${20b}", "");
-					params.put("${20c}", "✓");
+					params.put("x25a", "");
+					params.put("x25b", "");
+					params.put("x25c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_chart()) {
 				case 1:
-					params.put("${21a}", "✓");
-					params.put("${21b}", "");
-					params.put("${21c}", "");
+					params.put("x26a", "✓");
+					params.put("x26b", "");
+					params.put("x26c", "");
 					break;
 				case 0:
-					params.put("${21a}", "");
-					params.put("${21b}", "✓");
-					params.put("${21c}", "");
+					params.put("x26a", "");
+					params.put("x26b", "✓");
+					params.put("x26c", "");
 					break;
 				case -1:
-					params.put("${21a}", "");
-					params.put("${21b}", "");
-					params.put("${21c}", "✓");
+					params.put("x26a", "");
+					params.put("x26b", "");
+					params.put("x26c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_enclosure()) {
 				case 1:
-					params.put("${22a}", "✓");
-					params.put("${22b}", "");
-					params.put("${22c}", "");
+					params.put("x27a", "✓");
+					params.put("x27b", "");
+					params.put("x27c", "");
 					break;
 				case 0:
-					params.put("${22a}", "");
-					params.put("${22b}", "✓");
-					params.put("${22c}", "");
+					params.put("x27a", "");
+					params.put("x27b", "✓");
+					params.put("x27c", "");
 					break;
 				case -1:
-					params.put("${22a}", "");
-					params.put("${22b}", "");
-					params.put("${22c}", "✓");
+					params.put("x27a", "");
+					params.put("x27b", "");
+					params.put("x27c", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_teacher_opinion()) {
 				case 1:
-					params.put("${1te}", "✓");
-					params.put("${0te}", "");
+					params.put("x28a", "✓");
+					params.put("x28b", "");
 					break;
 				case 0:
-					params.put("${1te}", "");
-					params.put("${0te}", "✓");
+					params.put("x28a", "");
+					params.put("x28b", "✓");
 					break;
 				}
 				switch (bysjglxt_examination_formal.getExamination_formal_is_leader_opinion()) {
 				case 1:
-					params.put("${1le}", "✓");
-					params.put("${0le}", "");
+					params.put("x29a", "✓");
+					params.put("x29b", "");
 					break;
 				case 0:
-					params.put("${1le}", "");
-					params.put("${0le}", "✓");
+					params.put("x29a", "");
+					params.put("x29b", "✓");
 					break;
 				}
 			}
@@ -3212,13 +3281,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${evaNm}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${evaNa}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${evaMagor}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("p4", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("p5", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("p6", bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${evaNm}", "");
-				params.put("${evaNa}", "");
-				params.put("${evaMagor}", "");
+				params.put("p4", "");
+				params.put("p5", "");
+				params.put("p6", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -3228,8 +3297,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${evaChineseName}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${evaEnglishName}", bysjglxt_topic.getTopic_name_english());
+					params.put("p7", bysjglxt_topic.getTopic_name_chinese());
+					params.put("p8", bysjglxt_topic.getTopic_name_english());
 					// 根据课题指导老师userId 获取教师user表信息
 					bysjglxt_teacher_user = graduationProjectManagementDao
 							.getTeacherUserByUserId(bysjglxt_topic.getTopic_teacher());
@@ -3237,103 +3306,125 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 						bysjglxt_teacher_basic = graduationProjectManagementDao
 								.getTeacherBasicByBasicId(bysjglxt_teacher_user.getUser_teacher_basic());
 						if (bysjglxt_teacher_basic != null) {
-							params.put("${evaNu}", bysjglxt_teacher_basic.getName());
-							params.put("${evaTi}", bysjglxt_teacher_basic.getProfessional_title());
-							params.put("${evaUnit}", bysjglxt_teacher_basic.getUnit_name());
+							params.put("p1", bysjglxt_teacher_basic.getName());
+							params.put("p2", bysjglxt_teacher_basic.getProfessional_title());
+							params.put("p3", bysjglxt_teacher_basic.getUnit_name());
 						}
 					} else {
-						params.put("${evaNu}", "");
-						params.put("${evaTi}", "");
-						params.put("${evaUnit}", "");
+						params.put("p1", "");
+						params.put("p2", "");
+						params.put("p3", "");
 					}
 
 				} else {
-					params.put("${evaChineseName}", "");
-					params.put("${evaEnglishName}", "");
-					params.put("${evaNu}", "");
-					params.put("${evaTi}", "");
-					params.put("${evaUnit}", "");
+					params.put("p1", "");
+					params.put("p2", "");
+					params.put("p3", "");
+					params.put("p7", "");
+					params.put("p8", "");
 				}
 			}
 			// 根据学生user ID获得指导教师评价表
 			bysjglxt_evaluate_tutor = graduationProjectManagementDao
 					.getEvaluateTutor(bysjglxt_student_user.getUser_student_id());
 			if (bysjglxt_evaluate_tutor != null) {
-				params.put("${evaComment}", bysjglxt_evaluate_tutor.getEvaluate_tutor_teacher_comment() + "");
-				params.put("${1g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_training_objective() + "");
-				params.put("${2g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_difficulty() + "");
-				params.put("${3g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_workload() + "");
-				params.put("${4g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_bind() + "");
-				params.put("${18g}",
+				params.put("p26", bysjglxt_evaluate_tutor.getEvaluate_tutor_teacher_comment() + "");
+				params.put("p9", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_training_objective() + "");
+				params.put("p10", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_difficulty() + "");
+				params.put("p11", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_workload() + "");
+				params.put("p12", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_bind() + "");
+				/*params.put("${18g}",
 						bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_training_objective()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_difficulty()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_workload()
-								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_bind() + "");
-				params.put("${5g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_comprehensive() + "");
-				params.put("${6g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_reference() + "");
-				params.put("${7g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_experimental_design() + "");
-				params.put("${8g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_computing() + "");
-				params.put("${9g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_foreign_language() + "");
-				params.put("${10g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_computer() + "");
-				params.put("${11g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_innovate() + "");
-				params.put("${19g}",
+								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_bind() + "");*/
+				params.put("p13", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_comprehensive() + "");
+				params.put("p14", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_reference() + "");
+				params.put("p15", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_experimental_design() + "");
+				params.put("p16", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_computing() + "");
+				params.put("p17", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_foreign_language() + "");
+				params.put("p18", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_computer() + "");
+				params.put("p19", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_innovate() + "");
+				/*params.put("${19g}",
 						bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_comprehensive()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_reference()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_experimental_design()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_computing()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_foreign_language()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_computer()
-								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_innovate() + "");
+								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_innovate() + "");*/
 
-				params.put("${12g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_analysis() + "");
-				params.put("${13g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_chart() + "");
-				params.put("${14g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_instructions() + "");
-				params.put("${15g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_practicability() + "");
-				params.put("${16g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_normalization() + "");
-				params.put("${20g}",
+				params.put("p20", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_analysis() + "");
+				params.put("p21", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_chart() + "");
+				params.put("p22", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_instructions() + "");
+				params.put("p23", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_practicability() + "");
+				params.put("p24", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_normalization() + "");
+				/*params.put("${20g}",
 						bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_analysis()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_chart()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_instructions()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_practicability()
 								+ bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_normalization() + "");
-				params.put("${17g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_total() + "");
-				params.put("${21g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_total() + "");
+				params.put("${17g}", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_total() + "");*/
+				params.put("p25", bysjglxt_evaluate_tutor.getEvaluate_tutor_grade_total() + "");
 				switch (bysjglxt_evaluate_tutor.getEvaluate_tutor_is_teacher_opinion()) {
 				case 1:
-					params.put("${22g}", "✓");
-					params.put("${23g}", "");
+					params.put("p27", "✓");
+					params.put("p28", "");
 					break;
 				case 0:
-					params.put("${22g}", "");
-					params.put("${23g}", "✓");
+					params.put("p27", "");
+					params.put("p28", "✓");
 					break;
 				}
 			} else {
-				params.put("${evaComment}", "");
-				params.put("${1g}", "");
-				params.put("${2g}", "");
-				params.put("${3g}", "");
-				params.put("${4g}", "");
-				params.put("${18g}", "");
-				params.put("${5g}", "");
-				params.put("${6g}", "");
-				params.put("${7g}", "");
-				params.put("${8g}", "");
-				params.put("${9g}", "");
-				params.put("${10g}", "");
-				params.put("${11g}", "");
-				params.put("${19g}", "");
-				params.put("${12g}", "");
-				params.put("${13g}", "");
-				params.put("${14g}", "");
-				params.put("${15g}", "");
-				params.put("${16g}", "");
-				params.put("${20g}", "");
-				params.put("${17g}", "");
-				params.put("${21g}", "");
-				params.put("${22g}", "");
-				params.put("${23g}", "");
+				params.put("p9", "");
+				params.put("p10", "");
+				params.put("p11", "");
+				params.put("p12", "");
+				params.put("p13", "");
+				params.put("p14", "");
+				params.put("p15", "");
+				params.put("p16", "");
+				params.put("p17", "");
+				params.put("p18", "");
+				params.put("p19", "");
+				params.put("p20", "");
+				params.put("p21", "");
+				params.put("p22", "");
+				params.put("p23", "");
+				params.put("p24", "");
+				params.put("p26", "");
+				params.put("p27", "");
+				params.put("p28", "");
+				params.put("p25", "");
 			}
+		}else {
+			params.put("p26", "");
+			params.put("p27", "");
+			params.put("p28", "");
+			params.put("p25", "");
+			params.put("p7", "");
+			params.put("p8", "");
+			params.put("p9", "");
+			params.put("p10", "");
+			params.put("p11", "");
+			params.put("p12", "");
+			params.put("p13", "");
+			params.put("p14", "");
+			params.put("p15", "");
+			params.put("p16", "");
+			params.put("p17", "");
+			params.put("p18", "");
+			params.put("p19", "");
+			params.put("p20", "");
+			params.put("p21", "");
+			params.put("p22", "");
+			params.put("p23", "");
+			params.put("p24", "");
+			params.put("p1", "");
+			params.put("p2", "");
+			params.put("p3", "");
 		}
 		return params;
 	}
@@ -3356,13 +3447,13 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${4q}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${5q}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${6q}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("y4", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("y5", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("y6", bysjglxt_student_basic.getStudent_basic_class());
 			} else {
-				params.put("${4q}", "");
-				params.put("${5q}", "");
-				params.put("${6q}", "");
+				params.put("y4", "");
+				params.put("y5", "");
+				params.put("y6", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -3372,11 +3463,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${7q}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${8q}", bysjglxt_topic.getTopic_name_english());
+					params.put("y7", bysjglxt_topic.getTopic_name_chinese());
+					params.put("y8", bysjglxt_topic.getTopic_name_english());
 				} else {
-					params.put("${7q}", "");
-					params.put("${8q}", "");
+					params.put("y7", "");
+					params.put("y8", "");
 				}
 			}
 			// 根据课题评阅老师userId 获取教师user表信息
@@ -3386,95 +3477,120 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_teacher_basic = graduationProjectManagementDao
 						.getTeacherBasicByBasicId(bysjglxt_teacher_user.getUser_teacher_basic());
 				if (bysjglxt_teacher_basic != null) {
-					params.put("${1q}", bysjglxt_teacher_basic.getName());
-					params.put("${2q}", bysjglxt_teacher_basic.getProfessional_title());
-					params.put("${3q}", bysjglxt_teacher_basic.getUnit_name());
+					params.put("y1", bysjglxt_teacher_basic.getName());
+					params.put("y2", bysjglxt_teacher_basic.getProfessional_title());
+					params.put("y3", bysjglxt_teacher_basic.getUnit_name());
 				}
 			} else {
-				params.put("${1q}", "");
-				params.put("${2q}", "");
-				params.put("${3q}", "");
+				params.put("y1", "");
+				params.put("y2", "");
+				params.put("y3", "");
 			}
 
 			// 根据学生user ID获得指导教师评价表
 			bysjglxt_evaluate_review = graduationProjectManagementDao
 					.getEvaluateReview(bysjglxt_student_user.getUser_student_id());
 			if (bysjglxt_evaluate_review != null) {
-				params.put("${9q}", bysjglxt_evaluate_review.getEvaluate_review_teacher_comment() + "");
-				params.put("${1t}", bysjglxt_evaluate_review.getEvaluate_review_grade_training_objective() + "");
-				params.put("${2t}", bysjglxt_evaluate_review.getEvaluate_review_grade_difficulty() + "");
-				params.put("${3t}", bysjglxt_evaluate_review.getEvaluate_review_grade_workload() + "");
-				params.put("${4t}", bysjglxt_evaluate_review.getEvaluate_review_grade_bind() + "");
-				params.put("${18t}",
+				params.put("y26", bysjglxt_evaluate_review.getEvaluate_review_teacher_comment() + "");
+				params.put("y9", bysjglxt_evaluate_review.getEvaluate_review_grade_training_objective() + "");
+				params.put("y10", bysjglxt_evaluate_review.getEvaluate_review_grade_difficulty() + "");
+				params.put("y11", bysjglxt_evaluate_review.getEvaluate_review_grade_workload() + "");
+				params.put("y12", bysjglxt_evaluate_review.getEvaluate_review_grade_bind() + "");
+				/*params.put("${18t}",
 						bysjglxt_evaluate_review.getEvaluate_review_grade_training_objective()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_difficulty()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_workload()
-								+ bysjglxt_evaluate_review.getEvaluate_review_grade_bind() + "");
-				params.put("${5t}", bysjglxt_evaluate_review.getEvaluate_review_grade_comprehensive() + "");
-				params.put("${6t}", bysjglxt_evaluate_review.getEvaluate_review_grade_reference() + "");
-				params.put("${7t}", bysjglxt_evaluate_review.getEvaluate_review_grade_experimental_design() + "");
-				params.put("${8t}", bysjglxt_evaluate_review.getEvaluate_review_grade_computing() + "");
-				params.put("${9t}", bysjglxt_evaluate_review.getEvaluate_review_grade_foreign_language() + "");
-				params.put("${10t}", bysjglxt_evaluate_review.getEvaluate_review_grade_computer() + "");
-				params.put("${11t}", bysjglxt_evaluate_review.getEvaluate_review_grade_innovate() + "");
-				params.put("${19t}",
+								+ bysjglxt_evaluate_review.getEvaluate_review_grade_bind() + "");*/
+				params.put("y13", bysjglxt_evaluate_review.getEvaluate_review_grade_comprehensive() + "");
+				params.put("y14", bysjglxt_evaluate_review.getEvaluate_review_grade_reference() + "");
+				params.put("y15", bysjglxt_evaluate_review.getEvaluate_review_grade_experimental_design() + "");
+				params.put("y16", bysjglxt_evaluate_review.getEvaluate_review_grade_computing() + "");
+				params.put("y17", bysjglxt_evaluate_review.getEvaluate_review_grade_foreign_language() + "");
+				params.put("y18", bysjglxt_evaluate_review.getEvaluate_review_grade_computer() + "");
+				params.put("y19", bysjglxt_evaluate_review.getEvaluate_review_grade_innovate() + "");
+				/*params.put("${19t}",
 						bysjglxt_evaluate_review.getEvaluate_review_grade_comprehensive()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_reference()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_experimental_design()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_computing()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_foreign_language()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_computer()
-								+ bysjglxt_evaluate_review.getEvaluate_review_grade_innovate() + "");
+								+ bysjglxt_evaluate_review.getEvaluate_review_grade_innovate() + "");*/
 
-				params.put("${12t}", bysjglxt_evaluate_review.getEvaluate_review_grade_analysis() + "");
-				params.put("${13t}", bysjglxt_evaluate_review.getEvaluate_review_grade_chart() + "");
-				params.put("${14t}", bysjglxt_evaluate_review.getEvaluate_review_grade_instructions() + "");
-				params.put("${15t}", bysjglxt_evaluate_review.getEvaluate_review_grade_practicability() + "");
-				params.put("${16t}", bysjglxt_evaluate_review.getEvaluate_review_grade_normalization() + "");
-				params.put("${20t}",
+				params.put("y20", bysjglxt_evaluate_review.getEvaluate_review_grade_analysis() + "");
+				params.put("y21", bysjglxt_evaluate_review.getEvaluate_review_grade_chart() + "");
+				params.put("y22", bysjglxt_evaluate_review.getEvaluate_review_grade_instructions() + "");
+				params.put("y23", bysjglxt_evaluate_review.getEvaluate_review_grade_practicability() + "");
+				params.put("y24", bysjglxt_evaluate_review.getEvaluate_review_grade_normalization() + "");
+				/*params.put("${20t}",
 						bysjglxt_evaluate_review.getEvaluate_review_grade_analysis()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_chart()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_instructions()
 								+ bysjglxt_evaluate_review.getEvaluate_review_grade_practicability()
-								+ bysjglxt_evaluate_review.getEvaluate_review_grade_normalization() + "");
-				params.put("${17t}", bysjglxt_evaluate_review.getEvaluate_review_grade_total() + "");
-				params.put("${21t}", bysjglxt_evaluate_review.getEvaluate_review_grade_total() + "");
+								+ bysjglxt_evaluate_review.getEvaluate_review_grade_normalization() + "");*/
+				params.put("y25", bysjglxt_evaluate_review.getEvaluate_review_grade_total() + "");
+//				params.put("${21t}", bysjglxt_evaluate_review.getEvaluate_review_grade_total() + "");
 				switch (bysjglxt_evaluate_review.getEvaluate_review_is_teacher_opinion()) {
 				case 1:
-					params.put("${22t}", "✓");
-					params.put("${23t}", "");
+					params.put("y27", "✓");
+					params.put("y28", "");
 					break;
 				case 0:
-					params.put("${22t}", "");
-					params.put("${23t}", "✓");
+					params.put("y27", "");
+					params.put("y28", "✓");
 					break;
 				}
 			} else {
-				params.put("${9q}", "");
-				params.put("${1t}", "");
-				params.put("${2t}", "");
-				params.put("${3t}", "");
-				params.put("${4t}", "");
-				params.put("${18t}", "");
-				params.put("${5t}", "");
-				params.put("${6t}", "");
-				params.put("${7t}", "");
-				params.put("${8t}", "");
-				params.put("${9t}", "");
-				params.put("${10t}", "");
-				params.put("${11t}", "");
-				params.put("${19t}", "");
-				params.put("${12t}", "");
-				params.put("${13t}", "");
-				params.put("${14t}", "");
-				params.put("${15t}", "");
-				params.put("${16t}", "");
-				params.put("${20t}", "");
-				params.put("${17t}", "");
-				params.put("${21t}", "");
-				params.put("${22t}", "");
-				params.put("${23t}", "");
+				params.put("y9", "");
+				params.put("y10", "");
+				params.put("y11", "");
+				params.put("y12", "");
+				params.put("y13", "");
+				params.put("y14", "");
+				params.put("y15", "");
+				params.put("y16", "");
+				params.put("y17", "");
+				params.put("y18", "");
+				params.put("y19", "");
+				params.put("y20", "");
+				params.put("y21", "");
+				params.put("y22", "");
+				params.put("y23", "");
+				params.put("y24", "");
+				params.put("y25", "");
+				params.put("y26", "");
+				params.put("y27", "");
+				params.put("y28", "");
 			}
+		}else {
+			params.put("y1", "");
+			params.put("y2", "");
+			params.put("y3", "");
+			params.put("y4", "");
+			params.put("y5", "");
+			params.put("y6", "");
+			params.put("y7", "");
+			params.put("y8", "");
+			params.put("y9", "");
+			params.put("y10", "");
+			params.put("y11", "");
+			params.put("y12", "");
+			params.put("y13", "");
+			params.put("y14", "");
+			params.put("y15", "");
+			params.put("y16", "");
+			params.put("y17", "");
+			params.put("y18", "");
+			params.put("y19", "");
+			params.put("y20", "");
+			params.put("y21", "");
+			params.put("y22", "");
+			params.put("y23", "");
+			params.put("y24", "");
+			params.put("y25", "");
+			params.put("y26", "");
+			params.put("y27", "");
+			params.put("y28", "");
 		}
 		return params;
 	}
@@ -3494,17 +3610,17 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_student_basic = graduationProjectManagementDao
 					.getStudentBasicByBasicId(bysjglxt_student_user.getUser_student_basic());
 			if (bysjglxt_student_basic != null) {
-				params.put("${1z}", bysjglxt_student_basic.getStudent_basic_num());
-				params.put("${2z}", bysjglxt_student_basic.getStudent_basic_name());
-				params.put("${3z}", bysjglxt_student_basic.getStudent_basic_major());
+				params.put("d1", bysjglxt_student_basic.getStudent_basic_num());
+				params.put("d2", bysjglxt_student_basic.getStudent_basic_name());
+				params.put("d3", bysjglxt_student_basic.getStudent_basic_class());
 				int sessional = Integer.parseInt(bysjglxt_student_basic.getStudent_basic_level());
 				sessional = sessional + 4;
-				params.put("${4z}", sessional + "");
+				params.put("d5", sessional + "");
 			} else {
-				params.put("${1z}", "");
-				params.put("${2z}", "");
-				params.put("${3z}", "");
-				params.put("${4z}", "");
+				params.put("d1", "");
+				params.put("d2", "");
+				params.put("d3", "");
+				params.put("d5", "");
 			}
 			// 根据userid获取学生选题信息
 			bysjglxt_topic_select = graduationProjectManagementDao
@@ -3514,65 +3630,91 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
 				if (bysjglxt_topic != null) {
-					params.put("${5z}", bysjglxt_topic.getTopic_name_chinese());
-					params.put("${6z}", bysjglxt_topic.getTopic_name_english());
+					params.put("d4", bysjglxt_topic.getTopic_num());
+					params.put("d6", bysjglxt_topic.getTopic_name_chinese());
+					params.put("d7", bysjglxt_topic.getTopic_name_english());
 				} else {
-					params.put("${5z}", "");
-					params.put("${6z}", "");
+					params.put("d4", "");
+					params.put("d6", "");
+					params.put("d7", "");
 				}
 			}
 			bysjglxt_defence = graduationProjectManagementDao.getDefence(bysjglxt_student_user.getUser_student_id());
 			if (bysjglxt_defence != null) {
-				params.put("${7z}", bysjglxt_defence.getDefence_record());
-				params.put("${8z}", bysjglxt_defence.getDefence_leader_comment());
+				params.put("d8", bysjglxt_defence.getDefence_chenshu_time());
+				params.put("d9", bysjglxt_defence.getDefence_tiwen_time());
+				params.put("d10", bysjglxt_defence.getDefence_record());
+				params.put("d11", bysjglxt_defence.getDefence_leader_comment());
 
-				params.put("${9z}", bysjglxt_defence.getDefence_grade_writing() + "");
-				params.put("${10z}", bysjglxt_defence.getDefence_grade_normalization() + "");
-				params.put("${11z}", bysjglxt_defence.getDefence_grade_complete() + "");
-				params.put("${12z}", bysjglxt_defence.getDefence_grade_technology() + "");
-				params.put("${13z}", bysjglxt_defence.getDefence_grade_practicability() + "");
-				params.put("${18z}",
+				params.put("d12", bysjglxt_defence.getDefence_grade_writing() + "");
+				params.put("d13", bysjglxt_defence.getDefence_grade_normalization() + "");
+				params.put("d14", bysjglxt_defence.getDefence_grade_complete() + "");
+				params.put("d15", bysjglxt_defence.getDefence_grade_technology() + "");
+				params.put("d16", bysjglxt_defence.getDefence_grade_practicability() + "");
+				/*params.put("${18z}",
 						bysjglxt_defence.getDefence_grade_writing() + bysjglxt_defence.getDefence_grade_normalization()
 								+ bysjglxt_defence.getDefence_grade_complete()
 								+ bysjglxt_defence.getDefence_grade_technology()
-								+ bysjglxt_defence.getDefence_grade_practicability() + "");
-				params.put("${14z}", bysjglxt_defence.getDefence_grade_appearance() + "");
-				params.put("${15z}", bysjglxt_defence.getDefence_grade_statement() + "");
-				params.put("${16z}", bysjglxt_defence.getDefence_grade_answer() + "");
-				params.put("${19z}",
+								+ bysjglxt_defence.getDefence_grade_practicability() + "");*/
+				params.put("d17", bysjglxt_defence.getDefence_grade_appearance() + "");
+				params.put("d18", bysjglxt_defence.getDefence_grade_statement() + "");
+				params.put("d19", bysjglxt_defence.getDefence_grade_answer() + "");
+				/*params.put("${19z}",
 						bysjglxt_defence.getDefence_grade_statement() + bysjglxt_defence.getDefence_grade_appearance()
-								+ bysjglxt_defence.getDefence_grade_answer() + "");
+								+ bysjglxt_defence.getDefence_grade_answer() + "");*/
 
-				params.put("${17z}", bysjglxt_defence.getDefence_grade_defence() + "");
-				params.put("${20z}", bysjglxt_defence.getDefence_grade_defence() + "");
-				params.put("${21z}", bysjglxt_defence.getDefence_grade_evaluate_tutor() + "");
-				params.put("${22z}", bysjglxt_defence.getDefence_grade_evaluate_review() + "");
-				params.put("${23z}", bysjglxt_defence.getDefence_total() + "");
-				params.put("${24z}", bysjglxt_defence.getDefence_finally() + "");
+//				params.put("${17z}", bysjglxt_defence.getDefence_grade_defence() + "");
+				params.put("d20", bysjglxt_defence.getDefence_total() + "");
+				params.put("d21", bysjglxt_defence.getDefence_grade_evaluate_tutor() + "");
+				params.put("d22", bysjglxt_defence.getDefence_grade_evaluate_review() + "");
+				params.put("d23", bysjglxt_defence.getDefence_total() + "");
+				params.put("d24", bysjglxt_defence.getDefence_finally() + "");
 			} else {
-				params.put("${7z}", "");
-				params.put("${8z}", "");
-				params.put("${9z}", "");
-				params.put("${10z}", "");
-				params.put("${11z}", "");
-				params.put("${12z}", "");
-				params.put("${13z}", "");
-				params.put("${18z}", "");
-				params.put("${14z}", "");
-				params.put("${15z}", "");
-				params.put("${16z}", "");
-				params.put("${19z}", "");
-				params.put("${17z}", "");
-				params.put("${20z}", "");
-				params.put("${21z}", "");
-				params.put("${22z}", "");
-				params.put("${23z}", "");
-				params.put("${24z}", "");
+				params.put("d8", "");
+				params.put("d10", "");
+				params.put("d11", "");
+				params.put("d12", "");
+				params.put("d13", "");
+				params.put("d14", "");
+				params.put("d15", "");
+				params.put("d16", "");
+				params.put("d17", "");
+				params.put("d18", "");
+				params.put("d19", "");
+				params.put("d20", "");
+				params.put("d21", "");
+				params.put("d22", "");
+				params.put("d23", "");
+				params.put("d24", "");
+				
 			}
+		}else {
+			params.put("d1", "");
+			params.put("d2", "");
+			params.put("d3", "");
+			params.put("d4", "");
+			params.put("d5", "");
+			params.put("d6", "");
+			params.put("d7", "");
+			params.put("d8", "");
+			params.put("d9", "");
+			params.put("d10", "");
+			params.put("d11", "");
+			params.put("d12", "");
+			params.put("d13", "");
+			params.put("d14", "");
+			params.put("d15", "");
+			params.put("d16", "");
+			params.put("d17", "");
+			params.put("d18", "");
+			params.put("d19", "");
+			params.put("d20", "");
+			params.put("d21", "");
+			params.put("d22", "");
+			params.put("d23", "");
+			params.put("d24", "");
 		}
 		return params;
 	}
-
-	
 
 }

@@ -14,6 +14,8 @@ public class bysjglxt_defence {
 	private int defence_grade_appearance = 5;
 	private int defence_grade_statement = 20;
 	private int defence_grade_answer = 25;
+	private int defence_chenshu_time = 0;
+	private int defence_tiwen_time = 0;
 	private int defence_grade_defence;
 	private double defence_grade_evaluate_tutor;
 	private double defence_grade_evaluate_review;
@@ -28,6 +30,22 @@ public class bysjglxt_defence {
 
 	public void setDefence_id(String defence_id) {
 		this.defence_id = defence_id;
+	}
+
+	public int getDefence_chenshu_time() {
+		return defence_chenshu_time;
+	}
+
+	public void setDefence_chenshu_time(int defence_chenshu_time) {
+		this.defence_chenshu_time = defence_chenshu_time;
+	}
+
+	public int getDefence_tiwen_time() {
+		return defence_tiwen_time;
+	}
+
+	public void setDefence_tiwen_time(int defence_tiwen_time) {
+		this.defence_tiwen_time = defence_tiwen_time;
 	}
 
 	public String getDefence_student() {
@@ -183,7 +201,8 @@ public class bysjglxt_defence {
 				+ ", defence_grade_technology=" + defence_grade_technology + ", defence_grade_practicability="
 				+ defence_grade_practicability + ", defence_grade_appearance=" + defence_grade_appearance
 				+ ", defence_grade_statement=" + defence_grade_statement + ", defence_grade_answer="
-				+ defence_grade_answer + ", defence_grade_defence=" + defence_grade_defence
+				+ defence_grade_answer + ", defence_chenshu_time=" + defence_chenshu_time + ", defence_tiwen_time="
+				+ defence_tiwen_time + ", defence_grade_defence=" + defence_grade_defence
 				+ ", defence_grade_evaluate_tutor=" + defence_grade_evaluate_tutor + ", defence_grade_evaluate_review="
 				+ defence_grade_evaluate_review + ", defence_total=" + defence_total + ", defence_finally="
 				+ defence_finally + ", defence_gmt_create=" + defence_gmt_create + ", defence_gmt_modified="

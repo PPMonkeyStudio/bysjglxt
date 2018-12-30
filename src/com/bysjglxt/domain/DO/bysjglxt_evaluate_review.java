@@ -21,7 +21,7 @@ public class bysjglxt_evaluate_review {
 	private int evaluate_review_grade_practicability = 6;
 	private int evaluate_review_grade_normalization = 7;
 	private int evaluate_review_grade_total;
-	private int evaluate_review_is_teacher_opinion;
+	private int evaluate_review_is_teacher_opinion=1;
 	private String evaluate_review_gmt_create;
 	private String evaluate_review_gmt_modified;
 
