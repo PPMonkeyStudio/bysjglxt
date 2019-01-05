@@ -238,7 +238,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		bysjglxt_process_instance.setProcess_instance_id(TeamUtil.getUuid());
 		bysjglxt_process_instance.setProcess_instance_name(processInstanceName);
 		bysjglxt_process_instance.setProcess_instance_process_definition(process_definition_id);
-		bysjglxt_process_instance.setProcess_instance_state("活动");
+ 		bysjglxt_process_instance.setProcess_instance_state("活动");
 		bysjglxt_process_instance.setProcess_instance_man(operation);
 		bysjglxt_process_instance.setProcess_instance_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_process_instance
@@ -405,6 +405,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			if (!flag)
 				return -3;
 		}
+		//通知该系部所有拥有教研室老师的信息
+		
 		return 1;
 
 	}

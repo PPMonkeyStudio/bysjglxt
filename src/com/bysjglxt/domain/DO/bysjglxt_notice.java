@@ -9,8 +9,18 @@ public class bysjglxt_notice {
 	private String notice_gmt_create;
 	private String notice_gmt_modified;
 
+	private int notice_leixing = 2;
+
 	public String getNotice_id() {
 		return notice_id;
+	}
+
+	public int getNotice_leixing() {
+		return notice_leixing;
+	}
+
+	public void setNotice_leixing(int notice_leixing) {
+		this.notice_leixing = notice_leixing;
 	}
 
 	public void setNotice_id(String notice_id) {
@@ -69,7 +79,8 @@ public class bysjglxt_notice {
 	public String toString() {
 		return "bysjglxt_notice [notice_id=" + notice_id + ", notice_launch=" + notice_launch + ", notice_belong="
 				+ notice_belong + ", notice_content=" + notice_content + ", notice_state=" + notice_state
-				+ ", notice_gmt_create=" + notice_gmt_create + ", notice_gmt_modified=" + notice_gmt_modified + "]";
+				+ ", notice_gmt_create=" + notice_gmt_create + ", notice_gmt_modified=" + notice_gmt_modified
+				+ ", notice_leixing=" + notice_leixing + "]";
 	}
 
 }

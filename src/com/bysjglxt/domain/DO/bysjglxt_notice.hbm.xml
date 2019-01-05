@@ -1,30 +1,33 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2019-1-2 16:13:19 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_notice" table="bysjglxt_notice">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_notice" table="BYSJGLXT_NOTICE">
         <id name="notice_id" type="java.lang.String">
-            <column name="notice_id" />
+            <column name="NOTICE_ID" />
             <generator class="assigned" />
         </id>
         <property name="notice_launch" type="java.lang.String">
-            <column name="notice_launch" />
+            <column name="NOTICE_LAUNCH" />
         </property>
         <property name="notice_belong" type="java.lang.String">
-            <column name="notice_belong" />
+            <column name="NOTICE_BELONG" />
         </property>
         <property name="notice_content" type="java.lang.String">
-            <column name="notice_content" />
+            <column name="NOTICE_CONTENT" />
         </property>
         <property name="notice_state" type="int">
-            <column name="notice_state" />
+            <column name="NOTICE_STATE" />
         </property>
         <property name="notice_gmt_create" type="java.lang.String">
-            <column name="notice_gmt_create" />
+            <column name="NOTICE_GMT_CREATE" />
         </property>
         <property name="notice_gmt_modified" type="java.lang.String">
-            <column name="notice_gmt_modified" />
+            <column name="NOTICE_GMT_MODIFIED" />
+        </property>
+        <property name="notice_leixing" type="int">
+            <column name="NOTICE_LEIXING" />
         </property>
     </class>
 </hibernate-mapping>
