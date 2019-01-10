@@ -48,7 +48,7 @@
 		</div>
 		<div class="panel-body" style="margin: 0 0 20px 0;">
 			<div class="form-group">
-				<input type="email" class="form-control" id="login_username"
+				<input type="text" class="form-control" id="login_username"
 					placeholder="账号">
 			</div> 
 			<div class="form-group">

@@ -2,9 +2,11 @@ package com.bysjglxt.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.bysjglxt.dao.CollegeManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_college;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
@@ -22,7 +24,15 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		this.collegeManagementDao = collegeManagementDao;
 	}
 
-	
+	static {
+		//加载消息文件
+//		try {
+//			Properties props = new Properties();
+//			props.load(CollegeManagementServiceImpl.getClass().getClassLoader().getResourceAsStream("file.properties"));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+	}
 	
 	
 	/**
@@ -172,6 +182,16 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		bysjglxt_teacher_user.setUser_teacher_is_college_admin(1);
 		bysjglxt_teacher_user.setUser_teacher_is_defence_leader(2);
 		collegeManagementDao.saveObj(bysjglxt_teacher_user);
+		//TODO
+		//消息通知，后续将使用Spring AOP进行横切解决
+		bysjglxt_notice noticeCollege = new bysjglxt_notice();
+		noticeCollege.setNotice_id(TeamUtil.getUuid());
+		//TODO 这里要留意一下
+		noticeCollege.setNotice_launch("管理员");
+		noticeCollege.setNotice_belong(bysjglxt_teacher_user.getUser_teacher_id());
+		noticeCollege.setNotice_content("已下发");
+		
+		
 		return 1;
 	}
 
