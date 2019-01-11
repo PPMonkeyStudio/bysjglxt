@@ -24,7 +24,7 @@ function processController(obj) {
 					`,
 				onContentReady : listprocess,
 				buttons:{
-					返回 : function() {
+					确定 : function() {
 					}
 				}
 			});
@@ -96,9 +96,9 @@ function listprocess(){
 				new_td = document.createElement("td");
 				new_tr.appendChild(new_td);
 				if (new_td.innerHTML = jsonData[num].taskInstance.task_instance_is_update == 1) {
-					new_td.innerHTML = '<button class="btn btn-default" id="'+jsonData[num].taskInstance.task_instance_id+'" onclick="updateProcessController(this,-1)" >移出</button>';
+					new_td.innerHTML = '<button class="btn btn-default" id="'+jsonData[num].taskInstance.task_instance_id+'" onclick="updateProcessController(this,-1)" >转为不可更改</button>';
 				} else {
-					new_td.innerHTML = '<button class="btn btn-default" id="'+jsonData[num].taskInstance.task_instance_id+'" onclick="updateProcessController(this,1)" >更改</button>';
+					new_td.innerHTML = '<button class="btn btn-default" id="'+jsonData[num].taskInstance.task_instance_id+'" onclick="updateProcessController(this,1)" >转为可更改</button>';
 				}
 			}
 		}

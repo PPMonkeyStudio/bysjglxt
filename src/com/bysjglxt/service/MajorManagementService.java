@@ -40,4 +40,10 @@ public interface MajorManagementService {
 	 */
 	public int updateSection(bysjglxt_major major);
 
+	/**
+	 * 根据专业名称获取专业信息
+	 * @param bysjglxtMajor
+	 */
+	public bysjglxt_major getMajorByMajorName(bysjglxt_major bysjglxtMajor);
+
 }

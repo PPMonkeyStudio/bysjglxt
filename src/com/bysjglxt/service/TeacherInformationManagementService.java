@@ -54,7 +54,7 @@ public interface TeacherInformationManagementService {
 	 *            手动输入的教师基础信息
 	 * @return 是否存储成功,1是 0否
 	 */
-	public boolean save_NewTeacher(bysjglxt_teacher_basic teacher_basic, String userId);
+	public boolean save_NewTeacher(bysjglxt_teacher_basic teacher_basic,bysjglxt_section section, String userId);
 
 	/**
 	 * @待测试
@@ -99,7 +99,7 @@ public interface TeacherInformationManagementService {
 	 * @param bysjglxt_teacher_basic
 	 * @return
 	 */
-	public boolean updateTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic);
+	public boolean updateTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic,bysjglxt_teacher_user teacherUser);
 
 	/**
 	 * 修改教师登陆信息

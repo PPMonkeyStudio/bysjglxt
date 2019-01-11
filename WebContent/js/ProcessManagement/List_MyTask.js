@@ -64,12 +64,12 @@ function List_MyTask(pageIndex) {
 						if (myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskDefinition.task_definition_type == 1) {
 							sss = sss + '<button  id="'
 							+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-							+ '" onclick="passTask(this)" class="btn btn-default"><i class="fa fa-legal"></i> 同意通过</button>';
+							+ '" onclick="passTask(this)" class="btn btn-default"><i class="fa fa-legal"></i> 确定完成本任务</button>';
 							new_td.innerHTML = sss;
 						} else {
 							sss = sss + '<button  id="'
 							+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
-							+ '" class="btn btn-default" onclick="passTask(this)"><i class="fa fa-legal"></i> 同意通过</button>'
+							+ '" class="btn btn-default" onclick="passTask(this)"><i class="fa fa-legal"></i> 确定完成本任务</button>'
 							+ '<button style="margin:0 0 0 10px;" id="'
 							+ myTask_json.list_ProcessDetailDTO[num].bysjglxtTaskInstance.task_instance_id
 							+ '" class="btn btn-default" onclick="repulseTask(this)" ><i class="fa fa-recycle"></i> 驳回请求</button>';

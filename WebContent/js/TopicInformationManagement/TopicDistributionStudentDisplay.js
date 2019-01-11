@@ -25,7 +25,7 @@ function TopicDistributionStudentDisplay(obj) {
 						+ '</table>',
 				type : 'orange',
 				buttons : {
-					返回 : function() {
+					确定 : function() {
 					}
 				},
 				onContentReady : function() {

@@ -16,6 +16,8 @@ function Get_Teacher_Section(select) {
 						select.appendChild(option);
 						option.value = SectionList[num].section_id;
 					}
+					$('select').selectpicker('refresh');
+				    $('select').selectpicker('render');
 				}
 				// $('#' + select.id).selectpicker('refresh');
 			} else {

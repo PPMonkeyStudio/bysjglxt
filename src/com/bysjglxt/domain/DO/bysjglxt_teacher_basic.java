@@ -25,8 +25,8 @@ public class bysjglxt_teacher_basic {
 	private String engineering_background="";
 	private String industry_background="";
 	private String graduate_tutor_type="";
-	private String number_of_doctor="";
-	private String number_of_master="";
+	private String number_of_doctor="0";
+	private String number_of_master="0";
 	private String teacher_basic_gmt_create="";
 	private String teacher_basic_gmt_modified="";
 	private String phone;

@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
@@ -404,5 +405,15 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		Query query = session.createQuery(hql);
 		bysjglxt_student_user = (bysjglxt_student_user) query.uniqueResult();
 		return bysjglxt_student_user;
+	}
+
+	@Override
+	public bysjglxt_college getCollegeById(String college) {
+		Session session = getSession();
+		bysjglxt_college bysjglxt_college = null;
+		String hql = "from bysjglxt_college where college_id='" + college + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_college = (bysjglxt_college) query.uniqueResult();
+		return bysjglxt_college;
 	}
 }

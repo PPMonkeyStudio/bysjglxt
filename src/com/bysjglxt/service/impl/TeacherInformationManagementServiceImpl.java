@@ -3,19 +3,23 @@ package com.bysjglxt.service.impl;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
+import com.bysjglxt.service.CollegeManagementService;
 import com.bysjglxt.service.TeacherInformationManagementService;
 
 import util.ExcelToBean2;
@@ -186,42 +190,52 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	 * OK
 	 */
 	@Override
-	public boolean save_NewTeacher(bysjglxt_teacher_basic teacher_basic, String userId) {
+	public boolean save_NewTeacher(bysjglxt_teacher_basic teacher_basic,bysjglxt_section section, String userId) {
 		String college = collegeJudge(1, userId);
+		bysjglxt_college col = new bysjglxt_college();
+		col = teacherInformationManagementDao.getCollegeById(college);
 		boolean flag = false;
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		bysjglxt_section bysjglxt_section = null;
 		teacher_basic.setTeacher_basic_id(TeamUtil.getUuid());
+		teacher_basic.setUnit_number(col.getCollege_code());
+		teacher_basic.setUnit_name(col.getCollege_name());
 		teacher_basic.setTeacher_basic_gmt_create(TeamUtil.getStringSecond());
 		teacher_basic.setTeacher_basic_gmt_modified(teacher_basic.getTeacher_basic_gmt_create());
 		flag = teacherInformationManagementDao.teacherBasicIsExist(teacher_basic.getJob_number());
 		if (flag) {
 			return false;
 		}
+		
+		//保存
 		flag = teacherInformationManagementDao.saveTeacherBasic(teacher_basic);
 		// 有关教研室：根据任教专业代码获取教研室，如果没有则填写无
-		if (teacher_basic.getTeaching_profession_no() != null
-				&& teacher_basic.getTeaching_profession_no().trim().length() > 0) {
-			bysjglxt_section = teacherInformationManagementDao
-					.getSectionByMajorCode(teacher_basic.getTeaching_profession_no().trim());
-			if (bysjglxt_section == null) {
-				bysjglxt_teacher_user.setUser_teacher_section("");
-			} else {
-				if (bysjglxt_section.getSection_id() != null && bysjglxt_section.getSection_id().trim().length() > 0) {
-					bysjglxt_teacher_user.setUser_teacher_section(bysjglxt_section.getSection_id().trim());
-				} else {
+		if(section==null) {
+			if (teacher_basic.getTeaching_profession_no() != null
+					&& teacher_basic.getTeaching_profession_no().trim().length() > 0) {
+				bysjglxt_section = teacherInformationManagementDao
+						.getSectionByMajorCode(teacher_basic.getTeaching_profession_no().trim());
+				if (bysjglxt_section == null) {
 					bysjglxt_teacher_user.setUser_teacher_section("");
+				} else {
+					if (bysjglxt_section.getSection_id() != null && bysjglxt_section.getSection_id().trim().length() > 0) {
+						bysjglxt_teacher_user.setUser_teacher_section(bysjglxt_section.getSection_id().trim());
+					} else {
+						bysjglxt_teacher_user.setUser_teacher_section("");
+					}
 				}
+			} else {
+				bysjglxt_teacher_user.setUser_teacher_section("");
 			}
-		} else {
-			bysjglxt_teacher_user.setUser_teacher_section("");
+		}else {
+			bysjglxt_teacher_user.setUser_teacher_section(section.getSection_id());
 		}
 		bysjglxt_teacher_user.setUser_teacher_id(TeamUtil.getUuid());
 		bysjglxt_teacher_user.setUser_teacher_guidance_num(0);
 		// 工号
 		bysjglxt_teacher_user.setUser_teacher_num(teacher_basic.getJob_number());
 		// 密码
-		bysjglxt_teacher_user.setUser_teacher_password(md5.GetMD5Code(bysjglxt_teacher_user.getUser_teacher_num()));
+		bysjglxt_teacher_user.setUser_teacher_password(md5.GetMD5Code("000000"));
 		bysjglxt_teacher_user.setUser_teacher_basic(teacher_basic.getTeacher_basic_id());
 		// 教研室未给予
 		bysjglxt_teacher_user.setUser_teacher_max_guidance(-1);
@@ -330,9 +344,36 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	 * 修改教师基础表信息
 	 */
 	@Override
-	public boolean updateTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic) {
-		bysjglxt_teacher_basic.setTeacher_basic_gmt_modified(TeamUtil.getStringSecond());
-		return teacherInformationManagementDao.updateBasic(bysjglxt_teacher_basic);
+	public boolean updateTeacherBasic(bysjglxt_teacher_basic bysjglxt_teacher_basic,bysjglxt_teacher_user bysjglxt_teacher_user) {
+		//
+		if(bysjglxt_teacher_basic ==null || bysjglxt_teacher_basic.getTeacher_basic_id()==null || "".equals(bysjglxt_teacher_basic.getTeacher_basic_id())) {
+			return false;
+		}
+		//
+		bysjglxt_teacher_basic teacherBasic = new bysjglxt_teacher_basic();
+		bysjglxt_teacher_user teacherUser = new bysjglxt_teacher_user();
+		teacherBasic = teacherInformationManagementDao.get_TeacherBasicInformation_ByUserBasic(bysjglxt_teacher_basic.getTeacher_basic_id());
+		if(teacherBasic == null) {
+			return false;
+		}
+		teacherBasic.setName(bysjglxt_teacher_basic.getName());
+		teacherBasic.setSex(bysjglxt_teacher_basic.getSex());
+		teacherBasic.setBirthday(bysjglxt_teacher_basic.getBirthday());
+		teacherBasic.setInduction_date(bysjglxt_teacher_basic.getInduction_date());
+		teacherBasic.setJob_statue(bysjglxt_teacher_basic.getJob_statue());
+		teacherBasic.setProfessional_title(bysjglxt_teacher_basic.getProfessional_title());
+		teacherBasic.setHighest_education(bysjglxt_teacher_basic.getHighest_education());
+		teacherBasic.setHighest_degree(bysjglxt_teacher_basic.getHighest_degree());
+		teacherBasic.setQq(bysjglxt_teacher_basic.getQq());
+		teacherBasic.setPhone(bysjglxt_teacher_basic.getPhone());
+		teacherBasic.setTeacher_basic_gmt_modified(TeamUtil.getStringSecond());
+		teacherInformationManagementDao.saveTeacherBasic(teacherBasic);
+		teacherUser = teacherInformationManagementDao.getTeacherInfoByBasicId(teacherBasic.getTeacher_basic_id());
+		teacherUser.setUser_teacher_section(bysjglxt_teacher_user.getUser_teacher_section());
+		teacherUser.setUser_teacher_max_guidance(bysjglxt_teacher_user.getUser_teacher_max_guidance());
+		teacherUser.setUser_teacher_gmt_modified(TeamUtil.getStringSecond());
+		teacherInformationManagementDao.saveTeacher(teacherUser);
+		return true;
 	}
 
 	@Override

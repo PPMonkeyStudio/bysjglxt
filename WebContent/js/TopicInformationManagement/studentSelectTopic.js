@@ -3,7 +3,7 @@ function studentSelectTopic(this_button) {
 	var jc = $
 			.confirm({
 				columnClass : 'col-md-6 col-md-offset-3',
-				title : '学生详细信息',
+				title : '选题详细信息',
 				content : '<table id="table_topic_detail" class="table table-hover table-bordered" style="text-align: center;">'
 						+ '<tbody>' + '</tbody>' + '</table>',
 				buttons : {

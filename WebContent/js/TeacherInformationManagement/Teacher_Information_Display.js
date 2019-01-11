@@ -1,4 +1,8 @@
-﻿function Teacher_Information_Display(this_button) {
+﻿;
+var zhicheng = ['讲师','未评级','助教','其他初级','其他中级','副教授','教授'];
+var xueli = ['硕士研究生','专科及以下','大学本科','博士研究生'];
+var xuewei = ['硕士','无学位','学士','博士'];
+function Teacher_Information_Display(this_button) {
 
 	var jc = $
 			.confirm({
@@ -28,11 +32,8 @@
 									}
 								}
 							}
-							var formData = new FormData(document
-									.getElementById("form_UpdateTeacher"));
-							xhr
-									.open("POST",
-											"/bysjglxt/teacher/TeacherInformationManagement_UpdateTeacherBasic");
+							var formData = new FormData(document.getElementById("form_UpdateTeacher"));
+							xhr.open("POST","/bysjglxt/teacher/TeacherInformationManagement_UpdateTeacherBasic");
 							xhr.send(formData);
 							/*
 							 * 
@@ -40,7 +41,7 @@
 							return false;
 						}
 					},
-					'返回 ' : function() {
+					'确定 ' : function() {
 					}
 				},
 				onContentReady : function() {
@@ -70,7 +71,7 @@
 							new_tr_1.appendChild(document.createTextNode(''));
 							table_teacher_detail.firstElementChild
 									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>工号</th><td><input name="updateTeacherBasic.job_number"  style="text-align: center;" class="form-control"  value="'
+							new_tr_1.innerHTML = '<th>工号</th><td><input disabled name="updateTeacherBasic.job_number"  style="text-align: center;" class="form-control"  value="'
 									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.job_number
 									+ '"></input></td><th>姓名</th><td><input name="updateTeacherBasic.name"  style="text-align: center;" class="form-control"  value="'
 									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.name
@@ -80,12 +81,30 @@
 							new_tr_1.appendChild(document.createTextNode(''));
 							table_teacher_detail.firstElementChild
 									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>性别</th><td><input name="updateTeacherBasic.sex"  style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex
-									+ '"></input></td><th>出生年月</th><td><input name="updateTeacherBasic.birthday"  style="text-align: center;" class="input_TeacherInformation form-control"  value="'
+							new_tr_1.innerHTML = '<th>性别</th><td><select name="updateTeacherBasic.sex" class="form-control" style="width: auto;" id="teacherBasicInfoSex"></select></td>'
+									+ '<th>出生年月</th><td><input name="updateTeacherBasic.birthday"  style="text-align: center;" class="input_TeacherInformation form-control"  value="'
 									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.birthday
 									+ '"></input></td>';
-
+							if(teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex != null && teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex !=undefined){
+								if(teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex == '男'){
+									new_tr_1.innerHTML = '<th>性别</th><td><select name="updateTeacherBasic.sex" class="form-control" style="width: auto;" id="teacherBasicInfoSex"><option value="男" selected>男</option><option value="女">女</option></select></td>'
+										+ '<th>出生年月</th><td><input name="updateTeacherBasic.birthday"  style="text-align: center;" class="input_TeacherInformation form-control"  value="'
+										+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.birthday
+										+ '"></input></td>';
+								}else if(teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.sex == '女'){
+									new_tr_1.innerHTML = '<th>性别</th><td><select name="updateTeacherBasic.sex" class="form-control" style="width: auto;" id="teacherBasicInfoSex"><option value="男">男</option><option value="女" selected>女</option></select></td>'
+										+ '<th>出生年月</th><td><input name="updateTeacherBasic.birthday"  style="text-align: center;" class="input_TeacherInformation form-control"  value="'
+										+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.birthday
+										+ '"></input></td>';
+								}else{
+									new_tr_1.innerHTML = '<th>性别</th><td><select name="updateTeacherBasic.sex" class="form-control" style="width: auto;" id="teacherBasicInfoSex"><option value="男">男</option><option value="女">女</option></select></td>'
+										+ '<th>出生年月</th><td><input name="updateTeacherBasic.birthday"  style="text-align: center;" class="input_TeacherInformation form-control"  value="'
+										+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.birthday
+										+ '"></input></td>';
+								}
+							}
+							
+							
 							new_tr_1 = document.createElement("tr");
 							new_tr_1.appendChild(document.createTextNode(''));
 							table_teacher_detail.firstElementChild
@@ -98,102 +117,105 @@
 
 							new_tr_1 = document.createElement("tr");
 							new_tr_1.appendChild(document.createTextNode(''));
-							table_teacher_detail.firstElementChild
-									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>单位号</th><td><input name="updateTeacherBasic.unit_number"  style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.unit_number
-									+ '"></input></td><th>单位名称</th><td><input name="updateTeacherBasic.unit_name"  style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.unit_name
-									+ '"></input></td>';
-
+							table_teacher_detail.firstElementChild.appendChild(new_tr_1);
+							var zhi = '<th>专业技术职称</th><td><select name="updateTeacherBasic.professional_title" class="form-control" style="width: auto;" id="teacherBasicInfoSex">';
+							for(let i of zhicheng){
+							    zhi += '<option value="'+i+'"';
+							    if(i == teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title){
+							    	zhi += ' selected '
+							    }
+							    zhi += '>'+i+'</option>';
+							}
+							zhi += '</select></td>'
+								+ '<th>单位名称</th><td><input disabled name="updateTeacherBasic.unit_name"  style="text-align: center;" class="input_TeacherInformation form-control"  value="'
+								+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.unit_name
+								+ '"></input></td>';
+							new_tr_1.innerHTML = zhi;
 							new_tr_1 = document.createElement("tr");
 							new_tr_1.appendChild(document.createTextNode(''));
 							table_teacher_detail.firstElementChild
-									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>学历</th><td><input name="updateTeacherBasic.highest_education" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_education
-									+ '"></input></td><th>最高学位</th><td><input name="updateTeacherBasic.highest_degree" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_degree
-									+ '"></input></td>';
-
+									.appendChild(new_tr_1);
+							zhi = '';
+							zhi += '<th>学历</th><td><select name="updateTeacherBasic.highest_education" class="form-control" style="width: auto;" id="teacherBasicInfoXueLi">';
+							for(let i of xueli){
+							    zhi += '<option value="'+i+'"';
+							    if(i == teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_education){
+							    	zhi += ' selected '
+							    }
+							    zhi += '>'+i+'</option>';
+							}
+							zhi += '</select></td><th>最高学位</th><td><select name="updateTeacherBasic.highest_degree" class="form-control" style="width: auto;" id="teacherBasicInfoXueWei">';
+							for(let i of xuewei){
+							    zhi += '<option value="'+i+'"';
+							    if(i == teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.highest_degree){
+							    	zhi += ' selected '
+							    }
+							    zhi += '>'+i+'</option>';
+							}
+							zhi += '</select></td>';
+							console.log(zhi)
+							new_tr_1.innerHTML = zhi;
+							zhi = '';
 							new_tr_1 = document.createElement("tr");
 							new_tr_1.appendChild(document.createTextNode(''));
 							table_teacher_detail.firstElementChild
-									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>学缘</th><td><input name="updateTeacherBasic.learn_edge_structure" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.learn_edge_structure
-									+ '"></input></td><th>专业技术职称</th><td><input name="updateTeacherBasic.professional_title" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.professional_title
+									.appendChild(new_tr_1);
+							var qq = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.qq;
+							if(qq == null || qq == undefined){
+								qq = "无";
+							}
+							var phone = teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.phone;
+							if(phone == null || phone == undefined){
+								phone = "无";
+							}
+							new_tr_1.innerHTML = '<th>QQ</th><td><input name="updateTeacherBasic.qq" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
+									+ qq
+									+ '"></input></td><th>电话号码</th><td><input name="updateTeacherBasic.phone" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
+									+ phone
 									+ '"></input></td>';
-
 							new_tr_1 = document.createElement("tr");
 							new_tr_1.appendChild(document.createTextNode(''));
-							table_teacher_detail.firstElementChild
-									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>学科类别</th><td><input name="updateTeacherBasic.subject_category" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.subject_category
-									+ '"></input></td><th>任教类型</th><td><input name="updateTeacherBasic.teaching_type" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.teaching_type
-									+ '"></input></td>';
-
+							table_teacher_detail.firstElementChild.appendChild(new_tr_1);
+							new_tr_1.innerHTML = '<th>所属教研室</th><td colspan="3"><select name="updateTeacherUser.user_teacher_section" class="form-control" style="width: auto;" id="teacherBasicInfoSection"></select></td>';
+							sectionJ(teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_section);
 							new_tr_1 = document.createElement("tr");
 							new_tr_1.appendChild(document.createTextNode(''));
-							table_teacher_detail.firstElementChild
-									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>任教专业名称</th><td><input name="updateTeacherBasic.teaching_profession_name" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.teaching_profession_name
-									+ '"></input></td><th>任教专业代码</th><td><input name="updateTeacherBasic.teaching_profession_no" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.teaching_profession_no
+							table_teacher_detail.firstElementChild.appendChild(new_tr_1);
+							new_tr_1.innerHTML = '<th>最多可指导学生数</th><td colspan="3"><input name="updateTeacherUser.user_teacher_max_guidance" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
+									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherUser.user_teacher_max_guidance
 									+ '"></input></td>';
-
-							new_tr_1 = document.createElement("tr");
-							new_tr_1.appendChild(document.createTextNode(''));
-							table_teacher_detail.firstElementChild
-									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>专业任教时间</th><td><input name="updateTeacherBasic.profession_teaching_date" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.profession_teaching_date
-									+ '"></input></td><th>是否实验技术人员</th><td><input name="updateTeacherBasic.experimental_technical_personnel" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.experimental_technical_personnel
-									+ '"></input></td>';
-
-							new_tr_1 = document.createElement("tr");
-							new_tr_1.appendChild(document.createTextNode(''));
-							table_teacher_detail.firstElementChild
-									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>是否双师型</th><td><input name="updateTeacherBasic.double_teacher_type" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.double_teacher_type
-									+ '"></input></td><th>是否工程背景</th><td><input name="updateTeacherBasic.engineering_background" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.engineering_background
-									+ '"></input></td>';
-
-							new_tr_1 = document.createElement("tr");
-							new_tr_1.appendChild(document.createTextNode(''));
-							table_teacher_detail.firstElementChild
-									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>是否行业背景</th><td><input name="updateTeacherBasic.industry_background" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.industry_background
-									+ '"></input></td><th>导师类别</th><td><input name="updateTeacherBasic.graduate_tutor_type" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.graduate_tutor_type
-									+ '"></input></td>';
-
-							new_tr_1 = document.createElement("tr");
-							new_tr_1.appendChild(document.createTextNode(''));
-							table_teacher_detail.firstElementChild
-									.appendChild(new_tr_1)
-							new_tr_1.innerHTML = '<th>校内指导博士生数</th><td><input name="updateTeacherBasic.number_of_doctor" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.number_of_doctor
-									+ '"></input></td><th>校内指导硕士生数</th><td><input name="updateTeacherBasic.number_of_master" style="text-align: center;" class="input_TeacherInformation form-control"  value="'
-									+ teacher_json.list_TeacherInformationDTO[num].bysjglxtTeacherBasic.number_of_master
-									+ '"></input></td>';
-
 						}
-
 					}
 				}
 			});
-
-	/*
-	 * 
-	 */
-
+}
+function sectionJ(user_teacher_section){
+	var xhr2 = false;
+	xhr2 = new XMLHttpRequest();
+	xhr2.onreadystatechange = function() {
+		var message;
+		if (xhr2.readyState == 4) {
+			if (xhr2.status == 200) {
+				SectionList = JSON.parse(xhr2.responseText);
+				var sele = document.getElementById("teacherBasicInfoSection");
+				var k = '';
+				for (var num = 0; num < SectionList.length; num++) {
+					var option = '<option value="'+SectionList[num].section_id+'"'
+					if(user_teacher_section == SectionList[num].section_id){
+						option += 'selected'
+					}
+					option += '>'+SectionList[num].section_name+'</option>';
+					k += option;
+				}
+				console.log(k)
+				sele.innerHTML = k;
+				$('#teacherBasicInfoSection').selectpicker('refresh');
+				$('#teacherBasicInfoSection').selectpicker('render');
+			} else {
+				toastr.error(xhr2.status);
+			}
+		}
+	}
+	xhr2.open("POST","/bysjglxt/teacher/TeacherInformationManagement_GetTeacherSection");
+	xhr2.send(null);
 }

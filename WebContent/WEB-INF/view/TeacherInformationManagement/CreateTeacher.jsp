@@ -48,60 +48,123 @@
 									<option value="女">女</option>
 							</select></td>
 							<th>出生年月</th>
-							<td><input id="input_birthday" class="form-control"
+							<td><input id="input_birthday" value="1981-04" class="form-control"
 								type="text"></td>
 						</tr>
 						<tr>
 							<th>入校时间</th>
-							<td><input id="input_induction_date" class="form-control"
+							<td><input id="input_induction_date" value="2004-07" class="form-control"
 								type="text"></td>
 							<th>任职状态</th>
-							<td><input id="input_job_statue" class="form-control"
-								type="text"></td>
+							<td><select class="form-control" style="width: auto;"
+								id="input_job_statue"><option value="在职">在职</option>
+									<option value="女">女</option>
+							</select></td>
+							<!-- <td><input id="input_job_statue" class="form-control"
+								type="text"></td> -->
 						</tr>
-						<tr>
+						<!-- <tr>
 							<th>单位编号</th>
 							<td><input id="input_unit_number" class="form-control"
 								type="text"></td>
 							<th>单位名称</th>
 							<td><input id="input_unit_name" class="form-control"
 								type="text"></td>
-						</tr>
+						</tr> -->
 						<tr>
-							<th>最高学历</th>
-							<td><input id="input_highest_education" class="form-control"
-								type="text"></td>
+							<th>学历</th>
+							<td><select class="form-control" style="width: auto;"
+								id="input_highest_education">
+								<option value="硕士研究生">硕士研究生</option>
+								<option value="专科及以下">专科及以下</option>
+								<option value="大学本科">大学本科</option>
+								<option value="博士研究生">博士研究生</option>
+							</select></td>
+							<!-- <td><input id="input_highest_education" class="form-control"
+								type="text"></td> -->
 							<th>最高学位</th>
-							<td><input id="input_highest_degree" class="form-control"
-								type="text"></td>
+							<td><select class="form-control" style="width: auto;"
+								id="input_highest_degree">
+								<option value="硕士">硕士</option>
+								<option value="无学位">无学位</option>
+								<option value="学士">学士</option>
+								<option value="博士">博士</option>
+							</select></td>
+							<!-- <td><input id="input_highest_degree" class="form-control"
+								type="text"></td> -->
 						</tr>
 						<tr>
 							<th>学缘</th>
-							<td><input id="input_learn_edge_structure"
-								class="form-control" type="text"></td>
+							<td><select class="form-control" style="width: auto;"
+								id="input_learn_edge_structure">
+								<option value="外校（境内）">外校（境内）</option>
+								<option value="外校（境外）">外校（境外）</option>
+							</select></td>
+							<!-- <td><input id="input_learn_edge_structure"
+								class="form-control" type="text"></td> -->
 							<th>专业技术职称</th>
-							<td><input id="input_professional_title"
-								class="form-control" type="text"></td>
+							<td><select class="form-control" style="width: auto;"
+								id="input_professional_title">
+								<option value="讲师">讲师</option>
+								<option value="未评级">未评级</option>
+								<option value="助教">助教</option>
+								<option value="其他初级">其他初级</option>
+								<option value="其他中级">其他中级</option>
+								<option value="副教授">副教授</option>
+								<option value="教授">教授</option>
+							</select></td>
+							<!-- <td><input id="input_professional_title"
+								class="form-control" type="text"></td> -->
 						</tr>
 						<tr>
 							<th>学科类别</th>
 							<td><input id="input_subject_category" class="form-control"
 								type="text"></td>
-							<th>授课类型</th>
-							<td><input id="input_teaching_type" class="form-control"
-								type="text"></td>
+							<th>任教类型</th>
+							<td><select class="form-control" style="width: auto;"
+								id="input_teaching_type">
+								<option value="专业课">专业课</option>
+								<option value="无任教">无任教</option>
+								<option value="其他">其他</option>
+							</select></td>
+							<!-- <td><input id="input_teaching_type" class="form-control"
+								type="text"></td> -->
 						</tr>
 						<tr>
+							<th>任教专业名称</th>
+							<td>
+							<select class="form-control" id="input_teaching_profession_name"
+									style="width: auto; margin: 0 auto;"
+									onchange="getChangeMajorCode(this)">
+									<option value="其他">其他</option>
+							</select>
+							<%-- <select class="form-control" style="width: auto;"
+								id="input_teaching_profession_name">
+							</select> --%>
+							</td>
+							<th>任教专业代码</th>
+							<td><input disabled id="input_teaching_profession_no"
+								class="form-control" type="text"></td>
+						</tr>
+						<tr>
+							<th>所属教研室</th>
+							<td>
+								<select class="form-control" id="belong_section"
+										style="width: auto; margin: 0 auto;">
+								</select>
+							</td>
+						</tr>
+						<!-- <tr id="section_info">
 							<th>任教专业名称</th>
 							<td><input id="input_teaching_profession_name"
 								class="form-control" type="text"></td>
 							<th>任教专业代码</th>
 							<td><input id="input_teaching_profession_no"
 								class="form-control" type="text"></td>
-						</tr>
+						</tr> -->
 						<tr>
 							<th>专业任教时间</th>
-							<td><input id="input_profession_teaching_date"
+							<td><input value="2015" id="input_profession_teaching_date"
 								class="form-control" type="text"></td>
 							<th>是否实验技术人员</th>
 							<td>
@@ -110,8 +173,9 @@
 								id="input_experimental_technical_personnel"><option value="是">是</option>
 									<option value="否">否</option>
 							</select>
+							</td>
 							<!-- <input id="input_experimental_technical_personnel"
-								class="form-control" type="text"></td> -->
+								class="form-control" type="text">-->
 						</tr>
 						<tr>
 							<th>是否双师型</th>
@@ -183,8 +247,17 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TeacherInformationManagement/createTeacherPageInfo.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/TeacherInformationManagement/Get_Teacher_Section.js"></script>
 </body>
 <script>
-	$('select').selectpicker('refresh');
+    var select_major = document.getElementById("input_teaching_profession_name");
+    Get_Student_Major(select_major);
+    var select_section = document.getElementById("belong_section");
+    Get_Teacher_Section(select_section);
 </script>
 </html>

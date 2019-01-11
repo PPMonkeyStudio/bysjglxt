@@ -75,7 +75,7 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (teacher_json.list_TeacherInformationDTO[num].bysjglxtSection == undefined
-							|| teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name == "") {
+							|| teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name == "" ||teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name == undefined) {
 						new_td.innerHTML = '未分配';
 					} else {
 						new_td.innerHTML = teacher_json.list_TeacherInformationDTO[num].bysjglxtSection.section_name;

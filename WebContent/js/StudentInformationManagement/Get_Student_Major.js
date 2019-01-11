@@ -15,6 +15,8 @@ function Get_Student_Major(select) {
 					option.value = MajorList[num].major_name;
 				}
 
+				$('select').selectpicker('refresh');
+			    $('select').selectpicker('render');
 				// $('#' + select.id).selectpicker('refresh');
 
 			} else {
@@ -25,6 +27,5 @@ function Get_Student_Major(select) {
 
 	xhr.open("POST",
 			"/bysjglxt/student/StudentInformationManagement_GetStudentMajor");
-
 	xhr.send(null);
 }

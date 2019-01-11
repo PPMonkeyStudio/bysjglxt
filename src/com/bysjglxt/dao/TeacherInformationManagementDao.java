@@ -2,6 +2,7 @@ package com.bysjglxt.dao;
 
 import java.util.List;
 
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
@@ -51,5 +52,12 @@ public interface TeacherInformationManagementDao {
 	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByMajorCode(String trim);
 
 	public com.bysjglxt.domain.DO.bysjglxt_student_user getStudentByUserId(String userId);
+
+	/**
+	 * 获取学院
+	 * @param college
+	 * @return
+	 */
+	public bysjglxt_college getCollegeById(String college);
 
 }

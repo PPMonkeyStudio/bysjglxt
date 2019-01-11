@@ -6,8 +6,8 @@ function Create_Teacher() {
 	var input_birthday = document.getElementById("input_birthday");
 	var input_induction_date = document.getElementById("input_induction_date");
 	var input_job_statue = document.getElementById("input_job_statue");
-	var input_unit_number = document.getElementById("input_unit_number");
-	var input_unit_name = document.getElementById("input_unit_name");
+	/*var input_unit_number = document.getElementById("input_unit_number");
+	var input_unit_name = document.getElementById("input_unit_name");*/
 	var input_highest_education = document
 			.getElementById("input_highest_education");
 	var input_highest_degree = document.getElementById("input_highest_degree");
@@ -22,6 +22,7 @@ function Create_Teacher() {
 			.getElementById("input_teaching_profession_name");
 	var input_teaching_profession_no = document
 			.getElementById("input_teaching_profession_no");
+	var input_teaching_section = document.getElementById("belong_section");
 	var input_profession_teaching_date = document
 			.getElementById("input_profession_teaching_date");
 	var input_experimental_technical_personnel = document
@@ -80,8 +81,9 @@ function Create_Teacher() {
 	formData.append("newTeacher.birthday", input_birthday.value);
 	formData.append("newTeacher.induction_date", input_induction_date.value);
 	formData.append("newTeacher.job_statue", input_job_statue.value);
-	formData.append("newTeacher.unit_number", input_unit_number.value);
-	formData.append("newTeacher.unit_name", input_unit_name.value);
+	formData.append("section.section_id",input_teaching_section.value);
+	/*formData.append("newTeacher.unit_number", input_unit_number.value);
+	formData.append("newTeacher.unit_name", input_unit_name.value);*/
 	formData.append("newTeacher.highest_education",
 			input_highest_education.value);
 	formData.append("newTeacher.highest_degree", input_highest_degree.value);

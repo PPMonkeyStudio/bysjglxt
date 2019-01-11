@@ -1,12 +1,15 @@
 package com.bysjglxt.action;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
@@ -63,6 +66,34 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * 修改的学生基础信息
 	 */
 	private bysjglxt_teacher_basic newTeacher;
+	private InputStream inputStream;
+	private String fileName;
+	
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	private bysjglxt_section section;
+	
+	public bysjglxt_section getSection() {
+		return section;
+	}
+
+	public void setSection(bysjglxt_section section) {
+		this.section = section;
+	}
 
 	/*
 	 * 
@@ -81,6 +112,15 @@ public class TeacherInformationManagementAction extends ActionSupport
 		return "CreateTeacherPage";
 	}
 
+	public String exportTeacherInfoTemplate() throws Exception {
+        String filePath = ServletActionContext.getServletContext().getRealPath("WEB-INF/teacher-template.xls");   
+		File exportFile = new File(filePath);
+		fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(exportFile);
+		return "exportAll";
+	}
+	
+	
 	public void GiveTeacherRecorder() throws IOException {
 		teacherInformationManagementService.addRecorder(ListTeacherID);
 		http_response.setContentType("text/html;charset=utf-8");
@@ -178,7 +218,7 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 * @说明 修改教师基础信息
 	 */
 	public void UpdateTeacherBasic() throws IOException {
-		teacherInformationManagementService.updateTeacherBasic(updateTeacherBasic);
+		teacherInformationManagementService.updateTeacherBasic(updateTeacherBasic,updateTeacherUser);
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}
@@ -199,7 +239,7 @@ public class TeacherInformationManagementAction extends ActionSupport
 	public void CreateTeacher() {
 		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
 				.get("userTeacherDTO");
-		teacherInformationManagementService.save_NewTeacher(newTeacher,
+		teacherInformationManagementService.save_NewTeacher(newTeacher,section,
 				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
 		http_response.setContentType("text/html;charset=utf-8");
 		try {

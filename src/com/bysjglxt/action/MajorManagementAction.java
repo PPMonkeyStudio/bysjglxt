@@ -38,6 +38,19 @@ public class MajorManagementAction extends ActionSupport implements ServletRespo
 	private bysjglxt_major bysjglxtMajor;
 
 	/**
+	 * 根据专业名称获取专业
+	 * @throws IOException
+	 */
+	public void getMajorByMajorName() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(majorManagementService.getMajorByMajorName(bysjglxtMajor)));
+	}
+	
+	
+	/**
 	 * @throws IOException
 	 * 
 	 */
@@ -56,10 +69,7 @@ public class MajorManagementAction extends ActionSupport implements ServletRespo
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") == null) {
 			http_response.getWriter().write("error");
 		}
-		http_response
-				.getWriter().write(
-						gson.toJson(
-								majorManagementService.majorManagementVO(majorVO,
+		http_response.getWriter().write(gson.toJson(majorManagementService.majorManagementVO(majorVO,
 										((TeacherInformationDTO) ActionContext.getContext().getSession()
 												.get("userTeacherDTO")).getBysjglxtTeacherUser()
 														.getUser_teacher_id())));

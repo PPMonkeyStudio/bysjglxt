@@ -35,7 +35,6 @@
 			<!--  -->
 			<div class="panel-body">
 				<div style="height: 34px;">
-
 					<div style="width: 500px; float: left;">
 						<button class="btn btn-default"
 							onclick="window.location='<%=basePath%>teacher/TeacherInformationManagement_CreateTeacherPage'">
@@ -47,6 +46,9 @@
 							<i class="fa fa-upload"></i>
 							通过Excel导入
 						</button>
+						<a class="teacher_control  btn-link"
+							onclick="window.location='<%=basePath%>teacher/TeacherInformationManagement_exportTeacherInfoTemplate'">
+							下载模板 </a>
 					</div>
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">

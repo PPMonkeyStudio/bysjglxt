@@ -114,7 +114,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 							+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
 							+ '<li><a href="/bysjglxt/graduationProject/GraduationProjectManagement_MyGraduationProjectPage?MyTutorGraduationProjectStudentID='
 							+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
-							+ '" >毕业设计过程手册</a></li>'
+							+ '" >毕业设计过程管理手册</a></li>'
 							+ '<li><a onclick="topicReview(this)" id="'
 							+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 							+ '">分配评阅教师</a></li>';

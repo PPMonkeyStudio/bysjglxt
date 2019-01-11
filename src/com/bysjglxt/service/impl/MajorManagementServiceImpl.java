@@ -21,7 +21,16 @@ public class MajorManagementServiceImpl implements MajorManagementService {
 	public void setMajorManagementDao(MajorManagementDao majorManagementDao) {
 		this.majorManagementDao = majorManagementDao;
 	}
-
+	/**
+	 * 
+	 */
+	@Override
+	public bysjglxt_major getMajorByMajorName(bysjglxt_major bysjglxtMajor) {
+		if(bysjglxtMajor==null || bysjglxtMajor.getMajor_name()==null || "".equals(bysjglxtMajor.getMajor_name())) {
+			return null;	
+		}
+		return majorManagementDao.getMajorByName(bysjglxtMajor.getMajor_name());
+	}
 	/**
 	 * 遍历出属于这个学院的所有专业
 	 */
@@ -170,5 +179,7 @@ public class MajorManagementServiceImpl implements MajorManagementService {
 		bysjglxt_major.setMajor_gmt_modified(TeamUtil.getStringSecond());
 		return majorManagementDao.addObject(bysjglxt_major);
 	}
+
+
 
 }
