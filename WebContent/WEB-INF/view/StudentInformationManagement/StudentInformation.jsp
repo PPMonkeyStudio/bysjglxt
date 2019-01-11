@@ -44,6 +44,9 @@
 							<i class="fa fa-upload"></i>
 							通过Excel导入
 						</button>
+						<a class="teacher_control  btn-link"
+							onclick="window.location='<%=basePath%>student/StudentInformationManagement_exportStudentTemplate'">
+							下载模板 </a>
 					</div>
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">

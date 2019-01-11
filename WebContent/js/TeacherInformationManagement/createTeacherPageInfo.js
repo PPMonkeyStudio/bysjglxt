@@ -1,6 +1,4 @@
-function getChangeMajorCode(obj){
-	console.log(obj);
-	console.log(obj.value)
+function getChangeMajorCode(obj,ll){
 	var xhr = false;
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -8,10 +6,11 @@ function getChangeMajorCode(obj){
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
 				var major = JSON.parse(xhr.responseText);
+				var k = '#'+ll
 				if(major == undefined){
-					$("#input_teaching_profession_no").val("");
+					$(k).val("");
 				}else{
-					$("#input_teaching_profession_no").val(major.major_professionalcode);
+					$(k).val(major.major_professionalcode);
 				}
 			} else {
 				toastr.error(xhr.status);

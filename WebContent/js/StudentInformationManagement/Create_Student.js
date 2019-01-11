@@ -7,7 +7,7 @@ function Create_Student() {
 	var student_basic_idtype = document.getElementById("student_basic_idtype");
 	var student_basic_idcaard = document
 			.getElementById("student_basic_idcaard");
-	var student_basic_age = document.getElementById("student_basic_age");
+//	var student_basic_age = document.getElementById("student_basic_age");
 	var student_basic_sex = document.getElementById("student_basic_sex");
 	var student_basic_nation = document.getElementById("student_basic_nation");
 	var student_basic_politicalvisage = document
@@ -25,14 +25,20 @@ function Create_Student() {
 	var student_basic_major = document.getElementById("student_basic_major");
 	var student_basic_independentmajorname = document
 			.getElementById("student_basic_independentmajorname");
+	var student_basic_qq = document
+	.getElementById("student_basic_qq");
 	var student_basic_is_normalmajor = document
 			.getElementById("student_basic_is_normalmajor");
 	var student_basic_is_disability = document
 			.getElementById("student_basic_is_disability");
+	var student_basic_class = document
+	.getElementById("student_basic_class");
 	var student_basic_householdregistrationtype = document
 			.getElementById("student_basic_householdregistrationtype");
 	var student_basic_transactiontypes = document
 			.getElementById("student_basic_transactiontypes");
+	var student_basic_level = document
+	.getElementById("student_basic_level");
 	var student_basic_entranceeducation = document
 			.getElementById("student_basic_entranceeducation");
 	var student_basic_enrollmentmode = document
@@ -40,8 +46,8 @@ function Create_Student() {
 	var student_basic_reasonsfordroppingoutofschool = document
 			.getElementById("student_basic_reasonsfordroppingoutofschool");
 	var student_basic_phone = document.getElementById("student_basic_phone");
-	var student_basic_college = document
-			.getElementById("student_basic_college");
+//	var student_basic_college = document
+//			.getElementById("student_basic_college");
 	/*
 	 * 
 	 */
@@ -92,6 +98,10 @@ function Create_Student() {
 		formData.append("newStudent.student_basic_year",
 				student_basic_year.value);
 	}
+	if (!student_basic_class.value == "") {
+		formData.append("newStudent.student_basic_class",
+				student_basic_class.value);
+	}
 	if (!student_basic_grade.value == "") {
 		formData.append("newStudent.student_basic_grade",
 				student_basic_grade.value);
@@ -104,17 +114,25 @@ function Create_Student() {
 		formData.append("newStudent.student_basic_idcaard",
 				student_basic_idcaard.value);
 	}
-	if (!student_basic_age.value == "") {
+	/*if (!student_basic_age.value == "") {
 		formData
 				.append("newStudent.student_basic_age", student_basic_age.value);
-	}
+	}*/
 	if (!student_basic_sex.value == "") {
 		formData
 				.append("newStudent.student_basic_sex", student_basic_sex.value);
 	}
+	if (!student_basic_level.value == "") {
+		formData
+		.append("newStudent.student_basic_level", student_basic_level.value);
+	}
 	if (!student_basic_nation.value == "") {
 		formData.append("newStudent.student_basic_nation",
 				student_basic_nation.value);
+	}
+	if (!student_basic_qq.value == "") {
+		formData.append("newStudent.student_basic_qq",
+				student_basic_qq.value);
 	}
 	if (!student_basic_politicalvisage.value == "") {
 		formData.append("newStudent.student_basic_politicalvisage",
@@ -179,10 +197,10 @@ function Create_Student() {
 				student_basic_reasonsfordroppingoutofschool.value);
 	}
 
-	if (!student_basic_college.value == "") {
-		formData.append("newStudent.student_basic_college",
-				student_basic_college.value);
-	}
+//	if (!student_basic_college.value == "") {
+//		formData.append("newStudent.student_basic_college",
+//				student_basic_college.value);
+//	}
 
 	if (!student_basic_phone.value == "") {
 		formData.append("newStudent.student_basic_phone",

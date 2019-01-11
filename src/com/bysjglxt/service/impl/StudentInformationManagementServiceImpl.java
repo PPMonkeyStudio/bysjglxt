@@ -102,8 +102,11 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			bysjglxt_student_user.setUser_student_id(TeamUtil.getUuid());
 			bysjglxt_student_user.setUser_student_num(bysjglxt_student_basic.getStudent_basic_num());
 			bysjglxt_student_user.setUser_student_belong_major(bysjglxt_major.getMajor_id());
-			bysjglxt_student_user
-					.setUser_student_password(md5.GetMD5Code(bysjglxt_student_basic.getStudent_basic_num()));
+			if(bysjglxt_student_basic.getStudent_basic_idcaard()!=null && !"".equals(bysjglxt_student_basic.getStudent_basic_idcaard())) {
+				bysjglxt_student_user.setUser_student_password(md5.GetMD5Code(bysjglxt_student_basic.getStudent_basic_idcaard().substring(bysjglxt_student_basic.getStudent_basic_idcaard().trim().length()-6)));
+			}else {
+				bysjglxt_student_user.setUser_student_password(md5.GetMD5Code("000000"));
+			}
 			bysjglxt_student_user.setUser_student_is_select_topic(2);
 			bysjglxt_student_user.setUser_student_basic(bysjglxt_student_basic.getStudent_basic_id());
 			bysjglxt_student_user.setUser_student_is_operate_premission(1);
@@ -137,22 +140,23 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	@Override
 	public boolean save_NewStudent(bysjglxt_student_basic student_basic, String userId) {
 		String college = getCollegeByUserId(userId);
+		bysjglxt_college col = new bysjglxt_college();
+		col = studentInformationManagementDao.getCollegeById(college);
 		boolean flag = false;
-		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
-		student_basic.setStudent_basic_id(TeamUtil.getStringSecond());
-		bysjglxt_major bysjglxt_major = new bysjglxt_major();
 		flag = studentInformationManagementDao.studentBasicIsExist(student_basic.getStudent_basic_num());
 		if (flag) {
 			return false;
 		}
-		flag = studentInformationManagementDao.saveStudentBasic(student_basic);
+		bysjglxt_student_user bysjglxt_student_user = new bysjglxt_student_user();
+		student_basic.setStudent_basic_id(TeamUtil.getUuid());
+		student_basic.setStudent_basic_college(col.getCollege_name());
+		bysjglxt_major bysjglxt_major = new bysjglxt_major();
 		// 判断专业是否存在于数据库中,使用专业代码进行比较
 		if (student_basic.getStudent_basic_professionalcode() != null
 				&& student_basic.getStudent_basic_professionalcode().trim().length() > 0) {
 			// 根据专业代码在数据库中进行查询
 			bysjglxt_major = new bysjglxt_major();
-			bysjglxt_major = studentInformationManagementDao
-					.getMajorByCode(student_basic.getStudent_basic_professionalcode().trim());
+			bysjglxt_major = studentInformationManagementDao.getMajorByCode(student_basic.getStudent_basic_professionalcode().trim());
 			if (bysjglxt_major == null) {
 				bysjglxt_major = new bysjglxt_major();
 				bysjglxt_major.setMajor_id(TeamUtil.getUuid());
@@ -164,10 +168,15 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 				flag = studentInformationManagementDao.saveObject(bysjglxt_major);
 			}
 		}
-
+		student_basic.setStudent_basic_major(bysjglxt_major.getMajor_name());
+		flag = studentInformationManagementDao.saveStudentBasic(student_basic);
 		bysjglxt_student_user.setUser_student_id(TeamUtil.getUuid());
 		bysjglxt_student_user.setUser_student_num(student_basic.getStudent_basic_num());
-		bysjglxt_student_user.setUser_student_password(md5.GetMD5Code(student_basic.getStudent_basic_num()));
+		if(student_basic.getStudent_basic_idcaard()!=null && !"".equals(student_basic.getStudent_basic_idcaard())) {
+			bysjglxt_student_user.setUser_student_password(md5.GetMD5Code(student_basic.getStudent_basic_idcaard().substring(student_basic.getStudent_basic_idcaard().trim().length()-6)));
+		}else {
+			bysjglxt_student_user.setUser_student_password(md5.GetMD5Code("000000"));
+		}
 		bysjglxt_student_user.setUser_student_basic(student_basic.getStudent_basic_id());
 		bysjglxt_student_user.setUser_student_is_select_topic(2);
 		bysjglxt_student_user.setUser_student_is_operate_premission(1);
@@ -454,7 +463,31 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 
 	@Override
 	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic) {
-		return studentInformationManagementDao.update_StudentBasicInfomation(bysjglxt_student_basic);
+		System.out.println(bysjglxt_student_basic);
+		//根据
+		bysjglxt_student_basic studentBasic = new bysjglxt_student_basic();
+		studentBasic = studentInformationManagementDao.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_basic.getStudent_basic_id());
+		studentBasic.setStudent_basic_name(bysjglxt_student_basic.getStudent_basic_name());
+		studentBasic.setStudent_basic_idtype(bysjglxt_student_basic.getStudent_basic_idtype());
+		studentBasic.setStudent_basic_idcaard(bysjglxt_student_basic.getStudent_basic_idcaard());
+		//根据专业名称获取专业信息
+		bysjglxt_major major = new bysjglxt_major();
+		major = studentInformationManagementDao.getMajorByCode(bysjglxt_student_basic.getStudent_basic_major());
+		if(major==null) {
+			return false;
+		}
+		studentBasic.setStudent_basic_professionalcode(major.getMajor_professionalcode());
+		studentBasic.setStudent_basic_major(major.getMajor_name());
+		studentBasic.setStudent_basic_phone(bysjglxt_student_basic.getStudent_basic_phone());
+		studentBasic.setStudent_basic_qq(bysjglxt_student_basic.getStudent_basic_qq());
+		studentBasic.setStudent_basic_class(bysjglxt_student_basic.getStudent_basic_class());
+		studentInformationManagementDao.update_StudentBasicInfomation(studentBasic);
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = studentInformationManagementDao.getStudentInfoByBasicId(studentBasic.getStudent_basic_id());
+		studentUser.setUser_student_belong_major(major.getMajor_id());
+		studentUser.setUser_student_gmt_modified(TeamUtil.getStringSecond());
+		studentInformationManagementDao.saveObject(studentUser);
+		return true;
 	}
 
 	@Override

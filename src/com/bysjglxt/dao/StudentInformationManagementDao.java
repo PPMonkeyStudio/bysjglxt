@@ -2,6 +2,7 @@ package com.bysjglxt.dao;
 
 import java.util.List;
 
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
@@ -129,5 +130,7 @@ public interface StudentInformationManagementDao {
 
 	// 删除毕业论文
 	public boolean deleteDissertationById(String dissertation_id);
+
+	bysjglxt_college getCollegeById(String college);
 
 }

@@ -1,12 +1,15 @@
 package com.bysjglxt.action;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
@@ -95,6 +98,34 @@ public class StudentInformationManagementAction extends ActionSupport
 	 */
 	public String listStudentInfoPage() {
 		return "listStudentInfoPage";
+	}
+	private InputStream inputStream;
+	private String fileName;
+	
+	
+	
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String exportStudentTemplate() throws Exception {
+        String filePath = ServletActionContext.getServletContext().getRealPath("WEB-INF/student-template.xlsx");   
+		File exportFile = new File(filePath);
+		fileName = new String(exportFile.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(exportFile);
+		return "exportAll";
 	}
 	
 	/**

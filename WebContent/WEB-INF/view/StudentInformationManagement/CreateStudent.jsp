@@ -44,11 +44,24 @@
 						</tr>
 						<tr>
 							<th>年制</th>
-							<td><input value="四年制" id="student_basic_year"
-								class="form-control" type="text"></td>
+							<td><select class="form-control" style="width: auto;"
+								id="student_basic_year">
+									<option value="四年制">四年制</option>
+									<option value="三年制">三年制</option>
+									<option value="五年制">五年制</option>
+							</select></td>
+							<!-- <td><input value="四年制" id="student_basic_year"
+								class="form-control" type="text"></td> -->
 							<th>年级</th>
-							<td><input value="本科四年级" id="student_basic_grade"
-								class="form-control" type="text"></td>
+							<td><select class="form-control" style="width: auto;"
+								id="student_basic_grade">
+									<option value="本科四年级">本科四年级</option>
+									<option value="本科三年级">本科三年级</option>
+									<option value="本科二年级">本科二年级</option>
+									<option value="本科一年级">本科一年级</option>
+							</select></td>
+							<!-- <td><input value="本科四年级" id="student_basic_grade"
+								class="form-control" type="text"></td> -->
 						</tr>
 						<tr>
 							<th>证件类型</th>
@@ -62,8 +75,8 @@
 								type="text"></td>
 						</tr>
 						<tr>
-							<th>年龄</th>
-							<td><input id="student_basic_age" class="form-control"
+							<th>级别</th>
+							<td><input id="student_basic_level" class="form-control" value="2015"
 								type="text"></td>
 							<th>性别</th>
 							<td><select class="form-control" style="width: auto;"
@@ -85,24 +98,34 @@
 							<td><input id="student_basic_native_place"
 								class="form-control" type="text"></td>
 							<th>学生类型</th>
-							<td><input id="student_basic_studenttype"
+							<td><input id="student_basic_studenttype" value="普通本科生"
 								class="form-control" type="text"></td>
 						</tr>
 						<tr>
 							<th>招生类型</th>
-							<td><input id="student_basic_enrollmenttype"
+							<td><input id="student_basic_enrollmenttype" value="高中起点"
 								class="form-control" type="text"></td>
 							<th>授课方式</th>
 							<td><input id="student_basic_teachingmethods"
 								class="form-control" type="text"></td>
 						</tr>
 						<tr>
-							<th>专业代码</th>
-							<td><input id="student_basic_professionalcode"
-								class="form-control" type="text"></td>
 							<th>专业名称</th>
-							<td><input id="student_basic_major" class="form-control"
-								type="text"></td>
+							<td><select class="form-control" style="width: auto;"
+								id="student_basic_major"
+								onchange="getChangeMajorCode(this,'student_basic_professionalcode')">
+								<option value="选择">选择</option>
+							</select></td>
+							<!-- <td><input id="student_basic_major" class="form-control"
+								type="text"></td> -->
+							<th>专业代码</th>
+							<td><input disabled id="student_basic_professionalcode"
+								class="form-control" type="text"></td>
+						</tr>
+						<tr>
+							<th>班级</th>
+							<td colspan="3"><input value="软件工程1501" id="student_basic_class"
+								class="form-control" type="text"></td>
 						</tr>
 						<tr>
 							<th>自主专业名称</th>
@@ -151,11 +174,11 @@
 								class="form-control" type="text"></td>
 						</tr>
 						<tr>
-							<th>联系方式</th>
+							<th>电话号码</th>
 							<td><input id="student_basic_phone" class="form-control"
 								type="text"></td>
-							<th>学院</th>
-							<td><input id="student_basic_college" class="form-control"
+							<th>qq</th>
+							<td><input id="student_basic_qq" class="form-control"
 								type="text"></td>
 						</tr>
 					</tbody>
@@ -177,8 +200,14 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
+	<script type="text/javascript"
+	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
+	<script type="text/javascript"
+	src="<%=basePath%>js/TeacherInformationManagement/createTeacherPageInfo.js"></script>
 </body>
 <script>
+	var select_major = document.getElementById("student_basic_major");
+	Get_Student_Major(select_major);
 	$('select').selectpicker('refresh');
 </script>
 </html>

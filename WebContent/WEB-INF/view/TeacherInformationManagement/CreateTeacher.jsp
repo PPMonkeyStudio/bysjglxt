@@ -135,8 +135,7 @@
 							<td>
 							<select class="form-control" id="input_teaching_profession_name"
 									style="width: auto; margin: 0 auto;"
-									onchange="getChangeMajorCode(this)">
-									<option value="其他">其他</option>
+									onchange="getChangeMajorCode(this,'input_teaching_profession_no')">
 							</select>
 							<%-- <select class="form-control" style="width: auto;"
 								id="input_teaching_profession_name">

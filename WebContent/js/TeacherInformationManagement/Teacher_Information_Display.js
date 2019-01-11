@@ -153,7 +153,6 @@ function Teacher_Information_Display(this_button) {
 							    zhi += '>'+i+'</option>';
 							}
 							zhi += '</select></td>';
-							console.log(zhi)
 							new_tr_1.innerHTML = zhi;
 							zhi = '';
 							new_tr_1 = document.createElement("tr");
