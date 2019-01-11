@@ -5,6 +5,7 @@ import java.util.List;
 import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DTO.CollegeInformationDTO;
+import com.google.gson.JsonElement;
 
 public interface CollegeManagementService {
 
@@ -16,9 +17,16 @@ public interface CollegeManagementService {
 	public int updateCollegeAdmin(String teacherUserId);
 
 	// 添加系部
-	public int addCollege(bysjglxt_college college, bysjglxt_teacher_basic bysjglxt_teacher_basic);
+	public int addCollege(bysjglxt_college college,bysjglxt_teacher_basic bysjglxt_teacher_basic);
 
 	
 	public bysjglxt_college getCollegetById(String id);
+
+	/**
+	 * 根据学院编号获取学院管理员信息
+	 * @param college_code
+	 * @return
+	 */
+	public CollegeInformationDTO getCollegeAdminInfoByCollegeCode(String college_code);
 	
 }

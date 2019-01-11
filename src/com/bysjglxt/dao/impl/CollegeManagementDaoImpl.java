@@ -12,6 +12,7 @@ import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DTO.CollegeInformationDTO;
 
 public class CollegeManagementDaoImpl implements CollegeManagementDao {
 	private SessionFactory sessionFactory;
@@ -85,6 +86,23 @@ public class CollegeManagementDaoImpl implements CollegeManagementDao {
 		return bysjglxt_teacher_user;
 	}
 
+
+	@Override
+	public bysjglxt_teacher_user getTeacherUserByCollegeId(String college_id) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		Session session = getSession();
+		String hql = "from bysjglxt_teacher_user where user_teacher_belong_college='" + college_id + "' and user_teacher_is_college_admin = 1";
+		Query query = session.createQuery(hql);
+		List<bysjglxt_teacher_user> listTeacherUser = new ArrayList<>();
+		listTeacherUser = query.list();
+		if(listTeacherUser!=null && listTeacherUser.size()>0) {
+			bysjglxt_teacher_user = listTeacherUser.get(0);
+		}
+		session.clear();
+		return bysjglxt_teacher_user;
+	}
+	
+	
 	@Override
 	public void saveObj(Object obj) {
 		Session session = getSession();
@@ -144,5 +162,8 @@ public class CollegeManagementDaoImpl implements CollegeManagementDao {
 		session.clear();
 		return bysjglxt_college;
 	}
+
+
+
 
 }

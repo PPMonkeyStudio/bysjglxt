@@ -11,6 +11,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DTO.CollegeInformationDTO;
 import com.bysjglxt.service.CollegeManagementService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -43,6 +44,26 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 */
 	public String CollegeManagementPage() {
 		return "CollegeManagementPage";
+	}
+
+	/**
+	 * 根据学院编号获取学院管理员信息
+	 */
+	public void getCollegeAdminInfoByCollegeCode() {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		try {
+			CollegeInformationDTO collegeInformationDTO = collegeManagementService
+					.getCollegeAdminInfoByCollegeCode(college.getCollege_code());
+			if (collegeInformationDTO == null) {
+				collegeInformationDTO.setState("error");
+			}
+			http_response.getWriter().write(gson.toJson(collegeInformationDTO));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -85,6 +106,7 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	 */
 	public void addCollege() {
 		try {
+			// 教师信息更改为由后台自动的生成,不再从前台获取
 			http_response.getWriter().write(collegeManagementService.addCollege(college, bysjglxt_teacher_basic) + "");
 		} catch (IOException e) {
 			e.printStackTrace();

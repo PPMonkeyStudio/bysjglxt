@@ -6,6 +6,7 @@ import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DTO.CollegeInformationDTO;
 
 public interface CollegeManagementDao {
 
@@ -32,5 +33,13 @@ public interface CollegeManagementDao {
 	 * @return
 	 */
 	public bysjglxt_college getCollegeById(String id);
+
+	/**
+	 * 根据学院id获取管理员信息
+	 * @param college_id
+	 * @return
+	 */
+	public bysjglxt_teacher_user getTeacherUserByCollegeId(String college_id);
+
 
 }

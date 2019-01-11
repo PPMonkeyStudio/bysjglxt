@@ -13,6 +13,7 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DTO.CollegeInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.service.CollegeManagementService;
+import com.google.gson.JsonElement;
 
 import util.TeamUtil;
 import util.md5;
@@ -114,13 +115,57 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		return 1;
 	}
 
+
+	/**
+	 * 根据学院编号获取学院管理员信息
+	 * @param college_code
+	 * @return
+	 */
+	@Override
+	public CollegeInformationDTO getCollegeAdminInfoByCollegeCode(String college_code) {
+		bysjglxt_college college = new bysjglxt_college();
+		CollegeInformationDTO collegeInformationDTO = new CollegeInformationDTO();
+		TeacherInformationDTO teacherInformationDTO = new TeacherInformationDTO();
+		if(college_code==null || "".equals(college_code)) {
+			return null;
+		}
+		college = collegeManagementDao.getCollegeByCode(college_code);
+		if(college == null) {
+			return null;
+		}
+		//根据该学院的学院信息获取学院管理员信息
+		bysjglxt_teacher_user teacherUser = new bysjglxt_teacher_user();
+		teacherUser = collegeManagementDao.getTeacherUserByCollegeId(college.getCollege_id());
+		if(teacherUser !=null && teacherUser.getUser_teacher_basic()!=null && !"".equals(teacherUser.getUser_teacher_basic())) {
+			teacherInformationDTO.setBysjglxtTeacherUser(teacherUser);
+			bysjglxt_teacher_basic teacherBasic = new bysjglxt_teacher_basic();
+			teacherBasic = collegeManagementDao.getTeacherBasicById(teacherUser.getUser_teacher_basic());
+			if(teacherBasic!=null) {
+				teacherInformationDTO.setBysjglxtTeacherBasic(teacherBasic);
+			}
+			if(teacherUser.getUser_teacher_section()!=null && !"".equals(teacherUser.getUser_teacher_section().trim())) {
+				bysjglxt_section section = new bysjglxt_section();
+				section = collegeManagementDao.getSectionById(teacherUser.getUser_teacher_section().trim());
+				if(section!=null) {
+					teacherInformationDTO.setBysjglxtSection(section);
+				}
+			}
+		}
+		collegeInformationDTO.setCollege(college);
+		collegeInformationDTO.setTeacherInformationDTO(teacherInformationDTO);
+		return collegeInformationDTO;
+	}
+
+	
+	
 	/**
 	 * 添加管理员
 	 * 
 	 * @return -1 数据错误 1 正确
 	 */
 	@Override
-	public int addCollege(bysjglxt_college college, bysjglxt_teacher_basic bysjglxt_teacher_basic) {
+	public int addCollege(bysjglxt_college college,bysjglxt_teacher_basic bysjglxt_teacher_basic) {
+//		bysjglxt_teacher_basic bysjglxt_teacher_basic = new bysjglxt_teacher_basic();
 		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
 		bysjglxt_college bysjglxt_college = new bysjglxt_college();
 		bysjglxt_teacher_basic teacherBasic = new bysjglxt_teacher_basic();
@@ -129,11 +174,11 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 			// 数据错误
 			return -1;
 		}
-		if (bysjglxt_teacher_basic.getName() == null || bysjglxt_teacher_basic.getName().trim().length() <= 0
+		/*if (bysjglxt_teacher_basic.getName() == null || bysjglxt_teacher_basic.getName().trim().length() <= 0
 				|| bysjglxt_teacher_basic.getJob_number() == null
 				|| bysjglxt_teacher_basic.getJob_number().trim().length() <= 0) {
 			return -1;
-		}
+		}*/
 		// 根据所填写院系代码以及院系名称进行查询
 		if (college.getCollege_code() != null && college.getCollege_code().trim().length() > 0) {
 			bysjglxt_college = collegeManagementDao.getCollegeByCode(college.getCollege_code().trim());
@@ -150,20 +195,21 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 			}
 		}
 		// 1.根据工号进行排除重复
-		if (bysjglxt_teacher_basic.getJob_number() != null
+		/*if (bysjglxt_teacher_basic.getJob_number() != null
 				&& bysjglxt_teacher_basic.getJob_number().trim().length() > 0) {
 			teacherBasic = collegeManagementDao.getTeacherBasicByJobNum(bysjglxt_teacher_basic.getJob_number().trim());
 			if (teacherBasic != null) {
 				// 有重复
 				return -2;
 			}
-		}
+		}*/
 		// 添加学院
 		college.setCollege_id(TeamUtil.getUuid());
 		college.setCollege_gmt_create(TeamUtil.getStringSecond());
 		college.setCollege_gmt_modified(college.getCollege_gmt_create());
 		collegeManagementDao.saveObj(college);
 		// 添加教师管理员
+		bysjglxt_teacher_basic.setJob_number(college.getCollege_code().trim()+"000000");
 		bysjglxt_teacher_basic.setTeacher_basic_id(TeamUtil.getUuid());
 		bysjglxt_teacher_basic.setTeacher_basic_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_teacher_basic.setTeacher_basic_gmt_modified(bysjglxt_teacher_basic.getTeacher_basic_gmt_create());
