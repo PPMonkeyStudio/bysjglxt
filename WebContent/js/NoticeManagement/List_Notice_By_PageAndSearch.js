@@ -41,7 +41,14 @@ function List_Notice_By_PageAndSearch(pageIndex) {
 					 */
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					new_td.innerHTML = notice_json.listNoticeDTO[num].bysjglxt_notice.notice_content;
+//					new_td.innerHTML = notice_json.listNoticeDTO[num].bysjglxt_notice.notice_content;
+					if (notice_json.listNoticeDTO[num].bysjglxt_notice.notice_state == 2) {
+						new_td.innerHTML = '<a href="javascript:;" id="'+notice_json.listNoticeDTO[num].bysjglxt_notice.notice_id+'" onclick="readNotice(this)" style="cursor: pointer;">'+notice_json.listNoticeDTO[num].bysjglxt_notice.notice_content+'</a>';
+					} else {
+						new_td.innerHTML = '<a href="javascript:;" id="'+notice_json.listNoticeDTO[num].bysjglxt_notice.notice_id+'" onclick="readNotice(this)" style="cursor: pointer;color:#BBB;">'+notice_json.listNoticeDTO[num].bysjglxt_notice.notice_content+'</a>';
+					}
+					
+					
 					/*
 					 * 
 					 */

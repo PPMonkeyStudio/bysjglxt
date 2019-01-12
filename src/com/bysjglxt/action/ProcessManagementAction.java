@@ -81,6 +81,21 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	}
 
 	/**
+	 * 根据流程定义id获取判断该流程是否有处于活动状态的实例
+	 * @throws IOException 
+	 */
+	public void judgeProcessState() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		bysjglxt_process_instance processInstance = processManagementService.getProcessInstanceByDefinitionId(processDefinitionId);
+		if(processInstance == null) {
+			http_response.getWriter().write("wu");
+		}else {
+			http_response.getWriter().write("you");
+		}
+		
+	}
+	
+	/**
 	 * @throws IOException
 	 * 
 	 */

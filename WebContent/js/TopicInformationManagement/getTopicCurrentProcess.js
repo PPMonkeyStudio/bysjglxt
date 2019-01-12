@@ -25,8 +25,8 @@ function getTopicCurrentProcess() {
 									text_TopicCurrentProcess.innerHTML = '正在进行：<span class="label label-info">创建选题</span>';
 									bar_TopicCurrentProcess.style.width = '20%';
 									bar_TopicCurrentProcess.className = 'progress-bar progress-bar-info';
-								} else if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name == "公布选题") {
-									text_TopicCurrentProcess.innerHTML = '正在进行：<span class="label label-primary">公布选题</span>';
+								} else if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name == "提前选题") {
+									text_TopicCurrentProcess.innerHTML = '正在进行：<span class="label label-primary">提前选题</span>';
 									bar_TopicCurrentProcess.style.width = '40%';
 									bar_TopicCurrentProcess.className = 'progress-bar progress-bar-primary';
 								} else if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name == "正式选题") {

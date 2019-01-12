@@ -38,8 +38,18 @@ public class TopicInformationManagementVO {
 	// 对指导老师进行筛选
 	private String teacher = null;
 
+	private String year = "";
+	
 	// 审核筛选
 	private String state;
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
 
 	@Override
 	public String toString() {

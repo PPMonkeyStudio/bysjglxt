@@ -1,7 +1,6 @@
 function BootProcess(button_Process) {
 
-	$
-			.confirm({
+	$.confirm({
 				title : '开启流程',
 				content : '<input id="input_process_instance_name" class="form-control"   value="'
 						+ button_Process.parentNode.id

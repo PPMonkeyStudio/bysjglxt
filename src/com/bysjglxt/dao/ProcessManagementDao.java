@@ -98,4 +98,9 @@ public interface ProcessManagementDao {
 	// 根据专业名称获取教研室对象
 	public com.bysjglxt.domain.DO.bysjglxt_section getSectionByMajorId(String user_student_belong_major);
 
+	/**
+	 * 
+	 */
+	public bysjglxt_process_instance getProcessInstanceByDefinitionAndState(String processDefinitionId, String string);
+
 }

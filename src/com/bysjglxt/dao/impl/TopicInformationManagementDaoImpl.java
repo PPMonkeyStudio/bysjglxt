@@ -148,8 +148,12 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic.topic_teacher = '" + topicManagementVO.getTeacher() + "'";
 		}
-		hql = hql
-				+ " and topic.topic_year = (select max(bt.topic_year) from  bysjglxt_topic bt) order by topic.topic_examine_state desc,topic.topic_gmt_create desc";
+		if("1".equals(topicManagementVO.getYear())) {
+			hql = hql + " and topic.topic_year = (select max(bt.topic_year) from  bysjglxt_topic bt) order by topic.topic_examine_state desc,topic.topic_gmt_create desc";
+		}
+		if("2".equals(topicManagementVO.getYear())) {
+			hql = hql+ " and topic.topic_year < (select max(bt.topic_year) from  bysjglxt_topic bt) order by topic.topic_examine_state desc,topic.topic_gmt_create desc";
+		}
 		Query query = session.createQuery(hql);
 		query.setFirstResult((topicManagementVO.getPageIndex() - 1) * topicManagementVO.getPageSize());
 		query.setMaxResults(topicManagementVO.getPageSize());
@@ -381,7 +385,12 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		if (topicManagementVO.getTeacher() != null && topicManagementVO.getTeacher().trim().length() > 0) {
 			hql = hql + " and topic_teacher = '" + topicManagementVO.getTeacher() + "'";
 		}
-		hql = hql + " order by topic_gmt_create desc";
+		if("1".equals(topicManagementVO.getYear())) {
+			hql = hql + " and topic.topic_year = (select max(bt.topic_year) from  bysjglxt_topic bt) order by topic.topic_examine_state desc,topic.topic_gmt_create desc";
+		}
+		if("2".equals(topicManagementVO.getYear())) {
+			hql = hql+ " and topic.topic_year < (select max(bt.topic_year) from  bysjglxt_topic bt) order by topic.topic_examine_state desc,topic.topic_gmt_create desc";
+		}
 		Query query = session.createQuery(hql);
 		List<bysjglxt_topic> listbysjglxt_topicByPageAndSearch = query.list();
 		session.clear();

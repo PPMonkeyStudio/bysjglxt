@@ -147,16 +147,16 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
 								+ '" onclick="studentSelectTopic(this)" class="btn btn-default">详细</button>';
 					}
-
-					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
-					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<label class="fancy-checkbox" >'
-							+ '<input  id="'
-							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" type="checkbox" class="checkbox_select">'
-							+ '<span></span></label></div>';
-
+					if (userTeacherDTO != null && userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_college_admin == 1){
+						new_td = document.createElement("td");
+						new_td.appendChild(document.createTextNode(''));
+						new_tr.appendChild(new_td);
+						new_td.innerHTML = '<label class="fancy-checkbox" >'
+								+ '<input  id="'
+								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
+								+ '" type="checkbox" class="checkbox_select">'
+								+ '<span></span></label></div>';
+					}
 				}
 
 				/*
@@ -167,10 +167,8 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 				document.getElementById("span_totalRecords").innerHTML = topic_json.totalRecords;
 				// 让加载图标消失
 				document.getElementById("i_pulse").style.display = "none";
-
 				// 让全选框取消选择
 				document.getElementById("checkbox_all_select").checked = false;
-
 				/*
 				 * * 角色控制 /
 				 */roleControl();
@@ -227,7 +225,10 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 	}
 	/*
 	 * 
-	 */formData.append("topicInformationManagementVO.pageIndex", pageIndex);
+	 */
+	//本年
+	formData.append("topicInformationManagementVO.year","1");
+	formData.append("topicInformationManagementVO.pageIndex", pageIndex);
 
 	xhr.send(formData);
 }

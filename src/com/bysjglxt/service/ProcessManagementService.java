@@ -3,6 +3,7 @@ package com.bysjglxt.service;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
+import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DTO.ProcessDTO;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
@@ -103,6 +104,13 @@ public interface ProcessManagementService {
 
 	// 2.打回
 	public int repulse(String taskInstanceId);
+
+	/**
+	 * 
+	 * @param processDefinitionId
+	 * @return
+	 */
+	public bysjglxt_process_instance getProcessInstanceByDefinitionId(String processDefinitionId);
 
 	/**
 	 * 获得属于某个人正在进行的任务实例以及以及所属流程实例定义

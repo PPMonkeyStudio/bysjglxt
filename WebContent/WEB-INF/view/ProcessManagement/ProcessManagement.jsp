@@ -25,6 +25,8 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/Delete_Process.js"></script>
 <script type="text/javascript"
+	src="<%=basePath%>js/ProcessManagement/judgeProcessState.js"></script>
+<script type="text/javascript"
 	src="<%=basePath%>js/ProcessManagement/BootProcess.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 

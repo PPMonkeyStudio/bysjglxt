@@ -137,8 +137,8 @@ function DistributionStudent(student_topic) {
 	} else {
 		for (var num = 0; topicCurrentProcessDTO.listTaskBelongProcess.length; num++) {
 			if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
-				if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "公布选题") {
-					toastr.error("还未到公布选题的时间");
+				if (topicCurrentProcessDTO.listTaskBelongProcess[num].taskDefinition.task_definition_name != "提前选题") {
+					toastr.error("还未到提前选题的时间");
 					return;
 				}
 				break;

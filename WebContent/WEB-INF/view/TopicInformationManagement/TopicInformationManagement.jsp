@@ -27,7 +27,7 @@
 
 <!---------------------------------------------------------------------------------------------------->
 
-<title>课题管理页</title>
+<title>课题管理页-本年课题</title>
 </head>
 <body>
 	<s:action name="LoginLogoutManagement_navbar"
@@ -129,7 +129,7 @@
 								</select>
 							</th>
 							<th>查看</th>
-							<th class="">
+							<th class="college_control">
 								<label class="fancy-checkbox">
 									<input id="checkbox_all_select" type="checkbox"
 										onclick="all_select()">

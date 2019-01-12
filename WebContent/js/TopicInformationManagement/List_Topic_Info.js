@@ -115,16 +115,16 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
 								+ '" onclick="studentSelectTopic(this)" class="btn btn-default">详细</button>';
 					}
-
-					new_td = document.createElement("td");
-					new_td.appendChild(document.createTextNode(''));
-					new_tr.appendChild(new_td);
-					new_td.innerHTML = '<label class="fancy-checkbox" >'
-							+ '<input  id="'
-							+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
-							+ '" type="checkbox" class="checkbox_select">'
-							+ '<span></span></label></div>';
-
+					if (userTeacherDTO != null && userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_college_admin == 1){
+						new_td = document.createElement("td");
+						new_td.appendChild(document.createTextNode(''));
+						new_tr.appendChild(new_td);
+						new_td.innerHTML = '<label class="fancy-checkbox" >'
+								+ '<input  id="'
+								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id
+								+ '" type="checkbox" class="checkbox_select">'
+								+ '<span></span></label></div>';
+					}
 				}
 
 				/*
@@ -188,7 +188,10 @@ function List_Topic_By_PageAndSearch(pageIndex) {
 	 * 
 	 */
 	formData.append("topicInformationManagementVO.pageIndex", pageIndex);
-
+	
+	//历年
+	formData.append("topicInformationManagementVO.year","2");
+	
 	xhr.send(formData);
 }
 function flip(flipPage) {

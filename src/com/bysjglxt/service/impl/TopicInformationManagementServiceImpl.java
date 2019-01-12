@@ -259,7 +259,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			bysjglxt_notice.setNotice_launch(adminUserId);
 			bysjglxt_notice.setNotice_belong(bysjglxt_topic.getTopic_teacher());
 			bysjglxt_notice.setNotice_content("您的课题【" + bysjglxt_topic.getTopic_name_chinese() + "】，已通过【"
-					+ bysjglxt_teacher_user.getUser_teacher_num() + name + "】老师的审核，等待公布选题");
+					+ bysjglxt_teacher_user.getUser_teacher_num() + name + "】老师的审核，等待提前选题");
 			bysjglxt_notice.setNotice_state(2);
 			bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
@@ -370,6 +370,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_teacher_basic bysjglxt_teacher_basic = null;
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		bysjglxt_section bysjglxt_section = null;
+		//判断本年与历年
 		// 获得符合条件的10条课题
 		list_bysjglxt_topic = topicInformationManagementDao.VO_Topic_By_PageAndSearch(topicManagementVO,
 				studentOrTeacher, collegeJudge(studentOrTeacher, userId));

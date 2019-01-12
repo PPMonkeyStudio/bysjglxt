@@ -731,6 +731,14 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		return 1;
 	}
 
+	/**
+	 * 
+	 */
+	@Override
+	public bysjglxt_process_instance getProcessInstanceByDefinitionId(String processDefinitionId) {
+		return processManagementDao.getProcessInstanceByDefinitionAndState(processDefinitionId, "活动");
+	}
+
 	// 获取某个流程正在进行的任务实例
 	//
 	/*

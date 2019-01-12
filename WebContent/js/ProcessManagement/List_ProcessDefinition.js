@@ -78,7 +78,7 @@ function List_ProcessDefinition(pageIndex) {
 								+ '<button class="btn btn-default" id="'
 								+ processDefinition_json[num].process_definition_id
 								+ '"'
-								+ ' onclick="BootProcess(this)" '
+								+ ' onclick="judgeProcessState(this)" '
 								+ 'style="margin:0 0 0 10px;">'
 								+ '开启流程'
 								+ '</button>' + '</a>';

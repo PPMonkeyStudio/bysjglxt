@@ -181,7 +181,7 @@ function studentSelectTopic(this_button) {
 							} else {
 								for (var num4 = 0; num4 < topicCurrentProcessDTO.listTaskBelongProcess.length; num4++) {
 									if (topicCurrentProcessDTO.listTaskBelongProcess[num4].taskInstance.task_instance_state == 1) {
-										if (topicCurrentProcessDTO.listTaskBelongProcess[num4].taskDefinition.task_definition_name == "公布选题") {
+										if (topicCurrentProcessDTO.listTaskBelongProcess[num4].taskDefinition.task_definition_name == "提前选题") {
 											var button_selectTopic_early = document
 													.getElementsByClassName("button_tqxt")[0];
 											if (button_selectTopic_early != null) {
