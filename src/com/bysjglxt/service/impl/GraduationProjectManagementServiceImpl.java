@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -18,8 +17,6 @@ import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.struts2.ServletActionContext;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_comment;
@@ -44,6 +41,7 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ProcessBelongDTO;
+import com.bysjglxt.domain.DTO.ReviewTutorTeacherInfoDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
@@ -57,7 +55,6 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import util.ExcelToBean2;
 import util.TeamUtil;
-import util.XwpfTUtil;
 
 public class GraduationProjectManagementServiceImpl implements GraduationProjectManagementService {
 
@@ -65,6 +62,94 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
+	}
+
+	/**
+	 * 批量分配
+	 */
+	@Override
+	public List<ReviewTutorTeacherInfoDTO> piliangAssign(String sectionId, int studentNum, int teacherNum) {
+		List<ReviewTutorTeacherInfoDTO> list = new ArrayList<>();
+		ReviewTutorTeacherInfoDTO reviewTutorTeacherInfoDTO = new ReviewTutorTeacherInfoDTO();
+		List<TeacherInformationDTO> listTeacherInformationDTO = graduationProjectManagementDao.getTeacherInformationDTO(sectionId,teacherNum);
+		//该教研室未分配评阅老师的学生数量
+		int studentCount = graduationProjectManagementDao.getStudentCountNotAssignedTeacher(sectionId,teacherNum);
+		//保证分配的学生数量不会出错
+		if(studentCount < studentNum) {
+			studentNum = studentCount;
+		}
+		if(listTeacherInformationDTO==null || listTeacherInformationDTO.size()<=0)
+			return null;
+		//分配的数量
+		int pinjun = studentNum / (listTeacherInformationDTO.size());
+		int ewai = studentNum % (listTeacherInformationDTO.size());
+		List<bysjglxt_student_user> listStudentUser = new ArrayList<>();
+		for (TeacherInformationDTO teacherInformationDTO : listTeacherInformationDTO) {
+			listStudentUser = new ArrayList<>();
+			int assignStudentCount = pinjun;
+			//获取可分配的学生
+			if(ewai > 0) {
+				assignStudentCount++;
+				//调用分配方法需要studentUserId 和 评阅老师teacherUserId
+			}
+			listStudentUser = graduationProjectManagementDao.getStudentNotAssignedTeacher(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),sectionId,assignStudentCount);
+			for (bysjglxt_student_user bysjglxt_student_user : listStudentUser) {
+				reviewTutorTeacherInfoDTO = new ReviewTutorTeacherInfoDTO();
+				bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+				TeacherInformationDTO tutorInformationDTO = new TeacherInformationDTO();
+				StudentInformationDTO studentInformationDTO = new StudentInformationDTO();
+				if(assignment(bysjglxt_student_user.getUser_student_id(), teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id()) == 1) {
+					reviewTutorTeacherInfoDTO.setReviewTeacherInformationDTO(teacherInformationDTO);
+					// 根据选题Id获取选题表信息
+					bysjglxt_topic_select = graduationProjectManagementDao.getStudentSelectTopic(bysjglxt_student_user.getUser_student_id());
+					//根据学生UserId获取指导老师信息
+					tutorInformationDTO = graduationProjectManagementDao.getTeacherInfomationDTOByTeacherUserId(bysjglxt_topic_select.getTopic_select_teacher_tutor());
+					reviewTutorTeacherInfoDTO.setTutorTeacherInformationDTO(tutorInformationDTO);
+					studentInformationDTO = graduationProjectManagementDao.getStudentInfoByUserId(bysjglxt_student_user.getUser_student_id());
+					reviewTutorTeacherInfoDTO.setStudentInformationDTO(studentInformationDTO);
+					//获取学生信息
+					list.add(reviewTutorTeacherInfoDTO);
+				}
+			}
+			ewai--;
+		}
+		return list;
+	}
+	public int assignment(String studentUserId, String reviewId) {
+		boolean flag = false;
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		// 根据选题Id获取选题表信息
+		bysjglxt_topic_select = graduationProjectManagementDao.getStudentSelectTopic(studentUserId);
+		if (bysjglxt_topic_select == null)
+			return -1;
+		bysjglxt_topic_select.setTopic_select_teacher_review(reviewId);
+		bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
+		if (!(graduationProjectManagementDao.saveObj(bysjglxt_topic_select)==1))
+			return -1;
+		// 判断该学生是否开启毕业设计流程
+		// 用man.state.bysjglxt_process_definitionName 得到该学生流程实例表
+		bysjglxt_process_instance = graduationProjectManagementDao
+				.getProcessInstanceByManStatePAndName(bysjglxt_topic_select.getTopic_select_student());
+		if (bysjglxt_process_instance != null) {
+			// 根据任务定义名获取任务定义表
+			bysjglxt_task_definition = graduationProjectManagementDao.getTaskDefinitionByName("评阅老师填写评阅审查表");
+			if (bysjglxt_task_definition != null) {
+				// 根据流程实例Id以及任务定义ID可以获取任务实例表
+				bysjglxt_task_instance = graduationProjectManagementDao.getTaskInstanceByNameAndProcessInstanceId(
+						bysjglxt_task_definition.getTask_definition_id(),
+						bysjglxt_process_instance.getProcess_instance_id());
+				if (bysjglxt_task_instance != null) {
+					bysjglxt_task_instance
+							.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_review());
+					graduationProjectManagementDao.saveObj(bysjglxt_task_instance);
+				}
+			}
+		}
+
+		return 1;
 	}
 
 	/**

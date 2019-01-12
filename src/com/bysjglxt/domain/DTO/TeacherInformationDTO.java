@@ -31,6 +31,14 @@ public class TeacherInformationDTO {
 		this.bysjglxtTeacherUser = bysjglxtTeacherUser;
 	}
 
+	public TeacherInformationDTO(bysjglxt_teacher_basic bysjglxtTeacherBasic, bysjglxt_teacher_user bysjglxtTeacherUser,
+			bysjglxt_section bysjglxtSection) {
+		super();
+		this.bysjglxtTeacherBasic = bysjglxtTeacherBasic;
+		this.bysjglxtTeacherUser = bysjglxtTeacherUser;
+		this.bysjglxtSection = bysjglxtSection;
+	}
+
 	@Override
 	public String toString() {
 		return "TeacherInformationDTO [bysjglxtTeacherBasic=" + bysjglxtTeacherBasic + ", bysjglxtTeacherUser="

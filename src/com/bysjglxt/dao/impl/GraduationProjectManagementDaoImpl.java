@@ -31,7 +31,9 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
@@ -45,7 +47,43 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	public Session getSession() {
 		return this.sessionFactory.getCurrentSession();
 	}
-
+	
+	@Override
+	public bysjglxt_task_instance getTaskInstanceByNameAndProcessInstanceId(String task_definition_id,
+			String process_instance_id) {
+		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_instance where task_instance_process_instance = '" + process_instance_id
+				+ "' and task_instance_task_definition = '" + task_definition_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_instance = (bysjglxt_task_instance) query.uniqueResult();
+		session.clear();
+		return bysjglxt_task_instance;
+	}
+	
+	@Override
+	public bysjglxt_task_definition getTaskDefinitionByName(String string) {
+		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
+		Session session = getSession();
+		String hql = "from bysjglxt_task_definition where task_definition_name = '" + string + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_task_definition = (bysjglxt_task_definition) query.uniqueResult();
+		session.clear();
+		return bysjglxt_task_definition;
+	}
+	
+	@Override
+	public bysjglxt_process_instance getProcessInstanceByManStatePAndName(String topic_select_student) {
+		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		Session session = getSession();
+		String hql = "select processInstance from bysjglxt_process_instance processInstance,bysjglxt_process_definition processDefinition where processInstance.process_instance_process_definition=processDefinition.process_definition_id ";
+		hql = hql + " and processInstance.process_instance_man='" + topic_select_student
+				+ "' and processInstance.process_instance_state='活动' and processDefinition.process_definition_name='毕业设计流程' ";
+		Query query = session.createQuery(hql);
+		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
+		session.clear();
+		return bysjglxt_process_instance;
+	}
 	@Override
 	public int fillEmptyInTaskBook(bysjglxt_taskbook bysjglxt_taskbook) {
 		int flag = 1;
@@ -160,6 +198,63 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	}
 
 	@Override
+	public List<bysjglxt_student_user> getStudentNotAssignedTeacher(String teacherUserId,String sectionId, int assignStudentCount) {
+		List<bysjglxt_student_user> list = new ArrayList<>();
+		Session session = getSession();
+		String hql = "SELECT"
+				+ " studentUser"
+				+ " FROM"
+				+ " bysjglxt_topic_select topicSelect,"
+				+ " bysjglxt_student_user studentUser,"
+				+ " bysjglxt_student_basic studentBasic,"
+				+ " bysjglxt_major major"
+				+ " WHERE"
+				+ " ("
+				+ " topicSelect.topic_select_teacher_review IS NULL"
+				+ " OR topicSelect.topic_select_teacher_review = ''"
+				+ " )"
+				+ " AND studentUser.user_student_id = topicSelect.topic_select_student"
+				+ " AND studentUser.user_student_basic = studentBasic.student_basic_id"
+				+ " AND studentUser.user_student_belong_major = major.major_id"
+				+ " AND major.major_belong_section = '"+sectionId+"' "
+				+ " AND topicSelect.topic_select_teacher_tutor != '"+teacherUserId+"' "
+				+ " order by rand()";
+		Query query = session.createQuery(hql);
+		list = query.list();
+		if(list!=null && list.size()>0) {
+			if(list.size() > assignStudentCount) {
+				list = list.subList(0, assignStudentCount);
+			}
+		}
+		return list;
+	}
+
+	@Override
+	public int getStudentCountNotAssignedTeacher(String sectionId, int teacherNum) {
+		Session session = getSession();
+		String hql = "SELECT"
+				+ " count(*)"
+				+ " FROM"
+				+ " bysjglxt_topic_select topicSelect,"
+				+ " bysjglxt_student_user studentUser,"
+				+ " bysjglxt_student_basic studentBasic,"
+				+ " bysjglxt_major major"
+				+ " WHERE"
+				+ " ("
+				+ " topicSelect.topic_select_teacher_review IS NULL"
+				+ " OR topicSelect.topic_select_teacher_review = ''"
+				+ " )"
+				+ " AND studentUser.user_student_id = topicSelect.topic_select_student"
+				+ " AND studentUser.user_student_basic = studentBasic.student_basic_id"
+				+ " AND studentUser.user_student_belong_major = major.major_id"
+				+ " AND major.major_belong_section = '"+sectionId+"'";
+		Query query = session.createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	
+	@Override
 	public bysjglxt_taskbook getTaskbookById(String taskbook_id) {
 		bysjglxt_taskbook bysjglxt_taskbook = new bysjglxt_taskbook();
 		Session session = getSession();
@@ -268,6 +363,28 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		bysjglxt_defence = (bysjglxt_defence) query.uniqueResult();
 		session.clear();
 		return bysjglxt_defence;
+	}
+
+	/**
+	 * 获取该教研室教师信息
+	 */
+	@Override
+	public List<TeacherInformationDTO> getTeacherInformationDTO(String sectionId, int teacherNum) {
+		List<TeacherInformationDTO> listTeacherInformationDTO = new ArrayList<>();
+		Session session = getSession();
+		String hql = "SELECT new com.bysjglxt.domain.DTO.TeacherInformationDTO(teacherBasic,teacherUser,section) from bysjglxt_section section,bysjglxt_teacher_user teacherUser,bysjglxt_teacher_basic teacherBasic"
+				+ " where section.section_id = teacherUser.user_teacher_section "
+				+ " and teacherUser.user_teacher_basic = teacherBasic.teacher_basic_id" + " and section.section_id='"
+				+ sectionId + "' order by rand()";
+		Query query = session.createQuery(hql);
+		listTeacherInformationDTO = query.list();
+		session.clear();
+		if (listTeacherInformationDTO != null && listTeacherInformationDTO.size() > 0) {
+			if (listTeacherInformationDTO.size() < teacherNum) {
+				teacherNum = listTeacherInformationDTO.size();
+			}
+		}
+		return listTeacherInformationDTO.subList(0, teacherNum);
 	}
 
 	@Override
@@ -1332,6 +1449,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		}
 		return flag;
 	}
+
 	/**
 	 * 更改状态
 	 */
@@ -1340,7 +1458,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		int flag = 1;
 		try {
 			Session session = getSession();
-			String hql = "update bysjglxt_task_instance set task_instance_is_update="+state+" where task_instance_id = '"+studentUserId+"'";
+			String hql = "update bysjglxt_task_instance set task_instance_is_update=" + state
+					+ " where task_instance_id = '" + studentUserId + "'";
 			Query query = session.createQuery(hql);
 			query.executeUpdate();
 			session.flush();
@@ -1523,8 +1642,8 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		}
 		return flag;
 	}
-	
-	//下发任务书置空
+
+	// 下发任务书置空
 	@Override
 	public boolean deleteXiaTaskBookFileByUserId(String userId) {
 		boolean flag = true;
@@ -1541,6 +1660,7 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		}
 		return flag;
 	}
+
 	/**
 	 * 开题报告文件置空
 	 */
@@ -1579,7 +1699,31 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return (bysjglxt_task_instance) query.uniqueResult();
 	}
 
+	/**
+	 * 
+	 */
+	@Override
+	public TeacherInformationDTO getTeacherInfomationDTOByTeacherUserId(String user_student_id) {
+		TeacherInformationDTO teacher = new TeacherInformationDTO();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.TeacherInformationDTO(teacherBasic,teacherUser) from bysjglxt_teacher_user teacherUser,bysjglxt_teacher_basic teacherBasic"
+				+ " where teacherUser.user_teacher_basic=teacherBasic.teacher_basic_id and teacherUser.user_teacher_id = '"+user_student_id+"'";
+		Query query = session.createQuery(hql);
+		teacher = (TeacherInformationDTO) query.uniqueResult();
+		session.clear();
+		return teacher;
+	}
 
-
+	@Override
+	public StudentInformationDTO getStudentInfoByUserId(String user_student_id) {
+		StudentInformationDTO student = new StudentInformationDTO();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.StudentInformationDTO(studentBasic,studentUser) from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic"
+				+ " where studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_id = '"+user_student_id+"'";
+		Query query = session.createQuery(hql);
+		student = (StudentInformationDTO) query.uniqueResult();
+		session.clear();
+		return student;
+	}
 
 }

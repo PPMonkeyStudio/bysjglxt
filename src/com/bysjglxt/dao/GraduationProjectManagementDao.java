@@ -13,6 +13,7 @@ import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_basic;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
@@ -20,7 +21,9 @@ import com.bysjglxt.domain.DO.bysjglxt_taskbook;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
 
@@ -175,5 +178,49 @@ public interface GraduationProjectManagementDao {
 	 * @return
 	 */
 	public boolean deleteWanTaskBookFileByUserId(String userId);
+
+	/**
+	 * 获取该教研室的老师
+	 * @param sectionId
+	 * @param teacherNum
+	 * @return
+	 */
+	public List<TeacherInformationDTO> getTeacherInformationDTO(String sectionId, int teacherNum);
+
+	/**
+	 * 某教研室未分配评阅老师的学生数量
+	 * @param sectionId
+	 * @param teacherNum
+	 */
+	public int getStudentCountNotAssignedTeacher(String sectionId, int teacherNum);
+
+	/**
+	 * 获取分配的学生信息
+	 * @param sectionId
+	 * @param assignStudentCount
+	 * @return
+	 */
+	public List<bysjglxt_student_user> getStudentNotAssignedTeacher(String teacherUserId,String sectionId, int assignStudentCount);
+
+	public bysjglxt_process_instance getProcessInstanceByManStatePAndName(String topic_select_student);
+
+	public bysjglxt_task_definition getTaskDefinitionByName(String string);
+
+	public bysjglxt_task_instance getTaskInstanceByNameAndProcessInstanceId(String task_definition_id,
+			String process_instance_id);
+
+	/**
+	 * 
+	 * @param user_student_id
+	 * @return
+	 */
+	public TeacherInformationDTO getTeacherInfomationDTOByTeacherUserId(String user_student_id);
+
+	/**
+	 * 
+	 * @param user_student_id
+	 * @return
+	 */
+	public StudentInformationDTO getStudentInfoByUserId(String user_student_id);
 
 }

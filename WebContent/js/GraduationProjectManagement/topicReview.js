@@ -26,13 +26,10 @@ function topicReview(button) {
 									.open("POST",
 											"/bysjglxt/topic/TopicInformationManagement_AssignmentReviewTeacher");
 
-							var select_topicReview = document
-									.getElementById("select_topicReview");
+							var select_topicReview = document.getElementById("select_topicReview");
 							var formData = new FormData();
 							formData.append("assignmentTopicId", button.id);
-
-							formData.append("assignmentReviewTeacherId",
-									select_topicReview.value);
+							formData.append("assignmentReviewTeacherId",select_topicReview.value);
 							xhr.send(formData);
 							/*
 							 * 

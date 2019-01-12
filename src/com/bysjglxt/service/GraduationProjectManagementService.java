@@ -16,6 +16,7 @@ import com.bysjglxt.domain.DO.bysjglxt_report_opening;
 import com.bysjglxt.domain.DO.bysjglxt_summary;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DTO.ReviewTutorTeacherInfoDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
 import com.bysjglxt.domain.VO.CommentInformationVO;
 import com.bysjglxt.domain.VO.TeacherTutorStudentVO;
@@ -529,6 +530,15 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public int updateTaskInstaceState(String studentUserId, int state);
+
+	/**
+	 * 获取对应的数量
+	 * @param sectionId
+	 * @param studentNum
+	 * @param teacherNum
+	 * @return
+	 */
+	public List<ReviewTutorTeacherInfoDTO> piliangAssign(String sectionId, int studentNum, int teacherNum);
 
 
 

@@ -81,6 +81,34 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_topic_select = topicInformationManagementDao.getSelectTopicByOwnId(studentUserId);
 		if (bysjglxt_topic_select == null)
 			return -1;
+		if(bysjglxt_topic_select.getTopic_select_teacher_review()!=null && !"".equals(bysjglxt_topic_select.getTopic_select_teacher_review())) {
+			//移除原有的评阅老师
+			bysjglxt_topic_select.setTopic_select_teacher_review(null);
+			bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
+			flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
+			if (!flag)
+				return -1;
+			// 判断该学生是否开启毕业设计流程
+			// 用man.state.bysjglxt_process_definitionName 得到该学生流程实例表
+			bysjglxt_process_instance = topicInformationManagementDao
+					.getProcessInstanceByManStatePAndName(bysjglxt_topic_select.getTopic_select_student());
+			if (bysjglxt_process_instance != null) {
+				// 根据任务定义名获取任务定义表
+				bysjglxt_task_definition = topicInformationManagementDao.getTaskDefinitionByName("评阅老师填写评阅审查表");
+				if (bysjglxt_task_definition != null) {
+					// 根据流程实例Id以及任务定义ID可以获取任务实例表
+					bysjglxt_task_instance = topicInformationManagementDao.getTaskInstanceByNameAndProcessInstanceId(
+							bysjglxt_task_definition.getTask_definition_id(),
+							bysjglxt_process_instance.getProcess_instance_id());
+					if (bysjglxt_task_instance != null) {
+						bysjglxt_task_instance.setTask_instance_role(null);
+						bysjglxt_task_instance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
+						topicInformationManagementDao.saveObj(bysjglxt_task_instance);
+					}
+				}
+			}
+
+		}
 		bysjglxt_topic_select.setTopic_select_teacher_review(reviewId);
 		bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
 		flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
@@ -99,8 +127,8 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 						bysjglxt_task_definition.getTask_definition_id(),
 						bysjglxt_process_instance.getProcess_instance_id());
 				if (bysjglxt_task_instance != null) {
-					bysjglxt_task_instance
-							.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_review());
+					bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_review());
+					bysjglxt_task_instance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
 					topicInformationManagementDao.saveObj(bysjglxt_task_instance);
 				}
 			}

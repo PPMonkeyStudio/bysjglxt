@@ -99,6 +99,36 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	private String oldDissertation;
 
+	private String sectionId;
+	private int studentNum;
+	private int teacherNum;
+	
+	
+	
+	public String getSectionId() {
+		return sectionId;
+	}
+
+	public void setSectionId(String sectionId) {
+		this.sectionId = sectionId;
+	}
+
+	public int getStudentNum() {
+		return studentNum;
+	}
+
+	public void setStudentNum(int studentNum) {
+		this.studentNum = studentNum;
+	}
+
+	public int getTeacherNum() {
+		return teacherNum;
+	}
+
+	public void setTeacherNum(int teacherNum) {
+		this.teacherNum = teacherNum;
+	}
+
 	/*
 	 * 
 	 */
@@ -140,6 +170,19 @@ public class GraduationProjectManagementAction extends ActionSupport
 		this.studentUserId = studentUserId;
 	}
 
+	/**
+	 * 根据前台传过来的教研室信息，学生数量，教师数量自动分配评阅老师
+	 * @throws IOException
+	 */
+	public void piliangAssign() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(graduationProjectManagementService.piliangAssign(sectionId,studentNum,teacherNum)));
+	}
+	
+	
 	/**
 	 * @throws IOException
 	 * 

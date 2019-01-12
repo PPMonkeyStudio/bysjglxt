@@ -15,7 +15,6 @@
 
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/processController.js"></script>
-
 <title>毕业设计管理</title>
 </head>
 <body>
@@ -37,7 +36,7 @@
 				<h3 class="panel-title">毕业设计管理</h3>
 			</div>
 			<div class="panel-body">
-				<div style="width: 100%; float: left;">
+				<div style="width: 25%; float: left;">
 				<!--TODO 这里没有给控制  -->
 					<button class="btn btn-default" id="button_Start_GraduationProject_All"
 						onclick="Start_GraduationProject_All()">
@@ -45,13 +44,28 @@
 						开启所有符合条件的毕业设计流程
 					</button>
 				</div>
-				<div style="width: 500px; float: left;">
-					<button class="btn btn-default" style="margin: 10px 0;"
+				<div style="width: 25%; float: left;">
+					<button class="btn btn-default"
 						onclick="exportStudentsGraduation()">
 						<i class="fa fa-suitcase"></i>
 						批量导出《毕业设计过程管理手册》
 					</button>
 				</div>
+				<div style="width: 25%; float: left;">
+				<!--TODO 这里没有给控制  -->
+					<button class="btn btn-default" id="button_assign_preview_teacher"
+						onclick="assignmentPreviewTeacher()">
+						<i class="fa fa-bug"></i>
+						批量分配评阅老师
+					</button>
+				</div>
+			<!-- 	<div style="width: 500px; float: left;">
+					<button class="btn btn-default" style="margin: 10px 0;"
+						onclick="assignmentPreviewTeacher()">
+						<i class="fa fa-suitcase"></i>
+						批量分配评阅老师
+					</button>
+				</div> -->
 				<div style="height: 34px;">
 					<!-- 检索 -->
 					<div class="input-group" style="width: 300px; float: right;">
@@ -159,6 +173,8 @@
 </body>
 <!---------------------------------------------------------------------------------------------------->
 <script type="text/javascript"
+	src="<%=basePath%>js/TeacherInformationManagement/Get_Teacher_Section.js"></script>
+<script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/List_MyManagementGraduationProject_By_PageAndSearch.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/update_defence_record.js"></script>
@@ -174,5 +190,7 @@
 	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Major.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/StudentInformationManagement/Get_Student_Level.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/assignmentPreviewTeacher.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 </html>
