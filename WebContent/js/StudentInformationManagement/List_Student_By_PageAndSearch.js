@@ -111,21 +111,24 @@ function List_Student_By_PageAndSearch(pageIndex) {
 
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
-					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 2
-							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission == 1) {
+					if(student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission == 1){
 						new_td.innerHTML = '<div class="dropdown" >'
-								+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
-								+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
-								+ '<li><a id="'
-								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-								+ '" onclick="Student_Information_Display(this)" >详细基础信息</a></li>'
-								+ '<li><a id="'
-								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-								+ '" onclick="assignmentStudentTopic(this)">分配选题</a></li>'
-								+ '<li><a id="'
-								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
-								+ '" onclick="distributionStudentMajor(this)">分配专业</a></li>'
-								+ '</div>';
+							+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
+							+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
+							+ '<li><a id="'
+							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
+							+ '" onclick="Student_Information_Display(this)" >详细基础信息</a></li>'
+							+ '<li><a id="'
+							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
+							+ '" onclick="assignmentStudentTopic(this)">分配选题</a></li>'
+							+ '<li><a id="'
+							+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
+							+ '" onclick="distributionStudentMajor(this)">分配专业</a></li>'
+							+ '</div>';
+					}
+					/*if (student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_select_topic == 2
+							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_is_operate_premission == 1) {
+						
 					} else {
 						new_td.innerHTML = '<div class="dropdown" >'
 								+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
@@ -137,7 +140,7 @@ function List_Student_By_PageAndSearch(pageIndex) {
 								+ student_json.list_StudentInformationDTO[num].bysjglxtStudentUser.user_student_id
 								+ '" onclick="distributionStudentMajor(this)">分配专业</a></li>'
 								+ '</div>';
-					}
+					}*/
 
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);

@@ -8,7 +8,10 @@ import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
+import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
 public interface TopicInformationManagementDao {
@@ -162,5 +165,14 @@ public interface TopicInformationManagementDao {
 	 * @return
 	 */
 	public List<bysjglxt_teacher_user> getTeacherUserNotTopic(String year, String user_teacher_belong_college);
+
+	TeacherInformationDTO getTeacherInfoDTOByUserId(String topic_teacher);
+
+	/**
+	 * 根据课题id获取学生信息
+	 * @param topicId
+	 * @return
+	 */
+	public List<StudentInformationDTO> getStudentInfoByTopicId(String topicId);
 
 }

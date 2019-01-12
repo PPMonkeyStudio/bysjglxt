@@ -22,6 +22,9 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
+import com.bysjglxt.domain.DTO.TopicInformationManagementDTO;
 import com.bysjglxt.domain.VO.TopicInformationManagementVO;
 
 public class TopicInformationManagementDaoImpl implements TopicInformationManagementDao {
@@ -49,6 +52,36 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		return flag;
 	}
 
+	/**
+	 * 
+	 */
+	@Override
+	public List<StudentInformationDTO> getStudentInfoByTopicId(String topicId) {
+		List<StudentInformationDTO> list = new ArrayList<>();
+		Session session = getSession();
+		String hql = "SELECT new com.bysjglxt.domain.DTO.StudentInformationDTO(studentBasic,studentUser) from bysjglxt_topic_select topicSelect,"
+				+ " bysjglxt_student_user studentUser, bysjglxt_student_basic studentBasic where "
+				+ " topicSelect.topic_select_student = studentUser.user_student_id"
+				+ " AND studentUser.user_student_basic = studentBasic.student_basic_id"
+				+ " AND topicSelect.topic_select_topic = '"+topicId+"'";
+		Query query = session.createQuery(hql);
+		list = query.list();
+		session.clear();
+		return list;
+	}
+
+	//
+	@Override
+	public TeacherInformationDTO getTeacherInfoDTOByUserId(String topic_teacher) {
+		TeacherInformationDTO teacher = new TeacherInformationDTO();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.TeacherInformationDTO(teacherBasic,teacherUser) from bysjglxt_teacher_user teacherUser,bysjglxt_teacher_basic teacherBasic"
+				+ " where teacherUser.user_teacher_basic=teacherBasic.teacher_basic_id and teacherUser.user_teacher_id = '"+topic_teacher+"'";
+		Query query = session.createQuery(hql);
+		teacher = (TeacherInformationDTO) query.uniqueResult();
+		session.clear();
+		return teacher;
+	}
 	// 弃用
 	@Override
 	public boolean CreateTopic(bysjglxt_topic newTopic) {

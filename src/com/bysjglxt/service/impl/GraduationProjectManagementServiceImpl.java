@@ -85,8 +85,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	@Override
 	public bysjglxt_task_instance getTaskInstance(String taskName, String userId) {
-		System.out.println("s:" + userId);
-		System.out.println(graduationProjectManagementDao.getTaskInstance(taskName, userId));
 		return graduationProjectManagementDao.getTaskInstance(taskName, userId);
 	}
 
@@ -652,7 +650,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				reportOpening.setReport_file_is_xiazai(-1);
 				reportOpening.setReport_opening_file(newFileName);
 				reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
-				System.out.println("d:" + reportOpening);
 				flag = graduationProjectManagementDao.saveObj(reportOpening) == 1 ? true : false;
 				if (!flag)
 					return -2;
@@ -2243,7 +2240,6 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				bysjglxt_topic topic = new bysjglxt_topic();
 				topic = graduationProjectManagementDao
 						.getStudentTopicByTopicId(bysjglxt_topic_select.getTopic_select_topic());
-				System.out.println(topic.getTopic_name_chinese().length());
 				String name = "";
 				if (topic.getTopic_name_chinese() != null || !"".equals(topic.getTopic_name_chinese())) {
 					int j = 0;

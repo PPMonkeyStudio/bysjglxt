@@ -27,7 +27,8 @@
 	src="<%=basePath%>js/TopicInformationManagement/distributionTopicStudent.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/TopicInformationManagement/TopicDistributionStudentDisplay.js"></script>
-
+<script type="text/javascript"
+	src="<%=basePath%>js/TopicInformationManagement/topicStudent.js"></script>
 <!---------------------------------------------------------------------------------------------------->
 
 <title>课题管理页</title>

@@ -78,6 +78,13 @@ public class TopicInformationManagementAction extends ActionSupport
 		return "allTopic";
 	}
 	
+	public void getStudentByTopicId() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		http_response.getWriter().write(gson.toJson(topicInformationManagementService.getStudentInfoByTopicId(topicId)));
+	}
 	
 	public void getTeacherNotTopicInfo() throws IOException {
 		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
@@ -139,7 +146,6 @@ public class TopicInformationManagementAction extends ActionSupport
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
-		System.out.println("d:"+topic);
 		List<bysjglxt_topic> list_topic = topicInformationManagementService.listAllTopic(topic,
 				userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_belong_college());
 		http_response.getWriter().write(gson.toJson(list_topic));
@@ -174,15 +180,17 @@ public class TopicInformationManagementAction extends ActionSupport
 	}
 
 	public void listSelectBysjglxtTopic() throws IOException {
+		
 		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
 				.get("userTeacherDTO");
 		http_response.setContentType("text/html;charset=utf-8");
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
-		List<bysjglxt_topic> list_topic = topicInformationManagementService
-				.listSelectBysjglxtTopic(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
-		http_response.getWriter().write(gson.toJson(list_topic));
+		List<TopicInformationManagementDTO> listTopicInfo = topicInformationManagementService.listSelectBysjglxtTopic(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
+//		List<bysjglxt_topic> list_topic = topicInformationManagementService
+//				.listSelectBysjglxtTopic(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
+		http_response.getWriter().write(gson.toJson(listTopicInfo));
 	}
 
 	/*

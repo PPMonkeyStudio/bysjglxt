@@ -140,7 +140,7 @@ public interface TopicInformationManagementService {
 	 * @说明 遍历出所有可以选择的课题用于分配最后剩余的学生
 	 * @return
 	 */
-	public List<bysjglxt_topic> listSelectBysjglxtTopic(String userId);
+	public List<TopicInformationManagementDTO> listSelectBysjglxtTopic(String userId);
 
 	/**
 	 * 学生点击我的课题拿出属于自己已经选择的课题
@@ -224,6 +224,13 @@ public interface TopicInformationManagementService {
 	 * @return
 	 */
 	public List<TeacherDTO> getTeacherNotTopicInfo(String user_teacher_belong_college);
+
+	/**
+	 * 根据课题id获取选择该课题的所有学生
+	 * @param topicId
+	 * @return
+	 */
+	public List<StudentInformationDTO> getStudentInfoByTopicId(String topicId);
 
 	
 

@@ -34,11 +34,6 @@ public class TeamUtil {
 	}
 
 	
-	@Test
-	public void gg() {
-		System.out.println(getPeoiod());
-	}
-
 	// 添加数字中文化的方法
 	public static String format(String text) {
 		for (int i = 0; i < 10; i++) {

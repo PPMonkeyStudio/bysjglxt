@@ -434,8 +434,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
 			http_response.getWriter().write(gson.toJson(graduationProjectManagementService.get_ReportOpening(
 					(String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"))));
-			System.out
-					.println((String) ActionContext.getContext().getSession().get("MyTutorGraduationProjectStudentID"));
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			http_response.getWriter()
 					.write(gson.toJson(graduationProjectManagementService.get_ReportOpening(
@@ -602,9 +600,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 		listStringUse = new ArrayList<>();
 		String[] StringUse_sz = StringUse.split(",");
 		listStringUse = Arrays.asList(StringUse_sz);
-		for (String string : StringUse_sz) {
-			System.out.println("string:" + string);
-		}
 		File exportFile = graduationProjectManagementService.exportAll(listStringUse);
 		// File exportFile = graduationProjectManagementService.exportAll();
 		if (exportFile != null) {
@@ -843,7 +838,6 @@ public class GraduationProjectManagementAction extends ActionSupport
 		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
 			juese = ((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
 					.getBysjglxtStudentUser().getUser_student_id();
-			System.out.println("xiazai:"+juese);
 		}
 		File downloadDissertation = graduationProjectManagementService.downloadXiaTaskBook(juese,DissertationUserID);
 		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");

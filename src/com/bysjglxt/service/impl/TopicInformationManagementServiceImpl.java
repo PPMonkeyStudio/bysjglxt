@@ -40,6 +40,15 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		this.collegeManagementService = collegeManagementService;
 	}
 
+
+	/**
+	 * 根据课题id获取学生信息
+	 */
+	@Override
+	public List<StudentInformationDTO> getStudentInfoByTopicId(String topicId) {
+		return topicInformationManagementDao.getStudentInfoByTopicId(topicId);
+	}
+	
 	public CollegeManagementService getCollegeManagementService() {
 		return collegeManagementService;
 	}
@@ -548,14 +557,18 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	 * 遍历出所有可以进行选择的课题
 	 */
 	@Override
-	public List<bysjglxt_topic> listSelectBysjglxtTopic(String userId) {
+	public List<TopicInformationManagementDTO> listSelectBysjglxtTopic(String userId) {
+		List<TopicInformationManagementDTO> list = new ArrayList<>();
 		String college = getCollegeByUserId(userId);
 		boolean flag = true;
 		List<bysjglxt_topic> listAllBysjglxtTopic = new ArrayList<bysjglxt_topic>();
-		List<bysjglxt_topic> listSelectBysjglxtTopic = new ArrayList<bysjglxt_topic>();
 		bysjglxt_teacher_user bysjglxt_teacher_user = null;
 		listAllBysjglxtTopic = topicInformationManagementDao.getAllTopic(college);
+		TopicInformationManagementDTO topicInformationManagementDTO = new TopicInformationManagementDTO();
+		TeacherInformationDTO dto = new TeacherInformationDTO();
 		for (bysjglxt_topic bysjglxt_topic : listAllBysjglxtTopic) {
+			topicInformationManagementDTO = new TopicInformationManagementDTO();
+			dto = new TeacherInformationDTO();
 			flag = true;
 			bysjglxt_teacher_user = new bysjglxt_teacher_user();
 			bysjglxt_teacher_user = topicInformationManagementDao.getTeacherUserInfo(bysjglxt_topic.getTopic_teacher());
@@ -573,9 +586,13 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			if (!flag) {
 				continue;
 			}
-			listSelectBysjglxtTopic.add(bysjglxt_topic);
+			//根据指导老师userId获取指导老师信息
+			dto = topicInformationManagementDao.getTeacherInfoDTOByUserId(bysjglxt_topic.getTopic_teacher());
+			topicInformationManagementDTO.setBysjglxtTopic(bysjglxt_topic);
+			topicInformationManagementDTO.setTeacherInformationDTO(dto);
+			list.add(topicInformationManagementDTO);
 		}
-		return listSelectBysjglxtTopic;
+		return list;
 	}
 
 	/**
@@ -890,6 +907,11 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_topic bysjglxt_topic = new bysjglxt_topic();
 		bysjglxt_student_user = topicInformationManagementDao.getStudentUserByUserId(userId);
 		if (bysjglxt_student_user != null) {
+			//判断学生是否选题
+			if(bysjglxt_student_user.getUser_student_is_select_topic()==1) {
+				//已经选题，那么就需要先退选该课题
+				dropTopic(userId);
+			}
 			// 更改user表的状态
 			flag = topicInformationManagementDao.updateStudentUserRecord(bysjglxt_student_user.getUser_student_id());
 			if (!flag)
@@ -1072,7 +1094,6 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_teacher_basic teacherBasic = new bysjglxt_teacher_basic();
 		String year = TeamUtil.getPeoiod();
 		listTeacherUser = topicInformationManagementDao.getTeacherUserNotTopic(year, user_teacher_belong_college);
-		System.out.println(listTeacherUser.size());
 		for (bysjglxt_teacher_user bysjglxt_teacher_user : listTeacherUser) {
 			teacherDTO = new TeacherDTO();
 			teacherBasic = new bysjglxt_teacher_basic();

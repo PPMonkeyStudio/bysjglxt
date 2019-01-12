@@ -23,6 +23,17 @@ public class StudentInformationDTO {
 		return bysjglxtStudentBasic;
 	}
 
+	public StudentInformationDTO(bysjglxt_student_basic bysjglxtStudentBasic,
+			bysjglxt_student_user bysjglxtStudentUser) {
+		super();
+		this.bysjglxtStudentBasic = bysjglxtStudentBasic;
+		this.bysjglxtStudentUser = bysjglxtStudentUser;
+	}
+
+	public StudentInformationDTO() {
+		super();
+	}
+
 	public void setBysjglxtStudentBasic(bysjglxt_student_basic bysjglxtStudentBasic) {
 		this.bysjglxtStudentBasic = bysjglxtStudentBasic;
 	}

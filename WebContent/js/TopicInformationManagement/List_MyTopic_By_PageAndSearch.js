@@ -38,11 +38,10 @@ function List_MyTopic_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (topic_json.list_TopicInformationDTO[num].bysjglxtTopic != undefined
 							&& topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_name_chinese != "") {
-						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_name_chinese;
+						new_td.innerHTML = '<a href="javascript:;" id="'+topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_id+'" onclick="topicStudent(this)" style="cursor: pointer;">'+topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_name_chinese+'</a>';
 					} else {
 						new_td.innerHTML = '无';
 					}
-
 					new_td = document.createElement("td");
 					new_td.appendChild(document.createTextNode(''));
 					new_tr.appendChild(new_td);
@@ -71,7 +70,8 @@ function List_MyTopic_By_PageAndSearch(pageIndex) {
 								+ '/'
 								+ topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student_max;
 					} else {
-						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student_num;
+						new_td.innerHTML = topic_json.list_TopicInformationDTO[num].bysjglxtTopic.topic_student_num
+						+ '/∞';
 					}
 
 					new_td = document.createElement("td");

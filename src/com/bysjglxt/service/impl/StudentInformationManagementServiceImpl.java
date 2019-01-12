@@ -463,7 +463,6 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 
 	@Override
 	public boolean update_StudentBasicInfomation(bysjglxt_student_basic bysjglxt_student_basic) {
-		System.out.println(bysjglxt_student_basic);
 		//根据
 		bysjglxt_student_basic studentBasic = new bysjglxt_student_basic();
 		studentBasic = studentInformationManagementDao.get_StudentBasicInformation_ByUserBasic(bysjglxt_student_basic.getStudent_basic_id());

@@ -556,7 +556,6 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		Session session = getSession();
 		String hql = "from bysjglxt_process_instance where process_instance_process_definition='"
 				+ processDefinitionId + "' and process_instance_state='"+state+"' ";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
 		return bysjglxt_process_instance;

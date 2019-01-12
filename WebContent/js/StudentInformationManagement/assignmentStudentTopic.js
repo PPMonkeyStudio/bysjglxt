@@ -17,6 +17,7 @@ function assignmentStudentTopic(obj) {
 										<th>中文名称</th>
 										<th>课题来源</th>
 										<th>课题性质</th>
+										<th>指导老师</th>
 										<th>操作</th>
 									</tr>
 								</tbody>
@@ -60,8 +61,8 @@ function assignmentStudentTopic(obj) {
 								new_td = document.createElement("td");
 								new_tr.appendChild(new_td);
 								if (topic_json != undefined
-										&& topic_json[num].topic_name_chinese != "") {
-									new_td.innerHTML = topic_json[num].topic_name_chinese;
+										&& topic_json[num].bysjglxtTopic.topic_name_chinese != "") {
+									new_td.innerHTML = topic_json[num].bysjglxtTopic.topic_name_chinese;
 								} else {
 									new_td.innerHTML = '无';
 								}
@@ -70,8 +71,8 @@ function assignmentStudentTopic(obj) {
 								new_td.appendChild(document.createTextNode(''));
 								new_tr.appendChild(new_td);
 								if (topic_json != undefined
-										&& topic_json[num].topic_source != "") {
-									new_td.innerHTML = topic_json[num].topic_source;
+										&& topic_json[num].bysjglxtTopic.topic_source != "") {
+									new_td.innerHTML = topic_json[num].bysjglxtTopic.topic_source;
 								} else {
 									new_td.innerHTML = '无';
 								}
@@ -80,10 +81,17 @@ function assignmentStudentTopic(obj) {
 								new_td.appendChild(document.createTextNode(''));
 								new_tr.appendChild(new_td);
 								if (topic_json != undefined
-										&& topic_json[num].topic_type != "") {
-									new_td.innerHTML = topic_json[num].topic_type;
+										&& topic_json[num].bysjglxtTopic.topic_type != "") {
+									new_td.innerHTML = topic_json[num].bysjglxtTopic.topic_type;
 								} else {
 									new_td.innerHTML = '无';
+								}
+								new_td = document.createElement("td");
+								new_td.appendChild(document.createTextNode(''));
+								new_tr.appendChild(new_td);
+								if (topic_json != undefined
+										&& topic_json[num].teacherInformationDTO.bysjglxtTeacherBasic.name != "") {
+									new_td.innerHTML = topic_json[num].teacherInformationDTO.bysjglxtTeacherBasic.name;
 								}
 								/**
 								 * 
@@ -92,7 +100,7 @@ function assignmentStudentTopic(obj) {
 								new_td = document.createElement("td");
 								new_td.appendChild(document.createTextNode(''));
 								new_tr.appendChild(new_td);
-								new_td.innerHTML = '<button type="button" class="btn btn-blue" id="' + topic_json[num].topic_id +'" onclick="assign(this)" >选择</button>';
+								new_td.innerHTML = '<button type="button" class="btn btn-blue" id="' + topic_json[num].bysjglxtTopic.topic_id +'" onclick="assign(this)" >选择</button>';
 							}
 							
 						}
