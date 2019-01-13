@@ -223,4 +223,6 @@ public interface GraduationProjectManagementDao {
 	 */
 	public StudentInformationDTO getStudentInfoByUserId(String user_student_id);
 
+	public String getGraduationTutorCount(String user_teacher_id,int state);
+
 }

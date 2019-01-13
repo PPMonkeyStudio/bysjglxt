@@ -540,6 +540,15 @@ public interface GraduationProjectManagementService {
 	 */
 	public List<ReviewTutorTeacherInfoDTO> piliangAssign(String sectionId, int studentNum, int teacherNum);
 
+	/**
+	 * 获取我管理的数量
+	 * @param user_teacher_id
+	 * @return
+	 */
+	public int getGraduationManageCount(String user_teacher_id);
+
+	public String getGraduationTutorCount(String user_teacher_id,int state);
+
 
 
 }

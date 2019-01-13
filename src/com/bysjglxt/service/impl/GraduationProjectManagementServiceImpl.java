@@ -63,7 +63,49 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	public void setGraduationProjectManagementDao(GraduationProjectManagementDao graduationProjectManagementDao) {
 		this.graduationProjectManagementDao = graduationProjectManagementDao;
 	}
+	
+	/**
+	 * 我指导的学生数量
+	 */
+	@Override
+	public String getGraduationTutorCount(String user_teacher_id,int state) {
+		return graduationProjectManagementDao.getGraduationTutorCount(user_teacher_id,state);
+	}
 
+	
+	/**
+	 * 获取我管理的学生数量
+	 */
+	@Override
+	public int getGraduationManageCount(String user_teacher_id) {
+		bysjglxt_teacher_user bysjglxt_teacher_user = new bysjglxt_teacher_user();
+		bysjglxt_teacher_user = graduationProjectManagementDao.getTeacherUserByUserId(user_teacher_id);
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		String actor = "";
+		if (bysjglxt_teacher_user != null) {
+			if (bysjglxt_teacher_user.getUser_teacher_is_college_admin() == 1) {
+				actor = "系部管理员";
+			} else {
+				// 根据教研室主任userId获取教研室
+				bysjglxt_section = graduationProjectManagementDao.getSectionByUserId(user_teacher_id);
+				if (bysjglxt_section != null) {
+					actor = "教研室主任";
+				}else {
+					return 0;
+				}
+			}
+		} else {
+			return 0;
+		}
+		//获取该系部有效的学生数量
+		
+		
+		
+		//获取该教研室有效的学生数量
+		
+		
+		return 0;
+	}
 	/**
 	 * 批量分配
 	 */
@@ -3797,5 +3839,4 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return params;
 	}
-
 }

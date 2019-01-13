@@ -171,6 +171,23 @@ public class GraduationProjectManagementAction extends ActionSupport
 	}
 
 	/**
+	 * 获取我管理的学生数量
+	 * @throws IOException 
+	 */
+	public void getGraduationManageCount() throws IOException {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO");
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(graduationProjectManagementService.getGraduationManageCount(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id()) + "");
+	}
+	
+	public void getGraduationTutorCount() throws IOException {
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO");
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(graduationProjectManagementService.getGraduationTutorCount(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id(),state) + "");
+	
+	}
+	
+	/**
 	 * 根据前台传过来的教研室信息，学生数量，教师数量自动分配评阅老师
 	 * @throws IOException
 	 */

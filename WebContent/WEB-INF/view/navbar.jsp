@@ -64,6 +64,8 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/loginAndLogout/updatePassword.js"></script>
 <!--------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/getNavbarCount.js"></script>
 <title>Insert title here</title>
 </head>
 
@@ -177,16 +179,13 @@
 					</a>
 					<ul class="dropdown-menu">
 						<li class="teacher_control">
-							<a
-								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyManagementGraduationProjectPage">毕业设计管理</a>
+							<a id="graduation_manage" href="<%=basePath%>graduationProject/GraduationProjectManagement_MyManagementGraduationProjectPage">毕业设计管理</a>
 						</li>
 						<li class="teacher_control">
-							<a
-								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyTutorGraduationProjectPage">我指导的学生</a>
+							<a id="graduation_tutor" href="<%=basePath%>graduationProject/GraduationProjectManagement_MyTutorGraduationProjectPage">我指导的学生</a>
 						</li>
 						<li class="teacher_control">
-							<a
-								href="<%=basePath%>graduationProject/GraduationProjectManagement_MyReviewGraduationProjectPage">我评阅的学生</a>
+							<a id="graduation_review" href="<%=basePath%>graduationProject/GraduationProjectManagement_MyReviewGraduationProjectPage">我评阅的学生</a>
 						</li>
 						<li class="student_control">
 							<a

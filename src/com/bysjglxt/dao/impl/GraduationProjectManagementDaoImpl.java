@@ -48,6 +48,35 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return this.sessionFactory.getCurrentSession();
 	}
 	
+
+	@Override
+	public String getGraduationTutorCount(String user_teacher_id,int state) {
+		Session session = getSession();
+		String hql = "SELECT"
+				+ " count(*)"
+				+ " FROM"
+				+ " bysjglxt_teacher_user teacherUser,"
+				+ " bysjglxt_teacher_basic teacherBasic,"
+				+ " bysjglxt_student_user studentUser,"
+				+ " bysjglxt_topic_select topicSelect"
+				+ " where"
+				+ " teacherUser.user_teacher_basic = teacherBasic.teacher_basic_id";
+		if(state == 1) {
+			hql = hql + " AND teacherUser.user_teacher_id = topicSelect.topic_select_teacher_tutor";
+		}
+		if(state == 2) {
+			hql = hql + " AND teacherUser.user_teacher_id = topicSelect.topic_select_teacher_review";
+		}
+		hql = hql + " AND topicSelect.topic_select_student = studentUser.user_student_id"
+				+ " AND studentUser.user_student_is_select_topic = 1"
+				+ " AND studentUser.user_student_is_operate_premission = 1"
+				+ " AND studentUser.user_student_belong_college = teacherUser.user_teacher_belong_college"
+				+ " AND teacherUser.user_teacher_id = '"+user_teacher_id+"'";
+		Query query = session.createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count+"";
+	}
+	
 	@Override
 	public bysjglxt_task_instance getTaskInstanceByNameAndProcessInstanceId(String task_definition_id,
 			String process_instance_id) {
@@ -1725,5 +1754,6 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		session.clear();
 		return student;
 	}
+
 
 }

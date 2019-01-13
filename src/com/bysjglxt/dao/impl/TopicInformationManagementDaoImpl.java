@@ -763,7 +763,6 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
 		Session session = getSession();
 		String hql = "from bysjglxt_topic_select where topic_select_student = '" + topicId + "'";
-		System.out.println(hql);
 		Query query = session.createQuery(hql);
 		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
 		session.clear();
