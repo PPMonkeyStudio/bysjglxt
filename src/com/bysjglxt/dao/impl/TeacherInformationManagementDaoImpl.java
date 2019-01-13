@@ -14,6 +14,8 @@ import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 
 import util.TeamUtil;
@@ -415,5 +417,30 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		Query query = session.createQuery(hql);
 		bysjglxt_college = (bysjglxt_college) query.uniqueResult();
 		return bysjglxt_college;
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public TeacherInformationDTO getTeacherInfomationDTOByTeacherUserId(String user_student_id) {
+		TeacherInformationDTO teacher = new TeacherInformationDTO();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.TeacherInformationDTO(teacherBasic,teacherUser) from bysjglxt_teacher_user teacherUser,bysjglxt_teacher_basic teacherBasic"
+				+ " where teacherUser.user_teacher_basic=teacherBasic.teacher_basic_id and teacherUser.user_teacher_id = '"+user_student_id+"'";
+		Query query = session.createQuery(hql);
+		teacher = (TeacherInformationDTO) query.uniqueResult();
+		session.clear();
+		return teacher;
+	}
+
+	@Override
+	public bysjglxt_topic_select getStudentSelectTopic(String user_student_id) {
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_student = '" + user_student_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic_select = (bysjglxt_topic_select) query.uniqueResult();
+		session.clear();
+		return bysjglxt_topic_select;
 	}
 }

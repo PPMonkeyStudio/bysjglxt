@@ -17,10 +17,12 @@ import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 import com.bysjglxt.service.CollegeManagementService;
 import com.bysjglxt.service.TeacherInformationManagementService;
+import com.google.gson.JsonElement;
 
 import util.ExcelToBean2;
 import util.TeamUtil;
@@ -33,6 +35,17 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 
 	public void setTeacherInformationManagementDao(TeacherInformationManagementDao teacherInformationManagementDao) {
 		this.teacherInformationManagementDao = teacherInformationManagementDao;
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public TeacherInformationDTO getTeacherInfoByUserId(bysjglxt_student_user updateStudentUser) {
+		TeacherInformationDTO teacherInformationDTO = new TeacherInformationDTO();
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		bysjglxt_topic_select = teacherInformationManagementDao.getStudentSelectTopic(updateStudentUser.getUser_student_id());
+		return teacherInformationManagementDao.getTeacherInfomationDTOByTeacherUserId(bysjglxt_topic_select.getTopic_select_teacher_review());
 	}
 
 	/**

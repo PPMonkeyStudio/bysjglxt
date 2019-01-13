@@ -15,6 +15,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
@@ -62,6 +63,17 @@ public class TeacherInformationManagementAction extends ActionSupport
 	 */
 	private bysjglxt_teacher_basic updateTeacherBasic;
 	private bysjglxt_teacher_user updateTeacherUser;
+	
+	private bysjglxt_student_user studentUser;
+	
+	public bysjglxt_student_user getStudentUser() {
+		return studentUser;
+	}
+
+	public void setStudentUser(bysjglxt_student_user studentUser) {
+		this.studentUser = studentUser;
+	}
+
 	/*
 	 * 修改的学生基础信息
 	 */
@@ -110,6 +122,15 @@ public class TeacherInformationManagementAction extends ActionSupport
 	public String CreateTeacherPage() {
 
 		return "CreateTeacherPage";
+	}
+	
+	
+	public void getTeacherInfoByUserId() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(teacherInformationManagementService.getTeacherInfoByUserId(studentUser)));
 	}
 
 	public String exportTeacherInfoTemplate() throws Exception {

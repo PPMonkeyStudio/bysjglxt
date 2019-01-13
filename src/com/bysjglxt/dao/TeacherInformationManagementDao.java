@@ -6,6 +6,8 @@ import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
 
 public interface TeacherInformationManagementDao {
@@ -59,5 +61,14 @@ public interface TeacherInformationManagementDao {
 	 * @return
 	 */
 	public bysjglxt_college getCollegeById(String college);
+
+	public TeacherInformationDTO getTeacherInfomationDTOByTeacherUserId(String user_teacher_id);
+
+	/**
+	 * 
+	 * @param user_student_id
+	 * @return
+	 */
+	public bysjglxt_topic_select getStudentSelectTopic(String user_student_id);
 
 }

@@ -4,10 +4,12 @@ import java.io.File;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_section;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.TeacherInformationManagementVO;
+import com.google.gson.JsonElement;
 
 public interface TeacherInformationManagementService {
 
@@ -168,5 +170,12 @@ public interface TeacherInformationManagementService {
 	 * @return -1失败
 	 */
 	public int removeLeader(List<String> listTeacherUserId);
+
+	/**
+	 * 
+	 * @param updateTeacherUser
+	 * @return
+	 */
+	public TeacherInformationDTO getTeacherInfoByUserId(bysjglxt_student_user studentUser);
 
 }
