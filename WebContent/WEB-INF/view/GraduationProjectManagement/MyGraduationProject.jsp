@@ -121,8 +121,11 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/uploadStudentTaskbook.js"></script>		
 <script type="text/javascript"
-	src="<%=basePath%>js/GraduationProjectManagement/uploadShenTaskbook.js"></script>		
-
+	src="<%=basePath%>js/GraduationProjectManagement/uploadShenTaskbook.js"></script>	
+	<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadShenTaskbook2.js"></script>		
+	<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Save_shen_taskbook.js"></script>		
 <!---------------------------------------------------------------------------------------------------->
 
 <title>我的毕业设计</title>

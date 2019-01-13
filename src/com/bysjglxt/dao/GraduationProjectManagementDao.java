@@ -230,4 +230,6 @@ public interface GraduationProjectManagementDao {
 
 	public String getMaxTopicYear();
 
+	public boolean deleteShenTaskBookFileByUserId(String userId);
+
 }

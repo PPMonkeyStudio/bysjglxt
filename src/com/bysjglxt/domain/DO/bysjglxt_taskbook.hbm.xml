@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2019-1-13 15:34:58 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2019-1-13 16:53:04 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_taskbook" table="BYSJGLXT_TASKBOOK">
         <id name="taskbook_id" type="java.lang.String">
@@ -25,6 +25,9 @@
         </property>
         <property name="taskbook_xia_file_xiazai" type="java.lang.Integer">
             <column name="TASKBOOK_XIA_FILE_XIAZAI" />
+        </property>
+        <property name="taskbook_shen_file_xiazai" type="java.lang.Integer">
+            <column name="TASKBOOK_SHEN_FILE_XIAZAI" />
         </property>
         <property name="taskbook_leader_option" type="java.lang.String">
             <column name="TASKBOOK_LEADER_OPTION" />

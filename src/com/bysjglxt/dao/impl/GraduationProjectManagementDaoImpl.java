@@ -1780,4 +1780,21 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return year;
 	}
 
+	@Override
+	public boolean deleteShenTaskBookFileByUserId(String userId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_taskbook set taskbook_shen_file=null where bysjglxt_taskbook_student='"
+					+ userId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+			session.flush();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
 }

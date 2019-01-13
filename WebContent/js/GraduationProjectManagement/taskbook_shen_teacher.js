@@ -73,17 +73,62 @@ function shen_taskbook() {
 					tab.appendChild(div_2);*/
 				}
 
-				/*var ulSave = document.createElement("ul");
+				// 创建input
+				/*
+				 * 
+				 */
+				var textarea_3 = document.createElement("textarea");
+				textarea_3.id = 'shen2_id_taskbook';
+				textarea_3.style = "display:none;"
+				textarea_3.innerHTML = taskbook.bysjglxt_taskbook_student;
+				tab.appendChild(textarea_3);
+				/*
+				 * 
+				 */
+				var textarea_4 = document.createElement("textarea");
+				textarea_4.id = 'shen2_is_xiazai';
+				textarea_4.style = "display:none;"
+				textarea_4.innerHTML = taskbook.taskbook_shen_file_xiazai;
+				tab.appendChild(textarea_4);
+				/*
+				 * 
+				 */
+				var h4 = document.createElement("h4");
+				h4.innerHTML = '修改后的任务书';
+				tab.appendChild(h4);
+				/*
+				 * 新增的
+				 */
+				var div = document.createElement("div");
+				div.id = "div_shen_taskbook_box2";
+				tab.appendChild(div);
+				if (taskbook.taskbook_shen_file != null) {
+					var div_2 = document.createElement("div");
+					div_2.innerHTML = '<button class="btn btn-default" '
+							+ 'onclick="addShenTaskBook()">上传</button>';
+					tab.appendChild(div_2);
+					if (taskbook.taskbook_shen_file != '') {
+						taskbookShenFileChange2(taskbook.taskbook_shen_file);
+					}
+
+				} else {
+					var div_2 = document.createElement("div");
+					div_2.innerHTML = '<button class="btn btn-default" '
+							+ 'onclick="addShenTaskBook()">上传</button>';
+					tab.appendChild(div_2);
+				}
+				
+				var ulSave = document.createElement("ul");
 				ulSave.className='pager wizard';
 				var liSave = document.createElement("li");
 				liSave.id='button_SaveGraduationProject';
 				var aSave = document.createElement('a');
 				aSave.href='####';
-				aSave.onclick = Save_wan_taskbook
-//				aSave.text='提交更新';
+				aSave.onclick = Save_shen_taskbook
+				aSave.text='提交更新';
 				liSave.appendChild(aSave);
 				ulSave.appendChild(liSave);
-				tab.appendChild(ulSave);*/
+				tab.appendChild(ulSave);
 				
 				/*
 				 * 让不是现在进行的流程的不可编辑
@@ -91,58 +136,58 @@ function shen_taskbook() {
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
 				var div_wan_taskbook_del = document
-						.getElementById("div_wan_taskbook_del");
+						.getElementById("div_shen_taskbook_box2");
 				if ('-1' == k) {
 					if ("指导老师审核任务书" != current_processDefinitionName) {
 						div_2.parentNode.removeChild(div_2);
 						button_SaveGraduationProject.style.display = "none";
-						div_wan_taskbook_del.style.display = "none";
+						div_shen_taskbook_del2.style.display = "none";
 					} else if (userStudentDTO != null) {
 						if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
 							button_SaveGraduationProject.style.display = "block";
-							div_wan_taskbook_del.style.display = "block";
+							div_shen_taskbook_del2.style.display = "block";
 						} else {
 							div_2.parentNode.removeChild(div_2);
 							button_SaveGraduationProject.style.display = "none";
-							div_wan_taskbook_del.style.display = "none";
+							div_shen_taskbook_del2.style.display = "none";
 						}
 					} else if (userTeacherDTO != null) {
 						if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
 							button_SaveGraduationProject.style.display = "block";
-							div_wan_taskbook_del.style.display = "block";
+							div_shen_taskbook_del2.style.display = "block";
 						} else {
 							div_2.parentNode.removeChild(div_2);
 							button_SaveGraduationProject.style.display = "none";
-							div_wan_taskbook_del.style.display = "none";
+							div_shen_taskbook_del2.style.display = "none";
 						}
 					} else {
 						div_2.parentNode.removeChild(div_2);
 						button_SaveGraduationProject.style.display = "none";
-						div_wan_taskbook_del.style.display = "none";
+						div_shen_taskbook_del2.style.display = "none";
 					}
 				} else if ('1' == k) {
 					if (userStudentDTO != null) {
 						if (_userId_Task == userStudentDTO.bysjglxtStudentUser.user_student_id) {
 							button_SaveGraduationProject.style.display = "block";
-							div_wan_taskbook_del.style.display = "block";
+							div_shen_taskbook_del2.style.display = "block";
 						} else {
 							div_2.parentNode.removeChild(div_2);
 							button_SaveGraduationProject.style.display = "none";
-							div_wan_taskbook_del.style.display = "none";
+							div_shen_taskbook_del2.style.display = "none";
 						}
 					} else if (userTeacherDTO != null) {
 						if (_userId_Task == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
 							button_SaveGraduationProject.style.display = "block";
-							div_wan_taskbook_del.style.display = "block";
+							div_shen_taskbook_del2.style.display = "block";
 						} else {
 							div_2.parentNode.removeChild(div_2);
 							button_SaveGraduationProject.style.display = "none";
-							div_wan_taskbook_del.style.display = "none";
+							div_shen_taskbook_del2.style.display = "none";
 						}
 					} else {
 						div_2.parentNode.removeChild(div_2);
 						button_SaveGraduationProject.style.display = "none";
-						div_wan_taskbook_del.style.display = "none";
+						div_shen_taskbook_del2.style.display = "none";
 					}
 				}
 			} else {

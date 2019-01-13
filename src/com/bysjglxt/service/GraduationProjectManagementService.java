@@ -549,6 +549,11 @@ public interface GraduationProjectManagementService {
 
 	public String getGraduationTutorCount(String user_teacher_id,int state);
 
+	public int updateShenTaskbook(File dissertation, String oldDissertation, String studentUserId,
+			String dissertationFileName) throws IOException;
+
+	public File downloadShenTaskBookTwo(String juese, String dissertationUserID);
+
 
 
 }

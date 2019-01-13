@@ -925,7 +925,26 @@ public class GraduationProjectManagementAction extends ActionSupport
 		inputStream = new FileInputStream(downloadDissertation);
 		return "downloadDissertation";
 	}
-	
+	/**
+	 * 下载完善任务书
+	 * 
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 */
+	public String downloadShenTaskBookTwo() throws UnsupportedEncodingException, FileNotFoundException {
+		String juese = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			juese = ((TeacherInformationDTO) ActionContext.getContext().getSession()
+					.get("userTeacherDTO")).getBysjglxtTeacherUser().getUser_teacher_id();
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			juese = "student";
+		}
+		File downloadDissertation = graduationProjectManagementService.downloadShenTaskBookTwo(juese,DissertationUserID);
+		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(downloadDissertation);
+		return "downloadDissertation";
+	}
 	/**
 	 * 下载开题报告
 	 * 
@@ -991,6 +1010,13 @@ public class GraduationProjectManagementAction extends ActionSupport
 		 */
 	}
 
+	public void updateShenTaskbook() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(graduationProjectManagementService.updateShenTaskbook(dissertation,
+				oldDissertation, studentUserId, dissertationFileName) + "");
+	}
+	
 	// 更新wan任务书
 	public void updateWanTaskbook() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
