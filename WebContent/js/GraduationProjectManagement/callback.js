@@ -15,6 +15,9 @@ function callBack(instanseName){
 	case "学生上传开题报告":
 		report_opening();
 		break;
+	case "指导老师确认开题报告":
+		Report_Opening_Teacher();
+		break;
 	case "学生完成进展情况记录（前期准备阶段）":
 		RecordProgress_1_Student();
 		break;

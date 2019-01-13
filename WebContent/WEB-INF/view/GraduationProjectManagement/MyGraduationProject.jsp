@@ -125,7 +125,11 @@
 	<script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/uploadShenTaskbook2.js"></script>		
 	<script type="text/javascript"
-	src="<%=basePath%>js/GraduationProjectManagement/Save_shen_taskbook.js"></script>		
+	src="<%=basePath%>js/GraduationProjectManagement/Save_shen_taskbook.js"></script>	
+	<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadTeacherReportOpening.js"></script>	
+	<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/Save_teacher_report_opening.js"></script>	
 <!---------------------------------------------------------------------------------------------------->
 
 <title>我的毕业设计</title>
@@ -384,7 +388,8 @@
 					break;
 				}
 				case 5: {
-					Report_Opening_Teacher();
+					get_taskinstance_byname("指导老师确认开题报告");
+					/* Report_Opening_Teacher(); */
 					break;
 				}
 				case 6: {

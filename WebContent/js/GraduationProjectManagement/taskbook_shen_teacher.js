@@ -136,7 +136,7 @@ function shen_taskbook() {
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
 				var div_wan_taskbook_del = document
-						.getElementById("div_shen_taskbook_box2");
+						.getElementById("div_shen_taskbook_del2");
 				if ('-1' == k) {
 					if ("指导老师审核任务书" != current_processDefinitionName) {
 						div_2.parentNode.removeChild(div_2);

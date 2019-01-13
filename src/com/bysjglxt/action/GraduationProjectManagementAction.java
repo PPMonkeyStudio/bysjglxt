@@ -984,6 +984,23 @@ public class GraduationProjectManagementAction extends ActionSupport
 	 * 
 	 * @throws IOException
 	 */
+	public void updateTeacherReportOpening() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(graduationProjectManagementService.saveTeacherReportOpening(dissertation, oldDissertation,studentUserId,dissertationFileName) + "");
+		/*
+		 * if
+		 * (graduationProjectManagementService.updateReportOpening(updateReportOpening)
+		 * == 1) { http_response.getWriter().write("保存成功"); } else {
+		 * http_response.getWriter().write("系统繁忙"); }
+		 */
+	}
+
+	/**
+	 * 更新开题报告
+	 * 
+	 * @throws IOException
+	 */
 	public void updateReportOpening() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.setContentType("text/html;charset=utf-8");
@@ -995,7 +1012,7 @@ public class GraduationProjectManagementAction extends ActionSupport
 		 * http_response.getWriter().write("系统繁忙"); }
 		 */
 	}
-
+	
 	// 更新任务书
 	public void updateXiaTaskbook() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-12-27 17:27:27 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2019-1-13 17:42:25 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="com.bysjglxt.domain.DO.bysjglxt_report_opening" table="BYSJGLXT_REPORT_OPENING">
         <id name="report_opening_id" type="java.lang.String">
@@ -14,8 +14,14 @@
         <property name="report_opening_file" type="java.lang.String">
             <column name="REPORT_OPENING_FILE" />
         </property>
+        <property name="report_opening_teacher_file" type="java.lang.String">
+            <column name="REPORT_OPENING_TEACHER_FILE" />
+        </property>
         <property name="report_file_is_xiazai" type="java.lang.Integer">
             <column name="REPORT_FILE_IS_XIAZAI" />
+        </property>
+        <property name="report_opening_teacher_file_is_xiazai" type="java.lang.Integer">
+            <column name="REPORT_OPENING_TEACHER_FILE_IS_XIAZAI" />
         </property>
         <property name="report_opening_gmt_create" type="java.lang.String">
             <column name="REPORT_OPENING_GMT_CREATE" />

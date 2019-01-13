@@ -232,4 +232,11 @@ public interface GraduationProjectManagementDao {
 
 	public boolean deleteShenTaskBookFileByUserId(String userId);
 
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public boolean deleteReportOpeningTeacherFileByUserId(String userId);
+
 }

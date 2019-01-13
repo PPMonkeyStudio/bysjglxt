@@ -9,9 +9,27 @@ public class bysjglxt_report_opening {
 	 * report_opening_reference; private String report_opening_plan;
 	 */
 	private String report_opening_file;
+	private String report_opening_teacher_file;
 	private Integer report_file_is_xiazai = -1;
+	private Integer report_opening_teacher_file_is_xiazai = -1;
 	private String report_opening_gmt_create;
 	private String report_opening_gmt_modified;
+
+	public String getReport_opening_teacher_file() {
+		return report_opening_teacher_file;
+	}
+
+	public void setReport_opening_teacher_file(String report_opening_teacher_file) {
+		this.report_opening_teacher_file = report_opening_teacher_file;
+	}
+
+	public Integer getReport_opening_teacher_file_is_xiazai() {
+		return report_opening_teacher_file_is_xiazai;
+	}
+
+	public void setReport_opening_teacher_file_is_xiazai(Integer report_opening_teacher_file_is_xiazai) {
+		this.report_opening_teacher_file_is_xiazai = report_opening_teacher_file_is_xiazai;
+	}
 
 	public String getReport_opening_id() {
 		return report_opening_id;
@@ -64,10 +82,14 @@ public class bysjglxt_report_opening {
 	@Override
 	public String toString() {
 		return "bysjglxt_report_opening [report_opening_id=" + report_opening_id + ", report_opening_student="
-				+ report_opening_student + ", report_opening_file=" + report_opening_file + ", report_file_is_xiazai="
-				+ report_file_is_xiazai + ", report_opening_gmt_create=" + report_opening_gmt_create
+				+ report_opening_student + ", report_opening_file=" + report_opening_file
+				+ ", report_opening_teacher_file=" + report_opening_teacher_file + ", report_file_is_xiazai="
+				+ report_file_is_xiazai + ", report_opening_teacher_file_is_xiazai="
+				+ report_opening_teacher_file_is_xiazai + ", report_opening_gmt_create=" + report_opening_gmt_create
 				+ ", report_opening_gmt_modified=" + report_opening_gmt_modified + "]";
 	}
+
+
 
 
 }

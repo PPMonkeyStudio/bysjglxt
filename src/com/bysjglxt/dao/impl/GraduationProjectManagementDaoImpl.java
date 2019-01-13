@@ -1725,6 +1725,23 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	}
 
 	@Override
+	public boolean deleteReportOpeningTeacherFileByUserId(String userId) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "update bysjglxt_report_opening set report_opening_teacher_file=null where report_opening_student='"
+					+ userId + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+			session.flush();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
 	public bysjglxt_task_instance getTaskInstance(String taskName, String userId) {
 		Session session = getSession();
 		String hql = "SELECT"//

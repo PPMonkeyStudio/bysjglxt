@@ -554,6 +554,9 @@ public interface GraduationProjectManagementService {
 
 	public File downloadShenTaskBookTwo(String juese, String dissertationUserID);
 
+	public int saveTeacherReportOpening(File dissertation, String oldDissertation, String studentUserId,
+			String dissertationFileName) throws IOException;
+
 
 
 }
