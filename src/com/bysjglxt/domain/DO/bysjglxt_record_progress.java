@@ -10,6 +10,17 @@ public class bysjglxt_record_progress {
 	private String record_progress_stage;
 	private String record_progress_gmt_create;
 	private String record_progress_gmt_modified;
+	private String record_progress_student_file;
+
+	
+	
+	public String getRecord_progress_student_file() {
+		return record_progress_student_file;
+	}
+
+	public void setRecord_progress_student_file(String record_progress_student_file) {
+		this.record_progress_student_file = record_progress_student_file;
+	}
 
 	public String getRecord_progress_id() {
 		return record_progress_id;
@@ -82,7 +93,6 @@ public class bysjglxt_record_progress {
 	public void setRecord_progress_gmt_modified(String record_progress_gmt_modified) {
 		this.record_progress_gmt_modified = record_progress_gmt_modified;
 	}
-
 	@Override
 	public String toString() {
 		return "bysjglxt_record_progress [record_progress_id=" + record_progress_id + ", record_progress_student="
@@ -90,7 +100,8 @@ public class bysjglxt_record_progress {
 				+ ", record_progress_gmt_stop=" + record_progress_gmt_stop + ", record_progress_record="
 				+ record_progress_record + ", record_progress_opinion=" + record_progress_opinion
 				+ ", record_progress_stage=" + record_progress_stage + ", record_progress_gmt_create="
-				+ record_progress_gmt_create + ", record_progress_gmt_modified=" + record_progress_gmt_modified + "]";
+				+ record_progress_gmt_create + ", record_progress_gmt_modified=" + record_progress_gmt_modified
+				+ ", record_progress_student_file=" + record_progress_student_file + "]";
 	}
 
 }

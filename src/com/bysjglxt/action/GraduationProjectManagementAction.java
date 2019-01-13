@@ -703,8 +703,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void updateStudentRecordProgressEarlystage() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		if (graduationProjectManagementService
-				.updateStudentRecordProgressEarlystage(updateRecordProgressEarlystage) == 1) {
+		if (graduationProjectManagementService.updateStudentRecordProgressEarlystage(updateRecordProgressEarlystage,dissertation,
+				oldDissertation, studentUserId, dissertationFileName) == 1) {
 			http_response.getWriter().write("保存成功");
 		} else {
 			http_response.getWriter().write("系统繁忙");
@@ -904,7 +904,27 @@ public class GraduationProjectManagementAction extends ActionSupport
 		inputStream = new FileInputStream(downloadDissertation);
 		return "downloadDissertation";
 	}
-
+	
+	/**
+	 * 下载进展情况记录
+	 * 
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 */
+	public String downloadQianRecordProgress() throws UnsupportedEncodingException, FileNotFoundException {
+		String juese = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			juese = "teacher";
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			juese = ((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+					.getBysjglxtStudentUser().getUser_student_id();
+		}
+		File downloadDissertation = graduationProjectManagementService.downloadQianRecordProgress(juese,DissertationUserID);
+		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(downloadDissertation);
+		return "downloadDissertation";
+	}
 	/**
 	 * 下载完善任务书
 	 * 

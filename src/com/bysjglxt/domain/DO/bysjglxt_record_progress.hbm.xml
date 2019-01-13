@@ -1,36 +1,39 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2019-1-13 19:49:43 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_record_progress" table="bysjglxt_record_progress">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_record_progress" table="BYSJGLXT_RECORD_PROGRESS">
         <id name="record_progress_id" type="java.lang.String">
-            <column name="record_progress_id" />
+            <column name="RECORD_PROGRESS_ID" />
             <generator class="assigned" />
         </id>
         <property name="record_progress_student" type="java.lang.String">
-            <column name="record_progress_student" />
+            <column name="RECORD_PROGRESS_STUDENT" />
         </property>
         <property name="record_progress_gmt_start" type="java.lang.String">
-            <column name="record_progress_gmt_start" />
+            <column name="RECORD_PROGRESS_GMT_START" />
         </property>
         <property name="record_progress_gmt_stop" type="java.lang.String">
-            <column name="record_progress_gmt_stop" />
+            <column name="RECORD_PROGRESS_GMT_STOP" />
         </property>
         <property name="record_progress_record" type="java.lang.String">
-            <column name="record_progress_record" />
+            <column name="RECORD_PROGRESS_RECORD" />
         </property>
         <property name="record_progress_opinion" type="java.lang.String">
-            <column name="record_progress_opinion" />
+            <column name="RECORD_PROGRESS_OPINION" />
         </property>
         <property name="record_progress_stage" type="java.lang.String">
-            <column name="record_progress_stage" />
+            <column name="RECORD_PROGRESS_STAGE" />
         </property>
         <property name="record_progress_gmt_create" type="java.lang.String">
-            <column name="record_progress_gmt_create" />
+            <column name="RECORD_PROGRESS_GMT_CREATE" />
         </property>
         <property name="record_progress_gmt_modified" type="java.lang.String">
-            <column name="record_progress_gmt_modified" />
+            <column name="RECORD_PROGRESS_GMT_MODIFIED" />
+        </property>
+        <property name="record_progress_student_file" type="java.lang.String">
+            <column name="RECORD_PROGRESS_STUDENT_FILE" />
         </property>
     </class>
 </hibernate-mapping>
