@@ -7,6 +7,7 @@ public class bysjglxt_dissertation {
 	private String dissertation_gmt_create; // 创建时间
 	private String dissertation_gmt_modified; // 修改时间
 
+	
 	public String getDissertation_id() {
 		return dissertation_id;
 	}
@@ -53,5 +54,6 @@ public class bysjglxt_dissertation {
 				+ dissertation_student + ", dissertation_file=" + dissertation_file + ", dissertation_gmt_create="
 				+ dissertation_gmt_create + ", dissertation_gmt_modified=" + dissertation_gmt_modified + "]";
 	}
+
 
 }

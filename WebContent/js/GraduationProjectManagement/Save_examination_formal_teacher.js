@@ -238,6 +238,26 @@ function Save_examination_formal_teacher() {
 	 * 
 	 */
 
+	var input_lunwen_recordprogress = document.getElementById("input_lunwen_recordprogress");
+	if (input_lunwen_recordprogress != null) {
+		if (input_lunwen_recordprogress.files[0] != null) {
+			formData.append("dissertation", input_lunwen_recordprogress.files[0]);
+		}
+	}
+	var studentUserId = document.getElementById("student_id_lunwen_record_progress");
+	formData.append("studentUserId",studentUserId.value);
+	/*
+	 * 
+	 */
+	var div_old_qianqi_recordprogress = document.getElementsByClassName("div_old_lunwen_recordprogress");
+
+	if (div_old_qianqi_recordprogress.length > 0) {
+		var oldDissertation = div_old_qianqi_recordprogress[0].innerHTML;
+		formData.append("oldDissertation", oldDissertation);
+	} else {
+		formData.append("oldDissertation", "");
+	}
+	
 	/*
 	 * 
 	 */

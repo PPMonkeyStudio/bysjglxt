@@ -252,8 +252,10 @@ public interface GraduationProjectManagementService {
 	 * @说明 指导教师更改形式审查表 是 1 否 2 无 3
 	 * @param updateExaminationFormal
 	 * @return
+	 * @throws IOException 
 	 */
-	public int updateTeacherExaminationFormal(bysjglxt_examination_formal updateExaminationFormal);
+	public int updateTeacherExaminationFormal(bysjglxt_examination_formal updateExaminationFormal,File dissertation, String oldDissertation, String user_student_id,
+			String dissertationFileName) throws IOException;
 
 	/**
 	 * @说明 领导小组长更改形式审查表 是 1 否 2 无 3
@@ -578,6 +580,8 @@ public interface GraduationProjectManagementService {
 	public File downloadZhongRecordProgress(String juese, String dissertationUserID);
 
 	public File downloadHouRecordProgress(String juese, String dissertationUserID);
+
+	public File downloadTeacherLunWen(String juese, String dissertationUserID);
 
 
 

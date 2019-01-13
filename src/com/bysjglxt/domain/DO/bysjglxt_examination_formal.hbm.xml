@@ -1,93 +1,96 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2018-1-7 12:48:47 by Hibernate Tools 3.5.0.Final -->
+<!-- Generated 2019-1-13 23:14:33 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="com.bysjglxt.domain.DO.bysjglxt_examination_formal" table="bysjglxt_examination_formal">
+    <class name="com.bysjglxt.domain.DO.bysjglxt_examination_formal" table="BYSJGLXT_EXAMINATION_FORMAL">
         <id name="examination_formal_id" type="java.lang.String">
-            <column name="examination_formal_id" />
+            <column name="EXAMINATION_FORMAL_ID" />
             <generator class="assigned" />
         </id>
         <property name="examination_formal_student" type="java.lang.String">
-            <column name="examination_formal_student" />
+            <column name="EXAMINATION_FORMAL_STUDENT" />
         </property>
         <property name="examination_formal_is_cover" type="int">
-            <column name="examination_formal_is_cover" />
+            <column name="EXAMINATION_FORMAL_IS_COVER" />
         </property>
         <property name="examination_formal_is_a4" type="int">
-            <column name="examination_formal_is_a4" />
+            <column name="EXAMINATION_FORMAL_IS_A4" />
         </property>
         <property name="examination_formal_is_format" type="int">
-            <column name="examination_formal_is_format" />
+            <column name="EXAMINATION_FORMAL_IS_FORMAT" />
         </property>
         <property name="examination_formal_is_abstract_chinese" type="int">
-            <column name="examination_formal_is_abstract_chinese" />
+            <column name="EXAMINATION_FORMAL_IS_ABSTRACT_CHINESE" />
         </property>
         <property name="examination_formal_is_catalog" type="int">
-            <column name="examination_formal_is_catalog" />
+            <column name="EXAMINATION_FORMAL_IS_CATALOG" />
         </property>
         <property name="examination_formal_is_abstract_foreign" type="int">
-            <column name="examination_formal_is_abstract_foreign" />
+            <column name="EXAMINATION_FORMAL_IS_ABSTRACT_FOREIGN" />
         </property>
         <property name="examination_formal_is_headline" type="int">
-            <column name="examination_formal_is_headline" />
+            <column name="EXAMINATION_FORMAL_IS_HEADLINE" />
         </property>
         <property name="examination_formal_is_punctuation" type="int">
-            <column name="examination_formal_is_punctuation" />
+            <column name="EXAMINATION_FORMAL_IS_PUNCTUATION" />
         </property>
         <property name="examination_formal_is_chinese_keyword" type="int">
-            <column name="examination_formal_is_chinese_keyword" />
+            <column name="EXAMINATION_FORMAL_IS_CHINESE_KEYWORD" />
         </property>
         <property name="examination_formal_is_typo" type="int">
-            <column name="examination_formal_is_typo" />
+            <column name="EXAMINATION_FORMAL_IS_TYPO" />
         </property>
         <property name="examination_formal_is_reference_ten" type="int">
-            <column name="examination_formal_is_reference_ten" />
+            <column name="EXAMINATION_FORMAL_IS_REFERENCE_TEN" />
         </property>
         <property name="examination_formal_is_reference_foreign" type="int">
-            <column name="examination_formal_is_reference_foreign" />
+            <column name="EXAMINATION_FORMAL_IS_REFERENCE_FOREIGN" />
         </property>
         <property name="examination_formal_is_reference_new" type="int">
-            <column name="examination_formal_is_reference_new" />
+            <column name="EXAMINATION_FORMAL_IS_REFERENCE_NEW" />
         </property>
         <property name="examination_formal_is_reference_num" type="int">
-            <column name="examination_formal_is_reference_num" />
+            <column name="EXAMINATION_FORMAL_IS_REFERENCE_NUM" />
         </property>
         <property name="examination_formal_is_reference_format" type="int">
-            <column name="examination_formal_is_reference_format" />
+            <column name="EXAMINATION_FORMAL_IS_REFERENCE_FORMAT" />
         </property>
         <property name="examination_formal_is_progress_metaphase" type="int">
-            <column name="examination_formal_is_progress_metaphase" />
+            <column name="EXAMINATION_FORMAL_IS_PROGRESS_METAPHASE" />
         </property>
         <property name="examination_formal_is_progress_summary" type="int">
-            <column name="examination_formal_is_progress_summary" />
+            <column name="EXAMINATION_FORMAL_IS_PROGRESS_SUMMARY" />
         </property>
         <property name="examination_formal_is_progress_actual" type="int">
-            <column name="examination_formal_is_progress_actual" />
+            <column name="EXAMINATION_FORMAL_IS_PROGRESS_ACTUAL" />
         </property>
         <property name="examination_formal_is_progress_complete" type="int">
-            <column name="examination_formal_is_progress_complete" />
+            <column name="EXAMINATION_FORMAL_IS_PROGRESS_COMPLETE" />
         </property>
         <property name="examination_formal_is_progress_logic" type="int">
-            <column name="examination_formal_is_progress_logic" />
+            <column name="EXAMINATION_FORMAL_IS_PROGRESS_LOGIC" />
         </property>
         <property name="examination_formal_is_chart" type="int">
-            <column name="examination_formal_is_chart" />
+            <column name="EXAMINATION_FORMAL_IS_CHART" />
         </property>
         <property name="examination_formal_is_enclosure" type="int">
-            <column name="examination_formal_is_enclosure" />
+            <column name="EXAMINATION_FORMAL_IS_ENCLOSURE" />
         </property>
         <property name="examination_formal_is_teacher_opinion" type="int">
-            <column name="examination_formal_is_teacher_opinion" />
+            <column name="EXAMINATION_FORMAL_IS_TEACHER_OPINION" />
         </property>
         <property name="examination_formal_is_leader_opinion" type="int">
-            <column name="examination_formal_is_leader_opinion" />
+            <column name="EXAMINATION_FORMAL_IS_LEADER_OPINION" />
         </property>
         <property name="examination_formal_gmt_create" type="java.lang.String">
-            <column name="examination_formal_gmt_create" />
+            <column name="EXAMINATION_FORMAL_GMT_CREATE" />
         </property>
         <property name="examination_formal_gmt_modified" type="java.lang.String">
-            <column name="examination_formal_gmt_modified" />
+            <column name="EXAMINATION_FORMAL_GMT_MODIFIED" />
+        </property>
+        <property name="dissertation_teacher_file" type="java.lang.String">
+            <column name="DISSERTATION_TEACHER_FILE" />
         </property>
     </class>
 </hibernate-mapping>

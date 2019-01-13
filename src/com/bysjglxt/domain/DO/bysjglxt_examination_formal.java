@@ -29,9 +29,18 @@ public class bysjglxt_examination_formal {
 	private int examination_formal_is_leader_opinion = 1;
 	private String examination_formal_gmt_create;
 	private String examination_formal_gmt_modified;
+	private String dissertation_teacher_file;
 
 	public int getExamination_formal_is_chinese_keyword() {
 		return examination_formal_is_chinese_keyword;
+	}
+
+	public String getDissertation_teacher_file() {
+		return dissertation_teacher_file;
+	}
+
+	public void setDissertation_teacher_file(String dissertation_teacher_file) {
+		this.dissertation_teacher_file = dissertation_teacher_file;
 	}
 
 	public void setExamination_formal_is_chinese_keyword(int examination_formal_is_chinese_keyword) {
