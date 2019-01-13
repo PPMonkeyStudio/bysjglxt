@@ -19,6 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_comment;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_dissertation;
@@ -528,6 +529,16 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public int saveWanTaskbook(File file, String oldFileName, String userId, String newFileName) throws IOException {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userId);
+		if(studentUser==null) {
+			return 0;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
 		/*
 		 * 获取路径
 		 */
@@ -545,7 +556,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		taskBook = graduationProjectManagementDao.getTaskBookByUserId(userId);
 		// 如果新文件为空
 		if (file == null) {
-			path = lj + "bysjglxt/wanTaskbook/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/完善任务书/";
 			// 判断旧文件是否处于空的状态
 			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
 				// 如果是空
@@ -555,7 +566,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					// 如果存在,则将原有毕业论文删除
 					// 先进行删除
 					// 删除学生上传的文件
-					path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_wan_file();
+					path = path + taskBook.getTaskbook_wan_file();
 					File deleteFile = new File(path);
 					deleteFile.delete();
 					// flag = graduationProjectManagementDao.deleteWanTaskBookFileByUserId(userId);
@@ -574,7 +585,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return 1;
 			}
 		} else {
-			path = lj + "bysjglxt/wanTaskbook/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/完善任务书/";
 			// 如果新文件存在
 			// 1.判断是否有属于这个学生的毕业论文存在
 			if (taskBook != null && taskBook.getTaskbook_wan_file() != null
@@ -582,7 +593,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				// 如果存在
 				// 先进行删除
 				// 删除学生上传的文件
-				path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_wan_file();
+				path = path + taskBook.getTaskbook_wan_file();
 				File deleteFile = new File(path);
 				deleteFile.delete();
 				// 删除学生毕业论文记录
@@ -591,15 +602,16 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					return -1;
 				}
 			}
-			path = lj + "bysjglxt/wanTaskbook/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/完善任务书/";
 			// 保存毕业论文
 			// 1.上传毕业论文
 			if (taskBook != null) {
-				path = path + taskBook.getTaskbook_id() + "_" + newFileName;
+				String fileNameP = studentUser.getUser_student_num()+"WR."+newFileName.substring(newFileName.lastIndexOf(".")+1);
+				path = path  + fileNameP;
 				File newFile = new File(path);
 				FileUtils.copyFile(file, newFile);
 				// 存储数据到数据库
-				taskBook.setTaskbook_wan_file(newFileName);
+				taskBook.setTaskbook_wan_file(fileNameP);
 				taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 				taskBook.setTaskbook_wan_file_xiazai(-1);
 				flag = graduationProjectManagementDao.saveObj(taskBook) == 1 ? true : false;
@@ -609,12 +621,22 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return -2;
 			}
 		}
-		return 0;
+		return 1;
 	}
 
 	// 保存任务书
 	@Override
 	public int saveXiaTaskbook(File file, String oldFileName, String userId, String newFileName) throws IOException {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userId);
+		if(studentUser==null) {
+			return 0;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
 		/*
 		 * 获取路径
 		 */
@@ -632,7 +654,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		taskBook = graduationProjectManagementDao.getTaskBookByUserId(userId);
 		// 如果新文件为空
 		if (file == null) {
-			path = lj + "bysjglxt/xiaTaskbook/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/下发任务书/";
 			// 判断旧文件是否处于空的状态
 			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
 				// 如果是空
@@ -642,7 +664,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					// 如果存在,则将原有毕业论文删除
 					// 先进行删除
 					// 删除学生上传的文件
-					path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_xia_file();
+					path = path + taskBook.getTaskbook_xia_file();
 					File deleteFile = new File(path);
 					deleteFile.delete();
 					// flag = graduationProjectManagementDao.deleteXiaTaskBookFileByUserId(userId);
@@ -661,7 +683,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return 1;
 			}
 		} else {
-			path = lj + "bysjglxt/xiaTaskbook/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/下发任务书/";
 			// 如果新文件存在
 			// 1.判断是否有属于这个学生的毕业论文存在
 			if (taskBook != null && taskBook.getTaskbook_xia_file() != null
@@ -669,7 +691,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				// 如果存在
 				// 先进行删除
 				// 删除学生上传的文件
-				path = path + taskBook.getTaskbook_id() + "_" + taskBook.getTaskbook_xia_file();
+				path = path + taskBook.getTaskbook_xia_file();
 				File deleteFile = new File(path);
 				deleteFile.delete();
 				// 删除学生毕业论文记录
@@ -678,15 +700,17 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					return -1;
 				}
 			}
-			path = lj + "bysjglxt/xiaTaskbook/";
+			
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/下发任务书/";
 			// 保存毕业论文
-			// 1.上传毕业论文
+			// 1.上传毕业论文 //+ taskBook.getTaskbook_id() + "_"
 			if (taskBook != null) {
-				path = path + taskBook.getTaskbook_id() + "_" + newFileName;
+				String fileNameP = studentUser.getUser_student_num()+"XR."+newFileName.substring(newFileName.lastIndexOf(".")+1);
+				path = path  + fileNameP;
 				File newFile = new File(path);
 				FileUtils.copyFile(file, newFile);
 				// 存储数据到数据库
-				taskBook.setTaskbook_xia_file(newFileName);
+				taskBook.setTaskbook_xia_file(fileNameP);
 				taskBook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
 				taskBook.setTaskbook_xia_file_xiazai(-1);
 				flag = graduationProjectManagementDao.saveObj(taskBook) == 1 ? true : false;
@@ -696,12 +720,22 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return -2;
 			}
 		}
-		return 0;
+		return 1;
 	}
 
 	// 保存开题报告
 	@Override
 	public int saveReportOpening(File file, String oldFileName, String userId, String newFileName) throws IOException {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userId);
+		if(studentUser==null) {
+			return 0;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
 		/*
 		 * 获取路径
 		 */
@@ -719,7 +753,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		reportOpening = graduationProjectManagementDao.getReportOpeningUser(userId);
 		// 如果新文件为空
 		if (file == null) {
-			path = lj + "bysjglxt/reportOpening/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/开题报告/";
 			// 判断旧文件是否处于空的状态
 			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
 				// 如果是空
@@ -729,7 +763,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					// 如果存在,则将原有毕业论文删除
 					// 先进行删除
 					// 删除学生上传的文件
-					path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
+					path = path + reportOpening.getReport_opening_file();
 					File deleteFile = new File(path);
 					deleteFile.delete();
 					// flag =
@@ -749,7 +783,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return 1;
 			}
 		} else {
-			path = lj + "bysjglxt/reportOpening/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/开题报告/";
 			// 如果新文件存在
 			// 1.判断是否有属于这个学生的毕业论文存在
 			if (reportOpening != null && reportOpening.getReport_opening_file() != null
@@ -757,7 +791,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				// 如果存在
 				// 先进行删除
 				// 删除学生上传的文件
-				path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
+				path = path + reportOpening.getReport_opening_file();
 				File deleteFile = new File(path);
 				deleteFile.delete();
 				// 删除学生毕业论文记录
@@ -766,16 +800,18 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					return -1;
 				}
 			}
-			path = lj + "bysjglxt/reportOpening/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/开题报告/";
 			// 保存毕业论文
 			// 1.上传毕业论文
 			if (reportOpening != null) {
-				path = path + reportOpening.getReport_opening_id() + "_" + newFileName;
+				String fileNameP = studentUser.getUser_student_num()+"K."+newFileName.substring(newFileName.lastIndexOf(".")+1);
+				path = path  + fileNameP;
+//				path = path + reportOpening.getReport_opening_id() + "_" + newFileName;
 				File newFile = new File(path);
 				FileUtils.copyFile(file, newFile);
 				// 存储数据到数据库
 				reportOpening.setReport_file_is_xiazai(-1);
-				reportOpening.setReport_opening_file(newFileName);
+				reportOpening.setReport_opening_file(fileNameP);
 				reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
 				flag = graduationProjectManagementDao.saveObj(reportOpening) == 1 ? true : false;
 				if (!flag)
@@ -784,7 +820,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return -2;
 			}
 		}
-		return 0;
+		return 1;
 	}
 
 	/**
@@ -794,6 +830,16 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public int saveDissertation(File file, String oldFileName, String userId, String newFileName) throws IOException {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userId);
+		if(studentUser==null) {
+			return 0;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
 		/*
 		 * 获取路径
 		 */
@@ -810,7 +856,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
 		// 如果新文件为空
 		if (file == null) {
-			path = lj + "bysjglxt/graduagtionThesi/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/毕业论文/";
 			// 判断旧文件是否处于空的状态
 			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
 				// 如果是空
@@ -837,7 +883,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return 1;
 			}
 		} else {
-			path = lj + "bysjglxt/graduagtionThesi/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/毕业论文/";
 			// 如果新文件存在
 			bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
 			// 1.判断是否有属于这个学生的毕业论文存在
@@ -856,7 +902,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					return -1;
 				}
 			}
-			path = lj + "bysjglxt/graduagtionThesi/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/毕业论文/";
 			// 保存毕业论文
 			// 1.上传毕业论文
 			bysjglxt_dissertation = new bysjglxt_dissertation();
@@ -883,6 +929,16 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public File downloadWanTaskBook(String juese, String userID) {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userID);
+		if(studentUser==null) {
+			return null;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
 		/*
 		 * 获取路径
 		 */
@@ -896,12 +952,12 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		// 1.根据user Id获得学生毕业论文表中的记录
 		bysjglxt_taskbook wanTaskbook = new bysjglxt_taskbook();
-		String path = lj + "bysjglxt/wanTaskbook/";
+		String path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/完善任务书/";
 		wanTaskbook = graduationProjectManagementDao.getTaskBookByUserId(userID);
 		if (wanTaskbook == null) {
 			return null;
 		}
-		path = path + wanTaskbook.getTaskbook_id() + "_" + wanTaskbook.getTaskbook_wan_file();
+		path = path + wanTaskbook.getTaskbook_wan_file();
 		File file = new File(path);
 		// 如果下载的人是学生
 		// 获取某个学生的指导老师
@@ -923,6 +979,16 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	// 下载下发任务书
 	@Override
 	public File downloadXiaTaskBook(String juese, String userID) {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userID);
+		if(studentUser==null) {
+			return null;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
 		/*
 		 * 获取路径
 		 */
@@ -936,12 +1002,12 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		// 1.根据user Id获得学生毕业论文表中的记录
 		bysjglxt_taskbook xiaTaskbook = new bysjglxt_taskbook();
-		String path = lj + "bysjglxt/xiaTaskbook/";
+		String path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/下发任务书/";
 		xiaTaskbook = graduationProjectManagementDao.getTaskBookByUserId(userID);
 		if (xiaTaskbook == null) {
 			return null;
-		}
-		path = path + xiaTaskbook.getTaskbook_id() + "_" + xiaTaskbook.getTaskbook_xia_file();
+		}// xiaTaskbook.getTaskbook_id() + "_" + 
+		path = path +xiaTaskbook.getTaskbook_xia_file();
 		File file = new File(path);
 		// 如果下载的人是学生
 		if (userID.equals(juese)) {
@@ -958,6 +1024,16 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	 */
 	@Override
 	public File downloadReportOpening(String juese, String userID) {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userID);
+		if(studentUser==null) {
+			return null;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
 		/*
 		 * 获取路径
 		 */
@@ -971,12 +1047,12 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		// 1.根据user Id获得学生毕业论文表中的记录
 		bysjglxt_report_opening reportOpening = new bysjglxt_report_opening();
-		String path = lj + "bysjglxt/reportOpening/";
+		String path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/开题报告/";
 		reportOpening = graduationProjectManagementDao.getReportOpeningUser(userID);
 		if (reportOpening == null) {
 			return null;
 		}
-		path = path + reportOpening.getReport_opening_id() + "_" + reportOpening.getReport_opening_file();
+		path = path + reportOpening.getReport_opening_file();
 		File file = new File(path);
 		// 如果下载的人是学生
 		// 获取某个学生的指导老师
@@ -997,6 +1073,16 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	// 下载毕业论文
 	@Override
 	public File downloadDissertation(String userId) {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userId);
+		if(studentUser==null) {
+			return null;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
 		/*
 		 * 获取路径
 		 */
@@ -1010,7 +1096,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		// 1.根据user Id获得学生毕业论文表中的记录
 		bysjglxt_dissertation bysjglxt_dissertation = new bysjglxt_dissertation();
-		String path = lj + "graduagtionThesi/";
+		String path =  lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/毕业论文/";
 		bysjglxt_dissertation = graduationProjectManagementDao.getThesisByStudent(userId);
 		if (bysjglxt_dissertation == null) {
 			return null;

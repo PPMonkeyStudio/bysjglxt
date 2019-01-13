@@ -9,6 +9,7 @@ public class bysjglxt_taskbook {
 	 */
 	private String taskbook_xia_file = "";
 	private String taskbook_wan_file = "";
+	private String taskbook_shen_file = "";
 	private Integer taskbook_wan_file_xiazai = -1;
 	private Integer taskbook_xia_file_xiazai = -1;
 	private String taskbook_leader_option = "";
@@ -18,6 +19,14 @@ public class bysjglxt_taskbook {
 
 	public String getTaskbook_id() {
 		return taskbook_id;
+	}
+
+	public String getTaskbook_shen_file() {
+		return taskbook_shen_file;
+	}
+
+	public void setTaskbook_shen_file(String taskbook_shen_file) {
+		this.taskbook_shen_file = taskbook_shen_file;
 	}
 
 	public String getTaskbook_xia_file() {
@@ -92,11 +101,12 @@ public class bysjglxt_taskbook {
 	public String toString() {
 		return "bysjglxt_taskbook [taskbook_id=" + taskbook_id + ", bysjglxt_taskbook_student="
 				+ bysjglxt_taskbook_student + ", taskbook_xia_file=" + taskbook_xia_file + ", taskbook_wan_file="
-				+ taskbook_wan_file + ", taskbook_wan_file_xiazai=" + taskbook_wan_file_xiazai
-				+ ", taskbook_xia_file_xiazai=" + taskbook_xia_file_xiazai + ", taskbook_leader_option="
-				+ taskbook_leader_option + ", taskbook_gmt_create=" + taskbook_gmt_create + ", taskbook_gmt_modified="
-				+ taskbook_gmt_modified + "]";
+				+ taskbook_wan_file + ", taskbook_shen_file=" + taskbook_shen_file + ", taskbook_wan_file_xiazai="
+				+ taskbook_wan_file_xiazai + ", taskbook_xia_file_xiazai=" + taskbook_xia_file_xiazai
+				+ ", taskbook_leader_option=" + taskbook_leader_option + ", taskbook_gmt_create=" + taskbook_gmt_create
+				+ ", taskbook_gmt_modified=" + taskbook_gmt_modified + "]";
 	}
+
 
 
 

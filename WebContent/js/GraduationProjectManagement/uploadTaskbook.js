@@ -1,8 +1,8 @@
 var num_taskbook = 0;
 
 function addTeacherTaskBook() {
-
-	if (num_taskbook >= 2) {
+	console.log('dddddddddddddddddddddd:'+num_taskbook)
+	if (num_taskbook >= 1) {
 		toastr.error("已下发任务书，请先点击删除再上传");
 		return;
 	}
@@ -22,7 +22,9 @@ function addTeacherTaskBook() {
 }
 
 function taskbookFileChange(xia_taskbook) {
+	console.log('dddddddddddddddddddddddd:',num_taskbook)
 	num_taskbook++;
+	console.log("zuihou:",num_taskbook);
 	var div_xia_taskbook_box = document.getElementById("div_xia_taskbook_box");
 	var div_xia_taskbook_father = document.createElement("div");
 	var div_xia_taskbook_img = document.createElement("img");
@@ -102,6 +104,7 @@ function taskbookFileChange(xia_taskbook) {
 }
 function delXiaTaskBook() {
 	num_taskbook--;
+	console.log("zuihou:",num_taskbook);
 	var div_xia_taskbook_box = document.getElementById("div_xia_taskbook_box");
 	var div_xia_taskbook_father = document
 			.getElementById("div_xia_taskbook_father");

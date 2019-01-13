@@ -1,7 +1,5 @@
 function Initialization_xia_Taskbook_Teacher() {
-
-	var banner_xia_Taskbook_Teacher = document
-			.getElementById("banner_xia_Taskbook_Teacher");
+	var banner_xia_Taskbook_Teacher = document.getElementById("banner_xia_Taskbook_Teacher");
 	banner_xia_Taskbook_Teacher.click();
 }
 
@@ -63,6 +61,8 @@ function xia_taskbook() {
 							+ 'onclick="addTeacherTaskBook()">上传</button>';
 					tab.appendChild(div_2);
 					if (taskbook.taskbook_xia_file != '') {
+						//TODO 在这里将数量置为空
+						num_taskbook = 0;
 						taskbookFileChange(taskbook.taskbook_xia_file);
 					}
 

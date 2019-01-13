@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.GraduationProjectManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_comment;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_dissertation;
@@ -48,6 +49,19 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return this.sessionFactory.getCurrentSession();
 	}
 	
+
+	@Override
+	public bysjglxt_college getCollegeById(String user_student_belong_college) {
+		bysjglxt_college college = new bysjglxt_college();
+		Session session = getSession();
+		String hql = "from bysjglxt_college where college_id = '"+user_student_belong_college+"'";
+		Query query = session.createQuery(hql);
+		college = (bysjglxt_college) query.uniqueResult();
+		session.clear();
+		return college;
+	}
+
+
 
 	@Override
 	public String getGraduationTutorCount(String user_teacher_id,int state) {
@@ -1755,5 +1769,15 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 		return student;
 	}
 
+	@Override
+	public String getMaxTopicYear() {
+		String year = "";
+		Session session = getSession();
+		String hql = "select MAX(topic.topic_year) from bysjglxt_topic topic";
+		Query query = session.createQuery(hql);
+		year = (String) query.uniqueResult();
+		session.clear();
+		return year;
+	}
 
 }

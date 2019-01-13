@@ -2,6 +2,7 @@ package com.bysjglxt.dao;
 
 import java.util.List;
 
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_comment;
 import com.bysjglxt.domain.DO.bysjglxt_defence;
 import com.bysjglxt.domain.DO.bysjglxt_dissertation;
@@ -224,5 +225,9 @@ public interface GraduationProjectManagementDao {
 	public StudentInformationDTO getStudentInfoByUserId(String user_student_id);
 
 	public String getGraduationTutorCount(String user_teacher_id,int state);
+
+	public bysjglxt_college getCollegeById(String user_student_belong_college);
+
+	public String getMaxTopicYear();
 
 }

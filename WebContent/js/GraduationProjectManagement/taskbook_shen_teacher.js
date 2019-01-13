@@ -93,7 +93,7 @@ function shen_taskbook() {
 				var div_wan_taskbook_del = document
 						.getElementById("div_wan_taskbook_del");
 				if ('-1' == k) {
-					if ("学生完善任务书" != current_processDefinitionName) {
+					if ("指导老师审核任务书" != current_processDefinitionName) {
 						div_2.parentNode.removeChild(div_2);
 						button_SaveGraduationProject.style.display = "none";
 						div_wan_taskbook_del.style.display = "none";
