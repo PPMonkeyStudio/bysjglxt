@@ -206,8 +206,10 @@ public interface GraduationProjectManagementService {
 	 * @说明 学生更改后期进展情况记录
 	 * @param updateRecordProgress
 	 * @return
+	 * @throws IOException 
 	 */
-	public int updateStudentRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgress);
+	public int updateStudentRecordProgressLaterstage(bysjglxt_record_progress updateRecordProgress,File dissertation, String oldDissertation, String user_student_id,
+			String dissertationFileName) throws IOException;
 
 	/**
 	 * @说明 教师更改后期进展情况记录
@@ -220,8 +222,10 @@ public interface GraduationProjectManagementService {
 	 * @说明 学生更改完善期进展情况记录
 	 * @param updateRecordProgress
 	 * @return
+	 * @throws IOException 
 	 */
-	public int updateStudentRecordProgressPerfect(bysjglxt_record_progress updateRecordProgress);
+	public int updateStudentRecordProgressPerfect(bysjglxt_record_progress updateRecordProgress,File dissertation, String oldDissertation, String user_student_id,
+			String dissertationFileName) throws IOException;
 
 	/**
 	 * @说明 教师更改完善期进展情况记录
@@ -570,6 +574,10 @@ public interface GraduationProjectManagementService {
 	public File downloadQianRecordProgress(String juese, String dissertationUserID);
 
 	public File downloadZhuanRecordProgress(String juese, String dissertationUserID);
+
+	public File downloadZhongRecordProgress(String juese, String dissertationUserID);
+
+	public File downloadHouRecordProgress(String juese, String dissertationUserID);
 
 
 

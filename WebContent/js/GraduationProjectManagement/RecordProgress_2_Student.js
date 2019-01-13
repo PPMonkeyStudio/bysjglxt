@@ -124,64 +124,64 @@ function RecordProgress_2_Student() {
 					if ("学生完成进展情况记录（撰写阶段）" != current_processDefinitionName) {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
-						div_zhuan_recordprogress_del.style.display = "none";
 						upload_button.style.display = "none";
+						div_zhuan_recordprogress_del.style.display = "none";
 					} else if (userStudentDTO != null) {
 						if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
 							button_SaveGraduationProject.style.display = "block";
-							div_zhuan_recordprogress_del.style.display = "block";
 							upload_button.style.display = "block";
+							div_zhuan_recordprogress_del.style.display = "block";
 						} else {
 							textarea_1.disabled = "disabled";
 							button_SaveGraduationProject.style.display = "none";
-							div_zhuan_recordprogress_del.style.display = "none";
 							upload_button.style.display = "none";
+							div_zhuan_recordprogress_del.style.display = "none";
 						}
 					} else if (userTeacherDTO != null) {
 						if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
 							button_SaveGraduationProject.style.display = "block";
-							div_zhuan_recordprogress_del.style.display = "block";
 							upload_button.style.display = "block";
+							div_zhuan_recordprogress_del.style.display = "block";
 						} else {
 							textarea_1.disabled = "disabled";
 							button_SaveGraduationProject.style.display = "none";
-							div_zhuan_recordprogress_del.style.display = "none";
 							upload_button.style.display = "none";
+							div_zhuan_recordprogress_del.style.display = "none";
 						}
 					} else {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
-						div_zhuan_recordprogress_del.style.display = "none";
 						upload_button.style.display = "none";
+						div_zhuan_recordprogress_del.style.display = "none";
 					}
 				}else if('1' == k) {
 					if (userStudentDTO != null) {
 						if (_userId_Task == userStudentDTO.bysjglxtStudentUser.user_student_id) {
 							button_SaveGraduationProject.style.display = "block";
-							div_zhuan_recordprogress_del.style.display = "block";
 							upload_button.style.display = "block";
+							div_zhuan_recordprogress_del.style.display = "block";
 						} else {
 							textarea_1.disabled = "disabled";
 							button_SaveGraduationProject.style.display = "none";
-							div_zhuan_recordprogress_del.style.display = "none";
 							upload_button.style.display = "none";
+							div_zhuan_recordprogress_del.style.display = "none";
 						}
 					} else if (userTeacherDTO != null) {
 						if (_userId_Task == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
 							button_SaveGraduationProject.style.display = "block";
-							div_zhuan_recordprogress_del.style.display = "block";
 							upload_button.style.display = "block";
+							div_zhuan_recordprogress_del.style.display = "block";
 						} else {
 							textarea_1.disabled = "disabled";
 							button_SaveGraduationProject.style.display = "none";
-							div_zhuan_recordprogress_del.style.display = "none";
 							upload_button.style.display = "none";
+							div_zhuan_recordprogress_del.style.display = "none";
 						}
 					} else {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
-						div_zhuan_recordprogress_del.style.display = "none";
 						upload_button.style.display = "none";
+						div_zhuan_recordprogress_del.style.display = "none";
 					}
 				}
 				

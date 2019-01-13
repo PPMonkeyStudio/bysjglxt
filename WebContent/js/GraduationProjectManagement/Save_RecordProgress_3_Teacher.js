@@ -17,7 +17,7 @@ function Save_RecordProgress_3_Teacher() {
 					"POST",
 					"/bysjglxt/graduationProject/GraduationProjectManagement_updateTeacherRecordProgressLaterstage");
 
-	var record_progress_id = document.getElementById("record_progress_id");
+	var record_progress_id = document.getElementById("record_progress_zhong_id");
 	var record_progress_opinion_3 = document
 			.getElementById("record_progress_opinion_3");
 	/*

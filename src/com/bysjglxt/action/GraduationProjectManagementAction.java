@@ -745,7 +745,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 	public void updateStudentRecordProgressLaterstage() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		if (graduationProjectManagementService
-				.updateStudentRecordProgressLaterstage(updateRecordProgressLaterstage) == 1) {
+				.updateStudentRecordProgressLaterstage(updateRecordProgressLaterstage,dissertation,
+						oldDissertation, studentUserId, dissertationFileName) == 1) {
 			http_response.getWriter().write("保存成功");
 		} else {
 			http_response.getWriter().write("系统繁忙");
@@ -764,7 +765,8 @@ public class GraduationProjectManagementAction extends ActionSupport
 
 	public void updateStudentRecordProgressPerfect() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		if (graduationProjectManagementService.updateStudentRecordProgressPerfect(updateRecordProgressPerfect) == 1) {
+		if (graduationProjectManagementService.updateStudentRecordProgressPerfect(updateRecordProgressPerfect,dissertation,
+				oldDissertation, studentUserId, dissertationFileName) == 1) {
 			http_response.getWriter().write("保存成功");
 		} else {
 			http_response.getWriter().write("系统繁忙");
@@ -943,6 +945,47 @@ public class GraduationProjectManagementAction extends ActionSupport
 					.getBysjglxtStudentUser().getUser_student_id();
 		}
 		File downloadDissertation = graduationProjectManagementService.downloadZhuanRecordProgress(juese,DissertationUserID);
+		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(downloadDissertation);
+		return "downloadDissertation";
+	}
+	/**
+	 * 下载撰写情况记录
+	 * 
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 */
+	public String downloadZhongRecordProgress() throws UnsupportedEncodingException, FileNotFoundException {
+		String juese = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			juese = "teacher";
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			juese = ((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+					.getBysjglxtStudentUser().getUser_student_id();
+		}
+		File downloadDissertation = graduationProjectManagementService.downloadZhongRecordProgress(juese,DissertationUserID);
+		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(downloadDissertation);
+		return "downloadDissertation";
+	}
+	
+	/**
+	 * 下载完善情况记录
+	 * 
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 */
+	public String downloadHouRecordProgress() throws UnsupportedEncodingException, FileNotFoundException {
+		String juese = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			juese = "teacher";
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			juese = ((StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO"))
+					.getBysjglxtStudentUser().getUser_student_id();
+		}
+		File downloadDissertation = graduationProjectManagementService.downloadHouRecordProgress(juese,DissertationUserID);
 		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
 		inputStream = new FileInputStream(downloadDissertation);
 		return "downloadDissertation";

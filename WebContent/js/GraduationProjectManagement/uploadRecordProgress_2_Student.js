@@ -94,9 +94,9 @@ function zhuanRecordProgressFileChange(qianRecordProgress) {
 	div_zhuan_recordprogress_del.style.padding = "5px 10px";
 	div_zhuan_recordprogress_del.style.borderRadius = "50%";
 	div_zhuan_recordprogress_del.style.cursor = "pointer";
-	div_zhuan_recordprogress_del.onclick = delQianRecordProgress;
+	div_zhuan_recordprogress_del.onclick = delZhuanRecordProgress;
 }
-function delQianRecordProgress() {
+function delZhuanRecordProgress() {
 	num_student_taskbook--;
 	var div_zhuan_recordprogress_box = document.getElementById("div_zhuan_recordprogress_box");
 	var div_zhuan_recordprogress_father = document

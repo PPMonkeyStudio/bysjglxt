@@ -24,7 +24,7 @@ function RecordProgress_3_Teacher() {
 				 * 
 				 */
 				var textarea_0 = document.createElement("textarea");
-				textarea_0.id = 'record_progress_id';
+				textarea_0.id = 'record_progress_zhong_id';
 				textarea_0.style = "display:none;"
 				textarea_0.innerHTML = recordprocess_3.record_progress_id;
 				tab.appendChild(textarea_0);

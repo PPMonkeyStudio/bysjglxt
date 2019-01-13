@@ -17,7 +17,7 @@ function Save_RecordProgress_4_Teacher() {
 					"POST",
 					"/bysjglxt/graduationProject/GraduationProjectManagement_updateTeacherRecordProgressPerfect");
 
-	var record_progress_id = document.getElementById("record_progress_id");
+	var record_progress_id = document.getElementById("record_hou_progress_id");
 
 	var record_progress_opinion_4 = document
 			.getElementById("record_progress_opinion_4");
