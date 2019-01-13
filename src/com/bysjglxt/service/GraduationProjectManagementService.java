@@ -190,8 +190,10 @@ public interface GraduationProjectManagementService {
 	 * @说明 学生更改中期进展情况记录
 	 * @param updateRecordProgress
 	 * @return
+	 * @throws IOException 
 	 */
-	public int updateStudentRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress);
+	public int updateStudentRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress,File dissertation, String oldDissertation, String user_student_id,
+			String dissertationFileName) throws IOException;
 
 	/**
 	 * @说明 教师更改中期进展情况记录
@@ -566,6 +568,8 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public File downloadQianRecordProgress(String juese, String dissertationUserID);
+
+	public File downloadZhuanRecordProgress(String juese, String dissertationUserID);
 
 
 

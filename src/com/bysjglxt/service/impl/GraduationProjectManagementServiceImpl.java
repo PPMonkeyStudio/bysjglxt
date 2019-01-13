@@ -821,7 +821,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	}
 	
 	
-	public int saveRecordProgress(File file, String oldFileName, String userId, String newFileName,bysjglxt_record_progress record_progress) throws IOException {
+	public int saveRecordProgress(File file, String oldFileName, String userId, String newFileName,bysjglxt_record_progress record_progress,int state) throws IOException {
 		bysjglxt_student_user studentUser = new bysjglxt_student_user();
 		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userId);
 		if(studentUser==null) {
@@ -845,9 +845,29 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		boolean flag = false;
 		String path = "";
+		String weizhi = "";
+		String houzhui = "";
+		switch(state) {
+		case 1:
+			weizhi = "前期进展资料";
+			houzhui = "QQZL";
+			break;
+		case 2:
+			weizhi = "撰写进展资料";
+			houzhui = "ZXZL";
+			break;
+		case 3:
+			weizhi = "中期进展资料";
+			houzhui = "ZQZL";
+			break;
+		case 4:
+			weizhi = "后期进展资料";
+			houzhui = "HQZL";
+			break;
+		}
 		// 如果新文件为空
 		if (file == null) {
-			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/前期进展资料/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/"+weizhi+"/";
 			// 判断旧文件是否处于空的状态
 			if ("".equals(oldFileName) || !(oldFileName.trim().length() > 0)) {
 				// 如果是空
@@ -875,7 +895,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				return 1;
 			}
 		} else {
-			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/前期进展资料/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/"+weizhi+"/";
 			// 如果新文件存在
 			// 1.判断是否有属于这个学生的毕业论文存在
 			if (record_progress != null && record_progress.getRecord_progress_student_file() != null
@@ -892,11 +912,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 				graduationProjectManagementDao.saveObj(record_progress);
 			}
 			
-			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/前期进展资料/";
+			path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/"+weizhi+"/";
 			// 保存毕业论文
 			// 1.上传毕业论文 //+ taskBook.getTaskbook_id() + "_"
 			if (record_progress != null) {
-				String fileNameP = studentUser.getUser_student_num()+"QZL."+newFileName.substring(newFileName.lastIndexOf(".")+1);
+				String fileNameP = studentUser.getUser_student_num()+houzhui+"."+newFileName.substring(newFileName.lastIndexOf(".")+1);
 				path = path  + fileNameP;
 				File newFile = new File(path);
 				FileUtils.copyFile(file, newFile);
@@ -1216,7 +1236,64 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		return 1;
 	}
-
+	@Override
+	public File downloadZhuanRecordProgress(String juese, String userID) {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userID);
+		if(studentUser==null) {
+			return null;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		bysjglxt_record_progress recordProcess = new bysjglxt_record_progress();
+		recordProcess = graduationProjectManagementDao.getRecordProgress(userID, "中期");
+		// 1.根据user Id获得学生毕业论文表中的记录
+		String path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/撰写进展资料/";
+		if (recordProcess == null) {
+			return null;
+		}
+		path = path + recordProcess.getRecord_progress_student_file();
+//		path = path + wanTaskbook.getTaskbook_shen_file();
+		File file = new File(path);
+		// 如果下载的人是学生
+		/*if("teacher".equals(juese)) {
+			return file;
+		}*/
+		// 获取某个学生的指导老师
+		/*bysjglxt_topic_select topicSelect = new bysjglxt_topic_select();
+		topicSelect = graduationProjectManagementDao.getStudentSelectTopic(userID);
+		if (topicSelect != null && topicSelect.getTopic_select_teacher_tutor() != null
+				&& topicSelect.getTopic_select_teacher_tutor().trim().length() > 0) {
+			if ((topicSelect.getTopic_select_teacher_tutor()).equals(juese)) {
+				// 更改任务书
+				wanTaskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
+				wanTaskbook.setTaskbook_shen_file_xiazai(1);
+				graduationProjectManagementDao.saveObj(wanTaskbook);
+			}
+		}*/
+		// 如果下载的人是学生
+		/*if("student".equals(juese)) {
+			// 更改任务书
+			wanTaskbook.setTaskbook_gmt_modified(TeamUtil.getStringSecond());
+			wanTaskbook.setTaskbook_shen_file_xiazai(1);
+			graduationProjectManagementDao.saveObj(wanTaskbook);
+		}*/
+		return file;
+	}
 	@Override
 	public File downloadQianRecordProgress(String juese, String userID) {
 		bysjglxt_student_user studentUser = new bysjglxt_student_user();
@@ -2181,7 +2258,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		/**
 		 * 
 		 */
-		return saveRecordProgress(dissertation, oldDissertation, user_student_id, dissertationFileName, bysjglxt_record_progress_Earlystage);
+		return saveRecordProgress(dissertation, oldDissertation, user_student_id, dissertationFileName, bysjglxt_record_progress_Earlystage,1);
 	}
 
 	/**
@@ -2204,9 +2281,11 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 
 	/**
 	 * 学生更改中期记录
+	 * @throws IOException 
 	 */
 	@Override
-	public int updateStudentRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress) {
+	public int updateStudentRecordProgressMetaphase(bysjglxt_record_progress updateRecordProgress,File dissertation, String oldDissertation, String user_student_id,
+			String dissertationFileName) throws IOException {
 		int flag = 2;
 		bysjglxt_record_progress bysjglxt_record_progress_Metaphase = new bysjglxt_record_progress();
 		bysjglxt_record_progress_Metaphase = graduationProjectManagementDao
@@ -2217,7 +2296,8 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_record_progress_Metaphase.setRecord_progress_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyInProgressEarlystage(bysjglxt_record_progress_Metaphase);
 		}
-		return flag;
+		
+		return saveRecordProgress(dissertation, oldDissertation, user_student_id, dissertationFileName, bysjglxt_record_progress_Metaphase,2);
 	}
 
 	/**
@@ -2229,6 +2309,7 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_record_progress bysjglxt_record_progress_Metaphase = new bysjglxt_record_progress();
 		bysjglxt_record_progress_Metaphase = graduationProjectManagementDao
 				.getRecordProgress(updateRecordProgress.getRecord_progress_id());
+		System.out.println("bysjglxt_record_progress_Metaphase:"+bysjglxt_record_progress_Metaphase);
 		if (bysjglxt_record_progress_Metaphase != null) {
 			bysjglxt_record_progress_Metaphase
 					.setRecord_progress_opinion(updateRecordProgress.getRecord_progress_opinion());

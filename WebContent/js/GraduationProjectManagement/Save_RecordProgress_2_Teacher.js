@@ -17,7 +17,7 @@ function Save_RecordProgress_2_Teacher() {
 					"POST",
 					"/bysjglxt/graduationProject/GraduationProjectManagement_updateTeacherRecordProgressMetaphase");
 
-	var record_progress_id = document.getElementById("record_progress_id");
+	var record_progress_id = document.getElementById("record_zq_progress_id");
 
 	var record_progress_opinion_2 = document
 			.getElementById("record_progress_opinion_2");
@@ -27,6 +27,7 @@ function Save_RecordProgress_2_Teacher() {
 	 */
 	formData.append("updateRecordProgressMetaphase.record_progress_id",
 			record_progress_id.value);
+	console.log("12:",record_progress_id.value)
 	//
 	formData.append("updateRecordProgressMetaphase.record_progress_opinion",
 			record_progress_opinion_2.value);

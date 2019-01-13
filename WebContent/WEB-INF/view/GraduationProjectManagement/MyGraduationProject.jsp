@@ -38,6 +38,12 @@
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/uploadRecordProgress_1_Student.js"></script>
 <script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadRecordProgress_2_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadRecordProgress_3_Student.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/GraduationProjectManagement/uploadRecordProgress_4_Student.js"></script>
+<script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_1_Teacher.js"></script>
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/RecordProgress_2_Student.js"></script>

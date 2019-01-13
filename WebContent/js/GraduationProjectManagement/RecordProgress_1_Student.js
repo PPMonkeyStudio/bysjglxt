@@ -55,7 +55,7 @@ function RecordProgress_1_Student() {
 				textarea_3.id = 'student_id_qian_record_progress';
 				textarea_3.style = "display:none;"
 					textarea_3.innerHTML = recordprocess_1.record_progress_student;
-				tab.appendChild(textarea_1);
+				tab.appendChild(textarea_3);
 				/*
 				 * 
 				 */

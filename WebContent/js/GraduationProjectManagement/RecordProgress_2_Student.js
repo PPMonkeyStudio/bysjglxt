@@ -45,6 +45,63 @@ function RecordProgress_2_Student() {
 				}
 				tab.appendChild(textarea_1);
 
+				
+				
+				/**
+				 * 
+				 */
+				// 创建input
+				/*
+				 * 
+				 */
+				var textarea_3 = document.createElement("textarea");
+				textarea_3.id = 'student_id_zhuan_record_progress';
+				textarea_3.style = "display:none;"
+					textarea_3.innerHTML = recordprocess_2.record_progress_student;
+				tab.appendChild(textarea_3);
+				/*
+				 * 
+				 */
+				var textarea_4 = document.createElement("textarea");
+				textarea_4.id = 'student_id_zhuan_record_progress_is_xiazai';
+				textarea_4.style = "display:none;"
+					textarea_4.innerHTML=1;
+//				textarea_2.innerHTML = taskbook.taskbook_xia_file_xiazai;
+				tab.appendChild(textarea_4);
+				/*
+				 * 
+				 */
+				var h4 = document.createElement("h4");
+				h4.innerHTML = '过程资料：';
+				tab.appendChild(h4);
+				/*
+				 * 
+				 */
+				var div = document.createElement("div");
+				div.id = "div_zhuan_recordprogress_box";
+				tab.appendChild(div);
+				if (recordprocess_2.record_progress_student_file != null) {
+					var div_2 = document.createElement("div");
+					div_2.id = "upload_button_id";
+					div_2.innerHTML = '<button class="btn btn-default" '
+							+ 'onclick="addZhuanRecordProgressZiliao()">上传</button>';
+					tab.appendChild(div_2);
+					if (recordprocess_2.record_progress_student_file != '') {
+						//TODO 在这里将数量置为空
+						num_taskbook = 0;
+						zhuanRecordProgressFileChange(recordprocess_2.record_progress_student_file);
+					}
+
+				} else {
+					var div_2 = document.createElement("div");
+					div_2.innerHTML = '<button class="btn btn-default" '
+							+ 'onclick="addZhuanRecordProgressZiliao()">上传</button>';
+					tab.appendChild(div_2);
+				}
+				
+				
+				
+				
 				var ulSave = document.createElement("ul");
 				ulSave.className='pager wizard';
 				var liSave = document.createElement("li");
@@ -61,46 +118,70 @@ function RecordProgress_2_Student() {
 				 */
 				var button_SaveGraduationProject = document
 						.getElementById("button_SaveGraduationProject");
+				var div_zhuan_recordprogress_del = document.getElementById("div_zhuan_recordprogress_del");
+				var upload_button = document.getElementById("upload_button_id");
 				if ('-1' == k) {
 					if ("学生完成进展情况记录（撰写阶段）" != current_processDefinitionName) {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
+						div_zhuan_recordprogress_del.style.display = "none";
+						upload_button.style.display = "none";
 					} else if (userStudentDTO != null) {
 						if (current_processInstanceUserID == userStudentDTO.bysjglxtStudentUser.user_student_id) {
 							button_SaveGraduationProject.style.display = "block";
+							div_zhuan_recordprogress_del.style.display = "block";
+							upload_button.style.display = "block";
 						} else {
 							textarea_1.disabled = "disabled";
 							button_SaveGraduationProject.style.display = "none";
+							div_zhuan_recordprogress_del.style.display = "none";
+							upload_button.style.display = "none";
 						}
 					} else if (userTeacherDTO != null) {
 						if (current_processInstanceUserID == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
 							button_SaveGraduationProject.style.display = "block";
+							div_zhuan_recordprogress_del.style.display = "block";
+							upload_button.style.display = "block";
 						} else {
 							textarea_1.disabled = "disabled";
 							button_SaveGraduationProject.style.display = "none";
+							div_zhuan_recordprogress_del.style.display = "none";
+							upload_button.style.display = "none";
 						}
 					} else {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
+						div_zhuan_recordprogress_del.style.display = "none";
+						upload_button.style.display = "none";
 					}
 				}else if('1' == k) {
 					if (userStudentDTO != null) {
 						if (_userId_Task == userStudentDTO.bysjglxtStudentUser.user_student_id) {
 							button_SaveGraduationProject.style.display = "block";
+							div_zhuan_recordprogress_del.style.display = "block";
+							upload_button.style.display = "block";
 						} else {
 							textarea_1.disabled = "disabled";
 							button_SaveGraduationProject.style.display = "none";
+							div_zhuan_recordprogress_del.style.display = "none";
+							upload_button.style.display = "none";
 						}
 					} else if (userTeacherDTO != null) {
 						if (_userId_Task == userTeacherDTO.bysjglxtTeacherUser.user_teacher_id) {
 							button_SaveGraduationProject.style.display = "block";
+							div_zhuan_recordprogress_del.style.display = "block";
+							upload_button.style.display = "block";
 						} else {
 							textarea_1.disabled = "disabled";
 							button_SaveGraduationProject.style.display = "none";
+							div_zhuan_recordprogress_del.style.display = "none";
+							upload_button.style.display = "none";
 						}
 					} else {
 						textarea_1.disabled = "disabled";
 						button_SaveGraduationProject.style.display = "none";
+						div_zhuan_recordprogress_del.style.display = "none";
+						upload_button.style.display = "none";
 					}
 				}
 				
