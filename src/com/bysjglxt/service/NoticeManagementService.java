@@ -3,6 +3,8 @@ package com.bysjglxt.service;
 import java.util.List;
 
 import com.bysjglxt.domain.DTO.NoticeDTO;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.NoticeVO;
 
 public interface NoticeManagementService {
@@ -24,6 +26,14 @@ public interface NoticeManagementService {
 
 	//获取所有某状态的数量
 	public int getNoticeStateCount(String userId);
+
+	/**
+	 * 
+	 * @param sendString
+	 * @param message_content
+	 * @return
+	 */
+	public String sendMessage(String sendString, String message_content,TeacherInformationDTO teacherInfoDTO,StudentInformationDTO studentInfoDTO,String juese);
 	
 	
 }

@@ -49,6 +49,15 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 	}
 
 	@Override
+	public List<bysjglxt_section> getSectionByUser(String user_teacher_section) {
+		Session session = getSession();
+		String hql = "from bysjglxt_section where section_id='" + user_teacher_section +"'";
+		Query query = session.createQuery(hql);
+		List<bysjglxt_section> listSectionByPage = query.list();
+		session.clear();
+		return listSectionByPage;
+	}
+	@Override
 	public bysjglxt_teacher_user getBysjglxtTeacherUserById(String section_id) {
 		Session session = getSession();
 		bysjglxt_teacher_user teacherUserInformation = null;
@@ -136,4 +145,5 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 		}
 		return flag;
 	}
+
 }

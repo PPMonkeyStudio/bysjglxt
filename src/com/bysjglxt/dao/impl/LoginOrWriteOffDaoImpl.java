@@ -92,4 +92,15 @@ public class LoginOrWriteOffDaoImpl implements LoginOrWriteOffDao {
 		session.clear();
 		return bysjglxt_admin;
 	}
+
+	@Override
+	public bysjglxt_section getSectionByUserId(String user_teacher_id) {
+		Session session = getSession();
+		String hql = "from bysjglxt_section where section_leader = '" + user_teacher_id + "'";
+		bysjglxt_section bysjglxt_section = new bysjglxt_section();
+		Query query = session.createQuery(hql);
+		bysjglxt_section = (bysjglxt_section) query.uniqueResult();
+		session.clear();
+		return bysjglxt_section;
+	}
 }

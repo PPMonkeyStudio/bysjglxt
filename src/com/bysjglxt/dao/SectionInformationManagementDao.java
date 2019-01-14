@@ -27,4 +27,6 @@ public interface SectionInformationManagementDao {
 
 	boolean setTeacherUserSectionNull(String string);
 
+	List<bysjglxt_section> getSectionByUser(String user_teacher_section);
+
 }

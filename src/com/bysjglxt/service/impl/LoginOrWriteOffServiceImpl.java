@@ -22,6 +22,12 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 	}
 
 	@Override
+	public bysjglxt_section getSectionByUserId(String user_teacher_id) {
+		return loginOrWriteOffDao.getSectionByUserId(user_teacher_id);
+	}
+	
+	
+	@Override
 	public int login(String username, String password) {
 		if (username == null || username.trim().length() <= 0) {
 			return -1;
@@ -121,4 +127,5 @@ public class LoginOrWriteOffServiceImpl implements LoginOrWriteOffService {
 		}
 		return null;
 	}
+
 }

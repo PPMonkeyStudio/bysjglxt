@@ -66,6 +66,9 @@
 <!--------------------------------------------------------------------------------->
 <script type="text/javascript"
 	src="<%=basePath%>js/loginAndLogout/getNavbarCount.js"></script>
+	<!--------------------------------------------------------------------------------->
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/sendMessage.js"></script>
 <title>Insert title here</title>
 </head>
 
@@ -226,6 +229,9 @@
 							<a
 								href="<%=basePath%>notice/NoticeManagement_NoticeManagementPage"
 								class="notification-item" style="text-align: center;">查看历史消息</a>
+						</li>
+						<li>
+							<a href="javascript:;" class="notification-item" onclick="sendMessage()" style="text-align: center;">发送消息</a>
 						</li>
 					</ul>
 				</li>

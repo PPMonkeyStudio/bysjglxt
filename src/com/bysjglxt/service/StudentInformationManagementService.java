@@ -8,6 +8,7 @@ import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DTO.ExportGeaduationStudentDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.VO.StudentInformationManagementVO;
+import com.google.gson.JsonElement;
 
 public interface StudentInformationManagementService {
 
@@ -155,5 +156,7 @@ public interface StudentInformationManagementService {
 	 * 
 	 */
 	public int updatePassword(String user_student_id, String password, String oldPassword);
+
+	public List<StudentInformationDTO> listStudentNoCloseByCollege(String user_student_belong_college);
 
 }

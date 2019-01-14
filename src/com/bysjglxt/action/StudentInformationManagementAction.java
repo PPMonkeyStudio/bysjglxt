@@ -200,6 +200,14 @@ public class StudentInformationManagementAction extends ActionSupport
 				.listStudentNoClose(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
 	}
 
+	public void listStudentNoCloseByCollege() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		http_response.getWriter().write(gson.toJson(studentInformationManagementService.listStudentNoCloseByCollege(studentUser.getUser_student_belong_college())));
+	}
+	
 	/**
 	 * 
 	 * @说明 预览Excel导入的学生信息

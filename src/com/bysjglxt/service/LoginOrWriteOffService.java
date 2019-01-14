@@ -1,5 +1,7 @@
 package com.bysjglxt.service;
 
+import com.bysjglxt.domain.DO.bysjglxt_section;
+
 public interface LoginOrWriteOffService {
 
 	/**
@@ -19,5 +21,12 @@ public interface LoginOrWriteOffService {
 	 * @return
 	 */
 	public Object loginInformation(int role, String username);
+
+	/**
+	 * 获取教研室信息
+	 * @param user_teacher_id
+	 * @return
+	 */
+	public bysjglxt_section getSectionByUserId(String user_teacher_id);
 
 }

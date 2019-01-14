@@ -28,6 +28,26 @@ public class NoticeManagementAction extends ActionSupport implements ServletResp
 	 */
 	private NoticeVO noticeVO;
 	private String readNoticeID;
+	
+	private String sendString;
+	private String message_content;
+	
+
+	public String getSendString() {
+		return sendString;
+	}
+
+	public void setSendString(String sendString) {
+		this.sendString = sendString;
+	}
+
+	public String getMessage_content() {
+		return message_content;
+	}
+
+	public void setMessage_content(String message_content) {
+		this.message_content = message_content;
+	}
 
 	/*
 	 * 
@@ -73,6 +93,26 @@ public class NoticeManagementAction extends ActionSupport implements ServletResp
 
 	}
 
+	/**
+	 * @throws IOException 
+	 * 
+	 */
+	public void sendMessage() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		TeacherInformationDTO teacherInformationDTO = null;
+		StudentInformationDTO studentInformationDTO = null;
+		String juese = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			juese = "teacher";
+			teacherInformationDTO = (TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO");
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			juese = "student";
+			studentInformationDTO = (StudentInformationDTO) ActionContext.getContext().getSession().get("userStudentDTO");
+		}
+		http_response.getWriter().write(noticeManagementService.sendMessage(sendString,message_content,teacherInformationDTO,studentInformationDTO,juese));	
+	}
+	
+	
 	/**
 	 * 
 	 * @throws IOException

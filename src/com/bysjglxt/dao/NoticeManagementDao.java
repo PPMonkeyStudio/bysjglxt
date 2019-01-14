@@ -3,6 +3,10 @@ package com.bysjglxt.dao;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_notice;
+import com.bysjglxt.domain.DO.bysjglxt_student_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.NoticeVO;
 
 public interface NoticeManagementDao {
@@ -26,5 +30,23 @@ public interface NoticeManagementDao {
 	public int saveNotice(bysjglxt_notice bysjglxt_notice);
 
 	public List<bysjglxt_notice> getListNoticeCount(String userId, int i);
+
+	public List<StudentInformationDTO> getStudentUserByCollegeId(String college_id);
+
+	public List<TeacherInformationDTO> getTeacherUserByCollegeId(String college_id);
+
+	public TeacherInformationDTO getTeacherInfoByUserId(String notice_launch);
+
+	public bysjglxt_topic_select getSelectTopicByUserId(String user_student_id);
+
+	public List<StudentInformationDTO> getStudentInfoByTutorUserId(String user_teacher_id);
+
+	public List<StudentInformationDTO> getStudentInfoByReviewUserId(String user_teacher_id);
+
+	public List<TeacherInformationDTO> getTeacherInfoBySectionId(String substring);
+
+	public List<StudentInformationDTO> getStudentInfoBySectionId(String substring);
+
+	public StudentInformationDTO getStudentInfoByUserId(String substring);
 
 }

@@ -20,4 +20,6 @@ public interface LoginOrWriteOffDao {
 
 	public com.bysjglxt.domain.DO.bysjglxt_admin getAdminByAccount(String username);
 
+	public bysjglxt_section getSectionByUserId(String user_teacher_id);
+
 }

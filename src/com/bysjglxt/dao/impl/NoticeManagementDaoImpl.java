@@ -13,6 +13,9 @@ import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.NoticeVO;
 
 public class NoticeManagementDaoImpl implements NoticeManagementDao {
@@ -26,6 +29,88 @@ public class NoticeManagementDaoImpl implements NoticeManagementDao {
 		return this.sessionFactory.getCurrentSession();
 	}
 
+
+	@Override
+	public TeacherInformationDTO getTeacherInfoByUserId(String notice_launch) {
+		TeacherInformationDTO teacherInformationDTO = new TeacherInformationDTO();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.TeacherInformationDTO(teacherBasic,teacherUser) from bysjglxt_teacher_user teacherUser,bysjglxt_teacher_basic teacherBasic where teacherUser.user_teacher_basic= teacherBasic.teacher_basic_id and teacherUser.user_teacher_id = '" + notice_launch + "'";
+		Query query = session.createQuery(hql);
+		teacherInformationDTO = (TeacherInformationDTO) query.uniqueResult();
+		return teacherInformationDTO;
+	}
+
+	@Override
+	public List<TeacherInformationDTO> getTeacherUserByCollegeId(String college_id) {
+		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.TeacherInformationDTO(teacherBasic,teacherUser) from bysjglxt_teacher_user teacherUser,bysjglxt_teacher_basic teacherBasic where teacherUser.user_teacher_basic= teacherBasic.teacher_basic_id and teacherUser.user_teacher_belong_college = '" + college_id + "'";
+		Query query = session.createQuery(hql);
+		listTeacherUser = query.list();
+		return listTeacherUser;	
+	}
+
+	@Override
+	public List<TeacherInformationDTO> getTeacherInfoBySectionId(String sectionId) {
+		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.TeacherInformationDTO(teacherBasic,teacherUser) from bysjglxt_teacher_user teacherUser,bysjglxt_teacher_basic teacherBasic where teacherUser.user_teacher_basic= teacherBasic.teacher_basic_id and teacherUser.user_teacher_section = '" + sectionId + "'";
+		Query query = session.createQuery(hql);
+		listTeacherUser = query.list();
+		return listTeacherUser;	
+	}
+
+
+	@Override
+	public List<StudentInformationDTO> getStudentUserByCollegeId(String college_id) {
+		List<StudentInformationDTO> listStudentUser = new ArrayList<StudentInformationDTO>();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.StudentInformationDTO(studentBasic,studentUser) from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where studentUser.user_student_basic= studentBasic.student_basic_id and studentUser.user_student_belong_college = '" + college_id + "' and studentUser.user_student_is_operate_premission = 1";
+		Query query = session.createQuery(hql);
+		listStudentUser = query.list();
+		return listStudentUser;
+	}
+
+	@Override
+	public StudentInformationDTO getStudentInfoByUserId(String userId) {
+		StudentInformationDTO listStudentUser = new StudentInformationDTO();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.StudentInformationDTO(studentBasic,studentUser) from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where studentUser.user_student_basic= studentBasic.student_basic_id and studentUser.user_student_id = '" + userId + "' and studentUser.user_student_is_operate_premission = 1";
+		Query query = session.createQuery(hql);
+		listStudentUser = (StudentInformationDTO) query.uniqueResult();
+		return listStudentUser;
+	}
+	@Override
+	public List<StudentInformationDTO> getStudentInfoBySectionId(String sectionId) {
+		List<StudentInformationDTO> listStudentUser = new ArrayList<StudentInformationDTO>();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.StudentInformationDTO(studentBasic,studentUser) from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_major major where major.major_id=studentUser.user_student_belong_major and studentUser.user_student_basic= studentBasic.student_basic_id and major.major_belong_section = '" + sectionId + "' and studentUser.user_student_is_operate_premission = 1";
+		Query query = session.createQuery(hql);
+		listStudentUser = query.list();
+		return listStudentUser;
+	}
+
+	@Override
+	public List<StudentInformationDTO> getStudentInfoByTutorUserId(String user_teacher_id) {
+		List<StudentInformationDTO> listStudentUser = new ArrayList<StudentInformationDTO>();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.StudentInformationDTO(studentBasic,studentUser) from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect where topicSelect.topic_select_student= studentUser.user_student_id and studentUser.user_student_basic= studentBasic.student_basic_id  and studentUser.user_student_is_operate_premission = 1 and topicSelect.topic_select_teacher_tutor='"+user_teacher_id+"'";
+		Query query = session.createQuery(hql);
+		listStudentUser = query.list();
+		return listStudentUser;
+	}
+
+	@Override
+	public List<StudentInformationDTO> getStudentInfoByReviewUserId(String user_teacher_id) {
+		List<StudentInformationDTO> listStudentUser = new ArrayList<StudentInformationDTO>();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.StudentInformationDTO(studentBasic,studentUser) from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic,bysjglxt_topic_select topicSelect where topicSelect.topic_select_student= studentUser.user_student_id and studentUser.user_student_basic= studentBasic.student_basic_id  and studentUser.user_student_is_operate_premission = 1 and topicSelect.topic_select_teacher_review='"+user_teacher_id+"'";
+		Query query = session.createQuery(hql);
+		listStudentUser = query.list();
+		return listStudentUser;
+	}
+
+	
 	// 根据状态以及拥有者ID获取通知
 	@Override
 	public List<bysjglxt_notice> getListNoticeByBelongAndState(String userId, int i) {
@@ -142,4 +227,16 @@ public class NoticeManagementDaoImpl implements NoticeManagementDao {
 		list_bysjglxt_notice = query.list();
 		return list_bysjglxt_notice;
 	}
+
+	@Override
+	public bysjglxt_topic_select getSelectTopicByUserId(String user_student_id) {
+		bysjglxt_topic_select bysjglxt_topic_select = new bysjglxt_topic_select();
+		Session session = getSession();
+		String hql = "from bysjglxt_topic_select where topic_select_student='"+user_student_id+"'";
+		Query query = session.createQuery(hql);
+		bysjglxt_topic_select = (com.bysjglxt.domain.DO.bysjglxt_topic_select) query.uniqueResult();
+		return bysjglxt_topic_select;
+	}
+
+
 }

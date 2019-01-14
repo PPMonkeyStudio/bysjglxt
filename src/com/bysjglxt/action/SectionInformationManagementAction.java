@@ -116,7 +116,29 @@ public class SectionInformationManagementAction extends ActionSupport
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter().write("success");
 	}
-
+	public void getSectionByUser() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") == null) {
+			http_response.getWriter().write("error");
+		}
+		TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession()
+				.get("userTeacherDTO");
+		if(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_is_college_admin()==1) {
+			http_response.getWriter().write(gson.toJson(sectionInformationManagementService
+					.listBysjglxtSection(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id())));
+		}else {
+			if(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_section() == null) {
+				http_response.getWriter().write("error");
+			}else {
+				http_response.getWriter().write(gson.toJson(sectionInformationManagementService.getSectionByUser(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_section())));	
+			}
+			
+		}
+		
+	}
 	/**
 	 * 遍历出属于操作者的所有教研室
 	 * 

@@ -9,6 +9,7 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
 import com.bysjglxt.domain.DO.bysjglxt_admin;
+import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.service.LoginOrWriteOffService;
@@ -36,6 +37,32 @@ public class LoginOrWriteOffAction extends ActionSupport implements ServletRespo
 	 */
 	private String oldPassword;
 	private String newPassword;
+
+	/**
+	 * @throws IOException 
+	 * 
+	 */
+	public void getUserRole() throws IOException {
+		http_response.setContentType("text/html;charset=utf-8");
+		String role = "";
+		//老师
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			TeacherInformationDTO userTeacherDTO = (TeacherInformationDTO) ActionContext.getContext().getSession().get("userTeacherDTO");
+			role = "teacher";
+			if(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_is_college_admin()==1) {
+				role = "admin";
+			}else {
+				//根据userId获取教研室信息
+				bysjglxt_section section = loginOrWriteOffService.getSectionByUserId(userTeacherDTO.getBysjglxtTeacherUser().getUser_teacher_id());
+				if(section != null) {
+					role = "jiaoyanshi";
+				}
+			}
+		}else if(ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			role = "student";
+		}
+		http_response.getWriter().write(role);
+	}
 
 	/*
 	 * 登录

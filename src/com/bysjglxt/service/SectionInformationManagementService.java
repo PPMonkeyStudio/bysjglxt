@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.VO.SectionInformationManagementVO;
+import com.google.gson.JsonElement;
 
 public interface SectionInformationManagementService {
 
@@ -42,5 +43,7 @@ public interface SectionInformationManagementService {
 	 * 
 	 */
 	public boolean updateSection(bysjglxt_section bysjglxt_section);
+
+	public List<bysjglxt_section> getSectionByUser(String user_teacher_section);
 
 }

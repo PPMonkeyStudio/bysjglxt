@@ -116,6 +116,13 @@ public class SectionInformationManagementServiceImpl implements SectionInformati
 		return sectionInformationManagementDao.listBysjglxtSection(userId);
 	}
 
+
+	@Override
+	public List<bysjglxt_section> getSectionByUser(String user_teacher_section) {
+		return sectionInformationManagementDao.getSectionByUser(user_teacher_section);
+	}
+
+	
 	@Override
 	public boolean updateSection(bysjglxt_section bysjglxt_section) {
 		bysjglxt_section.setSection_gmt_modified(TeamUtil.getStringSecond());
