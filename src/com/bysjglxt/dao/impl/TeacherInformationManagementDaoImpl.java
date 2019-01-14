@@ -10,6 +10,7 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_college;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
@@ -78,6 +79,18 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		return flag;
 	}
 
+	@Override
+	public boolean saveObj(Object obj) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(obj);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
 	@Override
 	public bysjglxt_teacher_user getStudentById(String teacher_id) {
 		Session session = getSession();
@@ -443,4 +456,5 @@ public class TeacherInformationManagementDaoImpl implements TeacherInformationMa
 		session.clear();
 		return bysjglxt_topic_select;
 	}
+
 }

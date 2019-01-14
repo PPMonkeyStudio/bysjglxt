@@ -27,7 +27,7 @@
 				<h3 class="panel-title">欢迎使用毕业设计管理系统</h3>
 			</div>
 			<div class="panel-body">
-				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
+				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;overflow-y: auto;max-height:500px;">
 					<div class="panel-heading" style="background-color:#BBB;color:#FFF;">
 						<h3 class="panel-title">待完成</h3>
 					</div>
@@ -39,24 +39,24 @@
 						</table>
 					</div>
 				</div>
-				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
+				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;overflow-y: auto;max-height:500px;">
 					<div class="panel-heading" style="background-color:#BBB;color:#FFF;">
 						<h3 class="panel-title">已完成</h3>
 					</div>
 					<div class="panel-body">
-						<table id="yiFinishTask" class="table table-bordered" style="text-align: center;">
+						<table id="yiFinishTask" class="table table-bordered">
 							<tbody>
 								
 							</tbody>
 						</table>
 					</div>
 				</div>
-				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
+				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;overflow-y: auto;max-height:500px;">
 					<div class="panel-heading" style="background-color:#BBB;color:#FFF;">
 						<h3 class="panel-title">公告或私信</h3>
 					</div>
 					<div class="panel-body">
-						<table id="yiGongTask" class="table table-bordered" style="text-align: center;">
+						<table id="yiGongTask" class="table table-bordered">
 							<tbody>
 								
 							</tbody>

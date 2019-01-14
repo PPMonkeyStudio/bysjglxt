@@ -64,7 +64,7 @@
 	xhr.open("POST","/bysjglxt/notice/NoticeManagement_getTaskByLiXing");
 	xhr.send(formData);
 })()
-;(function getYiFinish() {
+;(function yiGongTask() {
 	var xhr = false;
 	xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function() {
@@ -81,6 +81,7 @@
 					new_tr.className = "new_tr";
 					//
 					new_td = document.createElement("td");
+					console.log("s:",dai_list[num].launchName);
 					if(dai_list[num].launchName == 'admin'){
 						new_tr.style.color="red";
 					}

@@ -3,6 +3,7 @@ package com.bysjglxt.dao;
 import java.util.List;
 
 import com.bysjglxt.domain.DO.bysjglxt_college;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
@@ -70,5 +71,7 @@ public interface TeacherInformationManagementDao {
 	 * @return
 	 */
 	public bysjglxt_topic_select getStudentSelectTopic(String user_student_id);
+
+	public boolean saveObj(Object obj);
 
 }

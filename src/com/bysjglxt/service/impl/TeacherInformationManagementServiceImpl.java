@@ -1,11 +1,15 @@
 package com.bysjglxt.service.impl;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -13,6 +17,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_college;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
@@ -36,7 +41,18 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 	public void setTeacherInformationManagementDao(TeacherInformationManagementDao teacherInformationManagementDao) {
 		this.teacherInformationManagementDao = teacherInformationManagementDao;
 	}
-
+	public static Properties properties = new Properties();//properties属性
+	static {
+		//加载消息文件
+		try {
+//			properties.load(CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties"));
+			InputStream inputStream = CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties");
+			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+			properties.load(bf);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * 
 	 */
@@ -137,10 +153,29 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 			flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
 			if (!flag)
 				break;
+			createTeacherNotice(bysjglxt_teacher_user,userId);
 		}
 		return flag;
 	}
 
+	/**
+	 * 创建老师的时候生成的通知
+	 * @param bysjglxt_teacher_user
+	 */
+	public void createTeacherNotice(bysjglxt_teacher_user bysjglxt_teacher_user,String userId) {
+		bysjglxt_notice notice = new bysjglxt_notice();
+		notice.setNotice_id(TeamUtil.getUuid());
+		notice.setNotice_launch(userId);
+		notice.setNotice_belong(bysjglxt_teacher_user.getUser_teacher_id());
+		notice.setNotice_content((String)(properties.get("createTeacher")));
+		notice.setNotice_leixing(4);
+		notice.setNotice_state(2);
+		notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+		teacherInformationManagementDao.saveObj(notice);
+	}
+	
+	
 	// 根据user Id以及用户角色身份获取用户是哪个系的
 	public String collegeJudge(int studentOrTeacher, String userId) {
 		// 老师
@@ -258,6 +293,7 @@ public class TeacherInformationManagementServiceImpl implements TeacherInformati
 		bysjglxt_teacher_user.setUser_teacher_is_recorder(2);
 		bysjglxt_teacher_user.setUser_teacher_is_defence_leader(2);
 		flag = teacherInformationManagementDao.saveTeacher(bysjglxt_teacher_user);
+		createTeacherNotice(bysjglxt_teacher_user,userId);
 		return flag;
 	}
 

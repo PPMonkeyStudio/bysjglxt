@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.ProcessManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
@@ -19,6 +20,8 @@ import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
 
 public class ProcessManagementDaoImpl implements ProcessManagementDao {
@@ -31,7 +34,25 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 	public Session getSession() {
 		return this.sessionFactory.getCurrentSession();
 	}
-
+	@Override
+	public List<StudentInformationDTO> getStudentUserByCollegeId(String college_id) {
+		List<StudentInformationDTO> listStudentUser = new ArrayList<StudentInformationDTO>();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.StudentInformationDTO(studentBasic,studentUser) from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic where studentUser.user_student_basic= studentBasic.student_basic_id and studentUser.user_student_belong_college = '" + college_id + "' and studentUser.user_student_is_operate_premission = 1";
+		Query query = session.createQuery(hql);
+		listStudentUser = query.list();
+		return listStudentUser;
+	}
+	
+	@Override
+	public List<TeacherInformationDTO> getTeacherUserByCollegeId(String college_id) {
+		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.TeacherInformationDTO(teacherBasic,teacherUser) from bysjglxt_teacher_user teacherUser,bysjglxt_teacher_basic teacherBasic where teacherUser.user_teacher_basic= teacherBasic.teacher_basic_id and teacherUser.user_teacher_belong_college = '" + college_id + "'";
+		Query query = session.createQuery(hql);
+		listTeacherUser = query.list();
+		return listTeacherUser;	
+	}
 	@Override
 	public List<String> getListStudentSelect(String process_definition_id, String college) {
 		List<String> listStudentSelect = new ArrayList<>();
@@ -55,6 +76,19 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 			session.saveOrUpdate(selectTopicProcessDefinition);
 		} catch (Exception e) {
 			flag = -1;
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean saveObj(Object obj) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(obj);
+		} catch (Exception e) {
+			flag = false;
 			e.printStackTrace();
 		}
 		return flag;
@@ -537,7 +571,15 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		list_bysjglxt_teacher_user = query.list();
 		return list_bysjglxt_teacher_user;
 	}
-
+	@Override
+	public bysjglxt_teacher_user getTeacherByCollege(String user_teacher_belong_college) {
+		Session session = getSession();
+		bysjglxt_teacher_user teacherUserInformation = null;
+		String hql = "from bysjglxt_teacher_user where user_teacher_belong_college='" + user_teacher_belong_college + "' and user_teacher_is_college_admin=1";
+		Query query = session.createQuery(hql);
+		teacherUserInformation = (bysjglxt_teacher_user) query.uniqueResult();
+		return teacherUserInformation;
+	}
 	// 根据专业Id获取教研室对象
 	@Override
 	public bysjglxt_section getSectionByMajorId(String user_student_belong_major) {
@@ -560,5 +602,4 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
 		return bysjglxt_process_instance;
 	}
-
 }

@@ -68,13 +68,13 @@ function List_Section_By_Page(pageIndex) {
 					/*
 					 * 
 					 */
-					new_td = document.createElement("td");
+					/*new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<label class="fancy-checkbox">'
 							+ '<input id="'
 							+ section_json.teacherInformationDTO[num].bysjglxtSection.section_id
 							+ '" type="checkbox" class="checkbox_select">'
-							+ '<span></span></label></td>';
+							+ '<span></span></label></td>';*/
 
 				}
 

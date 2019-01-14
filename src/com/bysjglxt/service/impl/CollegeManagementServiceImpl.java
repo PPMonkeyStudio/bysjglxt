@@ -3,11 +3,8 @@ package com.bysjglxt.service.impl;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import com.bysjglxt.dao.CollegeManagementDao;
@@ -19,7 +16,6 @@ import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DTO.CollegeInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.service.CollegeManagementService;
-import com.google.gson.JsonElement;
 
 import util.TeamUtil;
 import util.md5;

@@ -2,6 +2,7 @@ package com.bysjglxt.dao;
 
 import java.util.List;
 
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
@@ -9,6 +10,9 @@ import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
 import com.bysjglxt.domain.DO.bysjglxt_taskbook;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
 
 public interface ProcessManagementDao {
@@ -102,5 +106,13 @@ public interface ProcessManagementDao {
 	 * 
 	 */
 	public bysjglxt_process_instance getProcessInstanceByDefinitionAndState(String processDefinitionId, String string);
+
+	public boolean saveObj(Object obj);
+
+	public List<TeacherInformationDTO> getTeacherUserByCollegeId(String college);
+
+	public List<StudentInformationDTO> getStudentUserByCollegeId(String college);
+
+	public bysjglxt_teacher_user getTeacherByCollege(String college);
 
 }

@@ -1,9 +1,14 @@
 package com.bysjglxt.service.impl;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.bysjglxt.dao.ProcessManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
@@ -17,7 +22,9 @@ import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ProcessDTO;
 import com.bysjglxt.domain.DTO.ProcessDefinitionDetailDTO;
 import com.bysjglxt.domain.DTO.ProcessDetailDTO;
+import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TaskDTO;
+import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.ProcessManagementVO;
 import com.bysjglxt.service.GraduationProjectManagementService;
 import com.bysjglxt.service.ProcessManagementService;
@@ -36,7 +43,18 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	public void setProcessManagementDao(ProcessManagementDao processManagementDao) {
 		this.processManagementDao = processManagementDao;
 	}
-
+	public static Properties properties = new Properties();//properties属性
+	static {
+		//加载消息文件
+		try {
+//			properties.load(CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties"));
+			InputStream inputStream = CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties");
+			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+			properties.load(bf);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * 获取所有需要进行选题的学生id
 	 * 
@@ -405,11 +423,62 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			if (!flag)
 				return -3;
 		}
-		//通知该系部所有拥有教研室老师的信息
-		
+		//得先知道是哪个系的
+		String college = "";
+		String launch = "";
+		if(bysjglxt_process_definition!=null && "选题流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
+			//根据教师userId获取学院信息
+			bysjglxt_teacher_user teacherUser = processManagementDao.getTeacherUserByNum(operation);
+			if(teacherUser!=null && teacherUser.getUser_teacher_belong_college()!=null && !"".equals(teacherUser.getUser_teacher_belong_college())) {
+				college = teacherUser.getUser_teacher_belong_college();
+				launch = operation;
+			}
+		}else if(bysjglxt_process_definition!=null && "毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
+			bysjglxt_student_user studentUser = processManagementDao.getStudentUser(operation);
+			if(studentUser!=null && studentUser.getUser_student_belong_college()!=null && !"".equals(studentUser.getUser_student_belong_college())) {
+				college = studentUser.getUser_student_belong_college();
+				bysjglxt_teacher_user teacherUser = processManagementDao.getTeacherByCollege(college);
+				launch = teacherUser.getUser_teacher_id();
+			}
+		}
+		//通知该系部所有拥有教研室老师
+		List<StudentInformationDTO> listStudentUser = new ArrayList<>();
+		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
+		listTeacherUser = processManagementDao.getTeacherUserByCollegeId(college);
+		listStudentUser = processManagementDao.getStudentUserByCollegeId(college);
+		for (TeacherInformationDTO teacherInformationDTO : listTeacherUser) {
+			if(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id().equals(launch)) {
+				createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"createAdminSelect",2);
+				continue;
+			}
+			createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"bootSelectTopic",4);
+			createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"createTeacherSelect",2);
+		}
+		for (StudentInformationDTO studentInformationDTO : listStudentUser) {
+			createTeacherNotice(studentInformationDTO.getBysjglxtStudentUser().getUser_student_id(),launch,"bootSelectTopic",4);
+		}
 		return 1;
 
 	}
+	
+	
+	
+	/**
+	 * @param 
+	 */
+	public void createTeacherNotice(String belongUserId,String userId,String content,int leixing) {
+		bysjglxt_notice notice = new bysjglxt_notice();
+		notice.setNotice_id(TeamUtil.getUuid());
+		notice.setNotice_launch(userId);
+		notice.setNotice_belong(belongUserId);
+		notice.setNotice_content((String)(properties.get(content)));
+		notice.setNotice_leixing(leixing);
+		notice.setNotice_state(2);
+		notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+		processManagementDao.saveObj(notice);
+	}
+	
 
 	@Override
 	public ProcessDefinitionDetailDTO processDefinitionDetailDTO(String processDefinitionId) {

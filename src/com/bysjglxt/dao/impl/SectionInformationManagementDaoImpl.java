@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.SectionInformationManagementDao;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
@@ -34,6 +35,19 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 		return count;
 	}
 
+
+	@Override
+	public bysjglxt_notice getNoticeByLaunchBelongLeiXing(String string, String userId, int i) {
+		Session session = getSession();
+		bysjglxt_notice bysjglxt_notice = null;
+		String hql = "from bysjglxt_notice where notice_launch='" + string + "' and notice_belong='"+userId+"' and notice_leixing="+i+"";
+		System.out.println(hql);
+		Query query = session.createQuery(hql);
+		bysjglxt_notice = (bysjglxt_notice) query.uniqueResult();
+		return bysjglxt_notice;
+	}
+
+	
 	@Override
 	public List<bysjglxt_section> getListSectionByPage(SectionInformationManagementVO sectionInformationManagementVO,
 			String college) {
@@ -48,6 +62,15 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 		return listSectionByPage;
 	}
 
+	@Override
+	public bysjglxt_section getSectionById(String section_id) {
+		Session session = getSession();
+		String hql = "from bysjglxt_section where section_id='" + section_id + "'";
+		Query query = session.createQuery(hql);
+		bysjglxt_section bysjglxt_section = (com.bysjglxt.domain.DO.bysjglxt_section) query.uniqueResult();
+		session.clear();
+		return bysjglxt_section;
+	}
 	@Override
 	public List<bysjglxt_section> getSectionByUser(String user_teacher_section) {
 		Session session = getSession();
@@ -68,6 +91,15 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 
 	}
 
+	@Override
+	public bysjglxt_teacher_user getTeacherByCollege(String user_teacher_belong_college) {
+		Session session = getSession();
+		bysjglxt_teacher_user teacherUserInformation = null;
+		String hql = "from bysjglxt_teacher_user where user_teacher_belong_college='" + user_teacher_belong_college + "' and user_teacher_is_college_admin=1";
+		Query query = session.createQuery(hql);
+		teacherUserInformation = (bysjglxt_teacher_user) query.uniqueResult();
+		return teacherUserInformation;
+	}
 	@Override
 	public bysjglxt_teacher_basic getBysjglxtTeacherBasicById(String user_teacher_basic) {
 		Session session = getSession();
@@ -131,6 +163,19 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 	}
 
 	@Override
+	public boolean savaObj(Object obj) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			session.saveOrUpdate(obj);
+		} catch (Exception e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+		
+	}
+	@Override
 	public boolean setTeacherUserSectionNull(String string) {
 		boolean flag = true;
 		try {
@@ -145,5 +190,6 @@ public class SectionInformationManagementDaoImpl implements SectionInformationMa
 		}
 		return flag;
 	}
+
 
 }

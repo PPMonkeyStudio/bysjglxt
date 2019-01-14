@@ -38,7 +38,7 @@ public class NoticeManagementServiceImpl implements NoticeManagementService {
 				noticeDTO.setLaunchName("admin");
 			}else {
 				//判断是否是系部管理员
-				bysjglxt_teacher_user teacher =noticeManagementDao.getTeacherUserById(bysjglxt_notice.getNotice_belong());
+				bysjglxt_teacher_user teacher =noticeManagementDao.getTeacherUserById(bysjglxt_notice.getNotice_launch());
 				if(teacher!=null && teacher.getUser_teacher_is_college_admin()==1) {
 					noticeDTO.setLaunchName("admin");
 				}else {

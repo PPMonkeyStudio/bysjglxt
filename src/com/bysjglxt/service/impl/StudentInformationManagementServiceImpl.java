@@ -1,7 +1,10 @@
 package com.bysjglxt.service.impl;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +21,7 @@ import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_major;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
@@ -45,7 +49,18 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 	public void setStudentInformationManagementDao(StudentInformationManagementDao studentInformationManagementDao) {
 		this.studentInformationManagementDao = studentInformationManagementDao;
 	}
-
+	public static Properties properties = new Properties();//properties属性
+	static {
+		//加载消息文件
+		try {
+//			properties.load(CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties"));
+			InputStream inputStream = CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties");
+			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+			properties.load(bf);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public List<bysjglxt_student_basic> convertStudentExcelToList(File studentExcel, String EXCEL_StudentFileName)
 			throws Exception {
@@ -116,10 +131,29 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
 			if (!flag)
 				break;
+			createStudentNotice(bysjglxt_student_user,userId);
 		}
 		return flag;
 	}
 
+	/**
+	 * 创建学生的时候生成的通知
+	 * @param bysjglxt_student_user
+	 */
+	public void createStudentNotice(bysjglxt_student_user bysjglxt_student_user,String userId) {
+		bysjglxt_notice notice = new bysjglxt_notice();
+		notice.setNotice_id(TeamUtil.getUuid());
+		notice.setNotice_launch(userId);
+		notice.setNotice_belong(bysjglxt_student_user.getUser_student_id());
+		notice.setNotice_content((String)(properties.get("createStudent")));
+		notice.setNotice_leixing(4);
+		notice.setNotice_state(2);
+		notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+		studentInformationManagementDao.saveObject(notice);
+	}
+	
+	
 	@Override
 	public List<StudentInformationDTO> list_StudentInformationDTO_All() {
 		List<StudentInformationDTO> list_StudentInformationDTO_All = new ArrayList<StudentInformationDTO>();
@@ -185,6 +219,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		bysjglxt_student_user.setUser_student_belong_college(college);
 		bysjglxt_student_user.setUser_student_gmt_modified(bysjglxt_student_user.getUser_student_gmt_create());
 		flag = studentInformationManagementDao.saveStudent(bysjglxt_student_user);
+		createStudentNotice(bysjglxt_student_user,userId);
 		return flag;
 	}
 
