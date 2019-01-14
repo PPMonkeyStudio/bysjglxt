@@ -49,4 +49,6 @@ public interface NoticeManagementDao {
 
 	public StudentInformationDTO getStudentInfoByUserId(String substring);
 
+	public List<bysjglxt_notice> getTaskByLiXing(String leixing, String userId);
+
 }

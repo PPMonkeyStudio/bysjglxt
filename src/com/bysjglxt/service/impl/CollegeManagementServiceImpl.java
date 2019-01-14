@@ -1,7 +1,13 @@
 package com.bysjglxt.service.impl;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import com.bysjglxt.dao.CollegeManagementDao;
@@ -25,14 +31,18 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		this.collegeManagementDao = collegeManagementDao;
 	}
 
+	
+	public static Properties properties = new Properties();//properties属性
 	static {
 		//加载消息文件
-//		try {
-//			Properties props = new Properties();
-//			props.load(CollegeManagementServiceImpl.getClass().getClassLoader().getResourceAsStream("file.properties"));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+//			properties.load(CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties"));
+			InputStream inputStream = CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties");
+			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+			properties.load(bf);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -232,12 +242,16 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		//消息通知，后续将使用Spring AOP进行横切解决
 		bysjglxt_notice noticeCollege = new bysjglxt_notice();
 		noticeCollege.setNotice_id(TeamUtil.getUuid());
-		//TODO 这里要留意一下
-		noticeCollege.setNotice_launch("管理员");
+		noticeCollege.setNotice_launch("系统管理员");
 		noticeCollege.setNotice_belong(bysjglxt_teacher_user.getUser_teacher_id());
-		noticeCollege.setNotice_content("已下发");
-		
-		
+		//TODO 这里要留意一下
+		String collegeNotice = (String) properties.get("createCollegeNotice");
+		noticeCollege.setNotice_content(collegeNotice.replaceAll("college", college.getCollege_name()));
+		noticeCollege.setNotice_leixing(2);
+		noticeCollege.setNotice_state(2);
+		noticeCollege.setNotice_gmt_modified(TeamUtil.getStringSecond());
+		noticeCollege.setNotice_gmt_create(noticeCollege.getNotice_gmt_modified());
+		collegeManagementDao.saveObj(noticeCollege);
 		return 1;
 	}
 

@@ -32,6 +32,16 @@ public class NoticeManagementAction extends ActionSupport implements ServletResp
 	private String sendString;
 	private String message_content;
 	
+	private String leixing;
+	
+
+	public String getLeixing() {
+		return leixing;
+	}
+
+	public void setLeixing(String leixing) {
+		this.leixing = leixing;
+	}
 
 	public String getSendString() {
 		return sendString;
@@ -64,6 +74,25 @@ public class NoticeManagementAction extends ActionSupport implements ServletResp
 		return "NoticeManagementPage";
 	}
 
+	/**
+	 * 获取任务
+	 * @throws IOException 
+	 */
+	public void getTaskByLiXing() throws IOException {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();// 格式化json数据
+		Gson gson = gsonBuilder.create();
+		http_response.setContentType("text/html;charset=utf-8");
+		String userId = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			userId = ((TeacherInformationDTO)(ActionContext.getContext().getSession().get("userTeacherDTO"))).getBysjglxtTeacherUser().getUser_teacher_id();
+		}else if(ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			userId = ((StudentInformationDTO)(ActionContext.getContext().getSession().get("userStudentDTO"))).getBysjglxtStudentUser().getUser_student_id();
+		}
+		http_response.getWriter().write(gson.toJson(noticeManagementService.getTaskByLiXing(leixing,userId)));
+	}
+	
+	
 	/**
 	 * 
 	 * @throws IOException

@@ -238,5 +238,15 @@ public class NoticeManagementDaoImpl implements NoticeManagementDao {
 		return bysjglxt_topic_select;
 	}
 
+	@Override
+	public List<bysjglxt_notice> getTaskByLiXing(String leixing, String userId) {
+		List<bysjglxt_notice> list_bysjglxt_notice = new ArrayList<bysjglxt_notice>();
+		Session session = getSession();
+		String hql = "from bysjglxt_notice where notice_belong = '" + userId + "' and notice_leixing = '" + leixing + "'";
+		Query query = session.createQuery(hql);
+		list_bysjglxt_notice = query.list();
+		return list_bysjglxt_notice;
+	}
+
 
 }

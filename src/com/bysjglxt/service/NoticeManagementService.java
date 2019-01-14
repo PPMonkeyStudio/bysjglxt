@@ -2,10 +2,12 @@ package com.bysjglxt.service;
 
 import java.util.List;
 
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DTO.NoticeDTO;
 import com.bysjglxt.domain.DTO.StudentInformationDTO;
 import com.bysjglxt.domain.DTO.TeacherInformationDTO;
 import com.bysjglxt.domain.VO.NoticeVO;
+import com.google.gson.JsonElement;
 
 public interface NoticeManagementService {
 
@@ -34,6 +36,8 @@ public interface NoticeManagementService {
 	 * @return
 	 */
 	public String sendMessage(String sendString, String message_content,TeacherInformationDTO teacherInfoDTO,StudentInformationDTO studentInfoDTO,String juese);
+
+	public List<NoticeDTO> getTaskByLiXing(String leixing, String userId);
 	
 	
 }

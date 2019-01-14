@@ -29,16 +29,14 @@
 			<div class="panel-body">
 				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
 					<div class="panel-heading" style="background-color:#BBB;color:#FFF;">
-						<h3 class="panel-title">正在进行</h3>
-					</div>
-					<div class="panel-body">
-					</div>
-				</div>
-				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
-					<div class="panel-heading" style="background-color:#BBB;color:#FFF;">
 						<h3 class="panel-title">待完成</h3>
 					</div>
 					<div class="panel-body">
+						<table id="daiFinishTask" class="table table-bordered">
+							<tbody>
+							
+							</tbody>
+						</table>
 					</div>
 				</div>
 				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
@@ -46,6 +44,23 @@
 						<h3 class="panel-title">已完成</h3>
 					</div>
 					<div class="panel-body">
+						<table id="yiFinishTask" class="table table-bordered" style="text-align: center;">
+							<tbody>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel" style="width:30%;border:1px solid black;float:left;margin-left:30px;">
+					<div class="panel-heading" style="background-color:#BBB;color:#FFF;">
+						<h3 class="panel-title">公告或私信</h3>
+					</div>
+					<div class="panel-body">
+						<table id="yiGongTask" class="table table-bordered" style="text-align: center;">
+							<tbody>
+								
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
@@ -54,6 +69,8 @@
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
 	<!---------------------------------------------------------------------------------------------------->
+	<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/getTask.js"></script>
 </body>
 <script>
 	

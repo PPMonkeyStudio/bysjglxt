@@ -26,6 +26,31 @@ public class NoticeManagementServiceImpl implements NoticeManagementService {
 	}
 
 
+	@Override
+	public List<NoticeDTO> getTaskByLiXing(String leixing, String userId) {
+		List<NoticeDTO> list = new ArrayList<>();
+		NoticeDTO noticeDTO = new NoticeDTO();
+		List<bysjglxt_notice> listNotice = new ArrayList<>();
+		listNotice = noticeManagementDao.getTaskByLiXing(leixing, userId);
+		for (bysjglxt_notice bysjglxt_notice : listNotice) {
+			noticeDTO = new NoticeDTO();
+			if("系统管理员".equals(bysjglxt_notice.getNotice_launch())) {
+				noticeDTO.setLaunchName("admin");
+			}else {
+				//判断是否是系部管理员
+				bysjglxt_teacher_user teacher =noticeManagementDao.getTeacherUserById(bysjglxt_notice.getNotice_belong());
+				if(teacher!=null && teacher.getUser_teacher_is_college_admin()==1) {
+					noticeDTO.setLaunchName("admin");
+				}else {
+					noticeDTO.setLaunchName("other");
+				}
+			}
+			noticeDTO.setBysjglxt_notice(bysjglxt_notice);
+			list.add(noticeDTO);
+		}
+		return list;
+	}
+
 	/**
 	 * 
 	 */
@@ -299,6 +324,5 @@ public class NoticeManagementServiceImpl implements NoticeManagementService {
 		}
 		return i;
 	}
-
 
 }

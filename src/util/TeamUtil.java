@@ -3,11 +3,20 @@ package util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,6 +42,39 @@ public class TeamUtil {
 		return year + 1 + "";
 	}
 
+	@Test
+	public void f() {
+		Map<String,String> map = proRead("notice.properties");
+		Set<String> key = map.keySet();
+		for(Iterator<String> it = key.iterator();it.hasNext();) {
+			String s = it.next();
+			System.out.println(s+":"+map.get(s));
+		}
+	}
+	
+	
+	public Map<String,String> proRead(String proName){
+		Properties pro = new Properties();
+		Map<String,String> mpro = new HashMap<String,String>();
+		InputStreamReader isr = null;
+		try {
+			isr = new InputStreamReader(TeamUtil.class.getResourceAsStream(proName),"UTF-8");
+			pro.load(isr);
+			Enumeration en = pro.propertyNames();
+			while(en.hasMoreElements()) {
+				String key = (String) en.nextElement();
+				String value = pro.getProperty(key);
+				mpro.put(key, value);
+			}
+			return mpro;
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mpro;
+	}
 	
 	// 添加数字中文化的方法
 	public static String format(String text) {
