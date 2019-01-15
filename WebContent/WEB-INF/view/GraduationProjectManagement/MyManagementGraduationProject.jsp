@@ -38,14 +38,14 @@
 			<div class="panel-body">
 				<div style="width: 25%; float: left;">
 				<!--TODO 这里没有给控制  -->
-					<button class="btn btn-default" id="button_Start_GraduationProject_All"
+					<button class="btn btn-default college_control" id="button_Start_GraduationProject_All"
 						onclick="Start_GraduationProject_All()">
 						<i class="fa fa-bug"></i>
 						开启所有符合条件的毕业设计流程
 					</button>
 				</div>
 				<div style="width: 25%; float: left;">
-					<button class="btn btn-default"
+					<button class="btn btn-default college_control"
 						onclick="exportStudentsGraduation()">
 						<i class="fa fa-suitcase"></i>
 						批量导出《毕业设计过程管理手册》
@@ -53,7 +53,7 @@
 				</div>
 				<div style="width: 25%; float: left;">
 				<!--TODO 这里没有给控制  -->
-					<button class="btn btn-default" id="button_assign_preview_teacher"
+					<button class="btn btn-default college_control" id="button_assign_preview_teacher"
 						onclick="assignmentPreviewTeacher()">
 						<i class="fa fa-bug"></i>
 						批量分配评阅老师
