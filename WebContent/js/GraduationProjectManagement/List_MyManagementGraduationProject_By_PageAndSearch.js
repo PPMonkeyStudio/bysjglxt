@@ -107,7 +107,19 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 					new_tr.appendChild(new_td);
 					if (myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO == null
 							|| myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].taskDTO.taskInstance == null) {
-						new_td.innerHTML = '';
+						var str_s = '<div class="dropdown" >'
+							+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'
+							+ '<ul class="dropdown-menu" aria-labelledby="dLabel">'
+							+ '<li><a href="/bysjglxt/graduationProject/GraduationProjectManagement_MyGraduationProjectPage?MyTutorGraduationProjectStudentID='
+							+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+							+ '" >毕业设计过程管理手册</a></li>';
+						if(userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_college_admin == 1){
+							str_s = str_s + '<li><a id="'
+								+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
+								+ '" onclick="processController(this)" >流程控制</a></li>';
+						}
+						str_s = str_s+'</ul></div>';
+						new_td.innerHTML = str_s;
 					}else {
 						var str_s = '<div class="dropdown" >'
 							+ '<i  class="fa fa-ellipsis-v fa-2x" style="cursor: pointer;" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>'

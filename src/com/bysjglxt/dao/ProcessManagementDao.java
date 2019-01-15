@@ -121,4 +121,6 @@ public interface ProcessManagementDao {
 
 	public bysjglxt_notice getNoticeByBelongContentAndLeiXing(String user_teacher_id, String string, int i);
 
+	public bysjglxt_teacher_user getTeacherUserByStudentId(String operation);
+
 }

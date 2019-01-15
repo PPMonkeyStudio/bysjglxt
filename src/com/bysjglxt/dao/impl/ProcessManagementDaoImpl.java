@@ -632,4 +632,14 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		bysjglxt_notice = (bysjglxt_notice) query.uniqueResult();
 		return bysjglxt_notice;
 	}
+
+	@Override
+	public bysjglxt_teacher_user getTeacherUserByStudentId(String operation) {
+		Session session = getSession();
+		bysjglxt_teacher_user bysjglxt_teacher_user = null;
+		String hql = "SELECT teacherUser FROM bysjglxt_topic_select topicSelect,bysjglxt_teacher_user teacherUser WHERE topicSelect.topic_select_teacher_tutor = teacherUser.user_teacher_id AND topicSelect.topic_select_student = '"+operation+"'";
+		Query query = session.createQuery(hql);
+		bysjglxt_teacher_user = (bysjglxt_teacher_user) query.uniqueResult();
+		return bysjglxt_teacher_user;
+	}
 }

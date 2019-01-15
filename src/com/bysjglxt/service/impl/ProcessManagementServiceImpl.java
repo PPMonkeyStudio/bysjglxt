@@ -17,6 +17,7 @@ import com.bysjglxt.domain.DO.bysjglxt_student_basic;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_task_definition;
 import com.bysjglxt.domain.DO.bysjglxt_task_instance;
+import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
 import com.bysjglxt.domain.DO.bysjglxt_topic_select;
 import com.bysjglxt.domain.DTO.ProcessDTO;
@@ -186,6 +187,29 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			if (i != 1) {
 				return -3;
 			}
+		}
+		if(processDefinition!=null && "毕业设计流程".equals(processDefinition.getProcess_definition_name())) {
+			bysjglxt_teacher_user teacherUser = processManagementDao.getTeacherByCollege(college);
+			String launch = teacherUser.getUser_teacher_id();
+			List<TeacherInformationDTO> listTeacherUser = processManagementDao.getTeacherUserByCollegeId(college);
+			List<StudentInformationDTO> listStudentUser = processManagementDao.getStudentUserByCollegeId(college);
+			//通知该系部所有拥有教研室老师
+			for (TeacherInformationDTO teacherInformationDTO : listTeacherUser) {
+				if(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id().equals(launch)) {
+					createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"cretaeAdminGraduation",2);
+					continue;
+				}
+				createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"bootGraduation",4);
+				//createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"createTeacherXiaTaskBook",2);
+			}
+			for (StudentInformationDTO studentInformationDTO : listStudentUser) {
+				createTeacherNotice(studentInformationDTO.getBysjglxtStudentUser().getUser_student_id(),launch,"bootGraduation",4);
+			}
+			bysjglxt_notice notice = processManagementDao.getNoticeByBelongContentAndLeiXing(launch, ((String)(properties.get("createGraduationProcess"))),2);
+			notice.setNotice_leixing(1);
+			notice.setNotice_state(1);
+			notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+			processManagementDao.saveObj(notice);
 		}
 		return 1;
 	}
@@ -426,42 +450,63 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		//得先知道是哪个系的
 		String college = "";
 		String launch = "";
+		List<StudentInformationDTO> listStudentUser = new ArrayList<>();
+		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
 		if(bysjglxt_process_definition!=null && "选题流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
 			//根据教师userId获取学院信息
 			bysjglxt_teacher_user teacherUser = processManagementDao.getTeacherUserByNum(operation);
 			if(teacherUser!=null && teacherUser.getUser_teacher_belong_college()!=null && !"".equals(teacherUser.getUser_teacher_belong_college())) {
 				college = teacherUser.getUser_teacher_belong_college();
 				launch = operation;
+				listTeacherUser = processManagementDao.getTeacherUserByCollegeId(college);
+				listStudentUser = processManagementDao.getStudentUserByCollegeId(college);
+				//通知该系部所有拥有教研室老师
+				for (TeacherInformationDTO teacherInformationDTO : listTeacherUser) {
+					if(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id().equals(launch)) {
+						createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"createAdminSelect",2);
+						continue;
+					}
+					createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"bootSelectTopic",4);
+					createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"createTeacherSelect",2);
+				}
+				for (StudentInformationDTO studentInformationDTO : listStudentUser) {
+					createTeacherNotice(studentInformationDTO.getBysjglxtStudentUser().getUser_student_id(),launch,"bootSelectTopic",4);
+				}
 			}
 		}else if(bysjglxt_process_definition!=null && "毕业设计流程".equals(bysjglxt_process_definition.getProcess_definition_name())) {
+			//获取该学生的指导老师
 			bysjglxt_student_user studentUser = processManagementDao.getStudentUser(operation);
+			bysjglxt_student_basic studentBasic = processManagementDao.getStudentBasicById(studentUser.getUser_student_basic());
 			if(studentUser!=null && studentUser.getUser_student_belong_college()!=null && !"".equals(studentUser.getUser_student_belong_college())) {
 				college = studentUser.getUser_student_belong_college();
 				bysjglxt_teacher_user teacherUser = processManagementDao.getTeacherByCollege(college);
 				launch = teacherUser.getUser_teacher_id();
+				//获取该学生的指导老师
+				bysjglxt_teacher_user tutorTeacherUser = processManagementDao.getTeacherUserByStudentId(operation);
+				String content = ((String)(properties.get("createTeacherXiaTaskBook"))).replaceAll("student_num", studentBasic.getStudent_basic_num()).replaceAll("student_name", studentBasic.getStudent_basic_name());
+				createTeacherNoticeString(tutorTeacherUser.getUser_teacher_id(),launch,content,2);
 			}
-		}
-		//通知该系部所有拥有教研室老师
-		List<StudentInformationDTO> listStudentUser = new ArrayList<>();
-		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
-		listTeacherUser = processManagementDao.getTeacherUserByCollegeId(college);
-		listStudentUser = processManagementDao.getStudentUserByCollegeId(college);
-		for (TeacherInformationDTO teacherInformationDTO : listTeacherUser) {
-			if(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id().equals(launch)) {
-				createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"createAdminSelect",2);
-				continue;
-			}
-			createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"bootSelectTopic",4);
-			createTeacherNotice(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),launch,"createTeacherSelect",2);
-		}
-		for (StudentInformationDTO studentInformationDTO : listStudentUser) {
-			createTeacherNotice(studentInformationDTO.getBysjglxtStudentUser().getUser_student_id(),launch,"bootSelectTopic",4);
+			
 		}
 		return 1;
 
 	}
 	
-	
+	/**
+	 * @param 
+	 */
+	public void createTeacherNoticeString(String belongUserId,String userId,String content,int leixing) {
+		bysjglxt_notice notice = new bysjglxt_notice();
+		notice.setNotice_id(TeamUtil.getUuid());
+		notice.setNotice_launch(userId);
+		notice.setNotice_belong(belongUserId);
+		notice.setNotice_content(content);
+		notice.setNotice_leixing(leixing);
+		notice.setNotice_state(2);
+		notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+		processManagementDao.saveObj(notice);
+	}
 	
 	/**
 	 * @param 
@@ -740,7 +785,9 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		}
 		List<StudentInformationDTO> listStudentUser = new ArrayList<>();
 		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
-		System.out.println(taskDefinition.getTask_definition_name());
+		bysjglxt_student_user studentUserNotice = new bysjglxt_student_user();
+		bysjglxt_student_basic studentBasicNotice = new bysjglxt_student_basic();
+		String neirong = "";
 		switch(taskDefinition.getTask_definition_name()) {
 		case "创建选题":
 			//获取该学院的所有老师
@@ -906,6 +953,442 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 				processManagementDao.saveObj(adminNotice);
 			}
 			break;
+		case "指导老师下发任务书":
+			//获取下发任务书的通知，并将这个通知变成已完成
+			bysjglxt_student_user studentUser = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			bysjglxt_student_basic studentBasic = processManagementDao.getStudentBasicById(studentUser.getUser_student_basic());
+			if(studentBasic != null) {
+				String content = ((String)(properties.get("createTeacherXiaTaskBook"))).replaceAll("student_num", studentBasic.getStudent_basic_num()).replaceAll("student_name", studentBasic.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			//下发新的通知
+			sendMessage(userId,nextTaskInstance.getTask_instance_role(),((String)(properties.get("wanShanTaskBook"))),2,2);
+			break;
+		case "学生完善任务书":
+			//获取下发任务书的通知，并将这个通知变成已完成
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("wanShanTaskBook")));
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("tutorShenTaskBook"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//下发新的通知
+			sendMessage(userId,nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师审核任务书":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("tutorShenTaskBook"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("tutorShenTaskBookPassStudent")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("tutorShenTaskBookPassCollege"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());;
+			//通知管理员
+			sendMessage(studentUserNotice.getUser_student_id(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导小组组长填写任务书审核意见":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("tutorShenTaskBookPassCollege"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("collegeShenTaskBookPassStudent")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			//.replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());;
+			neirong = ((String)(properties.get("studentUploadReport")));
+			//通知管理员
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "学生上传开题报告":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				//.replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				String content = ((String)(properties.get("studentUploadReport")));
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("collegeShenTaskBookPassStudent")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("passStudentUploadReport"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());;
+			//通知管理员
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师确认开题报告":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("passStudentUploadReport"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("qianRecordStudent")));
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "学生完成进展情况记录（前期准备阶段）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("qianRecordStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("qianRecordTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师填写进展情况意见（前期准备阶段）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("qianRecordTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("zhuanRecordStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "学生完成进展情况记录（撰写阶段）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("zhuanRecordStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("zhuanRecordTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师填写进展情况意见（撰写阶段）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("zhuanRecordTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("zhongRecordStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "学生完成进展情况记录（中期自查阶段）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("zhongRecordStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("zhongRecordTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师填写进展情况意见（中期自查阶段）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("zhongRecordTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("wanRecordStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "学生完成进展情况记录（完善阶段）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("wanRecordStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("wanRecordTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师填写进展情况意见（完善阶段）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("wanRecordTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("zongJieStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "学生完成个人学习工作总结":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("zongJieStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("zongJieTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师填写个人学习工作总结意见":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("zongJieTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("graduationStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "学生提交答辩论文":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("graduationStudent"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+//			neirong = ((String)(properties.get("tutorShenReportPass")));
+			//下发学生新的通知
+//			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("graduationTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师填写形式审查表":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("graduationTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("graduationCheckTeacherPassStudent")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("graduationCheckTeacherPassCollege"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导小组组长填写形式审查表（核查）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("graduationCheckTeacherPassCollege"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("graduationCheckCollegePassStudent")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("graduationCheckCollegePassCollege"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师填写评价审阅表":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("graduationCheckCollegePassCollege"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("graduationEvaluateTutorPass")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("graduationReviewTutor"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),nextTaskInstance.getTask_instance_role(),neirong,2,2);
+			break;
+		case "评阅老师填写评阅审查表":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("graduationReviewTutor"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(userId, content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("graduationReviewTutorPass")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("disserationStart"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+			//通知下一任务
+			sendMessage(currentTaskInstance.getTask_instance_role(),teacherUser.getUser_teacher_id(),neirong,2,2);
+			break;
 		}
 		
 /*		// 通知执行者
@@ -953,6 +1436,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		// 1.根据任务实例ID获取任务实例实例对象
 		bysjglxt_task_instance currentTaskInstance = new bysjglxt_task_instance();
 		bysjglxt_task_instance neCurrentTaskInstanceFather = new bysjglxt_task_instance();
+		bysjglxt_task_instance previewTask = new bysjglxt_task_instance();
+		bysjglxt_task_instance returnTask = new bysjglxt_task_instance();
 		bysjglxt_task_instance currentTaskInstanceFather = new bysjglxt_task_instance();
 		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
 		// bysjglxt_task_instance currentTaskInstanceReturn = new
@@ -965,7 +1450,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		}
 		bysjglxt_process_instance = processManagementDao
 				.getProcessInstanceById(currentTaskInstance.getTask_instance_process_instance());
-
+		
 		// 2.将当前实例对象更改未未开始
 		// 更改任务实例状态,将之改为已结束
 		currentTaskInstance.setTask_instance_state(2);
@@ -974,6 +1459,8 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		flag = processManagementDao.instanceTask(currentTaskInstance);
 		if (!flag)
 			return -1;// 更改任务实例失败
+		previewTask = processManagementDao.getTaskInstanceingById(currentTaskInstance.getTask_instance_father());
+		returnTask = processManagementDao.getTaskInstanceingById(currentTaskInstance.getTask_instance_return());
 		// 3.先获得返回任务实例的ID currentTaskInstance.getTask_instance_return()
 		// id 是父任务实例ID
 		neCurrentTaskInstanceFather = processManagementDao
@@ -1005,7 +1492,7 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		}
 
 		// 将记录插入到通知表中
-		bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
+	/*	bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
 		bysjglxt_notice.setNotice_launch(currentTaskInstance.getTask_instance_role());
 		bysjglxt_notice.setNotice_belong(neCurrentTaskInstanceFather.getTask_instance_role());
 		bysjglxt_notice.setNotice_content("已驳回任务");
@@ -1015,7 +1502,177 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		if (!(bysjglxt_notice.getNotice_belong().equals(bysjglxt_notice.getNotice_launch()))) {
 			// 存储记录
 			processManagementDao.fillNoticeRecord(bysjglxt_notice);
+		}*/
+		//通知
+		bysjglxt_task_definition taskDefinition = new bysjglxt_task_definition();
+		if(currentTaskInstance!=null && currentTaskInstance.getTask_instance_task_definition()!=null && !"".equals(currentTaskInstance.getTask_instance_task_definition())) {
+			taskDefinition = processManagementDao.getTaskDefinition(currentTaskInstance.getTask_instance_task_definition());
 		}
+		if(taskDefinition == null) {
+			return 1;
+		}
+		List<StudentInformationDTO> listStudentUser = new ArrayList<>();
+		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
+		bysjglxt_student_user studentUserNotice = new bysjglxt_student_user();
+		bysjglxt_student_basic studentBasicNotice = new bysjglxt_student_basic();
+		String neirong = "";
+		switch(taskDefinition.getTask_definition_name()) {
+		case "指导老师审核任务书":
+			//先把上面的任务完成
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("tutorShenTaskBook"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(currentTaskInstance.getTask_instance_role(), content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("tutorShenTaskBookNotPass")));
+			//下发不通过新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			//生成关于返回的节点的任务
+			neirong = ((String)(properties.get("wanShanTaskBook")));
+			sendMessage(currentTaskInstance.getTask_instance_role(),returnTask.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导小组组长填写任务书审核意见":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("tutorShenTaskBookPassCollege"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(currentTaskInstance.getTask_instance_role(), content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			//通知学生不通过
+			neirong = ((String)(properties.get("collegeShenTaskBookNotPass")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			neirong = ((String)(properties.get("wanShanTaskBook"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());;
+			//生成新得
+			sendMessage(currentTaskInstance.getTask_instance_role(),returnTask.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师确认开题报告":
+			//获取学生的通知，并将这个通知变成已完成---不通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("passStudentUploadReport"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(currentTaskInstance.getTask_instance_role(), content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("tutorShenReportNotPass")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			//.replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());;
+			neirong = ((String)(properties.get("studentUploadReport")));
+			//通知下一任务
+			sendMessage(studentUserNotice.getUser_student_id(),returnTask.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师填写形式审查表":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("graduationTeacher"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(currentTaskInstance.getTask_instance_role(), content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("graduationTeacherNotPass")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			//.replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());;
+			neirong = ((String)(properties.get("graduationStudent")));
+			//通知下一任务
+			sendMessage(studentUserNotice.getUser_student_id(),returnTask.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导小组组长填写形式审查表（核查）":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("graduationCheckTeacherPassCollege"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(currentTaskInstance.getTask_instance_role(), content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("graduationCollegeNotPass")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			//.replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());;
+			neirong = ((String)(properties.get("graduationStudent")));
+			//通知下一任务
+			sendMessage(studentUserNotice.getUser_student_id(),returnTask.getTask_instance_role(),neirong,2,2);
+			break;
+		case "指导老师填写评价审阅表":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("graduationCheckCollegePassCollege"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(currentTaskInstance.getTask_instance_role(), content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			neirong = ((String)(properties.get("graduationEvaluateTutorNotPass")));
+			//下发学生新的通知
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			//.replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());;
+			neirong = ((String)(properties.get("graduationStudent")));
+			//通知下一任务
+			sendMessage(studentUserNotice.getUser_student_id(),returnTask.getTask_instance_role(),neirong,2,2);
+			break;
+		case "评阅老师填写评阅审查表":
+			//获取学生的通知，并将这个通知变成已完成---通过
+			studentUserNotice = processManagementDao.getStudentUser(bysjglxt_process_instance.getProcess_instance_man());
+			studentBasicNotice = processManagementDao.getStudentBasicById(studentUserNotice.getUser_student_basic());
+			if(studentBasicNotice != null) {
+				String content = ((String)(properties.get("graduationReviewTutor"))).replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());
+				bysjglxt_notice xiafaTaskNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(currentTaskInstance.getTask_instance_role(), content, 2);
+				if(xiafaTaskNotice!=null) {
+					xiafaTaskNotice.setNotice_state(1);
+					xiafaTaskNotice.setNotice_leixing(1);
+					xiafaTaskNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(xiafaTaskNotice);
+				}
+			}
+			//下发学生新的通知
+			neirong = ((String)(properties.get("graduationReviewTutorNotPass")));
+			sendMessage(currentTaskInstance.getTask_instance_role(),studentUserNotice.getUser_student_id(),neirong,4,2);
+			//.replaceAll("student_num", studentBasicNotice.getStudent_basic_num()).replaceAll("student_name", studentBasicNotice.getStudent_basic_name());;
+			neirong = ((String)(properties.get("graduationStudent")));
+			//通知下一任务
+			sendMessage(studentUserNotice.getUser_student_id(),returnTask.getTask_instance_role(),neirong,2,2);
+		}
+		
+		
 		return 1;
 	}
 

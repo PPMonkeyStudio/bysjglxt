@@ -17,6 +17,7 @@ import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
 import com.bysjglxt.domain.DO.bysjglxt_major;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
@@ -48,8 +49,26 @@ public class GraduationProjectManagementDaoImpl implements GraduationProjectMana
 	public Session getSession() {
 		return this.sessionFactory.getCurrentSession();
 	}
-	
-
+	@Override
+	public bysjglxt_teacher_user getTeacherByCollege(String user_teacher_belong_college) {
+		Session session = getSession();
+		bysjglxt_teacher_user teacherUserInformation = null;
+		String hql = "from bysjglxt_teacher_user where user_teacher_belong_college='" + user_teacher_belong_college + "' and user_teacher_is_college_admin=1";
+		Query query = session.createQuery(hql);
+		teacherUserInformation = (bysjglxt_teacher_user) query.uniqueResult();
+		return teacherUserInformation;
+	}
+	@Override
+	public bysjglxt_notice getNoticeByTopicInfoAndLeiXing(String content, int i) {
+		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
+		String hql = "from bysjglxt_notice where notice_leixing=" + i + " and notice_content like '%"+content+"%'";
+		System.out.println(hql);
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		bysjglxt_notice = (bysjglxt_notice) query.uniqueResult();
+		session.clear();
+		return bysjglxt_notice;
+	}
 	@Override
 	public bysjglxt_college getCollegeById(String user_student_belong_college) {
 		bysjglxt_college college = new bysjglxt_college();

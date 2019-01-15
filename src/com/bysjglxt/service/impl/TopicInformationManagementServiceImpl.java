@@ -93,14 +93,15 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
 		StudentInformationDTO studentInformationDTO = topicInformationManagementDao.getStudentInfoByUserId(studentUserId);
+		
 		// 根据选题Id获取选题表信息
 		bysjglxt_topic_select = topicInformationManagementDao.getSelectTopicByOwnId(studentUserId);
 		bysjglxt_notice notice = new bysjglxt_notice();
 		String collge_id = getCollegeByUserId(reviewId);
 		if (bysjglxt_topic_select == null)
 			return -1;
+		TeacherInformationDTO newTeacherInformationDTO = topicInformationManagementDao.getTeacherInfoDTOByUserId(reviewId);
 		if(bysjglxt_topic_select.getTopic_select_teacher_review()!=null && !"".equals(bysjglxt_topic_select.getTopic_select_teacher_review())) {
-			
 			//移除原有的评阅老师
 			bysjglxt_topic_select.setTopic_select_teacher_review(null);
 			bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
@@ -111,7 +112,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			notice.setNotice_id(TeamUtil.getUuid());
 			notice.setNotice_launch((topicInformationManagementDao.getTeacherByCollege(collge_id)).getUser_teacher_id());
 			notice.setNotice_belong(bysjglxt_topic_select.getTopic_select_teacher_review());
-			notice.setNotice_content(((String)(properties.get("removeReviewTeacher"))).replaceAll("num", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_num().replaceAll("name", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_name())));
+			notice.setNotice_content(((String)(properties.get("removeReviewTeacher"))).replaceAll("num", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_num()).replaceAll("name", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_name()));
 			notice.setNotice_leixing(4);
 			notice.setNotice_state(2);
 			notice.setNotice_gmt_create(TeamUtil.getStringSecond());
@@ -164,12 +165,24 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 					notice.setNotice_id(TeamUtil.getUuid());
 					notice.setNotice_launch((topicInformationManagementDao.getTeacherByCollege(collge_id)).getUser_teacher_id());
 					notice.setNotice_belong(reviewId);
-					notice.setNotice_content(((String)(properties.get("addReviewTeacher"))).replaceAll("num", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_num().replaceAll("name", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_name())));
+					notice.setNotice_content(((String)(properties.get("addReviewTeacher"))).replaceAll("num", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_num()).replaceAll("name", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_name()));
 					notice.setNotice_leixing(4);
 					notice.setNotice_state(2);
 					notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 					notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
 					topicInformationManagementDao.saveObj(notice);
+					//通知学生
+					notice = new bysjglxt_notice();
+					notice.setNotice_id(TeamUtil.getUuid());
+					notice.setNotice_launch((topicInformationManagementDao.getTeacherByCollege(collge_id)).getUser_teacher_id());
+					notice.setNotice_belong(studentInformationDTO.getBysjglxtStudentUser().getUser_student_id());
+					notice.setNotice_content(((String)(properties.get("removeReviewStudent"))).replaceAll("num", newTeacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_num()).replaceAll("name", newTeacherInformationDTO.getBysjglxtTeacherBasic().getName()));
+					notice.setNotice_leixing(4);
+					notice.setNotice_state(2);
+					notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+					notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+					topicInformationManagementDao.saveObj(notice);
+
 				}
 			}
 		}

@@ -1,10 +1,13 @@
 package com.bysjglxt.service.impl;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_definition;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
@@ -72,7 +76,18 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 	public String getGraduationTutorCount(String user_teacher_id,int state) {
 		return graduationProjectManagementDao.getGraduationTutorCount(user_teacher_id,state);
 	}
-
+	public static Properties properties = new Properties();//properties属性
+	static {
+		//加载消息文件
+		try {
+//			properties.load(CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties"));
+			InputStream inputStream = CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties");
+			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+			properties.load(bf);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * 获取我管理的学生数量
@@ -164,10 +179,53 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		StudentInformationDTO studentInformationDTO = graduationProjectManagementDao.getStudentInfoByUserId(studentUserId);
 		// 根据选题Id获取选题表信息
 		bysjglxt_topic_select = graduationProjectManagementDao.getStudentSelectTopic(studentUserId);
+		bysjglxt_notice notice = new bysjglxt_notice();
+		String collge_id = getCollegeByUserId(reviewId);
 		if (bysjglxt_topic_select == null)
 			return -1;
+		
+		TeacherInformationDTO newTeacherInformationDTO = graduationProjectManagementDao.getTeacherInfomationDTOByTeacherUserId(reviewId);
+		if(bysjglxt_topic_select.getTopic_select_teacher_review()!=null && !"".equals(bysjglxt_topic_select.getTopic_select_teacher_review())) {
+			//移除原有的评阅老师
+			bysjglxt_topic_select.setTopic_select_teacher_review(null);
+			bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
+			flag = graduationProjectManagementDao.saveObj(bysjglxt_topic_select)==1?true:false;
+			if (!flag)
+				return -1;
+			// 通知原有的评阅老师
+			notice.setNotice_id(TeamUtil.getUuid());
+			notice.setNotice_launch((graduationProjectManagementDao.getTeacherByCollege(collge_id)).getUser_teacher_id());
+			notice.setNotice_belong(bysjglxt_topic_select.getTopic_select_teacher_review());
+			notice.setNotice_content(((String)(properties.get("removeReviewTeacher"))).replaceAll("num", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_num()).replaceAll("name", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_name()));
+			notice.setNotice_leixing(4);
+			notice.setNotice_state(2);
+			notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+			notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+			graduationProjectManagementDao.saveObj(notice);
+			// 判断该学生是否开启毕业设计流程
+			// 用man.state.bysjglxt_process_definitionName 得到该学生流程实例表
+			bysjglxt_process_instance = graduationProjectManagementDao
+					.getProcessInstanceByManStatePAndName(bysjglxt_topic_select.getTopic_select_student());
+			if (bysjglxt_process_instance != null) {
+				// 根据任务定义名获取任务定义表
+				bysjglxt_task_definition = graduationProjectManagementDao.getTaskDefinitionByName("评阅老师填写评阅审查表");
+				if (bysjglxt_task_definition != null) {
+					// 根据流程实例Id以及任务定义ID可以获取任务实例表
+					bysjglxt_task_instance = graduationProjectManagementDao.getTaskInstanceByNameAndProcessInstanceId(
+							bysjglxt_task_definition.getTask_definition_id(),
+							bysjglxt_process_instance.getProcess_instance_id());
+					if (bysjglxt_task_instance != null) {
+						bysjglxt_task_instance.setTask_instance_role(null);
+						bysjglxt_task_instance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
+						graduationProjectManagementDao.saveObj(bysjglxt_task_instance);
+					}
+				}
+			}
+
+		}
 		bysjglxt_topic_select.setTopic_select_teacher_review(reviewId);
 		bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
 		if (!(graduationProjectManagementDao.saveObj(bysjglxt_topic_select)==1))
@@ -188,6 +246,28 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 					bysjglxt_task_instance
 							.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_review());
 					graduationProjectManagementDao.saveObj(bysjglxt_task_instance);
+					//TODO 添加评阅老师
+					//TODO 通知原有的评阅老师
+					notice.setNotice_id(TeamUtil.getUuid());
+					notice.setNotice_launch((graduationProjectManagementDao.getTeacherByCollege(collge_id)).getUser_teacher_id());
+					notice.setNotice_belong(reviewId);
+					notice.setNotice_content(((String)(properties.get("addReviewTeacher"))).replaceAll("num", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_num()).replaceAll("name", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_name()));
+					notice.setNotice_leixing(4);
+					notice.setNotice_state(2);
+					notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+					notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+					graduationProjectManagementDao.saveObj(notice);
+					//通知学生
+					notice = new bysjglxt_notice();
+					notice.setNotice_id(TeamUtil.getUuid());
+					notice.setNotice_launch((graduationProjectManagementDao.getTeacherByCollege(collge_id)).getUser_teacher_id());
+					notice.setNotice_belong(studentInformationDTO.getBysjglxtStudentUser().getUser_student_id());
+					notice.setNotice_content(((String)(properties.get("removeReviewStudent"))).replaceAll("num", newTeacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_num()).replaceAll("name", newTeacherInformationDTO.getBysjglxtTeacherBasic().getName()));
+					notice.setNotice_leixing(4);
+					notice.setNotice_state(2);
+					notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+					notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+					graduationProjectManagementDao.saveObj(notice);
 				}
 			}
 		}
@@ -2955,6 +3035,15 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 			bysjglxt_defence.setDefence_gmt_modified(TeamUtil.getStringSecond());
 			flag = graduationProjectManagementDao.fillEmptyDefence(bysjglxt_defence);
 		}
+		bysjglxt_student_user student = graduationProjectManagementDao.getStudentUserByUserId(bysjglxt_defence.getDefence_student());
+		bysjglxt_student_basic basic = graduationProjectManagementDao.getStudentBasicByBasicId(student.getUser_student_basic());
+		bysjglxt_notice notice = new bysjglxt_notice();
+		
+		notice = graduationProjectManagementDao.getNoticeByTopicInfoAndLeiXing(((String)(properties.get("disserationStart"))).replaceAll("student_num", basic.getStudent_basic_num()).replaceAll("student_name", basic.getStudent_basic_name()),2);
+		notice.setNotice_leixing(1);
+		notice.setNotice_state(1);
+		notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+		graduationProjectManagementDao.saveObj(notice);
 		return flag;
 	}
 

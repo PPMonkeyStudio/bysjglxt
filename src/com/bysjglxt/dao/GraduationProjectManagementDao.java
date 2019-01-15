@@ -9,6 +9,7 @@ import com.bysjglxt.domain.DO.bysjglxt_dissertation;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_review;
 import com.bysjglxt.domain.DO.bysjglxt_evaluate_tutor;
 import com.bysjglxt.domain.DO.bysjglxt_examination_formal;
+import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_process_instance;
 import com.bysjglxt.domain.DO.bysjglxt_record_progress;
 import com.bysjglxt.domain.DO.bysjglxt_report_opening;
@@ -238,5 +239,9 @@ public interface GraduationProjectManagementDao {
 	 * @return
 	 */
 	public boolean deleteReportOpeningTeacherFileByUserId(String userId);
+
+	public bysjglxt_teacher_user getTeacherByCollege(String collge_id);
+
+	public bysjglxt_notice getNoticeByTopicInfoAndLeiXing(String replaceAll, int i);
 
 }
