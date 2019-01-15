@@ -100,7 +100,7 @@ public interface ProcessManagementService {
 	 */
 
 	// 1.通过
-	public int pass(String taskInstanceId);
+	public int pass(String taskInstanceId,String userId,String juese);
 
 	// 2.打回
 	public int repulse(String taskInstanceId);

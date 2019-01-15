@@ -646,9 +646,26 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 	 * 下面是点击通过或打回
 	 ***************************/
 
+	public String getCollegeId(String userId,String juese) {
+		if("teacher".equals(juese)) {
+			return processManagementDao.getTeacherUserByNum(userId).getUser_teacher_belong_college();
+		}else if("student".equals(juese)) {
+			return processManagementDao.getStudentUser(userId).getUser_student_belong_college();
+		}
+		return null;
+	}
+	
 	// 通过
 	@Override
-	public int pass(String taskInstanceId) {
+	public int pass(String taskInstanceId,String userId,String juese) {
+		String college = getCollegeId(userId,juese);
+		if(college ==null) {
+			return -3;
+		}
+		bysjglxt_teacher_user teacherUser = processManagementDao.getTeacherByCollege(college);
+		if(teacherUser == null) {
+			return -3;
+		}
 		boolean flag = true;
 		bysjglxt_task_instance currentTaskInstance = new bysjglxt_task_instance();
 		bysjglxt_task_instance nextTaskInstance = new bysjglxt_task_instance();
@@ -696,23 +713,202 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 			flag = processManagementDao.instanceProcess(bysjglxt_process_instance);
 			if (!flag)
 				return -1;
+		}else {
+			// 更改任务实例状态,将之改为正在进行
+			nextTaskInstance.setTask_instance_state(1);
+			nextTaskInstance.setTask_instance_start(TeamUtil.getStringSecond());
+			nextTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
+			// 存储任务实例
+			flag = processManagementDao.instanceTask(nextTaskInstance);
+			if (!flag)
+				return -1;// 更改任务实例失败
+			// 将记录插入到通知表中
+			bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
+			if (currentTaskInstance.getTask_instance_role() == null || nextTaskInstance.getTask_instance_role() == null) {
+				return 1;
+			}
+			
+		}
+		//TODO 各项任务的通知都在这里集中
+		//获取任务定义
+		bysjglxt_task_definition taskDefinition = new bysjglxt_task_definition();
+		if(currentTaskInstance!=null && currentTaskInstance.getTask_instance_task_definition()!=null && !"".equals(currentTaskInstance.getTask_instance_task_definition())) {
+			taskDefinition = processManagementDao.getTaskDefinition(currentTaskInstance.getTask_instance_task_definition());
+		}
+		if(taskDefinition == null) {
 			return 1;
 		}
-		// 更改任务实例状态,将之改为正在进行
-		nextTaskInstance.setTask_instance_state(1);
-		nextTaskInstance.setTask_instance_start(TeamUtil.getStringSecond());
-		nextTaskInstance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
-		// 存储任务实例
-		flag = processManagementDao.instanceTask(nextTaskInstance);
-		if (!flag)
-			return -1;// 更改任务实例失败
-		// 将记录插入到通知表中
-		bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
-
-		if (currentTaskInstance.getTask_instance_role() == null || nextTaskInstance.getTask_instance_role() == null) {
-			return 1;
+		List<StudentInformationDTO> listStudentUser = new ArrayList<>();
+		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
+		System.out.println(taskDefinition.getTask_definition_name());
+		switch(taskDefinition.getTask_definition_name()) {
+		case "创建选题":
+			//获取该学院的所有老师
+			listTeacherUser = processManagementDao.getTeacherUserListByCollegeId(college);
+//			listStudentUser = processManagementDao.getStudentUserByCollegeId(college);
+			for (TeacherInformationDTO teacherInformationDTO : listTeacherUser) {
+				if(teacherUser.getUser_teacher_id().equals(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id())) {
+					continue;
+				}
+				//生成新的公告---新的所有人的通知
+				sendMessage(teacherUser.getUser_teacher_id(),teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),((String)(properties.get("passCreateTopic"))),2,2);
+			}
+			//发给自己的-----新得任务结点的自己的通知
+			sendMessage(teacherUser.getUser_teacher_id(),teacherUser.getUser_teacher_id(),((String)(properties.get("earlySelectTopic"))),2,2);
+			//将创建选题的任务全部改成已完成-----上一个发给大家的通知
+			List<bysjglxt_notice> listNotice = processManagementDao.getNoticeByContentAndLeiXing(((String)(properties.get("createTeacherSelect"))),2);
+			if(listNotice!=null && listNotice.size()>0) {
+				for (bysjglxt_notice notice : listNotice) {
+					notice.setNotice_leixing(1);
+					notice.setNotice_state(1);
+					notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(notice);
+				}
+			}
+			//那个管理员的创建选题的通知也要变成已完成--------上一个发给管理员的通知
+			bysjglxt_notice adminNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(teacherUser.getUser_teacher_id(), ((String)(properties.get("createAdminSelect"))),2);
+			if(adminNotice!=null) {
+				adminNotice.setNotice_leixing(1);
+				adminNotice.setNotice_state(1);
+				adminNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				processManagementDao.saveObj(adminNotice);
+			}
+			break;
+		case "提前选题":
+			//获取该学院的所有老师
+			listTeacherUser = processManagementDao.getTeacherUserListByCollegeId(college);
+//			listStudentUser = processManagementDao.getStudentUserByCollegeId(college);
+			for (TeacherInformationDTO teacherInformationDTO : listTeacherUser) {
+				if(teacherUser.getUser_teacher_id().equals(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id())) {
+					continue;
+				}
+				//生成新的公告
+				sendMessage(teacherUser.getUser_teacher_id(),teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),((String)(properties.get("passEarlySelectTopic"))),2,2);
+			}
+			//发给自己的
+			sendMessage(teacherUser.getUser_teacher_id(),teacherUser.getUser_teacher_id(),((String)(properties.get("formalSelectTopic"))),2,2);
+			//将提前选题的任务全部改成已完成
+			List<bysjglxt_notice> list = processManagementDao.getNoticeByContentAndLeiXing(((String)(properties.get("passCreateTopic"))),2);
+			if(list!=null && list.size()>0) {
+				for (bysjglxt_notice notice : list) {
+					notice.setNotice_leixing(1);
+					notice.setNotice_state(1);
+					notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(notice);
+				}
+			}
+			//那个管理员的提前选题的通知也要变成已完成
+			bysjglxt_notice adminNotice2 = processManagementDao.getNoticeByBelongContentAndLeiXing(teacherUser.getUser_teacher_id(), ((String)(properties.get("earlySelectTopic"))),2);
+			if(adminNotice2!=null) {
+				adminNotice2.setNotice_leixing(1);
+				adminNotice2.setNotice_state(1);
+				adminNotice2.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				processManagementDao.saveObj(adminNotice2);
+			}
+			break;
+		case "正式选题":
+			//获取该学院的所有老师
+			listTeacherUser = processManagementDao.getTeacherUserListByCollegeId(college);
+//			listStudentUser = processManagementDao.getStudentUserByCollegeId(college);
+			for (TeacherInformationDTO teacherInformationDTO : listTeacherUser) {
+				if(teacherUser.getUser_teacher_id().equals(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id())) {
+					continue;
+				}
+				//生成新的公告
+				sendMessage(teacherUser.getUser_teacher_id(),teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),((String)(properties.get("passformalSelectTopic"))),2,2);
+			}
+			//发给自己的
+			sendMessage(teacherUser.getUser_teacher_id(),teacherUser.getUser_teacher_id(),((String)(properties.get("assignSelectTopic"))),2,2);
+			//将提前选题的任务全部改成已完成
+			List<bysjglxt_notice> list2 = processManagementDao.getNoticeByContentAndLeiXing(((String)(properties.get("passEarlySelectTopic"))),2);
+			if(list2!=null && list2.size()>0) {
+				for (bysjglxt_notice notice : list2) {
+					notice.setNotice_leixing(1);
+					notice.setNotice_state(1);
+					notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(notice);
+				}
+			}
+			//那个管理员的提前选题的通知也要变成已完成
+			adminNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(teacherUser.getUser_teacher_id(), ((String)(properties.get("formalSelectTopic"))),2);
+			if(adminNotice!=null) {
+				adminNotice.setNotice_leixing(1);
+				adminNotice.setNotice_state(1);
+				adminNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				processManagementDao.saveObj(adminNotice);
+			}
+			break;
+		case "分配选题":
+			//获取该学院的所有老师
+			listTeacherUser = processManagementDao.getTeacherUserListByCollegeId(college);
+//			listStudentUser = processManagementDao.getStudentUserByCollegeId(college);
+			for (TeacherInformationDTO teacherInformationDTO : listTeacherUser) {
+				if(teacherUser.getUser_teacher_id().equals(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id())) {
+					continue;
+				}
+				//生成新的公告
+				sendMessage(teacherUser.getUser_teacher_id(),teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),((String)(properties.get("passassignSelectTopic"))),2,2);
+			}
+			//发给自己的
+			sendMessage(teacherUser.getUser_teacher_id(),teacherUser.getUser_teacher_id(),((String)(properties.get("finishTopic"))),2,2);
+			//将提前选题的任务全部改成已完成
+			list2 = processManagementDao.getNoticeByContentAndLeiXing(((String)(properties.get("passformalSelectTopic"))),2);
+			if(list2!=null && list2.size()>0) {
+				for (bysjglxt_notice notice : list2) {
+					notice.setNotice_leixing(1);
+					notice.setNotice_state(1);
+					notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(notice);
+				}
+			}
+			//那个管理员的提前选题的通知也要变成已完成
+			adminNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(teacherUser.getUser_teacher_id(), ((String)(properties.get("assignSelectTopic"))),2);
+			if(adminNotice!=null) {
+				adminNotice.setNotice_leixing(1);
+				adminNotice.setNotice_state(1);
+				adminNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				processManagementDao.saveObj(adminNotice);
+			}
+			break;
+		case "完成选题":
+			//获取该学院的所有老师
+			listTeacherUser = processManagementDao.getTeacherUserListByCollegeId(college);
+			listStudentUser = processManagementDao.getStudentUserByCollegeId(college);
+			for (StudentInformationDTO studentInformationDTO : listStudentUser) {
+				//生成新的公告
+				sendMessage(teacherUser.getUser_teacher_id(),studentInformationDTO.getBysjglxtStudentUser().getUser_student_id(),((String)(properties.get("topicSelectFinishStudent"))),4,2);
+			}
+			for (TeacherInformationDTO teacherInformationDTO : listTeacherUser) {
+				if(teacherUser.getUser_teacher_id().equals(teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id())) {
+					continue;
+				}
+				//生成新的公告
+				sendMessage(teacherUser.getUser_teacher_id(),teacherInformationDTO.getBysjglxtTeacherUser().getUser_teacher_id(),((String)(properties.get("passfinishTopic"))),4,2);
+			}
+			//发给自己的
+			sendMessage(teacherUser.getUser_teacher_id(),teacherUser.getUser_teacher_id(),((String)(properties.get("createGraduationProcess"))),2,2);
+			//将提前选题的任务全部改成已完成
+			list2 = processManagementDao.getNoticeByContentAndLeiXing(((String)(properties.get("passassignSelectTopic"))),2);
+			if(list2!=null && list2.size()>0) {
+				for (bysjglxt_notice notice : list2) {
+					notice.setNotice_leixing(1);
+					notice.setNotice_state(1);
+					notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+					processManagementDao.saveObj(notice);
+				}
+			}
+			//那个管理员的提前选题的通知也要变成已完成
+			adminNotice = processManagementDao.getNoticeByBelongContentAndLeiXing(teacherUser.getUser_teacher_id(), ((String)(properties.get("finishTopic"))),2);
+			if(adminNotice!=null) {
+				adminNotice.setNotice_leixing(1);
+				adminNotice.setNotice_state(1);
+				adminNotice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				processManagementDao.saveObj(adminNotice);
+			}
+			break;
 		}
-		// 通知执行者
+		
+/*		// 通知执行者
 		bysjglxt_notice.setNotice_launch(currentTaskInstance.getTask_instance_role());
 		// 通知拥有者
 		bysjglxt_notice.setNotice_belong(nextTaskInstance.getTask_instance_role());
@@ -723,10 +919,33 @@ public class ProcessManagementServiceImpl implements ProcessManagementService {
 		if (!(bysjglxt_notice.getNotice_belong().equals(bysjglxt_notice.getNotice_launch()))) {
 			// 存储记录
 			processManagementDao.fillNoticeRecord(bysjglxt_notice);
-		}
+		}*/
 		return 1;// 成功
 	}
 
+	
+	/**
+	 * 
+	 */
+	public void sendMessage(String launch,String belong,String content,int leixing,int state) {
+		bysjglxt_notice notice = new bysjglxt_notice();
+		notice.setNotice_id(TeamUtil.getUuid());
+		notice.setNotice_launch(launch);
+		notice.setNotice_belong(belong);
+		notice.setNotice_leixing(leixing);
+		notice.setNotice_state(state);
+		notice.setNotice_content(content);
+		notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+		processManagementDao.saveObj(notice);
+	}
+	
+	
+	
+	/**
+	 * 
+	 */
+	
 	// 打回
 	@Override
 	public int repulse(String taskInstanceId) {

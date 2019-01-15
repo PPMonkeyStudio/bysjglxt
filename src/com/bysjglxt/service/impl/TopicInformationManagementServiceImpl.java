@@ -1,7 +1,11 @@
 package com.bysjglxt.service.impl;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import com.bysjglxt.dao.TopicInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_college;
@@ -40,7 +44,18 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		this.collegeManagementService = collegeManagementService;
 	}
 
-
+	public static Properties properties = new Properties();//properties属性
+	static {
+		//加载消息文件
+		try {
+//			properties.load(CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties"));
+			InputStream inputStream = CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties");
+			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+			properties.load(bf);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * 根据课题id获取学生信息
 	 */
@@ -68,7 +83,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	public List<bysjglxt_topic> listAllTopic(bysjglxt_topic topic, String user_teacher_belong_college) {
 		return this.topicInformationManagementDao.listAllTopic(topic, user_teacher_belong_college);
 	}
-
+	
 	// 添加评阅老师
 	@Override
 	public int assignment(String studentUserId, String reviewId) {
@@ -77,17 +92,31 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		bysjglxt_task_instance bysjglxt_task_instance = new bysjglxt_task_instance();
 		bysjglxt_task_definition bysjglxt_task_definition = new bysjglxt_task_definition();
 		bysjglxt_process_instance bysjglxt_process_instance = new bysjglxt_process_instance();
+		StudentInformationDTO studentInformationDTO = topicInformationManagementDao.getStudentInfoByUserId(studentUserId);
 		// 根据选题Id获取选题表信息
 		bysjglxt_topic_select = topicInformationManagementDao.getSelectTopicByOwnId(studentUserId);
+		bysjglxt_notice notice = new bysjglxt_notice();
+		String collge_id = getCollegeByUserId(reviewId);
 		if (bysjglxt_topic_select == null)
 			return -1;
 		if(bysjglxt_topic_select.getTopic_select_teacher_review()!=null && !"".equals(bysjglxt_topic_select.getTopic_select_teacher_review())) {
+			
 			//移除原有的评阅老师
 			bysjglxt_topic_select.setTopic_select_teacher_review(null);
 			bysjglxt_topic_select.setTopic_select_gmt_modified(TeamUtil.getStringSecond());
 			flag = topicInformationManagementDao.createStudentSclectInformation(bysjglxt_topic_select);
 			if (!flag)
 				return -1;
+			// 通知原有的评阅老师
+			notice.setNotice_id(TeamUtil.getUuid());
+			notice.setNotice_launch((topicInformationManagementDao.getTeacherByCollege(collge_id)).getUser_teacher_id());
+			notice.setNotice_belong(bysjglxt_topic_select.getTopic_select_teacher_review());
+			notice.setNotice_content(((String)(properties.get("removeReviewTeacher"))).replaceAll("num", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_num().replaceAll("name", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_name())));
+			notice.setNotice_leixing(4);
+			notice.setNotice_state(2);
+			notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+			notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+			topicInformationManagementDao.saveObj(notice);
 			// 判断该学生是否开启毕业设计流程
 			// 用man.state.bysjglxt_process_definitionName 得到该学生流程实例表
 			bysjglxt_process_instance = topicInformationManagementDao
@@ -130,10 +159,22 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 					bysjglxt_task_instance.setTask_instance_role(bysjglxt_topic_select.getTopic_select_teacher_review());
 					bysjglxt_task_instance.setTask_instance_gmt_modified(TeamUtil.getStringSecond());
 					topicInformationManagementDao.saveObj(bysjglxt_task_instance);
+					//TODO 添加评阅老师
+					//TODO 通知原有的评阅老师
+					notice.setNotice_id(TeamUtil.getUuid());
+					notice.setNotice_launch((topicInformationManagementDao.getTeacherByCollege(collge_id)).getUser_teacher_id());
+					notice.setNotice_belong(reviewId);
+					notice.setNotice_content(((String)(properties.get("addReviewTeacher"))).replaceAll("num", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_num().replaceAll("name", studentInformationDTO.getBysjglxtStudentBasic().getStudent_basic_name())));
+					notice.setNotice_leixing(4);
+					notice.setNotice_state(2);
+					notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+					notice.setNotice_gmt_modified(notice.getNotice_gmt_create());
+					topicInformationManagementDao.saveObj(notice);
 				}
 			}
 		}
-
+		
+		
 		return 1;
 	}
 
@@ -187,6 +228,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			listAdminTeacherUser = topicInformationManagementDao
 					.getListAdminByCollege(bysjglxt_teacher_user.getUser_teacher_belong_college());
 		}
+		bysjglxt_teacher_basic teacher = topicInformationManagementDao.getTeacherBasicInfo(bysjglxt_teacher_user.getUser_teacher_basic());
 		for (bysjglxt_teacher_user teacher_user2 : listAdminTeacherUser) {
 			bysjglxt_notice = new bysjglxt_notice();
 			String name = "";
@@ -204,8 +246,10 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
 			bysjglxt_notice.setNotice_launch(bysjglxt_teacher_user.getUser_teacher_id());
 			bysjglxt_notice.setNotice_belong(teacher_user2.getUser_teacher_id());
-			bysjglxt_notice.setNotice_content("【" + bysjglxt_teacher_user.getUser_teacher_num() + name + "】老师，创建课题【"
-					+ newTopic.getTopic_name_chinese() + "】，等待审核通过");
+			bysjglxt_notice.setNotice_content(((String)(properties.get("createSelectAdmin"))).replaceAll("job_num", bysjglxt_teacher_user.getUser_teacher_num()).replaceAll("name", teacher.getName()).replaceAll("topic_num", newTopic.getTopic_num()).replaceAll("topic_chinese", newTopic.getTopic_name_chinese()));
+			/*bysjglxt_notice.setNotice_content("【" + bysjglxt_teacher_user.getUser_teacher_num() + name + "】老师，创建课题【"
+					+ newTopic.getTopic_name_chinese() + "】，等待审核通过");*/
+			bysjglxt_notice.setNotice_leixing(2);
 			bysjglxt_notice.setNotice_state(2);
 			bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
@@ -213,6 +257,13 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			if (!flag) {
 				break;
 			}
+		}
+		bysjglxt_notice = new bysjglxt_notice();
+		if(bysjglxt_notice!=null) {
+			bysjglxt_notice = topicInformationManagementDao.getNoticeByContentAndLeiXingBelong(newTopic.getTopic_teacher(),((String)(properties.get("createTeacherSelect"))), 2);
+			bysjglxt_notice.setNotice_state(1);
+			bysjglxt_notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+			topicInformationManagementDao.saveObj(bysjglxt_notice);
 		}
 		return flag;
 	}
@@ -226,31 +277,35 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			bysjglxt_topic = new bysjglxt_topic();
 			// 根据课题ID获得课题对象
 			bysjglxt_topic = topicInformationManagementDao.getBysjglxtTopicById(topicId);
-			if ("已关闭".equals(bysjglxt_topic.getTopic_examine_state())) {
+			//只有未审核的可以删除
+			if (!"未审核".equals(bysjglxt_topic.getTopic_examine_state())) {
 				continue;
 			}
-			if ("审核未通过".equals(bysjglxt_topic.getTopic_examine_state())) {
+/*			if ("审核未通过".equals(bysjglxt_topic.getTopic_examine_state())) {
 				continue;
 			}
-			if (bysjglxt_topic != null) {
+*/			if (bysjglxt_topic != null) {
 				// 删除选题的话需要将学生选题表里面的关于该课题记录删除
 				// 1.先获得学生选题表关于该选题集合
 				listTopicSelect = topicInformationManagementDao.getTopicSelectList(bysjglxt_topic.getTopic_id());
 				if (listTopicSelect.size() > 0) {
 					for (bysjglxt_topic_select bysjglxt_topic_select : listTopicSelect) {
 						// 根据选题表中学生字段将学生登录表中的选题字段变化
-						flag = topicInformationManagementDao
-								.updateStudentUserNotSelect(bysjglxt_topic_select.getTopic_select_student());
+						flag = topicInformationManagementDao.updateStudentUserNotSelect(bysjglxt_topic_select.getTopic_select_student());
 						if (!flag)
 							break;
 						// 删除学生选题表
-						flag = topicInformationManagementDao
-								.deleteTopicSelect(bysjglxt_topic_select.getTopic_select_id());
+						flag = topicInformationManagementDao.deleteTopicSelect(bysjglxt_topic_select.getTopic_select_id());
 						if (!flag)
 							break;
 					}
 				}
 				flag = topicInformationManagementDao.DeleteTopic(topicId);
+			}
+			//TODO 如果删除了课题，是不是把对应的通知直接删除
+			bysjglxt_notice notice = topicInformationManagementDao.getNoticeByTopicInfoAndLeiXing(bysjglxt_topic.getTopic_num(),2);
+			if(notice!=null) {
+				topicInformationManagementDao.deleteNotice(notice.getNotice_id());
 			}
 		}
 		return flag;
@@ -281,8 +336,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				}
 			}
 			if (bysjglxt_topic.getTopic_teacher() != null && bysjglxt_topic.getTopic_teacher().trim().length() > 0) {
-				bysjglxtBasic = topicInformationManagementDao
-						.getTeacherBasicInfo(bysjglxt_topic.getTopic_teacher().trim());
+				bysjglxtBasic = topicInformationManagementDao.getTeacherBasicInfo(bysjglxt_topic.getTopic_teacher().trim());
 				if (bysjglxtBasic != null) {
 					if (bysjglxtBasic.getName() != null && bysjglxtBasic.getName().trim().length() > 0) {
 						name = bysjglxtBasic.getName().trim();
@@ -290,17 +344,34 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				}
 			}
 			flag = topicInformationManagementDao.updateTopicState(string, TeamUtil.getStringSecond());
+			//通过两步操作-第一将以前的课题的审核通知leixing变成1
+			bysjglxt_notice = topicInformationManagementDao.getNoticeByTopicInfoAndLeiXing(bysjglxt_topic.getTopic_num(), 2);
+			if(bysjglxt_notice!=null) {
+				bysjglxt_notice.setNotice_leixing(1);
+				bysjglxt_notice.setNotice_state(1);
+				bysjglxt_notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				topicInformationManagementDao.saveObj(bysjglxt_notice);
+			}
+			//将审核任务变成已完成
+			bysjglxt_notice = new bysjglxt_notice();
+			bysjglxt_notice = topicInformationManagementDao.getNoticeByContentAndLeiXingBelong(bysjglxt_topic.getTopic_teacher(),((String)(properties.get("createTeacherSelect"))), 2);
+			if(bysjglxt_notice!=null) {
+				bysjglxt_notice.setNotice_leixing(1);
+				bysjglxt_notice.setNotice_state(1);
+				bysjglxt_notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				topicInformationManagementDao.saveObj(bysjglxt_notice);
+			}
+			bysjglxt_notice = new bysjglxt_notice();
 			bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
-
 			// 获取与老师是一致的系部管理员所通过的
 			bysjglxt_notice.setNotice_launch(adminUserId);
 			bysjglxt_notice.setNotice_belong(bysjglxt_topic.getTopic_teacher());
-			bysjglxt_notice.setNotice_content("您的课题【" + bysjglxt_topic.getTopic_name_chinese() + "】，已通过【"
-					+ bysjglxt_teacher_user.getUser_teacher_num() + name + "】老师的审核，等待提前选题");
+			bysjglxt_notice.setNotice_content(((String)(properties.get("topicCheckPass"))).replaceAll("topic_num", bysjglxt_topic.getTopic_num()).replaceAll("topic_chinese", bysjglxt_topic.getTopic_name_chinese()));
+			bysjglxt_notice.setNotice_leixing(4);
 			bysjglxt_notice.setNotice_state(2);
 			bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
-			flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
+			flag = topicInformationManagementDao.saveObj(bysjglxt_notice);
 		}
 		return flag;
 	}
@@ -309,6 +380,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 	public boolean closeTopic(List<String> topicID) {
 		boolean flag = false;
 		bysjglxt_topic bysjglxt_topic = null;
+		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
 		for (String string : topicID) {
 			// 只有已通过的课题可以进行关闭
 			bysjglxt_topic = new bysjglxt_topic();
@@ -321,6 +393,26 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				continue;
 			}
 			flag = topicInformationManagementDao.closeTopic(string, TeamUtil.getStringSecond());
+			//将审核任务变成已完成
+			bysjglxt_notice = new bysjglxt_notice();
+			bysjglxt_notice = topicInformationManagementDao.getNoticeByContentAndLeiXingBelong(bysjglxt_topic.getTopic_teacher(),((String)(properties.get("createTeacherSelect"))), 2);
+			if(bysjglxt_notice!=null) {
+				bysjglxt_notice.setNotice_leixing(1);
+				bysjglxt_notice.setNotice_state(1);
+				bysjglxt_notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				topicInformationManagementDao.saveObj(bysjglxt_notice);
+			}
+			String adminUserId = bysjglxt_notice.getNotice_launch();
+			bysjglxt_notice = new bysjglxt_notice();
+			// 获取与老师是一致的系部管理员所通过的
+			bysjglxt_notice.setNotice_launch(adminUserId);
+			bysjglxt_notice.setNotice_belong(bysjglxt_topic.getTopic_teacher());
+			bysjglxt_notice.setNotice_content(((String)(properties.get("closeTopic"))).replaceAll("topic_num", bysjglxt_topic.getTopic_num()).replaceAll("topic_chinese", bysjglxt_topic.getTopic_name_chinese()));
+			bysjglxt_notice.setNotice_leixing(4);
+			bysjglxt_notice.setNotice_state(2);
+			bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
+			flag = topicInformationManagementDao.saveObj(bysjglxt_notice);
 		}
 		return flag;
 	}
@@ -355,15 +447,36 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				}
 			}
 			flag = topicInformationManagementDao.notAdoptTopic(string, TeamUtil.getStringSecond());
+			//通过两步操作-第一将以前的课题的审核通知leixing变成1
+			bysjglxt_notice = new bysjglxt_notice();
+			bysjglxt_notice = topicInformationManagementDao.getNoticeByTopicInfoAndLeiXing(bysjglxt_topic.getTopic_num(), 2);
+			if(bysjglxt_notice!=null) {
+				bysjglxt_notice.setNotice_leixing(1);
+				bysjglxt_notice.setNotice_state(1);
+				bysjglxt_notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				topicInformationManagementDao.saveObj(bysjglxt_notice);
+			}
+			bysjglxt_notice = new bysjglxt_notice();
 			bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
 			bysjglxt_notice.setNotice_launch(adminUserId);
 			bysjglxt_notice.setNotice_belong(bysjglxt_topic.getTopic_teacher());
-			bysjglxt_notice.setNotice_content("您的课题【" + bysjglxt_topic.getTopic_name_chinese() + "】，未通过【"
-					+ bysjglxt_teacher_user.getUser_teacher_num() + name + "】老师的审核，请尽快修改");
+			bysjglxt_notice.setNotice_content(((String)(properties.get("topicCheckNotPass"))).replaceAll("topic_num", bysjglxt_topic.getTopic_num()).replaceAll("topic_chinese", bysjglxt_topic.getTopic_name_chinese()));
+			/*bysjglxt_notice.setNotice_content("您的课题【" + bysjglxt_topic.getTopic_name_chinese() + "】，未通过【"
+					+ bysjglxt_teacher_user.getUser_teacher_num() + name + "】老师的审核，请尽快修改");*/
+			bysjglxt_notice.setNotice_leixing(4);
 			bysjglxt_notice.setNotice_state(2);
 			bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
-			flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
+			flag = topicInformationManagementDao.saveObj(bysjglxt_notice);
+			//将审核任务变成已完成
+			bysjglxt_notice = new bysjglxt_notice();
+			bysjglxt_notice = topicInformationManagementDao.getNoticeByContentAndLeiXingBelong(bysjglxt_topic.getTopic_teacher(),((String)(properties.get("createTeacherSelect"))), 2);
+			if(bysjglxt_notice!=null) {
+				bysjglxt_notice.setNotice_leixing(1);
+				bysjglxt_notice.setNotice_state(1);
+				bysjglxt_notice.setNotice_gmt_modified(TeamUtil.getStringSecond());
+				topicInformationManagementDao.saveObj(bysjglxt_notice);
+			}
 		}
 		return flag;
 	}
@@ -546,12 +659,13 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				}
 			}
 		}
-		bysjglxt_notice
-				.setNotice_content("【" + num + name + "】同学，选了您的课题【" + bysjglxt_topic.getTopic_name_chinese() + "】");
+		bysjglxt_notice.setNotice_content(((String)(properties.get("selectTopic"))).replaceAll("student_num", num).replaceAll("name", name).replaceAll("topic_num", bysjglxt_topic.getTopic_num()).replaceAll("topic_chinese", bysjglxt_topic.getTopic_name_chinese()));
+//		bysjglxt_notice.setNotice_content("【" + num + name + "】同学，选了您的课题【" + bysjglxt_topic.getTopic_name_chinese() + "】");
+		bysjglxt_notice.setNotice_leixing(4);
 		bysjglxt_notice.setNotice_state(2);
 		bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 		bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
-		flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
+		flag = topicInformationManagementDao.saveObj(bysjglxt_notice);
 		return 1;
 	}
 
@@ -821,7 +935,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		if (bysjglxt_teacher_user == null) {
 			return -1;
 		}
-
+		bysjglxt_teacher_basic teacher = topicInformationManagementDao.getTeacherBasicInfo(bysjglxt_teacher_user.getUser_teacher_basic());
 		// 添加通知记录
 		// 1.获取所有的该系管理员
 		if (bysjglxt_teacher_user.getUser_teacher_belong_college() != null
@@ -830,12 +944,15 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 					.getListAdminByCollege(bysjglxt_teacher_user.getUser_teacher_belong_college());
 		}
 		for (bysjglxt_teacher_user teacher_user2 : listAdminTeacherUser) {
+			//TODO
 			bysjglxt_notice = new bysjglxt_notice();
 			bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
 			bysjglxt_notice.setNotice_launch(bysjglxt_teacher_user.getUser_teacher_id());
 			bysjglxt_notice.setNotice_belong(teacher_user2.getUser_teacher_id());
-			bysjglxt_notice.setNotice_content("工号为:" + bysjglxt_teacher_user.getUser_teacher_num() + "的老师创建课题:"
-					+ topic.getTopic_name_chinese() + "需要审核");
+			bysjglxt_notice.setNotice_content(((String)(properties.get("createSelectAdmin"))).replaceAll("job_num", bysjglxt_teacher_user.getUser_teacher_num()).replaceAll("name", teacher.getName()).replaceAll("topic_num", topic.getTopic_num()).replaceAll("topic_chinese", topic.getTopic_name_chinese()));
+			/*bysjglxt_notice.setNotice_content("工号为:" + bysjglxt_teacher_user.getUser_teacher_num() + "的老师创建课题:"
+					+ topic.getTopic_name_chinese() + "需要审核");*/
+			bysjglxt_notice.setNotice_leixing(2);
 			bysjglxt_notice.setNotice_state(2);
 			bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
 			bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
@@ -891,7 +1008,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				topicName = topic.getTopic_name_chinese().trim();
 			}
 		}
-		// 通知学生
+		// 通知老师
 		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
 		bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
 		bysjglxt_notice.setNotice_launch(studentUserId);
@@ -913,11 +1030,13 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 				}
 			}
 		}
-		bysjglxt_notice.setNotice_content("【" + num + name + "】同学，退选您的课题【" + topicName + "】");
+		bysjglxt_notice.setNotice_content(((String)(properties.get("dropTopic"))).replaceAll("student_num", num).replaceAll("name", name).replaceAll("topic_num", topic.getTopic_num()).replaceAll("topic_chinese", topicName));
+//		bysjglxt_notice.setNotice_content("【" + num + name + "】同学，退选您的课题【" + topicName + "】");
 		bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_notice.setNotice_leixing(4);
 		bysjglxt_notice.setNotice_state(2);
 		bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
-		flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
+		flag = topicInformationManagementDao.saveObj(bysjglxt_notice);
 
 		return 1;
 	}
@@ -958,7 +1077,7 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			}
 			flag = topicInformationManagementDao.addTeacherUserSrtudentNum(bysjglxt_teacher_user.getUser_teacher_id());
 		}
-
+		
 		// 4.添加选题记录
 		bysjglxt_topic_select.setTopic_select_id(TeamUtil.getUuid());
 		bysjglxt_topic_select.setTopic_select_student(userId);
@@ -970,15 +1089,43 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 		if (!flag)
 			return -1;
 		// 通知学生
-		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
-		bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
-		bysjglxt_notice.setNotice_launch(bysjglxt_topic.getTopic_teacher());
-		bysjglxt_notice.setNotice_belong(userId);
-		bysjglxt_notice.setNotice_content("老师分配你进如指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
-		bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
-		bysjglxt_notice.setNotice_state(2);
-		bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
-		flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
+		
+		bysjglxt_notice bysjglxt_notice2 = new bysjglxt_notice();
+		bysjglxt_notice2.setNotice_id(TeamUtil.getUuid());
+		bysjglxt_notice2.setNotice_launch(bysjglxt_topic.getTopic_teacher());
+		bysjglxt_notice2.setNotice_belong(userId);
+		bysjglxt_notice2.setNotice_content(((String)(properties.get("assignTopic"))).replaceAll("topic_num", bysjglxt_topic.getTopic_num()).replaceAll("topic_chinese", bysjglxt_topic.getTopic_name_chinese()));
+//		bysjglxt_notice.setNotice_content("老师分配你进如指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
+		bysjglxt_notice2.setNotice_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_notice2.setNotice_leixing(4);
+		bysjglxt_notice2.setNotice_state(2);
+		bysjglxt_notice2.setNotice_gmt_modified(bysjglxt_notice2.getNotice_gmt_create());
+		flag = topicInformationManagementDao.saveObj(bysjglxt_notice2);
+		
+		bysjglxt_notice bysjglxt_notice3 = new bysjglxt_notice();
+		bysjglxt_notice3.setNotice_id(TeamUtil.getUuid());
+		bysjglxt_notice3.setNotice_launch(userId);
+		bysjglxt_notice3.setNotice_belong(bysjglxt_teacher_user.getUser_teacher_id());
+		String name = "";
+		String num = "";
+		if (bysjglxt_student_user.getUser_student_basic() != null
+				&& bysjglxt_student_user.getUser_student_basic().trim().length() > 0) {
+			bysjglxt_student_basic studentBasic = topicInformationManagementDao.getStudentBasic(bysjglxt_student_user.getUser_student_basic());
+			if (studentBasic != null) {
+				if (studentBasic.getStudent_basic_name() != null
+						&& studentBasic.getStudent_basic_name().trim().length() > 0) {
+					name = studentBasic.getStudent_basic_name().trim();
+					num = studentBasic.getStudent_basic_num().trim();
+				}
+			}
+		}
+		bysjglxt_notice3.setNotice_content(((String)(properties.get("selectTopic"))).replaceAll("student_num", num).replaceAll("name", name).replaceAll("topic_num", bysjglxt_topic.getTopic_num()).replaceAll("topic_chinese", bysjglxt_topic.getTopic_name_chinese()));
+//		bysjglxt_notice.setNotice_content("【" + num + name + "】同学，选了您的课题【" + bysjglxt_topic.getTopic_name_chinese() + "】");
+		bysjglxt_notice3.setNotice_leixing(4);
+		bysjglxt_notice3.setNotice_state(2);
+		bysjglxt_notice3.setNotice_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_notice3.setNotice_gmt_modified(bysjglxt_notice3.getNotice_gmt_create());
+		flag = topicInformationManagementDao.saveObj(bysjglxt_notice3);
 		return 1;
 	}
 
@@ -1050,24 +1197,28 @@ public class TopicInformationManagementServiceImpl implements TopicInformationMa
 			if ((bysjglxt_topic.getTopic_student().trim()).indexOf(studentID) != -1) {
 				// 如果包含 的话，也就是说是调用了取消指定的方法
 				bysjglxt_topic.setTopic_student(bysjglxt_topic.getTopic_student().replaceAll(studentID + "#&#", ""));
-				bysjglxt_notice.setNotice_content("老师取消你进入指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
+				bysjglxt_notice.setNotice_content(((String)(properties.get("removeZaoSelectTopic"))).replaceAll("topic_num", bysjglxt_topic.getTopic_num()).replaceAll("topic_chinese", bysjglxt_topic.getTopic_name_chinese()));
+//				bysjglxt_notice.setNotice_content("老师取消你进入指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
 			} else {
 				// 如果不包含,则是调用的指定的方法
 				bysjglxt_topic.setTopic_student(bysjglxt_topic.getTopic_student() + studentID + "#&#");
-				bysjglxt_notice.setNotice_content("老师添加你进入指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
+				bysjglxt_notice.setNotice_content(((String)(properties.get("addZaoSelectTopic"))).replaceAll("topic_num", bysjglxt_topic.getTopic_num()).replaceAll("topic_chinese", bysjglxt_topic.getTopic_name_chinese()));
+//				bysjglxt_notice.setNotice_content("老师添加你进入指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
 			}
 		} else {
 			bysjglxt_topic.setTopic_student(studentID + "#&#");
-			bysjglxt_notice.setNotice_content("老师添加你进入指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
+			bysjglxt_notice.setNotice_content(((String)(properties.get("addZaoSelectTopic"))).replaceAll("topic_num", bysjglxt_topic.getTopic_num()).replaceAll("topic_chinese", bysjglxt_topic.getTopic_name_chinese()));
+//			bysjglxt_notice.setNotice_content("老师添加你进入指定选题人选" + bysjglxt_topic.getTopic_name_chinese());
 		}
 		// 通知学生
 		bysjglxt_notice.setNotice_id(TeamUtil.getUuid());
 		bysjglxt_notice.setNotice_launch(bysjglxt_topic.getTopic_teacher());
 		bysjglxt_notice.setNotice_belong(studentID);
 		bysjglxt_notice.setNotice_gmt_create(TeamUtil.getStringSecond());
+		bysjglxt_notice.setNotice_leixing(4);
 		bysjglxt_notice.setNotice_state(2);
 		bysjglxt_notice.setNotice_gmt_modified(bysjglxt_notice.getNotice_gmt_create());
-		flag = topicInformationManagementDao.createNoti1ceRecord(bysjglxt_notice);
+		flag = topicInformationManagementDao.saveObj(bysjglxt_notice);
 		// 课题表
 		bysjglxt_topic.setTopic_gmt_modified(TeamUtil.getStringSecond());
 		flag = topicInformationManagementDao.CreateTopic(bysjglxt_topic);

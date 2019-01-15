@@ -10,7 +10,6 @@ import org.hibernate.SessionFactory;
 
 import com.bysjglxt.dao.TeacherInformationManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_college;
-import com.bysjglxt.domain.DO.bysjglxt_notice;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_student_user;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;

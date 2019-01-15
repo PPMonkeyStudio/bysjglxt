@@ -115,4 +115,10 @@ public interface ProcessManagementDao {
 
 	public bysjglxt_teacher_user getTeacherByCollege(String college);
 
+	public List<TeacherInformationDTO> getTeacherUserListByCollegeId(String college);
+
+	public List<bysjglxt_notice> getNoticeByContentAndLeiXing(String string, int i);
+
+	public bysjglxt_notice getNoticeByBelongContentAndLeiXing(String user_teacher_id, String string, int i);
+
 }

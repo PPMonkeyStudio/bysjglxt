@@ -91,7 +91,7 @@ function deleteTopicList() {
 			if (xhr.status == 200) {
 				if (xhr.responseText == "success") {
 					toastr.success("所选课题已删除");
-					List_Topic_By_PageAndSearch(1);
+					window.location.href="/bysjglxt/topic/TopicInformationManagement_MyTopicListPage";
 				}
 			} else {
 				toastr.error(xhr.status);

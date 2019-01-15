@@ -602,4 +602,34 @@ public class ProcessManagementDaoImpl implements ProcessManagementDao {
 		bysjglxt_process_instance = (bysjglxt_process_instance) query.uniqueResult();
 		return bysjglxt_process_instance;
 	}
+
+	@Override
+	public List<TeacherInformationDTO> getTeacherUserListByCollegeId(String college) {
+		List<TeacherInformationDTO> listTeacherUser = new ArrayList<>();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.TeacherInformationDTO(teacherBasic,teacherUser) from bysjglxt_teacher_user teacherUser,bysjglxt_teacher_basic teacherBasic where teacherUser.user_teacher_basic= teacherBasic.teacher_basic_id and teacherUser.user_teacher_belong_college = '" + college + "'";
+		Query query = session.createQuery(hql);
+		listTeacherUser = query.list();
+		return listTeacherUser;	
+	}
+
+	@Override
+	public List<bysjglxt_notice> getNoticeByContentAndLeiXing(String content, int i) {
+		Session session = getSession();
+		List<bysjglxt_notice> listNotice = new ArrayList<>();
+		String hql = "from bysjglxt_notice where notice_content like '%" + content + "' and notice_leixing="+i;
+		Query query = session.createQuery(hql);
+		listNotice = query.list();
+		return listNotice;
+	}
+
+	@Override
+	public bysjglxt_notice getNoticeByBelongContentAndLeiXing(String user_teacher_id, String content, int i) {
+		Session session = getSession();
+		bysjglxt_notice bysjglxt_notice = null;
+		String hql = "from bysjglxt_notice where notice_content like '%" + content + "' and notice_belong='" + user_teacher_id + "' and notice_leixing=2";
+		Query query = session.createQuery(hql);
+		bysjglxt_notice = (bysjglxt_notice) query.uniqueResult();
+		return bysjglxt_notice;
+	}
 }

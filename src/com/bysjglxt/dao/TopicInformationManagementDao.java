@@ -175,4 +175,14 @@ public interface TopicInformationManagementDao {
 	 */
 	public List<StudentInformationDTO> getStudentInfoByTopicId(String topicId);
 
+	public bysjglxt_notice getNoticeByTopicInfoAndLeiXing(String content, int i);
+
+	public bysjglxt_teacher_user getTeacherByCollege(String user_teacher_belong_college);
+	
+	public boolean deleteNotice(String notice_id);
+
+	public bysjglxt_notice getNoticeByContentAndLeiXingBelong(String topic_teacher, String string, int i);
+
+	public StudentInformationDTO getStudentInfoByUserId(String studentUserId);
+
 }

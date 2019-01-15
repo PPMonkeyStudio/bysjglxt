@@ -37,7 +37,15 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	public Session getSession() {
 		return this.sessionFactory.getCurrentSession();
 	}
-
+	@Override
+	public bysjglxt_teacher_user getTeacherByCollege(String user_teacher_belong_college) {
+		Session session = getSession();
+		bysjglxt_teacher_user teacherUserInformation = null;
+		String hql = "from bysjglxt_teacher_user where user_teacher_belong_college='" + user_teacher_belong_college + "' and user_teacher_is_college_admin=1";
+		Query query = session.createQuery(hql);
+		teacherUserInformation = (bysjglxt_teacher_user) query.uniqueResult();
+		return teacherUserInformation;
+	}
 	@Override
 	public boolean addObject(Object obj) {
 		boolean flag = true;
@@ -90,6 +98,20 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		return flag;
 	}
 
+	@Override
+	public boolean deleteNotice(String notice_id) {
+		boolean flag = true;
+		try {
+			Session session = getSession();
+			String hql = "delete from bysjglxt_notice where notice_id='" + notice_id + "'";
+			Query query = session.createQuery(hql);
+			query.executeUpdate();
+		} catch (HibernateException e) {
+			flag = false;
+			e.printStackTrace();
+		}
+		return flag;
+	}
 	@Override
 	public boolean DeleteTopic(String topicID) {
 		boolean flag = true;
@@ -911,6 +933,31 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 	}
 
 	@Override
+	public bysjglxt_notice getNoticeByContentAndLeiXingBelong(String belongUserId,String content, int i) {
+		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
+		String hql = "from bysjglxt_notice where notice_leixing=" + i + " and notice_content like '%"+content+"%' and notice_belong='"+belongUserId+"'";
+		System.out.println(hql);
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		bysjglxt_notice = (bysjglxt_notice) query.uniqueResult();
+		session.clear();
+		return bysjglxt_notice;
+	}
+	
+	@Override
+	public bysjglxt_notice getNoticeByTopicInfoAndLeiXing(String content, int i) {
+		bysjglxt_notice bysjglxt_notice = new bysjglxt_notice();
+		String hql = "from bysjglxt_notice where notice_leixing=" + i + " and notice_content like '%"+content+"%'";
+		System.out.println(hql);
+		Session session = getSession();
+		Query query = session.createQuery(hql);
+		bysjglxt_notice = (bysjglxt_notice) query.uniqueResult();
+		session.clear();
+		return bysjglxt_notice;
+	}
+	
+	
+	@Override
 	public List<bysjglxt_teacher_user> getTeacherUserCreateTopic(String year, String teacherColleage) {
 		Session session = getSession();
 		List<bysjglxt_teacher_user> list = new ArrayList<>();
@@ -968,5 +1015,18 @@ public class TopicInformationManagementDaoImpl implements TopicInformationManage
 		list = sqlQuery.list();
 		return list;
 	}
+
+	@Override
+	public StudentInformationDTO getStudentInfoByUserId(String user_student_id) {
+		StudentInformationDTO student = new StudentInformationDTO();
+		Session session = getSession();
+		String hql = "select new com.bysjglxt.domain.DTO.StudentInformationDTO(studentBasic,studentUser) from bysjglxt_student_user studentUser,bysjglxt_student_basic studentBasic"
+				+ " where studentUser.user_student_basic=studentBasic.student_basic_id and studentUser.user_student_id = '"+user_student_id+"'";
+		Query query = session.createQuery(hql);
+		student = (StudentInformationDTO) query.uniqueResult();
+		session.clear();
+		return student;
+	}
+	
 
 }

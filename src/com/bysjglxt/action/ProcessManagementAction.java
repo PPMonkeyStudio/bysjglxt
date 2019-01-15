@@ -266,7 +266,17 @@ public class ProcessManagementAction extends ActionSupport implements ServletRes
 	 */
 	public void passTask() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
-		switch (processManagementService.pass(passTaskID)) {
+		//
+		String userId = "";
+		String juese = "";
+		if(ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			userId = ((TeacherInformationDTO)(ActionContext.getContext().getSession().get("userTeacherDTO"))).getBysjglxtTeacherUser().getUser_teacher_id();
+			juese = "teacher";
+		}else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			userId = ((StudentInformationDTO)(ActionContext.getContext().getSession().get("userStudentDTO"))).getBysjglxtStudentUser().getUser_student_id();
+			juese = "student";
+		}
+		switch (processManagementService.pass(passTaskID,userId,juese)) {
 		case -5: {
 			http_response.getWriter().write("下一步任务无执行者");
 			break;

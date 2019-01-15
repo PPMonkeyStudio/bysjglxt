@@ -231,6 +231,10 @@
 	rel="stylesheet" type="text/css">
 <script src="<%=basePath%>js/jquery.multi-select.js"
 	type="text/javascript"></script>
+<script src="<%=basePath%>js/TopicInformationManagement/topic_examine_state.js"
+	type="text/javascript"></script>
+	<script src="<%=basePath%>js/TopicInformationManagement/List_Topic_By_PageAndSearch.js"
+	type="text/javascript"></script>
 <script>
 	// 	$('#select_source').selectpicker('refresh');
 	// 	$('#select_type').selectpicker('refresh');
