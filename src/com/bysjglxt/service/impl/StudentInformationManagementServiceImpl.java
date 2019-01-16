@@ -55,7 +55,7 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 		try {
 //			properties.load(CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties"));
 			InputStream inputStream = CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties");
-			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
 			properties.load(bf);
 		} catch (Exception e) {
 			e.printStackTrace();

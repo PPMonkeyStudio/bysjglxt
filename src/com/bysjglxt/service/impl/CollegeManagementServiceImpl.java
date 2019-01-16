@@ -3,6 +3,7 @@ package com.bysjglxt.service.impl;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -34,7 +35,7 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		try {
 //			properties.load(CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties"));
 			InputStream inputStream = CollegeManagementServiceImpl.class.getClassLoader().getResourceAsStream("notice.properties");
-			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream));
+			BufferedReader bf = new BufferedReader(new InputStreamReader(inputStream,"UTF-8"));
 			properties.load(bf);
 		} catch (Exception e) {
 			e.printStackTrace();
