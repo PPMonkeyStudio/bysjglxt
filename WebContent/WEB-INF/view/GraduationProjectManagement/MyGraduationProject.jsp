@@ -160,7 +160,7 @@
 				style="width: calc(100% - 40px); margin: 20px 20px 0 0; float: right;">
 				<div class="panel-body">
 					
-					<h3 class="panel-title"><s:fielderror></s:fielderror>进度</h3>
+					<h3 class="panel-title">当前进度：<span id="currentTask"></span></h3>
 					<br>
 					<div class="progress" style="">
 						<div class="progress-bar" role="progressbar"

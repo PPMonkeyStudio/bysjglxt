@@ -127,7 +127,7 @@ function List_MyManagementGraduationProject_By_PageAndSearch(pageIndex) {
 							+ '<li><a href="/bysjglxt/graduationProject/GraduationProjectManagement_MyGraduationProjectPage?MyTutorGraduationProjectStudentID='
 							+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 							+ '" >毕业设计过程管理手册</a></li>'
-							+ '<li><a onclick="topicReview(this)" id="'
+							+ '<li><a onclick="topicReview(this)"  class="college_control" id="'
 							+ myManagementGraduationProject_json.list_TeacherTutorStudentDTO[num].studentInformationDTO.bysjglxtStudentUser.user_student_id
 							+ '">分配评阅教师</a></li>';
 						if(userTeacherDTO.bysjglxtTeacherUser.user_teacher_is_college_admin == 1){

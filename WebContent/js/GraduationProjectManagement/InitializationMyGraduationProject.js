@@ -15,18 +15,17 @@ function InitializationMyGraduationProject() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-
 				currentProcessDto = JSON.parse(xhr.responseText);
 				for (var num = 0; currentProcessDto.listTaskBelongProcess.length; num++) {
 					if (currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_state == 1) {
-						console.log("dd:"+currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_role);
 						current_processDefinitionName = currentProcessDto.listTaskBelongProcess[num].taskDefinition.task_definition_name;
-						console.log("current_processDefinitionName:"+current_processDefinitionName);
 						current_processInstanceUserID = currentProcessDto.listTaskBelongProcess[num].taskInstance.task_instance_role;
-						console.log("current_processInstanceUserID:"+current_processInstanceUserID);
 						break;
 					}
 				}
+				var taskSpan = document.getElementById("currentTask");
+				taskSpan.innerHTML=current_processDefinitionName;
+				taskSpan.style.color="#428BCA";
 				/*
 				 * 
 				 */

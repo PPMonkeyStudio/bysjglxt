@@ -123,7 +123,7 @@ function List_MyTask(pageIndex) {
 			.getElementById("select_state").value);
 
 	formData.append("processManagementVO.pageIndex", pageIndex);
-
+	
 	xhr.send(formData);
 }
 function flip(flipPage) {

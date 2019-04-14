@@ -15,6 +15,8 @@
 
 <script type="text/javascript"
 	src="<%=basePath%>js/GraduationProjectManagement/processController.js"></script>
+<script type="text/javascript"
+	src="<%=basePath%>js/loginAndLogout/roleControl.js"></script>
 <title>毕业设计管理</title>
 </head>
 <body>

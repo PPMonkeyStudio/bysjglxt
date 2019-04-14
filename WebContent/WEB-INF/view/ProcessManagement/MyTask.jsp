@@ -37,13 +37,13 @@
 			<div class="panel-body">
 				<div style="height: 34px;">
 					<!-- 检索 -->
-					<div class="input-group" style="width: 300px; float: right;">
+					<%-- <div class="input-group" style="width: 300px; float: right;">
 						<input id="input_search" class="form-control"
-							oninput="List_Teacher_By_PageAndSearch(1)" type="text">
+							oninput="List_MyTask(1)" type="text">
 						<span class="input-group-addon">
 							<i class="fa fa-search"></i>
 						</span>
-					</div>
+					</div> --%>
 				</div>
 				<table id="table_myTask" class="table table-hover "
 					style="text-align: center; margin: 20px 0;">
