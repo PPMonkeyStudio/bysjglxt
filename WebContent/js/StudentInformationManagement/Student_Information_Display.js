@@ -47,7 +47,7 @@ function Student_Information_Display(this_button) {
 							return false;
 						}
 					},
-					'返回 ' : function() {
+					'取消 ' : function() {
 					}
 				},
 				onContentReady : function() {

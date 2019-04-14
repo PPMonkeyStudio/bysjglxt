@@ -117,10 +117,14 @@ public class StudentInformationManagementServiceImpl implements StudentInformati
 			bysjglxt_student_user.setUser_student_id(TeamUtil.getUuid());
 			bysjglxt_student_user.setUser_student_num(bysjglxt_student_basic.getStudent_basic_num());
 			bysjglxt_student_user.setUser_student_belong_major(bysjglxt_major.getMajor_id());
-			if(bysjglxt_student_basic.getStudent_basic_idcaard()!=null && !"".equals(bysjglxt_student_basic.getStudent_basic_idcaard())) {
-				bysjglxt_student_user.setUser_student_password(md5.GetMD5Code(bysjglxt_student_basic.getStudent_basic_idcaard().substring(bysjglxt_student_basic.getStudent_basic_idcaard().trim().length()-6)));
-			}else {
-				bysjglxt_student_user.setUser_student_password(md5.GetMD5Code("000000"));
+			try {
+				if(bysjglxt_student_basic.getStudent_basic_idcaard()!=null && !"".equals(bysjglxt_student_basic.getStudent_basic_idcaard())) {
+					bysjglxt_student_user.setUser_student_password(md5.GetMD5Code(bysjglxt_student_basic.getStudent_basic_idcaard().substring(bysjglxt_student_basic.getStudent_basic_idcaard().trim().length()-6)));
+				}else {
+					bysjglxt_student_user.setUser_student_password(md5.GetMD5Code("000000"));
+				}
+			}catch(Exception e) {
+				throw new RuntimeException("excel内容中身份证号码格式不对");
 			}
 			bysjglxt_student_user.setUser_student_is_select_topic(2);
 			bysjglxt_student_user.setUser_student_basic(bysjglxt_student_basic.getStudent_basic_id());

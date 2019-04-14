@@ -57,7 +57,7 @@ public class ExcelToBean2 {
 			// sheet
 			XSSFSheet sheet = (XSSFSheet) workbook.getSheetAt(sheetIndex);
 			// row
-			for (int rowIndex = 1; rowIndex < sheet.getPhysicalNumberOfRows(); rowIndex++) {
+			for (int rowIndex = 1; rowIndex < sheet.getLastRowNum()+1; rowIndex++) {
 				XSSFRow row = sheet.getRow(rowIndex);
 				Map<String, Object> map = new HashMap<String, Object>();
 				for (int cellIndex = 0; cellIndex < row.getLastCellNum(); cellIndex++) {

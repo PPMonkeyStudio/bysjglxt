@@ -26,9 +26,9 @@ function Preview_Student_EXCEL(file) {
 					if (EXCEL_Student_List[num].student_basic_name == undefined) {
 						EXCEL_Student_List[num].student_basic_name = "";
 					}
-					if (EXCEL_Student_List[num].student_basic_year == undefined) {
+					/*if (EXCEL_Student_List[num].student_basic_year == undefined) {
 						EXCEL_Student_List[num].student_basic_year = "";
-					}
+					}*/
 					if (EXCEL_Student_List[num].student_basic_grade == undefined) {
 						EXCEL_Student_List[num].student_basic_grade = "";
 					}
@@ -38,13 +38,13 @@ function Preview_Student_EXCEL(file) {
 					if (EXCEL_Student_List[num].student_basic_idcaard == undefined) {
 						EXCEL_Student_List[num].student_basic_idcaard = "";
 					}
-					if (EXCEL_Student_List[num].student_basic_age == undefined) {
+					/*if (EXCEL_Student_List[num].student_basic_age == undefined) {
 						EXCEL_Student_List[num].student_basic_age = "";
-					}
+					}*/
 					if (EXCEL_Student_List[num].student_basic_sex == undefined) {
 						EXCEL_Student_List[num].student_basic_sex = "";
 					}
-					if (EXCEL_Student_List[num].student_basic_nation == undefined) {
+					/*if (EXCEL_Student_List[num].student_basic_nation == undefined) {
 						EXCEL_Student_List[num].student_basic_nation = "";
 					}
 					if (EXCEL_Student_List[num].student_basic_politicalvisage == undefined) {
@@ -61,14 +61,14 @@ function Preview_Student_EXCEL(file) {
 					}
 					if (EXCEL_Student_List[num].student_basic_teachingmethods == undefined) {
 						EXCEL_Student_List[num].student_basic_teachingmethods = "";
-					}
+					}*/
 					if (EXCEL_Student_List[num].student_basic_professionalcode == undefined) {
 						EXCEL_Student_List[num].student_basic_professionalcode = "";
 					}
 					if (EXCEL_Student_List[num].student_basic_major == undefined) {
 						EXCEL_Student_List[num].student_basic_major = "";
 					}
-					if (EXCEL_Student_List[num].student_basic_independentmajorname == undefined) {
+					/*if (EXCEL_Student_List[num].student_basic_independentmajorname == undefined) {
 						EXCEL_Student_List[num].student_basic_independentmajorname = "";
 					}
 					if (EXCEL_Student_List[num].student_basic_is_normalmajor == undefined) {
@@ -91,14 +91,22 @@ function Preview_Student_EXCEL(file) {
 					}
 					if (EXCEL_Student_List[num].student_basic_reasonsfordroppingoutofschool == undefined) {
 						EXCEL_Student_List[num].student_basic_reasonsfordroppingoutofschool = "";
-					}
+					}*/
 					if (EXCEL_Student_List[num].student_basic_phone == undefined) {
 						EXCEL_Student_List[num].student_basic_phone = "";
 					}
 					if (EXCEL_Student_List[num].student_basic_college == undefined) {
 						EXCEL_Student_List[num].student_basic_college = "";
 					}
-
+					if (EXCEL_Student_List[num].student_basic_level == undefined) {
+						EXCEL_Student_List[num].student_basic_level = "";
+					}
+					if (EXCEL_Student_List[num].student_basic_qq == undefined) {
+						EXCEL_Student_List[num].student_basic_qq = "";
+					}
+					if (EXCEL_Student_List[num].student_basic_class == undefined) {
+						EXCEL_Student_List[num].student_basic_class = "";
+					}
 				}
 
 				var table_excel_student = document
@@ -111,14 +119,14 @@ function Preview_Student_EXCEL(file) {
 				table_excel_student.firstElementChild.appendChild(new_th);
 
 				new_th.innerHTML = '<th>学号</th>' + '<th>姓名</th>'
-						+ '<th>年制</th>' + '<th>年级</th>' + '<th>证件类型</th>'
-						+ '<th>身份证/护照号码</th>' + '<th>年龄</th>' + '<th>性别</th>'
-						+ '<th>民族</th>' + '<th>政治面貌</th>' + '<th>生源地</th>'
-						+ '<th>学生类型</th>' + '<th>招生类型</th>' + '<th>授课方式</th>'
-						+ '<th>专业代码</th>' + '<th>专业名称</th>' + '<th>自主专业名称</th>'
+						/*+ '<th>年制</th>'*/ + '<th>年级</th>' + '<th>证件类型</th>'
+						+ '<th>身份证/护照号码</th>' /*+ '<th>年龄</th>'*/ + '<th>性别</th>'
+						/*+ '<th>民族</th>' + '<th>政治面貌</th>' + '<th>生源地</th>'
+						+ '<th>学生类型</th>' + '<th>招生类型</th>' + '<th>授课方式</th>'*/
+						+ '<th>专业代码</th>' + '<th>专业名称</th>' /*+ '<th>自主专业名称</th>'
 						+ '<th>是否师范类</th>' + '<th>是否残疾</th>' + '<th>户口类型</th>'
 						+ '<th>异动类型</th>' + '<th>入学学历</th>' + '<th>招生方式</th>'
-						+ '<th>休退学原因</th>' + '<th>联系方式</th>' + '<th>学院</th>';
+						+ '<th>休退学原因</th>'*/ + '<th>联系方式</th>' + '<th>学院</th>'+ '<th>级别</th>'+ '<th>QQ</th>'+ '<th>班级</th>';
 
 				for (var num = 0; num < EXCEL_Student_List.length; num++) {
 
@@ -133,19 +141,19 @@ function Preview_Student_EXCEL(file) {
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_name
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].student_basic_year
+							/*+ EXCEL_Student_List[num].student_basic_year
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].student_basic_grade
+*/							+ EXCEL_Student_List[num].student_basic_grade
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_idtype
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_idcaard
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].student_basic_age
-							+ '</td><td>'
+							/*+ EXCEL_Student_List[num].student_basic_age
+							+ '</td><td>'*/
 							+ EXCEL_Student_List[num].student_basic_sex
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].student_basic_nation
+							/*+ EXCEL_Student_List[num].student_basic_nation
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_politicalvisage
 							+ '</td><td>'
@@ -156,12 +164,12 @@ function Preview_Student_EXCEL(file) {
 							+ EXCEL_Student_List[num].student_basic_enrollmenttype
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_teachingmethods
-							+ '</td><td>'
+							+ '</td><td>'*/
 							+ EXCEL_Student_List[num].student_basic_professionalcode
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_major
 							+ '</td><td>'
-							+ EXCEL_Student_List[num].student_basic_independentmajorname
+							/*+ EXCEL_Student_List[num].student_basic_independentmajorname
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_is_normalmajor
 							+ '</td><td>'
@@ -176,10 +184,16 @@ function Preview_Student_EXCEL(file) {
 							+ EXCEL_Student_List[num].student_basic_enrollmentmode
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_reasonsfordroppingoutofschool
-							+ '</td><td>'
+							+ '</td><td>'*/
 							+ EXCEL_Student_List[num].student_basic_phone
 							+ '</td><td>'
 							+ EXCEL_Student_List[num].student_basic_college
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_level
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_qq
+							+ '</td><td>'
+							+ EXCEL_Student_List[num].student_basic_class
 							+ '</td>';
 				}
 				// 让加载图标消失

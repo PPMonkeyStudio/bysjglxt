@@ -5,18 +5,17 @@ function Get_Student_Major(select) {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				var MajorList = JSON.parse(xhr.responseText);
-
-				for (var num = 0; num < MajorList.length; num++) {
+				 var MajorList = JSON.parse(xhr.responseText);
+				 for (var num = 0; num < MajorList.length; num++) {
 					var option = document.createElement("option");
 					option.appendChild(document
 							.createTextNode(MajorList[num].major_name));
 					select.appendChild(option);
 					option.value = MajorList[num].major_name;
-				}
-
-				$('select').selectpicker('refresh');
+				}$('select').selectpicker('refresh');
 			    $('select').selectpicker('render');
+
+				
 				// $('#' + select.id).selectpicker('refresh');
 
 			} else {

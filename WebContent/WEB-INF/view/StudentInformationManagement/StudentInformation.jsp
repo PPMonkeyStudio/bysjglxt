@@ -63,7 +63,7 @@
 						<tr>
 							<th>学号</th>
 							<th>姓名</th>
-							<th>
+							<%-- <th>
 								<select class="form-control" id="select_sex"
 									style="width: auto; margin: 0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
@@ -71,28 +71,29 @@
 									<option value="男">男</option>
 									<option value="女">女</option>
 								</select>
-							</th>
-							<th>
+							</th> --%>
+							<%-- <th>
 								<select class="form-control" id="select_major"
 									data-live-search="true"
 									style="width: auto; margin: 0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">专业（全部）</option>
 								</select>
-							</th>
-							<th>
+							</th> --%>
+							<%-- <th>
 								<select class="form-control" id="select_level"
 									data-live-search="true"
 									style="width: auto; margin: 0 auto;"
 									onchange="List_Student_By_PageAndSearch(1)">
 									<option value="-1">级别（全部）</option>
 								</select>
-							</th>
-							<th>年制</th>
-							<th>年级</th>
-							<th>电话</th>
+							</th> --%>
+							<!-- <th>年制</th> -->
+							<!-- <th>年级</th> -->
+							<th>电话号码</th>
 							<th>QQ</th>
 							<th>学院</th>
+							<th>班级</th>
 							<th>操作</th>
 							<th>
 								<label class="fancy-checkbox">

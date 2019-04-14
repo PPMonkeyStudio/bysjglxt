@@ -56,48 +56,48 @@ function List_Student_By_PageAndSearch(pageIndex) {
 						new_td.innerHTML = '无';
 					}
 
-					new_td = document.createElement("td");
+				/*	new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_sex != "") {
 						new_td.innerHTML = student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_sex;
 					} else {
 						new_td.innerHTML = '无';
-					}
+					}*/
 
-					new_td = document.createElement("td");
+				/*	new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_major != "") {
 						new_td.innerHTML = student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_major;
 					} else {
 						new_td.innerHTML = '无';
-					}
+					}*/
 
-					new_td = document.createElement("td");
+					/*new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_level != "") {
 						new_td.innerHTML = student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_level;
 					} else {
 						new_td.innerHTML = '无';
-					}
-					new_td = document.createElement("td");
+					}*/
+					/*new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basicd_year != "") {
 						new_td.innerHTML = student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_year;
 					} else {
 						new_td.innerHTML = '无';
-					}
-					new_td = document.createElement("td");
+					}*/
+					/*new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
 							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_grade != "") {
 						new_td.innerHTML = student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_grade;
 					} else {
 						new_td.innerHTML = '无';
-					}
+					}*/
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
@@ -122,7 +122,14 @@ function List_Student_By_PageAndSearch(pageIndex) {
 					} else {
 						new_td.innerHTML = '无';
 					}
-					
+					new_td = document.createElement("td");
+					new_tr.appendChild(new_td);
+					if (student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic != undefined
+							&& student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_class != "") {
+						new_td.innerHTML = student_json.list_StudentInformationDTO[num].bysjglxtStudentBasic.student_basic_class;
+					} else {
+						new_td.innerHTML = '无';
+					}
 					new_td = document.createElement("td");
 					new_tr.appendChild(new_td);
 					new_td.innerHTML = '<div class="dropdown" >'
@@ -183,24 +190,24 @@ function List_Student_By_PageAndSearch(pageIndex) {
 	 * 
 	 */
 	// 性别
-	var select_sex = document.getElementById("select_sex");
+	/*var select_sex = document.getElementById("select_sex");
 	if (select_sex.value == "男") {
 		formData.append("studentInformationManagementVO.sex", select_sex.value);
 	} else if (select_sex.value == "女") {
 		formData.append("studentInformationManagementVO.sex", select_sex.value);
-	}
+	}*/
 	// 专业
-	if (document.getElementById("select_major").value == "-1") {
+	/*if (document.getElementById("select_major").value == "-1") {
 	} else {
 		formData.append("studentInformationManagementVO.student_basic_major",
 				document.getElementById("select_major").value);
-	}
+	}*/
 	// 级别
-	if (document.getElementById("select_level").value == "-1") {
+	/*if (document.getElementById("select_level").value == "-1") {
 	} else {
 		formData.append("studentInformationManagementVO.student_basic_level",
 				document.getElementById("select_level").value);
-	}
+	}*/
 	/*
 	 * 
 	 */
