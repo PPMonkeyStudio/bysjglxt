@@ -38,7 +38,7 @@ function teacherReportOpeningChange(report_opening) {
 	div_report_opening_teacher_father.style.width = "100%";
 	div_report_opening_teacher_father.style.margin = "0 0 20px 0";
 	div_report_opening_teacher_father.id = "div_report_opening_teacher_father";
-	div_teacher_report_opening_name.href = '/bysjglxt/graduationProject/GraduationProjectManagement_downloadReportOpening?DissertationUserID='
+	div_teacher_report_opening_name.href = '/bysjglxt/graduationProject/GraduationProjectManagement_downloadTeacherReportOpening?DissertationUserID='
 		+ currentProcessDto.processInstance.process_instance_man;
 	var xiazaiWanOk = document.getElementById("report_file_is_xiazai");
 	if("1" == xiazaiWanOk.value){

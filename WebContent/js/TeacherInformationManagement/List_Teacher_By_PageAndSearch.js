@@ -5,7 +5,8 @@ function List_Teacher_By_PageAndSearch(pageIndex) {
 	document.getElementById("i_pulse").style.display = "block";
 
 	/*
-	 * 
+	 * <thead>
+	 * <tbody>
 	 */
 	var xhr = false;
 	xhr = new XMLHttpRequest();

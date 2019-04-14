@@ -3,10 +3,11 @@ package com.bysjglxt.service.impl;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import org.springframework.transaction.annotation.Transactional;
 
 import com.bysjglxt.dao.CollegeManagementDao;
 import com.bysjglxt.domain.DO.bysjglxt_college;
@@ -251,7 +252,33 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 		collegeManagementDao.saveObj(noticeCollege);
 		return 1;
 	}
-
+	
+	@Override
+	@Transactional
+	public String deleteCollegeById(List<String> collegeIds) {
+		String msg = "success";
+		for (String college_id : collegeIds) {
+			//根据学院id去查找信息
+			int count = collegeManagementDao.getTeacherUserCountByCollegeId(college_id);
+			if(count>1) {
+				msg = "error";
+				continue;
+			}
+			count = collegeManagementDao.getSectionCountById(college_id);
+			if(count>=1) {
+				msg = "error";
+				continue;
+			}
+			count = collegeManagementDao.getMajorCountById(college_id);
+			if(count>=1) {
+				msg = "error";
+				continue;
+			}
+			collegeManagementDao.deleteCollegeById(college_id);
+		}
+		//删除学员信息
+		return msg;
+	}
 
 
 	/**
@@ -261,5 +288,7 @@ public class CollegeManagementServiceImpl implements CollegeManagementService {
 	public bysjglxt_college getCollegetById(String id) {
 		return this.collegeManagementDao.getCollegeById(id);
 	}
+
+
 
 }

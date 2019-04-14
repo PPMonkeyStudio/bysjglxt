@@ -1796,13 +1796,16 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		}
 		// 1.根据user Id获得学生毕业论文表中的记录
 		bysjglxt_report_opening reportOpening = new bysjglxt_report_opening();
-		String path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/开题报告/";
+		String path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/学生开题报告/";
 		reportOpening = graduationProjectManagementDao.getReportOpeningUser(userID);
 		if (reportOpening == null) {
 			return null;
 		}
 		path = path + reportOpening.getReport_opening_file();
 		File file = new File(path);
+		if("student".equals(juese)) {
+			return file;
+		}
 		// 如果下载的人是学生
 		// 获取某个学生的指导老师
 		bysjglxt_topic_select topicSelect = new bysjglxt_topic_select();
@@ -1819,6 +1822,55 @@ public class GraduationProjectManagementServiceImpl implements GraduationProject
 		return file;
 	}
 
+	
+	/**
+	 * 下载开题报告
+	 */
+	@Override
+	public File downloadTeacherReportOpening(String juese, String userID) {
+		bysjglxt_student_user studentUser = new bysjglxt_student_user();
+		studentUser = graduationProjectManagementDao.getStudentUserByUserId(userID);
+		if(studentUser==null) {
+			return null;
+		}
+		//获取学院信息
+		bysjglxt_college college = new bysjglxt_college();
+		college = graduationProjectManagementDao.getCollegeById(studentUser.getUser_student_belong_college());
+		//获取课题最大的year
+		String year = graduationProjectManagementDao.getMaxTopicYear();
+		/*
+		 * 获取路径
+		 */
+		String lj = "";
+		try {
+			Properties props = new Properties();
+			props.load(this.getClass().getClassLoader().getResourceAsStream("file.properties"));
+			lj = props.getProperty("lj");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 1.根据user Id获得学生毕业论文表中的记录
+		bysjglxt_report_opening reportOpening = new bysjglxt_report_opening();
+		String path = lj + "bysjglxt/"+college.getCollege_code()+"/"+year+"/教师开题报告/";
+		reportOpening = graduationProjectManagementDao.getReportOpeningUser(userID);
+		if (reportOpening == null) {
+			return null;
+		}
+		path = path + reportOpening.getReport_opening_teacher_file();
+		File file = new File(path);
+		if(!"student".equals(juese)) {
+			return file;
+		}
+		if(userID.equals(reportOpening.getReport_opening_student())) {
+			// 更改状态
+			reportOpening.setReport_opening_teacher_file_is_xiazai(1);
+			reportOpening.setReport_opening_gmt_modified(TeamUtil.getStringSecond());
+			graduationProjectManagementDao.saveObj(reportOpening);
+		}		
+		return file;
+	}
+	
+	
 	// 下载毕业论文
 	@Override
 	public File downloadDissertation(String userId) {

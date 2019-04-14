@@ -524,6 +524,14 @@ public interface GraduationProjectManagementService {
 	 * @return
 	 */
 	public File downloadReportOpening(String juese,String dissertationUserID);
+	
+	/**
+	 * 下载开题报告
+	 * 
+	 * @param dissertationUserID
+	 * @return
+	 */
+	public File downloadTeacherReportOpening(String juese,String dissertationUserID);
 
 	/**
 	 * 

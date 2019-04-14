@@ -12,7 +12,6 @@ import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_section;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_user;
-import com.bysjglxt.domain.DTO.CollegeInformationDTO;
 
 public class CollegeManagementDaoImpl implements CollegeManagementDao {
 	private SessionFactory sessionFactory;
@@ -163,6 +162,41 @@ public class CollegeManagementDaoImpl implements CollegeManagementDao {
 		return bysjglxt_college;
 	}
 
+	@Override
+	public int getTeacherUserCountByCollegeId(String college_id) {
+		Session session = getSession();
+		String hql = "select count(*) from bysjglxt_teacher_user where user_teacher_belong_college='" + college_id + "'";
+		Query query = session.createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public int getSectionCountById(String college_id) {
+		Session session = getSession();
+		String hql = "select count(*) from bysjglxt_section where section_college_id='" + college_id + "'";
+		Query query = session.createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public int getMajorCountById(String college_id) {
+		Session session = getSession();
+		String hql = "select count(*) from bysjglxt_major major,bysjglxt_section section where major.major_belong_section = section.section_college_id and section.section_college_id='" + college_id + "'";
+		Query query = session.createQuery(hql);
+		int count = ((Number) query.uniqueResult()).intValue();
+		return count;
+	}
+
+	@Override
+	public String deleteCollegeById(String college_id) {
+		Session session = getSession();
+		String hql = "delete from bysjglxt_college where college_id='" + college_id + "'";
+		Query query = session.createQuery(hql);
+		query.executeUpdate();
+		return "success";
+	}
 
 
 

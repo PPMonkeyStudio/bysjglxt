@@ -1076,6 +1076,31 @@ public class GraduationProjectManagementAction extends ActionSupport
 		return "downloadDissertation";
 	}
 
+	/**
+	 * 下载开题报告
+	 * 
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws FileNotFoundException
+	 */
+	public String downloadTeacherReportOpening() throws UnsupportedEncodingException, FileNotFoundException {
+		String juese = "";
+		if (ActionContext.getContext().getSession().get("userTeacherDTO") != null) {
+			juese = ((TeacherInformationDTO) ActionContext.getContext().getSession()
+					.get("userTeacherDTO")).getBysjglxtTeacherUser().getUser_teacher_id();
+		} else if (ActionContext.getContext().getSession().get("userStudentDTO") != null) {
+			juese = "student";
+		}
+		File downloadDissertation = graduationProjectManagementService.downloadTeacherReportOpening(juese,DissertationUserID);
+
+		// fileName = new String(downloadDissertation.getName().getBytes(""), "UTF-8");
+		fileName = new String(downloadDissertation.getName().getBytes("GBK"), "ISO-8859-1");
+		inputStream = new FileInputStream(downloadDissertation);
+
+		return "downloadDissertation";
+	}
+	
+	
 	public void updateDissertation() throws IOException {
 		http_response.setContentType("text/html;charset=utf-8");
 		http_response.getWriter()

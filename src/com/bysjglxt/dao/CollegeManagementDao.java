@@ -41,5 +41,13 @@ public interface CollegeManagementDao {
 	 */
 	public bysjglxt_teacher_user getTeacherUserByCollegeId(String college_id);
 
+	public int getTeacherUserCountByCollegeId(String college_id);
+
+	public int getSectionCountById(String college_id);
+
+	public int getMajorCountById(String college_id);
+
+	public String deleteCollegeById(String college_id);
+
 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import com.bysjglxt.domain.DO.bysjglxt_college;
 import com.bysjglxt.domain.DO.bysjglxt_teacher_basic;
 import com.bysjglxt.domain.DTO.CollegeInformationDTO;
-import com.google.gson.JsonElement;
 
 public interface CollegeManagementService {
 
@@ -28,5 +27,12 @@ public interface CollegeManagementService {
 	 * @return
 	 */
 	public CollegeInformationDTO getCollegeAdminInfoByCollegeCode(String college_code);
+
+	/**
+	 * delete
+	 * @param college_id
+	 * @return
+	 */
+	String deleteCollegeById(List<String> collegeIds);
 	
 }

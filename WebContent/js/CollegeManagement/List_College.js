@@ -81,6 +81,17 @@ function List_College() {
 							+ college_json[num].college.college_id
 							+ '" onclick="updateAdmin(this)" >分配管理员</a></li>'
 							+ '</div>';
+					/**
+					 * 
+					 */
+					new_td = document.createElement("td");
+					new_td.appendChild(document.createTextNode(''));
+					new_tr.appendChild(new_td);
+					new_td.innerHTML = '<label class="fancy-checkbox">'
+							+ '<input id="'
+							+ college_json[num].college.college_id
+							+ '" type="checkbox" class="checkbox_select">'
+							+ '<span></span></label>';
 				}
 
 				// 让加载图标消失

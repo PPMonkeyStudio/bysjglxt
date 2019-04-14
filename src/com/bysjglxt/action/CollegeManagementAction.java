@@ -1,6 +1,7 @@
 package com.bysjglxt.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +35,10 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 	private bysjglxt_teacher_user bysjglxt_teacher_user;
 	private bysjglxt_teacher_basic bysjglxt_teacher_basic;
 	private bysjglxt_college college;
-
+	/*
+	 * 删除所选学院列表
+	 */
+	private List<String> ListDeleteCollegeID;
 	/*
 	 * 
 	 */
@@ -113,6 +117,18 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 		}
 	}
 
+	/**
+	 * 删除学院
+	 */
+	public void DeleteCollege() {
+		String msg = collegeManagementService.deleteCollegeById(ListDeleteCollegeID);
+		try {
+			http_response.getWriter().write(msg);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/*
 	 * 
 	 */
@@ -173,6 +189,14 @@ public class CollegeManagementAction extends ActionSupport implements ServletRes
 
 	public void setBysjglxt_teacher_basic(bysjglxt_teacher_basic bysjglxt_teacher_basic) {
 		this.bysjglxt_teacher_basic = bysjglxt_teacher_basic;
+	}
+
+	public List<String> getListDeleteCollegeID() {
+		return ListDeleteCollegeID;
+	}
+
+	public void setListDeleteCollegeID(List<String> listDeleteCollegeID) {
+		ListDeleteCollegeID = listDeleteCollegeID;
 	}
 
 	/*
