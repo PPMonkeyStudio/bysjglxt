@@ -5,7 +5,8 @@ function Save_dissertation() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				toastr.success("毕业论文修改成功");
+				toastr.success("任务“学生提交答辩论文”已完成更新")
+				toastr.error("温馨提示：如确定对该任务更新已完成，请在“流程”--“我的任务”中，单击按钮“确定完成此任务”");
 			} else {
 				toastr.error(xhr.status);
 			}

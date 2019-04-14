@@ -6,7 +6,8 @@ function Save_examination_formal_teacher() {
 		var message;
 		if (xhr.readyState == 4) {
 			if (xhr.status == 200) {
-				toastr.success("保存成功");
+				toastr.success("任务“指导老师填写形式审查表”已完成更新")
+				toastr.error("温馨提示：如确定对该任务更新已完成，请在“流程”--“我的任务”中，单击按钮“确定完成此任务”");
 				examination_formal_teacher();
 			} else {
 				toastr.error(xhr.status);
